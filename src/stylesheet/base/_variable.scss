@@ -1,0 +1,45 @@
+$color: (
+	primary: #fbb03b,
+	greyLight: #f6f6f6,
+	white: #fff,
+	grey: #a8a8a8,
+	greyDark: #c4c4c4,
+	dark: #333,
+	black: #000,
+	red: #f00
+);
+
+$font-family-base: 'Poppins', sans-serif;
+$line-height-txt: 1.5;
+
+$font-sizes: (
+	xxs: 10px,
+	xs: 12px,
+	sm: 14px,
+	md: 16px,
+	lg: 18px,
+	xl: 20px,
+	xxl: 24px
+);
+
+$font-weight: (
+	light: 300,
+	normal: 400,
+	medium: 500,
+	bold: 700
+);
+
+$breakpoints: (
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
+);
+
+$opacity-base: 0.5;
+
+$p-col: 10px;
+$p-col-sm: 4px;
+
+$icon-size: 40px;
+$icon-size-sm: 20px;

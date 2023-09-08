@@ -1,0 +1,134 @@
+.container {
+	max-width: 1152px;
+	margin: 0 auto;
+	width: 100%;
+	padding: 0 20px;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.item-center {
+	align-items: center;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.justify-start {
+	justify-content: flex-start;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-end {
+	justify-content: flex-end;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.item-center {
+	align-items: center;
+}
+
+.d-block {
+	display: block;
+}
+
+.d-inline {
+	display: inline;
+}
+
+.d-inline-block {
+	display: inline-block;
+}
+
+.d-hidden {
+	display: none;
+}
+
+.d-inline-flex {
+	display: inline-flex;
+}
+
+.d-table {
+	display: table;
+}
+
+.d-table-row {
+	display: table-row;
+}
+
+.d-table-cell {
+	display: table-cell;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 calc(0px - $p-col);
+}
+
+.col {
+	padding: 0 $p-col;
+}
+
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		width: percentage(calc($i / 12));
+	}
+}
+
+@media screen and (max-width: map-get($breakpoints, lg)) {
+	.container {
+		max-width: calc(100vw - 48px);
+	}
+
+	.row {
+		margin: calc(0px - $p-col-sm);
+	}
+
+	.col {
+		padding: $p-col-sm;
+	}
+
+	@for $i from 1 through 12 {
+		.col-lg-#{$i} {
+			width: percentage(calc($i / 12));
+		}
+	}
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+	.container {
+		max-width: calc(100vw - 48px);
+	}
+
+	.row {
+		margin: calc(0px - $p-col-sm);
+	}
+
+	.col {
+		padding: $p-col-sm;
+	}
+
+	@for $i from 1 through 12 {
+		.col-sm-#{$i} {
+			width: percentage(calc($i / 12));
+		}
+	}
+}
