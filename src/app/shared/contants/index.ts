@@ -1,1 +1,1 @@
-const Contants = '';
+export const index = ' tự thêm';

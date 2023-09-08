@@ -1,1 +1,1 @@
-const store = '';
+export const store = '';

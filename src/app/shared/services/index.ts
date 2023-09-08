@@ -1,1 +1,1 @@
-class ServiceIndex {}
+export class ServiceIndex {}

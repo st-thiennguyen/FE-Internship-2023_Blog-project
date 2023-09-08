@@ -1,1 +1,1 @@
-enum Status {}
+export enum Status {}

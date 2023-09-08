@@ -1,1 +1,1 @@
-class PostItemModel {}
+export class PostItemModel {}
