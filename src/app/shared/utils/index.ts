@@ -1,9 +1,9 @@
 import { StorageKey } from '../constants';
 
-export const getLocalStorage = (key: StorageKey) => {
-  return JSON.parse(localStorage.getItem(key)!) || [];
+export const getLocalStorage = <T>(key: StorageKey, initial?: T): T => {
+  return JSON.parse(localStorage.getItem(key)!) || initial;
 };
 
-export const setLocalStorage = (key: StorageKey, items: any) => {
+export const setLocalStorage = <T>(key: StorageKey, items: T) => {
   localStorage.setItem(key, JSON.stringify(items));
 };

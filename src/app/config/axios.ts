@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { Auth } from '../models/auth';
 import { StorageKey } from '../shared/constants';
 import { getLocalStorage } from '../shared/utils';
 
@@ -10,9 +11,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   //handle token
-  if (getLocalStorage(StorageKey.AUTH)) {
-    let token = getLocalStorage(StorageKey.AUTH).accessToken;
-    config.headers.Authorization = `Bearer ${token}`;
+  if (getLocalStorage(StorageKey.AUTH, {})) {
+    let token: Auth = getLocalStorage(StorageKey.AUTH);
+    const accessToken = token.accessToken || '';
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;
 });
@@ -25,7 +27,7 @@ axiosInstance.interceptors.response.use(
     console.log(error.response);
     switch (error.response.status) {
       case 401:
-        if (!getLocalStorage(StorageKey.AUTH)) {
+        if (!getLocalStorage(StorageKey.AUTH, {})) {
           const message401 = error.response.data.message;
           return Promise.reject(message401);
         } else {
