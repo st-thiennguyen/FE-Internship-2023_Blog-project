@@ -1,1 +1,3 @@
-export const index = ' tự thêm';
+export enum StorageKey {
+  AUTH = 'auth',
+}

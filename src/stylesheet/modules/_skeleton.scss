@@ -1,18 +1,18 @@
 .skeleton {
-	background-color: #a5a5a5;
-	animation: skeleton-animation 1s infinite linear;
+  background-color: #a5a5a5;
+  animation: skeleton-animation 1s infinite linear;
 }
 
 @keyframes skeleton-animation {
-	0% {
-		opacity: 0.2;
-	}
+  0% {
+    opacity: 0.2;
+  }
 
-	50% {
-		opacity: 0.5;
-	}
+  50% {
+    opacity: 0.5;
+  }
 
-	100% {
-		opacity: 0.2;
-	}
+  100% {
+    opacity: 0.2;
+  }
 }

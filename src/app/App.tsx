@@ -1,16 +1,31 @@
+import { Route, Routes } from 'react-router-dom';
+
 function App() {
+  const routes = [
+    { path: '/', element: <>Home</> },
+    {
+      path: '/detail',
+      element: <>Detail</>,
+    },
+  ];
+
   return (
-    <div className="App">
-      <header>
-        Header
-      </header>
+    <>
       <main>
-        Main
+        <Routes>
+          {routes.length > 0 &&
+            routes.map((route) => {
+              return (
+                <Route
+                  path={route.path}
+                  element={route.element}
+                  key={route.path}
+                />
+              );
+            })}
+        </Routes>
       </main>
-      <footer>
-        Footer
-      </footer>
-    </div>
+    </>
   );
 }
 
