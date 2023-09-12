@@ -5,10 +5,14 @@ $color: (
   subtext: #67717a,
   textButton: #fff,
   background: #f5f5f5,
+  borderColor: #e9ecef,
+  backgroundFrame: #fff,
 );
 
 $font-family-base: "Poppins", sans-serif;
 $line-height-txt: 1.5;
+
+$header-height: 73px;
 
 $font-size: (
   xxs: 10px,

@@ -1,0 +1,43 @@
+.footer {
+  background-color: map-get($color, backgroundFrame);
+  &-content {
+    padding: 80px 0;
+  }
+  &-logo {
+    width: 133px;
+  }
+  &-subtext {
+    max-width: 700px;
+    font-size: map-get($font-size, xs);
+    color: map-get($color, subtext);
+    font-weight: map-get($font-weight, medium);
+  }
+  &-copyright {
+    border-top: 1px solid map-get($color, borderColor);
+    padding: 24px 0;
+    .copyright {
+      color: map-get($color, text);
+      font-size: map-get($color, sm);
+    }
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .footer {
+    &-content {
+      padding: 40px 0;
+    }
+    &-copyright {
+      flex-direction: column;
+      padding: 12px 0;
+      .copyright {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
