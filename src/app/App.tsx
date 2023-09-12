@@ -1,8 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 
+import Home from './pages/home';
+
 function App() {
   const routes = [
-    { path: '/', element: <>Home</> },
+    { path: '/', element: <Home /> },
     {
       path: '/detail',
       element: <>Detail</>,

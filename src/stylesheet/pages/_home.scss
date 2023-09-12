@@ -1,0 +1,63 @@
+.home-page {
+  .section-title {
+    color: map-get($color, text);
+    margin-bottom: 20px;
+  }
+  .section-recommend {
+    .recommend {
+      position: relative;
+      justify-content: end;
+      height: 400px;
+      padding: 20px;
+      background: url("../../assets/images/bg_auth.png") top center /
+        cover no-repeat;
+      color: map-get($color, textButton);
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+      &-content {
+        z-index: 1;
+      }
+      &-author {
+        display: inline-block;
+        margin: 4px 0 15px;
+      }
+      &-reaction-item {
+        margin-right: 10px;
+        .icon {
+          margin-right: 4px;
+        }
+      }
+    }
+    .tag-list {
+      max-width: 305px;
+      flex-wrap: wrap;
+    }
+    .tag-item:not(:last-child) {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    .slick-list {
+      margin: 0 -10px;
+    }
+    .slick-slide {
+      padding: 0 10px;
+    }
+    .slick-slider {
+      overflow: hidden;
+    }
+    .slick-prev {
+      left: 20px;
+      z-index: 1;
+    }
+    .slick-next {
+      right: 20px;
+    }
+  }
+}
