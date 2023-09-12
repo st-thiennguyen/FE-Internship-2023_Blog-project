@@ -17,11 +17,16 @@
   cursor: not-allowed;
 }
 
-.btn-rounded {
+.btn-outline {
   border: 1px solid;
 }
 
 .btn-primary {
   background-color: map-get($color, primary);
   color: map-get($color, textButton);
+}
+
+.btn-secondary {
+  background-color: map-get($color, secondary );
+  color : #fff;
 }
