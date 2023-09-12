@@ -1,4 +1,4 @@
-import Recommend from './components/Recommend';
+import Recommend from './components/recommend';
 
 const Home = () => {
   return (

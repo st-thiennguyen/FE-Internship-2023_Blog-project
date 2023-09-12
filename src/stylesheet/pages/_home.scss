@@ -9,8 +9,8 @@
       justify-content: end;
       height: 400px;
       padding: 20px;
-      background: url("../../assets/images/bg_auth.png") top center /
-        cover no-repeat;
+      background: url("../../assets/images/bg_auth.png") top center / cover
+        no-repeat;
       color: map-get($color, textButton);
       &::after {
         content: "";
@@ -28,7 +28,7 @@
         display: inline-block;
         margin: 4px 0 15px;
       }
-      &-reaction-item {
+      .reaction-item {
         margin-right: 10px;
         .icon {
           margin-right: 4px;
