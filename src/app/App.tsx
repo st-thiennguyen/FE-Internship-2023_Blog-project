@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 
-import Register from './pages/auth/register/RegisterPage';
+import Register from './pages/auth/register/Register';
 
 function App() {
   const routes = [

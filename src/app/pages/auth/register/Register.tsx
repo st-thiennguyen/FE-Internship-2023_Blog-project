@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import bg from '../../../../assets/images/bg-auth.png';
-import logo from '../../../../assets/images/logo.png';
-
 const Register = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -15,11 +12,17 @@ const Register = () => {
     <div className="auth-page register-page">
       <div className="auth-wrapper row justify-between">
         <div className="auth-body col col-6 col-sm-12">
-          <h1 className="logo">
-            <Link to="/">
-              <img className="logo-img" src={logo} alt="supremethod" />
-            </Link>
-          </h1>
+          <header className="logo-wrapper">
+            <h1 className="logo">
+              <Link to="/">
+                <img
+                  className="logo-img"
+                  src={require('../../../../assets/images/logo.png')}
+                  alt="supremethod"
+                />
+              </Link>
+            </h1>
+          </header>
           <h2 className="auth-title text-center">REGISTER</h2>
           <form className="form form-register" action="">
             <div className="row">
@@ -83,17 +86,12 @@ const Register = () => {
                 name=""
                 placeholder="Enter password..."
               />
-              {isShowPassword ? (
-                <i
-                  onClick={togglePassword}
-                  className="icon icon-eye-slash icon-password"
-                ></i>
-              ) : (
-                <i
-                  onClick={togglePassword}
-                  className="icon icon-eye icon-password"
-                ></i>
-              )}
+              <i
+                onClick={togglePassword}
+                className={`icon icon-password ${
+                  isShowPassword ? `icon-eye-slash` : `icon-eye`
+                }`}
+              ></i>
             </div>
             <button className="btn btn-primary btn-auth" type="submit">
               Register
@@ -108,7 +106,11 @@ const Register = () => {
           </form>
         </div>
         <div className="auth-bg col col-6">
-          <img className="auth-img" src={bg} alt="Auth background" />
+          <img
+            className="auth-img"
+            src={require('../../../../assets/images/bg-auth.png')}
+            alt="Auth background"
+          />
         </div>
       </div>
     </div>
