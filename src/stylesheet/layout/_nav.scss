@@ -1,0 +1,34 @@
+.navbar {
+  margin-left: 20px;
+
+  &-content {
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .icon-search {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+  }
+
+  &-subtext {
+    padding-right: 12px;
+    margin-left: 8px;
+    color: map-get($color, text);
+    font-size: map-get($font-size, sm);
+    font-weight: map-get($font-weight, semibold);
+    letter-spacing: -0.175px;
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, xl)) {
+  .navbar-item:nth-child(1) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .header-welcome {
+    display: none;
+  }
+}

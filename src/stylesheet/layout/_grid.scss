@@ -94,10 +94,6 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
-  .container {
-    max-width: calc(100vw - 48px);
-  }
-
   .row {
     margin: calc(0px - $p-col-sm);
   }
@@ -114,10 +110,6 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, md)) {
-  .container {
-    max-width: calc(100vw - 48px);
-  }
-
   .row {
     margin: calc(0px - $p-col-sm);
   }
