@@ -3,9 +3,10 @@
   top: 0;
   left: 0;
   right: 0;
+
   background-color: map-get($color, backgroundFrame);
   &-wrapper {
-    padding: 10px 0;
+    height: $header-height;
   }
 
   &-logo {
