@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: map-get($color, backgroundFrame);
+  &-wrapper {
+    padding: 10px 0;
+  }
+
+  &-logo {
+    width: 200px;
+  }
+
+  &-welcome {
+    border-right: 2px solid map-get($color, borderColor);
+    padding-right: 38px;
+    color: map-get($color, subtext);
+    font-size: map-get($font-size, xs);
+    font-weight: map-get($font-weight, semibold);
+  }
+}
