@@ -21,15 +21,15 @@ const PostItem = () => {
                 sit, aliquam quas nesciunt rem?
               </p>
             </div>
-            <div className="post-footer">
+            <div className="post-footer d-flex justify-between">
               <span className="read-more">READ MORE</span>
-              <ul className="post-reaction-list">
-                <div className="post-reaction-item">
-                  <i className="icon icon-like-black"></i>
+              <ul className="post-reaction-list d-flex item-center">
+                <div className="post-reaction-item d-flex">
+                  <i className="icon icon-small icon-like-black"></i>
                   <span className="post-reaction-number">10</span>
                 </div>
-                <div className="post-reaction-item">
-                  <i className="icon icon-comment-black"></i>
+                <div className="post-reaction-item d-flex">
+                  <i className="icon icon-small icon-comment-black"></i>
                   <span className="post-reaction-number">10</span>
                 </div>
               </ul>

@@ -1,6 +1,6 @@
 import Aside from '../../shared/layout/aside';
 import LatestPost from './components/LatestPost';
-import Recommend from './components/Recommend';
+import Recommend from './components/recommend';
 
 const Home = () => {
   return (

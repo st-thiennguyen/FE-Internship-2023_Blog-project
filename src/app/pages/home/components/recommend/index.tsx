@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+
+import RecommendItem from './RecommendItem';
 
 const settings = {
   dots: true,
@@ -10,6 +11,7 @@ const settings = {
   slidesToShow: 3,
   slidesToScroll: 1,
 };
+
 const data = [
   {
     id: 1,
@@ -113,45 +115,7 @@ const Recommend = () => {
     <section className="section section-recommend">
       <Slider {...settings} className="recommend-list">
         {data.map((post) => {
-          return (
-            <Link to={'/'} className="recommend-link" key={post.id}>
-              <div className="recommend-item">
-                <div className="recommend d-flex flex-column">
-                  <div className="recommend-content">
-                    <h3 className="recommend-title">{post.title}</h3>
-                    <span className="recommend-author">
-                      By {post.user.lastName}
-                    </span>
-                    <div className="recommend-footer d-flex justify-between">
-                      <ul className="recommend-reaction-list d-flex">
-                        <li className="recommend-reaction-item d-flex">
-                          <i className="icon icon-like"></i>
-                          <span className="recommend-reaction-number">
-                            {post.likes}
-                          </span>
-                        </li>
-                        <li className="recommend-reaction-item d-flex">
-                          <i className="icon icon-comment"></i>
-                          <span className="recommend-reaction-number">
-                            {post.comments}
-                          </span>
-                        </li>
-                      </ul>
-                      <ul className="tag-list d-flex">
-                        {post.tags.map((tag) => {
-                          return (
-                            <li className="tag-item" key={tag}>
-                              <span className="tag">{tag}</span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          );
+          return <RecommendItem post={post} key={post.id} />;
         })}
       </Slider>
     </section>

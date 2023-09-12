@@ -30,7 +30,7 @@
         display: inline-block;
         margin: 4px 0 15px;
       }
-      &-reaction-item {
+      .reaction-item {
         margin-right: 10px;
         .icon {
           margin-right: 4px;
@@ -104,16 +104,10 @@
         margin-bottom: 6px;
       }
       &-footer {
-        display: flex;
-        justify-content: space-between;
         padding: 10px 0;
-      }
-      &-reaction-list {
-        display: flex;
       }
       &-reaction-item {
         margin-right: 10px;
-        display: flex;
       }
       .icon {
         margin-right: 4px;
