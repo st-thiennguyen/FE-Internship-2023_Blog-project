@@ -3,35 +3,43 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+
   .auth-body {
     margin: 0 auto;
     padding: 32px 24px 24px;
     max-width: 680px;
-    .auth-title { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .auth-title {
       padding-top: 16px;
       position: relative;
-      text-align: center;
       font-size: 30px;
       font-weight: map-get($map: $font-weight, $key: medium);
     }
   }
+
   .logo-img {
     width: 200px;
   }
+
   .auth-bg {
     padding: 0;
     transition: none !important;
+
     .auth-img {
       object-fit: cover;
       height: 100vh;
     }
   }
+
   .btn-auth {
     margin: 20px 0 10px;
     width: 100%;
     outline: 0;
-    cursor: pointer;
     border: 1px solid transparent;
+
     &:hover {
       border: 1px solid map-get($map: $color, $key: primary);
       color: map-get($map: $color, $key: primary);
@@ -39,3 +47,4 @@
     }
   }
 }
+
