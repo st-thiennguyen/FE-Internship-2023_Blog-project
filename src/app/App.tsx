@@ -1,10 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 
 import Register from './pages/auth/register/Register';
+import Footer from './shared/layout/Footer';
+import Header from './shared/layout/Header';
 
 function App() {
   const routes = [
-    { path: '/', element: <>Home</> },
+    { path: '/', element: <></> },
     {
       path: '/detail',
       element: <>Detail</>,
@@ -17,7 +19,8 @@ function App() {
 
   return (
     <>
-      <main>
+      <Header />
+      <main className="main">
         <Routes>
           {routes.length > 0 &&
             routes.map((route) => {
@@ -31,6 +34,7 @@ function App() {
             })}
         </Routes>
       </main>
+      <Footer />
     </>
   );
 }

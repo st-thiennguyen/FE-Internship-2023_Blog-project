@@ -2,6 +2,31 @@
   display: inline-block;
   background-repeat: no-repeat;
   background-position: center;
+  &-small {
+    width: $icon-size-sm;
+    height: $icon-size-sm;
+  }
+  &-user-20 {
+    background-image: url("../../assets/icons/ic-user-20.svg");
+  }
+  &-search-20 {
+    background-image: url("../../assets/icons/ic-search-20.svg");
+  }
+  &-moon-20 {
+    background-image: url("../../assets/icons/ic-moon-20.svg");
+  }
+  &-write-20 {
+    background-image: url("../../assets/icons/ic-write-20.svg");
+  }
+  &-facebook-20 {
+    background-image: url("../../assets/icons/ic-facebook-20.svg");
+  }
+  &-instagram-20 {
+    background-image: url("../../assets/icons/ic-instagram-20.svg");
+  }
+  &-twitter-20 {
+    background-image: url("../../assets/icons/ic-twitter-20.svg");
+  }
 
   &-eye {
     width: 12px;
