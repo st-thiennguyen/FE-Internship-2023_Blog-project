@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 
+import Home from './pages/home';
 import Register from './pages/auth/register/Register';
 import Footer from './shared/layout/Footer';
 import Header from './shared/layout/Header';
 
 function App() {
   const routes = [
-    { path: '/', element: <></> },
+    { path: '/', element: <Home /> },
     {
       path: '/detail',
       element: <>Detail</>,
