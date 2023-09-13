@@ -1,3 +1,4 @@
+const BASE_URL = process.env.REACT_APP_BASE_API;
 const RESOURCES = {
   users: 'users',
   auth: 'auth',
@@ -9,16 +10,19 @@ const RESOURCES = {
 
 export const ENDPOINT = {
   auth: {
-    google: `/${RESOURCES.auth}/google`,
-    facebook: `/${RESOURCES.auth}/facebook`,
-    github: `/${RESOURCES.auth}/github`,
-    register: `/${RESOURCES.users}/register`,
-    login: `/${RESOURCES.users}/login`,
-    logout: `/${RESOURCES.users}/logout`,
-    reset_password: `/${RESOURCES.users}/reset-password`,
-    change_password: `/${RESOURCES.users}/change-password`,
+    google: `${BASE_URL}/${RESOURCES.auth}/google`,
+    facebook: `${BASE_URL}/${RESOURCES.auth}/facebook`,
+    github: `${BASE_URL}/${RESOURCES.auth}/github`,
+    register: `${BASE_URL}/${RESOURCES.users}/register`,
+    login: `${BASE_URL}/${RESOURCES.users}/login`,
+    logout: `${BASE_URL}/${RESOURCES.users}/logout`,
+    reset_password: `${BASE_URL}/${RESOURCES.users}/reset-password`,
+    change_password: `${BASE_URL}/${RESOURCES.users}/change-password`,
   },
   bookmark: {
-    index: `/${RESOURCES.bookmarks}/`,
+    index: `${BASE_URL}/${RESOURCES.bookmarks}/`,
+  },
+  post: {
+    index: `${BASE_URL}/${RESOURCES.posts}`,
   },
 };

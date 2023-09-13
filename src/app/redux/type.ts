@@ -1,6 +1,11 @@
-export const GET_DATA_BLOG_START = 'get-data-blog-start';
-export const GET_DATA_BLOG_SUCCESS = 'get-data-blog-success';
-export const GET_DATA_BLOG_FAILURE = 'get-data-blog-failure';
+export const GET_ALL_BLOG_START = 'get-all-blog-start';
+export const GET_ALL_BLOG_SUCCESS = 'get-all-blog-success';
+export const GET_ALL_BLOG_FAILURE = 'get-all-blog-failure';
+
+// DETAIL
+export const GET_DETAIL_BLOG_START = 'get-detail-blog-start';
+export const GET_DETAIL_BLOG_SUCCESS = 'get-detail-blog-success';
+export const GET_DETAIL_BLOG_FAILURE = 'get-detail-blog-failure';
 
 // REGISTER
 export const REGISTER_START = 'register-start';

@@ -1,0 +1,134 @@
+.detail-page {
+  .detail-cover {
+    height: 50vh;
+    min-height: 580px;
+    position: relative;
+    border-radius: 15px;
+    .cover-img {
+      height: 100%;
+      &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        border-radius: 15px;
+      }
+      img {
+        height: 100%;
+        border-radius: 15px;
+        object-fit: cover;
+      }
+    }
+    .cover-content {
+      @include position(0, 0, 0, 0, absolute);
+      max-width: 1000px;
+      padding: 50px;
+      color: map-get($color, textLight);
+      font-size: 25px;
+      .cover-auth {
+        margin-top: 10px;
+        width: fit-content;
+        .auth-ava {
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
+          img {
+            object-fit: cover;
+            border-radius: 100%;
+          }
+        }
+        font-size: 15px;
+        color: map-get($color, textLight);
+      }
+    }
+  }
+
+  .detail-content {
+    width: 70%;
+    gap: 40px;
+
+    .action-item {
+      margin-bottom: 16px;
+      .btn-post-action {
+        width: min-content;
+        height: min-content;
+        padding: 5px;
+        background-color: transparent;
+      }
+      .action-count {
+        margin-left: 10px;
+      }
+    }
+
+    .detail-post {
+      width: 100%;
+      .post-content {
+        letter-spacing: 0.3px;
+        text-align: justify;
+      }
+    }
+    .detail-author {
+      padding: 60px 0;
+      border-bottom: 1px solid map-get($color, borderColor);
+      .author-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 16px;
+        border-radius: 100%;
+        img {
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+}
+
+// LOADING
+.skeleton.action-item {
+  width: 40px;
+  height: 40px;
+}
+
+.skeleton.text-row {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
+}
+.skeleton.author-name {
+  width: 150px;
+  height: 20px;
+}
+
+@media screen and (max-width: map-get($breakpoints, lg)) {
+  .detail-page {
+    .detail-content {
+      width: 100%;
+      gap: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .detail-page {
+    .detail-action {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      .action-list {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: map-get($color, backgroundFrame);
+        padding: 10px 0;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        .action-item {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
