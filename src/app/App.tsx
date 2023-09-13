@@ -1,17 +1,20 @@
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './pages/Layout';
+import Login from './pages/auth/login/Login';
+import Register from './pages/auth/register/Register';
 
 function App() {
   const routes = [
     { path: '/*', element: <Layout /> },
-    {
-      path: '/register',
-      element: <>Register</>,
-    },
+
     {
       path: '/login',
-      element: <>Login</>,
+      element: <Login />,
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ];
 

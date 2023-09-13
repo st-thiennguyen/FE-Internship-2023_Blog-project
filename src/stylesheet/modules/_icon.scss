@@ -27,6 +27,33 @@
   &-twitter-20 {
     background-image: url("../../assets/icons/ic-twitter-20.svg");
   }
+
+  &-eye {
+    width: 12px;
+    height: 12px;
+    background: url("../../assets/icons/ic-eye-10.svg");
+    background-size: cover;
+  }
+
+  &-eye-slash {
+    width: 12px;
+    height: 12px;
+    background: url("../../assets/icons/ic-eye_slash-10.svg");
+    background-size: cover;
+  }
+  &-like {
+    background: url("../../assets/icons/ic-like.svg") top center / cover no-repeat;
+  }
+
+  &-comment {
+    background: url("../../assets/icons/ic-comment.svg") top center / cover no-repeat;
+  }
+  &-like-black {
+    background: url("../../assets/icons/ic-like-black.svg") top center / cover no-repeat;
+  }
+  &-comment-black {
+    background: url("../../assets/icons/ic-comment-black.svg") top center / cover no-repeat;
+  }
   &-fire-ouline-20 {
     background-image: url("../../assets/icons/ic-fire-ouline-20.svg");
   }
