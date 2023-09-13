@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import Home from './pages/home';
+import Register from './pages/auth/register/Register';
 import Footer from './shared/layout/Footer';
 import Header from './shared/layout/Header';
 
@@ -10,6 +11,10 @@ function App() {
     {
       path: '/detail',
       element: <>Detail</>,
+    },
+    {
+      path: '/register',
+      element: <Register />,
     },
   ];
 
