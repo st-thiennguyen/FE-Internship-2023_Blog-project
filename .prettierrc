@@ -11,6 +11,7 @@
   "singleQuote": true,
   "jsxSingleQuote": false,
   "tabWidth": 2,
+  "printWidth": 120,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "overrides": [

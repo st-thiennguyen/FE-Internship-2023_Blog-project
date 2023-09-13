@@ -1,21 +1,33 @@
-export interface Post {
+export interface PostModel {
   id: number;
   title: string;
+  description: string;
   content: string;
-  tags: string[];
   status: string;
+  tags: any[];
   userId: number;
   likes: number;
   comments: number;
-  cover: number;
+  cover: string;
   recommend: boolean;
-  user: User;
+  deletedAt: any;
+  createdAt: string;
+  user: UserModel;
 }
 
-export interface User {
+export interface UserModel {
   id: number;
   email: string;
   firstName: string;
   lastName: string;
   phone: string;
+  gender: string;
+  dob: string;
+  displayName: string;
+  picture: string;
+  isActive: boolean;
+  isAdmin: boolean;
+  followers: number;
+  followings: number;
+  verifyAt: string;
 }

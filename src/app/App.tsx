@@ -1,35 +1,28 @@
 import { Route, Routes } from 'react-router-dom';
 
-import Footer from './shared/layout/Footer';
-import Header from './shared/layout/Header';
+import Layout from './pages/Layout';
 
 function App() {
   const routes = [
-    { path: '/', element: <></> },
+    { path: '/*', element: <Layout /> },
     {
-      path: '/detail',
-      element: <>Detail</>,
+      path: '/register',
+      element: <>Register</>,
+    },
+    {
+      path: '/login',
+      element: <>Login</>,
     },
   ];
 
   return (
     <>
-      <Header />
-      <main className="main">
-        <Routes>
-          {routes.length > 0 &&
-            routes.map((route) => {
-              return (
-                <Route
-                  path={route.path}
-                  element={route.element}
-                  key={route.path}
-                />
-              );
-            })}
-        </Routes>
-      </main>
-      <Footer />
+      <Routes>
+        {routes.length > 0 &&
+          routes.map((route) => {
+            return <Route path={route.path} element={route.element} key={route.path} />;
+          })}
+      </Routes>
     </>
   );
 }
