@@ -63,8 +63,8 @@
   }
   .section-latest-post {
     .post {
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
       background-color: #fff;
       &:hover {
         .post-title {
@@ -98,7 +98,7 @@
         margin-bottom: 8px;
       }
       &-body {
-        border-bottom: 1px solid #c9c5c5;
+        border-bottom: 1px solid map-get($color, borderColor);
         margin-bottom: 6px;
       }
       &-footer {

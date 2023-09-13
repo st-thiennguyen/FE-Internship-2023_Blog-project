@@ -26,7 +26,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="navbar-item navbar-item-auth">
-                  <Link to="/" className="navbar-link">
+                  <Link to="/login" className="navbar-link">
                     <div className="navbar-content d-flex justify-center item-center">
                       <i className="icon icon-small icon-user-20"></i>
                     </div>
@@ -34,12 +34,12 @@ const Header = () => {
                   <div className="navbar-auth">
                     <ul className="auth-list">
                       <li className="auth-item">
-                        <Link to="/" className="auth-link">
+                        <Link to="/profile" className="auth-link">
                           Nguyen Si Thien
                         </Link>
                       </li>
                       <li className="auth-item">
-                        <Link to="/" className="auth-link">
+                        <Link to="/logout" className="auth-link">
                           Logout
                         </Link>
                       </li>
@@ -54,7 +54,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/" className="navbar-link">
+                  <Link to="/search" className="navbar-link">
                     <div className="navbar-content icon-search d-flex justify-center item-center">
                       <i className="icon icon-small icon-search-20"></i>
                     </div>{' '}
