@@ -24,7 +24,6 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   async (error) => {
-    console.log(error.response);
     switch (error.response.status) {
       case 401:
         if (!getLocalStorage(StorageKey.AUTH, {})) {
@@ -35,8 +34,7 @@ axiosInstance.interceptors.response.use(
         }
         break;
       case 400:
-        const message400 =
-          error.response.data.errors || error.response.data.message;
+        const message400 = error.response.data.errors || error.response.data.message;
         return Promise.reject(message400);
       default:
         break;

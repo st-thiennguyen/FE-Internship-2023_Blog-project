@@ -10,8 +10,7 @@
       justify-content: end;
       height: 400px;
       padding: 20px;
-      background: url("../../assets/images/demo-cover.jpg") top center / cover
-        no-repeat;
+      background: url("../../assets/images/demo-cover.jpg") top center / cover no-repeat;
       color: map-get($color, textButton);
       &::after {
         content: "";
@@ -63,7 +62,6 @@
     }
   }
   .section-latest-post {
-    padding: 40px 0;
     .post {
       border: 1px solid #ccc;
       border-radius: 6px;
