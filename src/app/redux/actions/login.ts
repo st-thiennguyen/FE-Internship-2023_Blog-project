@@ -1,4 +1,3 @@
-import { LOGIN_START } from './../type';
 import * as ACTIONS_TYPE from '../type';
 import axios from 'axios';
 

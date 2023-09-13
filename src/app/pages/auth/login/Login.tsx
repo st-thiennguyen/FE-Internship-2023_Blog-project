@@ -9,7 +9,6 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../redux/action/login';
 
 
 const Login = () => {
