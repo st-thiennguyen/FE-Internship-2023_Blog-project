@@ -35,10 +35,8 @@ const Detail = () => {
             authAvatar={post.user?.picture}
           />
           <section className="section section-detail-content">
-            <div className="container">
-              <div className="detail-content d-flex">
-                <DetailBlog post={post} />
-              </div>
+            <div className="detail-content d-flex">
+              <DetailBlog post={post} />
             </div>
           </section>
         </div>
