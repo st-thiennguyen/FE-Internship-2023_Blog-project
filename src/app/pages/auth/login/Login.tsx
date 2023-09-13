@@ -24,7 +24,7 @@ const Login = () => {
         <div className="auth-body col col-6 col-sm-12">
           <h1 className='logo'>
             <Link to="/">
-              <img className="logo-img" src={logoImg} alt="image logo Supremethod" />
+              <img className="logo-img" src={logoImg} alt="Supremethod" />
             </Link>
           </h1>
           <h2 className="auth-title text-center">LOGIN</h2>
