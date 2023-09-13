@@ -1,4 +1,4 @@
-import { PostModel } from '../../models/post-item';
+import { PostModel } from '../../models/post';
 import { RootAction } from '../store';
 import * as TYPE from '../type';
 

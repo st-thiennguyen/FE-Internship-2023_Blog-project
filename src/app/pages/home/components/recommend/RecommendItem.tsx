@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import { Post } from '../../../../models/post-item';
+import { PostModel } from '../../../../models/post';
 
 interface RecommendItemProps {
-  post: Post;
+  post: PostModel;
 }
 const RecommendItem = ({ post }: RecommendItemProps) => {
   return (

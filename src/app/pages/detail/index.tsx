@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { PostModel } from '../../models/post-item';
+import { PostModel } from '../../models/post';
 import { fetchDetailBlog } from '../../redux/action/post';
 import { RootState } from '../../redux/store';
 import DetailLoading from './DetailLoading';
@@ -24,7 +24,7 @@ const Detail = () => {
 
   return (
     <>
-      {true ? (
+      {isLoading && !isError ? (
         <DetailLoading />
       ) : (
         <div className="detail-page">

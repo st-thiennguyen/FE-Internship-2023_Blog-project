@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { PostModel } from '../../../models/post-item';
+import { PostModel } from '../../../models/post';
 
 interface DetailBlogProps {
   post: PostModel;

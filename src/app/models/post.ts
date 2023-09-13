@@ -4,7 +4,7 @@ export interface PostModel {
   description: string;
   content: string;
   status: string;
-  tags: any[];
+  tags: string[];
   userId: number;
   likes: number;
   comments: number;
