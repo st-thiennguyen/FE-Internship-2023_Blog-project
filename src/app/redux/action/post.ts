@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
-import { getDetailPost } from '../../shared/services/post';
+import { getDetailPost, getPublicPosts } from '../../shared/services/post';
 import { RootAction } from '../store';
 import * as TYPE from '../type';
 
@@ -33,5 +33,36 @@ export const fetchDetailBlog = async (id: number, dispatch: Dispatch<RootAction>
     })
     .catch((err) => {
       dispatch(getDetailBlogFailure(`${err}`));
+    });
+};
+
+export const getPublicPostStart = () => {
+  return {
+    type: TYPE.GET_ALL_POST_START,
+  };
+};
+
+export const getPublicPostSuccess = (data: PostModel[]) => {
+  return {
+    type: TYPE.GET_ALL_POST_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getPublicPostFailure = (message: string) => {
+  return {
+    type: TYPE.GET_ALL_POST_FAILURE,
+    payload: message,
+  };
+};
+
+export const fetchPublicPosts = (page: number, size: number) => async (dispatch: any) => {
+  dispatch(getPublicPostStart());
+  await getPublicPosts(page, size)
+    .then((result: any) => {
+      dispatch(getPublicPostSuccess(result));
+    })
+    .catch((err) => {
+      dispatch(getPublicPostFailure(`${err}`));
     });
 };

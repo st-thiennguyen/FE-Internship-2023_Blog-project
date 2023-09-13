@@ -13,3 +13,20 @@ export const getDetailPost = (id: number) => {
     }
   });
 };
+
+export const getPublicPosts = (page: number, size: number) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(`${ENDPOINT.post.public}`, {
+        params: {
+          page,
+          size,
+        },
+      });
+      const data = res.data.data;
+      resolve(data);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
