@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import logoImg from '../../../../assets/images/logo.png';
@@ -8,11 +8,27 @@ import icFacebook from '../../../../assets/icons/ic-facebook-30.svg';
 import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../redux/action/login';
 
 
 const Login = () => {
 
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const inputEmailRef = useRef<any>('');
+  const inputPasswordRef = useRef<any>('');
+
+  const dispatch = useDispatch();
+
+
+  const handleLogin = (e: any) => {
+    // e.preventDefault();
+    // try {
+      // dispatch(login(inputEmailRef.current.value, inputPasswordRef.current.value))
+    // } catch (error: any) {
+    //   console.log(error);
+    // }
+  }
 
   const togglePassword = () => {
     setIsPasswordShow(!isPasswordShow);
@@ -24,7 +40,7 @@ const Login = () => {
         <div className="auth-body col col-6 col-sm-12">
           <h1 className='logo'>
             <Link to="/">
-              <img className="logo-img" src={logoImg} alt="image logo Supremethod" />
+              <img className="logo-img" src={logoImg} alt="Supremethod" />
             </Link>
           </h1>
           <h2 className="auth-title text-center">LOGIN</h2>
@@ -45,15 +61,27 @@ const Login = () => {
               </a>
             </li>
           </ul>
-          <form action="" className="form login-form">
+          <form action="" className="form login-form" onSubmit={handleLogin}>
             <div className="form-input-group">
               <label htmlFor="email" className="form-label">Email</label>
-              <input className="input-email form-input" id="email" type="text" placeholder="Enter Email..." />
+              <input
+                className="input-email form-input"
+                id="email"
+                type="text"
+                placeholder="Enter Email..."
+                ref={inputEmailRef}
+              />
             </div>
             <div className="form-input-group">
               <label htmlFor="password" className="form-label">Passsword</label>
               <div className="input-password-group">
-                <input className="input-password form-input" id="password" type={isPasswordShow ? "text" : "password"} placeholder="Enter Password..." />
+                <input 
+                  className="input-password form-input" 
+                  id="password" 
+                  type={isPasswordShow ? "text" : "password"} 
+                  placeholder="Enter Password..."
+                  ref={inputPasswordRef}
+                />
                 <img src={isPasswordShow ? icEyeSlash : icEye} alt="icon eye" className="login-icon icon-eye text-center" onClick={togglePassword} />
               </div>
             </div>

@@ -5,6 +5,7 @@ import App from './app/App';
 import store from './app/redux/store';
 import './stylesheet/style.scss';
 import { BrowserRouter } from 'react-router-dom';
+import Login from './app/pages/auth/login/Login';
 
 
 
@@ -15,7 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Login />
     </BrowserRouter>
   </Provider>
 );
