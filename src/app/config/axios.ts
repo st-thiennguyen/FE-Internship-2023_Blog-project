@@ -24,7 +24,6 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   async (error) => {
-    console.log(error);
     switch (error.response.status) {
       case 401:
         if (!getLocalStorage(StorageKey.AUTH, {})) {

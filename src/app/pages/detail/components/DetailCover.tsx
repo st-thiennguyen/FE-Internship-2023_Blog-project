@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type DetailCoverProps = {
   cover: string;
@@ -17,12 +18,12 @@ const DetailCover = ({ cover, title, authAvatar, authName }: DetailCoverProps) =
           </div>
           <div className="cover-content d-flex flex-column justify-end">
             <h2 className="cover-title">{title}</h2>
-            <a href="/" className="cover-auth d-flex item-center">
+            <Link to="/" className="cover-auth d-flex item-center">
               <div className="auth-ava">
                 <img src={authAvatar} alt={authName + 'Avatar'} />
               </div>
               <span className="auth-name">{authName}</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

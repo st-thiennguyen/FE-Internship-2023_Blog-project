@@ -14,7 +14,7 @@ const Layout = () => {
     },
   ];
   return (
-    <div>
+    <>
       <Header />
       <main className="main">
         <Routes>
@@ -25,7 +25,7 @@ const Layout = () => {
         </Routes>
       </main>
       <Footer />
-    </div>
+    </>
   );
 };
 

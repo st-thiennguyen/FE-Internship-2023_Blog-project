@@ -24,14 +24,14 @@ const Detail = () => {
 
   return (
     <>
-      {isLoading && !isError ? (
+      {true ? (
         <DetailLoading />
       ) : (
         <div className="detail-page">
           <DetailCover
             cover={post.cover}
             title={post.title}
-            authName={post.user?.firstName + post.user?.lastName}
+            authName={post.user?.firstName + ' ' + post.user?.lastName}
             authAvatar={post.user?.picture}
           />
           <section className="section section-detail-content">

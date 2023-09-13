@@ -26,39 +26,39 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="navbar-item navbar-item-auth">
-                  <a href="/" className="navbar-link">
+                  <Link to="/" className="navbar-link">
                     <div className="navbar-content d-flex justify-center item-center">
                       <i className="icon icon-small icon-user-20"></i>
                     </div>
-                  </a>
+                  </Link>
                   <div className="navbar-auth">
                     <ul className="auth-list">
                       <li className="auth-item">
-                        <a href="/" className="auth-link">
+                        <Link to="/" className="auth-link">
                           Nguyen Si Thien
-                        </a>
+                        </Link>
                       </li>
                       <li className="auth-item">
-                        <a href="/" className="auth-link">
+                        <Link to="/" className="auth-link">
                           Logout
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
                 </li>
                 <li className="navbar-item">
-                  <a href="/" className="navbar-link">
+                  <Link to="/" className="navbar-link">
                     <div className="navbar-content d-flex justify-center item-center">
                       <i className="icon icon-small icon-moon-20"></i>
                     </div>{' '}
-                  </a>
+                  </Link>
                 </li>
                 <li className="navbar-item">
-                  <a href="/" className="navbar-link">
+                  <Link to="/" className="navbar-link">
                     <div className="navbar-content icon-search d-flex justify-center item-center">
                       <i className="icon icon-small icon-search-20"></i>
                     </div>{' '}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>

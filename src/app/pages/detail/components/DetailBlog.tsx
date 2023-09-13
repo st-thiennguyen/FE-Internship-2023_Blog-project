@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post-item';
 
@@ -33,12 +34,12 @@ const DetailBlog = ({ post }: DetailBlogProps) => {
       <div className="detail-post">
         <article className="post-content">{post.content}</article>
         <div className="detail-author">
-          <a href="/" className="detail-author-action text-center d-flex flex-column item-center">
+          <Link to="/" className="detail-author-action text-center d-flex flex-column item-center">
             <div className="author-img">
               <img src={post.user?.picture} alt={post.user?.displayName} />
             </div>
-            <p className="author-name">{post.user?.firstName + post.user?.lastName}</p>
-          </a>
+            <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>
+          </Link>
         </div>
       </div>
     </>
