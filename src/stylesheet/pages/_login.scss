@@ -1,0 +1,52 @@
+.auth {
+
+  .auth-title {
+    &::after {
+      left: 50%;
+      bottom: -8px;
+      position: absolute;
+      transform: translate(-50%);
+      content: "";
+      width: 150px;
+      border: 1px solid map-get($map: $color, $key: primary);
+    }
+  }
+
+  .login-icon {
+    width: 30px;
+  }
+
+  .login-external-list {
+    padding: 30px 0;
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  .input-password-group {
+    .icon-eye {
+      margin: 10px 0 10px -40px;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      cursor: pointer;
+    }
+  }
+
+  .register-link {
+    font-weight: map-get($map: $font-weight, $key: semibold);
+    color: map-get($map: $color, $key: primary);
+  }
+
+}
+
+@media only screen and (max-width: map-get($breakpoints , md)) {
+  .auth-body {
+    margin: auto 0;
+  }
+
+  .auth-bg {
+    transition: none;
+    display: none;
+  }
+}
+
