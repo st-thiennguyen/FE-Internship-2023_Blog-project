@@ -60,7 +60,7 @@ const TopFollower = () => {
                 </Link>
                 <div className="user-info">
                   <h4 className="user-name">{user.displayName}</h4>
-                  <span className="follower">{user.followers} follower</span>
+                  <span className="followers">{user.followers} followers</span>
                 </div>
               </div>
               <button className="btn btn-secondary btn-follow">Follow</button>
