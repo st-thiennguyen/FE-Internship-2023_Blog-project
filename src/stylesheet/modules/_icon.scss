@@ -41,17 +41,21 @@
     background: url("../../assets/icons/ic-eye_slash-10.svg");
     background-size: cover;
   }
-}
+  &-like {
+    background: url("../../assets/icons/ic-like.svg") top center / cover
+      no-repeat;
+  }
 
-.icon-like {
-  width: 20px;
-  height: 20px;
-  background: url("../../assets/icons/ic-like.svg") top center / cover no-repeat;
-}
-
-.icon-comment {
-  width: 20px;
-  height: 20px;
-  background: url("../../assets/icons/ic-comment.svg") top center / cover
-    no-repeat;
+  &-comment {
+    background: url("../../assets/icons/ic-comment.svg") top center / cover
+      no-repeat;
+  }
+  &-like-black {
+    background: url("../../assets/icons/ic-like-black.svg") top center / cover
+      no-repeat;
+  }
+  &-comment-black {
+    background: url("../../assets/icons/ic-comment-black.svg") top center /
+      cover no-repeat;
+  }
 }

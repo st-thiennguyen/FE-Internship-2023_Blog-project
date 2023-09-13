@@ -16,11 +16,11 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
             <div className="recommend-footer d-flex justify-between">
               <ul className="reaction-list d-flex">
                 <li className="reaction-item d-flex">
-                  <i className="icon icon-like"></i>
+                  <i className="icon icon-small icon-like"></i>
                   <span className="reaction-number">{post.likes}</span>
                 </li>
                 <li className="reaction-item d-flex">
-                  <i className="icon icon-comment"></i>
+                  <i className="icon icon-small icon-comment"></i>
                   <span className="reaction-number">{post.comments}</span>
                 </li>
               </ul>
