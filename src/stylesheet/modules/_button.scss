@@ -30,3 +30,8 @@
   background-color: map-get($color, secondary);
   color: #fff;
 }
+
+button:disabled,
+button[disabled] {
+  pointer-events: none;
+}

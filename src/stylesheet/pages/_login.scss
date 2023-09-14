@@ -37,6 +37,10 @@
     color: map-get($map: $color, $key: primary);
   }
 
+  .error-login-fail {
+    font-size: map-get($map: $font-size, $key: md);
+  }
+
 }
 
 @media only screen and (max-width: map-get($breakpoints , md)) {

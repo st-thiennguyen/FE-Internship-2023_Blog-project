@@ -3,9 +3,13 @@
     font-size: map-get($map: $font-size, $key: md);
   }
 
+  .form-input-group {
+    min-height: 88px;
+  }
+
   .form-input,
   .form-select {
-    margin: 4px 0 10px;
+    margin: 4px 0 5px;
     padding: 0 10px;
     width: 100%;
     height: 36px;
@@ -20,4 +24,20 @@
       transition: none;
     }
   }
+
+  .form-error {
+    color: red;
+    font-size: map-get($map: $font-size, $key: xs);
+    padding-left: 3px;
+  }
+
+  .form-fieldset {
+    border: 0;
+  }
+
+  input:disabled,
+  input[disabled] {
+    background-color: map-get($map: $color, $key: background);
+  }
 }
+

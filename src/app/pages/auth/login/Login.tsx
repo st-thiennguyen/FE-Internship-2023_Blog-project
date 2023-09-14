@@ -1,7 +1,15 @@
-import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { login } from '../../../redux/action/auth';
+import { regexEmail } from '../../../shared/constants';
+import { RootState } from '../../../redux/store';
 
 import logoImg from '../../../../assets/images/logo.png';
 import loginImg from '../../../../assets/images/bg-auth.png';
@@ -10,43 +18,69 @@ import icFacebook from '../../../../assets/icons/ic-facebook-30.svg';
 import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
-import { useForm } from 'react-hook-form';
 
 const schema = yup.object({
-  email: yup.string().required(),
-  password: yup.string().required()
+  email: yup
+    .string()
+    .trim()
+    .required('Email must not be null!')
+    .matches(regexEmail, 'Email invalid!'),
+  password: yup
+    .string()
+    .trim()
+    .required('Password must not be null!')
+    .max(40, 'Password must not be more than 40 characters!')
+    .min(4, 'Password must not be less than 4 characters!')
 }).required();
+
+type FormData = {
+  email: string,
+  password: string
+}
 
 const Login = () => {
 
-  const [isPasswordShow, setIsPasswordShow] = useState(false);
-  const inputEmailRef = useRef<any>('');
-  const inputPasswordRef = useRef<any>('');
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowError, setIsShowError] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoading = useSelector((state: RootState) => state.login.isLoading);
+  const accessToken: string = useSelector((state: RootState) => state.login.auth.accessToken);
+  const errorLogin: any = useSelector((state: RootState) => state.login.error);
+
+  const togglePassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  } = useForm<FormData>({ resolver: yupResolver(schema) });
+
+
+  const onSubmit = handleSubmit((data) => {
+    dispatch(login(data.email, data.password) as any);
   })
 
-  const handleLogin = (e: any) => {
-    e.preventDefault();
-  }
+  useEffect(() => {
+    if (errorLogin) {
+      setIsShowError(true);
+    }
+  }, [errorLogin]);
 
-
-
-  const togglePassword = () => {
-    setIsPasswordShow(!isPasswordShow);
-  }
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [accessToken]);
 
   return (
     <div className="auth">
       <div className="auth-wrapper row">
         <div className="auth-body col col-6 col-sm-12">
           <h1 className='logo'>
-            <Link to="/">
+            <Link to="/" className={isLoading ? 'disable-link' : ''}>
               <img className="logo-img" src={logoImg} alt="Supremethod" />
             </Link>
           </h1>
@@ -68,35 +102,44 @@ const Login = () => {
               </a>
             </li>
           </ul>
-          <form action="" className="form login-form" onSubmit={handleLogin}>
-            <div className="form-input-group">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                className="input-email form-input"
-                id="email"
-                type="text"
-                placeholder="Enter Email..."
-                ref={inputEmailRef}
-              />
-              <p>{errors.email?.message}</p>
-            </div>
-            <div className="form-input-group">
-              <label htmlFor="password" className="form-label">Passsword</label>
-              <div className="input-password-group">
+          <form action="" className="form login-form" onSubmit={onSubmit}>
+            <fieldset className='form-fieldset' disabled={isLoading}>
+              <div className="form-input-group">
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
-                  className="input-password form-input"
-                  id="password"
-                  type={isPasswordShow ? "text" : "password"}
-                  placeholder="Enter Password..."
-                  ref={inputPasswordRef}
+                  {...register("email")}
+                  className="input-email form-input"
+                  id="email"
+                  type="text"
+                  placeholder="Enter Email..."
+                  onFocus={() => {
+                    setIsShowError(false);
+                  }}
                 />
-                <img src={isPasswordShow ? icEyeSlash : icEye} alt="icon eye" className="login-icon icon-eye text-center" onClick={togglePassword} />
-                <p>{errors.password?.message}</p>
+                <p className='form-error'>{errors.email?.message}</p>
               </div>
-            </div>
-            <button type="submit" className="btn btn-primary btn-auth">login</button>
+              <div className="form-input-group">
+                <label htmlFor="password" className="form-label">Passsword</label>
+                <div className="input-password-group">
+                  <input
+                    {...register("password")}
+                    className="input-password form-input"
+                    id="password"
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Enter Password..."
+                    onFocus={() => {
+                      setIsShowError(false);
+                    }}
+                  />
+                  <img src={isShowPassword ? icEyeSlash : icEye} alt="icon eye" className="login-icon icon-eye text-center" onClick={togglePassword} />
+                  <p className='form-error'>{errors.password?.message}</p>
+                </div>
+                {isShowError ? <p className='form-error error-login-fail'>Email or password invalid!</p> : null}
+              </div>
+              <button type="submit" className="btn btn-primary btn-auth">{isLoading ? "loading..." : "login"}</button>
+            </fieldset>
           </form>
-          <p className="text-center">You"re new to Supremethod? <Link to="/register" className="register-link">Register</Link></p>
+          <p className="text-center">You"re new to Supremethod? <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : ''}`} >Register</Link></p>
         </div>
         <div className="auth-bg col col-6">
           <img src={loginImg} alt="image login" className="auth-img" />

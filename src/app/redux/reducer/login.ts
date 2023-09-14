@@ -1,13 +1,16 @@
+import { Auth } from '../../models/auth';
+import { StorageKey } from '../../shared/constants';
+import { getLocalStorage } from '../../shared/utils';
 import * as ACTIONS_TYPE from '../type';
 
 export interface LoginState {
-  token: Boolean,
-  isLoading: Boolean,
-  error: string
+  auth: Auth,
+  isLoading: boolean,
+  error: string,
 }
 
 const initState: LoginState = {
-  token: false,
+  auth: getLocalStorage(StorageKey.AUTH) || {},
   isLoading: false,
   error: ''
 }
@@ -16,17 +19,16 @@ export const loginReducer = (state = initState, action: any) => {
   switch (action.type) {
     case ACTIONS_TYPE.LOGIN_START: {
       return {
-        ...state, 
-        token: false,
+        ...state,
         isLoading: true,
         error: ''
       }
     }
-  
+
     case ACTIONS_TYPE.LOGIN_SUCCESS: {
       return {
-        ...state, 
-        token: true,
+        ...state,
+        auth: action.payload,
         isLoading: false,
         error: ''
       }
@@ -34,15 +36,14 @@ export const loginReducer = (state = initState, action: any) => {
 
     case ACTIONS_TYPE.LOGIN_FAILURE: {
       return {
-        ...state, 
-        token: false,
+        ...state,
         isLoading: false,
-        error: 'fail.........'
+        error: action.payload
       }
-    }    
+    }
 
-    default: 
-      return state
+    default:
+      return state;
   }
 }
 
