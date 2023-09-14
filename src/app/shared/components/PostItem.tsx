@@ -11,7 +11,7 @@ const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
   return (
-    <Link to={'/'}>
+    <Link to={`detail/${post.id}`}>
       <li className="post-item">
         <div className="post">
           <div className="post-img-wrapper">
@@ -43,7 +43,7 @@ const PostItem = ({ post }: PostItemProps) => {
               <span className="read-more">READ MORE</span>
               <ul className="post-reaction-list d-flex item-center">
                 <div className="post-reaction-item d-flex">
-                  <i className="icon icon-small icon-like-black"></i>
+                  <i className="icon icon-small icon-fire-ouline-20"></i>
                   <span className="post-reaction-number">{post.likes}</span>
                 </div>
                 <div className="post-reaction-item d-flex">

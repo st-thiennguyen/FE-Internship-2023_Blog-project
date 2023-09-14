@@ -49,8 +49,8 @@ const TopFollower = () => {
       <ul className="user-list">
         {users.map((user) => {
           return (
-            <li className="user-item" key={user.id}>
-              <div className="user-info-wrapper">
+            <li className="user-item d-flex justify-between flex-wrap" key={user.id}>
+              <div className="user-info-wrapper d-flex">
                 <Link className="user-link" to={'/'}>
                   <img
                     className="user-avatar"

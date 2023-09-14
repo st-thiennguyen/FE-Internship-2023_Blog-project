@@ -1,29 +1,29 @@
 .main {
   margin-top: $header-height;
   padding-top: 10px;
-  min-height: 100vh;
-  .main-body {
-    gap: 30px;
-    .main-content {
-      width: 70%;
-    }
-    .main-aside {
-      width: 30%;
-    }
-  }
+  // min-height: 100vh;
+  // .main-body {
+  //   gap: 30px;
+  //   .main-content {
+  //     width: 70%;
+  //   }
+  //   .main-aside {
+  //     width: 30%;
+  //   }
+  // }
 }
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
-  .main {
-    .main-body {
-      .main-content {
-        width: 60%;
-      }
-      .main-aside {
-        width: 40%;
-      }
-    }
-  }
+  // .main {
+  //   .main-body {
+  //     .main-content {
+  //       width: 60%;
+  //     }
+  //     .main-aside {
+  //       width: 40%;
+  //     }
+  //   }
+  // }
 }
 
 @media screen and (max-width: map-get($breakpoints, md)) {

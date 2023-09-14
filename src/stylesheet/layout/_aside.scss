@@ -17,27 +17,25 @@
     margin-bottom: 10px;
   }
   .user-item {
-    display: flex;
-    justify-content: space-between;
     &:not(:last-child) {
       margin-bottom: 24px;
     }
+  }
+  .user-info-wrapper {
+    min-width: 180px;
+  }
+  .btn-follow {
+    margin-top: 4px;
   }
 
   .user-avatar {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    margin-right: 20px;
+    margin-right: 12px;
   }
   .user-name {
     font-size: map-get($font-size, sm);
-  }
-  .user-info {
-    margin-right: 26px;
-    &-wrapper {
-      display: flex;
-    }
   }
   .followers {
     font-size: map-get($font-size, sm);
@@ -50,9 +48,12 @@
       margin-bottom: 20px;
     }
     &-author {
+      display: inline-block;
       font-size: map-get($font-size, sm);
+      margin-bottom: 6px;
     }
     &-title {
+      line-height: 1.2;
       font-size: map-get($font-size, md);
       &:hover {
         color: map-get($color, primary);
