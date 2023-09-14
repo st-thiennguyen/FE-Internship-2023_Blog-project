@@ -1,5 +1,10 @@
 .register-page {
+  .auth-body {
+    height: 100%;
+    overflow-y: auto;
+  }
   .auth-title {
+    margin-top: -24px;
     &::after {
       content: "";
       width: 250px;
@@ -14,6 +19,7 @@
   .form-register {
     margin-top: 30px;
   }
+
   .input-password-group {
     position: relative;
 
@@ -27,8 +33,19 @@
       cursor: pointer;
     }
   }
+
+  .btn-auth {
+    margin-top: 10px;
+  }
+
   .login-link {
     color: map-get($map: $color, $key: primary);
     font-weight: map-get($map: $font-weight, $key: semibold);
+  }
+}
+
+@media only screen and (max-width: map-get($breakpoints, md)) {
+  .auth-wrapper {
+    height: 100%;
   }
 }
