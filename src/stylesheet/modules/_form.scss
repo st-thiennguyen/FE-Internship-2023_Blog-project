@@ -22,7 +22,16 @@
   }
   .form-error {
     color: red;
-    font-size: map-get($map: $font-size, $key: xxs);
+    font-size: map-get($map: $font-size, $key: xs);
     padding-left: 3px;
+  }
+
+  .form-fieldset {
+    border: 0;
+  }
+
+  input:disabled,
+  input[disabled] {
+    background-color: map-get($map: $color, $key: background);
   }
 }
