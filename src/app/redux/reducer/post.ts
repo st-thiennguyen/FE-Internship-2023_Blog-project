@@ -24,7 +24,7 @@ export const postReducer = (state = initialState, action: RootAction): DetailSta
     case TYPE.GET_ALL_POST_START:
       return {
         ...state,
-        data: [] as PostModel[],
+        data: [...state.data] as PostModel[],
         isLoading: true,
         isError: false,
         message: '',
@@ -32,7 +32,7 @@ export const postReducer = (state = initialState, action: RootAction): DetailSta
     case TYPE.GET_ALL_POST_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: [...state.data, ...action.payload],
         isLoading: false,
         isError: false,
         isSuccess: true,
