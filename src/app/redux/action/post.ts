@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
 import { getDetailPost } from '../../shared/services/post';
-import { RootAction } from '../store';
+import { RootAction, RootThunk } from '../store';
 import * as TYPE from '../type';
 
 export const getDetailBlogStart = () => {
@@ -25,13 +25,14 @@ export const getDetailBlogFailure = (message: string) => {
   };
 };
 
-export const fetchDetailBlog = async (id: number, dispatch: Dispatch<RootAction>) => {
-  dispatch(getDetailBlogStart());
-  await getDetailPost(id)
-    .then((result: any) => {
-      dispatch(getDetailBlogSuccess(result));
-    })
-    .catch((err) => {
-      dispatch(getDetailBlogFailure(`${err}`));
-    });
-};
+export const fetchDetailBlog =
+  (id: number): RootThunk =>
+  async (dispatch: Dispatch<RootAction>) => {
+    dispatch(getDetailBlogStart());
+    try {
+      const data = await getDetailPost(id);
+      dispatch(getDetailBlogSuccess(data as PostModel));
+    } catch (error) {
+      dispatch(getDetailBlogFailure(`${error}`));
+    }
+  };
