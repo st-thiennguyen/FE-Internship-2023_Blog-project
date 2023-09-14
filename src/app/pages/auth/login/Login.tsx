@@ -79,8 +79,8 @@ const Login = () => {
     <div className="auth">
       <div className="auth-wrapper row">
         <div className="auth-body col col-6 col-sm-12">
-          <h1 className='logo'>
-            <Link to="/" className={isLoading ? 'disable-link' : ''}>
+          <h1 className="logo">
+            <Link to="/" className={isLoading ? "disable-link" : ""}>
               <img className="logo-img" src={logoImg} alt="Supremethod" />
             </Link>
           </h1>
@@ -102,8 +102,8 @@ const Login = () => {
               </a>
             </li>
           </ul>
-          <form action="" className="form login-form" onSubmit={onSubmit}>
-            <fieldset className='form-fieldset' disabled={isLoading}>
+          <form className="form login-form" onSubmit={onSubmit}>
+            <fieldset className="form-fieldset" disabled={isLoading}>
               <div className="form-input-group">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input
@@ -116,7 +116,7 @@ const Login = () => {
                     setIsShowError(false);
                   }}
                 />
-                <p className='form-error'>{errors.email?.message}</p>
+                <p className="form-error">{errors.email?.message}</p>
               </div>
               <div className="form-input-group">
                 <label htmlFor="password" className="form-label">Passsword</label>
@@ -132,14 +132,14 @@ const Login = () => {
                     }}
                   />
                   <img src={isShowPassword ? icEyeSlash : icEye} alt="icon eye" className="login-icon icon-eye text-center" onClick={togglePassword} />
-                  <p className='form-error'>{errors.password?.message}</p>
+                  <p className="form-error">{errors.password?.message}</p>
                 </div>
-                {isShowError ? <p className='form-error error-login-fail'>Email or password invalid!</p> : null}
+                {isShowError ? <p className="form-error error-login-fail">Email or password invalid!</p> : null}
               </div>
               <button type="submit" className="btn btn-primary btn-auth">{isLoading ? "loading..." : "login"}</button>
             </fieldset>
           </form>
-          <p className="text-center">You"re new to Supremethod? <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : ''}`} >Register</Link></p>
+          <p className="text-center">You"re new to Supremethod? <Link to="/register" className={`register-link ${isLoading ? "disable-link" : ""}`} >Register</Link></p>
         </div>
         <div className="auth-bg col col-6">
           <img src={loginImg} alt="image login" className="auth-img" />

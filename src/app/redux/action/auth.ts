@@ -5,6 +5,7 @@ import { RootAction } from '../store';
 import { fetchAuthLogin } from '../../shared/services/auth/login';
 import { setLocalStorage } from '../../shared/utils';
 import { StorageKey } from '../../shared/constants';
+import { Auth } from '../../models/auth';
 
 export const loginRequest = () => {
   return {
@@ -12,7 +13,7 @@ export const loginRequest = () => {
   }
 }
 
-export const loginSuccess = (data: any) => {
+export const loginSuccess = (data: Auth) => {
   return {
     type: ACTIONS_TYPE.LOGIN_SUCCESS,
     payload: data
