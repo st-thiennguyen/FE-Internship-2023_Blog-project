@@ -33,6 +33,18 @@ const DetailBlog = ({ post }: DetailBlogProps) => {
       </div>
       <div className="detail-post">
         <article className="post-content">{post.content}</article>
+        <div className="post-tag">
+          <ul className="tag-list d-flex flex-wrap justify-end">
+            {post.tags?.length > 0 &&
+              post.tags?.map((item, ind) => (
+                <li className="tag-item" key={ind}>
+                  <Link to="" className="tag">
+                    #{item}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </div>
         <div className="detail-author">
           <Link to="/" className="detail-author-action text-center d-flex flex-column item-center">
             <div className="author-img">

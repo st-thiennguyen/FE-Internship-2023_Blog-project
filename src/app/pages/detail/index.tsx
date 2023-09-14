@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
 import { fetchDetailBlog } from '../../redux/action/post';
 import { RootState } from '../../redux/store';
-import DetailLoading from './DetailLoading';
+import Loading from '../../shared/components/Loading';
 import DetailBlog from './components/DetailBlog';
 import DetailCover from './components/DetailCover';
 
@@ -16,7 +16,6 @@ const Detail = () => {
 
   const post: PostModel = useSelector((state: RootState) => state.detail.data);
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
-  const isError = useSelector((state: RootState) => state.detail.isError);
 
   useEffect(() => {
     fetchDetailBlog(Number(postId), dispatch);
@@ -24,8 +23,8 @@ const Detail = () => {
 
   return (
     <>
-      {isLoading && !isError ? (
-        <DetailLoading />
+      {isLoading ? (
+        <Loading />
       ) : (
         <div className="detail-page">
           <DetailCover

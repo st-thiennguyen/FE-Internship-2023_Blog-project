@@ -66,6 +66,12 @@
       .post-content {
         letter-spacing: 0.3px;
         text-align: justify;
+        margin-bottom: 16px;
+      }
+      .post-tag {
+        .tag-list {
+          gap: 10px;
+        }
       }
     }
     .detail-author {
