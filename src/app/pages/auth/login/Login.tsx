@@ -47,7 +47,7 @@ const Login = () => {
   const navigate = useNavigate();
   const isLoading = useSelector((state: RootState) => state.login.isLoading);
   const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
-  const errorLogin: any = useSelector((state: RootState) => state.login.error.response?.data.errors[0]);
+  const errorLogin: any = useSelector((state: RootState) => state.login.message.response?.data.errors[0]);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -137,7 +137,7 @@ const Login = () => {
                 </div>
                 {isShowError ? <p className="form-error error-login-fail">{errorLogin}</p> : null}
               </div>
-              <Button label='login' isLoading={true} optionClassName='btn-primary btn-auth' />
+              <Button label='login' isLoading={isLoading} optionClassName='btn-primary btn-auth' />
             </fieldset>
           </form>
           <p className="text-center">You"re new to Supremethod? <Link to="/register" className={`register-link ${isLoading ? "disable-link" : ""}`} >Register</Link></p>

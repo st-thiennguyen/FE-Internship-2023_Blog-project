@@ -6,13 +6,13 @@ import * as ACTIONS_TYPE from '../type';
 export interface LoginState {
   auth: Auth,
   isLoading: boolean,
-  error: string,
+  message: string,
 }
 
 const initState: LoginState = {
   auth: getLocalStorage(StorageKey.AUTH) || null,
   isLoading: false,
-  error: ''
+  message: ''
 }
 
 export const loginReducer = (state = initState, action: any) => {
@@ -21,7 +21,7 @@ export const loginReducer = (state = initState, action: any) => {
       return {
         ...state,
         isLoading: true,
-        error: ''
+        message: ''
       }
     }
 
@@ -30,7 +30,7 @@ export const loginReducer = (state = initState, action: any) => {
         ...state,
         auth: action.payload,
         isLoading: false,
-        error: ''
+        message: ''
       }
     }
 
@@ -38,7 +38,7 @@ export const loginReducer = (state = initState, action: any) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload
+        message: action.payload
       }
     }
 
