@@ -6,6 +6,11 @@
     width: $icon-size-sm;
     height: $icon-size-sm;
   }
+
+  &-medium {
+    width: 25px;
+    height: 25px;
+  }
   &-user-20 {
     background-image: url("../../assets/icons/ic-user-20.svg");
   }
@@ -62,5 +67,14 @@
   }
   &-bookmark-20 {
     background-image: url("../../assets/icons/ic-bookmark-20.svg");
+  }
+  &-close-20 {
+    background-image: url("../../assets/icons/ic-close-20.svg");
+  }
+  &-date-20 {
+    background-image: url("../../assets/icons/ic-date-20.svg");
+  }
+  &-close-10 {
+    background-image: url("../../assets/icons/ic-close-10.svg");
   }
 }
