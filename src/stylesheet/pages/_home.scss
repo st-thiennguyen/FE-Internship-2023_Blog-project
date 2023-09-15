@@ -69,7 +69,10 @@
       box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
       border-radius: 12px;
       background-color: #fff;
-      margin-bottom: 20px;
+      margin-bottom: $p-col * 2;
+      &-list {
+        margin-bottom: 20px;
+      }
       &-body-top {
         margin-bottom: 10px;
       }
@@ -107,12 +110,12 @@
         position: relative;
         font-size: map-get($font-size, sm);
         font-weight: map-get($font-weight, medium);
-        margin-right: 14px;
+        margin-right: 16px;
         &::after {
           content: "";
           position: absolute;
           top: 50%;
-          right: -10px;
+          right: -11px;
           transform: translateY(-50%);
           width: 6px;
           height: 6px;
@@ -160,6 +163,48 @@
       .read-more {
         font-size: map-get($font-size, sm);
         font-weight: map-get($font-weight, medium);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, lg)) {
+  .home-page {
+    .section-latest-post {
+      .post {
+        margin-bottom: $p-col-lg * 2;
+      }
+    }
+    .recommend-title {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .username::after {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .detail-page {
+    .detail-action {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      .action-list {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: map-get($color, backgroundFrame);
+        padding: 10px 0;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        .action-item {
+          margin-bottom: 0;
+        }
       }
     }
   }

@@ -20,17 +20,23 @@ const Layout = () => {
       <Header />
       <main className="main">
         <div className="container">
-          <div className="d-flex main-body">
-            <div className="main-content">
-              <Routes>
-                {routes.length > 0 &&
-                  routes.map((route) => {
-                    return <Route path={route.path} element={route.element} key={route.path} />;
-                  })}
-              </Routes>
-            </div>
-            <div className="main-aside">
-              <Aside />
+          <div className=" main-body">
+            <div className="row">
+              <div className="col col-9 col-lg-12">
+                <div className="main-content">
+                  <Routes>
+                    {routes.length > 0 &&
+                      routes.map((route) => {
+                        return <Route path={route.path} element={route.element} key={route.path} />;
+                      })}
+                  </Routes>
+                </div>
+              </div>
+              <div className="col col-3 col-lg-12">
+                <div className="main-aside">
+                  <Aside />
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ const PostList = ({ posts }: PostListProps) => {
       <div className="row">
         {posts.map((post) => {
           return (
-            <div className="col col-6" key={post.id}>
+            <div className="col col-6 col-md-12" key={post.id}>
               <PostItem post={post} />
             </div>
           );

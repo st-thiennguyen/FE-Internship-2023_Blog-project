@@ -4,8 +4,14 @@ import TopPost from './components/TopPost';
 const Aside = () => {
   return (
     <aside className="aside">
-      <TopFollower />
-      <TopPost />
+      <div className="row">
+        <div className="col col-12 col-lg-6 col-sm-12">
+          <TopFollower />
+        </div>
+        <div className="col col-12 col-lg-6 col-sm-12">
+          <TopPost />
+        </div>
+      </div>
     </aside>
   );
 };
