@@ -47,7 +47,7 @@ const Login = () => {
   const navigate = useNavigate();
   const isLoading = useSelector((state: RootState) => state.login.isLoading);
   const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
-  const errorLogin: any = useSelector((state: RootState) => state.login.message.response?.data.errors[0]);
+  const errorLogin: any = useSelector((state: RootState) => state.login.message);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
