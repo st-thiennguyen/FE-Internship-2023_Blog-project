@@ -27,12 +27,13 @@ export const getDetailBlogFailure = (message: string) => {
 
 export const fetchDetailBlog =
   (id: number): RootThunk =>
-  async (dispatch: Dispatch<RootAction>) => {
+  (dispatch: Dispatch<RootAction>) => {
     dispatch(getDetailBlogStart());
-    try {
-      const data = await getDetailPost(id);
-      dispatch(getDetailBlogSuccess(data as PostModel));
-    } catch (error) {
-      dispatch(getDetailBlogFailure(`${error}`));
-    }
+    getDetailPost(id)
+      .then((result) => {
+        dispatch(getDetailBlogSuccess(result as PostModel));
+      })
+      .catch((err) => {
+        dispatch(getDetailBlogFailure(`${err}`));
+      });
   };

@@ -30,18 +30,20 @@ const Detail = () => {
         <DetailLoading />
       ) : (
         <div className="detail-page">
-          <DetailCover
-            cover={post.cover}
-            title={post.title}
-            authName={post.user?.firstName + ' ' + post.user?.lastName}
-            authAvatar={post.user?.picture}
-            datePost={new Date(post.createdAt)}
-          />
-          <section className="section section-detail-content">
-            <div className="detail-content d-flex">
-              <DetailBlog post={post} />
-            </div>
-          </section>
+          <article>
+            <DetailCover
+              cover={post.cover}
+              title={post.title}
+              authorName={post.user?.firstName + ' ' + post.user?.lastName}
+              authorAvatar={post.user?.picture}
+              datePost={new Date(post.createdAt)}
+            />
+            <section className="section section-detail-content">
+              <div className="detail-content d-flex">
+                <DetailBlog post={post} />
+              </div>
+            </section>
+          </article>
         </div>
       )}
       {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}

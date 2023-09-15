@@ -31,8 +31,8 @@
       .cover-info {
         margin-top: 10px;
       }
-      .cover-auth {
-        .auth-ava {
+      .cover-author {
+        .author-ava {
           width: 30px;
           height: 30px;
           margin-right: 10px;
@@ -70,7 +70,7 @@
 
     .detail-post {
       width: 100%;
-      .post-content {
+      .detail-post-body {
         font-size: map-get($font-size, lg);
         letter-spacing: 0.3px;
         margin-bottom: 16px;
