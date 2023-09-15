@@ -1,4 +1,5 @@
 .btn {
+  position: relative;
   text-transform: capitalize;
   padding: 12px 32px;
   color: map-get($color, dark);
@@ -10,6 +11,7 @@
   border: none;
   outline: none;
   cursor: pointer;
+  transition: none !important;
 }
 
 .btn.disabled {
@@ -29,4 +31,33 @@
 .btn-secondary {
   background-color: map-get($color, secondary);
   color: #fff;
+}
+
+button:disabled,
+button[disabled] {
+  pointer-events: none;
+}
+
+.btn-loading {
+  position: absolute;
+  top: 0;
+  right: 38%;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #ff5722;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+  transition: none !important;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
