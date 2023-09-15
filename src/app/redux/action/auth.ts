@@ -1,10 +1,13 @@
-import axios from 'axios';
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
 import { postRegister } from '../../shared/services/auth/register';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
+
+import { fetchAuthLogin } from '../../shared/services/auth/login';
+import { setLocalStorage } from '../../shared/utils';
+import { StorageKey } from '../../shared/constants';
 
 export const loginRequest = () => {
   return {
@@ -46,19 +49,6 @@ export const registerFailure = (error: string[]) => {
   };
 };
 
-export const login = (email: string, password: string) => async (dispatch: any) => {
-  try {
-    const response = await axios.post(
-      'http://ec2-18-143-176-131.ap-southeast-1.compute.amazonaws.com:3000/api/v1/users/login',
-      { email, password },
-    );
-    dispatch(loginSuccess(response.data));
-    console.log(response);
-  } catch (error: any) {
-    dispatch(loginFailure(error));
-  }
-};
-
 export const registerAccount =
   (registerData: RegisterProps): RootThunk =>
   async (dispatch: Dispatch<RootAction>) => {
@@ -70,3 +60,14 @@ export const registerAccount =
       dispatch(registerSuccess(res));
     }
   };
+
+export const login = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(loginRequest());
+  try {
+    const data: any = await fetchAuthLogin(email, password)
+    dispatch(loginSuccess(data));
+    setLocalStorage(StorageKey.AUTH, data);
+  } catch (error: any) {
+    dispatch(loginFailure(error.response?.data.errors[0]));
+  }
+} 
