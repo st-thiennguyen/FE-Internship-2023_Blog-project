@@ -12,3 +12,9 @@ export interface UserInfo {
   dob: string;
   displayName: string;
 }
+
+export interface RegisterProps extends Omit<UserInfo, 'id'> {
+  password: string;
+  phone: string;
+  picture: string;
+}

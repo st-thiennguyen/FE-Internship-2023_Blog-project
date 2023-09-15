@@ -1,3 +1,4 @@
+import { loginReducer } from './reducer/login';
 import { AnyAction, applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkAction } from 'redux-thunk';

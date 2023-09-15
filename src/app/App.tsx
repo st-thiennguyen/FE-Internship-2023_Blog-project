@@ -24,7 +24,8 @@ function App() {
         {routes.length > 0 &&
           routes.map((route) => {
             return <Route path={route.path} element={route.element} key={route.path} />;
-          })}
+          })
+        }
       </Routes>
     </>
   );

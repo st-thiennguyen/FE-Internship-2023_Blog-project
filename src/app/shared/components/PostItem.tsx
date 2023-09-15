@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
-import { convertDateTime } from '../utils';
+import { convertDateToString } from '../utils';
 
 interface PostItemProps {
   post: PostModel;
@@ -34,7 +34,7 @@ const PostItem = ({ post }: PostItemProps) => {
                   />
                   <span className="user-name">{post.user.displayName}</span>
                 </div>
-                <p className="post-created-date">{convertDateTime(post.createdAt)}</p>
+                <p className="post-created-date">{convertDateToString(post.createdAt)}</p>
               </div>
               <h3 className="post-title">{post.title}</h3>
               <p className="post-content">{post.content}</p>
