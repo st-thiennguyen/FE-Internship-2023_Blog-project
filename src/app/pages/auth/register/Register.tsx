@@ -2,11 +2,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
+import logo from '../../../../assets/images/logo.svg';
 import { registerAccount } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
+import Button from '../../../shared/components/Button';
+import ToastMessage from '../../../shared/components/ToastMessage';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 import { convertDateFormat } from '../../../shared/utils/dateFormat';
 
@@ -45,14 +48,24 @@ type FormData = yup.InferType<typeof schema>;
 
 const Register = () => {
   const isLoading: boolean = useSelector((state: RootState) => state.register.isLoading);
+  const isSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
+  const isError: boolean = useSelector((state: RootState) => state.register.isError);
   const message: string = useSelector((state: RootState) => state.register.message);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/login');
+    }
+  }, [isSuccess, navigate]);
 
   const {
     register,
@@ -93,13 +106,11 @@ const Register = () => {
     <div className="auth-page register-page">
       <div className="auth-wrapper row justify-between">
         <div className="auth-body col col-6 col-sm-12">
-          <header className="logo-wrapper">
-            <h1 className="logo">
-              <Link to="/" className={isLoading ? 'disable-link' : ''}>
-                <img className="logo-img" src={require('../../../../assets/images/logo.png')} alt="supremethod" />
-              </Link>
-            </h1>
-          </header>
+          <h1 className="header-logo d-flex justify-between item-center">
+            <Link to="/" className={isLoading ? 'logo-link disable-link' : 'logo-link'}>
+              <img className="logo-img" src={logo} alt="Supremethod" />
+            </Link>
+          </h1>
           <h2 className="auth-title text-center">REGISTER</h2>
           <form className="form form-register" onSubmit={handleSubmit(onRegister)}>
             <fieldset className="form-fieldset" disabled={isLoading}>
@@ -185,9 +196,7 @@ const Register = () => {
                   {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
               </div>
-              <button className="btn btn-primary btn-auth" type="submit">
-                Register
-              </button>
+              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
             </fieldset>
           </form>
           <p className="text-center">
@@ -200,6 +209,7 @@ const Register = () => {
         <div className="auth-bg col col-6">
           <img className="auth-img" src={require('../../../../assets/images/bg-auth.png')} alt="Auth background" />
         </div>
+        {isError && <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />}
       </div>
     </div>
   );
