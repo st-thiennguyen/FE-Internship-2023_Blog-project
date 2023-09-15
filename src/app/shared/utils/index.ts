@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { StorageKey } from '../constants';
 
 export const getLocalStorage = <T>(key: StorageKey, initial?: T): T => {
@@ -10,16 +8,6 @@ export const setLocalStorage = <T>(key: StorageKey, items: T) => {
   localStorage.setItem(key, JSON.stringify(items));
 };
 
-export const checkImage = async (url: string) => {
-  if (!url) {
-    return false;
-  }
-  const res = await axios.get(url);
-  const buff = res.status === 200;
-
-  return buff;
-};
-
 export const isImageUrlValid = (url: string): Promise<boolean> => {
   return new Promise((resolve) => {
     const img = new Image();
@@ -27,4 +15,9 @@ export const isImageUrlValid = (url: string): Promise<boolean> => {
     img.onerror = () => resolve(false);
     img.src = url;
   });
+};
+
+export const convertDateToString = (date: any) => {
+  const newDate = new Date(date);
+  return newDate.getDate() + '-' + newDate.getMonth() + '-' + newDate.getFullYear();
 };

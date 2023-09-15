@@ -36,7 +36,7 @@ const Detail = () => {
               title={post.title}
               authorName={post.user?.firstName + ' ' + post.user?.lastName}
               authorAvatar={post.user?.picture}
-              datePost={new Date(post.createdAt)}
+              datePost={post.createdAt}
             />
             <section className="section section-detail-content">
               <div className="detail-content d-flex">

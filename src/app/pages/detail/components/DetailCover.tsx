@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import noImage from '../../../../assets/images/no-image.png';
-import { isImageUrlValid } from '../../../shared/utils';
+import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
 
 type DetailCoverProps = {
   cover: string;
   title: string;
   authorAvatar: string;
   authorName: string;
-  datePost: Date;
+  datePost: any;
 };
 
 const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: DetailCoverProps) => {
@@ -36,9 +36,7 @@ const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: Detai
             </Link>
             <div className="cover-date d-flex item-center">
               <i className="icon icon-small icon-date-20"></i>
-              <p className="cover-date-title">
-                {datePost.getDate() + '-' + datePost.getMonth() + '-' + datePost.getFullYear()}
-              </p>
+              <p className="cover-date-title">{convertDateToString(datePost)}</p>
             </div>
           </div>
         </div>
