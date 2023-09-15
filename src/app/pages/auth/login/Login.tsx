@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import logoImg from '../../../../assets/images/logo.png';
 import loginImg from '../../../../assets/images/bg-auth.png';
@@ -8,11 +10,32 @@ import icFacebook from '../../../../assets/icons/ic-facebook-30.svg';
 import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
+import { useForm } from 'react-hook-form';
 
+const schema = yup.object({
+  email: yup.string().required(),
+  password: yup.string().required()
+}).required();
 
 const Login = () => {
 
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const inputEmailRef = useRef<any>('');
+  const inputPasswordRef = useRef<any>('');
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  })
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+  }
+
+
 
   const togglePassword = () => {
     setIsPasswordShow(!isPasswordShow);
@@ -45,16 +68,30 @@ const Login = () => {
               </a>
             </li>
           </ul>
-          <form action="" className="form login-form">
+          <form action="" className="form login-form" onSubmit={handleLogin}>
             <div className="form-input-group">
               <label htmlFor="email" className="form-label">Email</label>
-              <input className="input-email form-input" id="email" type="text" placeholder="Enter Email..." />
+              <input
+                className="input-email form-input"
+                id="email"
+                type="text"
+                placeholder="Enter Email..."
+                ref={inputEmailRef}
+              />
+              <p>{errors.email?.message}</p>
             </div>
             <div className="form-input-group">
               <label htmlFor="password" className="form-label">Passsword</label>
               <div className="input-password-group">
-                <input className="input-password form-input" id="password" type={isPasswordShow ? "text" : "password"} placeholder="Enter Password..." />
+                <input
+                  className="input-password form-input"
+                  id="password"
+                  type={isPasswordShow ? "text" : "password"}
+                  placeholder="Enter Password..."
+                  ref={inputPasswordRef}
+                />
                 <img src={isPasswordShow ? icEyeSlash : icEye} alt="icon eye" className="login-icon icon-eye text-center" onClick={togglePassword} />
+                <p>{errors.password?.message}</p>
               </div>
             </div>
             <button type="submit" className="btn btn-primary btn-auth">login</button>

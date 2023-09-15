@@ -42,6 +42,9 @@
 @media only screen and (max-width: map-get($breakpoints , md)) {
   .auth-body {
     margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .auth-bg {

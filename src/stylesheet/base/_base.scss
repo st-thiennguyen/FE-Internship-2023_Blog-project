@@ -6,3 +6,7 @@ body {
   color: map-get($color, text);
   background-color: map-get($color, background);
 }
+
+.disable-link {
+  pointer-events: none;
+}
