@@ -11,15 +11,15 @@ const DetailLoading = () => {
         <div className="detail-content d-flex">
           <div className="detail-action">
             <ul className="action-list">
-              {Array.from({ length: 3 }, (item, ind) => (
-                <li className="skeleton action-item d-flex item-center" key={ind}></li>
+              {Array.from({ length: 3 }, (item, index) => (
+                <li className="skeleton action-item d-flex item-center" key={index}></li>
               ))}
             </ul>
           </div>
           <div className="detail-post">
             <article className="post-content">
-              {Array.from({ length: 30 }, (item, ind) => (
-                <p className="skeleton text-row" key={ind}></p>
+              {Array.from({ length: 30 }, (item, index) => (
+                <p className="skeleton text-row" key={index}></p>
               ))}
             </article>
             <div className="detail-author">
