@@ -10,7 +10,7 @@ export interface LoginState {
 }
 
 const initState: LoginState = {
-  auth: getLocalStorage(StorageKey.AUTH) || {},
+  auth: getLocalStorage(StorageKey.AUTH) || null,
   isLoading: false,
   error: ''
 }

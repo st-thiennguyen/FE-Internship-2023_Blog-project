@@ -18,6 +18,7 @@ import icFacebook from '../../../../assets/icons/ic-facebook-30.svg';
 import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
+import Button from '../../../shared/components/Button';
 
 const schema = yup.object({
   email: yup
@@ -45,8 +46,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading = useSelector((state: RootState) => state.login.isLoading);
-  const accessToken: string = useSelector((state: RootState) => state.login.auth.accessToken);
-  const errorLogin: any = useSelector((state: RootState) => state.login.error);
+  const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
+  const errorLogin: any = useSelector((state: RootState) => state.login.error.response?.data.errors[0]);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -134,9 +135,9 @@ const Login = () => {
                   <img src={isShowPassword ? icEyeSlash : icEye} alt="icon eye" className="login-icon icon-eye text-center" onClick={togglePassword} />
                   <p className="form-error">{errors.password?.message}</p>
                 </div>
-                {isShowError ? <p className="form-error error-login-fail">Email or password invalid!</p> : null}
+                {isShowError ? <p className="form-error error-login-fail">{errorLogin}</p> : null}
               </div>
-              <button type="submit" className="btn btn-primary btn-auth">{isLoading ? "loading..." : "login"}</button>
+              <Button label='login' isLoading={true} optionClassName='btn-primary btn-auth' />
             </fieldset>
           </form>
           <p className="text-center">You"re new to Supremethod? <Link to="/register" className={`register-link ${isLoading ? "disable-link" : ""}`} >Register</Link></p>
