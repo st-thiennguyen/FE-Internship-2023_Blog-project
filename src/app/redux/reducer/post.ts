@@ -24,7 +24,6 @@ export const postReducer = (state = initialState, action: RootAction): DetailSta
     case TYPE.GET_ALL_POST_START:
       return {
         ...state,
-        data: [...state.data] as PostModel[],
         isLoading: true,
         isError: false,
         message: '',
@@ -45,6 +44,11 @@ export const postReducer = (state = initialState, action: RootAction): DetailSta
         isError: true,
         isSuccess: false,
         message: action.payload,
+      };
+    case TYPE.LOAD_MORE_PUBLIC_POST:
+      return {
+        ...state,
+        currentPage: state.currentPage + 1,
       };
     default:
       return state;

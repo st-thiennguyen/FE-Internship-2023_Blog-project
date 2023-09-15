@@ -56,13 +56,18 @@ export const getPublicPostFailure = (message: string) => {
   };
 };
 
+export const loadMore = () => {
+  return {
+    type: TYPE.LOAD_MORE_PUBLIC_POST,
+  };
+};
+
 export const fetchPublicPosts = (page: number, size: number) => async (dispatch: any) => {
   dispatch(getPublicPostStart());
-  await getPublicPosts(page, size)
-    .then((result: any) => {
-      dispatch(getPublicPostSuccess(result));
-    })
-    .catch((err) => {
-      dispatch(getPublicPostFailure(`${err}`));
-    });
+  try {
+    const data = await getPublicPosts(page, size);
+    dispatch(getPublicPostSuccess(data));
+  } catch (err) {
+    dispatch(getPublicPostFailure(`${err}`));
+  }
 };
