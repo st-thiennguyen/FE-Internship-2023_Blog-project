@@ -13,7 +13,7 @@ const initState: RegisterState = {
   error: '',
 };
 
-export const registerReducer = (state = initState, action: RootAction) => {
+export const registerReducer = (state = initState, action: RootAction): RegisterState => {
   switch (action.type) {
     case ACTIONS_TYPE.REGISTER_START: {
       return {

@@ -1,5 +1,3 @@
-import { Gender } from '../shared/constants';
-
 export interface Auth {
   accessToken: string;
   userInfo: UserInfo;

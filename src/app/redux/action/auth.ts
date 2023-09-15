@@ -39,7 +39,7 @@ export const registerSuccess = (res: string) => {
   };
 };
 
-export const registerFailure = (error: string) => {
+export const registerFailure = (error: string[]) => {
   return {
     type: ACTIONS_TYPE.REGISTER_FAILURE,
     payload: error,
@@ -59,11 +59,11 @@ export const login = (email: string, password: string) => async (dispatch: any) 
   }
 };
 
-export const registerAccount = async (registerData: RegisterProps, dispatch: Dispatch<RootAction>) => {
+export const registerAccount = (registerData: RegisterProps) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(registerStart());
   const res = await postRegister(registerData);
   if (res.errors) {
-    dispatch(registerFailure(res.errors));
+    dispatch(registerFailure(res.errors[0]));
   } else {
     dispatch(registerSuccess(res));
   }

@@ -12,7 +12,7 @@ import { convertDateFormat } from '../../../shared/utils/dateFormat';
 
 const schema = yup
   .object({
-    firstName: yup.string().trim('Whitespace').required('First Name must not be null'),
+    firstName: yup.string().trim().required('First Name must not be null'),
     lastName: yup.string().trim().required('Last Name must not be null'),
     displayName: yup.string().trim().required('Display Name must not be null'),
     gender: yup
@@ -35,7 +35,7 @@ const schema = yup
     email: yup.string().trim().matches(regexEmail, 'Invalid email address').required('Email must not be null'),
     password: yup
       .string()
-      .min(4, '')
+      .min(4, 'Password must not be less than 4 characters')
       .max(40, 'Password must be less than 40 characters')
       .required('Password must not be null'),
   })
@@ -51,8 +51,6 @@ const Register = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const myFieldset = document.getElementById('form-fieldset');
-
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
   };
@@ -60,7 +58,6 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -78,8 +75,8 @@ const Register = () => {
   };
 
   const onRegister = (data: FormData) => {
-    registerAccount(
-      {
+    dispatch(
+      registerAccount({
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -89,8 +86,7 @@ const Register = () => {
         phone: data.phoneNumber,
         displayName: data.displayName,
         picture: handlePictureByGender(data.gender),
-      },
-      dispatch,
+      }) as any,
     );
   };
 
@@ -143,7 +139,7 @@ const Register = () => {
               <div className="row">
                 <div className="form-input-group col col-6">
                   <label className="form-label">Date of birth</label>
-                  <input className="form-input" type="date" {...register('dob')} />
+                  <input id="datepicker" className="form-input" type="date" {...register('dob')} />
                   {errors.dob && <p className="form-error">{errors.dob?.message}</p>}
                 </div>
                 <div className="form-input-group col col-6">
@@ -198,7 +194,7 @@ const Register = () => {
           <p className="text-center">
             Already had an account?{' '}
             <Link className={`login-link ${isLoading && 'disable-link'}`} to="/login">
-              {isLoading ? 'Loding...' : 'Login'}
+              {isLoading ? 'Loading...' : 'Login'}
             </Link>
           </p>
         </div>

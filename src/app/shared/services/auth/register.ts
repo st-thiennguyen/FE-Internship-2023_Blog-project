@@ -5,7 +5,8 @@ import { ENDPOINT } from '../../constants/endpoint';
 
 export const postRegister = async (registerData: RegisterProps) => {
   try {
-    return (await axios.post(`${ENDPOINT.auth.register}`, registerData)).data;
+    const response = await axios.post(`${ENDPOINT.auth.register}`, registerData);
+    return response.data;
   } catch (error) {
     const err = error as AxiosError;
     return err.response?.data;
