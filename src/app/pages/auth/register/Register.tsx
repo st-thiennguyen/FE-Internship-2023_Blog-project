@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
-import { registerAccount, registerReset } from '../../../redux/action/auth';
+import { registerAccount } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -51,6 +51,7 @@ const Register = () => {
   const isSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.register.isError);
   const message: string = useSelector((state: RootState) => state.register.message);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -61,14 +62,10 @@ const Register = () => {
   };
 
   useEffect(() => {
-    dispatch(registerReset());
-  }, []);
-
-  useEffect(() => {
     if (isSuccess) {
       navigate('/login');
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   const {
     register,

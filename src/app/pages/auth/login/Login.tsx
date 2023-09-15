@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
-import { login } from '../../../redux/action/auth';
+import { login, registerReset } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -51,6 +51,11 @@ const Login = () => {
     setIsShowPassword(!isShowPassword);
   };
 
+  const [registerState] = useState({
+    isRegisterSuccess,
+    registerMessage,
+  });
+
   const {
     register,
     handleSubmit,
@@ -61,11 +66,17 @@ const Login = () => {
     dispatch(login(data.email, data.password) as any);
   });
 
+  const removeStateRegister = useRef(() => {});
+  removeStateRegister.current = () => {
+    isRegisterSuccess && dispatch(registerReset());
+  };
+
   useEffect(() => {
+    removeStateRegister.current();
     if (accessToken) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [accessToken, navigate]);
 
   return (
     <div className="auth">
@@ -144,12 +155,12 @@ const Login = () => {
           <img src={loginImg} alt="background login" className="auth-img" />
         </div>
       </div>
-      {isRegisterSuccess && (
+      {registerState.isRegisterSuccess && (
         <ToastMessage
-          isShow={isRegisterSuccess}
-          isSuccess={isRegisterSuccess}
+          isShow={registerState.isRegisterSuccess}
+          isSuccess={registerState.isRegisterSuccess}
           title={'Success'}
-          subtitle={registerMessage}
+          subtitle={registerState.registerMessage}
         />
       )}
       {isError && (
