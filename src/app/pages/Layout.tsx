@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
+import { RootState } from '../redux/store';
 import Footer from '../shared/layout/Footer';
 import Header from '../shared/layout/Header';
 import Aside from '../shared/layout/aside';
@@ -8,6 +10,8 @@ import Detail from './detail/index';
 import Home from './home';
 
 const Layout = () => {
+  const authCheck = useSelector((state: RootState) => state.login.auth);
+
   const routes = [
     { path: '/', element: <Home /> },
     {
@@ -17,7 +21,7 @@ const Layout = () => {
   ];
   return (
     <>
-      <Header />
+      <Header isLogin={authCheck?.accessToken} auth={authCheck} />
       <main className="main">
         <div className="container">
           <div className=" main-body">

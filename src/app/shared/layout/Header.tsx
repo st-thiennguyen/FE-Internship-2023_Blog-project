@@ -2,8 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/images/logo.svg';
+import { Auth } from '../../models/auth';
 
-const Header = () => {
+interface HeaderProps {
+  isLogin: Boolean;
+  auth: Auth;
+}
+
+const Header = ({ isLogin, auth }: HeaderProps) => {
   return (
     <header className="header">
       <div className="container">
@@ -31,20 +37,32 @@ const Header = () => {
                       <i className="icon icon-small icon-user-20"></i>
                     </div>
                   </Link>
-                  <div className="navbar-auth">
-                    <ul className="auth-list">
-                      <li className="auth-item">
-                        <Link to="/profile" className="auth-link">
-                          Nguyen Si Thien
-                        </Link>
-                      </li>
-                      <li className="auth-item">
-                        <Link to="/logout" className="auth-link">
-                          Logout
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
+                  {isLogin ? (
+                    <div className="navbar-auth">
+                      <ul className="auth-list">
+                        <li className="auth-item">
+                          <Link to="/profile" className="auth-link">
+                            {auth.userInfo?.displayName}
+                          </Link>
+                        </li>
+                        <li className="auth-item">
+                          <Link to="/logout" className="auth-link">
+                            Logout
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <div className="navbar-auth">
+                      <ul className="auth-list">
+                        <li className="auth-item">
+                          <Link to="/login" className="auth-link">
+                            Login
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </li>
                 <li className="navbar-item">
                   <Link to="/" className="navbar-link">
