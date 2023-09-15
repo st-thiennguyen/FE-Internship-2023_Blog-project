@@ -8,6 +8,7 @@ export const GET_DETAIL_BLOG_SUCCESS = 'get-detail-blog-success';
 export const GET_DETAIL_BLOG_FAILURE = 'get-detail-blog-failure';
 
 // REGISTER
+export const REGISTER_RESET_STATE = 'register-reset-state';
 export const REGISTER_START = 'register-start';
 export const REGISTER_SUCCESS = 'register-success';
 export const REGISTER_FAILURE = 'register-failure';

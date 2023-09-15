@@ -17,6 +17,15 @@ const initState: RegisterState = {
 
 export const registerReducer = (state = initState, action: RootAction): RegisterState => {
   switch (action.type) {
+    case ACTIONS_TYPE.REGISTER_RESET_STATE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        isSuccess: false,
+        message: '',
+      };
+    }
     case ACTIONS_TYPE.REGISTER_START: {
       return {
         ...state,

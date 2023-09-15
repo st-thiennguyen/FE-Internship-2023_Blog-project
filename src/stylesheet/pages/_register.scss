@@ -4,51 +4,58 @@
   }
   .auth-body {
     height: 100%;
-    overflow-y: auto;
-  }
-  .auth-title {
-    margin-top: -24px;
-    &::after {
-      content: "";
-      width: 250px;
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translate(-50%);
-      border: 1px solid map-get($map: $color, $key: primary);
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .auth-title {
+      padding-top: 0;
+      margin-top: -24px;
+      &::after {
+        content: "";
+        width: 250px;
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translate(-50%);
+        border: 1px solid map-get($map: $color, $key: primary);
+      }
+    }
+
+    .form-register {
+      margin-top: 30px;
+    }
+
+    .input-password-group {
+      position: relative;
+
+      .icon-password {
+        margin: 10px 0 10px -40px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+
+    .btn-auth {
+      margin-top: 10px;
+    }
+
+    .login-link {
+      color: map-get($map: $color, $key: primary);
+      font-weight: map-get($map: $font-weight, $key: semibold);
     }
   }
 
-  .form-register {
-    margin-top: 30px;
-  }
-
-  .input-password-group {
-    position: relative;
-
-    .icon-password {
-      margin: 10px 0 10px -40px;
-      position: absolute;
-      width: 20px;
-      height: 20px;
-
-      text-align: center;
-      cursor: pointer;
+  @media only screen and (max-width: map-get($breakpoints, md)) {
+    .auth-wrapper {
+      height: 100%;
     }
-  }
-
-  .btn-auth {
-    margin-top: 10px;
-  }
-
-  .login-link {
-    color: map-get($map: $color, $key: primary);
-    font-weight: map-get($map: $font-weight, $key: semibold);
-  }
-}
-
-@media only screen and (max-width: map-get($breakpoints, md)) {
-  .auth-wrapper {
-    height: 100%;
   }
 }

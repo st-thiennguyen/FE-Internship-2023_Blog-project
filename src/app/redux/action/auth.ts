@@ -1,13 +1,12 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
+import { StorageKey } from '../../shared/constants';
+import { fetchAuthLogin } from '../../shared/services/auth/login';
 import { postRegister } from '../../shared/services/auth/register';
+import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
-
-import { fetchAuthLogin } from '../../shared/services/auth/login';
-import { setLocalStorage } from '../../shared/utils';
-import { StorageKey } from '../../shared/constants';
 
 export const loginRequest = () => {
   return {
@@ -26,6 +25,12 @@ export const loginFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.LOGIN_FAILURE,
     payload: error,
+  };
+};
+
+export const registerReset = () => {
+  return {
+    type: ACTIONS_TYPE.REGISTER_RESET_STATE,
   };
 };
 
@@ -64,10 +69,10 @@ export const registerAccount =
 export const login = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(loginRequest());
   try {
-    const data: any = await fetchAuthLogin(email, password)
+    const data: any = await fetchAuthLogin(email, password);
     dispatch(loginSuccess(data));
     setLocalStorage(StorageKey.AUTH, data);
   } catch (error: any) {
     dispatch(loginFailure(error.response?.data.errors[0]));
   }
-} 
+};

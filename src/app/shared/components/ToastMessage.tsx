@@ -13,7 +13,9 @@ const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps)
   const closeClick = useRef(() => {});
 
   closeClick.current = () => {
-    setIsShowToast(false);
+    if (isShowToast) {
+      setIsShowToast(false);
+    }
   };
 
   useEffect(() => {
