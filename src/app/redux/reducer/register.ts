@@ -3,14 +3,16 @@ import * as ACTIONS_TYPE from '../type';
 
 export interface RegisterState {
   isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
   message: string;
-  error: string;
 }
 
 const initState: RegisterState = {
   isLoading: false,
+  isError: false,
+  isSuccess: false,
   message: '',
-  error: '',
 };
 
 export const registerReducer = (state = initState, action: RootAction): RegisterState => {
@@ -19,8 +21,9 @@ export const registerReducer = (state = initState, action: RootAction): Register
       return {
         ...state,
         isLoading: true,
+        isError: false,
+        isSuccess: false,
         message: '',
-        error: '',
       };
     }
 
@@ -28,6 +31,7 @@ export const registerReducer = (state = initState, action: RootAction): Register
       return {
         ...state,
         isLoading: false,
+        isSuccess: true,
         message: action.payload,
       };
     }
@@ -36,7 +40,8 @@ export const registerReducer = (state = initState, action: RootAction): Register
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        isError: true,
+        message: action.payload,
       };
     }
     default:

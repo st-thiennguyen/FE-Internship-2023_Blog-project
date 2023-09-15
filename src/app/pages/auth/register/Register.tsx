@@ -44,9 +44,8 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const Register = () => {
-  const isLoading = useSelector((state: RootState) => state.register.isLoading);
-  const message = useSelector((state: RootState) => state.register.message);
-  const error = useSelector((state: RootState) => state.register.error);
+  const isLoading: boolean = useSelector((state: RootState) => state.register.isLoading);
+  const message: string = useSelector((state: RootState) => state.register.message);
   const dispatch = useDispatch();
 
   const [isShowPassword, setIsShowPassword] = useState(false);

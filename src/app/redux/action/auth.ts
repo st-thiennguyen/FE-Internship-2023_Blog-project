@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
 import { postRegister } from '../../shared/services/auth/register';
-import { RootAction } from '../store';
+import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
 
 export const loginRequest = () => {
@@ -59,12 +59,14 @@ export const login = (email: string, password: string) => async (dispatch: any) 
   }
 };
 
-export const registerAccount = (registerData: RegisterProps) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(registerStart());
-  const res = await postRegister(registerData);
-  if (res.errors) {
-    dispatch(registerFailure(res.errors[0]));
-  } else {
-    dispatch(registerSuccess(res));
-  }
-};
+export const registerAccount =
+  (registerData: RegisterProps): RootThunk =>
+  async (dispatch: Dispatch<RootAction>) => {
+    dispatch(registerStart());
+    const res = await postRegister(registerData);
+    if (res.errors) {
+      dispatch(registerFailure(res.errors[0]));
+    } else {
+      dispatch(registerSuccess(res));
+    }
+  };
