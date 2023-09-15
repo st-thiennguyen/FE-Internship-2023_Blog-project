@@ -25,7 +25,7 @@ export const getDetailBlogFailure = (message: string) => {
   };
 };
 
-export const fetchDetailBlog = async (id: number, dispatch: Dispatch<RootAction>) => {
+export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getDetailBlogStart());
   await getDetailPost(id)
     .then((result: any) => {
