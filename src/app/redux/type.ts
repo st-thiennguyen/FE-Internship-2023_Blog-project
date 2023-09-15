@@ -75,4 +75,6 @@ export const GET_USER_POST_START = 'get-user-post-start';
 export const GET_USER_POST_SUCCESS = 'get-user-post-success';
 export const GET_USER_POST_FAILURE = 'get-user-post-failure';
 
-//
+// LOAD MORE
+
+export const LOAD_MORE_PUBLIC_POST = 'load-more-public-post';

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { PostModel } from '../../../models/post';
 import { ENDPOINT } from '../../constants/endpoint';
 
 export const getDetailPost = (id: number) => {
@@ -15,7 +16,7 @@ export const getDetailPost = (id: number) => {
   });
 };
 
-export const getPublicPosts = (page: number, size: number) => {
+export const getPublicPosts = (page: number, size: number): Promise<PostModel[]> => {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(`${ENDPOINT.post.public}`, {
