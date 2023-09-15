@@ -1,4 +1,5 @@
 const BASE_URL = process.env.REACT_APP_BASE_API;
+
 const RESOURCES = {
   users: 'users',
   auth: 'auth',
@@ -24,5 +25,6 @@ export const ENDPOINT = {
   },
   post: {
     index: `${BASE_URL}/${RESOURCES.posts}`,
+    public: `${BASE_URL}/${RESOURCES.posts}/public`,
   },
 };

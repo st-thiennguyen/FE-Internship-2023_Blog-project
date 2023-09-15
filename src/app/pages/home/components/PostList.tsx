@@ -1,15 +1,20 @@
+import { PostModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
 
-const PostList = () => {
+interface PostListProps {
+  posts: PostModel[];
+}
+const PostList = ({ posts }: PostListProps) => {
   return (
     <ul className="post-list">
       <div className="row">
-        <div className="col col-6">
-          <PostItem />
-        </div>
-        <div className="col col-6">
-          <PostItem />
-        </div>
+        {posts.map((post) => {
+          return (
+            <div className="col col-6" key={post.id}>
+              <PostItem post={post} />
+            </div>
+          );
+        })}
       </div>
     </ul>
   );

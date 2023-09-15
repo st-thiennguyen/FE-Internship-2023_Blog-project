@@ -1,6 +1,6 @@
-export const GET_ALL_BLOG_START = 'get-all-blog-start';
-export const GET_ALL_BLOG_SUCCESS = 'get-all-blog-success';
-export const GET_ALL_BLOG_FAILURE = 'get-all-blog-failure';
+export const GET_ALL_POST_START = 'get-all-post-start';
+export const GET_ALL_POST_SUCCESS = 'get-all-post-success';
+export const GET_ALL_POST_FAILURE = 'get-all-post-failure';
 
 // DETAIL
 export const GET_DETAIL_BLOG_START = 'get-detail-blog-start';
