@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
 import { getDetailPost, getPublicPosts } from '../../shared/services/post';
-import { RootAction } from '../store';
+import { RootAction, RootThunk } from '../store';
 import * as TYPE from '../type';
 
 export const getDetailBlogStart = () => {
@@ -25,7 +25,7 @@ export const getDetailBlogFailure = (message: string) => {
   };
 };
 
-export const fetchDetailBlog = async (id: number, dispatch: Dispatch<RootAction>) => {
+export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getDetailBlogStart());
   await getDetailPost(id)
     .then((result: any) => {

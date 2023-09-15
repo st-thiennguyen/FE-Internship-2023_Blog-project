@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import Login from './app/pages/auth/login/Login';
 
 import App from './app/App';
 import store from './app/redux/store';
