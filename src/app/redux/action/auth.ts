@@ -34,7 +34,6 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
     dispatch(loginSuccess(data));
     setLocalStorage(StorageKey.AUTH, data);
   } catch (error: any) {
-    console.log(error.response?.data.errors[0]);
     dispatch(loginFailure(error.response?.data.errors[0]));
   }
 } 
