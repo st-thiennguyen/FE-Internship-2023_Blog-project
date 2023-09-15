@@ -28,10 +28,11 @@
       padding: 50px;
       color: map-get($color, textLight);
       font-size: 25px;
-      .cover-auth {
+      .cover-info {
         margin-top: 10px;
-        width: fit-content;
-        .auth-ava {
+      }
+      .cover-author {
+        .author-ava {
           width: 30px;
           height: 30px;
           margin-right: 10px;
@@ -43,13 +44,17 @@
         font-size: 15px;
         color: map-get($color, textLight);
       }
+      .cover-date {
+        &-title {
+          font-size: 14px;
+          margin-left: 10px;
+        }
+      }
     }
   }
 
   .detail-content {
-    width: 70%;
     gap: 40px;
-
     .action-item {
       margin-bottom: 16px;
       .btn-post-action {
@@ -65,9 +70,27 @@
 
     .detail-post {
       width: 100%;
-      .post-content {
+      .detail-post-body {
+        font-size: map-get($font-size, lg);
         letter-spacing: 0.3px;
-        text-align: justify;
+        margin-bottom: 16px;
+        .post-desc {
+          margin-bottom: 60px;
+          &::first-letter {
+            font-size: map-get($font-size, xxl);
+            background-color: map-get($color, backgroundFrame);
+            color: map-get($color, primary);
+            padding: 8px 16px;
+            border-radius: 12px;
+            margin-right: 15px;
+            line-height: 1.8;
+          }
+        }
+      }
+      .post-tag {
+        .tag-list {
+          gap: 10px;
+        }
       }
     }
     .detail-author {

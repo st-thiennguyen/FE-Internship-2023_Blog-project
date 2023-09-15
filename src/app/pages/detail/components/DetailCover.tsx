@@ -1,29 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import noImage from '../../../../assets/images/no-image.png';
+import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
 
 type DetailCoverProps = {
   cover: string;
   title: string;
-  authAvatar: string;
-  authName: string;
+  authorAvatar: string;
+  authorName: string;
+  datePost: any;
 };
 
-const DetailCover = ({ cover, title, authAvatar, authName }: DetailCoverProps) => {
+const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: DetailCoverProps) => {
+  const [errorImage, setErrorImage] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(cover).then((value) => setErrorImage(!value));
+  }, [cover]);
+
   return (
     <section className="section section-detail-cover">
-      <div className="container">
-        <div className="detail-cover">
-          <div className="cover-img">
-            <img src={cover} aria-hidden alt={title} />
-          </div>
-          <div className="cover-content d-flex flex-column justify-end">
-            <h2 className="cover-title">{title}</h2>
-            <Link to="/" className="cover-auth d-flex item-center">
-              <div className="auth-ava">
-                <img src={authAvatar} alt={authName + 'Avatar'} />
+      <div className="detail-cover">
+        <div className="cover-img">
+          <img src={!errorImage ? cover : noImage} alt={title} />
+        </div>
+        <div className="cover-content d-flex flex-column justify-end">
+          <h2 className="cover-title">{title}</h2>
+          <div className="cover-info d-flex justify-between item-center">
+            <Link to="/" className="cover-author d-flex item-center">
+              <div className="author-ava">
+                <img src={authorAvatar} alt={authorName + ' Avatar'} />
               </div>
-              <span className="auth-name">{authName}</span>
+              <span className="author-name">{authorName}</span>
             </Link>
+            <div className="cover-date d-flex item-center">
+              <i className="icon icon-small icon-date-20"></i>
+              <p className="cover-date-title">{convertDateToString(datePost)}</p>
+            </div>
           </div>
         </div>
       </div>

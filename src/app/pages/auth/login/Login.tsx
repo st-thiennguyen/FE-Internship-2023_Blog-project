@@ -72,7 +72,7 @@ const Login = () => {
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/');
+      navigate('/')
     }
   }, [accessToken]);
 

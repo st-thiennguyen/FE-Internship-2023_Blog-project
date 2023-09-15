@@ -32,10 +32,25 @@ const DetailBlog = ({ post }: DetailBlogProps) => {
         </ul>
       </div>
       <div className="detail-post">
-        <article className="post-content">{post.content}</article>
-        <div className="detail-author">
-          <Link to="/" className="detail-author-action text-center d-flex flex-column item-center">
-            <div className="author-img">
+        <div className="detail-post-body">
+          <p className="post-desc">{post.description}</p>
+          <p className="post-content">{post.content}</p>
+        </div>
+        <div className="post-tag">
+          <ul className="tag-list d-flex flex-wrap justify-end">
+            {post.tags?.length > 0 &&
+              post.tags?.map((item, index) => (
+                <li className="tag-item" key={index}>
+                  <Link to="/" className="tag">
+                    #{item}
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="detail-author text-center d-flex justify-center">
+          <Link to="/" className="detail-author-action d-flex flex-column item-center">
+            <div className="author-img d-flex">
               <img src={post.user?.picture} alt={post.user?.displayName} />
             </div>
             <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>

@@ -1,0 +1,61 @@
+.toast {
+  position: fixed;
+  top: calc($header-height + 10px);
+  left: 100%;
+  min-width: 320px;
+  &-wrapper {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 12px;
+    .toast-icon {
+      margin-right: 16px;
+    }
+    .btn-toast-close {
+      padding: 0;
+      background-color: transparent;
+    }
+    .icon-toast {
+      width: 24px;
+      height: 24px;
+    }
+    .icon-toast-close {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  &-title {
+    color: map-get($color, text);
+    font-size: 16px;
+    font-weight: map-get($font-weight, semibold);
+    text-transform: capitalize;
+  }
+  &-subtext {
+    color: map-get($color, subtext);
+    font-size: 14px;
+  }
+}
+
+.toast.success {
+  .toast-wrapper {
+    border: 1px solid #48c1b5;
+    background-color: #f6fff9;
+    .icon-toast {
+      background-image: url("../../assets/icons/ic-success-24.svg");
+    }
+  }
+}
+
+.toast.error {
+  .toast-wrapper {
+    border: 1px solid #f4b0a1;
+    background-color: #fff5f3;
+    .icon-toast {
+      background-image: url("../../assets/icons/ic-fail-24.svg");
+    }
+  }
+}
+
+.toast.show {
+  left: unset;
+  right: 20px;
+}
