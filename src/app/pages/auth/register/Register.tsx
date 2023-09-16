@@ -11,7 +11,7 @@ import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
-import { convertDateFormat } from '../../../shared/utils/dateFormat';
+import { convertDateFormat } from '../../../shared/utils/date';
 
 const schema = yup
   .object({

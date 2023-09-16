@@ -4,3 +4,8 @@ export const convertDateFormat = (date: Date) => {
   const day = date.getDate().toString().padStart(2, '0');
   return `${day}/${month}/${year}`;
 };
+
+export const convertDateToString = (date: any) => {
+  const newDate = new Date(date);
+  return newDate.getDate() + '-' + newDate.getMonth() + '-' + newDate.getFullYear();
+};

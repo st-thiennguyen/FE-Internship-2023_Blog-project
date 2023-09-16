@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchPublicPosts, loadMore } from '../../../redux/action/post';
+import { fetchPublicPosts, loadMore, resetCurrentPage } from '../../../redux/action/post';
 import { RootState } from '../../../redux/store';
 import { pageSize } from '../../../shared/constants/post';
 import PostItemLoading from './PostItemLoading';
@@ -15,12 +15,17 @@ const LatestPost = () => {
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
+    dispatch(resetCurrentPage());
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchPublicPosts(currentPage, pageSize));
   }, [currentPage]);
 
   const isLoadmore = () => {
     return currentPage + 1 <= totalPage;
   };
+
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>

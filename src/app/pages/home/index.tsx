@@ -15,6 +15,8 @@ const Home = () => {
 
   useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
+
+    window.removeEventListener('scroll', onScroll);
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);

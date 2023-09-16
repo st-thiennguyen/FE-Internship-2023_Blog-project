@@ -19,9 +19,9 @@ const PostList = ({ posts }: PostListProps) => {
               <PostItemLoading />
             </li>
           ))
-        : posts.map((post) => {
+        : posts.map((post, idx) => {
             return (
-              <li className="post-item col col-6 col-md-12" key={post.id}>
+              <li className="post-item col col-6 col-md-12" key={idx}>
                 <PostItem post={post} />
               </li>
             );

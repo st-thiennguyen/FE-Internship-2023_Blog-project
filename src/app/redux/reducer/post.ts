@@ -32,10 +32,9 @@ export const postReducer = (state = initialState, action: RootAction): PublicPos
         message: '',
       };
     case TYPE.GET_ALL_POST_SUCCESS:
-      const newPosts = state.currentPage === 1 && state.data.length ? [] : action.payload.data;
       return {
         ...state,
-        data: [...state.data, ...newPosts],
+        data: [...state.data, ...action.payload.data],
         totalPage: action.payload.totalPage,
         isLoading: false,
         isError: false,
@@ -54,6 +53,11 @@ export const postReducer = (state = initialState, action: RootAction): PublicPos
       return {
         ...state,
         currentPage: state.currentPage + 1,
+      };
+    case TYPE.RESET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: 1,
       };
     default:
       return state;
