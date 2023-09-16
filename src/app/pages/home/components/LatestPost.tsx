@@ -11,12 +11,16 @@ const LatestPost = () => {
   const currentPage = useSelector((state: RootState) => state.post.currentPage);
   const isLoading = useSelector((state: RootState) => state.post.isLoading);
   const posts = useSelector((state: RootState) => state.post.data);
+  const totalPage = useSelector((state: RootState) => state.post.totalPage);
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
     dispatch(fetchPublicPosts(currentPage, pageSize));
   }, [currentPage]);
 
+  const isLoadmore = () => {
+    return currentPage + 1 <= totalPage;
+  };
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
@@ -30,11 +34,13 @@ const LatestPost = () => {
           ))}
         </div>
       )}
-      <div className="btn-load-more-wrapper d-flex justify-center">
-        <button className="btn btn-primary" onClick={() => dispatch(loadMore())}>
-          Load More
-        </button>
-      </div>
+      {isLoadmore() && (
+        <div className="btn-load-more-wrapper d-flex justify-center">
+          <button className="btn btn-primary" onClick={() => dispatch(loadMore())}>
+            Load More
+          </button>
+        </div>
+      )}
     </section>
   );
 };

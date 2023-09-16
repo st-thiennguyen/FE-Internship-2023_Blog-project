@@ -2,36 +2,41 @@ import { PostModel } from '../../models/post';
 import { RootAction } from '../store';
 import * as TYPE from '../type';
 
-interface DetailStateProps {
+interface PublicPostState {
   data: PostModel[];
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
   message: string;
   currentPage: number;
+  totalPage: number;
 }
-const initialState: DetailStateProps = {
+const initialState: PublicPostState = {
   data: [] as PostModel[],
   isLoading: false,
   isError: false,
   isSuccess: false,
   message: '',
   currentPage: 1,
+  totalPage: 0,
 };
 
-export const postReducer = (state = initialState, action: RootAction): DetailStateProps => {
+export const postReducer = (state = initialState, action: RootAction): PublicPostState => {
   switch (action.type) {
     case TYPE.GET_ALL_POST_START:
       return {
         ...state,
         isLoading: true,
+        isSuccess: false,
         isError: false,
         message: '',
       };
     case TYPE.GET_ALL_POST_SUCCESS:
+      const newPosts = state.currentPage === 1 && state.data.length ? [] : action.payload.data;
       return {
         ...state,
-        data: [...state.data, ...action.payload],
+        data: [...state.data, ...newPosts],
+        totalPage: action.payload.totalPage,
         isLoading: false,
         isError: false,
         isSuccess: true,

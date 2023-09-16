@@ -25,7 +25,7 @@ export const getPublicPosts = (page: number, size: number): Promise<PostModel[]>
           size,
         },
       });
-      const data = res.data.data;
+      const data = res.data;
       resolve(data);
     } catch (error) {
       reject(error);
