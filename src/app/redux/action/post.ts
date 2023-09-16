@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
-import { getDetailPost, getPublicPosts } from '../../shared/services/post.service';
+import { getDetailPost, getPublicPosts } from '../../shared/services/index';
 import { RootAction } from '../store';
 import * as TYPE from '../type';
 

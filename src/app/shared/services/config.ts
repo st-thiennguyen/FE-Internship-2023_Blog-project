@@ -37,7 +37,6 @@ export class ApiService {
       console.error('Network Error:', error.message);
       throw new Error('Network error. Please check your internet connection.');
     } else {
-      // Something else happened while setting up the request
       console.error('Error:', error.message);
       throw new Error('An unexpected error occurred.');
     }

@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
 import { StorageKey } from '../../shared/constants';
-import { fetchAuthLogin, postRegister } from '../../shared/services';
+import { fetchAuthLogin, postRegister } from '../../shared/services/index';
 import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
