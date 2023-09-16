@@ -12,12 +12,13 @@ export class ApiService {
         'Content-Type': 'application/json',
       },
     });
+    this._setInterceptors();
   }
 
   private _setInterceptors = () => {
     this.axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => response,
-      (error: AxiosError) => error,
+      (error: AxiosError) => this._handleError(error),
     );
   };
 
