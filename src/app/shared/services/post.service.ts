@@ -1,19 +1,12 @@
 import axios from 'axios';
 
-import { PostModel } from '../../../models/post';
-import { ENDPOINT } from '../../constants/endpoint';
+import { PostModel } from '../../models/post';
+import { ENDPOINT } from '../constants/endpoint';
+import { ApiService } from './index';
 
 export const getDetailPost = (id: number) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(`${ENDPOINT.post.index}/${id}`)
-      .then((result) => {
-        resolve(result.data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.index}/${id}`);
 };
 
 export const getPublicPosts = (page: number, size: number): Promise<PostModel[]> => {

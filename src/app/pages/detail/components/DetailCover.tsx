@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import noImage from '../../../../assets/images/no-image.png';
-import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
+import { isImageUrlValid } from '../../../shared/utils/';
+import { convertDateToString } from '../../../shared/utils/date';
 
 type DetailCoverProps = {
   cover: string;
