@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 import NoImg from '../../../assets/images/no-image.png';
 import { PostModel } from '../../models/post';
-import { convertDateToString, isImageUrlValid } from '../utils';
+import { isImageUrlValid } from '../utils';
+import { convertDateToString } from '../utils/date';
 
 interface PostItemProps {
   post: PostModel;
@@ -14,7 +15,7 @@ const PostItem = ({ post }: PostItemProps) => {
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
-  }, [isErrImg]);
+  }, [isErrImg, post.cover]);
 
   return (
     <Link className="post-link" to={`detail/${post.id}`}>

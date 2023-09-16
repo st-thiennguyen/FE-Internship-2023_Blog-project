@@ -62,7 +62,7 @@ export class ApiService {
         newUrl += `?${queryString}`;
       }
     }
-    
+
     return newUrl;
   }
 
