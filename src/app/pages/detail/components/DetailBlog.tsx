@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import avaDefault from '../../../../assets/images/user-default.png';
 import { PostModel } from '../../../models/post';
+import { isImageUrlValid } from '../../../shared/utils';
 
 interface DetailBlogProps {
   post: PostModel;
 }
 
 const DetailBlog = ({ post }: DetailBlogProps) => {
+  const [errorImage, setErrorImage] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(post.user?.picture).then((value) => setErrorImage(!value));
+  }, [post.user?.picture]);
+
   return (
     <>
       <div className="detail-action">
@@ -51,7 +59,7 @@ const DetailBlog = ({ post }: DetailBlogProps) => {
         <div className="detail-author text-center d-flex justify-center">
           <Link to="/" className="detail-author-action d-flex flex-column item-center">
             <div className="author-img d-flex">
-              <img src={post.user?.picture} alt={post.user?.displayName} />
+              <img src={!errorImage ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
             </div>
             <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>
           </Link>

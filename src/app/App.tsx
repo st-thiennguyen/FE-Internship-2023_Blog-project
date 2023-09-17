@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Login from './pages/auth/login/Login';
 import Register from './pages/auth/register/Register';
+import PageNotFound from './pages/not-found/PageNotFound';
 
 function App() {
   const routes = [
@@ -15,6 +16,11 @@ function App() {
     {
       path: '/register',
       element: <Register />,
+    },
+
+    {
+      path: '/404',
+      element: <PageNotFound />,
     },
   ];
 

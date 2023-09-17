@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { RootState } from '../redux/store';
 import Footer from '../shared/layout/Footer';
@@ -18,10 +18,15 @@ const Layout = () => {
       path: '/detail/:postId',
       element: <Detail />,
     },
+    {
+      path: '*',
+      element: <Navigate to="/404" />,
+    },
   ];
   return (
     <>
       <Header isLogin={authCheck?.accessToken} auth={authCheck} />
+
       <main className="main">
         <div className="container">
           <div className=" main-body">

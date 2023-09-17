@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import noImage from '../../../../assets/images/no-image.png';
+import avatarDefault from '../../../../assets/images/user-default.png';
 import { isImageUrlValid } from '../../../shared/utils/';
 import { convertDateToString } from '../../../shared/utils/date';
 
@@ -15,10 +16,12 @@ type DetailCoverProps = {
 
 const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: DetailCoverProps) => {
   const [errorImage, setErrorImage] = useState(false);
+  const [errorAvatar, setErrorAvatar] = useState(false);
 
   useEffect(() => {
     isImageUrlValid(cover).then((value) => setErrorImage(!value));
-  }, [cover]);
+    isImageUrlValid(authorAvatar).then((value) => setErrorAvatar(!value));
+  }, [cover, authorAvatar]);
 
   return (
     <section className="section section-detail-cover">
@@ -31,7 +34,7 @@ const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: Detai
           <div className="cover-info d-flex justify-between item-center">
             <Link to="/" className="cover-author d-flex item-center">
               <div className="author-ava">
-                <img src={authorAvatar} alt={authorName + ' Avatar'} />
+                <img src={!errorAvatar ? authorAvatar : avatarDefault} alt={authorName + ' Avatar'} />
               </div>
               <span className="author-name">{authorName}</span>
             </Link>

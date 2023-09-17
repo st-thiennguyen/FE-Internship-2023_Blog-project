@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
 import { fetchDetailBlog } from '../../redux/action/post';
@@ -24,11 +24,17 @@ const Detail = () => {
     dispatch(fetchDetailBlog(Number(postId)) as any);
   }, [dispatch, postId]);
 
-  return (
-    <>
-      {isLoading ? (
-        <DetailLoading />
-      ) : (
+  return _handleContentDetailPage(post, isLoading, isError, message);
+};
+
+export default Detail;
+
+const _handleContentDetailPage = (post: PostModel, isLoading: boolean, isError: boolean, message: string) => {
+  if (isLoading) {
+    return <DetailLoading />;
+  } else if (post.id) {
+    return (
+      <>
         <div className="detail-page">
           <article>
             <DetailCover
@@ -45,10 +51,10 @@ const Detail = () => {
             </section>
           </article>
         </div>
-      )}
-      {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
-    </>
-  );
+        {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
+      </>
+    );
+  } else {
+    return isError && !post.id ? <Navigate to="/404" /> : <>Home</>;
+  }
 };
-
-export default Detail;
