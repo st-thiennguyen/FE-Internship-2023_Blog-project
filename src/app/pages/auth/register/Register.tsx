@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
-import { registerAccount } from '../../../redux/action/auth';
+import { registerAction } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -88,7 +88,7 @@ const Register = () => {
 
   const onRegister = (data: FormData) => {
     dispatch(
-      registerAccount({
+      registerAction({
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -202,7 +202,7 @@ const Register = () => {
           <p className="text-center">
             Already had an account?{' '}
             <Link className={`login-link ${isLoading && 'disable-link'}`} to="/login">
-              {isLoading ? 'Loading...' : 'Login'}
+              Login
             </Link>
           </p>
         </div>

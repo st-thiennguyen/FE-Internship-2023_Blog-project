@@ -31,6 +31,10 @@ export class ApiService {
 
   private _handleError = (error: AxiosError) => {
     if (error.response) {
+      if (typeof error.response?.data === 'object') {
+        const { errors }: any = error.response?.data;
+        throw new Error(`${errors[0]}`);
+      }
       console.error('Server Error :', error.response.status, error.response.data);
       throw new Error(`${error.response?.data}`);
     } else if (error.request) {
