@@ -1,42 +1,64 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const PostItem = () => {
+import NoImg from '../../../assets/images/no-image.png';
+import { PostModel } from '../../models/post';
+import { isImageUrlValid } from '../utils';
+import { convertDateToString } from '../utils/date';
+
+interface PostItemProps {
+  post: PostModel;
+}
+const PostItem = ({ post }: PostItemProps) => {
+  const [isErrImg, setIsErrImg] = useState(false);
+  const [isErrAvt, setIsErrAvt] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
+  }, [isErrImg, post.cover]);
+
   return (
-    <Link to={'/'}>
-      <li className="post-item">
-        <div className="post">
-          <img
-            src={require('../../../assets/images/demo-cover.jpg')}
-            alt="Post Title"
-            className="post-img"
-          />
-          <div className="post-body-wrapper">
-            <div className="post-body">
-              <span className="post-author">Nguyen Trong Viet</span>
-              <h3 className="post-title">Title Of Post</h3>
-              <p className="post-content">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat odio quasi saepe omnis iusto consequatur vitae illo
-                quisquam porro distinctio animi quaerat ab officiis suscipit
-                sit, aliquam quas nesciunt rem?
-              </p>
+    <Link className="post-link" to={`detail/${post.id}`}>
+      <div className="post">
+        <div className="post-img-wrapper">
+          {isErrImg ? (
+            <img src={NoImg} alt={post.title} className={`post-img err`} />
+          ) : (
+            <img src={post.cover} alt={post.title} className={`post-img`} />
+          )}
+        </div>
+        <div className="post-body-wrapper">
+          <div className="post-body">
+            <div className="post-body-top d-flex item-center">
+              <div className="user-info-wrapper d-flex item-center">
+                <img
+                  className="user-avatar"
+                  onError={() => setIsErrAvt(true)}
+                  src={!isErrAvt ? post.cover : require('../../../assets/images/user-default.png')}
+                  alt={post.user.displayName}
+                />
+                <span className="user-name">{post.user.displayName}</span>
+              </div>
+              <p className="post-created-date">{convertDateToString(post.createdAt)}</p>
             </div>
-            <div className="post-footer d-flex justify-between">
-              <span className="read-more">READ MORE</span>
-              <ul className="post-reaction-list d-flex item-center">
-                <div className="post-reaction-item d-flex">
-                  <i className="icon icon-small icon-like-black"></i>
-                  <span className="post-reaction-number">10</span>
-                </div>
-                <div className="post-reaction-item d-flex">
-                  <i className="icon icon-small icon-comment-black"></i>
-                  <span className="post-reaction-number">10</span>
-                </div>
-              </ul>
-            </div>
+            <h3 className="post-title">{post.title}</h3>
+            <p className="post-content">{post.content}</p>
+          </div>
+          <div className="post-footer d-flex justify-between">
+            <span className="read-more">READ MORE</span>
+            <ul className="post-reaction-list d-flex item-center">
+              <div className="post-reaction-item d-flex">
+                <i className="icon icon-small icon-fire-ouline-20"></i>
+                <span className="post-reaction-number">{post.likes}</span>
+              </div>
+              <div className="post-reaction-item d-flex">
+                <i className="icon icon-small icon-comment-black"></i>
+                <span className="post-reaction-number">{post.comments}</span>
+              </div>
+            </ul>
           </div>
         </div>
-      </li>
+      </div>
     </Link>
   );
 };

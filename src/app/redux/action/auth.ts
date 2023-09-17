@@ -1,16 +1,12 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
-import { postRegister } from '../../shared/services/auth/register';
+import { ENDPOINT, StorageKey } from '../../shared/constants';
+import { fetchAuthLogin, register } from '../../shared/services/index';
+import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
-
-import { fetchAuthLogin } from '../../shared/services/auth/login';
-import { setLocalStorage } from '../../shared/utils';
-import { StorageKey } from '../../shared/constants';
-import { postLogout } from '../../shared/services/auth/logout';
 import axios from 'axios';
-import { ENDPOINT } from '../../shared/constants/endpoint';
 
 export const loginRequest = () => {
   return {
@@ -51,7 +47,7 @@ export const registerSuccess = (res: string) => {
   };
 };
 
-export const registerFailure = (error: string[]) => {
+export const registerFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.REGISTER_FAILURE,
     payload: error,
@@ -68,18 +64,18 @@ export const registerAccount =
   (registerData: RegisterProps): RootThunk =>
   async (dispatch: Dispatch<RootAction>) => {
     dispatch(registerStart());
-    const res = await postRegister(registerData);
-    if (res.errors) {
-      dispatch(registerFailure(res.errors[0]));
-    } else {
-      dispatch(registerSuccess(res));
+    try {
+      const response = await register(registerData);
+      dispatch(registerSuccess(`${response}`));
+    } catch (error) {
+      dispatch(registerFailure(`${error}`));
     }
   };
 
 export const login = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(loginRequest());
   try {
-    const data: any = await fetchAuthLogin(email, password)
+    const data: any = await fetchAuthLogin(email, password);
     dispatch(loginSuccess(data));
     setLocalStorage(StorageKey.AUTH, data);
   } catch (error: any) {

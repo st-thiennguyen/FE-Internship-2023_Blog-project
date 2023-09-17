@@ -33,6 +33,10 @@
   justify-content: space-between;
 }
 
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
 .justify-end {
   justify-content: flex-end;
 }
@@ -94,12 +98,15 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
+  .container {
+    max-width: 940px;
+  }
   .row {
-    margin: calc(0px - $p-col-sm);
+    margin: calc(0px - $p-col-lg);
   }
 
   .col {
-    padding: $p-col-sm;
+    padding: 0 $p-col-lg;
   }
 
   @for $i from 1 through 12 {
@@ -110,12 +117,31 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, md)) {
+  .container {
+    max-width: 720px;
+  }
   .row {
     margin: calc(0px - $p-col-sm);
   }
 
   .col {
-    padding: $p-col-sm;
+    padding: 0 $p-col-sm;
+  }
+
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      width: percentage(calc($i / 12));
+    }
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+  .row {
+    margin: calc(0px - $p-col-sm);
+  }
+
+  .col {
+    padding: 0 $p-col-sm;
   }
 
   @for $i from 1 through 12 {

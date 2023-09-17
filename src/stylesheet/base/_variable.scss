@@ -8,9 +8,11 @@ $color: (
   background: #f5f5f5,
   borderColor: #e9ecef,
   backgroundFrame: #fff,
+  loader-background-color: #eeeeee,
+  loader-highlight-color: #dedede,
 );
 
-$font-family-base: "Poppins", sans-serif;
+$font-family-base: "Manrope", sans-serif;
 $line-height-txt: 1.5;
 
 $header-height: 73px;
@@ -42,7 +44,8 @@ $breakpoints: (
 
 $opacity-base: 0.5;
 
-$p-col: 10px;
+$p-col: 15px;
+$p-col-lg: 10px;
 $p-col-sm: 4px;
 
 $icon-size: 40px;

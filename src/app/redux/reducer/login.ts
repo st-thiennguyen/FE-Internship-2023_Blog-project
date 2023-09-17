@@ -4,16 +4,18 @@ import { getLocalStorage } from '../../shared/utils';
 import * as ACTIONS_TYPE from '../type';
 
 export interface LoginState {
-  auth: Auth,
-  isLoading: boolean,
-  message: string,
+  auth: Auth;
+  isLoading: boolean;
+  isError: boolean;
+  message: string;
 }
 
 const initState: LoginState = {
   auth: getLocalStorage(StorageKey.AUTH) || null,
   isLoading: false,
-  message: ''
-}
+  isError: false,
+  message: '',
+};
 
 export const loginReducer = (state = initState, action: any) => {
   switch (action.type) {
@@ -21,8 +23,9 @@ export const loginReducer = (state = initState, action: any) => {
       return {
         ...state,
         isLoading: true,
-        message: ''
-      }
+        isError: false,
+        message: '',
+      };
     }
 
     case ACTIONS_TYPE.LOGIN_SUCCESS: {
@@ -30,21 +33,22 @@ export const loginReducer = (state = initState, action: any) => {
         ...state,
         auth: action.payload,
         isLoading: false,
-        message: ''
-      }
+        message: '',
+      };
     }
 
     case ACTIONS_TYPE.LOGIN_FAILURE: {
       return {
         ...state,
         isLoading: false,
-        message: action.payload
-      }
+        isError: true,
+        message: action.payload,
+      };
     }
 
     default:
       return state;
   }
-}
+};
 
 export default loginReducer;

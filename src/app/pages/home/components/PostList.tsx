@@ -1,16 +1,31 @@
-import PostItem from '../../../shared/components/PostItem';
+import { useSelector } from 'react-redux';
 
-const PostList = () => {
+import { PostModel } from '../../../models/post';
+import { RootState } from '../../../redux/store';
+import PostItem from '../../../shared/components/PostItem';
+import PostItemLoading from './PostItemLoading';
+
+interface PostListProps {
+  posts: PostModel[];
+}
+const PostList = ({ posts }: PostListProps) => {
+  const currentPage = useSelector((state: RootState) => state.post.currentPage);
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
   return (
-    <ul className="post-list">
-      <div className="row">
-        <div className="col col-6">
-          <PostItem />
-        </div>
-        <div className="col col-6">
-          <PostItem />
-        </div>
-      </div>
+    <ul className="post-list row">
+      {isLoading && currentPage === 1
+        ? Array.from({ length: 6 }, (item, index) => (
+            <li className="post-item col col-6 col-md-12" key={index}>
+              <PostItemLoading />
+            </li>
+          ))
+        : posts.map((post, index) => {
+            return (
+              <li className="post-item col col-6 col-md-12" key={index}>
+                <PostItem post={post} />
+              </li>
+            );
+          })}
     </ul>
   );
 };
