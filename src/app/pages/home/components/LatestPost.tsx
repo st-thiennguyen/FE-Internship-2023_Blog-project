@@ -32,8 +32,8 @@ const LatestPost = () => {
       <PostList posts={posts} />
       {currentPage > 1 && isLoading && (
         <div className="row">
-          {Array.from({ length: 6 }, (item, idx) => (
-            <li className="post-item col col-6 col-md-12" key={idx}>
+          {Array.from({ length: 6 }, (item, index) => (
+            <li className="post-item col col-6 col-md-12" key={index}>
               <PostItemLoading />
             </li>
           ))}
