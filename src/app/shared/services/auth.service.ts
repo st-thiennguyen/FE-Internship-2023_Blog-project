@@ -14,3 +14,7 @@ export const login = (email: string, password: string) => {
   return apiLogin.post(ENDPOINT.auth.login, { email, password });
 };
 
+export const logout = (token: string) => {
+  const apiLogout = new ApiService();
+  return apiLogout.post(ENDPOINT.auth.logout, {token});
+};
