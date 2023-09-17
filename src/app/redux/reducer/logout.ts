@@ -13,8 +13,21 @@ export const logoutReducer = (state = initState, action : any) => {
     case ACTIONS_TYPE.LOGOUT_START: 
       return {
         ...state,
+        isLogout: false
+      }
+
+      case ACTIONS_TYPE.LOGOUT_SUCCESS: 
+      return {
+        ...state,
         isLogout: true
       }
+
+      case ACTIONS_TYPE.LOGOUT_FAILURE: 
+      return {
+        ...state,
+        isLogout: false
+      }
+    
     default:
       return state;
   }
