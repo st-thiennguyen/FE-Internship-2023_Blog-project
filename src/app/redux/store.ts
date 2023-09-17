@@ -4,7 +4,6 @@ import thunk, { ThunkAction } from 'redux-thunk';
 
 import { loggerMiddleware } from './middleware/middleware';
 import { rootReducer } from './reducer/index';
-import { loginReducer } from './reducer/login';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
