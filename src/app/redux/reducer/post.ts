@@ -2,36 +2,43 @@ import { PostModel } from '../../models/post';
 import { RootAction } from '../store';
 import * as TYPE from '../type';
 
-interface DetailStateProps {
+interface PublicPostState {
   data: PostModel[];
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
   message: string;
   currentPage: number;
+  totalPage: number;
+  totalItems: number;
 }
-const initialState: DetailStateProps = {
+const initialState: PublicPostState = {
   data: [] as PostModel[],
   isLoading: false,
   isError: false,
   isSuccess: false,
   message: '',
   currentPage: 1,
+  totalPage: 0,
+  totalItems: 0,
 };
 
-export const postReducer = (state = initialState, action: RootAction): DetailStateProps => {
+export const postReducer = (state = initialState, action: RootAction): PublicPostState => {
   switch (action.type) {
     case TYPE.GET_ALL_POST_START:
       return {
         ...state,
         isLoading: true,
+        isSuccess: false,
         isError: false,
         message: '',
       };
     case TYPE.GET_ALL_POST_SUCCESS:
       return {
         ...state,
-        data: [...state.data, ...action.payload],
+        data: [...state.data, ...action.payload.data],
+        totalPage: action.payload.totalPage,
+        totalItems: action.payload.totalItems,
         isLoading: false,
         isError: false,
         isSuccess: true,
@@ -49,6 +56,11 @@ export const postReducer = (state = initialState, action: RootAction): DetailSta
       return {
         ...state,
         currentPage: state.currentPage + 1,
+      };
+    case TYPE.RESET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: 1,
       };
     default:
       return state;

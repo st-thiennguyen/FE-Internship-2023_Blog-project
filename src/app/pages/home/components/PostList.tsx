@@ -14,14 +14,14 @@ const PostList = ({ posts }: PostListProps) => {
   return (
     <ul className="post-list row">
       {isLoading && currentPage === 1
-        ? Array.from({ length: 6 }, (item, idx) => (
-            <li className="post-item col col-6 col-md-12" key={idx}>
+        ? Array.from({ length: 6 }, (item, index) => (
+            <li className="post-item col col-6 col-md-12" key={index}>
               <PostItemLoading />
             </li>
           ))
-        : posts.map((post) => {
+        : posts.map((post, index) => {
             return (
-              <li className="post-item col col-6 col-md-12" key={post.id}>
+              <li className="post-item col col-6 col-md-12" key={index}>
                 <PostItem post={post} />
               </li>
             );

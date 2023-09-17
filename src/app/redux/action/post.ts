@@ -55,17 +55,24 @@ export const getPublicPostFailure = (message: string) => {
   };
 };
 
+export const resetCurrentPage = () => {
+  return {
+    type: TYPE.RESET_CURRENT_PAGE,
+  };
+};
+
 export const loadMore = () => {
   return {
     type: TYPE.LOAD_MORE_PUBLIC_POST,
   };
 };
 
-export const fetchPublicPosts = (page: number, size: number) => async (dispatch: any) => {
+export const fetchPublicPosts = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPublicPostStart());
   try {
-    const data = await getPublicPosts(page, size);
-    dispatch(getPublicPostSuccess(data));
+    const response = await getPublicPosts(page, size);
+
+    dispatch(getPublicPostSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPublicPostFailure(`${err}`));
   }

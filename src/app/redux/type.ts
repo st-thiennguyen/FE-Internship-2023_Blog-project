@@ -1,6 +1,7 @@
 export const GET_ALL_POST_START = 'get-all-post-start';
 export const GET_ALL_POST_SUCCESS = 'get-all-post-success';
 export const GET_ALL_POST_FAILURE = 'get-all-post-failure';
+export const RESET_CURRENT_PAGE = 'reset-current-page';
 
 // DETAIL
 export const GET_DETAIL_BLOG_START = 'get-detail-blog-start';
@@ -76,6 +77,10 @@ export const GET_USER_POST_START = 'get-user-post-start';
 export const GET_USER_POST_SUCCESS = 'get-user-post-success';
 export const GET_USER_POST_FAILURE = 'get-user-post-failure';
 
-// LOAD MORE
+// GET USERS
+export const GET_USERS_START = 'get-users-start';
+export const GET_USERS_SUCCESS = 'get-users-success';
+export const GET_USERS_FAILURE = 'get-users-failure';
 
+// LOAD MORE
 export const LOAD_MORE_PUBLIC_POST = 'load-more-public-post';
