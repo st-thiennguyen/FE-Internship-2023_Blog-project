@@ -20,7 +20,7 @@ const Layout = () => {
     },
     {
       path: '*',
-      element: <Navigate to="/404" />,
+      element: <Navigate to="/page-not-found" />,
     },
   ];
   return (

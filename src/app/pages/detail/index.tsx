@@ -32,7 +32,9 @@ export default Detail;
 const _handleContentDetailPage = (post: PostModel, isLoading: boolean, isError: boolean, message: string) => {
   if (isLoading) {
     return <DetailLoading />;
-  } else if (post.id) {
+  } else if (isError && !post.id) {
+    return <Navigate to="/page-not-found" />;
+  } else {
     return (
       <>
         <div className="detail-page">
@@ -54,7 +56,5 @@ const _handleContentDetailPage = (post: PostModel, isLoading: boolean, isError: 
         {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
       </>
     );
-  } else {
-    return isError && !post.id ? <Navigate to="/404" /> : <>Home</>;
   }
 };

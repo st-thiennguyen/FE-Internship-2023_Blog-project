@@ -19,7 +19,7 @@ function App() {
     },
 
     {
-      path: '/404',
+      path: '/page-not-found',
       element: <PageNotFound />,
     },
   ];

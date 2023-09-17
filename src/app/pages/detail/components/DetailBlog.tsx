@@ -10,10 +10,10 @@ interface DetailBlogProps {
 }
 
 const DetailBlog = ({ post }: DetailBlogProps) => {
-  const [errorImage, setErrorImage] = useState(false);
+  const [isErrorCover, setIsErrorCover] = useState(false);
 
   useEffect(() => {
-    isImageUrlValid(post.user?.picture).then((value) => setErrorImage(!value));
+    isImageUrlValid(post.user?.picture).then((value) => setIsErrorCover(!value));
   }, [post.user?.picture]);
 
   return (
@@ -59,7 +59,7 @@ const DetailBlog = ({ post }: DetailBlogProps) => {
         <div className="detail-author text-center d-flex justify-center">
           <Link to="/" className="detail-author-action d-flex flex-column item-center">
             <div className="author-img d-flex">
-              <img src={!errorImage ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
+              <img src={!isErrorCover ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
             </div>
             <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>
           </Link>
