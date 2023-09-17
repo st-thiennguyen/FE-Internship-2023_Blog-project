@@ -113,7 +113,7 @@ const Register = () => {
           </h1>
           <h2 className="auth-title text-center">REGISTER</h2>
           <form className="form form-register" onSubmit={handleSubmit(onRegister)}>
-            <fieldset className="form-fieldset">
+            <fieldset className="form-fieldset" disabled={isLoading}>
               <div className="row">
                 <div className="form-input-group col col-6">
                   <label className="form-label">First Name</label>
@@ -196,7 +196,7 @@ const Register = () => {
                   {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
               </div>
-              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={false}></Button>
+              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
             </fieldset>
           </form>
           <p className="text-center">
