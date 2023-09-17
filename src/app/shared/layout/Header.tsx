@@ -1,29 +1,15 @@
-import React, { useEffect } from 'react';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/images/logo.svg';
-import { RootState } from '../../redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { getLocalStorage } from '../utils';
-import { StorageKey } from '../constants';
-import { logout } from '../../redux/action/auth';
+import { Auth } from '../../models/auth';
 
-const Header = () => {
+interface HeaderProps {
+  isLogin: Boolean;
+  auth: Auth;
+}
 
-  const token = getLocalStorage(StorageKey.AUTH);
-  
-  const dispatch = useDispatch();
-
-  const handleLogout = (e: any) => {
-    
-    dispatch(logout(token) as any);
-    e.preventDefault();
-    localStorage.clear();
-    if (!token) {
-      redirect('/login');
-    }
-  }
-
+const Header = ({ isLogin, auth }: HeaderProps) => {
   return (
     <header className="header">
       <div className="container">
@@ -51,20 +37,32 @@ const Header = () => {
                       <i className="icon icon-small icon-user-20"></i>
                     </div>
                   </Link>
-                  <div className="navbar-auth">
-                    <ul className="auth-list">
-                      <li className="auth-item">
-                        <Link to="/profile" className="auth-link">
-                          Nguyen Si Thien
-                        </Link>
-                      </li>
-                      <li className="auth-item">
-                        <Link to='/login' className="auth-link" onClick={handleLogout}>
-                          Logout
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
+                  {isLogin ? (
+                    <div className="navbar-auth">
+                      <ul className="auth-list">
+                        <li className="auth-item">
+                          <Link to="/profile" className="auth-link">
+                            {auth.userInfo?.displayName}
+                          </Link>
+                        </li>
+                        <li className="auth-item">
+                          <Link to="/logout" className="auth-link">
+                            Logout
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <div className="navbar-auth">
+                      <ul className="auth-list">
+                        <li className="auth-item">
+                          <Link to="/login" className="auth-link">
+                            Login
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </li>
                 <li className="navbar-item">
                   <Link to="/" className="navbar-link">

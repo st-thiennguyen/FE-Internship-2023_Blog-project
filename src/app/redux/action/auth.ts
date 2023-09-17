@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
 import { ENDPOINT, StorageKey } from '../../shared/constants';
-import { fetchAuthLogin, register } from '../../shared/services/index';
+import { login, register } from '../../shared/services/index';
 import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
@@ -59,8 +59,7 @@ export const logoutRequest = () => {
     type: ACTIONS_TYPE.LOGOUT_START
   }
 }
-
-export const registerAccount =
+export const registerAction =
   (registerData: RegisterProps): RootThunk =>
   async (dispatch: Dispatch<RootAction>) => {
     dispatch(registerStart());
@@ -72,14 +71,14 @@ export const registerAccount =
     }
   };
 
-export const login = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
+export const loginAction = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(loginRequest());
   try {
-    const data: any = await fetchAuthLogin(email, password);
+    const data: any = await login(email, password);
     dispatch(loginSuccess(data));
     setLocalStorage(StorageKey.AUTH, data);
   } catch (error: any) {
-    dispatch(loginFailure(error.response?.data.errors[0]));
+    dispatch(loginFailure(error.response?.data));
   }
 } 
 
