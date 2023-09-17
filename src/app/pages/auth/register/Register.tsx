@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
-import { registerAccount } from '../../../redux/action/auth';
+import { registerAction } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -88,7 +88,7 @@ const Register = () => {
 
   const onRegister = (data: FormData) => {
     dispatch(
-      registerAccount({
+      registerAction({
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -113,7 +113,7 @@ const Register = () => {
           </h1>
           <h2 className="auth-title text-center">REGISTER</h2>
           <form className="form form-register" onSubmit={handleSubmit(onRegister)}>
-            <fieldset className="form-fieldset" disabled={isLoading}>
+            <fieldset className="form-fieldset">
               <div className="row">
                 <div className="form-input-group col col-6">
                   <label className="form-label">First Name</label>
@@ -196,13 +196,13 @@ const Register = () => {
                   {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
               </div>
-              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
+              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={false}></Button>
             </fieldset>
           </form>
           <p className="text-center">
             Already had an account?{' '}
             <Link className={`login-link ${isLoading && 'disable-link'}`} to="/login">
-              {isLoading ? 'Loading...' : 'Login'}
+              Login
             </Link>
           </p>
         </div>
