@@ -3,6 +3,8 @@
   top: calc($header-height + 10px);
   left: 100%;
   min-width: 320px;
+  transition: all ease-in 1s;
+  z-index: 9;
   &-wrapper {
     width: 100%;
     padding: 15px 20px;

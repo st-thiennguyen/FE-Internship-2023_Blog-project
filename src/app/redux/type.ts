@@ -13,10 +13,12 @@ export const REGISTER_SUCCESS = 'register-success';
 export const REGISTER_FAILURE = 'register-failure';
 
 // LOGIN
+
 export const LOGIN_START = 'login-start';
 export const LOGIN_SUCCESS = 'login-success';
 export const LOGIN_FAILURE = 'login-failure';
 // Logout
+export const REGISTER_RESET_STATE = 'register-reset-state';
 export const LOGOUT_START = 'logout-start';
 export const LOGOUT_SUCCESS = 'logout-success';
 export const LOGOUT_FAILURE = 'logout-failure';

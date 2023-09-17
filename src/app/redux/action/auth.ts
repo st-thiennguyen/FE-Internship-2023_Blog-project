@@ -8,6 +8,9 @@ import * as ACTIONS_TYPE from '../type';
 import { fetchAuthLogin } from '../../shared/services/auth/login';
 import { setLocalStorage } from '../../shared/utils';
 import { StorageKey } from '../../shared/constants';
+import { postLogout } from '../../shared/services/auth/logout';
+import axios from 'axios';
+import { ENDPOINT } from '../../shared/constants/endpoint';
 
 export const loginRequest = () => {
   return {
@@ -26,6 +29,12 @@ export const loginFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.LOGIN_FAILURE,
     payload: error,
+  };
+};
+
+export const registerReset = () => {
+  return {
+    type: ACTIONS_TYPE.REGISTER_RESET_STATE,
   };
 };
 
@@ -49,6 +58,12 @@ export const registerFailure = (error: string[]) => {
   };
 };
 
+export const logoutRequest = () => {
+  return {
+    type: ACTIONS_TYPE.LOGOUT_START
+  }
+}
+
 export const registerAccount =
   (registerData: RegisterProps): RootThunk =>
   async (dispatch: Dispatch<RootAction>) => {
@@ -69,5 +84,23 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
     setLocalStorage(StorageKey.AUTH, data);
   } catch (error: any) {
     dispatch(loginFailure(error.response?.data.errors[0]));
+  }
+} 
+
+export const logout = (token: any) => async (dispatch: Dispatch<RootAction>) => {
+  try {
+    const response = await axios.post(ENDPOINT.auth.logout, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 200) {
+      dispatch(logoutRequest())
+    } else {
+      console.error('Logout failed:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Failed to logout:', error);
   }
 } 

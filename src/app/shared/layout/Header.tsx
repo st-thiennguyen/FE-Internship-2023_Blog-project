@@ -1,9 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 
 import logo from '../../../assets/images/logo.svg';
+import { RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLocalStorage } from '../utils';
+import { StorageKey } from '../constants';
+import { logout } from '../../redux/action/auth';
 
 const Header = () => {
+
+  const token = getLocalStorage(StorageKey.AUTH);
+  
+  const dispatch = useDispatch();
+
+  const handleLogout = (e: any) => {
+    
+    dispatch(logout(token) as any);
+    e.preventDefault();
+    localStorage.clear();
+    if (!token) {
+      redirect('/login');
+    }
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -39,7 +59,7 @@ const Header = () => {
                         </Link>
                       </li>
                       <li className="auth-item">
-                        <Link to="/logout" className="auth-link">
+                        <Link to='/login' className="auth-link" onClick={handleLogout}>
                           Logout
                         </Link>
                       </li>
