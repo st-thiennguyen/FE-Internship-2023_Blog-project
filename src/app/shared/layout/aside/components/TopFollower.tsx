@@ -1,48 +1,11 @@
 import { Link } from 'react-router-dom';
 
-const users = [
-  {
-    id: 1,
-    email: 'quan.do@supremetech.vn',
-    firstName: 'do',
-    lastName: 'quan',
-    gender: 'male|female|other',
-    dob: '19/10/1995',
-    phone: '',
-    displayName: 'st-quando',
-    picture: '../../../../../assets/images/demo-cover.jpg',
-    followers: 2345,
-    followings: 0,
-  },
-  {
-    id: 2,
-    email: 'viet.nguyen@supremetech.vn',
-    firstName: 'nguyen',
-    lastName: 'viet',
-    gender: 'male|female|other',
-    dob: '14/05/2000',
-    phone: '',
-    displayName: 'st-vietnguyen',
-    picture: '../../../../../assets/images/demo-cover.jpg',
-    followers: 199,
-    followings: 0,
-  },
-  {
-    id: 3,
-    email: 'thien.nguyen@supremetech.vn',
-    firstName: 'nguyen',
-    lastName: 'thien',
-    gender: 'male|female|other',
-    dob: '19/10/1995',
-    phone: '',
-    displayName: 'st-thiennguyen',
-    picture: '../../../../../assets/images/demo-cover.jpg',
-    followers: 7,
-    followings: 0,
-  },
-];
+import { UserModel } from '../../../../models/post';
 
-const TopFollower = () => {
+interface TopFollowerProps {
+  users: UserModel[];
+}
+const TopFollower = ({ users }: TopFollowerProps) => {
   return (
     <div className="top-follower">
       <h3 className="aside-title">Top Follower</h3>
@@ -55,7 +18,7 @@ const TopFollower = () => {
                   <img
                     className="user-avatar"
                     src={require('../../../../../assets/images/demo-cover.jpg')}
-                    alt="User avatar"
+                    alt={user.displayName}
                   />
                 </Link>
                 <div className="user-info">

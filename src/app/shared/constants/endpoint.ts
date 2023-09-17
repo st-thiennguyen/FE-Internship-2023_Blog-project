@@ -27,4 +27,7 @@ export const ENDPOINT = {
     index: `${BASE_URL}/${RESOURCES.posts}`,
     public: `${BASE_URL}/${RESOURCES.posts}/public`,
   },
+  users: {
+    index: `${BASE_URL}/${RESOURCES.users}/`,
+  },
 };
