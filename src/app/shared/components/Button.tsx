@@ -1,16 +1,17 @@
 interface ButtonProps {
-  handleClick?: () => void,
-  isLoading?: boolean,
-  label: string,
-  optionClassName?: string
+  handleClick?: () => void;
+  isLoading?: boolean;
+  isDisabled?: boolean;
+  label: string;
+  optionClassName?: string;
 }
 
-const Button = ({ handleClick, isLoading, label, optionClassName }: ButtonProps) => {
+const Button = ({ handleClick, isLoading, isDisabled, label, optionClassName }: ButtonProps) => {
   return (
-    <button className={`btn ${optionClassName}`} onClick={handleClick}>
-      { label }
-      <p className = { isLoading? "btn-loading": "" } ></p>
-    </button >
+    <button className={`btn ${optionClassName}`} onClick={handleClick} disabled={isDisabled}>
+      {label}
+      <p className={isLoading ? 'btn-loading' : ''}></p>
+    </button>
   );
 };
 
