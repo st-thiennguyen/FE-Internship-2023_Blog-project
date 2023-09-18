@@ -64,20 +64,6 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
                     </div>
                   )}
                 </li>
-                <li className="navbar-item">
-                  <Link to="/" className="navbar-link">
-                    <div className="navbar-content d-flex justify-center item-center">
-                      <i className="icon icon-small icon-moon-20"></i>
-                    </div>{' '}
-                  </Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/search" className="navbar-link">
-                    <div className="navbar-content icon-search d-flex justify-center item-center">
-                      <i className="icon icon-small icon-search-20"></i>
-                    </div>{' '}
-                  </Link>
-                </li>
               </ul>
             </nav>
           </div>
