@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { RegisterProps } from '../../models/auth';
 import { ENDPOINT } from '../constants/endpoint';
 import { ApiService } from './config';
