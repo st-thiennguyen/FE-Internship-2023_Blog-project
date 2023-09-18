@@ -41,7 +41,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
-  const message: boolean = useSelector((state: RootState) => state.login.message);
+  const message: string = useSelector((state: RootState) => state.login.message);
   const isLogin = getLocalStorage(StorageKey.AUTH);
   const errorLogin: any = useSelector((state: RootState) => state.login.isError);
 
@@ -165,7 +165,7 @@ const Login = () => {
         />
       )}
       {errorLogin && (
-        <ToastMessage isShow={errorLogin} isSuccess={!errorLogin} title={'Error'} subtitle={'email or password invalid!'}></ToastMessage>
+        <ToastMessage isShow={errorLogin} isSuccess={!errorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>
   );

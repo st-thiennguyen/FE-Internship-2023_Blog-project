@@ -95,7 +95,7 @@ export const loginAction = (email: string, password: string) => async (dispatch:
     dispatch(loginSuccess(data));
     setLocalStorage(StorageKey.AUTH, data);
   } catch (error: any) {
-    dispatch(loginFailure(error.response?.data));
+    dispatch(loginFailure(error));
   }
 }
 
