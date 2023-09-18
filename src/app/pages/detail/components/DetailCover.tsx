@@ -40,7 +40,7 @@ const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: Detai
             </Link>
             <div className="cover-date d-flex item-center">
               <i className="icon icon-small icon-date-20"></i>
-              <p className="cover-date-title">{convertDateToString(datePost)}</p>
+              <p className="cover-date-title">{convertDateToString(datePost, '-')}</p>
             </div>
           </div>
         </div>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import NoImg from '../../../assets/images/no-image.png';
 import { PostModel } from '../../models/post';
 import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
+
+import NoImg from '../../../assets/images/no-image.png';
 
 interface PostItemProps {
   post: PostModel;
@@ -39,7 +40,7 @@ const PostItem = ({ post }: PostItemProps) => {
                 />
                 <span className="user-name">{post.user.displayName}</span>
               </div>
-              <p className="post-created-date">{convertDateToString(post.createdAt)}</p>
+              <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
             <p className="post-content">{post.content}</p>

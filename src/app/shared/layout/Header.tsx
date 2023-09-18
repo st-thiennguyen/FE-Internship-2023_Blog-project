@@ -1,13 +1,14 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import logo from '../../../assets/images/logo.svg';
 import { Auth } from '../../models/auth';
-import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../redux/action/auth';
 import { getLocalStorage } from '../utils';
 import { StorageKey } from '../constants';
-import { useState } from 'react';
+
 import ToastMessage from '../components/ToastMessage';
+import logo from '../../../assets/images/logo.svg';
 
 interface HeaderProps {
   isLogin: Boolean;
@@ -15,7 +16,6 @@ interface HeaderProps {
 }
 
 const Header = ({ isLogin, auth }: HeaderProps) => {
-
   const [isShowToastMessage, setIsShowToastMessage] = useState(false);
   const token: any = getLocalStorage(StorageKey.AUTH);
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
     dispatch(logoutAction(token.accessToken) as any);
     e.preventDefault();
     setIsShowToastMessage(true);
-  }
+  };
 
   return (
     <header className="header">
@@ -62,7 +62,7 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
                           </Link>
                         </li>
                         <li className="auth-item">
-                          <Link to='/' className="auth-link" onClick={handleLogout}>
+                          <Link to="/" className="auth-link" onClick={handleLogout}>
                             Logout
                           </Link>
                         </li>
