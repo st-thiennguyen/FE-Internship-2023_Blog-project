@@ -105,6 +105,6 @@ export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction
     const response: any = await logout(token);
     dispatch(logoutSuccess(response.data));
   } catch (error) {
-    dispatch(logoutFailure(error as string))
+    dispatch(logoutFailure(error as string));
   }
 } 
