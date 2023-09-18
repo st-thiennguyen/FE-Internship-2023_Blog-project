@@ -12,11 +12,12 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
-import { login, registerReset } from '../../../redux/action/auth';
+import { loginAction, registerReset } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
-import { regexEmail } from '../../../shared/constants';
+import { StorageKey, regexEmail } from '../../../shared/constants';
+import { getLocalStorage } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -40,9 +41,9 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
-  const isError: boolean = useSelector((state: RootState) => state.login.isError);
-  const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
-  const errorLogin: any = useSelector((state: RootState) => state.login.message);
+  const message: string = useSelector((state: RootState) => state.login.message);
+  const isLogin = useSelector((state: RootState) => state.login.auth?.accessToken);
+  const errorLogin: any = useSelector((state: RootState) => state.login.isError);
 
   const isRegisterSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
   const registerMessage: string = useSelector((state: RootState) => state.register.message);
@@ -63,7 +64,7 @@ const Login = () => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(login(data.email, data.password) as any);
+    dispatch(loginAction(data.email, data.password) as any);
   });
 
   const removeStateRegister = useRef(() => {});
@@ -73,10 +74,10 @@ const Login = () => {
 
   useEffect(() => {
     removeStateRegister.current();
-    if (accessToken) {
+    if (isLogin) {
       navigate('/');
     }
-  }, [accessToken, navigate]);
+  }, [isLogin, navigate]);
 
   return (
     <div className="auth">
@@ -163,8 +164,8 @@ const Login = () => {
           subtitle={registerState.registerMessage}
         />
       )}
-      {isError && (
-        <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={errorLogin}></ToastMessage>
+      {errorLogin && (
+        <ToastMessage isShow={errorLogin} isSuccess={!errorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>
   );

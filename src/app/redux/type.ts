@@ -15,6 +15,7 @@ export const REGISTER_SUCCESS = 'register-success';
 export const REGISTER_FAILURE = 'register-failure';
 
 // LOGIN
+
 export const LOGIN_START = 'login-start';
 export const LOGIN_SUCCESS = 'login-success';
 export const LOGIN_FAILURE = 'login-failure';
