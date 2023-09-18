@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Footer from '../shared/layout/Footer';
 import Header from '../shared/layout/Header';
-import Aside from '../shared/layout/aside';
+import Aside from '../shared/layout/aside/container/Aside';
 import { RootState } from '../stores/store';
 import DetailPost from './detail-post/container/DetailPost';
 import Home from './home/container/Home';

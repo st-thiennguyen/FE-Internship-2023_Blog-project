@@ -66,13 +66,13 @@ const Register = () => {
     if (isSuccess) {
       navigate('/login');
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess]);
 
   useEffect(() => {
     if (accessToken) {
       navigate('/');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken]);
 
   const {
     register,

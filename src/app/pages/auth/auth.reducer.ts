@@ -103,7 +103,6 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
         ...state,
         auth: getLocalStorage(StorageKey.AUTH),
         isLoading: false,
-        isSuccess: true,
         isError: false,
         message: '',
       };
