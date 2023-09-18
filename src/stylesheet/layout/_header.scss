@@ -20,4 +20,11 @@
     font-size: map-get($font-size, xs);
     font-weight: map-get($font-weight, semibold);
   }
+
+  .avatar-user {
+    margin-left: 15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
 }

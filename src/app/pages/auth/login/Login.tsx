@@ -1,9 +1,16 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { loginAction, registerReset } from '../../../redux/action/auth';
+import { RootState } from '../../../redux/store';
+import { regexEmail } from '../../../shared/constants';
+import { AuthContext } from '../../../App';
+import Button from '../../../shared/components/Button';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
@@ -12,12 +19,6 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
-import { loginAction, registerReset } from '../../../redux/action/auth';
-import { RootState } from '../../../redux/store';
-import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
-import { StorageKey, regexEmail } from '../../../shared/constants';
-import { getLocalStorage } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -37,12 +38,16 @@ type FormData = {
 };
 
 const Login = () => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isLogin = authContext?.accessToken;
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
   const message: string = useSelector((state: RootState) => state.login.message);
-  const isLogin = useSelector((state: RootState) => state.login.auth?.accessToken);
   const errorLogin: any = useSelector((state: RootState) => state.login.isError);
 
   const isRegisterSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
@@ -77,7 +82,7 @@ const Login = () => {
     if (isLogin) {
       navigate('/');
     }
-  }, [isLogin, navigate]);
+  }, [isLogin]);
 
   return (
     <div className="auth">
@@ -147,7 +152,7 @@ const Login = () => {
           </form>
           <p className="text-center">
             You"re new to Supremethod?{' '}
-            <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : ''}`}>
+            <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : null}`}>
               Register
             </Link>
           </p>

@@ -10,8 +10,6 @@ import Detail from './detail/index';
 import Home from './home';
 
 const Layout = () => {
-  const authCheck = useSelector((state: RootState) => state.login.auth);
-
   const routes = [
     { path: '/', element: <Home /> },
     {
@@ -25,7 +23,7 @@ const Layout = () => {
   ];
   return (
     <>
-      <Header isLogin={authCheck?.accessToken} auth={authCheck} />
+      <Header />
 
       <main className="main">
         <div className="container">

@@ -100,7 +100,7 @@ export const loginAction = (email: string, password: string) => async (dispatch:
 export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutRequest());
   try {
-    const response = await logout(token);
+    await logout(token);
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutFailure(error as string));
