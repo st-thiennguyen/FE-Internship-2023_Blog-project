@@ -1,8 +1,7 @@
 import { Dispatch } from 'react';
-import axios from 'axios';
 
 import { RegisterProps } from '../../models/auth';
-import { ENDPOINT, StorageKey } from '../../shared/constants';
+import { StorageKey } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
 import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
