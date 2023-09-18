@@ -39,7 +39,7 @@ const PostItem = ({ post }: PostItemProps) => {
                 />
                 <span className="user-name">{post.user.displayName}</span>
               </div>
-              <p className="post-created-date">{convertDateToString(post.createdAt)}</p>
+              <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
             <p className="post-content">{post.content}</p>

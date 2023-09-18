@@ -11,7 +11,7 @@ import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
-import { convertDateFormat } from '../../../shared/utils/date';
+import { convertDateToString } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -107,7 +107,7 @@ const Register = () => {
         lastName: data.lastName,
         gender: data.gender,
         password: data.password,
-        dob: convertDateFormat(data.dob),
+        dob: convertDateToString(data.dob, '/'),
         phone: data.phoneNumber,
         displayName: data.displayName,
         picture: handlePictureByGender(data.gender),
