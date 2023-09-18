@@ -1,8 +1,13 @@
-import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/images/logo.svg';
 import { Auth } from '../../models/auth';
+import { logoutAction } from '../../pages/auth/auth.actions';
+import ToastMessage from '../components/ToastMessage';
+import { StorageKey } from '../constants';
+import { getLocalStorage } from '../utils';
 
 interface HeaderProps {
   isLogin: Boolean;
@@ -10,6 +15,16 @@ interface HeaderProps {
 }
 
 const Header = ({ isLogin, auth }: HeaderProps) => {
+  const [isShowToastMessage, setIsShowToastMessage] = useState(false);
+  const token: any = getLocalStorage(StorageKey.AUTH);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e: any) => {
+    dispatch(logoutAction(token.accessToken) as any);
+    e.preventDefault();
+    setIsShowToastMessage(true);
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -46,29 +61,22 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
                           </Link>
                         </li>
                         <li className="auth-item">
-                          <Link to="/logout" className="auth-link">
+                          <Link to="/" className="auth-link" onClick={handleLogout}>
                             Logout
                           </Link>
                         </li>
                       </ul>
                     </div>
-                  ) : (
-                    <div className="navbar-auth">
-                      <ul className="auth-list">
-                        <li className="auth-item">
-                          <Link to="/login" className="auth-link">
-                            Login
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  ) : null}
                 </li>
               </ul>
             </nav>
           </div>
         </div>
       </div>
+      {isShowToastMessage && (
+        <ToastMessage isShow={true} isSuccess={true} title={'success'} subtitle={'Logout success!'}></ToastMessage>
+      )}
     </header>
   );
 };

@@ -1,10 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import LatestPost from './components/LatestPost';
-import Recommend from './components/recommend';
+import { RootState } from '../../../../stores/store';
+import LatestPost from '../components/LatestPost';
+import Recommend from '../components/recommend';
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
+  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate('/');
+    }
+  }, [isLogin]);
 
   const goToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

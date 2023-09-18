@@ -88,6 +88,36 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
         message: action.payload,
       };
     }
+
+    case ACTIONS_TYPE.LOGOUT: {
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+      };
+    }
+
+    case ACTIONS_TYPE.LOGOUT_SUCCESS: {
+      return {
+        ...state,
+        auth: getLocalStorage(StorageKey.AUTH),
+        isLoading: false,
+        isSuccess: true,
+        isError: false,
+        message: '',
+      };
+    }
+
+    case ACTIONS_TYPE.LOGOUT_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+        message: action.payload,
+      };
+    }
     default:
       return state;
   }

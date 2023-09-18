@@ -7,11 +7,11 @@ import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
 import { RootState } from '../../../../stores/store';
-import { registerAction } from '../../../redux/action/auth';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 import { convertDateFormat } from '../../../shared/utils/date';
+import { registerAction } from '../auth.actions';
 
 const schema = yup
   .object({
@@ -47,15 +47,16 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const Register = () => {
-  const isLoading: boolean = useSelector((state: RootState) => state.register.isLoading);
-  const isSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
-  const isError: boolean = useSelector((state: RootState) => state.register.isError);
-  const message: string = useSelector((state: RootState) => state.register.message);
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
+  const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
+  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
+  const message: string = useSelector((state: RootState) => state.auth.message);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
@@ -66,6 +67,12 @@ const Register = () => {
       navigate('/login');
     }
   }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [accessToken, navigate]);
 
   const {
     register,

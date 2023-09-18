@@ -13,10 +13,10 @@ import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
 import { RootState } from '../../../../stores/store';
-import { login, registerReset } from '../../../redux/action/auth';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { regexEmail } from '../../../shared/constants';
+import { loginAction, registerReset } from '../auth.actions';
 
 const schema = yup
   .object({
@@ -39,13 +39,13 @@ const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
-  const isError: boolean = useSelector((state: RootState) => state.login.isError);
-  const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
-  const errorLogin: any = useSelector((state: RootState) => state.login.message);
+  const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
+  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const errorLogin: any = useSelector((state: RootState) => state.auth.message);
 
-  const isRegisterSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
-  const registerMessage: string = useSelector((state: RootState) => state.register.message);
+  const isRegisterSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
+  const registerMessage: string = useSelector((state: RootState) => state.auth.message);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -63,7 +63,7 @@ const Login = () => {
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(login(data.email, data.password) as any);
+    dispatch(loginAction(data.email, data.password) as any);
   });
 
   const removeStateRegister = useRef(() => {});

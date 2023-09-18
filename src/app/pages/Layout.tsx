@@ -7,10 +7,11 @@ import Footer from '../shared/layout/Footer';
 import Header from '../shared/layout/Header';
 import Aside from '../shared/layout/aside';
 import Detail from './detail/container/Detail';
-import Home from './home';
+import Home from './home/container/Home';
 
 const Layout = () => {
-  const authCheck = useSelector((state: RootState) => state.login.auth);
+  const authCheck = useSelector((state: RootState) => state.auth?.auth);
+  const isLogin = !!authCheck?.accessToken;
 
   const routes = [
     { path: '/', element: <Home /> },
@@ -25,7 +26,7 @@ const Layout = () => {
   ];
   return (
     <>
-      <Header isLogin={authCheck?.accessToken} auth={authCheck} />
+      <Header isLogin={isLogin} auth={authCheck} />
 
       <main className="main">
         <div className="container">
