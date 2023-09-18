@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import logo from '../../../assets/images/logo.svg';
 import { Auth } from '../../models/auth';
@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../redux/action/auth';
 import { getLocalStorage } from '../utils';
 import { StorageKey } from '../constants';
+import { useState } from 'react';
+import ToastMessage from '../components/ToastMessage';
 
 interface HeaderProps {
   isLogin: Boolean;
@@ -14,15 +16,14 @@ interface HeaderProps {
 
 const Header = ({ isLogin, auth }: HeaderProps) => {
 
+  const [isShowToastMessage, setIsShowToastMessage] = useState(false);
   const token: any = getLocalStorage(StorageKey.AUTH);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogout = (e: any) => {
     dispatch(logoutAction(token.accessToken) as any);
     e.preventDefault();
-    localStorage.clear();
-    navigate('/login');
+    setIsShowToastMessage(true);
   }
 
   return (
@@ -67,17 +68,7 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
                         </li>
                       </ul>
                     </div>
-                  ) : (
-                    <div className="navbar-auth">
-                      <ul className="auth-list">
-                        <li className="auth-item">
-                          <Link to="/login" className="auth-link">
-                            Login
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                  ) : null}
                 </li>
                 <li className="navbar-item">
                   <Link to="/" className="navbar-link">
@@ -98,6 +89,9 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
           </div>
         </div>
       </div>
+      {isShowToastMessage && (
+        <ToastMessage isShow={true} isSuccess={true} title={'success'} subtitle={'Logout success!'}></ToastMessage>
+      )}
     </header>
   );
 };

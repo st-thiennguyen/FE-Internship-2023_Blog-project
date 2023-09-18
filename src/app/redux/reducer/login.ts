@@ -46,6 +46,20 @@ export const loginReducer = (state = initState, action: any) => {
       };
     }
 
+    case ACTIONS_TYPE.LOGOUT_START: {
+      return {
+        ...state,
+      };
+    }
+
+    case ACTIONS_TYPE.LOGOUT_SUCCESS: {
+      localStorage.clear();
+      return {
+        ...initState
+      };
+    }
+
+
     default:
       return state;
   }
