@@ -2,9 +2,20 @@ import { useEffect, useState } from 'react';
 
 import LatestPost from './components/LatestPost';
 import Recommend from './components/recommend';
+import { getLocalStorage } from '../../shared/utils';
+import { StorageKey } from '../../shared/constants';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
+  const isLogin = getLocalStorage(StorageKey.AUTH);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate('/');
+    }
+  }, [isLogin]);
 
   const goToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

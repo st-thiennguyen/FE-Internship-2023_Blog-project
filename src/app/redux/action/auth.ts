@@ -1,4 +1,5 @@
 import { Dispatch } from 'react';
+import axios from 'axios';
 
 import { RegisterProps } from '../../models/auth';
 import { ENDPOINT, StorageKey } from '../../shared/constants';
@@ -6,7 +7,6 @@ import { login, register } from '../../shared/services/index';
 import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
-import axios from 'axios';
 
 export const loginRequest = () => {
   return {
@@ -78,15 +78,15 @@ export const logoutFailure = (error: string) => {
 
 export const registerAction =
   (registerData: RegisterProps): RootThunk =>
-  async (dispatch: Dispatch<RootAction>) => {
-    dispatch(registerStart());
-    try {
-      const response = await register(registerData);
-      dispatch(registerSuccess(`${response}`));
-    } catch (error) {
-      dispatch(registerFailure(`${error}`));
-    }
-  };
+    async (dispatch: Dispatch<RootAction>) => {
+      dispatch(registerStart());
+      try {
+        const response = await register(registerData);
+        dispatch(registerSuccess(`${response}`));
+      } catch (error) {
+        dispatch(registerFailure(`${error}`));
+      }
+    };
 
 export const loginAction = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(loginRequest());
@@ -97,10 +97,10 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   } catch (error: any) {
     dispatch(loginFailure(error.response?.data));
   }
-} 
+}
 
 export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(logoutRequest())
+  dispatch(logoutRequest());
   try {
     const response = await axios.post(ENDPOINT.auth.logout, null, {
       headers: {
@@ -108,11 +108,7 @@ export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction
       },
     });
 
-    if (response.status === 200) {
-      dispatch(logoutSuccess(response.data))
-    } else {
-      console.error('Logout failed:', response.statusText);
-    }
+    dispatch(logoutSuccess(response.data));
   } catch (error) {
     console.error('Failed to logout:', error);
   }

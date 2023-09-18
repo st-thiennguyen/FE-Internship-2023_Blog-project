@@ -42,7 +42,7 @@ const Login = () => {
   const navigate = useNavigate();
   const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
   const message: boolean = useSelector((state: RootState) => state.login.message);
-  const accessToken = getLocalStorage(StorageKey.AUTH);
+  const isLogin = getLocalStorage(StorageKey.AUTH);
   const errorLogin: any = useSelector((state: RootState) => state.login.isError);
 
   const isRegisterSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
@@ -74,10 +74,10 @@ const Login = () => {
 
   useEffect(() => {
     removeStateRegister.current();
-    if (accessToken) {
+    if (isLogin) {
       navigate('/');
     }
-  }, [accessToken, navigate]);
+  }, [isLogin, navigate]);
 
   return (
     <div className="auth">

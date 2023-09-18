@@ -1,10 +1,8 @@
-import React from 'react';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import logo from '../../../assets/images/logo.svg';
 import { Auth } from '../../models/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../redux/action/auth';
 import { getLocalStorage } from '../utils';
 import { StorageKey } from '../constants';
@@ -16,21 +14,15 @@ interface HeaderProps {
 
 const Header = ({ isLogin, auth }: HeaderProps) => {
 
-  const message: any = useSelector((state: RootState) => state.login) || '';
-  const token: any =  getLocalStorage(StorageKey.AUTH);
-  console.log(token);
+  const token: any = getLocalStorage(StorageKey.AUTH);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = (e: any) => {
-
     dispatch(logoutAction(token.accessToken) as any);
     e.preventDefault();
     localStorage.clear();
-
-    console.log('mess: ', message);
-    if (!token) {
-      redirect('/login');
-    }
+    navigate('/login');
   }
 
   return (
@@ -69,7 +61,7 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
                           </Link>
                         </li>
                         <li className="auth-item">
-                          <Link to="/logout" className="auth-link" onClick={handleLogout}>
+                          <Link to='/' className="auth-link" onClick={handleLogout}>
                             Logout
                           </Link>
                         </li>
