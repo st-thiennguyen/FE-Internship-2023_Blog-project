@@ -16,8 +16,7 @@ import { loginAction, registerReset } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
-import { StorageKey, regexEmail } from '../../../shared/constants';
-import { getLocalStorage } from '../../../shared/utils';
+import { regexEmail } from '../../../shared/constants';
 
 const schema = yup
   .object({
@@ -142,12 +141,17 @@ const Login = () => {
                   <p className="form-error">{errors.password?.message}</p>
                 </div>
               </div>
-              <Button label="login" isLoading={isLoading} optionClassName="btn-primary btn-auth" />
+              <Button
+                label="login"
+                optionClassName="btn-primary btn-auth"
+                isLoading={isLoading}
+                isDisabled={Object.keys(errors).length > 0}
+              />
             </fieldset>
           </form>
           <p className="text-center">
-            You"re new to Supremethod?{' '}
-            <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : ''}`}>
+            You're new to Supremethod?{' '}
+            <Link to="/register" className={`register-link ${isLoading && 'disable-link'}`}>
               Register
             </Link>
           </p>

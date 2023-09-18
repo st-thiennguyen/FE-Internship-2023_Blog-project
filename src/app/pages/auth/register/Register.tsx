@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
-import { registerAction } from '../../../redux/action/auth';
+import { registerAction, registerReset } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -62,7 +62,13 @@ const Register = () => {
     setIsShowPassword(!isShowPassword);
   };
 
+  const removeStateRegister = useRef(() => {});
+  removeStateRegister.current = () => {
+    isError && dispatch(registerReset());
+  };
+
   useEffect(() => {
+    removeStateRegister.current();
     if (isSuccess) {
       navigate('/login');
     }
@@ -203,7 +209,12 @@ const Register = () => {
                   {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
               </div>
-              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
+              <Button
+                label="Register"
+                optionClassName="btn btn-primary btn-auth"
+                isLoading={isLoading}
+                isDisabled={Object.keys(errors).length > 0}
+              ></Button>
             </fieldset>
           </form>
           <p className="text-center">
