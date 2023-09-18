@@ -1,12 +1,12 @@
 .auth {
-
   .auth-title {
     &::after {
+      content: "";
+      position: absolute;
       left: 50%;
       bottom: -8px;
-      position: absolute;
       transform: translate(-50%);
-      content: "";
+
       width: 150px;
       border: 1px solid map-get($map: $color, $key: primary);
     }
@@ -17,43 +17,41 @@
   }
 
   .login-external-list {
-    padding: 30px 0;
     width: 30%;
+    padding: 30px 0;
     margin: 0 auto;
   }
 
   .input-password-group {
     .icon-eye {
-      margin: 10px 0 10px -40px;
+      position: absolute;
       width: 20px;
       height: 20px;
-      position: absolute;
+
+      margin: 10px 0 10px -40px;
       cursor: pointer;
     }
   }
 
   .register-link {
-    font-weight: map-get($map: $font-weight, $key: semibold);
     color: map-get($map: $color, $key: primary);
+    font-weight: map-get($map: $font-weight, $key: semibold);
   }
 
   .error-login-fail {
     font-size: map-get($map: $font-size, $key: md);
   }
-
 }
 
 @media only screen and (max-width: map-get($breakpoints , md)) {
   .auth-body {
-    margin: auto 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: auto 0;
   }
 
   .auth-bg {
-    transition: none;
     display: none;
   }
 }
-
