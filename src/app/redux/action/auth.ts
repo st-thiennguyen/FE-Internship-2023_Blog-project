@@ -60,10 +60,9 @@ export const logoutRequest = () => {
   }
 }
 
-export const logoutSuccess = (res: string) => {
+export const logoutSuccess = () => {
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
-    payload: res,
   };
 };
 
@@ -102,8 +101,8 @@ export const loginAction = (email: string, password: string) => async (dispatch:
 export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutRequest());
   try {
-    const response: any = await logout(token);
-    dispatch(logoutSuccess(response.data));
+    const response = await logout(token);
+    dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutFailure(error as string));
   }
