@@ -47,15 +47,16 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const Register = () => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   const isLoading: boolean = useSelector((state: RootState) => state.register.isLoading);
   const isSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.register.isError);
   const message: string = useSelector((state: RootState) => state.register.message);
+  const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
@@ -66,6 +67,12 @@ const Register = () => {
       navigate('/login');
     }
   }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [accessToken, navigate]);
 
   const {
     register,
