@@ -165,12 +165,17 @@ const Login = () => {
         <ToastMessage
           isShow={registerState.isRegisterSuccess}
           isSuccess={registerState.isRegisterSuccess}
-          title={'Success'}
+          title={'Register Successfully'}
           subtitle={registerState.registerMessage}
         />
       )}
       {errorLogin && (
-        <ToastMessage isShow={errorLogin} isSuccess={!errorLogin} title={'Error'} subtitle={message}></ToastMessage>
+        <ToastMessage
+          isShow={errorLogin}
+          isSuccess={!errorLogin}
+          title={'Login failed'}
+          subtitle={message}
+        ></ToastMessage>
       )}
     </div>
   );

@@ -1,13 +1,15 @@
 .toast {
+  visibility: hidden;
   position: fixed;
-  top: calc($header-height + 10px);
-  left: 100%;
-  min-width: 320px;
-  transition: all ease-in 1s;
+  left: 50%;
+  top: calc($header-height + 8px);
+
+  min-width: 360px;
+  margin-left: -180px;
   z-index: 9;
   &-wrapper {
     width: 100%;
-    padding: 15px 20px;
+    padding: 16px 24px;
     border-radius: 12px;
     .toast-icon {
       margin-right: 16px;
@@ -58,6 +60,55 @@
 }
 
 .toast.show {
-  left: unset;
-  right: 20px;
+  visibility: visible;
+  -webkit-animation:
+    fadein 0.5s,
+    fadeout 0.5s 3.6s;
+  animation:
+    fadein 0.5s,
+    fadeout 0.5s 3.6s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: calc($header-height + 8px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: calc($header-height + 8px);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: calc($header-height + 8px);
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: calc($header-height + 8px);
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
