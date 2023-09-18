@@ -10,7 +10,7 @@ const Button = ({ handleClick, isLoading, isDisabled, label, optionClassName }: 
   return (
     <button className={`btn ${optionClassName}`} onClick={handleClick} disabled={isDisabled}>
       {label}
-      <p className={isLoading ? 'btn-loading' : ''}></p>
+      <p className={`${isLoading && `btn-loading`}`}></p>
     </button>
   );
 };
