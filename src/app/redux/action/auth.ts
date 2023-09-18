@@ -1,15 +1,15 @@
 import { Dispatch } from 'react';
 
+import { RootAction, RootThunk } from '../../../stores/store';
 import { RegisterProps } from '../../models/auth';
 import { StorageKey } from '../../shared/constants';
+import ACTIONS_TYPE from '../../shared/constants/type';
 import { fetchAuthLogin, register } from '../../shared/services/index';
 import { setLocalStorage } from '../../shared/utils';
-import { RootAction, RootThunk } from '../store';
-import * as ACTIONS_TYPE from '../type';
 
 export const loginRequest = () => {
   return {
-    type: ACTIONS_TYPE.LOGIN_START,
+    type: ACTIONS_TYPE.LOGIN,
   };
 };
 
@@ -35,7 +35,7 @@ export const registerReset = () => {
 
 export const registerStart = () => {
   return {
-    type: ACTIONS_TYPE.REGISTER_START,
+    type: ACTIONS_TYPE.REGISTER,
   };
 };
 

@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
+import { RootState } from '../../../../stores/store';
 import { registerAction } from '../../../redux/action/auth';
-import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';

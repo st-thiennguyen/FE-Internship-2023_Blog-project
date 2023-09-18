@@ -1,6 +1,6 @@
+import { RootAction } from '../../../stores/store';
 import { PostModel } from '../../models/post';
-import { RootAction } from '../store';
-import * as TYPE from '../type';
+import ACTIONS_TYPE from '../../shared/constants/type';
 
 interface DetailStateProps {
   data: PostModel;
@@ -19,7 +19,7 @@ const initialState: DetailStateProps = {
 
 export const detailReducer = (state = initialState, action: RootAction): DetailStateProps => {
   switch (action.type) {
-    case TYPE.GET_DETAIL_BLOG_START:
+    case ACTIONS_TYPE.GET_DETAIL_BLOG:
       return {
         ...state,
         data: {} as PostModel,
@@ -27,7 +27,7 @@ export const detailReducer = (state = initialState, action: RootAction): DetailS
         isError: false,
         message: '',
       };
-    case TYPE.GET_DETAIL_BLOG_SUCCESS:
+    case ACTIONS_TYPE.GET_DETAIL_BLOG_SUCCESS:
       return {
         ...state,
         data: action.payload,
@@ -36,7 +36,7 @@ export const detailReducer = (state = initialState, action: RootAction): DetailS
         isSuccess: true,
         message: '',
       };
-    case TYPE.GET_DETAIL_BLOG_FAILURE:
+    case ACTIONS_TYPE.GET_DETAIL_BLOG_FAILURE:
       return {
         ...state,
         isLoading: false,

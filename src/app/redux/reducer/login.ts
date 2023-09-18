@@ -1,9 +1,9 @@
 import { Auth } from '../../models/auth';
 import { StorageKey } from '../../shared/constants';
+import ACTIONS_TYPE from '../../shared/constants/type';
 import { getLocalStorage } from '../../shared/utils';
-import * as ACTIONS_TYPE from '../type';
 
-export interface LoginState {
+interface LoginState {
   auth: Auth;
   isLoading: boolean;
   isError: boolean;
@@ -19,7 +19,7 @@ const initState: LoginState = {
 
 export const loginReducer = (state = initState, action: any) => {
   switch (action.type) {
-    case ACTIONS_TYPE.LOGIN_START: {
+    case ACTIONS_TYPE.LOGIN: {
       return {
         ...state,
         isLoading: true,

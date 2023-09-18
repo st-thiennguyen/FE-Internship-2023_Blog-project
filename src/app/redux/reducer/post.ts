@@ -1,6 +1,6 @@
+import { RootAction } from '../../../stores/store';
 import { PostModel } from '../../models/post';
-import { RootAction } from '../store';
-import * as TYPE from '../type';
+import ACTIONS_TYPE from '../../shared/constants/type';
 
 interface PublicPostState {
   data: PostModel[];
@@ -25,7 +25,7 @@ const initialState: PublicPostState = {
 
 export const postReducer = (state = initialState, action: RootAction): PublicPostState => {
   switch (action.type) {
-    case TYPE.GET_ALL_POST_START:
+    case ACTIONS_TYPE.GET_ALL_POST:
       return {
         ...state,
         isLoading: true,
@@ -33,7 +33,7 @@ export const postReducer = (state = initialState, action: RootAction): PublicPos
         isError: false,
         message: '',
       };
-    case TYPE.GET_ALL_POST_SUCCESS:
+    case ACTIONS_TYPE.GET_ALL_POST_SUCCESS:
       return {
         ...state,
         data: [...state.data, ...action.payload.data],
@@ -44,7 +44,7 @@ export const postReducer = (state = initialState, action: RootAction): PublicPos
         isSuccess: true,
         message: '',
       };
-    case TYPE.GET_ALL_POST_FAILURE:
+    case ACTIONS_TYPE.GET_ALL_POST_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -52,12 +52,12 @@ export const postReducer = (state = initialState, action: RootAction): PublicPos
         isSuccess: false,
         message: action.payload,
       };
-    case TYPE.LOAD_MORE_PUBLIC_POST:
+    case ACTIONS_TYPE.LOAD_MORE_PUBLIC_POST:
       return {
         ...state,
         currentPage: state.currentPage + 1,
       };
-    case TYPE.RESET_CURRENT_PAGE:
+    case ACTIONS_TYPE.RESET_CURRENT_PAGE:
       return {
         ...state,
         currentPage: 1,

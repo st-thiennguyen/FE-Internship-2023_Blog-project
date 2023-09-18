@@ -2,11 +2,11 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { RootState } from '../redux/store';
+import { RootState } from '../../stores/store';
 import Footer from '../shared/layout/Footer';
 import Header from '../shared/layout/Header';
 import Aside from '../shared/layout/aside';
-import Detail from './detail/index';
+import Detail from './detail/container/Detail';
 import Home from './home';
 
 const Layout = () => {

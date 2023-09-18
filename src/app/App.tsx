@@ -1,14 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './pages/Layout';
-import Login from './pages/auth/login/Login';
-import Register from './pages/auth/register/Register';
+import Login from './pages/auth/containers/Login';
+import Register from './pages/auth/containers/Register';
 import PageNotFound from './pages/not-found/PageNotFound';
 
 function App() {
   const routes = [
-    { path: '/*', element: <Layout /> },
-
     {
       path: '/login',
       element: <Login />,
@@ -22,6 +20,7 @@ function App() {
       path: '/page-not-found',
       element: <PageNotFound />,
     },
+    { path: '/*', element: <Layout /> },
   ];
 
   return (

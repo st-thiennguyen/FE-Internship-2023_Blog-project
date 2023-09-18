@@ -1,6 +1,6 @@
+import { RootAction } from '../../../stores/store';
 import { UserModel } from '../../models/post';
-import { RootAction } from '../store';
-import * as TYPE from '../type';
+import ACTIONS_TYPE from '../../shared/constants/type';
 
 interface UserState {
   data: UserModel[];
@@ -19,7 +19,7 @@ const initialState: UserState = {
 
 export const userReducer = (state = initialState, action: RootAction): UserState => {
   switch (action.type) {
-    case TYPE.GET_USERS_START:
+    case ACTIONS_TYPE.GET_USERS:
       return {
         ...state,
         isLoading: true,
@@ -27,7 +27,7 @@ export const userReducer = (state = initialState, action: RootAction): UserState
         isError: false,
         message: '',
       };
-    case TYPE.GET_USERS_SUCCESS:
+    case ACTIONS_TYPE.GET_USERS_SUCCESS:
       return {
         ...state,
         data: [...action.payload.users],
@@ -35,7 +35,7 @@ export const userReducer = (state = initialState, action: RootAction): UserState
         isSuccess: true,
         message: '',
       };
-    case TYPE.GET_USERS_FAILURE:
+    case ACTIONS_TYPE.GET_USERS_FAILURE:
       return {
         ...state,
         isLoading: false,

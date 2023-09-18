@@ -1,26 +1,26 @@
 import { Dispatch } from 'react';
 
+import { RootAction } from '../../../stores/store';
 import { UserModel } from '../../models/post';
+import ACTIONS_TYPE from '../../shared/constants/type';
 import { getUsers } from '../../shared/services/user';
-import { RootAction } from '../store';
-import * as TYPE from '../type';
 
 export const getUsersStart = () => {
   return {
-    type: TYPE.GET_USERS_START,
+    type: ACTIONS_TYPE.GET_USERS,
   };
 };
 
 export const getUsersSuccess = (data: UserModel[]) => {
   return {
-    type: TYPE.GET_USERS_SUCCESS,
+    type: ACTIONS_TYPE.GET_USERS_SUCCESS,
     payload: data,
   };
 };
 
 export const getUsersFailure = (message: string) => {
   return {
-    type: TYPE.GET_USERS_FAILURE,
+    type: ACTIONS_TYPE.GET_USERS_FAILURE,
     payload: message,
   };
 };

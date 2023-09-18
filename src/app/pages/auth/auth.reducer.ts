@@ -1,21 +1,26 @@
 import { RootAction } from '../../../stores/store';
+import { Auth } from '../../models/auth';
+import { StorageKey } from '../../shared/constants';
 import ACTIONS_TYPE from '../../shared/constants/type';
+import { getLocalStorage } from '../../shared/utils';
 
-export interface RegisterState {
+export interface AuthStateProps {
+  auth: Auth;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
   message: string;
 }
 
-const initState: RegisterState = {
+const initState: AuthStateProps = {
+  auth: getLocalStorage(StorageKey.AUTH) || null,
   isLoading: false,
   isError: false,
   isSuccess: false,
   message: '',
 };
 
-export const registerReducer = (state = initState, action: RootAction): RegisterState => {
+export const authReducer = (state = initState, action: RootAction): AuthStateProps => {
   switch (action.type) {
     case ACTIONS_TYPE.REGISTER_RESET_STATE: {
       return {
@@ -53,9 +58,39 @@ export const registerReducer = (state = initState, action: RootAction): Register
         message: action.payload,
       };
     }
+
+    case ACTIONS_TYPE.LOGIN: {
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    }
+    case ACTIONS_TYPE.LOGIN_SUCCESS: {
+      return {
+        ...state,
+        auth: action.payload,
+        isLoading: false,
+        isSuccess: true,
+        isError: false,
+        message: '',
+      };
+    }
+
+    case ACTIONS_TYPE.LOGIN_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+        isError: true,
+        message: action.payload,
+      };
+    }
     default:
       return state;
   }
 };
 
-export default registerReducer;
+export default authReducer;
