@@ -59,6 +59,13 @@ export const loginReducer = (state = initState, action: any) => {
       };
     }
 
+    case ACTIONS_TYPE.LOGOUT_FAILURE: {
+      return {
+        ...state,
+        message: action.payload
+      };
+    }
+
 
     default:
       return state;

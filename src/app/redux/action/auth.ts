@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { RegisterProps } from '../../models/auth';
 import { ENDPOINT, StorageKey } from '../../shared/constants';
-import { login, register } from '../../shared/services/index';
+import { login, logout, register } from '../../shared/services/index';
 import { setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
@@ -102,14 +102,9 @@ export const loginAction = (email: string, password: string) => async (dispatch:
 export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutRequest());
   try {
-    const response = await axios.post(ENDPOINT.auth.logout, null, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
+    const response: any = await logout(token);
     dispatch(logoutSuccess(response.data));
   } catch (error) {
-    console.error('Failed to logout:', error);
+    dispatch(logoutFailure(error as string))
   }
 } 
