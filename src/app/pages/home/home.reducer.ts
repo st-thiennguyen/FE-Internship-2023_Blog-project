@@ -1,6 +1,6 @@
-import { RootAction } from '../../../stores/store';
-import { PostModel } from '../../models/post';
+import { PostModel, UserModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
+import { RootAction } from '../../stores/store';
 
 interface PublicPostState {
   data: PostModel[];
@@ -12,7 +12,7 @@ interface PublicPostState {
   totalPage: number;
   totalItems: number;
 }
-const initialState: PublicPostState = {
+const initialLastesPostState: PublicPostState = {
   data: [] as PostModel[],
   isLoading: false,
   isError: false,
@@ -23,7 +23,7 @@ const initialState: PublicPostState = {
   totalItems: 0,
 };
 
-export const postReducer = (state = initialState, action: RootAction): PublicPostState => {
+export const lastesPostReducer = (state = initialLastesPostState, action: RootAction): PublicPostState => {
   switch (action.type) {
     case ACTIONS_TYPE.GET_ALL_POST:
       return {
@@ -61,6 +61,51 @@ export const postReducer = (state = initialState, action: RootAction): PublicPos
       return {
         ...state,
         currentPage: 1,
+      };
+    default:
+      return state;
+  }
+};
+
+interface UserState {
+  data: UserModel[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  message: string;
+}
+const initialState: UserState = {
+  data: [] as UserModel[],
+  isLoading: false,
+  isError: false,
+  isSuccess: false,
+  message: '',
+};
+
+export const userReducer = (state = initialState, action: RootAction): UserState => {
+  switch (action.type) {
+    case ACTIONS_TYPE.GET_USERS:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_USERS_SUCCESS:
+      return {
+        ...state,
+        data: [...action.payload.users],
+        isLoading: false,
+        isSuccess: true,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_USERS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
       };
     default:
       return state;

@@ -2,10 +2,9 @@ import { AnyAction, applyMiddleware, combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkAction } from 'redux-thunk';
 
-import authReducer from '../app/pages/auth/auth.reducer';
-import { detailReducer } from '../app/pages/detail/detail.reducer';
-import { postReducer } from '../app/redux/reducer/post';
-import { userReducer } from '../app/redux/reducer/user';
+import authReducer from '../pages/auth/auth.reducer';
+import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
+import { lastesPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -16,8 +15,8 @@ export type RootThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, un
 
 export const rootReducer = combineReducers({
   auth: authReducer,
-  detail: detailReducer,
-  post: postReducer,
+  detail: detailPostReducer,
+  post: lastesPostReducer,
   user: userReducer,
 });
 

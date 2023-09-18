@@ -2,15 +2,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { RootState } from '../../../../stores/store';
 import { PostModel } from '../../../models/post';
-import { fetchDetailBlog } from '../../../redux/action/post';
 import ToastMessage from '../../../shared/components/ToastMessage';
-import DetailBlog from '../components/DetailBlog';
-import DetailCover from '../components/DetailCover';
-import DetailLoading from '../components/DetailLoading';
+import { RootState } from '../../../stores/store';
+import DetailPostContent from '../components/DetailPostContent';
+import DetailPostCover from '../components/DetailPostCover';
+import DetailPostLoading from '../components/DetailPostLoading';
+import { fetchDetailBlog } from '../detail-post.actions';
 
-const Detail = () => {
+const DetailPost = () => {
   const dispatch = useDispatch();
 
   const post: PostModel = useSelector((state: RootState) => state.detail.data);
@@ -26,10 +26,10 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(fetchDetailBlog(Number(postId)) as any);
-  }, [dispatch, postId]);
+  }, [postId]);
 
   if (isLoading) {
-    return <DetailLoading />;
+    return <DetailPostLoading />;
   }
 
   if (isError && !post.id) {
@@ -40,7 +40,7 @@ const Detail = () => {
     <>
       <div className="detail-page">
         <article>
-          <DetailCover
+          <DetailPostCover
             cover={post.cover}
             title={post.title}
             authorName={post.user?.firstName + ' ' + post.user?.lastName}
@@ -49,7 +49,7 @@ const Detail = () => {
           />
           <section className="section section-detail-content">
             <div className="detail-content d-flex">
-              <DetailBlog post={post} />
+              <DetailPostContent post={post} />
             </div>
           </section>
         </article>
@@ -59,4 +59,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default DetailPost;

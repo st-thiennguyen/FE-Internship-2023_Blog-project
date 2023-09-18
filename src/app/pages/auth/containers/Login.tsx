@@ -12,10 +12,10 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
-import { RootState } from '../../../../stores/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { regexEmail } from '../../../shared/constants';
+import { RootState } from '../../../stores/store';
 import { loginAction, registerReset } from '../auth.actions';
 
 const schema = yup

@@ -6,11 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
-import { RootState } from '../../../../stores/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 import { convertDateFormat } from '../../../shared/utils/date';
+import { RootState } from '../../../stores/store';
 import { registerAction } from '../auth.actions';
 
 const schema = yup

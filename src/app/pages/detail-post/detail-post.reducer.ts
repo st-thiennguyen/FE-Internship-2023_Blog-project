@@ -1,6 +1,6 @@
-import { RootAction } from '../../../stores/store';
 import { PostModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
+import { RootAction } from '../../stores/store';
 
 interface DetailStateProps {
   data: PostModel;
@@ -17,7 +17,7 @@ const initialState: DetailStateProps = {
   message: '',
 };
 
-export const detailReducer = (state = initialState, action: RootAction): DetailStateProps => {
+export const detailPostReducer = (state = initialState, action: RootAction): DetailStateProps => {
   switch (action.type) {
     case ACTIONS_TYPE.GET_DETAIL_BLOG:
       return {

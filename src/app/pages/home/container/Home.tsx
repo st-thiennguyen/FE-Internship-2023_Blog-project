@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { RootState } from '../../../../stores/store';
+import { RootState } from '../../../stores/store';
 import LatestPost from '../components/LatestPost';
 import Recommend from '../components/recommend';
 

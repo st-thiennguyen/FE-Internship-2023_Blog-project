@@ -1,9 +1,9 @@
 import { Dispatch } from 'react';
 
-import { RootAction } from '../../../stores/store';
 import { PostModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { getDetailPost } from '../../shared/services/index';
+import { RootAction } from '../../stores/store';
 
 const getDetailBlogStart = () => {
   return {

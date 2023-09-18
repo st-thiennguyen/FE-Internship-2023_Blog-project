@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../../../../stores/store';
 import { UserModel } from '../../../models/post';
-import { fetchUsers } from '../../../redux/action/user';
+import { fetchUsers } from '../../../pages/home/home.actions';
+import { RootState } from '../../../stores/store';
 import TopFollower from './components/TopFollower';
 import TopPost from './components/TopPost';
 
