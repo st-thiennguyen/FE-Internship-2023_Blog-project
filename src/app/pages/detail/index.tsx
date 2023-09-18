@@ -2,13 +2,14 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
+import { RootState } from '../../redux/store';
 import { PostModel } from '../../models/post';
 import { fetchDetailBlog } from '../../redux/action/post';
-import { RootState } from '../../redux/store';
-import ToastMessage from '../../shared/components/ToastMessage';
+
 import DetailLoading from './DetailLoading';
 import DetailBlog from './components/DetailBlog';
 import DetailCover from './components/DetailCover';
+import ToastMessage from '../../shared/components/ToastMessage';
 
 const Detail = () => {
   const dispatch = useDispatch();

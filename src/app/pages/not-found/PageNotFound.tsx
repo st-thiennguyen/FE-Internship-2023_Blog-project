@@ -1,8 +1,7 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import banner from '../../../assets/images/banner-404.svg';
 import Button from '../../shared/components/Button';
+import banner from '../../../assets/images/banner-404.svg';
 
 const PageNotFound = () => {
   const navigate = useNavigate();

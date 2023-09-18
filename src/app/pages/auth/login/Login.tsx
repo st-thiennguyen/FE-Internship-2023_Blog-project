@@ -1,22 +1,25 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import * as yup from 'yup';
 
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { RootState } from '../../../redux/store';
+import { loginAction, registerReset } from '../../../redux/action/auth';
+
+import ToastMessage from '../../../shared/components/ToastMessage';
+import Button from '../../../shared/components/Button';
+import { regexEmail } from '../../../shared/constants';
+
+import loginImg from '../../../../assets/images/bg-auth.png';
+import logoImg from '../../../../assets/images/logo.png';
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
 import icFacebook from '../../../../assets/icons/ic-facebook-30.svg';
 import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
-import loginImg from '../../../../assets/images/bg-auth.png';
-import logoImg from '../../../../assets/images/logo.png';
-import { loginAction, registerReset } from '../../../redux/action/auth';
-import { RootState } from '../../../redux/store';
-import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
-import { regexEmail } from '../../../shared/constants';
 
 const schema = yup
   .object({
