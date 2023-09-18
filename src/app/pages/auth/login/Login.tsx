@@ -16,8 +16,7 @@ import { loginAction, registerReset } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
-import { StorageKey, regexEmail } from '../../../shared/constants';
-import { getLocalStorage } from '../../../shared/utils';
+import { regexEmail } from '../../../shared/constants';
 
 const schema = yup
   .object({
@@ -165,17 +164,12 @@ const Login = () => {
         <ToastMessage
           isShow={registerState.isRegisterSuccess}
           isSuccess={registerState.isRegisterSuccess}
-          title={'Register Successfully'}
+          title={'Success'}
           subtitle={registerState.registerMessage}
         />
       )}
       {errorLogin && (
-        <ToastMessage
-          isShow={errorLogin}
-          isSuccess={!errorLogin}
-          title={'Login failed'}
-          subtitle={message}
-        ></ToastMessage>
+        <ToastMessage isShow={errorLogin} isSuccess={!errorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>
   );
