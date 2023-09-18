@@ -42,7 +42,6 @@ export const fetchPublicPosts = (page: number, size: number) => async (dispatch:
   dispatch(getPublicPostStart());
   try {
     const response = await getPublicPosts(page, size);
-
     dispatch(getPublicPostSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPublicPostFailure(`${err}`));
@@ -74,7 +73,6 @@ export const fetchUsers = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getUsersStart());
   try {
     const response = await getUsers();
-
     dispatch(getUsersSuccess(response as UserModel[]));
   } catch (err) {
     dispatch(getUsersFailure(`${err}`));

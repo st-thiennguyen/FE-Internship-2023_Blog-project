@@ -23,6 +23,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
       return {
         ...state,
         data: {} as PostModel,
+        isSuccess: false,
         isLoading: true,
         isError: false,
         message: '',
@@ -32,7 +33,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         ...state,
         data: action.payload,
         isLoading: false,
-        isError: false,
         isSuccess: true,
         message: '',
       };
@@ -41,7 +41,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         ...state,
         isLoading: false,
         isError: true,
-        isSuccess: false,
         message: action.payload,
       };
     default:

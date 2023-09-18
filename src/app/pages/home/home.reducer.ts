@@ -40,7 +40,6 @@ export const lastesPostReducer = (state = initialLastesPostState, action: RootAc
         totalPage: action.payload.totalPage,
         totalItems: action.payload.totalItems,
         isLoading: false,
-        isError: false,
         isSuccess: true,
         message: '',
       };
@@ -49,7 +48,6 @@ export const lastesPostReducer = (state = initialLastesPostState, action: RootAc
         ...state,
         isLoading: false,
         isError: true,
-        isSuccess: false,
         message: action.payload,
       };
     case ACTIONS_TYPE.LOAD_MORE_PUBLIC_POST:
