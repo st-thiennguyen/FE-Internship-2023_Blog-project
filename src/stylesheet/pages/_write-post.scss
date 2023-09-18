@@ -1,0 +1,57 @@
+.ql-container {
+  font-size: 28px;
+}
+
+.write-post {
+  background-color: #fff;
+  &-wrapper {
+    padding: 40px 0;
+  }
+  &-editor {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 700px;
+  }
+  &-path-cover {
+    position: absolute;
+    left: 50px;
+    width: 100%;
+    gap: 16px;
+  }
+
+  &-input {
+    padding: 50px 0;
+    width: 100%;
+    border: 0;
+    outline: none;
+    background-color: transparent;
+    font-size: 64px;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .ql-editor p {
+    font-family: "Times New Roman", Times, serif;
+  }
+  &-input::placeholder,
+  .ql-editor.ql-blank::before {
+    color: #b3b3b1;
+  }
+
+  &-area {
+    width: 100%;
+  }
+  .btn-add-cover,
+  .btn-pick-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid map-get($color, borderColor);
+    border-radius: 100%;
+    background-color: transparent;
+  }
+  .btn-pick-cover {
+    border: 1px solid map-get($color, primary);
+  }
+}

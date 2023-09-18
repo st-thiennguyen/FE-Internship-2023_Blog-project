@@ -8,6 +8,7 @@ import Aside from '../shared/layout/aside/container/Aside';
 import { RootState } from '../stores/store';
 import DetailPost from './detail-post/container/DetailPost';
 import Home from './home/container/Home';
+import WritePost from './write-post/containers/WritePost';
 
 const Layout = () => {
   const authCheck = useSelector((state: RootState) => state.auth?.auth);
@@ -27,7 +28,6 @@ const Layout = () => {
   return (
     <>
       <Header isLogin={isLogin} auth={authCheck} />
-
       <main className="main">
         <div className="container">
           <div className=" main-body">

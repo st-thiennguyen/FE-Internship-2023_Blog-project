@@ -4,6 +4,7 @@ import Layout from './pages/Layout';
 import Login from './pages/auth/containers/Login';
 import Register from './pages/auth/containers/Register';
 import PageNotFound from './pages/not-found/PageNotFound';
+import WritePost from './pages/write-post/containers/WritePost';
 
 function App() {
   const routes = [
@@ -14,6 +15,10 @@ function App() {
     {
       path: '/register',
       element: <Register />,
+    },
+    {
+      path: '/write',
+      element: <WritePost />,
     },
 
     {

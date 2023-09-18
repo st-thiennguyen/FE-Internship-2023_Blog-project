@@ -7,7 +7,7 @@ import { login, logout, register } from '../../shared/services/index';
 import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../../stores/store';
 
-export const loginRequest = () => {
+export const loginStart = () => {
   return {
     type: ACTIONS_TYPE.LOGIN,
   };
@@ -53,7 +53,7 @@ export const registerFailure = (error: string) => {
   };
 };
 
-export const logoutRequest = () => {
+export const logoutStart = () => {
   return {
     type: ACTIONS_TYPE.LOGOUT,
   };
@@ -85,22 +85,23 @@ export const registerAction =
   };
 
 export const loginAction = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(loginRequest());
+  dispatch(loginStart());
   try {
     const data: any = await login(email, password);
     dispatch(loginSuccess(data));
     setLocalStorage(StorageKey.AUTH, data);
-  } catch (error: any) {
-    dispatch(loginFailure(error));
+  } catch (error) {
+    dispatch(loginFailure(`${error}`));
   }
 };
 
-export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(logoutRequest());
+export const logoutAction = (token: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(logoutStart());
   try {
-    await logout(token).then(() => removeLocalStorage(StorageKey.AUTH));
+    await logout(token);
+    removeLocalStorage(StorageKey.AUTH);
     dispatch(logoutSuccess());
   } catch (error) {
-    dispatch(logoutFailure(error as string));
+    dispatch(logoutFailure(`${error}`));
   }
 };
