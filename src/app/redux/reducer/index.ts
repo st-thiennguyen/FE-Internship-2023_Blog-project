@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { detailReducer } from './detail.reducer';
+import { detailReducer } from './detail';
 import loginReducer from './login';
 import { postReducer } from './post';
 import registerReducer from './register';

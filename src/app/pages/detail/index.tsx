@@ -21,6 +21,10 @@ const Detail = () => {
   const { postId } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchDetailBlog(Number(postId)) as any);
   }, [dispatch, postId]);
 

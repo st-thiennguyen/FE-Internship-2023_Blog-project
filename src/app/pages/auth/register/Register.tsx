@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import logo from '../../../../assets/images/logo.svg';
-import { registerAction } from '../../../redux/action/auth';
+import { registerAction, registerReset } from '../../../redux/action/auth';
 import { RootState } from '../../../redux/store';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -47,25 +47,38 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const Register = () => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   const isLoading: boolean = useSelector((state: RootState) => state.register.isLoading);
   const isSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.register.isError);
   const message: string = useSelector((state: RootState) => state.register.message);
+  const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
   };
 
+  const removeStateRegister = useRef(() => {});
+  removeStateRegister.current = () => {
+    isError && dispatch(registerReset());
+  };
+
   useEffect(() => {
+    removeStateRegister.current();
     if (isSuccess) {
       navigate('/login');
     }
   }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [accessToken, navigate]);
 
   const {
     register,
@@ -196,7 +209,12 @@ const Register = () => {
                   {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
               </div>
-              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
+              <Button
+                label="Register"
+                optionClassName="btn btn-primary btn-auth"
+                isLoading={isLoading}
+                isDisabled={Object.keys(errors).length > 0}
+              ></Button>
             </fieldset>
           </form>
           <p className="text-center">
