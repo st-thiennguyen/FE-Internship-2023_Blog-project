@@ -4,6 +4,7 @@ import { PostModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
 import { RootState } from '../../../stores/store';
 import PostItemLoading from './PostItemLoading';
+import { Link } from 'react-router-dom';
 
 interface PostListProps {
   posts: PostModel[];
@@ -22,7 +23,9 @@ const PostList = ({ posts }: PostListProps) => {
         : posts.map((post, index) => {
             return (
               <li className="post-item col col-6 col-md-12" key={index}>
-                <PostItem post={post} />
+                <Link className="post-link" to={`detail/${post.id}`}>
+                  <PostItem post={post} />
+                </Link>
               </li>
             );
           })}
