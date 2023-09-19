@@ -16,12 +16,13 @@
       margin-top: -24px;
       &::after {
         content: "";
-        width: 250px;
         position: absolute;
+        width: 250px;
         bottom: -8px;
         left: 50%;
-        transform: translate(-50%);
+
         border: 1px solid map-get($map: $color, $key: primary);
+        transform: translate(-50%);
       }
     }
 
@@ -33,10 +34,10 @@
       position: relative;
 
       .icon-password {
-        margin: 10px 0 10px -40px;
         position: absolute;
         width: 20px;
         height: 20px;
+        margin: 10px 0 10px -40px;
 
         text-align: center;
         cursor: pointer;

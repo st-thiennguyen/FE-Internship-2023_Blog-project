@@ -1,37 +1,41 @@
+import { createContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
+import { appRoutes } from './app.routes';
 import Layout from './pages/Layout';
-import Login from './pages/auth/containers/Login';
-import Register from './pages/auth/containers/Register';
+import authRoutes from './pages/auth/auth.routes';
+import { RootState } from './stores/store';
 import PageNotFound from './pages/not-found/PageNotFound';
 
+interface RouteItem {
+  name: string;
+  path: string;
+  component: () => JSX.Element;
+  children?: RouteItem[];
+}
+
+export const AuthContext = createContext<any>(undefined);
+
 function App() {
-  const routes = [
-    {
-      path: '/login',
-      element: <Login />,
-    },
-    {
-      path: '/register',
-      element: <Register />,
-    },
-
-    {
-      path: '/page-not-found',
-      element: <PageNotFound />,
-    },
-    { path: '/*', element: <Layout /> },
-  ];
-
+  const auth = useSelector((state: RootState) => state.auth.auth);
   return (
-    <>
+    <AuthContext.Provider value={auth}>
       <Routes>
-        {routes.length > 0 &&
-          routes.map((route) => {
-            return <Route path={route.path} element={route.element} key={route.path} />;
-          })}
+        {authRoutes.map((val) => (
+          <Route key={val.name} path={val.path} element={<val.component />} />
+        ))}
+        <Route path="/" element={<Layout />}>
+          {appRoutes.map((val: RouteItem) => (
+            <Route key={val.name} path={val.path} element={<val.component />}>
+              {val.children &&
+                val.children.map((item) => <Route key={item.name} path={item.path} element={<item.component />} />)}
+            </Route>
+          ))}
+        </Route>
+        <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
-    </>
+    </AuthContext.Provider>
   );
 }
 
