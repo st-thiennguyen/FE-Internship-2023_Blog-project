@@ -1,4 +1,7 @@
+import { blob } from 'node:stream/consumers';
+import { StorageKey } from '../constants';
 import { ENDPOINT } from '../constants/endpoint';
+import { getLocalStorage } from '../utils';
 import { ApiService } from './index';
 
 export const getDetailPost = (id: number) => {
@@ -13,3 +16,4 @@ export const getPublicPosts = (page: number, size: number) => {
     size,
   });
 };
+

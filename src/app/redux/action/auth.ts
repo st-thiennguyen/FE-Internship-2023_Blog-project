@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 import { RegisterProps } from '../../models/auth';
 import { StorageKey } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
-import { setLocalStorage } from '../../shared/utils';
+import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../store';
 import * as ACTIONS_TYPE from '../type';
 
@@ -100,9 +100,10 @@ export const loginAction = (email: string, password: string) => async (dispatch:
 export const logoutAction = (token: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutRequest());
   try {
-    await logout(token);
+    await logout();
+    removeLocalStorage(StorageKey.AUTH);
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutFailure(error as string));
   }
-} 
+}
