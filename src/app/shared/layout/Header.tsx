@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../App';
-import { logoutAction } from '../../redux/action/auth';
 import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
+import { logoutAction } from '../../pages/auth/auth.actions';
 
 const Header = () => {
 
@@ -19,7 +19,7 @@ const Header = () => {
     e.preventDefault();
     dispatch(logoutAction(isLogin) as any);
     setIsShowToastMessage(true);
-  }
+  };
 
   return (
     <header className="header">

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchPublicPosts, loadMore, resetCurrentPage } from '../../../redux/action/post';
-import { RootState } from '../../../redux/store';
 import { pageSize } from '../../../shared/constants/post';
+import { RootState } from '../../../stores/store';
+import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
 

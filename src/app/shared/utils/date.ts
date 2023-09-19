@@ -1,11 +1,7 @@
-export const convertDateFormat = (date: Date) => {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${day}/${month}/${year}`;
-};
-
-export const convertDateToString = (date: any) => {
+export const convertDateToString = (date: any, separator: string) => {
   const newDate = new Date(date);
-  return newDate.getDate() + '-' + newDate.getMonth() + '-' + newDate.getFullYear();
+  const year = newDate.getFullYear();
+  const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = newDate.getDate().toString().padStart(2, '0');
+  return `${day}${separator}${month}${separator}${year}`;
 };

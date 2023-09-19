@@ -1,10 +1,10 @@
 .aside {
   .top-follower,
   .top-post {
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
     padding: 15px;
+    margin-bottom: 30px;
     border-radius: 10px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
     background-color: #fff;
   }
   .user-list,
@@ -30,8 +30,8 @@
   .user-avatar {
     width: 35px;
     height: 35px;
-    border-radius: 50%;
     margin-right: 12px;
+    border-radius: 50%;
   }
   .user-name {
     font-size: map-get($font-size, sm);
@@ -48,8 +48,8 @@
     }
     &-author {
       display: inline-block;
-      font-size: map-get($font-size, sm);
       margin-bottom: 6px;
+      font-size: map-get($font-size, sm);
     }
     &-title {
       line-height: 1.2;

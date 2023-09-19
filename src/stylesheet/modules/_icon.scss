@@ -2,6 +2,7 @@
   display: inline-block;
   background-repeat: no-repeat;
   background-position: center;
+
   &-small {
     width: $icon-size-sm;
     height: $icon-size-sm;
@@ -11,6 +12,7 @@
     width: 25px;
     height: 25px;
   }
+
   &-user-20 {
     background-image: url("../../assets/icons/ic-user-20.svg");
   }
@@ -46,6 +48,7 @@
     background: url("../../assets/icons/ic-eye_slash-10.svg");
     background-size: cover;
   }
+
   &-like {
     background: url("../../assets/icons/ic-like.svg") top center / cover no-repeat;
   }

@@ -5,8 +5,8 @@
 }
 
 a {
-  text-decoration: none;
   color: map-get($color, text);
+  text-decoration: none;
 }
 
 img {

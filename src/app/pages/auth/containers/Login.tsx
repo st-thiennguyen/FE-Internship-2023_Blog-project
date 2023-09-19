@@ -1,16 +1,9 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
-import { loginAction, registerReset } from '../../../redux/action/auth';
-import { RootState } from '../../../redux/store';
-import { regexEmail } from '../../../shared/constants';
-import { AuthContext } from '../../../App';
-import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
@@ -19,6 +12,11 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
+import Button from '../../../shared/components/Button';
+import ToastMessage from '../../../shared/components/ToastMessage';
+import { regexEmail } from '../../../shared/constants';
+import { RootState } from '../../../stores/store';
+import { loginAction, registerReset } from '../auth.actions';
 
 const schema = yup
   .object({
@@ -38,20 +36,16 @@ type FormData = {
 };
 
 const Login = () => {
-
-  const authContext = useContext(AuthContext);
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
+  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const errorLogin: any = useSelector((state: RootState) => state.auth.message);
 
-  const isLogin = authContext?.accessToken;
-  const [isShowPassword, setIsShowPassword] = useState(false);
-
-  const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
-  const message: string = useSelector((state: RootState) => state.login.message);
-  const isErrorLogin: any = useSelector((state: RootState) => state.login.isError);
-
-  const isRegisterSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
-  const registerMessage: string = useSelector((state: RootState) => state.register.message);
+  const isRegisterSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
+  const registerMessage: string = useSelector((state: RootState) => state.auth.message);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -79,10 +73,10 @@ const Login = () => {
 
   useEffect(() => {
     removeStateRegister.current();
-    if (isLogin) {
+    if (accessToken) {
       navigate('/');
     }
-  }, [isLogin]);
+  }, [accessToken, navigate]);
 
   return (
     <div className="auth">
@@ -147,17 +141,12 @@ const Login = () => {
                   <p className="form-error">{errors.password?.message}</p>
                 </div>
               </div>
-              <Button
-                label="login"
-                optionClassName="btn-primary btn-auth"
-                isLoading={isLoading}
-                isDisabled={Object.keys(errors).length > 0}
-              />
+              <Button label="login" isLoading={isLoading} optionClassName="btn-primary btn-auth" />
             </fieldset>
           </form>
           <p className="text-center">
-            You're new to Supremethod?{' '}
-            <Link to="/register" className={`register-link ${isLoading && 'disable-link'}`}>
+            You"re new to Supremethod?{' '}
+            <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : ''}`}>
               Register
             </Link>
           </p>
@@ -174,8 +163,8 @@ const Login = () => {
           subtitle={registerState.registerMessage}
         />
       )}
-      {isErrorLogin && (
-        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
+      {isError && (
+        <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={errorLogin}></ToastMessage>
       )}
     </div>
   );
