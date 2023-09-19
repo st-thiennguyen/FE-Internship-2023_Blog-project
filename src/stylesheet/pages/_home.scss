@@ -81,6 +81,9 @@
         color: map-get($color, subtext);
       }
     }
+    .post-action-list {
+      display: none;
+    }
   }
   .btn-backtotop {
     position: fixed;
