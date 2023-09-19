@@ -23,9 +23,7 @@ const PostList = ({ posts }: PostListProps) => {
         : posts.map((post, index) => {
             return (
               <li className="post-item col col-6 col-md-12" key={index}>
-                <Link className="post-link" to={`detail/${post.id}`}>
-                  <PostItem post={post} />
-                </Link>
+                <PostItem post={post} />
               </li>
             );
           })}
