@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DetailReaction = () => {
+const DetailPostReaction = () => {
   return (
     <div className="detail-action">
       <ul className="action-list">
@@ -26,4 +26,4 @@ const DetailReaction = () => {
   );
 };
 
-export default DetailReaction;
+export default DetailPostReaction;

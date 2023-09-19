@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Auth } from '../../models/auth';
-import { logoutAction } from '../../redux/action/auth';
-import { getLocalStorage } from '../utils';
-import { StorageKey } from '../constants';
-
-import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
+import { Auth } from '../../models/auth';
+import { logoutAction } from '../../pages/auth/auth.actions';
+import ToastMessage from '../components/ToastMessage';
+import { StorageKey } from '../constants';
+import { getLocalStorage } from '../utils';
 
 interface HeaderProps {
   isLogin: Boolean;

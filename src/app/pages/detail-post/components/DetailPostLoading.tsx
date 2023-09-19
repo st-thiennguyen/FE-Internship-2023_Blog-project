@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const DetailLoading = () => {
+const DetailPostLoading = () => {
   return (
     <div className="detail-page">
       <section className="section section-detail-cover">
@@ -34,4 +34,4 @@ const DetailLoading = () => {
   );
 };
 
-export default DetailLoading;
+export default DetailPostLoading;

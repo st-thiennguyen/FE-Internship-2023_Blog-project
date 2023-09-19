@@ -1,19 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-
-import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
-import { RootState } from '../../../redux/store';
-import { registerAction, registerReset } from '../../../redux/action/auth';
-import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
-import { convertDateToString } from '../../../shared/utils';
-
+import logo from '../../../../assets/images/logo.svg';
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
-import logo from '../../../../assets/images/logo.svg';
+import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
+import { convertDateToString } from '../../../shared/utils/date';
+import { RootState } from '../../../stores/store';
+import { registerAction } from '../auth.actions';
 
 const schema = yup
   .object({
@@ -51,11 +49,11 @@ type FormData = yup.InferType<typeof schema>;
 const Register = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const isLoading: boolean = useSelector((state: RootState) => state.register.isLoading);
-  const isSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
-  const isError: boolean = useSelector((state: RootState) => state.register.isError);
-  const message: string = useSelector((state: RootState) => state.register.message);
-  const accessToken: string = useSelector((state: RootState) => state.login.auth?.accessToken);
+  const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
+  const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
+  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
+  const message: string = useSelector((state: RootState) => state.auth.message);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,23 +62,17 @@ const Register = () => {
     setIsShowPassword(!isShowPassword);
   };
 
-  const removeStateRegister = useRef(() => {});
-  removeStateRegister.current = () => {
-    isError && dispatch(registerReset());
-  };
-
   useEffect(() => {
-    removeStateRegister.current();
     if (isSuccess) {
       navigate('/login');
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess]);
 
   useEffect(() => {
     if (accessToken) {
       navigate('/');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken]);
 
   const {
     register,
@@ -211,12 +203,7 @@ const Register = () => {
                   {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
               </div>
-              <Button
-                label="Register"
-                optionClassName="btn btn-primary btn-auth"
-                isLoading={isLoading}
-                isDisabled={Object.keys(errors).length > 0}
-              ></Button>
+              <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
             </fieldset>
           </form>
           <p className="text-center">
