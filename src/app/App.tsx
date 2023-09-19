@@ -1,37 +1,31 @@
 import { Route, Routes } from 'react-router-dom';
 
+import { appRoutes } from './app.routes';
 import Layout from './pages/Layout';
-import Login from './pages/auth/containers/Login';
-import Register from './pages/auth/containers/Register';
-import PageNotFound from './pages/not-found/PageNotFound';
+import authRoutes from './pages/auth/auth.routes';
+
+interface RouteItem {
+  name: string;
+  path: string;
+  component: () => JSX.Element;
+  children?: RouteItem[];
+}
 
 function App() {
-  const routes = [
-    {
-      path: '/login',
-      element: <Login />,
-    },
-    {
-      path: '/register',
-      element: <Register />,
-    },
-
-    {
-      path: '/page-not-found',
-      element: <PageNotFound />,
-    },
-    { path: '/*', element: <Layout /> },
-  ];
-
   return (
-    <>
-      <Routes>
-        {routes.length > 0 &&
-          routes.map((route) => {
-            return <Route path={route.path} element={route.element} key={route.path} />;
-          })}
-      </Routes>
-    </>
+    <Routes>
+      {authRoutes.map((val) => (
+        <Route key={val.name} path={val.path} element={<val.component />} />
+      ))}
+      <Route path="/" element={<Layout />}>
+        {appRoutes.map((val: RouteItem) => (
+          <Route key={val.name} path={val.path} element={<val.component />}>
+            {val.children &&
+              val.children.map((item) => <Route key={item.name} path={item.path} element={<item.component />} />)}
+          </Route>
+        ))}
+      </Route>
+    </Routes>
   );
 }
 
