@@ -9,17 +9,6 @@ import DetailPost from './detail-post/container/DetailPost';
 import Home from './home/container/Home';
 
 const Layout = () => {
-  const routes = [
-    { path: '/', element: <Home /> },
-    {
-      path: '/detail/:postId',
-      element: <DetailPost />,
-    },
-    {
-      path: '*',
-      element: <Navigate to="/page-not-found" />,
-    },
-  ];
   return (
     <>
       <Header />
