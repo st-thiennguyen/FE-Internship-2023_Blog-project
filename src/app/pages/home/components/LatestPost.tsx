@@ -1,32 +1,25 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { PostModel } from '../../../models/post';
 import { pageSize } from '../../../shared/constants/post';
-import { getPublicPosts } from '../../../shared/services';
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
 import EmptyPost from './recommend/EmptyPost';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../stores/store';
+import { fetchPublicPosts } from '../home.actions';
+
+const threshold = 400;
 
 const LatestPost = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [posts, setPosts] = useState<PostModel[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(0);
-
-  const getData = async () => {
-    setIsLoading(true);
-    const response: any = await getPublicPosts(currentPage, pageSize);
-    setTotalPage(response.totalPage);
-    setCurrentPage(currentPage + 1);
-    setPosts([...posts, ...response.data] || []);
-    setIsLoading(false);
-  };
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
+  const totalPage = useSelector((state: RootState) => state.post.totalPage);
+  const posts = useSelector((state: RootState) => state.post.data);
+  const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    getData();
+    dispatch(fetchPublicPosts(currentPage, pageSize));
   }, []);
-
-  const threshold = 400;
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
@@ -34,7 +27,8 @@ const LatestPost = () => {
     const documentHeight = document.documentElement.scrollHeight;
 
     if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage + 1 <= totalPage) {
-      getData();
+      setCurrentPage(currentPage + 1);
+      dispatch(fetchPublicPosts(currentPage, pageSize));
     }
   };
 
@@ -64,4 +58,4 @@ const LatestPost = () => {
   );
 };
 
-export default memo(LatestPost);
+export default LatestPost;
