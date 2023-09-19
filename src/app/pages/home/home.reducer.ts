@@ -143,8 +143,6 @@ export const recommendPostReducer = (state = initialRecommendPostState, action: 
         message: '',
       };
     case ACTIONS_TYPE.GET_RECOMMEND_SUCCESS:
-      console.log(action.payload.data);
-
       return {
         ...state,
         data: action.payload.data,
