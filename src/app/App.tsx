@@ -7,6 +7,7 @@ import Layout from './pages/Layout';
 import Login from './pages/auth/login/Login';
 import Register from './pages/auth/register/Register';
 import PageNotFound from './pages/not-found/PageNotFound';
+import AddPost from './pages/home/components/add';
 
 export const AuthContext = createContext<any>(undefined);
 
@@ -39,6 +40,7 @@ function App() {
             return <Route path={route.path} element={route.element} key={route.path} />;
           })}
       </Routes>
+      <AddPost></AddPost>
     </AuthContext.Provider>
   );
 }

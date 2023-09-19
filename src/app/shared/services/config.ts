@@ -27,9 +27,11 @@ export class ApiService {
   };
 
   private _setHeaders() {
-    const accessToken = getLocalStorage(StorageKey.AUTH,{});
+    const accessToken: any = getLocalStorage(StorageKey.AUTH,{});
+    console.log(accessToken);
+    
     if (accessToken) {
-      this.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      this.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken.accessToken}`;
     }
   }
 
@@ -74,6 +76,7 @@ export class ApiService {
   }
 
   public get = (url: string, param = {}, moreConfigs = {}) => {
+    this._setHeaders();
     return new Promise((resolve, reject) => {
       const request = this.axiosInstance.get(this.createURL(url, param), { ...moreConfigs });
       this._handleResponsed(request, resolve, reject);
