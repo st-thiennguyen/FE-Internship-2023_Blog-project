@@ -1,9 +1,12 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
+import { StorageKey } from '../constants';
+import { getLocalStorage } from '../utils';
+
 export class ApiService {
   axiosInstance: AxiosInstance;
 
-  constructor(accessToken = '') {
+  constructor() {
     this.axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_BASE_API,
       withCredentials: false,
@@ -12,18 +15,19 @@ export class ApiService {
         'Content-Type': 'application/json',
       },
     });
-    this._setInterceptors(accessToken);
+    this._setInterceptors();
   }
 
-  private _setInterceptors = (accessToken: string) => {
+  private _setInterceptors = () => {
     this.axiosInstance.interceptors.response.use(
       (response: AxiosResponse) => response,
       (error: AxiosError) => this._handleError(error),
     );
-    this._setHeaders(accessToken);
+    this._setHeaders();
   };
 
-  private _setHeaders(accessToken: string) {
+  private _setHeaders() {
+    const accessToken = getLocalStorage(StorageKey.AUTH, {});
     if (accessToken) {
       this.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     }
