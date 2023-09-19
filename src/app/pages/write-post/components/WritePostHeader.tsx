@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../../../assets/images/logo.svg';
 
-const WritePostHeader = () => {
+interface WritePostHeaderProps {
+  onPublishPost: () => void;
+}
+
+const WritePostHeader = ({ onPublishPost }: WritePostHeaderProps) => {
   return (
-    <header className="header">
+    <header className="header header-write-post">
       <div className="container">
         <div className="header-wrapper d-flex justify-between item-center">
           <h1 className="header-logo d-flex justify-between item-center">
@@ -13,28 +17,9 @@ const WritePostHeader = () => {
               <img src={logo} alt="Supremethod" />
             </Link>
           </h1>
-          <div className="header-right d-flex item-center">
-            <span className="header-welcome">Welcome to Supremethod !</span>
-            <nav className="navbar">
-              <ul className="navbar-list d-flex">
-                <li className="navbar-item">
-                  <Link to="/write" className="navbar-link">
-                    <div className="navbar-content d-flex justify-center item-center">
-                      <i className="icon icon-small icon-write-20"></i>
-                      <p className="navbar-subtext">Write</p>
-                    </div>
-                  </Link>
-                </li>
-                <li className="navbar-item navbar-item-auth">
-                  <Link to="/login" className="navbar-link">
-                    <div className="navbar-content d-flex justify-center item-center">
-                      <i className="icon icon-small icon-user-20"></i>
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>
+            Publish
+          </button>
         </div>
       </div>
     </header>
