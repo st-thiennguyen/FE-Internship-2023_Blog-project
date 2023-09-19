@@ -16,13 +16,12 @@ interface HeaderProps {
 
 const Header = ({ isLogin, auth }: HeaderProps) => {
   const [isShowToastMessage, setIsShowToastMessage] = useState(false);
-  const token: any = getLocalStorage(StorageKey.AUTH);
   const dispatch = useDispatch();
 
   const handleLogout = (e: any) => {
-    dispatch(logoutAction(token.accessToken) as any);
+    dispatch(logoutAction() as any);
     e.preventDefault();
-    setIsShowToastMessage(true);
+    // setIsShowToastMessage(true);
   };
 
   return (
@@ -61,7 +60,7 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
                           </Link>
                         </li>
                         <li className="auth-item">
-                          <Link to="/" className="auth-link" onClick={handleLogout}>
+                          <Link to="/logout" className="auth-link" onClick={handleLogout}>
                             Logout
                           </Link>
                         </li>

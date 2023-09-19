@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Layout from './pages/Layout';
 import Login from './pages/auth/containers/Login';
@@ -8,6 +8,10 @@ import WritePost from './pages/write-post/containers/WritePost';
 
 function App() {
   const routes = [
+    {
+      path: '/page-not-found',
+      element: <PageNotFound />,
+    },
     {
       path: '/login',
       element: <Login />,
@@ -19,11 +23,6 @@ function App() {
     {
       path: '/write',
       element: <WritePost />,
-    },
-
-    {
-      path: '/page-not-found',
-      element: <PageNotFound />,
     },
     { path: '/*', element: <Layout /> },
   ];

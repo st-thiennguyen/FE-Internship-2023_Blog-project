@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
+import { Auth } from '../../models/auth';
 import { StorageKey } from '../constants';
 import { getLocalStorage } from '../utils';
 
@@ -10,7 +11,7 @@ export class ApiService {
     this.axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_BASE_API,
       withCredentials: false,
-      timeout: 5000,
+      timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -18,20 +19,37 @@ export class ApiService {
     this._setInterceptors();
   }
 
-  private _setInterceptors = () => {
-    this.axiosInstance.interceptors.response.use(
-      (response: AxiosResponse) => response,
-      (error: AxiosError) => this._handleError(error),
-    );
-    this._setHeaders();
-  };
-
-  private _setHeaders() {
-    const accessToken = getLocalStorage(StorageKey.AUTH, {});
-    if (accessToken) {
-      this.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    }
+  private _requiresAuthorization(url: string) {
+    const pathsRequiringAuthorization = ['/logout'];
+    return pathsRequiringAuthorization.some((path) => url.includes(path));
   }
+
+  private _setInterceptors = () => {
+    this.axiosInstance.interceptors.request.use(
+      (config) => {
+        const requiresAuthorization = this._requiresAuthorization(config.url!);
+        if (requiresAuthorization) {
+          const auth = getLocalStorage(StorageKey.AUTH) as Auth;
+          if (auth) {
+            config.headers.Authorization = `Bearer ${auth.accessToken}`;
+          }
+        }
+        return config;
+      },
+      (error) => {
+        return this._handleError(error);
+      },
+    );
+
+    this.axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        return this._handleError(error);
+      },
+    );
+  };
 
   private _handleError = (error: AxiosError) => {
     if (error.response) {
