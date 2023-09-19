@@ -78,7 +78,6 @@ const Header = () => {
                   ) : (
                     <Link to="/login" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
-                        <i className="icon icon-small icon-user-20"></i>
                         <button className="btn btn-primary header-btn-login">Login</button>
                       </div>
                     </Link>

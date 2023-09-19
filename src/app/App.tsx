@@ -6,6 +6,7 @@ import { appRoutes } from './app.routes';
 import Layout from './pages/Layout';
 import authRoutes from './pages/auth/auth.routes';
 import { RootState } from './stores/store';
+import PageNotFound from './pages/not-found/PageNotFound';
 
 interface RouteItem {
   name: string;
@@ -32,6 +33,7 @@ function App() {
             </Route>
           ))}
         </Route>
+        <Route path={"*"} element={<PageNotFound />}></Route>
       </Routes>
     </AuthContext.Provider>
   );
