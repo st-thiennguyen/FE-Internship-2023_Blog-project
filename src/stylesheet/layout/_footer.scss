@@ -8,8 +8,8 @@
   }
   &-subtext {
     max-width: 700px;
-    font-size: map-get($font-size, xs);
     color: map-get($color, subtext);
+    font-size: map-get($font-size, xs);
     font-weight: map-get($font-weight, medium);
   }
   &-copyright {
