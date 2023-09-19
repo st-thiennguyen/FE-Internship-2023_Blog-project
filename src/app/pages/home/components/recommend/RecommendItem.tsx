@@ -21,7 +21,7 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
       <div className="recommend-item">
         <div
           className="recommend d-flex flex-column"
-          style={{ background: `url(${isErrImg ? NoImg : post.cover}) top center / cover no-repeat` }}
+          style={{ background: `url(${isErrImg ? NoImg : post.cover}) center / cover no-repeat` }}
         >
           <div className="recommend-content">
             <h3 className="recommend-title">{post.title}</h3>
