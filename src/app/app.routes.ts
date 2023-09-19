@@ -1,5 +1,5 @@
-import Detail from './pages/detail';
-import Home from './pages/home';
+import DetailPost from './pages/detail-post/container/DetailPost';
+import Home from './pages/home/container/Home';
 import PageNotFound from './pages/not-found/PageNotFound';
 
 export const appRoutes = [
@@ -7,7 +7,7 @@ export const appRoutes = [
   {
     name: 'detail',
     path: '/detail/:postId',
-    component: Detail,
+    component: DetailPost,
   },
   {
     name: 'page-not-found',
