@@ -4,7 +4,6 @@ import { PostModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
 import { RootState } from '../../../stores/store';
 import PostItemLoading from './PostItemLoading';
-import { Link } from 'react-router-dom';
 
 interface PostListProps {
   posts: PostModel[];
