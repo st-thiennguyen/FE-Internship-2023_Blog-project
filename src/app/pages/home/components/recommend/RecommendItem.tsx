@@ -56,21 +56,11 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
                 </li>
               </ul>
               <ul className="tag-list d-flex">
-                {post.tags.length > 3 ? (
-                  <>
-                    {sliceTags}
-                    <li className="tag-item" key="more">
-                      <span className="tag">+{post.tags.length - 3}</span>
-                    </li>
-                  </>
-                ) : (
-                  post.tags.map((tag) => {
-                    return (
-                      <li className="tag-item" key={tag}>
-                        <span className="tag">#{tag}</span>
-                      </li>
-                    );
-                  })
+                {sliceTags}
+                {post.tags.length > 3 && (
+                  <li className="tag-item" key="more">
+                    <span className="tag">+{post.tags.length - 3}</span>
+                  </li>
                 )}
               </ul>
             </div>
