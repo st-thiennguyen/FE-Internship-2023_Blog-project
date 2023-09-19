@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {isLogin && (
+      {isLogin && recommendPosts.length > 0 && (
         <>
           <h2 className="section-title">Recommended for you</h2>
           <Recommend />
