@@ -7,7 +7,7 @@ import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
 import { logoutAction } from '../../pages/auth/auth.actions';
 import { isImageUrlValid } from '../utils';
-import NoImg from '../../../assets/images/no-image.png';
+import avatarDefault from '../../../assets/images/user-default.png';
 
 const Header = () => {
 
@@ -58,7 +58,7 @@ const Header = () => {
                     <>
                       <Link to="/login" className="navbar-link">
                         <div className="navbar-content d-flex justify-center item-center">
-                          {!isErrorCover ? <img src={authContext.userInfo.picture} alt="avatar" className="icon icon-small avatar-user" /> : <img src={NoImg} alt="avatar" className={`post-img err`} />}
+                          {!isErrorCover ? <img src={authContext.userInfo.picture} alt="avatar" className="icon icon-small avatar-user" /> : <img src={avatarDefault} alt="avatar" className={`post-img err`} />}
                         </div>
                       </Link>
                       <div className="navbar-auth">
@@ -79,7 +79,7 @@ const Header = () => {
                     <Link to="/login" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-user-20"></i>
-                        <button className='btn btn-primary header-btn-login'>Login</button>
+                        <button className="btn btn-primary header-btn-login">Login</button>
                       </div>
                     </Link>
                   )}
