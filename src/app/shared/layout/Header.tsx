@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import { AuthContext } from '../../App';
 import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
 import { logoutAction } from '../../pages/auth/auth.actions';
+import { isImageUrlValid } from '../utils';
 
 const Header = () => {
 
@@ -21,6 +22,13 @@ const Header = () => {
     setIsShowToastMessage(true);
   };
 
+
+  const [isErrorCover, setIsErrorCover] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(authContext?.userInfo.picture).then((value) => setIsErrorCover(!value));
+  }, [authContext?.userInfo.picture]);
+
   return (
     <header className="header">
       <div className="container">
@@ -35,21 +43,21 @@ const Header = () => {
             <nav className="navbar">
               <ul className="navbar-list d-flex">
                 {
-                  isLogin ? (<li className="navbar-item">
+                  isLogin && (<li className="navbar-item">
                     <Link to="/write" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-write-20"></i>
                         <p className="navbar-subtext">Write</p>
                       </div>
                     </Link>
-                  </li>) : null
+                  </li>)
                 }
                 <li className="navbar-item navbar-item-auth">
                   {isLogin ? (
                     <>
                       <Link to="/login" className="navbar-link">
                         <div className="navbar-content d-flex justify-center item-center">
-                          <img src={isLogin ? authContext.userInfo.picture : null} alt="" className='icon icon-small avatar-user' />
+                          {!isErrorCover ? <img src={authContext.userInfo.picture} alt="avatar" className='icon icon-small avatar-user' /> : <i className="icon icon-small icon-user-20"></i>}
                         </div>
                       </Link>
                       <div className="navbar-auth">
@@ -69,7 +77,7 @@ const Header = () => {
                   ) : (
                     <Link to="/login" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
-                        {/* <i className="icon icon-small icon-user-20"></i> */}
+                        <i className="icon icon-small icon-user-20"></i>
                         <button className='btn btn-primary header-btn-login'>Login</button>
                       </div>
                     </Link>

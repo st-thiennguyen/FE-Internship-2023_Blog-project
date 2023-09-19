@@ -1,5 +1,5 @@
-import Login from './login/Login';
-import Register from './register/Register';
+import Login from "./containers/Login";
+import Register from "./containers/Register";
 
 const authRoutes = [
   {
