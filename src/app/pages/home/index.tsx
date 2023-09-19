@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { RootState } from '../../redux/store';
+import GoToTopBTn from '../../shared/components/GoToTopBtn';
 import LatestPost from './components/LatestPost';
 import Recommend from './components/recommend';
+import { RootState } from '../../redux/store';
 
 const Home = () => {
-  const [offset, setOffset] = useState(0);
   const isLogin = useSelector((state: RootState) => state.login.auth?.accessToken);
   const navigate = useNavigate();
 
@@ -17,22 +17,6 @@ const Home = () => {
     }
   }, [isLogin]);
 
-  const goToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  };
-  useEffect(() => {
-    goToTop();
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => setOffset(window.pageYOffset);
-
-    window.removeEventListener('scroll', onScroll);
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
     <div className="home-page">
       <Recommend />
@@ -41,11 +25,7 @@ const Home = () => {
           <LatestPost />
         </div>
       </div>
-      {offset > 1000 && (
-        <button className="btn-backtotop  d-flex justify-center item-center" onClick={goToTop}>
-          <i className="icon icon-medium icon-arrow-up-24"></i>
-        </button>
-      )}
+      <GoToTopBTn />
     </div>
   );
 };
