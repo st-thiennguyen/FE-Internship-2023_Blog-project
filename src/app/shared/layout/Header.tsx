@@ -1,29 +1,34 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import logo from '../../../assets/images/logo.svg';
-import { Auth } from '../../models/auth';
-import { logoutAction } from '../../pages/auth/auth.actions';
+import { AuthContext } from '../../App';
 import ToastMessage from '../components/ToastMessage';
-import { StorageKey } from '../constants';
-import { getLocalStorage } from '../utils';
+import logo from '../../../assets/images/logo.svg';
+import { logoutAction } from '../../pages/auth/auth.actions';
+import { isImageUrlValid } from '../utils';
+import avatarDefault from '../../../assets/images/user-default.png';
 
-interface HeaderProps {
-  isLogin: Boolean;
-  auth: Auth;
-}
+const Header = () => {
 
-const Header = ({ isLogin, auth }: HeaderProps) => {
   const [isShowToastMessage, setIsShowToastMessage] = useState(false);
-  const token: any = getLocalStorage(StorageKey.AUTH);
   const dispatch = useDispatch();
 
+  const authContext = useContext(AuthContext)
+  const isLogin = authContext?.accessToken;
+
   const handleLogout = (e: any) => {
-    dispatch(logoutAction(token.accessToken) as any);
     e.preventDefault();
+    dispatch(logoutAction(isLogin) as any);
     setIsShowToastMessage(true);
   };
+
+
+  const [isErrorCover, setIsErrorCover] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(authContext?.userInfo.picture).then((value) => setIsErrorCover(!value));
+  }, [authContext?.userInfo.picture]);
 
   return (
     <header className="header">
@@ -35,39 +40,49 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
             </Link>
           </h1>
           <div className="header-right d-flex item-center">
-            <span className="header-welcome">Welcome to Supremethod !</span>
+            <span className="header-welcome">{isLogin ? `Welcome ${authContext.userInfo.displayName}` : "Welcome to Supremethod !"}</span>
             <nav className="navbar">
               <ul className="navbar-list d-flex">
-                <li className="navbar-item">
-                  <Link to="/write" className="navbar-link">
-                    <div className="navbar-content d-flex justify-center item-center">
-                      <i className="icon icon-small icon-write-20"></i>
-                      <p className="navbar-subtext">Write</p>
-                    </div>
-                  </Link>
-                </li>
+                {
+                  isLogin && (<li className="navbar-item">
+                    <Link to="/write" className="navbar-link">
+                      <div className="navbar-content d-flex justify-center item-center">
+                        <i className="icon icon-small icon-write-20"></i>
+                        <p className="navbar-subtext">Write</p>
+                      </div>
+                    </Link>
+                  </li>)
+                }
                 <li className="navbar-item navbar-item-auth">
-                  <Link to="/login" className="navbar-link">
-                    <div className="navbar-content d-flex justify-center item-center">
-                      <i className="icon icon-small icon-user-20"></i>
-                    </div>
-                  </Link>
                   {isLogin ? (
-                    <div className="navbar-auth">
-                      <ul className="auth-list">
-                        <li className="auth-item">
-                          <Link to="/profile" className="auth-link">
-                            {auth.userInfo?.displayName}
-                          </Link>
-                        </li>
-                        <li className="auth-item">
-                          <Link to="/" className="auth-link" onClick={handleLogout}>
-                            Logout
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : null}
+                    <>
+                      <Link to="/login" className="navbar-link">
+                        <div className="navbar-content d-flex justify-center item-center">
+                          {!isErrorCover ? <img src={authContext.userInfo.picture} alt="avatar" className="icon icon-small avatar-user" /> : <img src={avatarDefault} alt="avatar" className={`post-img err`} />}
+                        </div>
+                      </Link>
+                      <div className="navbar-auth">
+                        <ul className="auth-list">
+                          <li className="auth-item">
+                            <Link to="/profile" className="auth-link">
+                              {authContext.userInfo?.displayName}
+                            </Link>
+                          </li>
+                          <li className="auth-item">
+                            <Link to='/' className="auth-link" onClick={handleLogout}>
+                              Logout
+                            </Link>
+                          </li>
+                        </ul>
+                      </div></>
+                  ) : (
+                    <Link to="/login" className="navbar-link">
+                      <div className="navbar-content d-flex justify-center item-center">
+                        <i className="icon icon-small icon-user-20"></i>
+                        <button className="btn btn-primary header-btn-login">Login</button>
+                      </div>
+                    </Link>
+                  )}
                 </li>
               </ul>
             </nav>
@@ -82,3 +97,4 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
 };
 
 export default Header;
+
