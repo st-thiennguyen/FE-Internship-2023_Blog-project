@@ -28,9 +28,17 @@
       &-content {
         z-index: 1;
       }
+
       &-author {
-        display: inline-block;
-        margin: 6px 0 16px;
+        .author-avatar {
+          width: 30px;
+          height: 40px;
+          margin-right: 10px;
+          img {
+            border-radius: 100%;
+            object-fit: cover;
+          }
+        }
       }
       .reaction-item {
         margin-right: 10px;
