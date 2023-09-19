@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
 import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
 import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
+import TextEditor from '../components/TextEditor';
 import WritePostHeader from '../components/WritePostHeader';
 
 const schema = yup
@@ -107,12 +108,7 @@ const WritePost = () => {
         <div className="container">
           <div className="write-post-wrapper">
             <form className="write-post-form d-flex flex-column">
-              <input
-                {...register('title')}
-                className="write-post-input"
-                type="text"
-                placeholder="Title post here ..."
-              />
+              <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..." />
               <p className="write-post-form-error">{errors.title?.message}</p>
               <div className="write-post-editor">
                 <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)}>
@@ -149,7 +145,11 @@ const WritePost = () => {
                   </div>
                 )}
 
-                {photoPreview && <img src={photoPreview} alt="Image of preview of title" />}
+                {photoPreview && (
+                  <div className="write-post-preview-img d-flex justify-center">
+                    <img src={photoPreview} alt="Image of preview of title" />
+                  </div>
+                )}
 
                 <ReactQuill
                   className="write-post-area"
@@ -160,13 +160,7 @@ const WritePost = () => {
                 />
                 <p className="write-post-form-error">{errors.description?.message}</p>
 
-                <ReactQuill
-                  className="write-post-area"
-                  theme="bubble"
-                  value={contentInput}
-                  onChange={onContentChange}
-                  placeholder="Write your story ..."
-                />
+                <TextEditor value={contentInput} placeholder={'Write your story ...'} onChange={onContentChange} />
                 <p className="write-post-form-error">{errors.content?.message}</p>
               </div>
               <div className="write-post-tags">

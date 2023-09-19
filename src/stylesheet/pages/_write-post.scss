@@ -9,6 +9,10 @@
   }
 }
 
+.quill-text-editor .ql-editor {
+  min-height: 300px;
+}
+
 .write-post {
   background-color: #fff;
   &-form {
@@ -61,6 +65,12 @@
 
   &-area {
     width: 100%;
+  }
+
+  &-preview-img {
+    img {
+      max-width: 700px;
+    }
   }
   .btn-add-cover,
   .btn-pick-cover {
