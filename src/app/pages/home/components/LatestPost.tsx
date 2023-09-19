@@ -1,36 +1,56 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { memo, useEffect, useState } from 'react';
 
-import { RootState } from '../../../redux/store';
-import { fetchPublicPosts, loadMore, resetCurrentPage } from '../../../redux/action/post';
+import { PostModel } from '../../../models/post';
 import { pageSize } from '../../../shared/constants/post';
-
+import { getPublicPosts } from '../../../shared/services';
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
+import EmptyPost from './recommend/EmptyPost';
 
 const LatestPost = () => {
-  const currentPage = useSelector((state: RootState) => state.post.currentPage);
-  const isLoading = useSelector((state: RootState) => state.post.isLoading);
-  const posts = useSelector((state: RootState) => state.post.data);
-  const totalPage = useSelector((state: RootState) => state.post.totalPage);
-  const dispatch = useDispatch<any>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState<PostModel[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+
+  const getData = async () => {
+    setIsLoading(true);
+    const response: any = await getPublicPosts(currentPage, pageSize);
+    setTotalPage(response.totalPage);
+    setCurrentPage(currentPage + 1);
+    setPosts([...posts, ...response.data] || []);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    dispatch(resetCurrentPage());
+    getData();
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchPublicPosts(currentPage, pageSize));
-  }, [currentPage]);
+  const threshold = 400;
 
-  const isLoadmore = () => {
-    return currentPage + 1 <= totalPage;
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage + 1 <= totalPage) {
+      getData();
+    }
   };
+
+  useEffect(() => {
+    if (posts.length) {
+      window.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isLoading]);
 
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
-      <PostList posts={posts} />
+      {posts.length ? <PostList posts={posts} /> : <EmptyPost />}
       {currentPage > 1 && isLoading && (
         <div className="row">
           {Array.from({ length: 6 }, (item, index) => (
@@ -40,15 +60,8 @@ const LatestPost = () => {
           ))}
         </div>
       )}
-      {isLoadmore() && (
-        <div className="btn-load-more-wrapper d-flex justify-center">
-          <button className="btn btn-primary" onClick={() => dispatch(loadMore())}>
-            Load More
-          </button>
-        </div>
-      )}
     </section>
   );
 };
 
-export default LatestPost;
+export default memo(LatestPost);
