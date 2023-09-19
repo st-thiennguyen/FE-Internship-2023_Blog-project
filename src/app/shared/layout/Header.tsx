@@ -7,6 +7,7 @@ import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
 import { logoutAction } from '../../pages/auth/auth.actions';
 import { isImageUrlValid } from '../utils';
+import NoImg from '../../../assets/images/no-image.png';
 
 const Header = () => {
 
@@ -39,7 +40,7 @@ const Header = () => {
             </Link>
           </h1>
           <div className="header-right d-flex item-center">
-            <span className="header-welcome">{isLogin ? `Welcome ${authContext.userInfo.displayName}` : 'Welcome to Supremethod !'}</span>
+            <span className="header-welcome">{isLogin ? `Welcome ${authContext.userInfo.displayName}` : "Welcome to Supremethod !"}</span>
             <nav className="navbar">
               <ul className="navbar-list d-flex">
                 {
@@ -57,7 +58,7 @@ const Header = () => {
                     <>
                       <Link to="/login" className="navbar-link">
                         <div className="navbar-content d-flex justify-center item-center">
-                          {!isErrorCover ? <img src={authContext.userInfo.picture} alt="avatar" className='icon icon-small avatar-user' /> : <i className="icon icon-small icon-user-20"></i>}
+                          {!isErrorCover ? <img src={authContext.userInfo.picture} alt="avatar" className="icon icon-small avatar-user" /> : <img src={NoImg} alt="avatar" className={`post-img err`} />}
                         </div>
                       </Link>
                       <div className="navbar-auth">
