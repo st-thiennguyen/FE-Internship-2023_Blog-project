@@ -1,8 +1,11 @@
+import { createContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import { appRoutes } from './app.routes';
 import Layout from './pages/Layout';
 import authRoutes from './pages/auth/auth.routes';
+import { RootState } from './stores/store';
 
 interface RouteItem {
   name: string;
@@ -11,21 +14,26 @@ interface RouteItem {
   children?: RouteItem[];
 }
 
+export const AuthContext = createContext<any>(undefined);
+
 function App() {
+  const auth = useSelector((state: RootState) => state.auth.auth);
   return (
-    <Routes>
-      {authRoutes.map((val) => (
-        <Route key={val.name} path={val.path} element={<val.component />} />
-      ))}
-      <Route path="/" element={<Layout />}>
-        {appRoutes.map((val: RouteItem) => (
-          <Route key={val.name} path={val.path} element={<val.component />}>
-            {val.children &&
-              val.children.map((item) => <Route key={item.name} path={item.path} element={<item.component />} />)}
-          </Route>
+    <AuthContext.Provider value={auth}>
+      <Routes>
+        {authRoutes.map((val) => (
+          <Route key={val.name} path={val.path} element={<val.component />} />
         ))}
-      </Route>
-    </Routes>
+        <Route path="/" element={<Layout />}>
+          {appRoutes.map((val: RouteItem) => (
+            <Route key={val.name} path={val.path} element={<val.component />}>
+              {val.children &&
+                val.children.map((item) => <Route key={item.name} path={item.path} element={<item.component />} />)}
+            </Route>
+          ))}
+        </Route>
+      </Routes>
+    </AuthContext.Provider>
   );
 }
 
