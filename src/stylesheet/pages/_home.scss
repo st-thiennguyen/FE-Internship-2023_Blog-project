@@ -12,8 +12,6 @@
       height: 400px;
       padding: 20px 24px;
       border-radius: 12px;
-
-      background: url("../../assets/images/demo-cover.jpg") top center / cover no-repeat;
       color: map-get($color, textButton);
 
       &-title {

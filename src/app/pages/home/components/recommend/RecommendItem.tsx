@@ -1,15 +1,28 @@
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../../models/post';
+import { useEffect, useState } from 'react';
+import { isImageUrlValid } from '../../../../shared/utils';
+
+import NoImg from '../../../../../assets/images/no-image.png';
 
 interface RecommendItemProps {
   post: PostModel;
 }
 const RecommendItem = ({ post }: RecommendItemProps) => {
+  const [isErrImg, setIsErrImg] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
+  }, [isErrImg, post.cover]);
+
   return (
     <Link to={'/'} className="recommend-link">
       <div className="recommend-item">
-        <div className="recommend d-flex flex-column">
+        <div
+          className="recommend d-flex flex-column"
+          style={{ background: `url(${isErrImg ? NoImg : post.cover}) top center / cover no-repeat` }}
+        >
           <div className="recommend-content">
             <h3 className="recommend-title">{post.title}</h3>
             <span className="recommend-author">By {post.user.lastName}</span>
