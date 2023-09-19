@@ -110,3 +110,57 @@ export const userReducer = (state = initialState, action: RootAction): UserState
       return state;
   }
 };
+
+interface RecommendPostState {
+  data: PostModel[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  message: string;
+  currentPage: number;
+  totalPage: number;
+  totalItems: number;
+}
+const initialRecommendPostState: RecommendPostState = {
+  data: [] as PostModel[],
+  isLoading: false,
+  isError: false,
+  isSuccess: false,
+  message: '',
+  currentPage: 1,
+  totalPage: 0,
+  totalItems: 0,
+};
+
+export const recommendPostReducer = (state = initialRecommendPostState, action: RootAction): RecommendPostState => {
+  switch (action.type) {
+    case ACTIONS_TYPE.GET_RECOMMEND:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_RECOMMEND_SUCCESS:
+      console.log(action.payload.data);
+
+      return {
+        ...state,
+        data: action.payload.data,
+        totalPage: action.payload.totalPage,
+        totalItems: action.payload.totalItems,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.GET_RECOMMEND_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+    default:
+      return state;
+  }
+};
