@@ -1,35 +1,50 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import { pageSize } from '../../../shared/constants/post';
-import { RootState } from '../../../stores/store';
-import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
+import EmptyPost from './recommend/EmptyPost';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../stores/store';
+import { fetchPublicPosts } from '../home.actions';
+
+const threshold = 400;
 
 const LatestPost = () => {
-  const currentPage = useSelector((state: RootState) => state.post.currentPage);
+  const [currentPage, setCurrentPage] = useState(1);
   const isLoading = useSelector((state: RootState) => state.post.isLoading);
-  const posts = useSelector((state: RootState) => state.post.data);
   const totalPage = useSelector((state: RootState) => state.post.totalPage);
+  const posts = useSelector((state: RootState) => state.post.data);
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    dispatch(resetCurrentPage());
+    dispatch(fetchPublicPosts(currentPage, pageSize));
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchPublicPosts(currentPage, pageSize));
-  }, [currentPage]);
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
 
-  const isLoadmore = () => {
-    return currentPage + 1 <= totalPage;
+    if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage + 1 <= totalPage) {
+      setCurrentPage(currentPage + 1);
+      dispatch(fetchPublicPosts(currentPage, pageSize));
+    }
   };
+
+  useEffect(() => {
+    if (posts.length) {
+      window.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isLoading]);
 
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
-      <PostList posts={posts} />
+      {posts.length ? <PostList posts={posts} /> : <EmptyPost />}
       {currentPage > 1 && isLoading && (
         <div className="row">
           {Array.from({ length: 6 }, (item, index) => (
@@ -37,13 +52,6 @@ const LatestPost = () => {
               <PostItemLoading />
             </li>
           ))}
-        </div>
-      )}
-      {isLoadmore() && (
-        <div className="btn-load-more-wrapper d-flex justify-center">
-          <button className="btn btn-primary" onClick={() => dispatch(loadMore())}>
-            Load More
-          </button>
         </div>
       )}
     </section>
