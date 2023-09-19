@@ -177,6 +177,22 @@
         font-weight: map-get($font-weight, medium);
       }
     }
+    .empty-post {
+      padding: 40px 20px;
+      border-radius: 6px;
+
+      background-color: #fff;
+      &-img {
+        width: 300px;
+        height: 300px;
+      }
+      &-title {
+        font-size: 32px;
+      }
+      &-desc {
+        color: map-get($color, subtext);
+      }
+    }
   }
   .btn-backtotop {
     position: fixed;
