@@ -28,10 +28,10 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
   return (
     <Link to={'/'} className="recommend-link">
       <div className="recommend-item">
-        <div
-          className="recommend d-flex flex-column"
-          style={{ background: `url(${isErrImg ? NoImg : post.cover}) center / cover no-repeat` }}
-        >
+        <div className="recommend d-flex flex-column">
+          <div className="recommend-cover">
+            <img className="recommend-cover-img" src={isErrImg ? NoImg : post.cover} alt={post.description} />
+          </div>
           <div className="recommend-content">
             <h3 className="recommend-title">{post.title}</h3>
             <div className="recommend-author d-flex item-center flex-row">

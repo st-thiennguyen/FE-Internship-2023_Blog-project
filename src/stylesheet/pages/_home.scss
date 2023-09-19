@@ -10,14 +10,22 @@
       justify-content: end;
 
       height: 400px;
-      padding: 20px 24px;
+      padding: 24px 32px;
       border-radius: 12px;
       color: map-get($color, textButton);
 
       &-title {
         max-width: 80%;
-        font-size: 28px;
+        font-size: 32px;
         line-height: 1.4;
+      }
+      &-cover {
+        @include position(0, 0, 0, 0, absolute);
+        border-radius: 12px;
+        &-img {
+          height: 100%;
+          object-fit: cover;
+        }
       }
       &::after {
         content: "";
@@ -30,9 +38,10 @@
       }
 
       &-author {
+        margin: 6px 0 10px;
         .author-avatar {
-          width: 30px;
-          height: 40px;
+          width: 24px;
+          height: 30px;
           margin-right: 10px;
           img {
             border-radius: 100%;
