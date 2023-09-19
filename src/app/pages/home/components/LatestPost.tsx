@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { pageSize } from '../../../shared/constants/post';
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
-import EmptyPost from './recommend/EmptyPost';
+import EmptyPost from './EmptyPost';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
 import { fetchPublicPosts } from '../home.actions';
