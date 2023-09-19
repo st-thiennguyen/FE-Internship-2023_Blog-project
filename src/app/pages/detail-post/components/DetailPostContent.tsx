@@ -5,11 +5,11 @@ import avaDefault from '../../../../assets/images/user-default.png';
 import { PostModel } from '../../../models/post';
 import { isImageUrlValid } from '../../../shared/utils';
 
-interface DetailBlogProps {
+interface DetailPostProps {
   post: PostModel;
 }
 
-const DetailBlog = ({ post }: DetailBlogProps) => {
+const DetailPostContent = ({ post }: DetailPostProps) => {
   const [isErrorCover, setIsErrorCover] = useState(false);
 
   useEffect(() => {
@@ -69,4 +69,4 @@ const DetailBlog = ({ post }: DetailBlogProps) => {
   );
 };
 
-export default DetailBlog;
+export default DetailPostContent;

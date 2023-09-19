@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 import noImage from '../../../../assets/images/no-image.png';
 import avaDefault from '../../../../assets/images/user-default.png';
-import { isImageUrlValid } from '../../../shared/utils/';
+import { isImageUrlValid } from '../../../shared/utils';
 import { convertDateToString } from '../../../shared/utils/date';
 
-type DetailCoverProps = {
+type DetailPostCoverProps = {
   cover: string;
   title: string;
   authorAvatar: string;
@@ -14,7 +14,7 @@ type DetailCoverProps = {
   datePost: any;
 };
 
-const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: DetailCoverProps) => {
+const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost }: DetailPostCoverProps) => {
   const [isErrorCover, setIsErrorCover] = useState(false);
   const [isErrorAvatar, setIsErrorAvatar] = useState(false);
 
@@ -49,4 +49,4 @@ const DetailCover = ({ cover, title, authorAvatar, authorName, datePost }: Detai
   );
 };
 
-export default DetailCover;
+export default DetailPostCover;
