@@ -2,12 +2,10 @@
   .section-user-post {
     .section-title {
       position: relative;
-
       display: inline-block;
       margin-bottom: 20px;
 
       color: map-get($color, primary);
-
       font-size: 30px;
 
       &::after {

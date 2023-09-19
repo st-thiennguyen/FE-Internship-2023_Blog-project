@@ -1,18 +1,17 @@
 import { useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import Footer from '../shared/layout/Footer';
 import Header from '../shared/layout/Header';
 import Aside from '../shared/layout/aside/container/Aside';
 import { RootState } from '../stores/store';
+import DetailPost from './detail-post/container/DetailPost';
+import Home from './home/container/Home';
 
 const Layout = () => {
-  const authCheck = useSelector((state: RootState) => state.auth?.auth);
-  const isLogin = !!authCheck?.accessToken;
-
   return (
     <>
-      <Header isLogin={isLogin} auth={authCheck} />
+      <Header />
 
       <main className="main">
         <div className="container">

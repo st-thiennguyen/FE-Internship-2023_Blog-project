@@ -1,6 +1,5 @@
 import DetailPost from './pages/detail-post/container/DetailPost';
 import Home from './pages/home/container/Home';
-import PageNotFound from './pages/not-found/PageNotFound';
 import userProfileRoutes from './pages/user-profile/user.routes';
 
 export const appRoutes = [
@@ -9,11 +8,6 @@ export const appRoutes = [
     name: 'detail',
     path: '/detail/:postId',
     component: DetailPost,
-  },
-  {
-    name: 'page-not-found',
-    path: '*',
-    component: PageNotFound,
   },
   ...userProfileRoutes,
 ];
