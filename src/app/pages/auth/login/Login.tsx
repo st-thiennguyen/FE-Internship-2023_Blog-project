@@ -48,7 +48,7 @@ const Login = () => {
 
   const isLoading: boolean = useSelector((state: RootState) => state.login.isLoading);
   const message: string = useSelector((state: RootState) => state.login.message);
-  const errorLogin: any = useSelector((state: RootState) => state.login.isError);
+  const isErrorLogin: any = useSelector((state: RootState) => state.login.isError);
 
   const isRegisterSuccess: boolean = useSelector((state: RootState) => state.register.isSuccess);
   const registerMessage: string = useSelector((state: RootState) => state.register.message);
@@ -174,8 +174,8 @@ const Login = () => {
           subtitle={registerState.registerMessage}
         />
       )}
-      {errorLogin && (
-        <ToastMessage isShow={errorLogin} isSuccess={!errorLogin} title={'Error'} subtitle={message}></ToastMessage>
+      {isErrorLogin && (
+        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>
   );
