@@ -1,16 +1,18 @@
 .toast {
-  visibility: hidden;
   position: fixed;
-  left: 50%;
   top: calc($header-height + 8px);
+  left: 50%;
 
+  visibility: hidden;
   min-width: 360px;
   margin-left: -180px;
   z-index: 9;
+
   &-wrapper {
     width: 100%;
     padding: 16px 24px;
     border-radius: 12px;
+
     .toast-icon {
       margin-right: 16px;
     }

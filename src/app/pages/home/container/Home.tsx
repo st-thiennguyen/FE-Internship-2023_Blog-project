@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { RootState } from '../../redux/store';
-import LatestPost from './components/LatestPost';
-import Recommend from './components/recommend';
+import { RootState } from '../../../stores/store';
+import LatestPost from '../components/LatestPost';
+import Recommend from '../components/recommend';
 
 const Home = () => {
   const [offset, setOffset] = useState(0);
-  const isLogin = useSelector((state: RootState) => state.login.auth?.accessToken);
+  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
   const navigate = useNavigate();
 
   useEffect(() => {

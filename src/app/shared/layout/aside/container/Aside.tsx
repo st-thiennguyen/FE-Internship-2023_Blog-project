@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../../../redux/store';
-import { UserModel } from '../../../models/post';
-import { fetchUsers } from '../../../redux/action/user';
-
-import TopFollower from './components/TopFollower';
-import TopPost from './components/TopPost';
+import { UserModel } from '../../../../models/post';
+import { fetchUsers } from '../../../../pages/home/home.actions';
+import { RootState } from '../../../../stores/store';
+import TopFollower from '../components/TopFollower';
+import TopPost from '../components/TopPost';
 
 const Aside = () => {
   const users = useSelector((state: RootState) => state.user.data);

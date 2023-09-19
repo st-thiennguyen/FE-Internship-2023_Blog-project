@@ -1,7 +1,7 @@
 .auth-wrapper {
-  margin: 0 !important;
   height: 100vh;
   width: 100%;
+  margin: 0 !important;
   overflow: hidden;
 
   .logo-img {
@@ -9,13 +9,14 @@
   }
 
   .auth-body {
-    margin: 0 auto;
-    padding: 32px 24px 24px;
     max-width: 680px;
+    padding: 32px 24px 24px;
+    margin: 0 auto;
 
     .auth-title {
-      padding-top: 16px;
       position: relative;
+      padding-top: 16px;
+
       font-size: 30px;
       font-weight: map-get($map: $font-weight, $key: medium);
     }
@@ -29,14 +30,15 @@
     }
   }
   .btn-auth {
-    margin: 20px 0 10px;
     width: 100%;
+    margin: 20px 0 10px;
     outline: 0;
     border: 1px solid transparent;
+
     &:hover {
       border: 1px solid map-get($map: $color, $key: primary);
-      color: map-get($map: $color, $key: primary);
       background-color: white;
+      color: map-get($map: $color, $key: primary);
     }
   }
 }
