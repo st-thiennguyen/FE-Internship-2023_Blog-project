@@ -17,7 +17,7 @@ const userProfileRoutes = [
         name: 'other-user',
         path: ':id',
         component: MainProfile,
-        isAuth: false,
+        isAuth: true,
       },
     ],
   },
