@@ -1,19 +1,20 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+import { createPost } from '../write-post.action';
+import ToastMessage from '../../../shared/components/ToastMessage';
+import { fetchSignUrlImage } from '../image-sign.action';
+import TextEditor from '../components/TextEditor';
+import WritePostHeader from '../components/WritePostHeader';
 
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
 import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
 import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
-import TextEditor from '../components/TextEditor';
-import WritePostHeader from '../components/WritePostHeader';
-import { useDispatch, useSelector } from 'react-redux'; 
-import { fetchResizeUrlImage } from '../image-sign.action';
-import { createPost } from '../write-post.action';
-import ToastMessage from '../../../shared/components/ToastMessage';
 
 const schema = yup
   .object({
@@ -48,7 +49,7 @@ const WritePost = () => {
   const [isShowToastMessage, setIsShowToastMessage] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
-  
+
   const linkImagePost = useSelector((state: any) => state.imageSign.file.url);
   const isSuccessCreatePost = useSelector((state: any) => state.writePost.isSuccess);
   const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
@@ -98,7 +99,7 @@ const WritePost = () => {
   const handleUploadCover = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     if (file) {
-      dispatch(fetchResizeUrlImage(file) as any);
+      dispatch(fetchSignUrlImage(file) as any);
       const previewUrl = URL.createObjectURL(file);
       setPhotoPreview(previewUrl);
     } else {
@@ -113,16 +114,16 @@ const WritePost = () => {
     }
   };
 
-  const onPublishPost = handleSubmit((data: any) => {
+  const onPublishPost = handleSubmit(async (data: any) => {
     dispatch(createPost({ ...data, cover: linkImagePost, status: statusPost, tags: tags }) as any)
-    setIsShowToastMessage(!isShowToastMessage)
+    setIsShowToastMessage(!isShowToastMessage);
   });
 
   const handleToggleStatus = (e: any) => {
     if (e.target.checked) {
-      setStatusPost('private');
-    } else {
       setStatusPost('public');
+    } else {
+      setStatusPost('private');
     }
   }
 
@@ -223,12 +224,14 @@ const WritePost = () => {
         </div>
       </div>
 
-      <ToastMessage 
-        isSuccess={isSuccessCreatePost} 
-        isShow={isShowToastMessage} 
-        title={isSuccessCreatePost ? "Success" : "Error"} 
-        subtitle={isMessageCreatePost}
-      ></ToastMessage>
+      {
+        isSuccessCreatePost && <ToastMessage
+          isSuccess={isShowToastMessage}
+          isShow={isShowToastMessage}
+          title={isSuccessCreatePost ? "Success" : "Error"}
+          subtitle={isMessageCreatePost}
+        ></ToastMessage>
+      }
     </>
   );
 };

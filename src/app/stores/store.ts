@@ -7,7 +7,7 @@ import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
 import { lastesPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 import { imageSignedReducer } from '../pages/write-post/image-sign.reducer';
-import { writePostReducer } from '../pages/write-post/write-post.reducer';
+import { writePostReducer } from '../pages/write-post/write-port.reducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 

@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { ApiService, UploadUrlImagePost, getResizeUrlImage } from '../../shared/services';
+import { UploadUrlImagePost, getSignUrlImage } from '../../shared/services';
 import { PositionImageModel } from '../../models/post';
 
 
@@ -25,10 +25,10 @@ export const getSignUrlImagePostFailure = (error: any) => {
   }
 }
 
-export const fetchResizeUrlImage = (file: any) => async (dispatch: Dispatch<RootAction>) => {
+export const fetchSignUrlImage = (file: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getSignUrlImagePostStart());
   try {
-    const response: any = await getResizeUrlImage(file)
+    const response: any = await getSignUrlImage(file)
     dispatch(getSignUrlImagePostSuccess(response))
     UploadUrlImagePost(response.signedRequest, file)
   } catch (error) {

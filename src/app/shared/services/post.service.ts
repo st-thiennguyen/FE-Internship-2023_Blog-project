@@ -22,7 +22,7 @@ export const postArticles = (data: any) => {
 };
 
 
-export const getResizeUrlImage = (file: any) => {
+export const getSignUrlImage = (file: any) => {
   const api = new ApiService();
   const params = {
     "type_upload": "cover-post",

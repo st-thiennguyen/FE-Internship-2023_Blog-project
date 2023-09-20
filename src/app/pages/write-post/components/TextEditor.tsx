@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from 'react-redux';
-import { fetchResizeUrlImage } from '../image-sign.action';
+import 'react-quill/dist/quill.snow.css';
 
 const formats = [
   'header',
@@ -38,25 +37,7 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
 
   const dispatch = useDispatch()
 
-  const imageHandler = () => {
-    const input = document.createElement("input");
-    const formData = new FormData();
-
-
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      const file : any = input.files;
-      if (file !== null) {
-        formData.append("image", file[0]);
-        dispatch(fetchResizeUrlImage(formData) as any);
-      }
-    }
-
-    return input.files![0];
-  };
+  // const imageHandler = () => {};
 
   const modules = React.useMemo(
     () => ({
@@ -70,7 +51,7 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
           ['clean'],
         ],
         handlers: {
-          image: imageHandler,
+          // image: imageHandler,
         },
       },
     }),
