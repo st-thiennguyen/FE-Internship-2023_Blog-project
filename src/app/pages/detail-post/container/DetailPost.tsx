@@ -43,9 +43,10 @@ const DetailPost = () => {
           <DetailPostCover
             cover={post.cover}
             title={post.title}
-            authorName={post.user?.firstName + ' ' + post.user?.lastName}
+            authorName={post.user?.displayName}
             authorAvatar={post.user?.picture}
             datePost={post.createdAt}
+            authorId={post.userId}
           />
           <section className="section section-detail-content">
             <div className="detail-content d-flex">

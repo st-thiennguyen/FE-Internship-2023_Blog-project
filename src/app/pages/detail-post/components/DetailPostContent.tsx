@@ -61,7 +61,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
             <div className="author-img d-flex">
               <img src={!isErrorCover ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
             </div>
-            <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>
+            <p className="author-name">{post.user?.displayName}</p>
           </Link>
         </div>
       </div>
