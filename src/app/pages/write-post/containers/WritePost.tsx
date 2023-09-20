@@ -10,6 +10,10 @@ import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
 import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
 import TextEditor from '../components/TextEditor';
 import WritePostHeader from '../components/WritePostHeader';
+import { useDispatch, useSelector } from 'react-redux'; 
+import { fetchResizeUrlImage } from '../image-sign.action';
+import { createPost } from '../write-post.action';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
 const schema = yup
   .object({
@@ -37,10 +41,19 @@ type FormData = {
 };
 
 const WritePost = () => {
+
+  const [statusPost, setStatusPost] = useState('public');
   const [isOpenImage, setIsOpenImage] = useState(false);
   const [isOpenInputLink, setIsOpenInputLink] = useState(false);
+  const [isShowToastMessage, setIsShowToastMessage] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  
+  const linkImagePost = useSelector((state: any) => state.imageSign.file.url);
+  const isSuccessCreatePost = useSelector((state: any) => state.writePost.isSuccess);
+  const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
+  const dispatch = useDispatch();
+
   const tagRef = useRef<HTMLInputElement>(null);
   const coverImageRef = useRef<HTMLInputElement>(null);
   const coverLinkRef = useRef<HTMLInputElement>(null);
@@ -85,6 +98,7 @@ const WritePost = () => {
   const handleUploadCover = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     if (file) {
+      dispatch(fetchResizeUrlImage(file) as any);
       const previewUrl = URL.createObjectURL(file);
       setPhotoPreview(previewUrl);
     } else {
@@ -99,7 +113,18 @@ const WritePost = () => {
     }
   };
 
-  const onPublishPost = handleSubmit((data) => {});
+  const onPublishPost = handleSubmit((data: any) => {
+    dispatch(createPost({ ...data, cover: linkImagePost, status: statusPost, tags: tags }) as any)
+    setIsShowToastMessage(!isShowToastMessage)
+  });
+
+  const handleToggleStatus = (e: any) => {
+    if (e.target.checked) {
+      setStatusPost('private');
+    } else {
+      setStatusPost('public');
+    }
+  }
 
   return (
     <>
@@ -114,7 +139,15 @@ const WritePost = () => {
                 <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)}>
                   <img src={iconImage} alt="Icon add image cover" width={18} height={18} />
                 </button>
-
+                <div className="toggle-button-cover">
+                  <div className="button-cover">
+                    <div className="button r" id="button-1">
+                      <input type="checkbox" className="checkbox" onClick={handleToggleStatus} />
+                      <div className="knobs"></div>
+                      <div className="layer"></div>
+                    </div>
+                  </div>
+                </div>
                 <input
                   ref={coverImageRef}
                   type="file"
@@ -189,6 +222,13 @@ const WritePost = () => {
           </div>
         </div>
       </div>
+
+      <ToastMessage 
+        isSuccess={isSuccessCreatePost} 
+        isShow={isShowToastMessage} 
+        title={isSuccessCreatePost ? "Success" : "Error"} 
+        subtitle={isMessageCreatePost}
+      ></ToastMessage>
     </>
   );
 };

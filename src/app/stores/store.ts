@@ -6,6 +6,8 @@ import authReducer from '../pages/auth/auth.reducer';
 import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
 import { lastesPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
+import { imageSignedReducer } from '../pages/write-post/image-sign.reducer';
+import { writePostReducer } from '../pages/write-post/write-post.reducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -18,6 +20,8 @@ export const rootReducer = combineReducers({
   detail: detailPostReducer,
   post: lastesPostReducer,
   user: userReducer,
+  imageSign: imageSignedReducer,
+  writePost: writePostReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(loggerMiddleware, thunk)));

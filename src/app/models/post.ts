@@ -31,3 +31,10 @@ export interface UserModel {
   followings: number;
   verifyAt: string;
 }
+
+
+export interface PositionImageModel {
+  signedRequest: string,
+  url: string,
+}
+
