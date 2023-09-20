@@ -1,20 +1,19 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { createPost } from '../write-post.action';
-import ToastMessage from '../../../shared/components/ToastMessage';
-import { fetchSignUrlImage } from '../image-sign.action';
-import TextEditor from '../components/TextEditor';
-import WritePostHeader from '../components/WritePostHeader';
 
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
 import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
 import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
+import TextEditor from '../components/TextEditor';
+import WritePostHeader from '../components/WritePostHeader';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost } from '../write-post.action';
+import ToastMessage from '../../../shared/components/ToastMessage';
+import { fetchSignUrlImage } from '../image-sign.action';
 
 const schema = yup
   .object({
@@ -114,16 +113,16 @@ const WritePost = () => {
     }
   };
 
-  const onPublishPost = handleSubmit(async (data: any) => {
+  const onPublishPost = handleSubmit((data: any) => {
     dispatch(createPost({ ...data, cover: linkImagePost, status: statusPost, tags: tags }) as any)
     setIsShowToastMessage(!isShowToastMessage);
   });
 
   const handleToggleStatus = (e: any) => {
     if (e.target.checked) {
-      setStatusPost('public');
-    } else {
       setStatusPost('private');
+    } else {
+      setStatusPost('public');
     }
   }
 
@@ -157,7 +156,6 @@ const WritePost = () => {
                   onChange={handleUploadCover}
                   accept="image/png, image/jpeg"
                 />
-
                 {isOpenInputLink && (
                   <input
                     ref={coverLinkRef}
@@ -167,7 +165,6 @@ const WritePost = () => {
                     placeholder="Enter the cover link here ..."
                   />
                 )}
-
                 {isOpenImage && (
                   <div className="write-post-path-cover d-flex">
                     <button className="btn btn-pick-cover" type="button" onClick={clickSelectCover}>
@@ -178,13 +175,11 @@ const WritePost = () => {
                     </button>
                   </div>
                 )}
-
                 {photoPreview && (
                   <div className="write-post-preview-img d-flex justify-center">
                     <img src={photoPreview} alt="Image of preview of title" />
                   </div>
                 )}
-
                 <ReactQuill
                   className="write-post-area"
                   theme="bubble"
@@ -193,7 +188,6 @@ const WritePost = () => {
                   placeholder="Description your story ..."
                 />
                 <p className="write-post-form-error">{errors.description?.message}</p>
-
                 <TextEditor value={contentInput} placeholder={'Write your story ...'} onChange={onContentChange} />
                 <p className="write-post-form-error">{errors.content?.message}</p>
               </div>
@@ -223,6 +217,7 @@ const WritePost = () => {
           </div>
         </div>
       </div>
+
 
       {
         isSuccessCreatePost && <ToastMessage

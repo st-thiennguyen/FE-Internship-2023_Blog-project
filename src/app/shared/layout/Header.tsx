@@ -6,8 +6,6 @@ import logo from '../../../assets/images/logo.svg';
 import { Auth } from '../../models/auth';
 import { logoutAction } from '../../pages/auth/auth.actions';
 import ToastMessage from '../components/ToastMessage';
-import { StorageKey } from '../constants';
-import { getLocalStorage } from '../utils';
 
 interface HeaderProps {
   isLogin: Boolean;
@@ -21,7 +19,7 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
   const handleLogout = (e: any) => {
     dispatch(logoutAction() as any);
     e.preventDefault();
-    // setIsShowToastMessage(true);
+    setIsShowToastMessage(true);
   };
 
   return (
