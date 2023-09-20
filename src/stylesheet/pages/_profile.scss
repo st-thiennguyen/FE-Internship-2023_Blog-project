@@ -41,10 +41,11 @@
         margin: 12px 0;
       }
       .detail-info-item {
-        margin: 2px 0;
+        margin: 4px 0;
       }
       .info-desc {
-        margin-left: 4px;
+        margin-left: 6px;
+        font-size: map-get($map: $font-size, $key: sm);
       }
     }
 
