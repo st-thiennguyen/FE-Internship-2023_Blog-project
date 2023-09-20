@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { PostModel, UserModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost, getPublicPosts } from '../../shared/services/index';
+import { getPublicPosts, getRecommendPosts } from '../../shared/services/index';
 import { getUsers } from '../../shared/services/user';
 import { RootAction } from '../../stores/store';
 
@@ -76,5 +76,36 @@ export const fetchUsers = () => async (dispatch: Dispatch<RootAction>) => {
     dispatch(getUsersSuccess(response as UserModel[]));
   } catch (err) {
     dispatch(getUsersFailure(`${err}`));
+  }
+};
+
+// recommend
+export const getRecommendStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_RECOMMEND,
+  };
+};
+
+export const getRecommendSuccess = (data: PostModel[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_RECOMMEND_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getRecommendFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_RECOMMEND_FAILURE,
+    payload: error,
+  };
+};
+
+export const getRecommend = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getRecommendStart());
+  try {
+    const response = await getRecommendPosts(page, size);
+    dispatch(getRecommendSuccess(response as PostModel[]));
+  } catch (error) {
+    dispatch(getRecommendFailure(`${error}`));
   }
 };

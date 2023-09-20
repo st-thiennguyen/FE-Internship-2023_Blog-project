@@ -10,16 +10,22 @@
       justify-content: end;
 
       height: 400px;
-      padding: 20px 24px;
+      padding: 24px 32px;
       border-radius: 12px;
-
-      background: url("../../assets/images/demo-cover.jpg") top center / cover no-repeat;
       color: map-get($color, textButton);
 
       &-title {
         max-width: 80%;
-        font-size: 28px;
+        font-size: 32px;
         line-height: 1.4;
+      }
+      &-cover {
+        @include position(0, 0, 0, 0, absolute);
+        border-radius: 12px;
+        &-img {
+          height: 100%;
+          object-fit: cover;
+        }
       }
       &::after {
         content: "";
@@ -30,9 +36,21 @@
       &-content {
         z-index: 1;
       }
+
       &-author {
-        display: inline-block;
-        margin: 6px 0 16px;
+        margin: 6px 0 10px;
+        .author-avatar {
+          width: 24px;
+          height: 30px;
+          margin-right: 10px;
+          img {
+            border-radius: 100%;
+            object-fit: cover;
+          }
+        }
+        .author-name {
+          color: map-get($map: $color, $key: textLight);
+        }
       }
       .reaction-item {
         margin-right: 10px;
@@ -43,7 +61,7 @@
     }
     .tag-list {
       flex-wrap: wrap;
-      max-width: 305px;
+      max-width: 500px;
     }
     .tag-item:not(:last-child) {
       margin-right: 5px;
