@@ -5,7 +5,7 @@
 
   padding: 12px 32px;
   border-radius: 6px;
-  border: none;
+  border: transparent;
   outline: none;
 
   color: map-get($color, dark);
@@ -28,10 +28,20 @@
 .btn-primary {
   background-color: map-get($color, primary);
   color: map-get($color, textButton);
+
+  &:hover {
+    color: map-get($color, primary);
+    background-color: map-get($color, backgroundFrame);
+  }
 }
 
 .btn-secondary {
   background-color: map-get($color, secondary);
+  color: #fff;
+}
+
+.btn-gradient {
+  background-image: linear-gradient(to right, map-get($color, primary), map-get($color, secondary));
   color: #fff;
 }
 
@@ -44,7 +54,7 @@ button[disabled] {
 .btn-loading {
   position: absolute;
   top: 0;
-  right: 38%;
+  right: 0;
 
   width: 20px;
   height: 20px;

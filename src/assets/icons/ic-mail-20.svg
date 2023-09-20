@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- License: MIT. Made by humbleicons: https://github.com/zraly/humbleicons -->
+<svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <g stroke="#000000" stroke-width="2">
+    <path stroke-linejoin="round" d="M20 6H4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V7a1 1 0 00-1-1z"/>
+    <path stroke-linecap="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8"/>
+  </g>
+</svg>
