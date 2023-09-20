@@ -1,7 +1,7 @@
 import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
 
-const MainProfile = () => {
+const ProfilePage = () => {
   return (
     <div className="main-profile-page">
       <UserDetail />
@@ -10,4 +10,4 @@ const MainProfile = () => {
   );
 };
 
-export default MainProfile;
+export default ProfilePage;

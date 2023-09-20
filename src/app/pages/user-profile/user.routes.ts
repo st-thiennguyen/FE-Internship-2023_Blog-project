@@ -1,4 +1,4 @@
-import MainProfile from './container/MainProfile';
+import ProfilePage from './container/ProfilePage';
 import UserProfile from './container/UserProfile';
 
 const userProfileRoutes = [
@@ -8,15 +8,15 @@ const userProfileRoutes = [
     component: UserProfile,
     children: [
       {
-        name: 'main-profile',
+        name: 'my-profile',
         path: '',
-        component: MainProfile,
+        component: ProfilePage,
         isAuth: true,
       },
       {
-        name: 'other-user',
+        name: 'user-profile',
         path: ':id',
-        component: MainProfile,
+        component: ProfilePage,
         isAuth: true,
       },
     ],
