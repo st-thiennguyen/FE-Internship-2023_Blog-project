@@ -47,7 +47,7 @@ const PostItem = ({ post }: PostItemProps) => {
               <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
-            <p className="post-content">{post.content}</p>
+            <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
           </div>
           <div className="post-footer d-flex justify-between">
             <span className="read-more">READ MORE</span>

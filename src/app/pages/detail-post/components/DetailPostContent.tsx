@@ -41,8 +41,8 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
       </div>
       <div className="detail-post">
         <div className="detail-post-body">
-          <p className="post-desc">{post.description}</p>
-          <p className="post-content">{post.content}</p>
+          <div className="post-desc" dangerouslySetInnerHTML={{ __html: post.description }}></div>
+          <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>
         <div className="post-tag">
           <ul className="tag-list d-flex flex-wrap justify-end">
