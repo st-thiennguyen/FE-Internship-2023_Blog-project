@@ -95,10 +95,10 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   }
 };
 
-export const logoutAction = (token: string) => async (dispatch: Dispatch<RootAction>) => {
+export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
-    await logout(token);
+    await logout();
     removeLocalStorage(StorageKey.AUTH);
     dispatch(logoutSuccess());
   } catch (error) {

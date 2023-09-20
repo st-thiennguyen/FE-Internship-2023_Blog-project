@@ -39,7 +39,7 @@ const PostItem = ({ post }: PostItemProps) => {
                 <img
                   className="user-avatar"
                   onError={() => setIsErrAvt(true)}
-                  src={!isErrAvt ? post.cover : require('../../../assets/images/user-default.png')}
+                  src={!isErrAvt ? post.user.picture : require('../../../assets/images/user-default.png')}
                   alt={post.user.displayName}
                 />
                 <span className="user-name">{post.user.displayName}</span>
