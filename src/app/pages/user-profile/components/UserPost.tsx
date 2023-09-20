@@ -1,5 +1,4 @@
 import { PostModel } from '../../../models/post';
-import PostItem from '../../../shared/components/PostItem';
 import UserPostList from './UserPostList';
 
 const posts: PostModel[] = [
