@@ -121,6 +121,90 @@
       }
     }
   }
+
+  .section-comment {
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 40px;
+    .comment-title {
+      margin-bottom: 16px;
+    }
+    .comment-input {
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 16px;
+
+      color: map-get($color, text);
+      font-size: map-get($font-size, md);
+      outline: none;
+      resize: none;
+
+      &:focus {
+        &::-webkit-input-placeholder {
+          opacity: 0;
+        }
+      }
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        display: none;
+      }
+      &-wrapper {
+        align-items: end;
+        width: 80%;
+        border-radius: 6px;
+        margin-bottom: 32px;
+      }
+    }
+    .btn-comment {
+      padding: 10px 12px;
+    }
+
+    .comment {
+      &-item {
+        width: 70%;
+        margin-bottom: 28px;
+      }
+      &-info-top {
+        align-items: flex-start;
+        margin-bottom: 4px;
+      }
+      .user-info {
+        margin-right: 10px;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+      .user-name {
+        margin-right: 10px;
+        font-size: map-get($font-size, xs);
+        font-weight: map-get($font-weight, bold);
+        color: map-get($color, subtext);
+      }
+      &-content {
+        border-radius: 6px;
+        font-size: map-get($font-size, lg);
+        color: map-get($color, text);
+      }
+      &-createdAt {
+        color: map-get($color, subtext);
+        font-size: map-get($font-size, xs);
+      }
+    }
+  }
 }
 
 // LOADING
