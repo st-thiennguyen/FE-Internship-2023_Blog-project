@@ -26,7 +26,7 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
   });
 
   return (
-    <Link to={'/'} className="recommend-link">
+    <Link to={`/detail/${post.id}`} className="recommend-link">
       <div className="recommend-item">
         <div className="recommend d-flex flex-column">
           <div className="recommend-cover">
@@ -35,14 +35,16 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
           <div className="recommend-content">
             <h3 className="recommend-title">{post.title}</h3>
             <div className="recommend-author d-flex item-center flex-row">
-              <div className="author-avatar">
-                <img
-                  onError={() => setIsErrAvt(true)}
-                  src={!isErrAvt ? post.user.picture : require('../../../../../assets/images/user-default.png')}
-                  alt={post.user.displayName}
-                />
-              </div>
-              <span className="author-name">{post.user.displayName}</span>
+              <Link to={`profile/${post.userId}`} className="d-flex">
+                <div className="author-avatar">
+                  <img
+                    onError={() => setIsErrAvt(true)}
+                    src={!isErrAvt ? post.user.picture : require('../../../../../assets/images/user-default.png')}
+                    alt={post.user.displayName}
+                  />
+                </div>
+                <span className="author-name">{post.user.displayName}</span>
+              </Link>
             </div>
             <div className="recommend-footer d-flex justify-between">
               <ul className="reaction-list d-flex">

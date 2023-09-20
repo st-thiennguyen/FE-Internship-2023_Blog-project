@@ -48,6 +48,9 @@
             object-fit: cover;
           }
         }
+        .author-name {
+          color: map-get($map: $color, $key: textLight);
+        }
       }
       .reaction-item {
         margin-right: 10px;
