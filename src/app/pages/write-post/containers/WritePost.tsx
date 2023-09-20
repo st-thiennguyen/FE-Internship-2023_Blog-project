@@ -20,12 +20,12 @@ const schema = yup
     description: yup
       .string()
       .required('Description must not be null!')
-      .min(100, 'Description must not be less than 100 characters')
+      .min(50, 'Description must not be less than 100 characters')
       .max(300, 'Description must not be more than 300 characters!'),
     content: yup
       .string()
       .required('Content must not be null!')
-      .min(200, 'Content must not be less than 200 characters!'),
+      .min(50, 'Content must not be less than 200 characters!'),
   })
   .required();
 
