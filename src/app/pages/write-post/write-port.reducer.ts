@@ -23,6 +23,7 @@ export const writePostReducer = (state = initState, action: RootAction) => {
       return {
         ...state,
         isLoading: true,
+        isSuccess : false
       }
 
     case ACTIONS_TYPE.ADD_POST_SUCCESS:

@@ -1,18 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.bubble.css';
 import * as yup from 'yup';
 
 import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
 import WritePostHeader from '../components/WritePostHeader';
-import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../write-post.action';
 import ToastMessage from '../../../shared/components/ToastMessage';
-import { fetchSignUrlImage } from '../image-sign.action';
+import { RootState } from '../../../stores/store';
+import 'react-quill/dist/quill.bubble.css';
 
 const schema = yup
   .object({
@@ -42,14 +43,24 @@ type FormData = {
 const WritePost = () => {
 
   const [statusPost, setStatusPost] = useState('public');
-  const [isShowToastMessage, setIsShowToastMessage] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  const formRef: any = useRef(null);
 
-  const linkImagePost = useSelector((state: any) => state.imageSign.file.url);
+  let linkImagePost = useSelector((state: any) => state.imageSign.file.url);
   const isSuccessCreatePost = useSelector((state: any) => state.writePost.isSuccess);
   const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleReset = (data: any) => {
+    formRef.current.reset();
+    data.content = '';
+    data.description = '';
+    data.title = '';
+    setPhotoPreview('');
+  };
 
   const {
     register,
@@ -64,14 +75,15 @@ const WritePost = () => {
     setValue('description', value);
   };
 
+
   const contentInput = watch('content');
   const onContentChange = (value: string) => {
     setValue('content', value);
   };
 
   const onPublishPost = handleSubmit((data: any) => {
-    dispatch(createPost({ ...data, cover: linkImagePost, status: statusPost, tags: tags }) as any)
-    setIsShowToastMessage(!isShowToastMessage);
+    dispatch(createPost({ ...data, cover: linkImagePost, status: statusPost, tags: tags }) as any);
+    handleReset(data);
   });
 
   const handleToggleStatus = (e: any) => {
@@ -82,13 +94,19 @@ const WritePost = () => {
     }
   }
 
+  useEffect(() => {
+    if (!accessToken) {
+      navigate('/');
+    }
+  }, [accessToken]);
+
   return (
     <>
       <WritePostHeader onPublishPost={onPublishPost} />
       <section className="section section-write-post">
         <div className="container">
           <div className="write-post">
-            <form className="write-post-form d-flex flex-column">
+            <form className="write-post-form d-flex flex-column" ref={formRef}>
               <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..." />
               <p className="write-post-form-error">{errors.title?.message}</p>
               <div className="write-post-editor">
@@ -118,23 +136,14 @@ const WritePost = () => {
           </div>
         </div>
       </section>
-
-
       {
-        isSuccessCreatePost ?
-          <ToastMessage
-            isSuccess={isSuccessCreatePost}
-            isShow={isSuccessCreatePost}
-            title={'success'}
-            subtitle={isMessageCreatePost}
-          ></ToastMessage>
-          :
-          <ToastMessage
-            isSuccess={isSuccessCreatePost}
-            isShow={isSuccessCreatePost}
-            title={'error'}
-            subtitle={isMessageCreatePost}
-          ></ToastMessage>
+        isSuccessCreatePost &&
+        <ToastMessage
+          isSuccess={isSuccessCreatePost}
+          isShow={isSuccessCreatePost}
+          title={isSuccessCreatePost ? 'success' : 'error'}
+          subtitle={isMessageCreatePost}
+        ></ToastMessage>
       }
     </>
   );

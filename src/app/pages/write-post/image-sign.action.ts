@@ -4,6 +4,11 @@ import { RootAction } from '../../stores/store';
 import { UploadUrlImagePost, getSignUrlImage } from '../../shared/services';
 import { PositionImageModel } from '../../models/post';
 
+export const signUrlImagePostReset = () => {
+  return {
+    type: ACTIONS_TYPE.RESET_SIGN_IMAGE_POST
+  }
+}
 
 export const getSignUrlImagePostStart = () => {
   return {
@@ -25,6 +30,8 @@ export const getSignUrlImagePostFailure = (error: any) => {
   }
 }
 
+
+
 export const fetchSignUrlImage = (file: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getSignUrlImagePostStart());
   try {
@@ -35,6 +42,7 @@ export const fetchSignUrlImage = (file: any) => async (dispatch: Dispatch<RootAc
     dispatch(getSignUrlImagePostFailure(error))
   }
 }
+
 
 
 

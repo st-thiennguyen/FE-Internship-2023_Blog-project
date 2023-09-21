@@ -1,0 +1,64 @@
+[33m6d4bbf7[m[33m ([m[1;36mHEAD -> [m[1;32mtask/20230921/cmvn-truongle_add-redux-and-handle-soft-delete-my-article[m[33m)[m task/20230919/cmvn-truongle_handle-logic-create-post
+[33m4af2df4[m[33m ([m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m Merge pull request #41 from st-thiennguyen/task/20230918/cmvn-truongle-Config_header_context_and_update_UI_header
+[33m20edd53[m[33m ([m[1;31morigin/task/20230918/cmvn-truongle-Config_header_context_and_update_UI_header[m[33m, [m[1;32mtask/20230918/cmvn-truongle-Config_header_context_and_update_UI_header[m[33m)[m Config_header_context_and_update_UI_header
+[33m454e40b[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into develop
+[33m056c00e[m fix conflict file empty post
+[33m7ebcd6b[m fix conflict file empty post
+[33mfe2501d[m delete routes in Layout.tsx
+[33me7ccd7c[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into task/20230918/cmvn-truongle-Config_header_context_and_update_UI_header
+[33mc395ab2[m change link import avatar
+[33m6435e00[m uninstall library not neccessary
+[33m4bbb761[m Merge pull request #35 from st-thiennguyen/enhance/20230919/st-vietnguyen-update-handle-load-more
+[33mc52b306[m[33m ([m[1;31morigin/enhance/20230919/st-vietnguyen-update-handle-load-more[m[33m)[m update handle loadmore latest post
+[33m921f605[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into task/20230918/cmvn-truongle-Config_header_context_and_update_UI_header
+[33m103bce2[m fix set again image vavatar when link avatar error
+[33m1c08e8b[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into enhance/20230919/st-vietnguyen-update-handle-load-more
+[33m69d64b4[m Merge pull request #36 from st-thiennguyen/enhance/20230919/st-vietnguyen_add-empty-post
+[33m97b09b6[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into task/20230918/cmvn-truongle-Config_header_context_and_update_UI_header
+[33m0c2d6c0[m[33m ([m[1;31morigin/enhance/20230919/st-vietnguyen_add-empty-post[m[33m)[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into enhance/20230919/st-vietnguyen_add-empty-post
+[33m23253fc[m fix message in empty post component
+[33m6d09d08[m Merge pull request #37 from st-thiennguyen/bug/20230919/st-khanhngo_fix-import-conflicts
+[33m03cf75d[m[33m ([m[1;31morigin/bug/20230919/st-khanhngo_fix-import-conflicts[m[33m)[m fix conflict import files
+[33mf5b12c5[m fix conflict file latest post
+[33m809674a[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into develop
+[33mbe1baaa[m change variable from errorLogin to isErrorLogin and add button login on header
+[33m9574d29[m Merge pull request #34 from st-thiennguyen/enhance/20230918/st-vietnguyen_config-router
+[33mb3fffbb[m fix conflict file home.tsx
+[33mcabe574[m[33m ([m[1;31morigin/enhance/20230918/st-vietnguyen_config-router[m[33m)[m resolve confix file app.ts
+[33m3722530[m Merge pull request #33 from st-thiennguyen/enhance/20230918/st-khanhngo_format-scss
+[33m5c435bf[m change btn go to top to component
+[33maeb0df4[m add empty post when no data
+[33me078f0e[m add empty post when no data
+[33m21cc100[m update handle load more get data when scroll
+[33m7162f97[m Merge pull request #32 from st-thiennguyen/enhance/20230918/st-thiennguyen_config-redux-project
+[33mba233d4[m[33m ([m[1;31morigin/enhance/20230918/st-thiennguyen_config-redux-project[m[33m)[m completed config redux structure
+[33m432cd9a[m config router for app
+[33md393a94[m[33m ([m[1;31morigin/enhance/20230918/st-khanhngo_format-scss[m[33m)[m remove empty line
+[33md42fd3c[m Merge pull request #31 from st-thiennguyen/enhance/20230918/st-khanhngo_format-scss-regex-import
+[33m2c5f0e7[m Re-arrange scss attributes
+[33m2b06b88[m fixed comment remove unneccessary state in redux
+[33ma56f30a[m completed redux config structure
+[33m15e417e[m[33m ([m[1;31morigin/enhance/20230918/st-khanhngo_format-scss-regex-import[m[33m)[m modify component import order
+[33meef12d2[m update rd structure
+[33mf380c44[m modify convertDate util
+[33m25aa53d[m modify regex email
+[33m84ea02a[m Merge branch 'develop' of github.com:st-thiennguyen/FE-Internship-2023_Blog-project into task/20230918/cmvn-truongle-Config_header_context_and_update_UI_header
+[33m1f70a45[m config header context and update UI header
+[33m39d192e[m Merge pull request #29 from st-thiennguyen/enhance/20230918/st-khanhngo_change-toast-and-form-button
+[33m527b773[m[33m ([m[1;31morigin/enhance/20230918/st-khanhngo_change-toast-and-form-button[m[33m)[m remove web-kit scss
+[33m10bc048[m update redux config
+[33mdef41f3[m modify button component classname
+[33m1aeaad1[m change Login toast label
+[33m8e15315[m modify toast animation & position
+[33mf59a939[m update redux new config
+[33md45ea8d[m disable button while validate error
+[33mcec85e2[m Merge pull request #28 from st-thiennguyen/enhance/20230918/st-thiennguyen_update-sroll-to-top-for-detail
+[33mf0c5209[m[33m ([m[1;31morigin/enhance/20230918/st-thiennguyen_update-sroll-to-top-for-detail[m[33m)[m update scroll to top for detail
+[33me0e1cde[m Merge pull request #26 from st-thiennguyen/task/20230913/cmvn-truongle-Implement_redux_and_validate-form
+[33m9550270[m Merge pull request #27 from st-thiennguyen/task/20230917/st-khanhngo_modify-register-structure
+[33mc132bd8[m[33m ([m[1;31morigin/task/20230917/st-khanhngo_modify-register-structure[m[33m)[m navigate to home if logged in
+[33m10ee422[m[33m ([m[1;31morigin/task/20230913/cmvn-truongle-Implement_redux_and_validate-form[m[33m, [m[1;32mtask/20230913/cmvn-truongle-Implement_redux_and_validate-form[m[33m)[m delete variable not use
+[33maa78efe[m delete res when lougot success
+[33ma7508d3[m delete logout.ts
+[33m22955df[m update isLogin
+[33mc07fd92[m complete logout and fix comment

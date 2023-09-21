@@ -19,6 +19,16 @@ const initState: PositionImageProps = {
 
 export const imageSignedReducer = (state = initState, action: RootAction) => {
   switch (action.type) {
+
+    case ACTIONS_TYPE.RESET_SIGN_IMAGE_POST:
+      return {
+        ...state,
+        file: {},
+        isLoading: false,
+        isSuccess: false,
+        error: ''
+      }
+
     case ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST:
       return {
         ...state,

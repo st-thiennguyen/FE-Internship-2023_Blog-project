@@ -141,13 +141,7 @@
   outline: none;
 }
 
-#app-cover {
-  display: table;
-  width: 600px;
-  margin: 80px auto;
-  counter-reset: button-counter;
-}
-.toggle-button-cover {
+.toggle-btn-status {
   display: table-cell;
   position: relative;
   width: 200px;
@@ -155,13 +149,13 @@
   box-sizing: border-box;
 }
 
-.button-cover {
+.btn-status {
   height: 100px;
   margin: 20px;
   border-radius: 4px;
 }
 
-.button-cover:before {
+.btn-status:before {
   counter-increment: button-counter;
   content: counter(button-counter);
   position: absolute;
@@ -173,7 +167,7 @@
   padding: 5px;
 }
 
-.button-cover,
+.btn-status,
 .knobs,
 .layer {
   position: absolute;
@@ -183,7 +177,7 @@
   left: 0;
 }
 
-.button {
+.btn-r {
   position: relative;
   top: 50%;
   width: 140px;
@@ -192,7 +186,7 @@
   overflow: hidden;
 }
 
-.button.b2 {
+.btn-r.b2 {
   border-radius: 2px;
 }
 
@@ -219,7 +213,7 @@
 }
 
 /* Button 1 */
-#button-1 .knobs:before {
+.btn-1 .knobs:before {
   content: "Private";
   position: absolute;
   top: 4px;
@@ -231,23 +225,22 @@
   text-align: center;
   line-height: 1;
   padding: 9px 4px;
-  background-color: #03a9f4;
-  // border-radius: 50%;
+  background-color: #03a9f4;  
   transition: 1.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-#button-1 .checkbox:checked + .knobs:before {
+.btn-1 .checkbox:checked + .knobs:before {
   content: "Public";
   left: 60px;
   background-color: #f44336;
 }
 
-#button-1 .checkbox:checked ~ .layer {
+.btn-1 .checkbox:checked ~ .layer {
   background-color: #fcebeb;
 }
 
-#button-1 .knobs,
-#button-1 .knobs:before,
-#button-1 .layer {
+.btn-1 .knobs,
+.btn-1 .knobs:before,
+.btn-1 .layer {
   transition: 0.3s ease-in all;
 }

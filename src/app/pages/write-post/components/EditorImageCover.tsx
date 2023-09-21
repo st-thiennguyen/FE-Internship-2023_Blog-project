@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
 import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
 import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
+import { fetchSignUrlImage } from '../image-sign.action';
+import { useDispatch } from 'react-redux';
 
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
@@ -16,6 +18,8 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview }: EditorImageCoverPro
   const coverImageRef = useRef<HTMLInputElement>(null);
   const coverLinkRef = useRef<HTMLInputElement>(null);
 
+  const dispatch = useDispatch();
+
   const clickSelectCover = () => {
     coverImageRef.current?.click();
   };
@@ -27,6 +31,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview }: EditorImageCoverPro
   const handleUploadCover = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     if (file) {
+      dispatch(fetchSignUrlImage(file) as any);
       const previewUrl = URL.createObjectURL(file);
       setPhotoPreview(previewUrl);
     } else {
