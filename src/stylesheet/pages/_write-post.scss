@@ -13,36 +13,23 @@
   min-height: 300px;
 }
 
-.write-post {
+.section-write-post {
   background-color: #fff;
+}
+
+.write-post {
+  padding: 40px 0;
+
   &-form {
     gap: 16px;
   }
-  .post-cover-file {
-    display: none;
-  }
-  .post-cover-link {
-    width: 50%;
-    padding: 10px 15px;
-    border-radius: 20px;
-    outline: none;
-    border: 1px solid map-get($color, borderColor);
-  }
-  &-wrapper {
-    padding: 40px 0;
-  }
+
   &-editor {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
     min-height: 400px;
-  }
-  &-path-cover {
-    position: absolute;
-    left: 50px;
-    width: 100%;
-    gap: 16px;
   }
 
   &-input {
@@ -67,11 +54,48 @@
     width: 100%;
   }
 
-  &-preview-img {
-    img {
-      max-width: 700px;
-    }
+  &-form-error {
+    font-size: 12px;
+    color: red;
   }
+}
+
+.editor-tags {
+  &-input {
+    width: 100%;
+    padding: 20px;
+    font-size: 18px;
+    border: 0;
+    outline: none;
+  }
+  &-input::placeholder {
+    color: #b3b3b1;
+  }
+
+  .tags-hint {
+    color: #b3b3b1;
+  }
+
+  &-list {
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  &-item {
+    padding: 10px 15px;
+    background-color: map-get($color, borderColor);
+    border-radius: 16px;
+  }
+
+  &-text {
+    padding: 10px 15px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+}
+
+.editor-cover {
   .btn-add-cover,
   .btn-pick-cover {
     display: flex;
@@ -86,36 +110,30 @@
     border: 1px solid map-get($color, primary);
   }
 
-  &-input-tags {
+  &-select {
+    position: absolute;
+    left: 50px;
+    top: 0;
     width: 100%;
-    padding: 20px;
-    font-size: 18px;
-    border: 0;
+    gap: 16px;
+  }
+
+  &-file {
+    display: none;
+  }
+  &-link {
+    margin-top: 15px;
+    width: 50%;
+    padding: 10px 15px;
+    border-radius: 20px;
     outline: none;
+    border: 1px solid map-get($color, borderColor);
   }
 
-  .tags-hint {
-    color: #b3b3b1;
-  }
-  .post-tags-list {
-    margin-top: 16px;
-    gap: 10px;
-    .post-tag-item {
-      padding: 10px 15px;
-      background-color: map-get($color, borderColor);
-      border-radius: 16px;
+  &-preview {
+    img {
+      max-width: 700px;
     }
-
-    .tag-write-post {
-      padding: 10px 15px;
-      background-color: transparent;
-      border: 0;
-      cursor: pointer;
-    }
-  }
-  &-form-error {
-    font-size: 12px;
-    color: red;
   }
 }
 
