@@ -6,6 +6,7 @@ import authReducer from '../pages/auth/auth.reducer';
 import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
 import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
+import { userProfileReducer } from '../pages/user-profile/user-profile.reducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
   detail: detailPostReducer,
   post: lastesPostReducer,
   user: userReducer,
+  userProfile: userProfileReducer,
   recommend: recommendPostReducer,
 });
 

@@ -31,3 +31,8 @@ export interface UserModel {
   followings: number;
   verifyAt: string;
 }
+
+export interface ProfileModel extends UserModel {
+  isFollowed: boolean;
+  Posts: PostModel[];
+}

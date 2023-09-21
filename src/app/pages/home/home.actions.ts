@@ -3,8 +3,8 @@ import { Dispatch } from 'react';
 import { PostModel, UserModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { getPublicPosts, getRecommendPosts } from '../../shared/services/index';
-import { getUsers } from '../../shared/services/user';
 import { RootAction } from '../../stores/store';
+import { getUsers } from '../../shared/services/user.service';
 
 export const getPublicPostStart = () => {
   return {

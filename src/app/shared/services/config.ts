@@ -20,7 +20,7 @@ export class ApiService {
   }
 
   private _requiresAuthorization(url: string) {
-    const pathsRequiringAuthorization = ['/logout'];
+    const pathsRequiringAuthorization = ['/logout', '/users'];
     return pathsRequiringAuthorization.some((path) => url.includes(path));
   }
 

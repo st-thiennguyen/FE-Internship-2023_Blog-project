@@ -29,6 +29,6 @@ export const ENDPOINT = {
     recommend: `${BASE_URL}/${RESOURCES.posts}/recommend`,
   },
   users: {
-    index: `${BASE_URL}/${RESOURCES.users}/`,
+    index: `${BASE_URL}/${RESOURCES.users}`,
   },
 };
