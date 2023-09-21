@@ -3,6 +3,7 @@ import { PostModel, ProfileModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../home/components/EmptyPost';
 import { RootState } from '../../../stores/store';
+import { useParams } from 'react-router-dom';
 
 interface UserPostListProps {
   postList: ProfileModel;
@@ -11,8 +12,10 @@ interface UserPostListProps {
 const UserPostList = ({ postList }: UserPostListProps) => {
   const posts: PostModel[] = postList.Posts;
   const userProfile = useSelector((state: RootState) => state.userProfile.profile);
+
+  const { id } = useParams();
   return (
-    <ul className="user-post-list row">
+    <ul className={`user-post-list row ${!id && 'my-post'}`}>
       {posts?.length > 0 ? (
         posts?.map((post, index) => {
           return (

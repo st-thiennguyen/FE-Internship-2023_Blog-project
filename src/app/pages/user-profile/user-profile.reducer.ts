@@ -48,7 +48,7 @@ export const userProfileReducer = (state = initialState, action: RootAction): Pr
       return {
         ...state,
         postList: {} as ProfileModel,
-        isLoading: false,
+        isLoading: true,
         isSuccess: false,
         isError: false,
         message: '',

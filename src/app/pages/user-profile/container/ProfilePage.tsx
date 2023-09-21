@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserPostAction, getUserProfileAction } from '../user-profile.action';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RootState } from '../../../stores/store';
+import Loading from '../../../shared/components/Loading';
 
 const ProfilePage = () => {
   const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
+  const isLoading = useSelector((state: RootState) => state.userProfile.isLoading);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,8 +29,14 @@ const ProfilePage = () => {
 
   return (
     <div className="main-profile-page">
-      <UserDetail />
-      <UserPost />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <UserDetail />
+          <UserPost />
+        </>
+      )}
     </div>
   );
 };

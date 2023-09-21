@@ -1,29 +1,37 @@
 import { Link, useParams } from 'react-router-dom';
 import Button from '../../../shared/components/Button';
-import { ProfileModel } from '../../../models/post';
 import { convertDateToString } from '../../../shared/utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../stores/store';
+import { useState } from 'react';
 
-interface UserDetailProps {
-  userProfile: ProfileModel;
-  postList: any;
-}
+const UserDetail = () => {
+  const userProfile = useSelector((state: RootState) => state.userProfile.profile);
+  const postList = useSelector((state: RootState) => state.userProfile.postList);
 
-const UserDetail = ({ userProfile, postList }: UserDetailProps) => {
-  const { displayName, email, firstName, lastName, followers, followings, isFollowed, picture } = userProfile;
+  const { displayName, email, firstName, lastName, followers, followings, isFollowed, picture, phone, dob } =
+    userProfile;
   const { verifyAt, Posts } = postList;
   const { id } = useParams();
+
+  const [isErrAvt, setIsErrAvt] = useState(false);
 
   return (
     <section className="section section-user-detail">
       <h2 className="section-title text-center">{displayName}</h2>
       <div className="user-detail-header d-flex item-center">
         <div className="user-avatar">
-          <img src={picture} alt="Khanh profile picture" className="user-avatar-img" />
+          <img
+            onError={() => setIsErrAvt(true)}
+            src={!isErrAvt ? picture : require('../../../../assets/images/user-default.png')}
+            alt={displayName + ` avatar`}
+            className="user-avatar-img"
+          />
         </div>
         <ul className="user-social-list row justify-between">
           <li className="user-social-item col col-4">
             <div className="user-social">
-              <p className="social-count text-center">{Posts.length}</p>
+              <p className="social-count text-center">{Posts?.length}</p>
               <p className="social-desc text-center">Posts</p>
             </div>
           </li>
@@ -45,22 +53,34 @@ const UserDetail = ({ userProfile, postList }: UserDetailProps) => {
         <div className="user-detail-info">
           <h3 className="user-detail-fullname">{firstName + ' ' + lastName}</h3>
           <div className="detail-info-item d-flex item-center">
+            <i className="icon icon-small icon-dob-20" />
+            <p className="info-desc">{dob}</p>
+          </div>
+          <div className="detail-info-item d-flex item-center">
             <i className="icon icon-small icon-mail-20" />
             <p className="info-desc">{email}</p>
           </div>
+        </div>
+        <div className="user-detail-info">
+          <div className="detail-info-item d-flex item-center">
+            <i className="icon icon-small icon-phone-20" />
+            <p className="info-desc">{phone}</p>
+          </div>
           <div className="detail-info-item d-flex item-center">
             <i className="icon icon-small icon-date-outline-20" />
-            <p className="info-desc">Joined since {convertDateToString(verifyAt, '-')}</p>
+            <p className="info-desc">Joined since {convertDateToString(verifyAt, '/')}</p>
           </div>
         </div>
         {id ? (
-          <Button label={'Follow'} optionClassName="btn btn-follow btn-gradient"></Button>
+          <Button
+            label={isFollowed ? 'Following' : 'Follow'}
+            optionClassName={`btn btn-follow ${isFollowed ? 'btn-following' : 'btn-gradient'}`}
+          ></Button>
         ) : (
           <Link to={'/update-account'} className="btn btn-secondary">
             Update Information
           </Link>
         )}
-        {/* <Button label={'Following'} optionClassName="btn btn-follow btn-following"></Button> */}
       </div>
     </section>
   );
