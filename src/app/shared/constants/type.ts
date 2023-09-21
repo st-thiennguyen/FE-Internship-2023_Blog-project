@@ -54,6 +54,7 @@ const ACTIONS_TYPE = {
   GET_PROFILE_SUCCESS: 'get-profile-success',
   GET_PROFILE_FAILURE: 'get-profile-failure',
   // UPDATE PROFILE
+  RESET_USER_PROFILE_STATE : 'reset-user-profile-state',
   UPDATE_PROFILE: 'update-profile',
   UPDATE_PROFILE_SUCCESS: 'update-profile-success',
   UPDATE_PROFILE_FAILURE: 'get-profile-failure',
@@ -75,6 +76,10 @@ const ACTIONS_TYPE = {
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
   GET_RECOMMEND_FAILURE: 'get-recommend-failure',
+  // REMOVE POST ITEM
+  REMOVE_POST_ITEM: 'remove-post-item',
+  REMOVE_POST_ITEM_SUCCESS: 'remove-post-item-success',
+  REMOVE_POST_ITEM_FAILURE: 'remove-post-item-failure',
 };
 
 export default ACTIONS_TYPE;

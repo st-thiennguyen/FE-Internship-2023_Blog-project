@@ -99,7 +99,7 @@
         color: map-get($color, subtext);
       }
     }
-    .post-action-list {
+    .post-action-list, .post-delete {
       display: none;
     }
   }

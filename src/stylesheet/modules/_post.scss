@@ -110,11 +110,6 @@
     font-size: map-get($font-size, sm);
     font-weight: map-get($font-weight, medium);
   }
-  &:hover {
-    .post-delete {
-      visibility: visible;
-    }
-  }
 
   .post-status {
     position: absolute;

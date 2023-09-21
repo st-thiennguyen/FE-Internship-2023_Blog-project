@@ -21,3 +21,8 @@ export const getRecommendPosts = (page: number, size: number) => {
     size,
   });
 };
+
+export const deletePostItem = (id : number) => {
+  const api = new ApiService();
+  return api.delete(`${ENDPOINT.post.index}/${id}`);
+}
