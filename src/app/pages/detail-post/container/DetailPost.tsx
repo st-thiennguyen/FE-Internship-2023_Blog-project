@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
-import ToastMessage from '../../../shared/components/ToastMessage';
 import { RootState } from '../../../stores/store';
+import { fetchDetailBlog } from '../detail-post.actions';
+
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
 import DetailPostLoading from '../components/DetailPostLoading';
-import { fetchDetailBlog } from '../detail-post.actions';
 import DetailPostComment from '../components/DetailPostComment';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
 const DetailPost = () => {
   const dispatch = useDispatch();

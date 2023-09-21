@@ -1,5 +1,3 @@
-import React from 'react';
-
 const DetailPostReaction = () => {
   return (
     <div className="detail-action">

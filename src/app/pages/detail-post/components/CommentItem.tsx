@@ -1,5 +1,5 @@
-import { CommentItemModel } from '../../../models/comment';
 import { timeAgoFromDate } from '../../../shared/utils';
+import { CommentItemModel } from '../../../models/comment';
 
 interface CommentItemProps {
   commentItem: CommentItemModel;
