@@ -72,7 +72,6 @@ const ACTIONS_TYPE = {
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
   // WRITE POST // RESIZE URL IMAGE POST
-  RESET_SIGN_IMAGE_POST: 'reset-sign-image-post',
   GET_SIGN_URL_IMAGE_POST: 'get-sign-image-post',
   GET_SIGN_URL_IMAGE_POST_SUCCESS: 'get-sign-image-post-success',
   GET_SIGN_URL_IMAGE_POST_FAILURE: 'get-sign-image-post-failure',

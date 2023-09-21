@@ -4,12 +4,6 @@ import { RootAction } from '../../stores/store';
 import { UploadUrlImagePost, getSignUrlImage } from '../../shared/services';
 import { PositionImageModel } from '../../models/post';
 
-export const signUrlImagePostReset = () => {
-  return {
-    type: ACTIONS_TYPE.RESET_SIGN_IMAGE_POST
-  }
-}
-
 export const getSignUrlImagePostStart = () => {
   return {
     type: ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST
