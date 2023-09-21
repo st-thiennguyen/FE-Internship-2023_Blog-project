@@ -52,7 +52,7 @@ export const uploadAvatar = (file: File) => async (dispatch: Dispatch<RootAction
   try {
     const response: any = await getEmptyImageUrl(file, TypeUploadImage.AVATAR);
     await putImageToLink(response.signedRequest, file);
-    dispatch(updateAvatarSuccess(response.signedRequest));
+    dispatch(updateAvatarSuccess(response.url));
   } catch (error) {
     dispatch(updateAvatarFailure(`${error}`));
   }

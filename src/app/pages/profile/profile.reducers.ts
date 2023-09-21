@@ -18,7 +18,7 @@ const initialState: UpdateProfileStateProps = {
   message: '',
 };
 
-export const updateUserReducer = (state = initialState, action: RootAction): UpdateProfileStateProps => {
+export const profileReducer = (state = initialState, action: RootAction): UpdateProfileStateProps => {
   switch (action.type) {
     case ACTIONS_TYPE.UPDATE_PROFILE:
       return {

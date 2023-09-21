@@ -7,9 +7,9 @@ import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../../shared/components/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfileAction, uploadAvatar } from '../update-user.actions';
 import { convertDateFormat, convertDateToString } from '../../../shared/utils';
 import { RootState } from '../../../stores/store';
+import { updateProfileAction, uploadAvatar } from '../proflie.actions';
 
 const schema = yup
   .object({

@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProfileAction, uploadAvatar } from '../update-user.actions';
 import { convertDateToString } from '../../../shared/utils';
 
 import icInfo from '../../../../assets/icons/ic-update-profile-24.svg';
