@@ -19,20 +19,12 @@ export class ApiService {
     this._setInterceptors();
   }
 
-  private _requiresAuthorization(url: string) {
-    const pathsRequiringAuthorization = ['/logout'];
-    return pathsRequiringAuthorization.some((path) => url.includes(path));
-  }
-
   private _setInterceptors = () => {
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        const requiresAuthorization = this._requiresAuthorization(config.url!);
-        if (requiresAuthorization) {
-          const auth = getLocalStorage(StorageKey.AUTH) as Auth;
-          if (auth) {
-            config.headers.Authorization = `Bearer ${auth.accessToken}`;
-          }
+        const auth = getLocalStorage(StorageKey.AUTH) as Auth;
+        if (auth) {
+          config.headers.Authorization = `Bearer ${auth.accessToken}`;
         }
         return config;
       },

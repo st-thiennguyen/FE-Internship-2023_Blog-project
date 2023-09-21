@@ -4,5 +4,5 @@ import { ApiService } from './config';
 
 export const updateProfile = (id: number, data: Omit<UserInfo, 'id' | 'email'>) => {
   const api = new ApiService();
-  return api.put(`${ENDPOINT.users.index}/${id}`);
+  return api.put(`${ENDPOINT.users.index}/${id}`, { ...data });
 };

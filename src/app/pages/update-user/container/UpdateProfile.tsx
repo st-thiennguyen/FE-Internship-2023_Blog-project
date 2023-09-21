@@ -1,77 +1,78 @@
-import React from 'react';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
+import React, { useRef, useState } from 'react';
 
 import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux';
-import { updateProfileAction } from '../update-user.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfileAction, uploadAvatar } from '../update-user.actions';
 import { convertDateToString } from '../../../shared/utils';
 
-const schema = yup
-  .object({
-    firstName: yup.string().trim().required('First Name must not be null'),
-    lastName: yup.string().trim().required('Last Name must not be null'),
-    displayName: yup.string().trim().required('Display Name must not be null'),
-    gender: yup
-      .mixed<Gender>()
-      .oneOf(Object.values(Gender), 'Gender must be male/female/other')
-      .required('Gender must not be null'),
-    dob: yup
-      .date()
-      .transform((value, originalValue) => {
-        if (originalValue === '') return null;
-        return value;
-      })
-      .max(new Date(), 'Date of birth must be in the past')
-      .required('Date of birth must not be null'),
-    phoneNumber: yup
-      .string()
-      .trim()
-      .matches(regexPhoneNumber, 'Invalid phone number')
-      .required('Phone number must not be null'),
-  })
-  .required();
+import icInfo from '../../../../assets/icons/ic-update-profile-24.svg';
+import icChangePass from '../../../../assets/icons/ic-change-password-24.svg';
+import UserUpdateForm from '../components/UserUpdateForm';
+import { RootState } from '../../../stores/store';
 
-type FormData = yup.InferType<typeof schema>;
+enum Tab {
+  UPDATE_USER_INFO = 'user-info',
+  CHANGE_PASSWORD = 'change-password',
+}
 
 const UpdateProfile = () => {
+  const avatarRef = useRef<HTMLInputElement>(null);
+  const [avatarPreview, setAvatarPreview] = useState<string>();
+  const [tab, setTab] = useState<Tab>(Tab.UPDATE_USER_INFO);
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
 
-  const handlePictureByGender = (gender: Gender) => {
-    switch (gender) {
-      case Gender.MALE:
-        return 'https://robohash.org/voluptasautvoluptatem.png?size=50x50&set=set1';
-      case Gender.FEMALE:
-        return 'https://robohash.org/consecteturdolorquia.png?size=50x50&set=set1';
-      default:
-        return 'https://robohash.org/illumetest.png?size=50x50&set=set1';
-    }
+  const onChangeTab = (value: Tab) => {
+    setTab(value);
   };
 
-  const onUpdateProfile = (data: FormData) => {
-    dispatch(
-      updateProfileAction(4, {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        gender: data.gender,
-        dob: convertDateToString(data.dob, '/'),
-        phone: data.phoneNumber,
-        displayName: data.displayName,
-        picture: handlePictureByGender(data.gender),
-      }) as any,
-    );
-  };
   return (
-    <div className="update-profile-page">
-      <div className=""></div>
+    <div className="update-profile">
+      <section className="section section-update-profile">
+        <div className="update-profile-wrapper">
+          <nav>
+            <ul className="tabs-list">
+              <li className={`tabs-item ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}>
+                <div
+                  title="Update Information"
+                  className="tabs-link d-flex justify-center item-center"
+                  onClick={() => onChangeTab(Tab.UPDATE_USER_INFO)}
+                >
+                  <img src={icInfo} alt="Icon update infomation" />
+                  Update Information
+                </div>
+              </li>
+              <li className={`tabs-item ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}>
+                <div
+                  title="Update Information"
+                  className="tabs-link d-flex justify-center item-center"
+                  onClick={() => onChangeTab(Tab.CHANGE_PASSWORD)}
+                >
+                  <img src={icChangePass} alt="Icon update infomation" />
+                  Change Password
+                </div>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="tab-content-wrapper">
+            <section
+              id="tab-update-info-content"
+              className={`section section-update-info ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}
+              data-tab-content
+            >
+              <UserUpdateForm />
+            </section>
+            <section
+              id="tab-change-password-content"
+              className={`section section-change-password ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}
+              data-tab-content
+            >
+              <div className="tab-content">Form change password</div>
+            </section>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

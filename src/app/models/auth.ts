@@ -10,6 +10,8 @@ export interface UserInfo {
   lastName: string;
   gender: string;
   dob: string;
+  phone: string;
+  picture: string;
   displayName: string;
 }
 

@@ -30,7 +30,6 @@ const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost }: D
           <img src={!isErrorCover ? cover : noImage} alt={title} />
         </div>
         <div className="cover-content d-flex flex-column justify-end">
-          <h2 className="cover-title">{title}</h2>
           <div className="cover-info d-flex justify-between item-center">
             <Link to="/" className="cover-author d-flex item-center">
               <div className="author-ava">

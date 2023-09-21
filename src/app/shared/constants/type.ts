@@ -56,7 +56,11 @@ const ACTIONS_TYPE = {
   // UPDATE PROFILE
   UPDATE_PROFILE: 'update-profile',
   UPDATE_PROFILE_SUCCESS: 'update-profile-success',
-  UPDATE_PROFILE_FAILURE: 'get-profile-failure',
+  UPDATE_PROFILE_FAILURE: 'update-profile-failure',
+  // UPDATE AVATAR
+  UPDATE_AVATAR: 'update-avatar',
+  UPDATE_AVATAR_SUCCESS: 'update-avatar-success',
+  UPDATE_AVATAR_FAILURE: 'update-avatar-failure',
   // GET USER INFO
   GET_USER_INFO: 'get-user-info',
   GET_USER_INFO_SUCCESS: 'get-user-info-success',

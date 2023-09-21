@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
@@ -11,12 +11,17 @@ interface PostItemProps {
   post: PostModel;
 }
 const PostItem = ({ post }: PostItemProps) => {
+  const postDescRef = useRef<HTMLParagraphElement>(null);
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
   }, [isErrImg, post.cover]);
+
+  const removeTags = () => {
+    postDescRef.current!.innerHTML = post.description;
+  };
 
   return (
     <Link className="post-link" to={`detail/${post.id}`}>
@@ -43,7 +48,7 @@ const PostItem = ({ post }: PostItemProps) => {
               <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
-            <p className="post-content">{post.content}</p>
+            <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
           </div>
           <div className="post-footer d-flex justify-between">
             <span className="read-more">READ MORE</span>
