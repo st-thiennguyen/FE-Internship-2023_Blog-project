@@ -44,7 +44,6 @@
 
 .update-profile-wrapper {
   //   background: #fff;
-  min-height: 100vh;
   padding: 10px;
   border-radius: 16px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -74,6 +73,12 @@
       display: none;
     }
   }
-  .profile-update-form {
+}
+
+.update-password-tab {
+  padding: 20px;
+  .err-message {
+    margin-top: 20px;
+    font-weight: map-get($font-weight, semibold);
   }
 }

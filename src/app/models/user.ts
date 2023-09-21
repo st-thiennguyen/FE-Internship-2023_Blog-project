@@ -14,3 +14,9 @@ export interface UserModel {
   followings: number;
   verifyAt: string;
 }
+
+export interface formChangePassword {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword?: string;
+}

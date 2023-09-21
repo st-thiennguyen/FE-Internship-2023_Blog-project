@@ -9,6 +9,7 @@ import icInfo from '../../../../assets/icons/ic-update-profile-24.svg';
 import icChangePass from '../../../../assets/icons/ic-change-password-24.svg';
 import UserUpdateForm from '../components/UserUpdateForm';
 import { RootState } from '../../../stores/store';
+import UpdatePasswordForm from '../components/UpdatePasswordForm';
 
 enum Tab {
   UPDATE_USER_INFO = 'user-info',
@@ -67,7 +68,9 @@ const UpdateProfile = () => {
               className={`section section-change-password ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}
               data-tab-content
             >
-              <div className="tab-content">Form change password</div>
+              <div className="tab-content">
+                <UpdatePasswordForm />
+              </div>
             </section>
           </div>
         </div>

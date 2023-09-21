@@ -6,7 +6,7 @@ import authReducer from '../pages/auth/auth.reducer';
 import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
 import { lastesPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
-import { profileReducer } from '../pages/user/profile.reducers';
+import { profileReducer } from '../pages/profile/profile.reducers';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
