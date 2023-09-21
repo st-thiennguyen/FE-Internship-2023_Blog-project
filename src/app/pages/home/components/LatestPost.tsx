@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { pageSize } from '../../../shared/constants/post';
+import { RootState } from '../../../stores/store';
+import { fetchPublicPosts } from '../home.actions';
+
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
 import EmptyPost from './EmptyPost';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../stores/store';
-import { fetchPublicPosts } from '../home.actions';
+import { pageSize } from '../../../shared/constants/post';
 
 const threshold = 400;
 

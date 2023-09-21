@@ -1,5 +1,4 @@
 import { CommentItemModel } from '../../../models/comment';
-import { timeAgoFromDate } from '../../../shared/utils';
 import CommentItem from './CommentItem';
 
 const listComment: CommentItemModel[] = [
