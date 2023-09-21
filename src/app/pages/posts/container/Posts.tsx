@@ -1,14 +1,12 @@
 import GoToTopBTn from '../../../shared/components/GoToTopBtn';
-import LatestPost from '../components/LatestPost';
-import Recommend from '../components/recommend';
+import PostResult from '../components/PostResult';
 
-const Home = () => {
+const Posts = () => {
   return (
     <div className="home-page">
-      <Recommend />
       <div className="row">
         <div className="col col-12">
-          <LatestPost />
+          <PostResult />
         </div>
       </div>
       <GoToTopBTn />
@@ -16,4 +14,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Posts;
