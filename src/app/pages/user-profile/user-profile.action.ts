@@ -1,7 +1,9 @@
 import { Dispatch } from 'react';
-import ACTIONS_TYPE from '../../shared/constants/type';
+
 import { RootAction } from '../../stores/store';
 import { getUserPosts, getUserProfile } from '../../shared/services/user.service';
+
+import ACTIONS_TYPE from '../../shared/constants/type';
 import { ProfileModel } from '../../models/post';
 
 const getUserProfileStart = () => {

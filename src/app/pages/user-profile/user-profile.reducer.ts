@@ -1,6 +1,6 @@
+import { RootAction } from '../../stores/store';
 import { ProfileModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { RootAction } from '../../stores/store';
 
 interface ProfileStateProps {
   profile: ProfileModel;

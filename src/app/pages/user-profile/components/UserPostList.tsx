@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import { RootState } from '../../../stores/store';
+
 import { PostModel, ProfileModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../home/components/EmptyPost';
-import { RootState } from '../../../stores/store';
-import { useParams } from 'react-router-dom';
 
 interface UserPostListProps {
   postList: ProfileModel;

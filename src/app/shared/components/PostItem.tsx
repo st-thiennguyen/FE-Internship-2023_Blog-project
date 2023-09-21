@@ -19,7 +19,7 @@ const PostItem = ({ post }: PostItemProps) => {
   }, [isErrImg, post.cover]);
 
   return (
-    <Link className="post-link" to={`${post.status === 'public' ? `/detail/${post.id}` : '#'}`}>
+    <Link className="post-link" to={`/detail/${post.id}`}>
       <div className="post">
         <div className="post-delete d-flex item-center justify-center">
           <i className="icon icon-small icon-delete icon-trash-20"></i>
