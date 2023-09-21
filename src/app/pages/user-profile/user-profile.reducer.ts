@@ -1,4 +1,4 @@
-import { PostModel, ProfileModel } from '../../models/post';
+import { ProfileModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
@@ -60,7 +60,7 @@ export const userProfileReducer = (state = initialState, action: RootAction): Pr
         isLoading: false,
         isSuccess: true,
       };
-    case ACTIONS_TYPE.GET_USER_POST:
+    case ACTIONS_TYPE.GET_USER_POST_FAILURE:
       return {
         ...state,
         isLoading: false,

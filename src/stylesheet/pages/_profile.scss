@@ -102,6 +102,9 @@
       .read-more {
         display: none;
       }
+      .post:hover .post-delete {
+        visibility: visible;
+      }
     }
     .user-post-empty {
       width: 70%;
