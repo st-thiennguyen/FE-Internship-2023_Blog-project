@@ -47,7 +47,7 @@ const WritePost = () => {
   const [photoPreview, setPhotoPreview] = useState<string>();
   const formRef: any = useRef(null);
 
-  let linkImagePost = useSelector((state: any) => state.imageSign.file.url);
+  let linkImagePost = useSelector((state: any) => state.imageSign.data.url);
   const isSuccessCreatePost = useSelector((state: any) => state.writePost.isSuccess);
   const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
@@ -60,6 +60,7 @@ const WritePost = () => {
     data.description = '';
     data.title = '';
     setPhotoPreview('');
+    setTags([]);
   };
 
   const {
@@ -113,7 +114,7 @@ const WritePost = () => {
                 <EditorImageCover photoPreview={photoPreview} setPhotoPreview={setPhotoPreview} />
                 <div className="toggle-btn-status">
                   <div className="btn-status">
-                    <div className="btn-r r btn-1">
+                    <div className="btn-toggle">
                       <input type="checkbox" className="checkbox" onClick={handleToggleStatus} />
                       <div className="knobs"></div>
                       <div className="layer"></div>
@@ -136,15 +137,12 @@ const WritePost = () => {
           </div>
         </div>
       </section>
-      {
-        isSuccessCreatePost &&
-        <ToastMessage
-          isSuccess={isSuccessCreatePost}
-          isShow={isSuccessCreatePost}
-          title={isSuccessCreatePost ? 'success' : 'error'}
-          subtitle={isMessageCreatePost}
-        ></ToastMessage>
-      }
+      <ToastMessage
+        isSuccess={isSuccessCreatePost}
+        isShow={isSuccessCreatePost}
+        title={isSuccessCreatePost ? 'success' : 'error'}
+        subtitle={isMessageCreatePost}
+      ></ToastMessage>
     </>
   );
 };

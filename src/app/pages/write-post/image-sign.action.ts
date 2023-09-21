@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { UploadUrlImagePost, getSignUrlImage } from '../../shared/services';
-import { PositionImageModel } from '../../models/post';
+import { SignatureImageModel } from '../../models/post';
 
 export const getSignUrlImagePostStart = () => {
   return {
@@ -10,7 +10,7 @@ export const getSignUrlImagePostStart = () => {
   }
 }
 
-export const getSignUrlImagePostSuccess = (data: PositionImageModel) => {
+export const getSignUrlImagePostSuccess = (data: SignatureImageModel) => {
   return {
     type: ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST_SUCCESS,
     payload: data

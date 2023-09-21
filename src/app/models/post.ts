@@ -33,7 +33,7 @@ export interface UserModel {
 }
 
 
-export interface PositionImageModel {
+export interface SignatureImageModel {
   signedRequest: string,
   url: string,
 }

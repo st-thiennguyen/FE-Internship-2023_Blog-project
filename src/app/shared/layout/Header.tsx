@@ -36,14 +36,14 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
             <nav className="navbar">
               <ul className="navbar-list d-flex">
                 {
-                  isLogin ? <li className="navbar-item">
+                  isLogin && <li className="navbar-item">
                     <Link to="/write" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-write-20"></i>
                         <p className="navbar-subtext">Write</p>
                       </div>
                     </Link>
-                  </li> : null
+                  </li>
                 }
                 <li className="navbar-item navbar-item-auth">
                   <Link to="/login" className="navbar-link">

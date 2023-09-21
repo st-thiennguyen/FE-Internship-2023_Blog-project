@@ -11,14 +11,12 @@ export const getPublicPosts = (page: number, size: number) => {
   return api.get(`${ENDPOINT.post.public}`, {
     page,
     size,
-  });
+  }); 
 };
 
 export const postArticles = (data: any) => {
   const api = new ApiService();
-  return api.post(`${ENDPOINT.post.index}`, {
-    ...data
-  });
+  return api.post(`${ENDPOINT.post.index}`, data);
 };
 
 

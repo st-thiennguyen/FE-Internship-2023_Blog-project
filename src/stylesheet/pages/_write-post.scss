@@ -177,7 +177,7 @@
   left: 0;
 }
 
-.btn-r {
+.btn-toggle {
   position: relative;
   top: 50%;
   width: 140px;
@@ -186,7 +186,7 @@
   overflow: hidden;
 }
 
-.btn-r.b2 {
+.btn-toggle.b2 {
   border-radius: 2px;
 }
 
@@ -212,8 +212,7 @@
   z-index: 1;
 }
 
-/* Button 1 */
-.btn-1 .knobs:before {
+.btn-toggle .knobs:before {
   content: "Private";
   position: absolute;
   top: 4px;
@@ -229,18 +228,18 @@
   transition: 1.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-.btn-1 .checkbox:checked + .knobs:before {
+.btn-toggle .checkbox:checked + .knobs:before {
   content: "Public";
   left: 60px;
   background-color: #f44336;
 }
 
-.btn-1 .checkbox:checked ~ .layer {
+.btn-toggle .checkbox:checked ~ .layer {
   background-color: #fcebeb;
 }
 
-.btn-1 .knobs,
-.btn-1 .knobs:before,
-.btn-1 .layer {
+.btn-toggle .knobs,
+.btn-toggle .knobs:before,
+.btn-toggle .layer {
   transition: 0.3s ease-in all;
 }

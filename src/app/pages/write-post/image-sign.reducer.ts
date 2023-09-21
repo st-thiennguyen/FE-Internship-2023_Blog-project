@@ -1,17 +1,17 @@
-import { PositionImageModel } from '../../models/post';
+import { SignatureImageModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
 
-interface PositionImageProps {
-  file: PositionImageModel,
+interface SignatureImage {
+  data: SignatureImageModel,
   isLoading: boolean,
   isSuccess: boolean,
   error: string
 }
 
-const initState: PositionImageProps = {
-  file: {} as any,
+const initState: SignatureImage = {
+  data: {} as any,
   isLoading: false,
   isSuccess: false,
   error: ''
@@ -30,7 +30,7 @@ export const imageSignedReducer = (state = initState, action: RootAction) => {
       return {
         ...state,
         isLoading: false,
-        file: action.payload
+        data: action.payload
       }
 
     case ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST_FAILURE:
