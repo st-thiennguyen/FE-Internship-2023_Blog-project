@@ -9,6 +9,7 @@ import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
 import DetailPostLoading from '../components/DetailPostLoading';
 import { fetchDetailBlog } from '../detail-post.actions';
+import DetailPostComment from '../components/DetailPostComment';
 
 const DetailPost = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const DetailPost = () => {
             </div>
           </section>
         </article>
+        <DetailPostComment />
       </div>
       {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
     </>
