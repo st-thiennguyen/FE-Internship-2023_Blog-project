@@ -17,6 +17,7 @@ const ACTIONS_TYPE = {
   LOGIN: 'login',
   LOGIN_SUCCESS: 'login-success',
   LOGIN_FAILURE: 'login-failure',
+  REASSIGNMENT_AUTH: 'reassignment-auth',
   // LOGOUT
   LOGOUT: 'logout',
   LOGOUT_SUCCESS: 'logout-success',

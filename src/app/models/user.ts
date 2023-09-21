@@ -13,4 +13,5 @@ export interface UserModel {
   followers: number;
   followings: number;
   verifyAt: string;
+  [key: string]: any;
 }
