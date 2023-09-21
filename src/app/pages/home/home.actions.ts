@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { PostModel, UserModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost, getPublicPosts } from '../../shared/services/index';
+import {  QueryPost, getPublicPosts } from '../../shared/services/index';
 import { getUsers } from '../../shared/services/user';
 import { RootAction } from '../../stores/store';
 
@@ -38,10 +38,10 @@ export const loadMore = () => {
   };
 };
 
-export const fetchPublicPosts = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+export const fetchPublicPosts = (query: QueryPost) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPublicPostStart());
   try {
-    const response = await getPublicPosts(page, size);
+    const response = await getPublicPosts(query);
     dispatch(getPublicPostSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPublicPostFailure(`${err}`));

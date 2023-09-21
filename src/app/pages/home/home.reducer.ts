@@ -2,7 +2,7 @@ import { PostModel, UserModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
-interface PublicPostState {
+export interface PublicPostState {
   data: PostModel[];
   isLoading: boolean;
   isError: boolean;
