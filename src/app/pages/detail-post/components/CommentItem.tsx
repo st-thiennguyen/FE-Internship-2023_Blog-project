@@ -16,7 +16,7 @@ const CommentItem = ({ commentItem }: CommentItemProps) => {
       <div className="comment-info d-flex flex-column justify-between">
         <div className="comment-info-top d-flex ">
           <span className="user-name">{commentItem.user.displayName}</span>
-          <span className="comment-createdAt">{timeAgoFromDate(commentItem.createdAt)}</span>
+          <span className="comment-time">{timeAgoFromDate(commentItem.createdAt)}</span>
         </div>
         <p className="comment-content">{commentItem.comment}</p>
       </div>

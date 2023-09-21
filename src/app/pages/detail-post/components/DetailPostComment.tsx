@@ -147,7 +147,7 @@ const DetailPostComment = () => {
           <button className="btn btn-primary btn-comment">Comment</button>
         </div>
         <ul className="comment-list">
-          {listComment.length &&
+          {listComment.length > 0 &&
             listComment.map((commentItem) => {
               return (
                 <li className="comment-item">
