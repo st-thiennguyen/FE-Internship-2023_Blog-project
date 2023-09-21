@@ -8,8 +8,6 @@ import { RootState } from '../../../stores/store';
 
 const ProfilePage = () => {
   const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
-  const userProfile = useSelector((state: RootState) => state.userProfile.profile);
-  const postList = useSelector((state: RootState) => state.userProfile.postList);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +27,7 @@ const ProfilePage = () => {
 
   return (
     <div className="main-profile-page">
-      <UserDetail userProfile={userProfile} postList={postList} />
+      <UserDetail />
       <UserPost />
     </div>
   );

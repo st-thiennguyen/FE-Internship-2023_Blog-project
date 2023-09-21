@@ -4,7 +4,7 @@ import { RootAction } from '../../stores/store';
 
 interface ProfileStateProps {
   profile: ProfileModel;
-  postList: PostModel[];
+  postList: ProfileModel;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -12,7 +12,7 @@ interface ProfileStateProps {
 }
 const initialState: ProfileStateProps = {
   profile: {} as ProfileModel,
-  postList: [] as PostModel[],
+  postList: {} as ProfileModel,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -47,7 +47,7 @@ export const userProfileReducer = (state = initialState, action: RootAction): Pr
     case ACTIONS_TYPE.GET_USER_POST:
       return {
         ...state,
-        postList: [] as PostModel[],
+        postList: {} as ProfileModel,
         isLoading: false,
         isSuccess: false,
         isError: false,
