@@ -1,5 +1,4 @@
 import { PostModel } from '../../../models/post';
-import PostItem from '../../../shared/components/PostItem';
 import UserPostList from './UserPostList';
 
 const posts: PostModel[] = [
@@ -29,11 +28,8 @@ const posts: PostModel[] = [
       dob: '30/04/2001',
       displayName: 'Dr.Tien',
       picture: 'null',
-      isActive: true,
-      isAdmin: false,
       followers: 1,
       followings: 0,
-      verifyAt: '2023-09-18T13:36:08.979Z',
     },
   },
   {
@@ -62,11 +58,8 @@ const posts: PostModel[] = [
       dob: '02/07/2001',
       displayName: 'cmvn-truong',
       picture: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000',
-      isActive: true,
-      isAdmin: false,
       followers: 0,
       followings: 0,
-      verifyAt: '2023-09-08T09:19:36.406Z',
     },
   },
   {
@@ -95,11 +88,8 @@ const posts: PostModel[] = [
       dob: '1995/05/23',
       displayName: 'pcapsg',
       picture: 'https://robohash.org/cumomnisdolore.png?size=50x50&set=set1',
-      isActive: true,
-      isAdmin: true,
       followers: 0,
       followings: 0,
-      verifyAt: '2021-02-15T23:59:45.000Z',
     },
   },
   {
@@ -129,11 +119,8 @@ const posts: PostModel[] = [
       dob: '1999/06/12',
       displayName: 'sstearns9',
       picture: 'https://robohash.org/omnissedveniam.png?size=50x50&set=set1',
-      isActive: true,
-      isAdmin: false,
       followers: 0,
       followings: 0,
-      verifyAt: '2020-11-14T20:06:45.000Z',
     },
   },
   {
@@ -163,14 +150,12 @@ const posts: PostModel[] = [
       dob: '1992/01/16',
       displayName: 'dborham2',
       picture: 'https://robohash.org/illumetest.png?size=50x50&set=set1',
-      isActive: false,
-      isAdmin: true,
       followers: 0,
       followings: 0,
-      verifyAt: '2021-01-18T16:51:01.000Z',
     },
   },
 ];
+
 const UserPost = () => {
   return (
     <section className="section section-user-post">
