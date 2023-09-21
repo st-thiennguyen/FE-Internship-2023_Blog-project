@@ -8,7 +8,7 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
   const tagRef = useRef<HTMLInputElement>(null);
 
   const handleAddTag = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.keyCode === 13 && tagRef.current!.value !== '') {
+    if (event.keyCode === 13 && tagRef.current!.value !== '' && !tags.includes(tagRef.current!.value)) {
       setTags([...tags, tagRef.current!.value.trim()]);
       tagRef.current!.value = '';
     }

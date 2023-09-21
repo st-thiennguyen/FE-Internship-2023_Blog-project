@@ -76,7 +76,7 @@ const Login = () => {
     if (accessToken) {
       navigate('/');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken]);
 
   return (
     <div className="auth">

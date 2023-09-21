@@ -10,7 +10,7 @@ type ToastMessageProps = {
 const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps) => {
   const [isShowToast, setIsShowToast] = useState(isShow);
 
-  const closeClick = useRef(() => {});
+  const closeClick = useRef(() => { });
 
   closeClick.current = () => {
     if (isShowToast) {
@@ -19,10 +19,16 @@ const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps)
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      closeClick.current();
-    }, 3000);
-  }, []);
+    setIsShowToast(isShow);
+  }, [isShow])
+
+  useEffect(() => {
+    if (isShow) {
+      setTimeout(() => {
+        closeClick.current();
+      }, 3000);
+    }
+  }, [isShow]);
 
   return (
     <div className={`toast ${isShowToast ? 'show' : ''} ${isSuccess ? 'success' : 'error'}`}>

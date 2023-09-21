@@ -35,14 +35,16 @@ const Header = ({ isLogin, auth }: HeaderProps) => {
             <span className="header-welcome">Welcome to Supremethod !</span>
             <nav className="navbar">
               <ul className="navbar-list d-flex">
-                <li className="navbar-item">
-                  <Link to="/write" className="navbar-link">
-                    <div className="navbar-content d-flex justify-center item-center">
-                      <i className="icon icon-small icon-write-20"></i>
-                      <p className="navbar-subtext">Write</p>
-                    </div>
-                  </Link>
-                </li>
+                {
+                  isLogin && <li className="navbar-item">
+                    <Link to="/write" className="navbar-link">
+                      <div className="navbar-content d-flex justify-center item-center">
+                        <i className="icon icon-small icon-write-20"></i>
+                        <p className="navbar-subtext">Write</p>
+                      </div>
+                    </Link>
+                  </li>
+                }
                 <li className="navbar-item navbar-item-auth">
                   <Link to="/login" className="navbar-link">
                     <div className="navbar-content d-flex justify-center item-center">

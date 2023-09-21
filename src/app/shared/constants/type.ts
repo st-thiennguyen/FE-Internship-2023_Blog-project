@@ -71,6 +71,14 @@ const ACTIONS_TYPE = {
   GET_USERS_FAILURE: 'get-users-failure',
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
+  // WRITE POST // RESIZE URL IMAGE POST
+  GET_SIGN_URL_IMAGE_POST: 'get-sign-image-post',
+  GET_SIGN_URL_IMAGE_POST_SUCCESS: 'get-sign-image-post-success',
+  GET_SIGN_URL_IMAGE_POST_FAILURE: 'get-sign-image-post-failure',
+  // ADD POST
+  ADD_POST: 'add-post',
+  ADD_POST_SUCCESS: 'add-post-success',
+  ADD_POST_FAILURE: 'add-post-failure',
 };
 
 export default ACTIONS_TYPE;
