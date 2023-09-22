@@ -1,11 +1,12 @@
 import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
-import ACTIONS_TYPE from '../../shared/constants/type';
-import { getPublicPosts, getRecommendPosts, QueryPost } from '../../shared/services/index';
-import { getUsers } from '../../shared/services/user';
-import { RootAction } from '../../stores/store';
 import { UserModel } from '../../models/user';
+import ACTIONS_TYPE from '../../shared/constants/type';
+import { RootAction } from '../../stores/store';
+
+import { getPublicPosts, getRecommendPosts, QueryPost } from '../../shared/services/index';
+import { getUsers } from '../../shared/services/user.service';
 
 export const getPublicPostStart = () => {
   return {
