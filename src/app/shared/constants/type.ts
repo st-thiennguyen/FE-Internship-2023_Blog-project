@@ -79,6 +79,10 @@ const ACTIONS_TYPE = {
   GET_COMMENTS: 'get-comments',
   GET_COMMENTS_SUCCESS: 'get-comments-success',
   GET_COMMENTS_FAILURE: 'get-comments-failure',
+  // POST COMMENT
+  POST_COMMENT: 'post-comment',
+  POST_COMMENT_SUCCESS: 'post-comment-success',
+  POST_COMMENT_FAILURE: 'post-comment-failure',
 };
 
 export default ACTIONS_TYPE;

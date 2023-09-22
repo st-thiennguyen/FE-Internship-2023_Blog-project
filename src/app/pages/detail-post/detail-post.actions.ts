@@ -2,9 +2,10 @@ import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost, getPostComments } from '../../shared/services/index';
+import { getDetailPost, getPostComments, postComment } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 import { CommentItemModel } from '../../models/comment';
+import { UserInfo } from '../../models/auth';
 
 const getDetailBlogStart = () => {
   return {
@@ -39,20 +40,20 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
 // Get post commennts
 const getCommentsStart = () => {
   return {
-    type: ACTIONS_TYPE.GET_COMMENTS,
+    type: ACTIONS_TYPE.POST_COMMENT,
   };
 };
 
 const getCommentsSuccess = (data: CommentItemModel) => {
   return {
-    type: ACTIONS_TYPE.GET_COMMENTS_SUCCESS,
+    type: ACTIONS_TYPE.POST_COMMENT_SUCCESS,
     payload: data,
   };
 };
 
 const getCommentsFailure = (message: string) => {
   return {
-    type: ACTIONS_TYPE.GET_COMMENTS_FAILURE,
+    type: ACTIONS_TYPE.POST_COMMENT_FAILURE,
     payload: message,
   };
 };
@@ -66,3 +67,35 @@ export const fetchComments = (id: string) => async (dispatch: Dispatch<RootActio
     dispatch(getCommentsFailure(`${error}`));
   }
 };
+
+// Post comment
+const postCommentStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_COMMENTS,
+  };
+};
+
+const postCommentSuccess = (data: CommentItemModel, user: UserInfo) => {
+  return {
+    type: ACTIONS_TYPE.GET_COMMENTS_SUCCESS,
+    payload: { ...data, user: user },
+  };
+};
+
+const postCommentFailure = (message: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_COMMENTS_FAILURE,
+    payload: message,
+  };
+};
+
+export const postCommentAction =
+  (id: string, comment: string, user: UserInfo) => async (dispatch: Dispatch<RootAction>) => {
+    dispatch(postCommentStart());
+    try {
+      const response = await postComment(id, comment);
+      dispatch(postCommentSuccess(response as CommentItemModel, user));
+    } catch (error) {
+      dispatch(postCommentFailure(`${error}`));
+    }
+  };
