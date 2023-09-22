@@ -1,8 +1,9 @@
+import { useSelector } from 'react-redux';
+
 import Slider from 'react-slick';
 
-import RecommendItem from './RecommendItem';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../../../stores/store';
+import RecommendItem from './RecommendItem';
 
 const Recommend = () => {
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);

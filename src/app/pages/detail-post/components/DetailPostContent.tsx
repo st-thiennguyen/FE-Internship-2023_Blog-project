@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import avaDefault from '../../../../assets/images/user-default.png';
 import { PostModel } from '../../../models/post';
 import { isImageUrlValid } from '../../../shared/utils';
+
+import avaDefault from '../../../../assets/images/user-default.png';
 
 interface DetailPostProps {
   post: PostModel;
@@ -41,6 +42,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
       </div>
       <div className="detail-post">
         <div className="detail-post-body">
+          <h2 className="post-title">{post.title}</h2>
           <div className="post-desc" dangerouslySetInnerHTML={{ __html: post.description }}></div>
           <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>

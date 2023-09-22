@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
@@ -19,7 +19,7 @@ const PostItem = ({ post }: PostItemProps) => {
   }, [isErrImg, post.cover]);
 
   return (
-    <Link className="post-link" to={`/detail/${post.id}`}>
+    <Link className="post-link" to={`/posts/detail/${post.id}`}>
       <div className="post">
         <div className="post-delete d-flex item-center justify-center">
           <i className="icon icon-small icon-delete icon-trash-20"></i>
@@ -51,7 +51,7 @@ const PostItem = ({ post }: PostItemProps) => {
               <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
-            <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+            <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
           </div>
           <div className="post-footer d-flex justify-between">
             <span className="read-more">READ MORE</span>

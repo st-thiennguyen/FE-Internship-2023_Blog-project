@@ -24,11 +24,6 @@
       transition: none;
     }
   }
-  .form-error {
-    padding-left: 3px;
-    color: red;
-    font-size: map-get($map: $font-size, $key: xs);
-  }
 
   .form-fieldset {
     border: 0;
@@ -38,4 +33,10 @@
   input[disabled] {
     background-color: map-get($map: $color, $key: defaultBg);
   }
+}
+
+.form-error {
+  padding-left: 3px;
+  color: red;
+  font-size: map-get($map: $font-size, $key: xs);
 }
