@@ -4,6 +4,11 @@ const ACTIONS_TYPE = {
   GET_ALL_POST_SUCCESS: 'get-all-post-success',
   GET_ALL_POST_FAILURE: 'get-all-post-failure',
   RESET_CURRENT_PAGE: 'reset-current-page',
+  // GET ALL POST WITH TAG
+  GET_POST_WITH_TAG: 'get-post-with-tag',
+  GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
+  GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
+  RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
   // GET DETAiL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
@@ -71,6 +76,7 @@ const ACTIONS_TYPE = {
   GET_USERS_FAILURE: 'get-users-failure',
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
+  LOAD_MORE_POST_WITH_TAGS: 'load-more-post-with-tags',
 };
 
 export default ACTIONS_TYPE;
