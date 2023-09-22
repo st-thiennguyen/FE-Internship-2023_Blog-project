@@ -1,4 +1,4 @@
-import { InteractionItemModel } from '../../../models/comment';
+import { InteractionItemModel } from '../../../models/interaction';
 import CommentItem from './CommentItem';
 
 const listComment: InteractionItemModel[] = [

@@ -1,38 +1,54 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { PostModel } from '../../../models/post';
+import { updateLikeAction } from '../detail-post.actions';
+import { useParams } from 'react-router-dom';
 
-interface PostReactionProps {
-  post: PostModel;
-}
-
-const DetailPostReaction = ({ post }: PostReactionProps) => {
-  const { likes, comments } = post;
-
-  const likeList = useSelector((state: RootState) => state.detail.likes);
+const DetailPostReaction = () => {
+  const post: PostModel = useSelector((state: RootState) => state.detail.data);
   const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
-  const [isLiked, setIsLiked] = useState(false);
+  const likeList = useSelector((state: RootState) => state.detail.likes);
+  const isLikeUpdated = useSelector((state: RootState) => state.detail.isLiked);
+
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const { postId } = useParams();
 
   useEffect(() => {
-    setIsLiked(likeList.some((user) => user.id === userId));
+    const initial = likeList.some((user) => user.userId === userId);
+
+    console.log('initial', initial);
+    console.log('likelist', likeList);
+    setIsLiked(initial);
+    console.log('first load is liked', isLiked);
   }, []);
+
+  useEffect(() => {
+    setIsLiked(isLikeUpdated);
+  }, [isLikeUpdated]);
+
+  const handleUpdateLike = () => {
+    if (postId) {
+      dispatch(updateLikeAction(postId) as any);
+    }
+  };
 
   return (
     <div className="detail-action">
       <ul className="action-list">
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action">
+          <button className="btn btn-post-action" onClick={handleUpdateLike}>
             <i className={`icon icon-small ${isLiked ? 'icon-fire-fill-20' : 'icon-fire-outline-20'}`}></i>
           </button>
-          <span className="action-count">{likes}</span>
+          <span className="action-count">{post.likes}</span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action">
             <i className="icon icon-small icon-comment-20"></i>
           </button>
-          <span className="action-count">{comments}</span>
+          <span className="action-count">{post.comments}</span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action">

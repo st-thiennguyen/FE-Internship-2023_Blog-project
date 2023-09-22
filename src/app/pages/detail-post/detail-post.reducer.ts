@@ -1,11 +1,12 @@
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
-import { InteractionItemModel } from './../../models/comment';
+import { InteractionItemModel } from '../../models/interaction';
 
 interface DetailStateProps {
   data: PostModel;
   likes: InteractionItemModel[];
+  isLiked: boolean;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -14,6 +15,7 @@ interface DetailStateProps {
 const initialState: DetailStateProps = {
   data: {} as PostModel,
   likes: [] as InteractionItemModel[],
+  isLiked: false,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -47,6 +49,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: action.payload,
       };
 
+    // Get post likes
     case ACTIONS_TYPE.GET_POST_LIKES:
       return {
         ...state,
@@ -62,9 +65,31 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         likes: action.payload,
         isLoading: false,
         isSuccess: true,
-        message: '',
       };
     case ACTIONS_TYPE.GET_POST_LIKES_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+
+    // update like
+    case ACTIONS_TYPE.UPDATE_LIKE:
+      return {
+        ...state,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_LIKE_SUCCESS:
+      return {
+        ...state,
+        isLiked: action.payload,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.UPDATE_LIKE_FAILURE:
       return {
         ...state,
         isLoading: false,

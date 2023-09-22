@@ -3,9 +3,9 @@ import { Dispatch } from 'react';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
-import { InteractionItemModel } from '../../models/comment';
+import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
-import { getDetailPost, getPostLikes } from '../../shared/services/index';
+import { getDetailPost, getPostLikes, updateLike } from '../../shared/services/index';
 
 const getDetailBlogStart = () => {
   return {
@@ -27,6 +27,17 @@ const getDetailBlogFailure = (message: string) => {
   };
 };
 
+export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getDetailBlogStart());
+  try {
+    const response = await getDetailPost(id);
+    dispatch(getDetailBlogSuccess(response as PostModel));
+  } catch (error) {
+    dispatch(getDetailBlogFailure(`${error}`));
+  }
+};
+
+// Get post likes
 const getPostLikesStart = () => {
   return {
     type: ACTIONS_TYPE.GET_POST_LIKES,
@@ -47,16 +58,6 @@ const getPostLikesFailure = (error: string) => {
   };
 };
 
-export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(getDetailBlogStart());
-  try {
-    const response = await getDetailPost(id);
-    dispatch(getDetailBlogSuccess(response as PostModel));
-  } catch (error) {
-    dispatch(getDetailBlogFailure(`${error}`));
-  }
-};
-
 export const fetchPostLikes = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPostLikesStart());
   try {
@@ -64,5 +65,36 @@ export const fetchPostLikes = (id: string) => async (dispatch: Dispatch<RootActi
     dispatch(getPostLikesSuccess(response as InteractionItemModel[]));
   } catch (error) {
     dispatch(getPostLikesFailure(`${error}`));
+  }
+};
+
+// Update like
+const updateLikeStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_LIKE,
+  };
+};
+
+const updateLikeSuccess = (response: InteractionProps) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_LIKE_SUCCESS,
+    payload: response.liked,
+  };
+};
+
+const updateLikeFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_LIKE_FAILURE,
+    payload: error,
+  };
+};
+
+export const updateLikeAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateLikeStart());
+  try {
+    const response = await updateLike(id);
+    dispatch(updateLikeSuccess(response as InteractionProps));
+  } catch (error) {
+    dispatch(updateLikeFailure(`${error}`));
   }
 };

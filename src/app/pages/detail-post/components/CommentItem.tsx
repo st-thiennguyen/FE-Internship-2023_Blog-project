@@ -1,5 +1,5 @@
 import { timeAgoFromDate } from '../../../shared/utils';
-import { InteractionItemModel } from '../../../models/comment';
+import { InteractionItemModel } from '../../../models/interaction';
 
 interface CommentItemProps {
   commentItem: InteractionItemModel;

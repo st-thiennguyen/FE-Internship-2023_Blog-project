@@ -20,7 +20,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
 
   return (
     <>
-      <DetailPostReaction post={post} />
+      <DetailPostReaction />
       <div className="detail-post">
         <div className="detail-post-body">
           <p className="post-desc">{post.description}</p>

@@ -26,3 +26,8 @@ export const getPostLikes = (id: string) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}/likes`);
 };
+
+export const updateLike = (id: string) => {
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.post.index}/${id}/likes`);
+};
