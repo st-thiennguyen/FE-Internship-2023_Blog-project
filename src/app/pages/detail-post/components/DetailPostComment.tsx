@@ -1,7 +1,7 @@
-import { CommentItemModel } from '../../../models/comment';
+import { InteractionItemModel } from '../../../models/comment';
 import CommentItem from './CommentItem';
 
-const listComment: CommentItemModel[] = [
+const listComment: InteractionItemModel[] = [
   {
     id: 31,
     userId: 132,

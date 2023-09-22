@@ -1,4 +1,11 @@
-const DetailPostReaction = () => {
+import { PostModel } from '../../../models/post';
+
+interface PostReactionProps {
+  post: PostModel;
+}
+
+const DetailPostReaction = ({ post }: PostReactionProps) => {
+  const { likes, comments } = post;
   return (
     <div className="detail-action">
       <ul className="action-list">
@@ -6,13 +13,13 @@ const DetailPostReaction = () => {
           <button className="btn btn-post-action">
             <i className="icon icon-small icon-fire-ouline-20"></i>
           </button>
-          <span className="action-count">321</span>
+          <span className="action-count">{likes}</span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action">
             <i className="icon icon-small icon-comment-20"></i>
           </button>
-          <span className="action-count">15</span>
+          <span className="action-count">{comments}</span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action">

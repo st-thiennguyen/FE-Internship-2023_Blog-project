@@ -1,6 +1,6 @@
 import { UserModel } from './post';
 
-export interface CommentItemModel {
+export interface InteractionItemModel {
   id: number;
   userId: number;
   postId: number;
