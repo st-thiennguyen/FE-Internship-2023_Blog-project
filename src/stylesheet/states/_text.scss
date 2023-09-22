@@ -1,3 +1,7 @@
 .text-primary {
   color: map-get($color, primary);
 }
+
+.text-danger {
+  color: rgb(242 5 5);
+}

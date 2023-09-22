@@ -10,6 +10,7 @@ const ACTIONS_TYPE = {
   GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
   // GET DETAiL BLOG
+  // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
   GET_DETAIL_BLOG_FAILURE: 'get-detail-blog-failure',
@@ -22,6 +23,7 @@ const ACTIONS_TYPE = {
   LOGIN: 'login',
   LOGIN_SUCCESS: 'login-success',
   LOGIN_FAILURE: 'login-failure',
+  REASSIGNMENT_AUTH: 'reassignment-auth',
   // LOGOUT
   LOGOUT: 'logout',
   LOGOUT_SUCCESS: 'logout-success',
@@ -61,7 +63,15 @@ const ACTIONS_TYPE = {
   // UPDATE PROFILE
   UPDATE_PROFILE: 'update-profile',
   UPDATE_PROFILE_SUCCESS: 'update-profile-success',
-  UPDATE_PROFILE_FAILURE: 'get-profile-failure',
+  UPDATE_PROFILE_FAILURE: 'update-profile-failure',
+  // UPDATE AVATAR
+  UPDATE_AVATAR: 'update-avatar',
+  UPDATE_AVATAR_SUCCESS: 'update-avatar-success',
+  UPDATE_AVATAR_FAILURE: 'update-avatar-failure',
+  // UPDATE PASSWORD
+  UPDATE_PASSWORD: 'update-password',
+  UPDATE_PASSWORD_SUCCESS: 'update-password-success',
+  UPDATE_PASSWORD_FAILURE: 'update-password-failure',
   // GET USER INFO
   GET_USER_INFO: 'get-user-info',
   GET_USER_INFO_SUCCESS: 'get-user-info-success',
@@ -77,6 +87,10 @@ const ACTIONS_TYPE = {
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
   LOAD_MORE_POST_WITH_TAGS: 'load-more-post-with-tags',
+  // GET RECOMMEND POSTS
+  GET_RECOMMEND: 'get-recommend',
+  GET_RECOMMEND_SUCCESS: 'get-recommend-success',
+  GET_RECOMMEND_FAILURE: 'get-recommend-failure',
 };
 
 export default ACTIONS_TYPE;

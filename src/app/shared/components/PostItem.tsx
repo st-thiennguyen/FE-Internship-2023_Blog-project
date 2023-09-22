@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
@@ -19,7 +19,7 @@ const PostItem = ({ post }: PostItemProps) => {
   }, [isErrImg, post.cover]);
 
   return (
-    <Link className="post-link" to={`detail/${post.id}`}>
+    <Link className="post-link" to={`/posts/detail/${post.id}`}>
       <div className="post">
         <div className="post-img-wrapper">
           {isErrImg ? (
@@ -35,7 +35,7 @@ const PostItem = ({ post }: PostItemProps) => {
                 <img
                   className="user-avatar"
                   onError={() => setIsErrAvt(true)}
-                  src={!isErrAvt ? post.cover : require('../../../assets/images/user-default.png')}
+                  src={!isErrAvt ? post.user.picture : require('../../../assets/images/user-default.png')}
                   alt={post.user.displayName}
                 />
                 <span className="user-name">{post.user.displayName}</span>
@@ -43,10 +43,17 @@ const PostItem = ({ post }: PostItemProps) => {
               <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
-            <p className="post-content">{post.content}</p>
+            <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
           </div>
           <div className="post-footer d-flex justify-between">
             <span className="read-more">READ MORE</span>
+            <ul className="post-action-list">
+              <li className="post-action-item">
+                <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={'/write'}>
+                  <i className="icon icon-small icon-write-20"></i>
+                </Link>
+              </li>
+            </ul>
             <ul className="post-reaction-list d-flex item-center">
               <div className="post-reaction-item d-flex">
                 <i className="icon icon-small icon-fire-ouline-20"></i>

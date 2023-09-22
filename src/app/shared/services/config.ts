@@ -1,33 +1,48 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
+import { Auth } from '../../models/auth';
+import { StorageKey } from '../constants';
+import { getLocalStorage } from '../utils';
+
 export class ApiService {
   axiosInstance: AxiosInstance;
 
-  constructor(accessToken = '') {
+  constructor() {
     this.axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_BASE_API,
       withCredentials: false,
-      timeout: 5000,
+      timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    this._setInterceptors(accessToken);
+    this._setInterceptors();
   }
 
-  private _setInterceptors = (accessToken: string) => {
-    this.axiosInstance.interceptors.response.use(
-      (response: AxiosResponse) => response,
-      (error: AxiosError) => this._handleError(error),
+  private _setInterceptors = () => {
+    this.axiosInstance.interceptors.request.use(
+      (config) => {
+        const auth = getLocalStorage(StorageKey.AUTH) as Auth;
+        if (auth && !config.url?.includes('.amazonaws.com')) {
+          config.headers.Authorization = `Bearer ${auth.accessToken}`;
+        }
+        return config;
+      },
+
+      (error) => {
+        return this._handleError(error);
+      },
     );
-    this._setHeaders(accessToken);
-  };
 
-  private _setHeaders(accessToken: string) {
-    if (accessToken) {
-      this.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    }
-  }
+    this.axiosInstance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        return this._handleError(error);
+      },
+    );
+  };
 
   private _handleError = (error: AxiosError) => {
     if (error.response) {

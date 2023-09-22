@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-
-import { pageSize } from '../../../shared/constants/post';
-import PostItemLoading from './PostItemLoading';
-import PostList from './PostList';
-import EmptyPost from './recommend/EmptyPost';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { RootState } from '../../../stores/store';
 import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
+
+import PostItemLoading from './PostItemLoading';
+import PostList from './PostList';
+import { pageSize } from '../../../shared/constants/post';
 
 const threshold = 400;
 
@@ -47,7 +47,7 @@ const LatestPost = () => {
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
-      {posts.length && <PostList posts={posts} />}
+      {posts.length > 0 && <PostList posts={posts} />}
       {isLoading && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (

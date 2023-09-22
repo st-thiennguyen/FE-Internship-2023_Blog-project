@@ -72,6 +72,13 @@ export const logoutFailure = (error: string) => {
   };
 };
 
+export const reAssignmentAuth = (data: any) => {
+  return {
+    type: ACTIONS_TYPE.REASSIGNMENT_AUTH,
+    payload: data,
+  };
+};
+
 export const registerAction =
   (registerData: RegisterProps): RootThunk =>
   async (dispatch: Dispatch<RootAction>) => {
@@ -95,10 +102,10 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   }
 };
 
-export const logoutAction = (token: string) => async (dispatch: Dispatch<RootAction>) => {
+export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
-    await logout(token);
+    await logout();
     removeLocalStorage(StorageKey.AUTH);
     dispatch(logoutSuccess());
   } catch (error) {

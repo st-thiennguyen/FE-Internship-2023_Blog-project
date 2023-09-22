@@ -1,12 +1,13 @@
 import { PostModel } from '../../../models/post';
+
 import PostItem from '../../../shared/components/PostItem';
-import EmptyPost from './recommend/EmptyPost';
+import EmptyPost from './EmptyPost';
 
 interface PostListProps {
   posts: PostModel[];
 }
 const PostList = ({ posts }: PostListProps) => {
-  return posts.length ? (
+  return posts.length > 0 ? (
     <ul className="post-list row">
       {posts.map((post, index) => {
         return (

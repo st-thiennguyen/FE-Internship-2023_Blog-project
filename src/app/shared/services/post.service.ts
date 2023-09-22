@@ -21,3 +21,11 @@ export const getPublicPosts = (query: QueryPost) => {
   });
   return api.get(`${ENDPOINT.post.public}`, query);
 };
+
+export const getRecommendPosts = (page: number, size: number) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recommend}`, {
+    page,
+    size,
+  });
+};

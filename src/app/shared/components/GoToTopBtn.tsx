@@ -4,7 +4,7 @@ const goToTop = () => {
   window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 };
 
-const GoToTopBTn = () => {
+const GoToTopBtn = () => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const GoToTopBTn = () => {
   );
 };
 
-export default GoToTopBTn;
+export default GoToTopBtn;
