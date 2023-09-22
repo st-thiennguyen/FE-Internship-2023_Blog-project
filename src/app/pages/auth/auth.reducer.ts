@@ -89,6 +89,13 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
       };
     }
 
+    case ACTIONS_TYPE.REASSIGNMENT_AUTH: {
+      return {
+        ...state,
+        auth: action.payload,
+      };
+    }
+
     case ACTIONS_TYPE.LOGOUT: {
       return {
         ...state,

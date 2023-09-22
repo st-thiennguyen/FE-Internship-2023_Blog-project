@@ -13,3 +13,11 @@ export const getPublicPosts = (page: number, size: number) => {
     size,
   });
 };
+
+export const getRecommendPosts = (page: number, size: number) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recommend}`, {
+    page,
+    size,
+  });
+};
