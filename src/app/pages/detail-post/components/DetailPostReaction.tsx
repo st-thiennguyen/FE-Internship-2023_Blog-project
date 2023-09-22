@@ -1,37 +1,30 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { PostModel } from '../../../models/post';
-import { updateLikeAction } from '../detail-post.actions';
-import { useParams } from 'react-router-dom';
+import { fetchPostLikes, updateLikeAction } from '../detail-post.actions';
+import { useNavigate, useParams } from 'react-router-dom';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
-const DetailPostReaction = () => {
-  const post: PostModel = useSelector((state: RootState) => state.detail.data);
-  const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
-  const likeList = useSelector((state: RootState) => state.detail.likes);
-  const isLikeUpdated = useSelector((state: RootState) => state.detail.isLiked);
+interface ReactionProps {
+  postId: number;
+  likeCount: number;
+  commentCount: number;
+}
 
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+const DetailPostReaction = ({ postId, likeCount, commentCount }: ReactionProps) => {
+  const [showToast, setShowToast] = useState(false);
+  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
+
   const dispatch = useDispatch();
-  const { postId } = useParams();
-
-  useEffect(() => {
-    const initial = likeList.some((user) => user.userId === userId);
-
-    console.log('initial', initial);
-    console.log('likelist', likeList);
-    setIsLiked(initial);
-    console.log('first load is liked', isLiked);
-  }, []);
-
-  useEffect(() => {
-    setIsLiked(isLikeUpdated);
-  }, [isLikeUpdated]);
 
   const handleUpdateLike = () => {
-    if (postId) {
+    if (postId && isLogin) {
       dispatch(updateLikeAction(postId) as any);
+    } else {
+      setShowToast(!showToast);
     }
   };
 
@@ -40,15 +33,15 @@ const DetailPostReaction = () => {
       <ul className="action-list">
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action" onClick={handleUpdateLike}>
-            <i className={`icon icon-small ${isLiked ? 'icon-fire-fill-20' : 'icon-fire-outline-20'}`}></i>
+            <i className={`icon icon-small ${isLiked && isLogin ? 'icon-fire-fill-20' : 'icon-fire-outline-20'}`}></i>
           </button>
-          <span className="action-count">{post.likes}</span>
+          <span className="action-count">{likeCount}</span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action">
             <i className="icon icon-small icon-comment-20"></i>
           </button>
-          <span className="action-count">{post.comments}</span>
+          <span className="action-count">{commentCount}</span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action">
@@ -56,6 +49,16 @@ const DetailPostReaction = () => {
           </button>
         </li>
       </ul>
+
+      {showToast && (
+        <ToastMessage
+          isShow={showToast}
+          isSuccess={false}
+          title={'Error'}
+          subtitle={'This action must be login'}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 };

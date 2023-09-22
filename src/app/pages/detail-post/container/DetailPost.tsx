@@ -20,8 +20,6 @@ const DetailPost = () => {
   const isError = useSelector((state: RootState) => state.detail.isError);
   const message = useSelector((state: RootState) => state.detail.message);
 
-  const isLikeUpdated = useSelector((state: RootState) => state.detail.isLiked);
-
   const { postId } = useParams();
 
   useEffect(() => {
@@ -31,9 +29,8 @@ const DetailPost = () => {
   useEffect(() => {
     if (postId) {
       dispatch(fetchDetailBlog(Number(postId)) as any);
-      dispatch(fetchPostLikes(postId) as any);
     }
-  }, [postId, isLikeUpdated]);
+  }, [postId]);
 
   if (isLoading) {
     return <DetailPostLoading />;
