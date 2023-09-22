@@ -11,17 +11,12 @@ interface PostItemProps {
   post: PostModel;
 }
 const PostItem = ({ post }: PostItemProps) => {
-  const postDescRef = useRef<HTMLParagraphElement>(null);
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
   }, [isErrImg, post.cover]);
-
-  const removeTags = () => {
-    postDescRef.current!.innerHTML = post.description;
-  };
 
   return (
     <Link className="post-link" to={`detail/${post.id}`}>

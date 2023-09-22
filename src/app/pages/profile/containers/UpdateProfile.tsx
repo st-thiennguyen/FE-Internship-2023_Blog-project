@@ -1,6 +1,4 @@
-import React, { useRef, useState } from 'react';
-
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
 import icInfo from '../../../../assets/icons/ic-update-profile-24.svg';
 import icChangePass from '../../../../assets/icons/ic-change-password-24.svg';
