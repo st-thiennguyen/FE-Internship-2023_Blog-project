@@ -97,6 +97,9 @@ const WritePost = ({ isUpdate }: writePostProps) => {
 
   const handleUpdatePost = handleSubmit((data: any) => {
     dispatch(updatePost({ ...data }, detailPost.id) as any)
+    setTimeout(()=>{
+      navigate(`/detail/${id}`)
+    },1500)
   });
 
   const handleToggleStatus = (e: any) => {
