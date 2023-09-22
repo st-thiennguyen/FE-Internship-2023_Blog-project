@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import noImage from '../../../../assets/images/no-image.png';
-import avaDefault from '../../../../assets/images/user-default.png';
 import { isImageUrlValid } from '../../../shared/utils';
 import { convertDateToString } from '../../../shared/utils/date';
+
+import noImage from '../../../../assets/images/no-image.png';
+import avaDefault from '../../../../assets/images/user-default.png';
 
 type DetailPostCoverProps = {
   cover: string;

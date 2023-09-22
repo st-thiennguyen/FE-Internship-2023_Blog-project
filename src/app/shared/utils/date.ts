@@ -16,3 +16,24 @@ export const convertDateFormat = (inputDate: string) => {
   }
   return inputDate;
 };
+
+export const timeAgoFromDate = (inputDate: string): string => {
+  const inputDateTime = new Date(inputDate);
+  const currentDateTime = new Date();
+
+  const timeDifference = currentDateTime.getTime() - inputDateTime.getTime();
+  const secondsDifference = Math.floor(timeDifference / 1000);
+  const minutesDifference = Math.floor(secondsDifference / 60);
+  const hoursDifference = Math.floor(minutesDifference / 60);
+  const daysDifference = Math.floor(hoursDifference / 24);
+
+  if (daysDifference > 0) {
+    return `${daysDifference}d${daysDifference > 1 ? 's' : ''} ago`;
+  } else if (hoursDifference > 0) {
+    return `${hoursDifference}h ago`;
+  } else if (minutesDifference > 0) {
+    return `${minutesDifference}minute${minutesDifference > 1 ? 's' : ''} ago`;
+  } else {
+    return `just now`;
+  }
+};

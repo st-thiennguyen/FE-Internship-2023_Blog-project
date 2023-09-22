@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import avaDefault from '../../../../assets/images/user-default.png';
 import { PostModel } from '../../../models/post';
 import { isImageUrlValid } from '../../../shared/utils';
+
+import avaDefault from '../../../../assets/images/user-default.png';
 
 interface DetailPostProps {
   post: PostModel;

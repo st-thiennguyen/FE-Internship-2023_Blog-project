@@ -7,7 +7,7 @@ import { UserModel } from '../../models/user';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
 import { getLocalStorage, setLocalStorage } from '../../shared/utils';
-import { loginSuccess, reAssignmentAuth } from '../auth/auth.actions';
+import { reAssignmentAuth } from '../auth/auth.actions';
 
 const updateAvatarStart = () => {
   return {
