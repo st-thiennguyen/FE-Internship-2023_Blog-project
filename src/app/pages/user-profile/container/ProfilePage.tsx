@@ -20,7 +20,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (id === userId.toString()) {
+    if (id === userId.toString() || 'me') {
       navigate('/profile');
     }
   }, []);
