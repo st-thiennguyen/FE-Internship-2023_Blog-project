@@ -17,6 +17,7 @@ const ACTIONS_TYPE = {
   LOGIN: 'login',
   LOGIN_SUCCESS: 'login-success',
   LOGIN_FAILURE: 'login-failure',
+  REASSIGNMENT_AUTH: 'reassignment-auth',
   // LOGOUT
   LOGOUT: 'logout',
   LOGOUT_SUCCESS: 'logout-success',
@@ -56,7 +57,15 @@ const ACTIONS_TYPE = {
   // UPDATE PROFILE
   UPDATE_PROFILE: 'update-profile',
   UPDATE_PROFILE_SUCCESS: 'update-profile-success',
-  UPDATE_PROFILE_FAILURE: 'get-profile-failure',
+  UPDATE_PROFILE_FAILURE: 'update-profile-failure',
+  // UPDATE AVATAR
+  UPDATE_AVATAR: 'update-avatar',
+  UPDATE_AVATAR_SUCCESS: 'update-avatar-success',
+  UPDATE_AVATAR_FAILURE: 'update-avatar-failure',
+  // UPDATE PASSWORD
+  UPDATE_PASSWORD: 'update-password',
+  UPDATE_PASSWORD_SUCCESS: 'update-password-success',
+  UPDATE_PASSWORD_FAILURE: 'update-password-failure',
   // GET USER INFO
   GET_USER_INFO: 'get-user-info',
   GET_USER_INFO_SUCCESS: 'get-user-info-success',
