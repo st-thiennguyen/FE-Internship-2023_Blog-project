@@ -9,11 +9,10 @@ import { fetchSignUrlImage } from '../image-sign.action';
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
   setPhotoPreview: (value: string) => void;
-  image?: string
   isUpdate?: boolean
 }
 
-const EditorImageCover = ({ photoPreview, setPhotoPreview, image, isUpdate }: EditorImageCoverProps) => {
+const EditorImageCover = ({ photoPreview, setPhotoPreview, isUpdate }: EditorImageCoverProps) => {
   const [isOpenImage, setIsOpenImage] = useState(false);
   const [isOpenInputLink, setIsOpenInputLink] = useState(false);
 
@@ -49,15 +48,15 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, image, isUpdate }: Ed
     }
   };
 
-  useEffect(()=>{
-    if(image !== '') {
-      setPhotoPreview(image as string);
+  useEffect(() => {
+    if (photoPreview !== '') {
+      setPhotoPreview(photoPreview as string);
     }
-  },[image])
+  }, [photoPreview])
 
   return (
     <div className="editor-cover">
-      <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)} disabled={isUpdate && true}>
+      <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)} disabled={isUpdate}>
         <img src={iconImage} alt="Icon add image cover" width={18} height={18} />
       </button>
 
@@ -65,9 +64,6 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, image, isUpdate }: Ed
         <div className="editor-cover-select d-flex">
           <button className="btn btn-pick-cover" type="button" onClick={clickSelectCover}>
             <img src={iconImageLocal} alt="Icon add image cover" width={16} height={16} />
-          </button>
-          <button className="btn btn-pick-cover" type="button" onClick={handleEnterLinkCover}>
-            <img src={iconImageNetwork} alt="Icon add image cover" width={16} height={16} />
           </button>
         </div>
       )}
@@ -91,13 +87,12 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, image, isUpdate }: Ed
         />
       )}
 
-      {photoPreview ? (
-        <div className="editor-cover-preview d-flex justify-center">
-          <img src={photoPreview} alt="Image of preview of title" />
-        </div>
-      ) : <div className="editor-cover-preview d-flex justify-center">
-        <img src={photoPreview} alt="Image of preview of title" />
-      </div>}
+      {
+        photoPreview &&
+          <div className="editor-cover-preview d-flex justify-center">
+            <img src={photoPreview} alt="Image of preview of title" />
+          </div>
+      }
     </div>
   );
 };

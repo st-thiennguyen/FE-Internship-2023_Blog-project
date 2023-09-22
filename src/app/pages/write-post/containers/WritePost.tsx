@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import EditorImageCover from '../components/EditorImageCover';
@@ -54,9 +54,11 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const navigate = useNavigate();
   const formRef: any = useRef(null);
 
-  let linkImagePost = useSelector((state: any) => state.imageSign.data.url);
+  const linkImagePost = useSelector((state: any) => state.imageSign.data.url);
   const detailPost = useSelector((state: RootState) => state.detail.data);
+  const imagePostUpdate = useSelector((state: any) => state.writePost.data?.cover);
   const isSuccessCreatePost = useSelector((state: any) => state.writePost.isSuccess);
+  const isErrorUpdatePost = useSelector((state: any) => state.writePost.isError);
   const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
@@ -96,7 +98,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   });
 
   const handleUpdatePost = handleSubmit((data: any) => {
-    dispatch(updatePost({ ...data }, detailPost.id) as any)
+    dispatch(updatePost(data, detailPost.id) as any)
     setTimeout(()=>{
       navigate(`/detail/${id}`)
     },1500)
@@ -124,10 +126,13 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     if (detailPost.description && isUpdate) {
       setValue('description', detailPost.description);
     }
+  }, [detailPost.description])
+
+  useEffect(() => {
     if (detailPost.content && isUpdate) {
       setValue('content', detailPost.content);
     }
-  }, [detailPost.description, detailPost.content])
+  }, [detailPost.content])
 
   return (
     <>
@@ -139,13 +144,11 @@ const WritePost = ({ isUpdate }: writePostProps) => {
               <div className="write-post">
                 <form className="write-post-form d-flex flex-column" ref={formRef}>
                   <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..."
-
                     defaultValue={detailPost.title && detailPost.title}
-
                   />
                   <p className="write-post-form-error">{errors.title?.message}</p>
                   <div className="write-post-editor">
-                    <EditorImageCover photoPreview={photoPreview} setPhotoPreview={setPhotoPreview} image={detailPost.cover} isUpdate={isUpdate} />
+                    <EditorImageCover photoPreview={imagePostUpdate} setPhotoPreview={setPhotoPreview} isUpdate={isUpdate} />
                     <div className="toggle-btn-status">
                       <div className="btn-status">
                         <div className="btn-toggle">
@@ -175,7 +178,13 @@ const WritePost = ({ isUpdate }: writePostProps) => {
           <ToastMessage
             isSuccess={isSuccessCreatePost}
             isShow={isSuccessCreatePost}
-            title={isSuccessCreatePost ? 'success' : 'error'}
+            title='success'
+            subtitle={isMessageCreatePost}
+          ></ToastMessage>
+          <ToastMessage
+            isSuccess={!isErrorUpdatePost}
+            isShow={isErrorUpdatePost}
+            title='error'
             subtitle={isMessageCreatePost}
           ></ToastMessage>
         </>) : (
@@ -186,7 +195,6 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                 <div className="write-post">
                   <form className="write-post-form d-flex flex-column" ref={formRef}>
                     <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..."
-                    // value={detailPost.title ? detailPost.title : ''}
                     />
                     <p className="write-post-form-error">{errors.title?.message}</p>
                     <div className="write-post-editor">

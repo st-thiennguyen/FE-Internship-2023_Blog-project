@@ -7,14 +7,16 @@ interface PositionImageProps {
   data: PostModel,
   isLoading: Boolean,
   isSuccess: Boolean,
-  message: string
+  message: string,
+  isError?: Boolean
 }
 
 const initState: PositionImageProps = {
   data: {} as any,
   isLoading: false,
   isSuccess: false,
-  message: ''
+  message: '',
+  isError: false
 }
 
 export const writePostReducer = (state = initState, action: RootAction) => {
@@ -64,6 +66,7 @@ export const writePostReducer = (state = initState, action: RootAction) => {
           isLoading: false,
           message: 'Update post fail !',
           isSuccess: false,
+          isError: true
         }
     default:
       return state;

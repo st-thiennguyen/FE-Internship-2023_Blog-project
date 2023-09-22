@@ -27,7 +27,7 @@ const EditorPostTags = ({ tags, setTags, isUpdate }: EditorPostTagsProps) => {
         type="text"
         onKeyDown={handleAddTag}
         placeholder="Enter your tags ..."
-        disabled={isUpdate && true }
+        disabled={isUpdate}
 
       />
       <span className="tags-hint">Hit 'Enter' to add new tag</span>
