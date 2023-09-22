@@ -47,20 +47,9 @@ const LatestPost = () => {
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
-      {isLoading && currentPage === 1 ? (
+      {posts.length && <PostList posts={posts} />}
+      {isLoading && (
         <ul className="row">
-          {Array.from({ length: 6 }, (item, index) => (
-            <li className="post-item col col-6 col-md-12" key={index}>
-              <PostItemLoading />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <PostList posts={posts} />
-      )}
-
-      {(isLoading && currentPage > 1) ?? (
-        <ul className="row post-list">
           {Array.from({ length: 6 }, (item, index) => (
             <li className="post-item col col-6 col-md-12" key={index}>
               <PostItemLoading />
