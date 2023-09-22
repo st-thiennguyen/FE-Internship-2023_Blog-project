@@ -21,3 +21,8 @@ export const getRecommendPosts = (page: number, size: number) => {
     size,
   });
 };
+
+export const getPostComments = (id: string) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.index}/${id}/comments`);
+};

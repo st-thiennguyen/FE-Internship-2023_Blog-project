@@ -199,7 +199,7 @@
         font-size: map-get($font-size, lg);
         color: map-get($color, text);
       }
-      &-createdAt {
+      &-time {
         color: map-get($color, subtext);
         font-size: map-get($font-size, xs);
       }

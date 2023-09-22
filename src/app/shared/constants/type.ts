@@ -75,6 +75,10 @@ const ACTIONS_TYPE = {
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
   GET_RECOMMEND_FAILURE: 'get-recommend-failure',
+  // GET POST COMMENTS
+  GET_COMMENTS: 'get-comments',
+  GET_COMMENTS_SUCCESS: 'get-comments-success',
+  GET_COMMENTS_FAILURE: 'get-comments-failure',
 };
 
 export default ACTIONS_TYPE;

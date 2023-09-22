@@ -17,7 +17,7 @@ export const timeAgoFromDate = (inputDate: string): string => {
   const daysDifference = Math.floor(hoursDifference / 24);
 
   if (daysDifference > 0) {
-    return `${daysDifference}d${daysDifference > 1 ? 's' : ''} ago`;
+    return `${daysDifference} day${daysDifference > 1 ? 's' : ''} ago`;
   } else if (hoursDifference > 0) {
     return `${hoursDifference}h ago`;
   } else if (minutesDifference > 0) {
