@@ -20,7 +20,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
 
   return (
     <>
-      <DetailPostReaction />
+      <DetailPostReaction postId={post.id} likeCount={post.likes} commentCount={post.comments} />
       <div className="detail-post">
         <div className="detail-post-body">
           <p className="post-desc">{post.description}</p>

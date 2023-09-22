@@ -58,7 +58,7 @@ const getPostLikesFailure = (error: string) => {
   };
 };
 
-export const fetchPostLikes = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+export const fetchPostLikes = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPostLikesStart());
   try {
     const response = await getPostLikes(id);
@@ -89,7 +89,7 @@ const updateLikeFailure = (error: string) => {
   };
 };
 
-export const updateLikeAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updateLikeStart());
   try {
     const response = await updateLike(id);

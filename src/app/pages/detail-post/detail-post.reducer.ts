@@ -6,7 +6,6 @@ import { InteractionItemModel } from '../../models/interaction';
 interface DetailStateProps {
   data: PostModel;
   likes: InteractionItemModel[];
-  isLiked: boolean;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -15,7 +14,6 @@ interface DetailStateProps {
 const initialState: DetailStateProps = {
   data: {} as PostModel,
   likes: [] as InteractionItemModel[],
-  isLiked: false,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -85,7 +83,11 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
     case ACTIONS_TYPE.UPDATE_LIKE_SUCCESS:
       return {
         ...state,
-        isLiked: action.payload,
+        data: {
+          ...state.data,
+          isLiked: action.payload,
+          likes: action.payload ? state.data?.likes + 1 : state.data?.likes - 1,
+        },
         isLoading: false,
         isSuccess: true,
       };

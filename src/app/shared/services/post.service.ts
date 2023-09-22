@@ -22,12 +22,12 @@ export const getRecommendPosts = (page: number, size: number) => {
   });
 };
 
-export const getPostLikes = (id: string) => {
+export const getPostLikes = (id: number) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}/likes`);
 };
 
-export const updateLike = (id: string) => {
+export const updateLike = (id: number) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.post.index}/${id}/likes`);
 };
