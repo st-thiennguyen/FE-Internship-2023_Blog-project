@@ -11,13 +11,26 @@ export const getPublicPosts = (page: number, size: number) => {
   return api.get(`${ENDPOINT.post.public}`, {
     page,
     size,
-  }); 
+  });
 };
 
 export const postArticles = (data: any) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}`, data);
 };
+
+export const updatePostArticles = (data: any, id: number) => {
+  const formData = new URLSearchParams();
+  formData.append('title', data.title);
+  formData.append('content', data.content);
+
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.post.index}/${id}`, formData.toString(), {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+}
 
 
 export const getSignUrlImage = (file: any) => {

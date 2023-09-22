@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import ReactQuill from 'react-quill';
-import { useDispatch } from 'react-redux';
 import 'react-quill/dist/quill.snow.css';
 
 const formats = [
@@ -35,10 +34,6 @@ type Props = {
 const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
 
-  const dispatch = useDispatch()
-
-  // const imageHandler = () => {};
-
   const modules = React.useMemo(
     () => ({
       toolbar: {
@@ -51,7 +46,6 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
           ['clean'],
         ],
         handlers: {
-          // image: imageHandler,
         },
       },
     }),

@@ -3,8 +3,9 @@ import React, { useRef } from 'react';
 interface EditorPostTagsProps {
   tags: string[];
   setTags: (value: string[]) => void;
+  isUpdate?: boolean
 }
-const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
+const EditorPostTags = ({ tags, setTags, isUpdate }: EditorPostTagsProps) => {
   const tagRef = useRef<HTMLInputElement>(null);
 
   const handleAddTag = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -26,6 +27,8 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
         type="text"
         onKeyDown={handleAddTag}
         placeholder="Enter your tags ..."
+        disabled={isUpdate && true }
+
       />
       <span className="tags-hint">Hit 'Enter' to add new tag</span>
       <ul className="editor-tags-list d-flex flex-wrap">

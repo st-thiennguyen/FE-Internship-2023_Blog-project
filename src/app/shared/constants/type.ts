@@ -79,6 +79,10 @@ const ACTIONS_TYPE = {
   ADD_POST: 'add-post',
   ADD_POST_SUCCESS: 'add-post-success',
   ADD_POST_FAILURE: 'add-post-failure',
+  // UPDATE POST
+  UPDATE_POST: 'update-post',
+  UPDATE_POST_SUCCESS: 'update-post-success',
+  UPDATE_POST_FAILURE: 'update-post-failure',
 };
 
 export default ACTIONS_TYPE;

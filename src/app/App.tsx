@@ -22,9 +22,13 @@ function App() {
     },
     {
       path: '/write',
-      element: <WritePost />,
+      element: <WritePost isUpdate={false} />,
     },
     { path: '/*', element: <Layout /> },
+    {
+      path: '/update/:id',
+      element: < WritePost isUpdate={true} />
+    }
   ];
 
   return (

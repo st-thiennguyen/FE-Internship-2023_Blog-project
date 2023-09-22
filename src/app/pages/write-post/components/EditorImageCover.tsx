@@ -1,17 +1,19 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
 import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
 import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
 import { fetchSignUrlImage } from '../image-sign.action';
-import { useDispatch } from 'react-redux';
 
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
   setPhotoPreview: (value: string) => void;
+  image?: string
+  isUpdate?: boolean
 }
 
-const EditorImageCover = ({ photoPreview, setPhotoPreview }: EditorImageCoverProps) => {
+const EditorImageCover = ({ photoPreview, setPhotoPreview, image, isUpdate }: EditorImageCoverProps) => {
   const [isOpenImage, setIsOpenImage] = useState(false);
   const [isOpenInputLink, setIsOpenInputLink] = useState(false);
 
@@ -47,9 +49,15 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview }: EditorImageCoverPro
     }
   };
 
+  useEffect(()=>{
+    if(image !== '') {
+      setPhotoPreview(image as string);
+    }
+  },[image])
+
   return (
     <div className="editor-cover">
-      <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)}>
+      <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)} disabled={isUpdate && true}>
         <img src={iconImage} alt="Icon add image cover" width={18} height={18} />
       </button>
 
@@ -83,11 +91,13 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview }: EditorImageCoverPro
         />
       )}
 
-      {photoPreview && (
+      {photoPreview ? (
         <div className="editor-cover-preview d-flex justify-center">
           <img src={photoPreview} alt="Image of preview of title" />
         </div>
-      )}
+      ) : <div className="editor-cover-preview d-flex justify-center">
+        <img src={photoPreview} alt="Image of preview of title" />
+      </div>}
     </div>
   );
 };

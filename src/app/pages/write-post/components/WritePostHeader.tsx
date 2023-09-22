@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 import logo from '../../../../assets/images/logo.svg';
 
 interface WritePostHeaderProps {
-  onPublishPost: () => void;
+  onPublishPost?: () => void;
+  isUpdate?: boolean;
+  handleUpdatePost?: () => void;
 }
 
-const WritePostHeader = ({ onPublishPost }: WritePostHeaderProps) => {
+const WritePostHeader = ({ onPublishPost, isUpdate , handleUpdatePost}: WritePostHeaderProps) => {
   return (
     <header className="header header-write-post">
       <div className="container">
@@ -17,9 +19,13 @@ const WritePostHeader = ({ onPublishPost }: WritePostHeaderProps) => {
               <img src={logo} alt="Supremethod" />
             </Link>
           </h1>
-          <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>
-            Publish
-          </button>
+          {
+            !isUpdate ? <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>
+              Publish
+            </button> : <button className="btn btn-primary btn-rounded" onClick={handleUpdatePost}>
+              Update
+            </button>
+          }
         </div>
       </div>
     </header>

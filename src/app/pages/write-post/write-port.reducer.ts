@@ -42,6 +42,29 @@ export const writePostReducer = (state = initState, action: RootAction) => {
         message: 'Create post fail !',
         isSuccess: false,
       }
+      case ACTIONS_TYPE.UPDATE_POST:
+        return {
+          ...state,
+          isLoading: true,
+          isSuccess : false
+        }
+  
+      case ACTIONS_TYPE.UPDATE_POST_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          data: action.payload,
+          message: 'Update post success !',
+          isSuccess: true,
+        }
+  
+      case ACTIONS_TYPE.UPDATE_POST_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          message: 'Update post fail !',
+          isSuccess: false,
+        }
     default:
       return state;
   }

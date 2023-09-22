@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { postArticles } from '../../shared/services';
+import { postArticles, updatePostArticles } from '../../shared/services';
 import { PostModel } from '../../models/post';
 
 export const addPostStart = () => {
@@ -24,6 +24,32 @@ export const addPostFailure = (error: any) => {
   }
 }
 
+export const updatePostStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_POST
+  }
+}
+
+export const updatePostSuccess = (data: any) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_POST_SUCCESS,
+    payload: data
+  }
+}
+
+export const updatePostFailure = (error: any) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_POST_FAILURE,
+    payload: error
+  }
+}
+
+export const getUserProfileStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_PROFILE,
+  };
+};
+
 export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(addPostStart());
   try {
@@ -33,3 +59,14 @@ export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAct
     dispatch(addPostFailure(error));
   }
 }
+
+export const updatePost = (data: PostModel, id: number) => async (dispatch: Dispatch<RootAction>) => { 
+  dispatch(updatePostStart());
+  try {
+    const res = await updatePostArticles(data, id);
+    dispatch(updatePostSuccess(res));
+  } catch (error) {
+    dispatch(updatePostFailure(error));
+  }
+}
+
