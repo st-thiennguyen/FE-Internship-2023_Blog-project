@@ -86,7 +86,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         data: {
           ...state.data,
           isLiked: action.payload,
-          likes: action.payload === true ? state.data?.likes + 1 : state.data?.likes - 1,
+          likes: action.payload ? state.data?.likes + 1 : state.data?.likes - 1,
         },
         isLoading: false,
         isSuccess: true,

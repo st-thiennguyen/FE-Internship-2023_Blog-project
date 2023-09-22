@@ -1,11 +1,9 @@
-import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { PostModel } from '../../../models/post';
-import { fetchPostLikes, updateLikeAction } from '../detail-post.actions';
-import { useNavigate, useParams } from 'react-router-dom';
+import { updateLikeAction } from '../detail-post.actions';
 import ToastMessage from '../../../shared/components/ToastMessage';
+import { useState } from 'react';
 
 interface ReactionProps {
   postId: number;
@@ -14,17 +12,16 @@ interface ReactionProps {
 }
 
 const DetailPostReaction = ({ postId, likeCount, commentCount }: ReactionProps) => {
-  const [showToast, setShowToast] = useState(false);
   const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
+  const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
+  const isError = useSelector((state: RootState) => state.detail.isError);
 
   const dispatch = useDispatch();
 
   const handleUpdateLike = () => {
-    if (postId && isLogin) {
+    if (postId) {
       dispatch(updateLikeAction(postId) as any);
-    } else {
-      setShowToast(!showToast);
     }
   };
 
@@ -50,14 +47,8 @@ const DetailPostReaction = ({ postId, likeCount, commentCount }: ReactionProps) 
         </li>
       </ul>
 
-      {showToast && (
-        <ToastMessage
-          isShow={showToast}
-          isSuccess={false}
-          title={'Error'}
-          subtitle={'This action must be login'}
-          onClose={() => setShowToast(false)}
-        />
+      {isError && (
+        <ToastMessage isShow={isError} isSuccess={isSuccess} title="Success" subtitle="Login to do this action" />
       )}
     </div>
   );
