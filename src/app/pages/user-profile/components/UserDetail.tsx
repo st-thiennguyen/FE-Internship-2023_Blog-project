@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import defaultAvatar from '../../../../assets/images/demo-ava.jpg';
+
 import Button from '../../../shared/components/Button';
+import defaultAvatar from '../../../../assets/images/demo-ava.jpg';
 
 const UserDetail = () => {
   return (
@@ -43,8 +44,8 @@ const UserDetail = () => {
             <p className="info-desc">Joined since 01-01-2000</p>
           </div>
         </div>
-        <Button label={'Follow'} optionClassName="btn btn-follow btn-gradient"></Button>
-        <Button label={'Following'} optionClassName="btn btn-follow btn-following"></Button>
+        <Button label={'Follow'} optionClassName="btn btn-follow btn-gradient" />
+        <Button label={'Following'} optionClassName="btn btn-follow btn-following" />
         <Link to={'/update-account'} className="btn btn-secondary">
           Update Information
         </Link>
