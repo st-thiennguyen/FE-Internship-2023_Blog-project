@@ -1,6 +1,7 @@
 import DetailPostPage from './pages/detail-post/container';
 import DetailPost from './pages/detail-post/container/DetailPost';
 import Home from './pages/home/container/Home';
+import Posts from './pages/posts/container/Posts';
 import userProfileRoutes from './pages/user-profile/user.routes';
 
 export const appRoutes = [
@@ -14,6 +15,11 @@ export const appRoutes = [
     path: '/posts',
     component: DetailPostPage,
     children: [
+      {
+        name: 'posts',
+        path: '',
+        component: Posts,
+      },
       {
         name: 'detail',
         path: 'detail/:postId',
