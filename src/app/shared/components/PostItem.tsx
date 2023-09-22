@@ -31,7 +31,11 @@ const PostItem = ({ post }: PostItemProps) => {
         <div className="post-body-wrapper">
           <div className="post-body">
             <div className="post-body-top d-flex item-center">
-              <div className="user-info-wrapper d-flex item-center">
+              <Link
+                to={`/profile/${post.userId}`}
+                onClick={(e) => e.stopPropagation}
+                className="user-info-wrapper d-flex item-center"
+              >
                 <img
                   className="user-avatar"
                   onError={() => setIsErrAvt(true)}
@@ -39,7 +43,7 @@ const PostItem = ({ post }: PostItemProps) => {
                   alt={post.user.displayName}
                 />
                 <span className="user-name">{post.user.displayName}</span>
-              </div>
+              </Link>
               <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>

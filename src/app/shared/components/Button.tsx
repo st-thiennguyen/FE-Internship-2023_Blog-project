@@ -9,7 +9,7 @@ interface ButtonProps {
 const Button = ({ handleClick, isLoading, isDisabled, label, optionClassName }: ButtonProps) => {
   return (
     <button className={`btn ${optionClassName}`} onClick={handleClick} disabled={isDisabled}>
-      {label}
+      <span>{label}</span>
       <p className={`${isLoading && `btn-loading`}`}></p>
     </button>
   );
