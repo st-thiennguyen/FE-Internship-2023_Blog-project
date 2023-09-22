@@ -30,12 +30,14 @@ const DetailPostComment = () => {
     const comment = inputComment.current?.value.trim();
     if (postId && comment) {
       dispatch(postCommentAction(postId, comment, currentUser) as any);
+      inputComment.current!.value = '';
     }
   }
 
   function handleBlur(): void {
     inputComment.current!.value = inputComment.current!.value.trim();
   }
+  console.log(listComment);
 
   return (
     <section className="section section-comment">
@@ -55,10 +57,10 @@ const DetailPostComment = () => {
         </div>
         <ul className="comment-list">
           {listComment.length > 0 &&
-            listComment.map((commentItem, index) => {
+            listComment.map((commentItem) => {
               return (
                 <li className="comment-item">
-                  <CommentItem key={index} commentItem={commentItem} />
+                  <CommentItem commentItem={commentItem} />
                 </li>
               );
             })}

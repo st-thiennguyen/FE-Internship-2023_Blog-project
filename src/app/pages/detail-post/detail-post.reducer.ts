@@ -76,12 +76,14 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
     case ACTIONS_TYPE.POST_COMMENT:
       return {
         ...state,
-        isLoading: true,
+        // isLoading: true,
         isSuccess: false,
         isError: false,
         message: '',
       };
     case ACTIONS_TYPE.POST_COMMENT_SUCCESS:
+      console.log(action.payload);
+
       return {
         ...state,
         comments: [action.payload, ...state.comments],

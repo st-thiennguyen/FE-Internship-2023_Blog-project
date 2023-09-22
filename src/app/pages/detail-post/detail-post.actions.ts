@@ -40,20 +40,20 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
 // Get post commennts
 const getCommentsStart = () => {
   return {
-    type: ACTIONS_TYPE.POST_COMMENT,
+    type: ACTIONS_TYPE.GET_COMMENTS,
   };
 };
 
-const getCommentsSuccess = (data: CommentItemModel) => {
+const getCommentsSuccess = (data: CommentItemModel[]) => {
   return {
-    type: ACTIONS_TYPE.POST_COMMENT_SUCCESS,
+    type: ACTIONS_TYPE.GET_COMMENTS_SUCCESS,
     payload: data,
   };
 };
 
 const getCommentsFailure = (message: string) => {
   return {
-    type: ACTIONS_TYPE.POST_COMMENT_FAILURE,
+    type: ACTIONS_TYPE.GET_COMMENTS_FAILURE,
     payload: message,
   };
 };
@@ -62,7 +62,7 @@ export const fetchComments = (id: string) => async (dispatch: Dispatch<RootActio
   dispatch(getCommentsStart());
   try {
     const response = await getPostComments(id);
-    dispatch(getCommentsSuccess(response as CommentItemModel));
+    dispatch(getCommentsSuccess(response as CommentItemModel[]));
   } catch (error) {
     dispatch(getCommentsFailure(`${error}`));
   }
@@ -71,20 +71,20 @@ export const fetchComments = (id: string) => async (dispatch: Dispatch<RootActio
 // Post comment
 const postCommentStart = () => {
   return {
-    type: ACTIONS_TYPE.GET_COMMENTS,
+    type: ACTIONS_TYPE.POST_COMMENT,
   };
 };
 
 const postCommentSuccess = (data: CommentItemModel, user: UserInfo) => {
   return {
-    type: ACTIONS_TYPE.GET_COMMENTS_SUCCESS,
+    type: ACTIONS_TYPE.POST_COMMENT_SUCCESS,
     payload: { ...data, user: user },
   };
 };
 
 const postCommentFailure = (message: string) => {
   return {
-    type: ACTIONS_TYPE.GET_COMMENTS_FAILURE,
+    type: ACTIONS_TYPE.POST_COMMENT_FAILURE,
     payload: message,
   };
 };
