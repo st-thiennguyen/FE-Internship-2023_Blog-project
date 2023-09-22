@@ -4,7 +4,7 @@ import thunk, { ThunkAction } from 'redux-thunk';
 
 import authReducer from '../pages/auth/auth.reducer';
 import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
-import { lastesPostReducer, userReducer } from '../pages/home/home.reducer';
+import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 import { profileReducer } from '../pages/profile/profile.reducers';
 
@@ -20,6 +20,7 @@ export const rootReducer = combineReducers({
   post: lastesPostReducer,
   user: userReducer,
   profile: profileReducer,
+  recommend: recommendPostReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(loggerMiddleware, thunk)));

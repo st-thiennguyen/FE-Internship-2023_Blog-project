@@ -1,15 +1,24 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import GoToTopBTn from '../../../shared/components/GoToTopBtn';
+import { RootState } from '../../../stores/store';
+import { getRecommend } from '../home.actions';
+
+import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import LatestPost from '../components/LatestPost';
 import Recommend from '../components/recommend';
-import { RootState } from '../../../stores/store';
 
 const Home = () => {
   const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const recommendPosts = useSelector((state: RootState) => state.recommend.data);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getRecommend(1, 10) as any);
+  }, []);
 
   useEffect(() => {
     if (!isLogin) {
@@ -19,13 +28,18 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <Recommend />
+      {isLogin && recommendPosts.length > 0 && (
+        <>
+          <h2 className="section-title">Recommended for you</h2>
+          <Recommend />
+        </>
+      )}
       <div className="row">
         <div className="col col-12">
           <LatestPost />
         </div>
       </div>
-      <GoToTopBTn />
+      <GoToTopBtn />
     </div>
   );
 };

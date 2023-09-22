@@ -49,10 +49,6 @@
     background-size: cover;
   }
 
-  &-like {
-    background: url("../../assets/icons/ic-like.svg") top center / cover no-repeat;
-  }
-
   &-comment {
     background: url("../../assets/icons/ic-comment.svg") top center / cover no-repeat;
   }
@@ -64,6 +60,9 @@
   }
   &-fire-ouline-20 {
     background-image: url("../../assets/icons/ic-fire-ouline-20.svg");
+  }
+  &-fire-20 {
+    background-image: url("../../assets/icons/ic-fire-20.svg");
   }
   &-comment-20 {
     background-image: url("../../assets/icons/ic-comment-20.svg");

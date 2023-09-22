@@ -19,16 +19,10 @@ const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps)
   };
 
   useEffect(() => {
-    setIsShowToast(isShow);
-  }, [isShow]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setTimeout(() => {
-        closeClick.current();
-      }, 4000);
-    }
-  }, [isSuccess]);
+    setTimeout(() => {
+      closeClick.current();
+    }, 4000);
+  }, []);
 
   return (
     <div className={`toast ${isShowToast && 'show'} ${isSuccess ? 'success' : 'error'}`}>

@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 
-import demoAva from '../../../../assets/images/demo-ava.jpg';
 import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../../shared/components/Button';
@@ -10,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { convertDateFormat, convertDateToString } from '../../../shared/utils';
 import { RootState } from '../../../stores/store';
 import { updateProfileAction, uploadAvatar } from '../proflie.actions';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
 const schema = yup
   .object({
@@ -42,9 +42,12 @@ type FormData = yup.InferType<typeof schema>;
 const UserUpdateForm = () => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
   const user = useSelector((state: RootState) => state.auth.auth?.userInfo);
-  const [dateTime, setDateTime] = useState<Date>();
+  const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
+  const isLoading = useSelector((state: RootState) => state.profile.isLoading);
+  const isError = useSelector((state: RootState) => state.profile.isError);
+  const message = useSelector((state: RootState) => state.profile.message);
+  const userPicture = useSelector((state: RootState) => state.profile.data.picture);
 
-  var date = { currentTime: new Date(user.dob) };
   const dispatch = useDispatch();
 
   const {
@@ -59,37 +62,37 @@ const UserUpdateForm = () => {
     avatarInputRef.current!.click();
   };
 
-  const handlePicture = (gender: Gender) => {
-    switch (gender) {
-      case Gender.MALE:
-        return 'https://robohash.org/voluptasautvoluptatem.png?size=50x50&set=set1';
-      case Gender.FEMALE:
-        return 'https://robohash.org/consecteturdolorquia.png?size=50x50&set=set1';
-      default:
-        return 'https://robohash.org/illumetest.png?size=50x50&set=set1';
-    }
-  };
-
   const handleUploadAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     if (file) {
-      dispatch(uploadAvatar(file) as any);
+      dispatch(
+        uploadAvatar(file, {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          gender: user.gender,
+          dob: convertDateToString(user.dob, '/'),
+          phone: user.phone,
+          displayName: user.displayName,
+          picture: userPicture,
+        }) as any,
+      );
     }
   };
 
-  const onUpdateProfile = (data: FormData) => {
+  const onUpdateProfile = handleSubmit((data: FormData) => {
     dispatch(
-      updateProfileAction(4, {
+      updateProfileAction({
         firstName: data.firstName,
         lastName: data.lastName,
         gender: data.gender,
         dob: convertDateToString(data.dob, '/'),
         phone: data.phoneNumber,
         displayName: data.displayName,
-        picture: handlePicture(data.gender),
+        picture: user.picture,
       }) as any,
     );
-  };
+  });
+
   return (
     <div className="update-info-tab">
       <div className="update-info-wrapper">
@@ -101,8 +104,8 @@ const UserUpdateForm = () => {
           <input ref={avatarInputRef} className="profile-avatar-input" type="file" onChange={handleUploadAvatar} />
         </div>
         <div className="profile-update-form">
-          <form className="form form-register" onSubmit={handleSubmit(onUpdateProfile)}>
-            <fieldset className="form-fieldset" disabled={false}>
+          <form className="form form-register" onSubmit={onUpdateProfile}>
+            <fieldset className="form-fieldset" disabled={isLoading}>
               <div className="row">
                 <div className="form-input-group col col-6">
                   <label className="form-label">First Name</label>
@@ -145,7 +148,7 @@ const UserUpdateForm = () => {
                     id="datepicker"
                     className="form-input"
                     type="date"
-                    defaultValue={convertDateFormat(user.dob)}
+                    defaultValue={convertDateFormat(user.dob ?? '')}
                     {...register('dob')}
                   />
                   {errors.dob && <p className="form-error">{errors.dob?.message}</p>}
@@ -180,6 +183,17 @@ const UserUpdateForm = () => {
           </form>
         </div>
       </div>
+      {isSuccess && (
+        <ToastMessage
+          isShow={isSuccess}
+          isSuccess={isSuccess}
+          title={'Success'}
+          subtitle={'Update profile successfully'}
+        ></ToastMessage>
+      )}
+      {isError && (
+        <ToastMessage isShow={isError} isSuccess={isSuccess} title={'Error'} subtitle={message}></ToastMessage>
+      )}
     </div>
   );
 };

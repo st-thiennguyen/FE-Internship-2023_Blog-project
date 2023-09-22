@@ -1,14 +1,8 @@
-import React, { useRef, useState } from 'react';
-
-import { Gender, regexPhoneNumber } from '../../../shared/constants';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { convertDateToString } from '../../../shared/utils';
+import { useState } from 'react';
 
 import icInfo from '../../../../assets/icons/ic-update-profile-24.svg';
 import icChangePass from '../../../../assets/icons/ic-change-password-24.svg';
 import UserUpdateForm from '../components/UserUpdateForm';
-import { RootState } from '../../../stores/store';
 import UpdatePasswordForm from '../components/UpdatePasswordForm';
 
 enum Tab {
@@ -17,10 +11,7 @@ enum Tab {
 }
 
 const UpdateProfile = () => {
-  const avatarRef = useRef<HTMLInputElement>(null);
-  const [avatarPreview, setAvatarPreview] = useState<string>();
   const [tab, setTab] = useState<Tab>(Tab.UPDATE_USER_INFO);
-  const dispatch = useDispatch();
 
   const onChangeTab = (value: Tab) => {
     setTab(value);

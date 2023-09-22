@@ -4,7 +4,7 @@ const ACTIONS_TYPE = {
   GET_ALL_POST_SUCCESS: 'get-all-post-success',
   GET_ALL_POST_FAILURE: 'get-all-post-failure',
   RESET_CURRENT_PAGE: 'reset-current-page',
-  // GET DETAiL BLOG
+  // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
   GET_DETAIL_BLOG_FAILURE: 'get-detail-blog-failure',
@@ -17,6 +17,7 @@ const ACTIONS_TYPE = {
   LOGIN: 'login',
   LOGIN_SUCCESS: 'login-success',
   LOGIN_FAILURE: 'login-failure',
+  REASSIGNMENT_AUTH: 'reassignment-auth',
   // LOGOUT
   LOGOUT: 'logout',
   LOGOUT_SUCCESS: 'logout-success',
@@ -79,6 +80,10 @@ const ACTIONS_TYPE = {
   GET_USERS_FAILURE: 'get-users-failure',
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
+  // GET RECOMMEND POSTS
+  GET_RECOMMEND: 'get-recommend',
+  GET_RECOMMEND_SUCCESS: 'get-recommend-success',
+  GET_RECOMMEND_FAILURE: 'get-recommend-failure',
 };
 
 export default ACTIONS_TYPE;

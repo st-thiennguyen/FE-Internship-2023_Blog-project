@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 
-import { PostModel } from '../../../models/post';
-import PostItem from '../../../shared/components/PostItem';
 import { RootState } from '../../../stores/store';
+import { PostModel } from '../../../models/post';
+
 import PostItemLoading from './PostItemLoading';
+import PostItem from '../../../shared/components/PostItem';
 
 interface PostListProps {
   posts: PostModel[];

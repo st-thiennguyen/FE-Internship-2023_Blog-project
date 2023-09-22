@@ -1,4 +1,3 @@
-import { PostModel } from '../../models/post';
 import { UserModel } from '../../models/user';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';

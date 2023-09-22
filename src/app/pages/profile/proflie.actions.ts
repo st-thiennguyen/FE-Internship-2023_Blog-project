@@ -1,11 +1,14 @@
 import { Dispatch } from 'react';
+
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { updatePassword, updateProfile } from '../../shared/services/user.service';
-import { UserInfo } from '../../models/auth';
 import { UserModel, formChangePassword } from '../../models/user';
+import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
-import { TypeUploadImage } from '../../shared/constants';
+import { StorageKey, TypeUploadImage } from '../../shared/constants';
+import { getLocalStorage, setLocalStorage } from '../../shared/utils';
+import { reAssignmentAuth } from '../auth/auth.actions';
 
 const updateAvatarStart = () => {
   return {
@@ -66,27 +69,39 @@ const updatePasswordStartFailure = (message: string) => {
   };
 };
 
-export const uploadAvatar = (file: File) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(updateAvatarStart());
-  try {
-    const response: any = await getEmptyImageUrl(file, TypeUploadImage.AVATAR);
-    await putImageToLink(response.signedRequest, file);
-    dispatch(updateAvatarSuccess(response.url));
-  } catch (error) {
-    dispatch(updateAvatarFailure(`${error}`));
-  }
-};
+export const uploadAvatar =
+  (file: File, data: Omit<UserInfo, 'id' | 'email'>) => async (dispatch: Dispatch<RootAction>) => {
+    dispatch(updateAvatarStart());
+    try {
+      const response: any = await getEmptyImageUrl(file, TypeUploadImage.AVATAR);
+      await putImageToLink(response.signedRequest, file);
+      dispatch(updateAvatarSuccess(response.url));
+      dispatch(updateProfileAction(data, response.url) as any);
+    } catch (error) {
+      dispatch(updateAvatarFailure(`${error}`));
+    }
+  };
 
 export const updateProfileAction =
-  (
-    id: number,
-    data: Omit<UserModel, 'id' | 'email' | 'isActive' | 'isAdmin' | 'followers' | 'followings' | 'verifyAt'>,
-  ) =>
-  async (dispatch: Dispatch<RootAction>) => {
+  (data: Omit<UserInfo, 'id' | 'email'>, picture?: string) => async (dispatch: Dispatch<RootAction>) => {
     dispatch(updateProfileStart());
     try {
-      const response = await updateProfile(id, data);
+      if (picture) {
+        data.picture = picture;
+      }
+      const response = await updateProfile(data);
       dispatch(updateProfileSuccess(response as UserModel));
+      const userData: Auth = getLocalStorage(StorageKey.AUTH);
+      const userUpdated = response as UserModel;
+
+      for (const key in userUpdated) {
+        if (userData.userInfo.hasOwnProperty(key)) {
+          userData.userInfo[key] = userUpdated[key];
+        }
+      }
+      dispatch(reAssignmentAuth(userData));
+
+      setLocalStorage(StorageKey.AUTH, { ...userData });
     } catch (error) {
       dispatch(updateProfileFailure(`${error}`));
     }
