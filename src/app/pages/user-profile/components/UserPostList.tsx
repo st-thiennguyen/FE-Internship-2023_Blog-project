@@ -19,7 +19,7 @@ const UserPostList = ({ postList }: UserPostListProps) => {
   return (
     <ul className={`user-post-list row ${!id && 'my-post'}`}>
       {posts?.length > 0 ? (
-        posts?.map((post, index) => {
+        posts.map((post, index) => {
           return (
             <li className="post-item col col-6 col-md-12" key={index}>
               <PostItem post={{ ...post, user: userProfile }} />
