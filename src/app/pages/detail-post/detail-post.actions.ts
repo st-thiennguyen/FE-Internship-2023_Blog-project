@@ -1,9 +1,11 @@
 import { Dispatch } from 'react';
 
-import { PostModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
+import { PostModel } from '../../models/post';
+import { InteractionItemModel } from '../../models/comment';
+
+import { getDetailPost, getPostLikes } from '../../shared/services/index';
 
 const getDetailBlogStart = () => {
   return {
@@ -25,6 +27,26 @@ const getDetailBlogFailure = (message: string) => {
   };
 };
 
+const getPostLikesStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_POST_LIKES,
+  };
+};
+
+const getPostLikesSuccess = (data: InteractionItemModel[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_POST_LIKES_SUCCESS,
+    payload: data,
+  };
+};
+
+const getPostLikesFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_POST_LIKES_FAILURE,
+    payload: error,
+  };
+};
+
 export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getDetailBlogStart());
   try {
@@ -32,5 +54,15 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
     dispatch(getDetailBlogSuccess(response as PostModel));
   } catch (error) {
     dispatch(getDetailBlogFailure(`${error}`));
+  }
+};
+
+export const fetchPostLikes = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getPostLikesStart());
+  try {
+    const response = await getPostLikes(id);
+    dispatch(getPostLikesSuccess(response as InteractionItemModel[]));
+  } catch (error) {
+    dispatch(getPostLikesFailure(`${error}`));
   }
 };

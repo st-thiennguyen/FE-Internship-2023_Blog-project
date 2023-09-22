@@ -4,7 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
-import { fetchDetailBlog } from '../detail-post.actions';
+import { fetchDetailBlog, fetchPostLikes } from '../detail-post.actions';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
@@ -27,7 +27,10 @@ const DetailPost = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchDetailBlog(Number(postId)) as any);
+    if (postId) {
+      dispatch(fetchDetailBlog(Number(postId)) as any);
+      dispatch(fetchPostLikes(postId) as any);
+    }
   }, [postId]);
 
   if (isLoading) {
