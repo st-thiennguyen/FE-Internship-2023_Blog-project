@@ -70,6 +70,28 @@ export const profileReducer = (state = initialState, action: RootAction): Update
         isError: true,
         message: action.payload,
       };
+    case ACTIONS_TYPE.UPDATE_PASSWORD:
+      return {
+        ...state,
+        isSuccess: false,
+        isLoading: true,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        message: 'Update Password Success',
+      };
+    case ACTIONS_TYPE.UPDATE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
     default:
       return state;
   }

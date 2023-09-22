@@ -1,9 +1,10 @@
 import { Dispatch } from 'react';
+
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { updateProfile } from '../../shared/services/user.service';
+import { updatePassword, updateProfile } from '../../shared/services/user.service';
+import { UserModel, formChangePassword } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
-import { UserModel } from '../../models/user';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
 import { getLocalStorage, setLocalStorage } from '../../shared/utils';
@@ -49,6 +50,25 @@ const updateProfileFailure = (message: string) => {
   };
 };
 
+const updatePasswordStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_PASSWORD,
+  };
+};
+
+const updatePasswordStartSuccess = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_PASSWORD_SUCCESS,
+  };
+};
+
+const updatePasswordStartFailure = (message: string) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_PASSWORD_FAILURE,
+    payload: message,
+  };
+};
+
 export const uploadAvatar =
   (file: File, data: Omit<UserInfo, 'id' | 'email'>) => async (dispatch: Dispatch<RootAction>) => {
     dispatch(updateAvatarStart());
@@ -86,3 +106,13 @@ export const updateProfileAction =
       dispatch(updateProfileFailure(`${error}`));
     }
   };
+
+export const updatePasswordAction = (data: formChangePassword) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updatePasswordStart());
+  try {
+    await updatePassword(data);
+    dispatch(updatePasswordStartSuccess());
+  } catch (error) {
+    dispatch(updatePasswordStartFailure(`${error}`));
+  }
+};

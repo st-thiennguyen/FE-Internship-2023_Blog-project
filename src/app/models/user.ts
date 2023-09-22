@@ -30,3 +30,9 @@ export interface UserModel {
   followings: number;
   [key: string]: any;
 }
+
+export interface formChangePassword {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword?: string;
+}

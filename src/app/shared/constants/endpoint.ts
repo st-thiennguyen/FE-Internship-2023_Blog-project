@@ -30,6 +30,7 @@ export const ENDPOINT = {
   },
   users: {
     index: `${BASE_URL}/${RESOURCES.users}/`,
+    updatePassword: `${BASE_URL}/${RESOURCES.users}/change-password`,
   },
   signatures: {
     index: `${BASE_URL}/${RESOURCES.signatures}`,

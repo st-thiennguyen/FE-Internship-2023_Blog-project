@@ -1,7 +1,6 @@
 import DetailPostPage from './pages/detail-post/container';
 import DetailPost from './pages/detail-post/container/DetailPost';
 import Home from './pages/home/container/Home';
-import UpdateProfile from './pages/profile/containers/UpdateProfile';
 import userProfileRoutes from './pages/user-profile/user.routes';
 
 export const appRoutes = [
