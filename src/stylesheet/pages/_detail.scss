@@ -1,6 +1,8 @@
 .detail-page {
   .detail-action {
     position: sticky;
+    height: fit-content;
+    top: 120px;
   }
   .detail-cover {
     position: relative;
@@ -73,6 +75,7 @@
       }
       .action-count {
         margin-left: 10px;
+        width: 20px;
       }
     }
 
