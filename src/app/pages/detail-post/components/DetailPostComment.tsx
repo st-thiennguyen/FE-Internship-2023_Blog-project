@@ -17,7 +17,8 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const { postId } = useParams();
 
   const inputComment = useRef<HTMLTextAreaElement>(null);
-  const handleKeyDown = (e: any) => {
+
+  const handleKeyDown = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = 'inherit';
     const computed = window.getComputedStyle(e.target);
 
@@ -31,17 +32,23 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
     e.target.style.height = `${height}px`;
   };
 
-  function handleComment(): void {
+  const handleComment = () => {
     const comment = inputComment.current!.value.trim();
     if (comment) {
       dispatch(postCommentAction(postId!, comment, currentUser) as any);
       inputComment.current!.value = '';
     }
-  }
+  };
 
-  function handleTrimInput(): void {
+  const handleTrimInput = () => {
     inputComment.current!.value = inputComment.current!.value.trim();
-  }
+  };
+
+  const handleEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!e.shiftKey && e.key === 'Enter') {
+      handleComment();
+    }
+  };
 
   return (
     <section ref={ref} className="section section-comment">
@@ -55,6 +62,7 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
               className="comment-input"
               onBlur={handleTrimInput}
               onChange={handleKeyDown}
+              onKeyUp={handleEnter}
             />
             <button className="btn btn-primary btn-comment" onClick={handleComment}>
               Comment
