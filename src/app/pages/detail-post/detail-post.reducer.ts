@@ -113,6 +113,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
 
       return {
         ...state,
+        data: { ...state.data, comments: state.data?.comments + 1 },
         comments: [action.payload, ...state.comments],
         isLoading: false,
         isSuccess: true,
