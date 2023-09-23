@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 
-import { Gender, regexPhoneNumber } from '../../../shared/constants';
-import { yupResolver } from '@hookform/resolvers/yup';
-import Button from '../../../shared/components/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { convertDateFormat, convertDateToString } from '../../../shared/utils';
 import { RootState } from '../../../stores/store';
 import { updateProfileAction, uploadAvatar } from '../proflie.actions';
+
+import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 
 const schema = yup

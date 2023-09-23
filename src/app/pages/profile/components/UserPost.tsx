@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
+
 import UserPostList from './UserPostList';
 
 const UserPost = () => {

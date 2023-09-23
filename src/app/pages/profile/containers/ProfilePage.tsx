@@ -4,10 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 
-import Loading from '../../../shared/components/Loading';
-import { getUserPostAction, getUserProfileAction } from '../proflie.actions';
+import { getUserProfileAction } from '../proflie.actions';
 import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
+import Loading from '../../../shared/components/Loading';
 
 const ProfilePage = () => {
   const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);

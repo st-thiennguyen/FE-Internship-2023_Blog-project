@@ -1,13 +1,16 @@
-import Button from '../../../shared/components/Button';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { updatePasswordAction } from '../proflie.actions';
 import { formChangePassword } from '../../../models/user';
-import ToastMessage from '../../../shared/components/ToastMessage';
 import { RootState } from '../../../stores/store';
-import { useEffect, useState } from 'react';
+
+import ToastMessage from '../../../shared/components/ToastMessage';
+import Button from '../../../shared/components/Button';
 
 interface UpdateUserPasswordFormProps {
   isShowToast: boolean;
@@ -59,12 +62,6 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
       reset();
     }
   }, [isSuccess]);
-
-  useEffect(() => {
-    return () => {
-      console.log('cleaned up');
-    };
-  }, []);
 
   type FormData = yup.InferType<typeof schema>;
   return (

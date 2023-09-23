@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
-import { ProfileModel } from '../../../models/user';
 import { PostModel } from '../../../models/post';
 
 import PostItem from '../../../shared/components/PostItem';

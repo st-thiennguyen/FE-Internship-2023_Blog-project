@@ -4,14 +4,11 @@ import { Link, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 import { convertDateToString } from '../../../shared/utils';
+import { ProfileModel } from '../../../models/user';
 import Button from '../../../shared/components/Button';
-import { ProfileModel, UserModel } from '../../../models/user';
-import { PostModel } from '../../../models/post';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);
-
-  console.log(profile);
 
   const { id } = useParams();
 
