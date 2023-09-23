@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 
@@ -39,9 +39,13 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const UserUpdateForm = () => {
+interface UpdateUserFormProps {
+  isShowToast: boolean;
+  setIsShowToast: (value: boolean) => void;
+}
+
+const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
-  const [isShowToast, setIsShowToast] = useState(false);
   const user = useSelector((state: RootState) => state.auth.auth?.userInfo);
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);

@@ -7,9 +7,14 @@ import { updatePasswordAction } from '../proflie.actions';
 import { formChangePassword } from '../../../models/user';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { RootState } from '../../../stores/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const UpdatePasswordForm = () => {
+interface UpdateUserPasswordFormProps {
+  isShowToast: boolean;
+  setIsShowToast: (value: boolean) => void;
+}
+
+const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordFormProps) => {
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isError = useSelector((state: RootState) => state.profile.isError);
   const message = useSelector((state: RootState) => state.profile.message);
@@ -46,6 +51,7 @@ const UpdatePasswordForm = () => {
   const onUpdatePassword = (data: formChangePassword) => {
     delete data.confirmPassword;
     dispatch(updatePasswordAction(data) as any);
+    setIsShowToast(true);
   };
 
   useEffect(() => {
@@ -53,6 +59,13 @@ const UpdatePasswordForm = () => {
       reset();
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    return () => {
+      console.log('cleaned up');
+    };
+  }, []);
+
   type FormData = yup.InferType<typeof schema>;
   return (
     <>
@@ -104,8 +117,12 @@ const UpdatePasswordForm = () => {
           </div>
         </div>
       </div>
-      {isSuccess && <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'Success'} subtitle={message} />}
-      {isError && <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />}
+      {isShowToast && isSuccess && (
+        <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'Success'} subtitle={message} />
+      )}
+      {isShowToast && isError && (
+        <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />
+      )}
     </>
   );
 };
