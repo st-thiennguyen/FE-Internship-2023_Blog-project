@@ -95,6 +95,14 @@ const ACTIONS_TYPE = {
   UPDATE_LIKE: 'update-like',
   UPDATE_LIKE_SUCCESS: 'update-like-success',
   UPDATE_LIKE_FAILURE: 'update-like-failure',
+  // GET POST COMMENTS
+  GET_COMMENTS: 'get-comments',
+  GET_COMMENTS_SUCCESS: 'get-comments-success',
+  GET_COMMENTS_FAILURE: 'get-comments-failure',
+  // POST COMMENT
+  POST_COMMENT: 'post-comment',
+  POST_COMMENT_SUCCESS: 'post-comment-success',
+  POST_COMMENT_FAILURE: 'post-comment-failure',
 };
 
 export default ACTIONS_TYPE;

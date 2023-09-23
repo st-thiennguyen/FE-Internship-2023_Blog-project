@@ -1,11 +1,12 @@
 import { Dispatch } from 'react';
 
 import ACTIONS_TYPE from '../../shared/constants/type';
+import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
-import { InteractionProps } from '../../models/interaction';
+import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
-import { getDetailPost, updateLike } from '../../shared/services/index';
+import { UserInfo } from '../../models/auth';
 
 const getDetailBlogStart = () => {
   return {
@@ -67,3 +68,66 @@ export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAc
     dispatch(updateLikeFailure(`${error}`));
   }
 };
+
+// Get post comments
+const getCommentsStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_COMMENTS,
+  };
+};
+
+const getCommentsSuccess = (data: InteractionItemModel[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_COMMENTS_SUCCESS,
+    payload: data,
+  };
+};
+
+const getCommentsFailure = (message: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_COMMENTS_FAILURE,
+    payload: message,
+  };
+};
+
+export const fetchComments = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getCommentsStart());
+  try {
+    const response = await getPostComments(id);
+    dispatch(getCommentsSuccess(response as InteractionItemModel[]));
+  } catch (error) {
+    dispatch(getCommentsFailure(`${error}`));
+  }
+};
+
+// Post comment
+const postCommentStart = () => {
+  return {
+    type: ACTIONS_TYPE.POST_COMMENT,
+  };
+};
+
+const postCommentSuccess = (data: InteractionItemModel, user: UserInfo) => {
+  return {
+    type: ACTIONS_TYPE.POST_COMMENT_SUCCESS,
+    payload: { ...data, user: user },
+  };
+};
+
+const postCommentFailure = (message: string) => {
+  return {
+    type: ACTIONS_TYPE.POST_COMMENT_FAILURE,
+    payload: message,
+  };
+};
+
+export const postCommentAction =
+  (id: string, comment: string, user: UserInfo) => async (dispatch: Dispatch<RootAction>) => {
+    dispatch(postCommentStart());
+    try {
+      const response = await postComment(id, comment);
+      dispatch(postCommentSuccess(response as InteractionItemModel, user));
+    } catch (error) {
+      dispatch(postCommentFailure(`${error}`));
+    }
+  };

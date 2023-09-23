@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { InteractionItemModel } from '../../../models/interaction';
 import { timeAgoFromDate } from '../../../shared/utils';
 
@@ -6,10 +8,13 @@ interface CommentItemProps {
 }
 
 const CommentItem = ({ commentItem }: CommentItemProps) => {
+  const [isErrAvt, setIsErrAvt] = useState(false);
+
   return (
     <div className="comment d-flex">
       <img
-        src={require('../../../../assets/images/demo-cover.jpg')}
+        onError={() => setIsErrAvt(true)}
+        src={!isErrAvt ? commentItem.user.picture : require('../../../../assets/images/user-default.png')}
         alt={commentItem.user.displayName}
         className="user-avatar"
       />

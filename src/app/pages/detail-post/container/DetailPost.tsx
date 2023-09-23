@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
-import { fetchDetailBlog } from '../detail-post.actions';
+import { fetchComments, fetchDetailBlog } from '../detail-post.actions';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
@@ -21,6 +21,7 @@ const DetailPost = () => {
   const message = useSelector((state: RootState) => state.detail.message);
 
   const { postId } = useParams();
+  const commentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,6 +30,7 @@ const DetailPost = () => {
   useEffect(() => {
     if (postId) {
       dispatch(fetchDetailBlog(Number(postId)) as any);
+      dispatch(fetchComments(postId) as any);
     }
   }, [postId]);
 
@@ -39,6 +41,10 @@ const DetailPost = () => {
   if (isError && !post.id) {
     return <Navigate to="/page-not-found" />;
   }
+
+  const scrollToComment = () => {
+    commentRef.current!.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -54,11 +60,11 @@ const DetailPost = () => {
           />
           <section className="section section-detail-content">
             <div className="detail-content d-flex">
-              <DetailPostContent post={post} />
+              <DetailPostContent post={post} scrollToComment={scrollToComment} />
             </div>
           </section>
         </article>
-        <DetailPostComment />
+        <DetailPostComment ref={commentRef} />
       </div>
       {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
     </>

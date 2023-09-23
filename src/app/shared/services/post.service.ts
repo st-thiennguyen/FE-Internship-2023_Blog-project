@@ -34,3 +34,13 @@ export const updateLike = (id: number) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.post.index}/${id}/likes`);
 };
+
+export const getPostComments = (id: string) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.index}/${id}/comments`);
+};
+
+export const postComment = (id: string, comment: string) => {
+  const api = new ApiService();
+  return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
+};
