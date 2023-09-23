@@ -19,8 +19,10 @@ const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps)
   };
 
   useEffect(() => {
-    setIsShowToast(isShow);
-  }, [isShow])
+    setTimeout(() => {
+      closeClick.current();
+    }, 3000);
+  }, []);
 
   useEffect(() => {
     if (isShow) {

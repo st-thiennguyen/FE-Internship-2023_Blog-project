@@ -168,8 +168,8 @@
 }
 
 .btn-status,
-.knobs,
-.layer {
+.private,
+.public {
   position: absolute;
   top: 0;
   right: 0;
@@ -201,18 +201,18 @@
   z-index: 3;
 }
 
-.knobs {
+.private {
   z-index: 2;
 }
 
-.layer {
+.public {
   width: 100%;
   background-color: #ebf7fc;
   transition: 0.3s ease all;
   z-index: 1;
 }
 
-.btn-toggle .knobs:before {
+.btn-toggle .private:before {
   content: "Private";
   position: absolute;
   top: 4px;
@@ -228,18 +228,18 @@
   transition: 1.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
-.btn-toggle .checkbox:checked + .knobs:before {
+.btn-toggle .checkbox:checked + .private:before {
   content: "Public";
   left: 60px;
   background-color: #f44336;
 }
 
-.btn-toggle .checkbox:checked ~ .layer {
+.btn-toggle .checkbox:checked ~ .public {
   background-color: #fcebeb;
 }
 
-.btn-toggle .knobs,
-.btn-toggle .knobs:before,
-.btn-toggle .layer {
+.btn-toggle .private,
+.btn-toggle .private:before,
+.btn-toggle .public {
   transition: 0.3s ease-in all;
 }

@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import EditorImageCover from '../components/EditorImageCover';
@@ -47,9 +47,11 @@ const WritePost = () => {
   const [photoPreview, setPhotoPreview] = useState<string>();
   const formRef: any = useRef(null);
 
-  let linkImagePost = useSelector((state: any) => state.imageSign.data.url);
+  const linkImagePost = useSelector((state: any) => state.imageSign.data.url);
   const isSuccessCreatePost = useSelector((state: any) => state.writePost.isSuccess);
-  const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
+  const isErrorCreatePost = useSelector((state: any) => state.writePost.isError);
+  const messageCreatePost = useSelector((state: any) => state.writePost.message);
+  const idPost = useSelector((state: any) => state.writePost.data?.id);
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -101,6 +103,12 @@ const WritePost = () => {
     }
   }, [accessToken]);
 
+  useEffect(() => {
+    if (isSuccessCreatePost) {
+      navigate(`/detail/${idPost}`);
+    }
+  }, [isSuccessCreatePost])
+
   return (
     <>
       <WritePostHeader onPublishPost={onPublishPost} />
@@ -116,8 +124,8 @@ const WritePost = () => {
                   <div className="btn-status">
                     <div className="btn-toggle">
                       <input type="checkbox" className="checkbox" onClick={handleToggleStatus} />
-                      <div className="knobs"></div>
-                      <div className="layer"></div>
+                      <div className="private"></div>
+                      <div className="public"></div>
                     </div>
                   </div>
                 </div>
@@ -137,12 +145,22 @@ const WritePost = () => {
           </div>
         </div>
       </section>
-      <ToastMessage
-        isSuccess={isSuccessCreatePost}
-        isShow={isSuccessCreatePost}
-        title={isSuccessCreatePost ? 'success' : 'error'}
-        subtitle={isMessageCreatePost}
-      ></ToastMessage>
+      {
+        isSuccessCreatePost && <ToastMessage
+          isShow={isSuccessCreatePost}
+          isSuccess={isSuccessCreatePost}
+          title='Success'
+          subtitle={messageCreatePost}
+        ></ToastMessage>
+      }
+      {
+        isErrorCreatePost && <ToastMessage
+          isShow={isErrorCreatePost}
+          isSuccess={isErrorCreatePost}
+          title='Error'
+          subtitle={messageCreatePost}
+        ></ToastMessage>
+      }
     </>
   );
 };
