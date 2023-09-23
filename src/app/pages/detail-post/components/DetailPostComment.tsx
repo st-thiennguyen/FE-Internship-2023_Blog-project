@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 import { postCommentAction } from '../detail-post.actions';
@@ -11,6 +11,8 @@ import React from 'react';
 const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const listComment = useSelector((state: RootState) => state.detail.comments);
   const currentUser = useSelector((state: RootState) => state.auth.auth?.userInfo);
+  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+
   const dispatch = useDispatch();
   const { postId } = useParams();
 
@@ -45,18 +47,27 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
     <section ref={ref} className="section section-comment">
       <h2 className="comment-title">Comments {`(${listComment.length})`}</h2>
       <div className="comment-wrapper">
-        <div className="comment-input-wrapper d-flex flex-column">
-          <textarea
-            placeholder="Add comment"
-            ref={inputComment}
-            className="comment-input"
-            onBlur={handleTrimInput}
-            onChange={handleKeyDown}
-          />
-          <button className="btn btn-primary btn-comment" onClick={handleComment}>
-            Comment
-          </button>
-        </div>
+        {isLogin ? (
+          <div className="comment-input-wrapper d-flex flex-column">
+            <textarea
+              placeholder="Add comment"
+              ref={inputComment}
+              className="comment-input"
+              onBlur={handleTrimInput}
+              onChange={handleKeyDown}
+            />
+            <button className="btn btn-primary btn-comment" onClick={handleComment}>
+              Comment
+            </button>
+          </div>
+        ) : (
+          <div className="comment-input-hidden text-center">
+            <Link to="/login" className="text-primary text-bold">
+              Login
+            </Link>
+            <span> to comment on this post</span>
+          </div>
+        )}
         <ul className="comment-list">
           {listComment.length > 0 &&
             listComment.map((commentItem) => {

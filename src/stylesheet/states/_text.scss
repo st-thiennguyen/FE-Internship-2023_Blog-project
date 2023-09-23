@@ -5,3 +5,7 @@
 .text-danger {
   color: rgb(242 5 5);
 }
+
+.text-bold {
+  font-weight: map-get($map: $font-weight, $key: bold);
+}
