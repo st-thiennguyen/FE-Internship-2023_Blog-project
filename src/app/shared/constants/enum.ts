@@ -7,3 +7,9 @@ export enum Gender {
   FEMALE = 'female',
   OTHER = 'other',
 }
+
+export enum TypeUploadImage {
+  AVATAR = 'avatar',
+  COVER_POST = 'cover-post',
+  IMAGE_POST = 'image-post',
+}

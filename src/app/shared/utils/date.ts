@@ -6,6 +6,17 @@ export const convertDateToString = (date: any, separator: string) => {
   return `${day}${separator}${month}${separator}${year}`;
 };
 
+export const convertDateFormat = (inputDate: string) => {
+  const parts = inputDate.split('/');
+  if (parts.length === 3) {
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+    return `${year}-${month}-${day}`;
+  }
+  return inputDate;
+};
+
 export const timeAgoFromDate = (inputDate: string): string => {
   const inputDateTime = new Date(inputDate);
   const currentDateTime = new Date();

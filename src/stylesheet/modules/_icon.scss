@@ -58,12 +58,17 @@
   &-comment-black {
     background: url("../../assets/icons/ic-comment-black.svg") top center / cover no-repeat;
   }
-  &-fire-ouline-20 {
+
+  &-fire-outline-20 {
     background-image: url("../../assets/icons/ic-fire-ouline-20.svg");
   }
   &-fire-20 {
     background-image: url("../../assets/icons/ic-fire-20.svg");
   }
+  &-fire-fill-20 {
+    background-image: url("../../assets/icons/ic-fire-fill-20.svg");
+  }
+
   &-comment-20 {
     background-image: url("../../assets/icons/ic-comment-20.svg");
   }
@@ -73,13 +78,24 @@
   &-close-20 {
     background-image: url("../../assets/icons/ic-close-20.svg");
   }
+
+  &-camera-white-20 {
+    background-image: url("../../assets/icons/ic-camera-white-20.svg");
+  }
   &-date-20 {
     background-image: url("../../assets/icons/ic-date-20.svg");
+  }
+  &-date-outline-20 {
+    background-image: url("../../assets/icons/ic-date-outline-20.svg");
   }
   &-close-10 {
     background-image: url("../../assets/icons/ic-close-10.svg");
   }
   &-arrow-up-24 {
     background-image: url("../../assets/icons/ic-arrow-up-grey.svg");
+  }
+
+  &-mail-20 {
+    background-image: url("../../assets/icons/ic-mail-20.svg");
   }
 }

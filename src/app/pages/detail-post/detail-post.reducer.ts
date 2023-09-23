@@ -1,11 +1,11 @@
-import { CommentItemModel } from '../../models/comment';
-import { PostModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
+import { PostModel } from '../../models/post';
+import { InteractionItemModel } from '../../models/interaction';
 
 interface DetailStateProps {
   data: PostModel;
-  comments: CommentItemModel[];
+  comments: InteractionItemModel[];
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -13,7 +13,7 @@ interface DetailStateProps {
 }
 const initialState: DetailStateProps = {
   data: {} as PostModel,
-  comments: [] as CommentItemModel[],
+  comments: [] as InteractionItemModel[],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -47,11 +47,38 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: action.payload,
       };
 
+    // update like
+    case ACTIONS_TYPE.UPDATE_LIKE:
+      return {
+        ...state,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_LIKE_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          isLiked: action.payload,
+          likes: action.payload ? state.data?.likes + 1 : state.data?.likes - 1,
+        },
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.UPDATE_LIKE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+
     // Get comments
     case ACTIONS_TYPE.GET_COMMENTS:
       return {
         ...state,
-        comments: [] as CommentItemModel[],
+        comments: [] as InteractionItemModel[],
         isSuccess: false,
         isLoading: true,
         isError: false,
@@ -76,7 +103,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
     case ACTIONS_TYPE.POST_COMMENT:
       return {
         ...state,
-        // isLoading: true,
         isSuccess: false,
         isError: false,
         message: '',

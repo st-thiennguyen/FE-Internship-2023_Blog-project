@@ -19,24 +19,16 @@ export class ApiService {
     this._setInterceptors();
   }
 
-  // private _requiresAuthorization(url: string) {
-  //   const pathsRequiringAuthorization = ['/logout'];
-  //   return pathsRequiringAuthorization.some((path) => url.includes(path));
-  // }
-
   private _setInterceptors = () => {
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        // const requiresAuthorization = this._requiresAuthorization(config.url!);
-        // if (requiresAuthorization) {
         const auth = getLocalStorage(StorageKey.AUTH) as Auth;
-        if (auth) {
+        if (auth && !config.url?.includes('.amazonaws.com')) {
           config.headers.Authorization = `Bearer ${auth.accessToken}`;
         }
-        // }
         return config;
       },
-      (error) => {
+      (error: AxiosError) => {
         return this._handleError(error);
       },
     );
@@ -56,6 +48,9 @@ export class ApiService {
       if (typeof error.response?.data === 'object') {
         const { errors }: any = error.response?.data;
         throw new Error(`${errors[0]}`);
+      }
+      if (error.response.status === 401) {
+        throw new Error(`Please login to do this action !`);
       }
       console.error('Server Error :', error.response.status, error.response.data);
       throw new Error(`${error.response?.data}`);

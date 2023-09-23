@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../models/post';
@@ -19,7 +19,7 @@ const PostItem = ({ post }: PostItemProps) => {
   }, [isErrImg, post.cover]);
 
   return (
-    <Link className="post-link" to={`/detail/${post.id}`}>
+    <Link className="post-link" to={`/posts/detail/${post.id}`}>
       <div className="post">
         <div className="post-img-wrapper">
           {isErrImg ? (
@@ -31,7 +31,11 @@ const PostItem = ({ post }: PostItemProps) => {
         <div className="post-body-wrapper">
           <div className="post-body">
             <div className="post-body-top d-flex item-center">
-              <div className="user-info-wrapper d-flex item-center">
+              <Link
+                to={`/profile/${post.userId}`}
+                onClick={(e) => e.stopPropagation}
+                className="user-info-wrapper d-flex item-center"
+              >
                 <img
                   className="user-avatar"
                   onError={() => setIsErrAvt(true)}
@@ -39,11 +43,11 @@ const PostItem = ({ post }: PostItemProps) => {
                   alt={post.user.displayName}
                 />
                 <span className="user-name">{post.user.displayName}</span>
-              </div>
+              </Link>
               <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
             </div>
             <h3 className="post-title">{post.title}</h3>
-            <p className="post-content">{post.content}</p>
+            <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
           </div>
           <div className="post-footer d-flex justify-between">
             <span className="read-more">READ MORE</span>
@@ -56,7 +60,7 @@ const PostItem = ({ post }: PostItemProps) => {
             </ul>
             <ul className="post-reaction-list d-flex item-center">
               <div className="post-reaction-item d-flex">
-                <i className="icon icon-small icon-fire-ouline-20"></i>
+                <i className="icon icon-small icon-fire-outline-20"></i>
                 <span className="post-reaction-number">{post.likes}</span>
               </div>
               <div className="post-reaction-item d-flex">
