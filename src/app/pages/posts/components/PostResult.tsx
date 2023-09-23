@@ -58,7 +58,7 @@ const PostResult = () => {
     <section className="section section-latest-post">
       <h2 className="section-title text-primary">RESULT OF FOUND</h2>
 
-      {posts.length > 0 && <PostList posts={posts} />}
+      {posts && <PostList posts={posts} isLoading={isLoading} />}
       {isLoading && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (
