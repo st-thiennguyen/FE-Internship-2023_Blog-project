@@ -21,6 +21,10 @@ const PostItem = ({ post }: PostItemProps) => {
   return (
     <Link className="post-link" to={`/posts/detail/${post.id}`}>
       <div className="post">
+        <div className="post-delete d-flex item-center justify-center">
+          <i className="icon icon-small icon-delete icon-trash-20"></i>
+          <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
+        </div>
         <div className="post-img-wrapper">
           {isErrImg ? (
             <img src={NoImg} alt={post.title} className={`post-img err`} />
