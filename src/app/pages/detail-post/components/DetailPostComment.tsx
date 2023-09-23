@@ -33,8 +33,8 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
 
   function handleComment(): void {
     const comment = inputComment.current!.value.trim();
-    if (postId && comment) {
-      dispatch(postCommentAction(postId, comment, currentUser) as any);
+    if (comment) {
+      dispatch(postCommentAction(postId!, comment, currentUser) as any);
       inputComment.current!.value = '';
     }
   }
