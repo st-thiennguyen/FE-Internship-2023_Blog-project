@@ -9,9 +9,10 @@ import DetailPostReaction from './DetailPostReaction';
 
 interface DetailPostProps {
   post: PostModel;
+  scrollToComment: () => void;
 }
 
-const DetailPostContent = ({ post }: DetailPostProps) => {
+const DetailPostContent = ({ post, scrollToComment }: DetailPostProps) => {
   const [isErrorCover, setIsErrorCover] = useState(false);
 
   useEffect(() => {
@@ -20,7 +21,12 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
 
   return (
     <>
-      <DetailPostReaction postId={post.id} likeCount={post.likes} commentCount={post.comments} />
+      <DetailPostReaction
+        postId={post.id}
+        likeCount={post.likes}
+        commentCount={post.comments}
+        scrollToComment={scrollToComment}
+      />
       <div className="detail-post">
         <div className="detail-post-body">
           <h2 className="post-title">{post.title}</h2>

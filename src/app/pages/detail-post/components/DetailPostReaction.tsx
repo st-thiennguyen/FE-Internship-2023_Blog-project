@@ -9,9 +9,10 @@ interface ReactionProps {
   postId: number;
   likeCount: number;
   commentCount: number;
+  scrollToComment: () => void;
 }
 
-const DetailPostReaction = ({ postId, likeCount, commentCount }: ReactionProps) => {
+const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
   const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
@@ -35,7 +36,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount }: ReactionProps) 
           <span className="action-count">{likeCount}</span>
         </li>
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action">
+          <button className="btn btn-post-action" onClick={scrollToComment}>
             <i className="icon icon-small icon-comment-20"></i>
           </button>
           <span className="action-count">{commentCount}</span>

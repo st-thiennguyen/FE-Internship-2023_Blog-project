@@ -6,8 +6,9 @@ import { RootState } from '../../../stores/store';
 import { postCommentAction } from '../detail-post.actions';
 
 import CommentItem from './CommentItem';
+import React from 'react';
 
-const DetailPostComment = () => {
+const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const listComment = useSelector((state: RootState) => state.detail.comments);
   const currentUser = useSelector((state: RootState) => state.auth.auth?.userInfo);
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const DetailPostComment = () => {
   }
 
   return (
-    <section className="section section-comment">
+    <section ref={ref} className="section section-comment">
       <h2 className="comment-title">Comments {`(${listComment.length})`}</h2>
       <div className="comment-wrapper">
         <div className="comment-input-wrapper d-flex flex-column">
@@ -69,6 +70,6 @@ const DetailPostComment = () => {
       </div>
     </section>
   );
-};
+});
 
 export default DetailPostComment;

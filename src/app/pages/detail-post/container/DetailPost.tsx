@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
@@ -21,6 +21,7 @@ const DetailPost = () => {
   const message = useSelector((state: RootState) => state.detail.message);
 
   const { postId } = useParams();
+  const commentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,6 +42,10 @@ const DetailPost = () => {
     return <Navigate to="/page-not-found" />;
   }
 
+  const scrollToComment = () => {
+    commentRef.current!.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <>
       <div className="detail-page">
@@ -55,11 +60,11 @@ const DetailPost = () => {
           />
           <section className="section section-detail-content">
             <div className="detail-content d-flex">
-              <DetailPostContent post={post} />
+              <DetailPostContent post={post} scrollToComment={scrollToComment} />
             </div>
           </section>
         </article>
-        <DetailPostComment />
+        <DetailPostComment ref={commentRef} />
       </div>
       {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
     </>
