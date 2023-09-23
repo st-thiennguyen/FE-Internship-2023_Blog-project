@@ -8,7 +8,7 @@ interface PostListProps {
   isLoading?: Boolean;
 }
 const PostList = ({ posts, isLoading }: PostListProps) => {
-  return posts.length > 0 ? (
+  return posts.length > 0 || isLoading ? (
     <ul className="post-list row">
       {posts.map((post, index) => {
         return (
@@ -18,11 +18,8 @@ const PostList = ({ posts, isLoading }: PostListProps) => {
         );
       })}
     </ul>
-  ) : !isLoading ? (
-    <EmptyPost />
   ) : (
-    <></>
+    <EmptyPost />
   );
 };
-
 export default PostList;
