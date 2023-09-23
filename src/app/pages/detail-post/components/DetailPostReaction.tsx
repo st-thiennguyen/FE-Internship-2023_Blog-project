@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { updateLikeAction } from '../detail-post.actions';
+
 import ToastMessage from '../../../shared/components/ToastMessage';
-import { useState } from 'react';
 
 interface ReactionProps {
   postId: number;

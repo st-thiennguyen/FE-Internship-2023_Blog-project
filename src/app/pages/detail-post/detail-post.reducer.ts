@@ -1,11 +1,9 @@
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
-import { InteractionItemModel } from '../../models/interaction';
 
 interface DetailStateProps {
   data: PostModel;
-  likes: InteractionItemModel[];
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
@@ -13,7 +11,6 @@ interface DetailStateProps {
 }
 const initialState: DetailStateProps = {
   data: {} as PostModel,
-  likes: [] as InteractionItemModel[],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -40,31 +37,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: '',
       };
     case ACTIONS_TYPE.GET_DETAIL_BLOG_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        message: action.payload,
-      };
-
-    // Get post likes
-    case ACTIONS_TYPE.GET_POST_LIKES:
-      return {
-        ...state,
-        likes: [] as InteractionItemModel[],
-        isLoading: true,
-        isSuccess: false,
-        isError: false,
-        message: '',
-      };
-    case ACTIONS_TYPE.GET_POST_LIKES_SUCCESS:
-      return {
-        ...state,
-        likes: action.payload,
-        isLoading: false,
-        isSuccess: true,
-      };
-    case ACTIONS_TYPE.GET_POST_LIKES_FAILURE:
       return {
         ...state,
         isLoading: false,

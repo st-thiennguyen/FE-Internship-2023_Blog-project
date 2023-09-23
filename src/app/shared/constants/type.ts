@@ -75,10 +75,6 @@ const ACTIONS_TYPE = {
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
   GET_RECOMMEND_FAILURE: 'get-recommend-failure',
-  // GET POST LIKES
-  GET_POST_LIKES: 'get-likes',
-  GET_POST_LIKES_SUCCESS: 'get-likes-success',
-  GET_POST_LIKES_FAILURE: 'get-likes-failure',
   // UPDATE LIKE
   UPDATE_LIKE: 'update-like',
   UPDATE_LIKE_SUCCESS: 'update-like-success',
