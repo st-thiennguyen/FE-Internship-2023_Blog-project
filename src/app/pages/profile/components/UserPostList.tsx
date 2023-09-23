@@ -9,18 +9,17 @@ import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../home/components/EmptyPost';
 
 interface UserPostListProps {
-  postList: ProfileModel;
+  postList: PostModel[];
 }
 
 const UserPostList = ({ postList }: UserPostListProps) => {
-  const posts: PostModel[] = postList.Posts;
-  const userProfile = useSelector((state: RootState) => state.userProfile.profile);
+  const userProfile = useSelector((state: RootState) => state.profile.data);
 
   const { id } = useParams();
   return (
     <ul className={`user-post-list row ${!id && 'my-post'}`}>
-      {posts?.length > 0 ? (
-        posts.map((post, index) => {
+      {postList?.length > 0 ? (
+        postList.map((post, index) => {
           return (
             <li className="post-item col col-6 col-md-12" key={index}>
               <PostItem post={{ ...post, user: userProfile }} />

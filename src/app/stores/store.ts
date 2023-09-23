@@ -8,7 +8,6 @@ import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/h
 import { loggerMiddleware } from './middleware';
 import { postTagReducer } from '../pages/posts/posts.reducer';
 import { profileReducer } from '../pages/profile/profile.reducers';
-import { userProfileReducer } from '../pages/user-profile/user-profile.reducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -21,7 +20,6 @@ export const rootReducer = combineReducers({
   detail: detailPostReducer,
   post: lastesPostReducer,
   user: userReducer,
-  userProfile: userProfileReducer,
   postTag: postTagReducer,
   profile: profileReducer,
   recommend: recommendPostReducer,

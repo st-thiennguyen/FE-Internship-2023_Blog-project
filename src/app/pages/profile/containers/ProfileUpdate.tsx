@@ -10,7 +10,7 @@ enum Tab {
   CHANGE_PASSWORD = 'change-password',
 }
 
-const UpdateProfile = () => {
+const ProfileUpdate = () => {
   const [tab, setTab] = useState<Tab>(Tab.UPDATE_USER_INFO);
 
   const onChangeTab = (value: Tab) => {
@@ -70,4 +70,4 @@ const UpdateProfile = () => {
   );
 };
 
-export default UpdateProfile;
+export default ProfileUpdate;

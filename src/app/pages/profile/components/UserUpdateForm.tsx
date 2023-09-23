@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 
@@ -41,6 +41,7 @@ type FormData = yup.InferType<typeof schema>;
 
 const UserUpdateForm = () => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
+  const [isShowToast, setIsShowToast] = useState(false);
   const user = useSelector((state: RootState) => state.auth.auth?.userInfo);
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
@@ -77,6 +78,7 @@ const UserUpdateForm = () => {
         }) as any,
       );
     }
+    setIsShowToast(true);
   };
 
   const onUpdateProfile = handleSubmit((data: FormData) => {
@@ -91,6 +93,7 @@ const UserUpdateForm = () => {
         picture: user.picture,
       }) as any,
     );
+    setIsShowToast(true);
   });
 
   return (
@@ -155,10 +158,8 @@ const UserUpdateForm = () => {
                 </div>
                 <div className="form-input-group col col-6">
                   <label className="form-label">Gender</label>
-                  <select className="form-select" defaultValue={''} {...register('gender')}>
-                    <option disabled defaultValue={user.gender}>
-                      -- Chose your gender --
-                    </option>
+                  <select className="form-select" defaultValue={user.gender} {...register('gender')}>
+                    <option disabled>-- Chose your gender --</option>
                     <option value={Gender.MALE}>Male</option>
                     <option value={Gender.FEMALE}>Female</option>
                     <option value={Gender.OTHER}>Other</option>
@@ -183,7 +184,7 @@ const UserUpdateForm = () => {
           </form>
         </div>
       </div>
-      {isSuccess && (
+      {isShowToast && isSuccess && (
         <ToastMessage
           isShow={isSuccess}
           isSuccess={isSuccess}
@@ -191,7 +192,7 @@ const UserUpdateForm = () => {
           subtitle={'Update profile successfully'}
         ></ToastMessage>
       )}
-      {isError && (
+      {isShowToast && isError && (
         <ToastMessage isShow={isError} isSuccess={isSuccess} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>

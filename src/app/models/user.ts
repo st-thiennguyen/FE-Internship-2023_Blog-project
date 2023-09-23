@@ -23,5 +23,5 @@ export interface formChangePassword {
 
 export interface ProfileModel extends UserModel {
   isFollowed: boolean;
-  Posts: PostModel[];
+  posts: PostModel[];
 }
