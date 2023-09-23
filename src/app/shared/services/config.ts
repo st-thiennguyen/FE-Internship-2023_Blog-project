@@ -23,7 +23,7 @@ export class ApiService {
     this.axiosInstance.interceptors.request.use(
       (config) => {
         const auth = getLocalStorage(StorageKey.AUTH) as Auth;
-        if (auth) {
+        if (auth && !config.url?.includes('.amazonaws.com')) {
           config.headers.Authorization = `Bearer ${auth.accessToken}`;
         }
         return config;

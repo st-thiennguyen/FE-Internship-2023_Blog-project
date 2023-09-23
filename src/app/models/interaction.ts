@@ -1,4 +1,4 @@
-import { UserModel } from './post';
+import { UserModel } from './user';
 
 export interface InteractionProps {
   liked: boolean;

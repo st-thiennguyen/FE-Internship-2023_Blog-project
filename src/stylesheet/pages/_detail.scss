@@ -74,8 +74,9 @@
         background-color: transparent;
       }
       .action-count {
-        margin-left: 10px;
         width: 20px;
+        margin-left: 10px;
+        overflow-wrap: break-word;
       }
     }
 
@@ -86,21 +87,20 @@
         font-size: map-get($font-size, lg);
         letter-spacing: 0.3px;
 
+        .post-title {
+          margin-bottom: 40px;
+        }
+
         .post-desc {
           margin-bottom: 60px;
           font-weight: map-get($font-weight, semibold);
           font-size: map-get($font-size, lg);
+        }
 
-          &::first-letter {
-            padding: 5px 12px;
-            margin-right: 5px;
-            border-radius: 12px;
-
-            color: map-get($color, primary);
-            background-color: map-get($color, backgroundFrame);
-            font-size: map-get($font-size, xxl);
-            line-height: 1.8;
-          }
+        .post-content {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
         }
       }
       .post-tag {
@@ -245,6 +245,7 @@
       bottom: 0;
       right: 0;
       left: 0;
+      z-index: 5;
 
       .action-list {
         display: flex;

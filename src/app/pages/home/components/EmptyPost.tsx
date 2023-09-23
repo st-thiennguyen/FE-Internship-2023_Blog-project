@@ -1,3 +1,5 @@
+import React from 'react';
+
 const EmptyPost = () => {
   return (
     <div className="empty-post d-flex item-center flex-column">

@@ -23,8 +23,9 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
       <DetailPostReaction postId={post.id} likeCount={post.likes} commentCount={post.comments} />
       <div className="detail-post">
         <div className="detail-post-body">
-          <p className="post-desc">{post.description}</p>
-          <p className="post-content">{post.content}</p>
+          <h2 className="post-title">{post.title}</h2>
+          <div className="post-desc" dangerouslySetInnerHTML={{ __html: post.description }}></div>
+          <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>
         <div className="post-tag">
           <ul className="tag-list d-flex flex-wrap justify-end">
@@ -43,7 +44,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
             <div className="author-img d-flex">
               <img src={!isErrorCover ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
             </div>
-            <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>
+            <p className="author-name">{post.user?.displayName}</p>
           </Link>
         </div>
       </div>

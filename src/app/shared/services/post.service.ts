@@ -6,12 +6,20 @@ export const getDetailPost = (id: number) => {
   return api.get(`${ENDPOINT.post.index}/${id}`);
 };
 
-export const getPublicPosts = (page: number, size: number) => {
+export interface QueryPost {
+  page?: number;
+  size?: number;
+  tags?: string[];
+}
+export const getPublicPosts = (query: QueryPost) => {
   const api = new ApiService();
-  return api.get(`${ENDPOINT.post.public}`, {
-    page,
-    size,
+
+  Object.keys(query).forEach((key) => {
+    if (query[key as keyof typeof query] === undefined) {
+      delete query[key as keyof typeof query];
+    }
   });
+  return api.get(`${ENDPOINT.post.public}`, query);
 };
 
 export const getRecommendPosts = (page: number, size: number) => {

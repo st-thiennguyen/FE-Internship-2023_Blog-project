@@ -1,3 +1,5 @@
+import { UserModel } from './user';
+
 export interface PostModel {
   id: number;
   title: string;
@@ -14,18 +16,4 @@ export interface PostModel {
   createdAt: string;
   user: UserModel;
   [key: string]: any;
-}
-
-export interface UserModel {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  gender: string;
-  dob: string;
-  displayName: string;
-  picture: string;
-  followers: number;
-  followings: number;
 }

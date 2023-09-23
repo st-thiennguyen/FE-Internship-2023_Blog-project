@@ -8,7 +8,6 @@ const Layout = () => {
   return (
     <>
       <Header />
-
       <main className="main">
         <div className="container">
           <div className=" main-body">
