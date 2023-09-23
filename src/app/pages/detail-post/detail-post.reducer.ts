@@ -11,6 +11,7 @@ interface DetailStateProps {
   isSuccess: boolean;
   message: string;
 }
+
 const initialState: DetailStateProps = {
   data: {} as PostModel,
   comments: [] as InteractionItemModel[],

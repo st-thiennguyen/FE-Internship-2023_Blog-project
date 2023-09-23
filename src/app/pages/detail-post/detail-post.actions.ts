@@ -69,7 +69,7 @@ export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAc
   }
 };
 
-// Get post commennts
+// Get post comments
 const getCommentsStart = () => {
   return {
     type: ACTIONS_TYPE.GET_COMMENTS,

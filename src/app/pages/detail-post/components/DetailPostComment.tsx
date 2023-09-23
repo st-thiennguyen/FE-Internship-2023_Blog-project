@@ -1,9 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import CommentItem from './CommentItem';
-import { RootState } from '../../../stores/store';
 import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import { RootState } from '../../../stores/store';
 import { postCommentAction } from '../detail-post.actions';
+
+import CommentItem from './CommentItem';
 
 const DetailPostComment = () => {
   const listComment = useSelector((state: RootState) => state.detail.comments);
@@ -27,17 +29,16 @@ const DetailPostComment = () => {
   };
 
   function handleComment(): void {
-    const comment = inputComment.current?.value.trim();
+    const comment = inputComment.current!.value.trim();
     if (postId && comment) {
       dispatch(postCommentAction(postId, comment, currentUser) as any);
       inputComment.current!.value = '';
     }
   }
 
-  function handleBlur(): void {
+  function handleTrimInput(): void {
     inputComment.current!.value = inputComment.current!.value.trim();
   }
-  console.log(listComment);
 
   return (
     <section className="section section-comment">
@@ -48,7 +49,7 @@ const DetailPostComment = () => {
             placeholder="Add comment"
             ref={inputComment}
             className="comment-input"
-            onBlur={handleBlur}
+            onBlur={handleTrimInput}
             onChange={handleKeyDown}
           />
           <button className="btn btn-primary btn-comment" onClick={handleComment}>
