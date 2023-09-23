@@ -64,7 +64,7 @@ const PostItem = ({ post }: PostItemProps) => {
             </ul>
             <ul className="post-reaction-list d-flex item-center">
               <div className="post-reaction-item d-flex">
-                <i className="icon icon-small icon-fire-ouline-20"></i>
+                <i className="icon icon-small icon-fire-outline-20"></i>
                 <span className="post-reaction-number">{post.likes}</span>
               </div>
               <div className="post-reaction-item d-flex">

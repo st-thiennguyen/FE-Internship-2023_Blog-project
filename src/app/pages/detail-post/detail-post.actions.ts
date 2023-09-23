@@ -1,9 +1,11 @@
 import { Dispatch } from 'react';
 
-import { PostModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
+import { PostModel } from '../../models/post';
+import { InteractionProps } from '../../models/interaction';
+
+import { getDetailPost, updateLike } from '../../shared/services/index';
 
 const getDetailBlogStart = () => {
   return {
@@ -32,5 +34,36 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
     dispatch(getDetailBlogSuccess(response as PostModel));
   } catch (error) {
     dispatch(getDetailBlogFailure(`${error}`));
+  }
+};
+
+// Update like
+const updateLikeStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_LIKE,
+  };
+};
+
+const updateLikeSuccess = (response: InteractionProps) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_LIKE_SUCCESS,
+    payload: response.liked,
+  };
+};
+
+const updateLikeFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_LIKE_FAILURE,
+    payload: error,
+  };
+};
+
+export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateLikeStart());
+  try {
+    const response = await updateLike(id);
+    dispatch(updateLikeSuccess(response as InteractionProps));
+  } catch (error) {
+    dispatch(updateLikeFailure(`${error}`));
   }
 };

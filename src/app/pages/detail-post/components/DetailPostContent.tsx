@@ -5,6 +5,7 @@ import { PostModel } from '../../../models/post';
 import { isImageUrlValid } from '../../../shared/utils';
 
 import avaDefault from '../../../../assets/images/user-default.png';
+import DetailPostReaction from './DetailPostReaction';
 
 interface DetailPostProps {
   post: PostModel;
@@ -19,27 +20,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
 
   return (
     <>
-      <div className="detail-action">
-        <ul className="action-list">
-          <li className="action-item d-flex item-center">
-            <button className="btn btn-post-action">
-              <i className="icon icon-small icon-fire-ouline-20"></i>
-            </button>
-            <span className="action-count">{post.likes}</span>
-          </li>
-          <li className="action-item d-flex item-center">
-            <button className="btn btn-post-action">
-              <i className="icon icon-small icon-comment-20"></i>
-            </button>
-            <span className="action-count">{post.comments}</span>
-          </li>
-          <li className="action-item d-flex item-center">
-            <button className="btn btn-post-action">
-              <i className="icon icon-small icon-bookmark-20"></i>
-            </button>
-          </li>
-        </ul>
-      </div>
+      <DetailPostReaction postId={post.id} likeCount={post.likes} commentCount={post.comments} />
       <div className="detail-post">
         <div className="detail-post-body">
           <h2 className="post-title">{post.title}</h2>

@@ -1,4 +1,9 @@
 .detail-page {
+  .detail-action {
+    position: sticky;
+    height: fit-content;
+    top: 120px;
+  }
   .detail-cover {
     position: relative;
     min-height: 580px;
@@ -69,6 +74,7 @@
         background-color: transparent;
       }
       .action-count {
+        width: 20px;
         margin-left: 10px;
         overflow-wrap: break-word;
       }

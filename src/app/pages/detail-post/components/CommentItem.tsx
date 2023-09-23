@@ -1,8 +1,8 @@
+import { InteractionItemModel } from '../../../models/interaction';
 import { timeAgoFromDate } from '../../../shared/utils';
-import { CommentItemModel } from '../../../models/comment';
 
 interface CommentItemProps {
-  commentItem: CommentItemModel;
+  commentItem: InteractionItemModel;
 }
 
 const CommentItem = ({ commentItem }: CommentItemProps) => {

@@ -5,9 +5,10 @@ type ToastMessageProps = {
   isSuccess: boolean;
   title: string;
   subtitle: string;
+  onClose?: () => void;
 };
 
-const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps) => {
+const ToastMessage = ({ isShow, isSuccess, title, subtitle, onClose }: ToastMessageProps) => {
   const [isShowToast, setIsShowToast] = useState(isShow);
 
   const closeClick = useRef(() => {});
@@ -21,6 +22,7 @@ const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps)
   useEffect(() => {
     setTimeout(() => {
       closeClick.current();
+      onClose && onClose();
     }, 4000);
   }, []);
 

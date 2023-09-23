@@ -15,4 +15,5 @@ export interface PostModel {
   deletedAt: any;
   createdAt: string;
   user: UserModel;
+  [key: string]: any;
 }

@@ -27,7 +27,9 @@ const DetailPost = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchDetailBlog(Number(postId)) as any);
+    if (postId) {
+      dispatch(fetchDetailBlog(Number(postId)) as any);
+    }
   }, [postId]);
 
   if (isLoading) {

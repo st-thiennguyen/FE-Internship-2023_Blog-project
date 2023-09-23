@@ -28,8 +28,7 @@ export class ApiService {
         }
         return config;
       },
-
-      (error) => {
+      (error: AxiosError) => {
         return this._handleError(error);
       },
     );
@@ -49,6 +48,9 @@ export class ApiService {
       if (typeof error.response?.data === 'object') {
         const { errors }: any = error.response?.data;
         throw new Error(`${errors[0]}`);
+      }
+      if (error.response.status === 401) {
+        throw new Error(`Please login to do this action !`);
       }
       console.error('Server Error :', error.response.status, error.response.data);
       throw new Error(`${error.response?.data}`);

@@ -91,6 +91,10 @@ const ACTIONS_TYPE = {
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
   GET_RECOMMEND_FAILURE: 'get-recommend-failure',
+  // UPDATE LIKE
+  UPDATE_LIKE: 'update-like',
+  UPDATE_LIKE_SUCCESS: 'update-like-success',
+  UPDATE_LIKE_FAILURE: 'update-like-failure',
 };
 
 export default ACTIONS_TYPE;
