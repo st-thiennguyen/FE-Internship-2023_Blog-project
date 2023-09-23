@@ -1,49 +1,56 @@
 .modal {
   position: fixed;
   top: 60px;
-  z-index: 99;
-  -webkit-animation: identifier 2s ease-in-out;
-  width: 20%;
   left: 40%;
+  width: 20%;
+  z-index: 99;
+  -webkit-animation: identifier .7s ease-in-out;
+
   .modal-confirm {
+    width: 400px;
     background-color: map-get($map: $color, $key: textLight);
     color: map-get($map: $color, $key: text);
-    width: 400px;
-    
+
     .modal-content {
       padding: 20px;
       border-radius: 5px;
       border: none;
-      text-align: center;
       font-size: 14px;
     }
 
     .modal-header {
-      border-bottom: none;
       position: absolute;
       top: -20px;
-    }
-
-    h4 {
-      text-align: center;
-      font-size: 26px;
-      margin: 30px 0 -10px;
+      border-bottom: none;
     }
 
     .close {
       position: absolute;
-      top: 40px;
-      right: -180px;
+      top: 30px;
+      right: -350px;
+      border: 0;
+      font-size: 30px;
+      font-weight: 600;
+      background-color: map-get($map: $color, $key: textLight);
+      color: #ee3535;
+      cursor: pointer;
     }
 
     .modal-body {
-      color: map-get($map: $color, $key: subtext);
       padding: 50px 0 20px 0;
+      color: map-get($map: $color, $key: subtext);
+
+      .modal-title {
+        margin: 30px 0 -10px;
+        position: absolute;
+        top: -20px;
+        font-size: 26px;
+      }
     }
 
     .modal-footer {
-      border: none;
       text-align: center;
+      border: none;
       border-radius: 5px;
       font-size: 13px;
 
@@ -51,54 +58,12 @@
         color: map-get($map: $color, $key: subtext);
       }
     }
-
-    .btn {
-      margin: 0 5px;
-
-      &:active {
-        color: map-get($map: $color, $key: backgroundFrame);
-        border-radius: 4px;
-        background: #60c7c1;
-        text-decoration: none;
-        transition: all 0.4s;
-        line-height: normal;
-        min-width: 120px;
-        border: none;
-        min-height: 40px;
-        border-radius: 3px;
-        margin: 0 5px;
-      }
-    }
-
-    .btn-secondary {
-      background: #c1c1c1;
-
-      &:hover {
-        background: #a8a8a8;
-      }
-
-      &:focus {
-        background: #a8a8a8;
-      }
-    }
-
-    .btn-danger {
-      background: #f15e5e;
-
-      &:hover {
-        background: #ee3535;
-      }
-
-      &:focus {
-        background: #ee3535;
-      }
-    }
   }
 }
 
 .trigger-btn {
-  display: inline-block;
   margin: 100px auto;
+  display: inline-block;
 }
 
 @keyframes identifier {
@@ -116,13 +81,9 @@
 }
 
 .overplay {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  @include position(0, 0, 0, 0, fixed);
+  width: 100%;
   z-index: 99;
   background-color: #141616;
-  width: 100%;
   opacity: 0.5;
 }

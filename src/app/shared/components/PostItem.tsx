@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import Modal from './Modal';
+import ToastMessage from './ToastMessage';
 import { PostModel } from '../../models/post';
 import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
-
-import NoImg from '../../../assets/images/no-image.png';
-import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../../pages/user-profile/user-profile.action';
-import ToastMessage from './ToastMessage';
-import Modal from './Modal';
+import NoImg from '../../../assets/images/no-image.png';
 
 interface PostItemProps {
   post: PostModel;
@@ -18,27 +17,29 @@ const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
   const [isShowMessage, setIsShowMessage] = useState(false);
-  const isDeletePostSuccess = useSelector((state: any) => state.userProfile?.isSuccess);
-  const deletePostMessage = useSelector((state: any) => state.userProfile?.message);
+  const isDeleteSuccess = useSelector((state: any) => state.userProfile?.isDeleteSuccess);
+  const isDeleteFailure = useSelector((state: any) => state.userProfile?.isDeleteFailure);
+  const deleteMessage = useSelector((state: any) => state.userProfile?.message);
   const dispatch = useDispatch()
+  const { id } = useParams();
 
   const handleDeletePostItem = (id: number) => {
     dispatch(deletePost(id) as any);
     setIsShowMessage(true);
   }
-  const [show, setShow] = useState(false);
+  const [isShowModal, setIShowModal] = useState(false);
 
-  const handleCancel = () => {
-    setShow(false);
+  const handleClose = () => {
+    setIShowModal(false);
   }
 
   const handleDelete = () => {
     handleDeletePostItem(post.id);
-    setShow(false);
+    setIShowModal(false);
   }
 
   const handleShowModal = () => {
-    setShow(!show);
+    setIShowModal(!isShowModal);
   }
 
 
@@ -90,7 +91,7 @@ const PostItem = ({ post }: PostItemProps) => {
               <span className="read-more">READ MORE</span>
               <ul className="post-action-list">
                 <li className="post-action-item">
-                  <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={'/write'}>
+                  <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/update/${id}`}>
                     <i className="icon icon-small icon-write-20"></i>
                   </Link>
                 </li>
@@ -110,16 +111,28 @@ const PostItem = ({ post }: PostItemProps) => {
         </div>
       </Link>
       <ToastMessage
-        isShow={isDeletePostSuccess}
-        isSuccess={isDeletePostSuccess}
-        title={isDeletePostSuccess ? 'Success' : 'Error'}
-        subtitle={deletePostMessage}
+        isShow={isDeleteSuccess}
+        isSuccess={isDeleteSuccess}
+        title='Success'
+        subtitle={deleteMessage}
       ></ToastMessage>
-      <Modal
-        onClickCancel={handleCancel}
-        onClickDelete={handleDelete}
-        isShow={show}
-      ></Modal>
+      <ToastMessage
+        isShow={isDeleteFailure}
+        isSuccess={isDeleteFailure}
+        title='Error'
+        subtitle={deleteMessage}
+      ></ToastMessage>
+      {
+        isShowModal && 
+        <Modal
+          onClickClose={handleClose}
+          onClickConfirm={handleDelete}
+          isShow={isShowModal}
+        >
+          <h4 className="modal-title">Delete</h4>
+          <p>Do you really want to delete?</p>
+        </Modal>
+      }
     </>
   );
 };

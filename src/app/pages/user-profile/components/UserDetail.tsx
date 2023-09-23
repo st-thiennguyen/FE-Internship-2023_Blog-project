@@ -1,9 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
-import Button from '../../../shared/components/Button';
-import { convertDateToString } from '../../../shared/utils';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../stores/store';
 import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '../../../stores/store';
+import { convertDateToString } from '../../../shared/utils';
+import Button from '../../../shared/components/Button';
 
 const UserDetail = () => {
   const userProfile = useSelector((state: RootState) => state.userProfile.profile);

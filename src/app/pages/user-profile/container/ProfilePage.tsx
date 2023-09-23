@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '../../../stores/store';
+import { getUserPostAction, getUserProfileAction } from '../user-profile.action';
 import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserPostAction, getUserProfileAction } from '../user-profile.action';
-import { useNavigate, useParams } from 'react-router-dom';
-import { RootState } from '../../../stores/store';
 import Loading from '../../../shared/components/Loading';
 
 const ProfilePage = () => {

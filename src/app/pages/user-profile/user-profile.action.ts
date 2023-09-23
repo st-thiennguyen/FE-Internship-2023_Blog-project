@@ -1,11 +1,11 @@
 import { Dispatch } from 'react';
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
+import ACTIONS_TYPE from '../../shared/constants/type';
 import { getUserPosts, getUserProfile } from '../../shared/services/user.service';
 import { ProfileModel } from '../../models/post';
 import { deletePostItem } from '../../shared/services';
 
-export const getUserProfileStart = () => {
+const getUserProfileStart = () => {
   return {
     type: ACTIONS_TYPE.GET_PROFILE,
   };
@@ -71,7 +71,7 @@ export const deletePost = (id: number) => async (dispatch: Dispatch<RootAction>)
     const response: any = await deletePostItem(id);
     dispatch(deletePostItemSuccess(id, response))
   } catch (error) {
-   dispatch(deletePostItemFailure(error as any)) 
+   dispatch(deletePostItemFailure(error as string)) 
   }
 }
 

@@ -51,6 +51,10 @@ button[disabled] {
   pointer-events: none;
 }
 
+.btn-danger {
+  background-color: map-get($map: $color, $key: danger);
+}
+
 .btn-loading {
   position: absolute;
   top: 0;
@@ -65,6 +69,45 @@ button[disabled] {
 
   animation: spin 1.5s linear infinite;
   transition: none !important;
+}
+
+.btn-modal {
+  margin: 0 5px;
+  width: 140px;
+
+  &:active {
+    margin: 0 5px;
+    min-height: 40px;
+    min-width: 120px;
+    border: none;
+    border-radius: 4px;
+
+    transition: all 0.4s;
+    line-height: normal;
+    text-decoration: none;
+    background: #60c7c1;
+    color: map-get($map: $color, $key: backgroundFrame);
+  }
+}
+
+.btn-secondary {
+  &:hover {
+    background: #0538c4;
+  }
+  &:focus {
+    background: #0538c4;
+  }
+}
+
+.btn-danger {
+  color: map-get($map: $color, $key: textLight);
+
+  &:hover {
+    background: #d70000;
+  }
+  &:focus {
+    background: #d70000;
+  }
 }
 
 @keyframes spin {

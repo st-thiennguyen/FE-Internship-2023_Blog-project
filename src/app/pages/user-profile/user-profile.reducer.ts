@@ -1,6 +1,6 @@
+import { RootAction } from '../../stores/store';
 import { ProfileModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { RootAction } from '../../stores/store';
 
 interface ProfileStateProps {
   profile: ProfileModel;
@@ -9,6 +9,8 @@ interface ProfileStateProps {
   isError: boolean;
   isSuccess: boolean;
   message: string;
+  isDeleteSuccess?: boolean;
+  isDeleteFailure?: boolean;
 }
 const initialState: ProfileStateProps = {
   profile: {} as ProfileModel,
@@ -17,6 +19,8 @@ const initialState: ProfileStateProps = {
   isError: false,
   isSuccess: false,
   message: '',
+  isDeleteSuccess: false,
+  isDeleteFailure: false,
 };
 
 export const userProfileReducer = (state = initialState, action: RootAction): ProfileStateProps => {
@@ -71,19 +75,17 @@ export const userProfileReducer = (state = initialState, action: RootAction): Pr
       return {
         ...state,
         isLoading: true,
-        isSuccess: false,
+        isDeleteSuccess: false,
         isError: false,
         message: '',
       };
     case ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS:
-      const updatedPosts = state.postList.Posts.filter((post) => {
-        return post.id !== (action.payload.id)
-      });
+      const updatedPosts = state.postList.Posts.filter((post) => post.id !== (action.payload.id));
       return {
         ...state,
         isLoading: false,
-        isSuccess: true,
-        postList: { ...state.postList , Posts : [...updatedPosts] },
+        isDeleteSuccess: true,
+        postList: { ...state.postList, Posts: updatedPosts },
         message: action.payload.res
       };
     case ACTIONS_TYPE.REMOVE_POST_ITEM_FAILURE:
@@ -91,6 +93,7 @@ export const userProfileReducer = (state = initialState, action: RootAction): Pr
         ...state,
         isLoading: false,
         isError: true,
+        isDeleteFailure: true,
         message: action.payload,
       };
     default:
