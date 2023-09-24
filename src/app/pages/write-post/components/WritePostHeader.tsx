@@ -9,7 +9,7 @@ interface WritePostHeaderProps {
   handleUpdatePost?: () => void;
 }
 
-const WritePostHeader = ({ onPublishPost, isUpdate , handleUpdatePost}: WritePostHeaderProps) => {
+const WritePostHeader = ({ onPublishPost, isUpdate, handleUpdatePost }: WritePostHeaderProps) => {
   return (
     <header className="header header-write-post">
       <div className="container">
@@ -20,11 +20,8 @@ const WritePostHeader = ({ onPublishPost, isUpdate , handleUpdatePost}: WritePos
             </Link>
           </h1>
           {
-            !isUpdate ? <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>
-              Publish
-            </button> : <button className="btn btn-primary btn-rounded" onClick={handleUpdatePost}>
-              Update
-            </button>
+            !isUpdate ? <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>Publish</button> :
+              <button className="btn btn-primary btn-rounded" onClick={handleUpdatePost}>Update</button>
           }
         </div>
       </div>

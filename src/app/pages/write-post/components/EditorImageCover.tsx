@@ -1,23 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
-import iconImageLocal from '../../../../assets/icons/ic-image-computer.svg';
-import iconImageNetwork from '../../../../assets/icons/ic-image-network.svg';
 import { fetchSignUrlImage } from '../image-sign.action';
 
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
   setPhotoPreview: (value: string) => void;
   isUpdate?: boolean
+  setErrorCoverMessage: (value: string) => void;
 }
 
-const EditorImageCover = ({ photoPreview, setPhotoPreview, isUpdate }: EditorImageCoverProps) => {
-  const [isOpenImage, setIsOpenImage] = useState(false);
-  const [isOpenInputLink, setIsOpenInputLink] = useState(false);
-
+const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage , isUpdate }: EditorImageCoverProps) => {
   const coverImageRef = useRef<HTMLInputElement>(null);
-  const coverLinkRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
 
@@ -25,26 +20,43 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, isUpdate }: EditorIma
     coverImageRef.current?.click();
   };
 
-  const handleEnterLinkCover = () => {
-    setIsOpenInputLink(!isOpenInputLink);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): boolean => {
+    let isImageValid = true;
+    const file = event.target.files![0]; // Get the first selected file
+
+    if (file) {
+      // Check if the file type isn't an image
+      if (!file.type.startsWith('image/')) {
+        setErrorCoverMessage('Please select a valid image file (jpg, png, etc.).');
+        isImageValid = false;
+      } else {
+        // Check file size (in bytes)
+        const maxSizeInBytes = 1 * 1024 * 1024; // 1MB
+        if (file.size > maxSizeInBytes) {
+          setErrorCoverMessage('File size exceeds the maximum allowed (1MB).');
+          isImageValid = false;
+        } else {
+          setErrorCoverMessage('');
+          isImageValid = true;
+        }
+      }
+    } else {
+      setErrorCoverMessage('Image cover is required !');
+      isImageValid = false;
+    }
+    return isImageValid;
   };
 
   const handleUploadCover = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files![0];
-    if (file) {
-      dispatch(fetchSignUrlImage(file) as any);
-      const previewUrl = URL.createObjectURL(file);
-      setPhotoPreview(previewUrl);
-    } else {
-      setPhotoPreview('');
-    }
-  };
-
-  const handleLinkCover = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.keyCode === 13) {
-      setPhotoPreview(coverLinkRef.current!.value);
-      coverLinkRef.current!.value = '';
-      setIsOpenInputLink(false);
+    if (handleFileChange(e)) {
+      const file = e.target.files![0];
+      if (file) {
+        dispatch(fetchSignUrlImage(file) as any);
+        const previewUrl = URL.createObjectURL(file);
+        setPhotoPreview(previewUrl);
+      } else {
+        setPhotoPreview('');
+      }
     }
   };
 
@@ -56,43 +68,33 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, isUpdate }: EditorIma
 
   return (
     <div className="editor-cover">
-      <button className="btn btn-add-cover" type="button" onClick={() => setIsOpenImage(!isOpenImage)} disabled={isUpdate}>
-        <img src={iconImage} alt="Icon add image cover" width={18} height={18} />
-      </button>
-
-      {isOpenImage && (
-        <div className="editor-cover-select d-flex">
-          <button className="btn btn-pick-cover" type="button" onClick={clickSelectCover}>
-            <img src={iconImageLocal} alt="Icon add image cover" width={16} height={16} />
-          </button>
-        </div>
-      )}
+      <div className="editor-cover-select d-flex justify-center item-center">
+        {photoPreview ? (
+          <div className="editor-cover-preview d-flex justify-center">
+            <img src={photoPreview} alt="Cover image preview" />
+          </div>
+        ) : (
+          <>
+            <h5 className="editor-cover-title">Cover Image</h5>
+            <div className="editor-cover-content d-flex flex-column item-center">
+              <p className="editor-cover-txt">Select the cover image you would like to attach.</p>
+              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} disabled={isUpdate}>
+                <img src={iconImage} alt="Icon add image cover" width={30} height={30} />
+              </button>
+              <p className="editor-cover-subtxt">Image type</p>
+            </div>
+          </>
+        )}
+      </div>
 
       <input
         ref={coverImageRef}
         type="file"
         className="editor-cover-file"
         id="post-cover-file"
-        onChange={handleUploadCover}
         accept="image/png, image/jpeg"
+        onChange={handleUploadCover}
       />
-
-      {isOpenInputLink && (
-        <input
-          ref={coverLinkRef}
-          onKeyDown={handleLinkCover}
-          type="text"
-          className="editor-cover-link"
-          placeholder="Enter the cover link here ..."
-        />
-      )}
-
-      {
-        photoPreview &&
-          <div className="editor-cover-preview d-flex justify-center">
-            <img src={photoPreview} alt="Image of preview of title" />
-          </div>
-      }
     </div>
   );
 };

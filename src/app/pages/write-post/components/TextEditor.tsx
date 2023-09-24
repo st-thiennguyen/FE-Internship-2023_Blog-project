@@ -28,11 +28,27 @@ interface OnChangeHandler {
 type Props = {
   value: string;
   placeholder: string;
-  onChange: OnChangeHandler;
+  setContent: OnChangeHandler;
+  setError: (value: string) => void;
 };
 
-const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
+const TextEditor: React.FC<Props> = ({ value, setContent, placeholder, setError }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
+
+  const onChange = (content: string) => {
+    const contentLength = content.replace(/<(.|\n)*?>/g, '').trim().length;
+
+    const isValidContent = contentLength >= 50;
+
+    if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
+      setError('Content must not be null !');
+    } else if (!isValidContent) {
+      setError('Content must not be less than 50 characters !');
+    } else {
+      setError('');
+    }
+    setContent(content);
+  };
 
   const modules = React.useMemo(
     () => ({
@@ -45,8 +61,6 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
           [{ color: [] }, { background: [] }, { align: [] }],
           ['clean'],
         ],
-        handlers: {
-        },
       },
     }),
     [],
@@ -61,7 +75,7 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
         value={value || ''}
         modules={modules}
         formats={formats}
-        onChange={onChange}
+        onChange={(content) => onChange(content)}
         placeholder={placeholder}
       />
     </>
