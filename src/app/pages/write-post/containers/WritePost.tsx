@@ -99,7 +99,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     dispatch(updatePost(data, detailPost.id) as any);
     setTimeout(() => {
       navigate(`/detail/${id}`);
-    }, 1500);
+    }, 3000);
   });
 
   const handleToggleStatus = (e: any) => {
