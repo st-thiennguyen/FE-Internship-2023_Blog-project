@@ -2,8 +2,14 @@ import { Dispatch } from 'react';
 
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { updatePassword, updateProfile, getUserPosts, getUserProfile } from '../../shared/services/user.service';
-import { UserModel, formChangePassword, ProfileModel } from '../../models/user';
+import {
+  updatePassword,
+  updateProfile,
+  getUserPosts,
+  getUserProfile,
+  updateFollow,
+} from '../../shared/services/user.service';
+import { UserModel, formChangePassword, ProfileModel, FollowModel } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
@@ -109,6 +115,26 @@ const updatePasswordStartFailure = (message: string) => {
   };
 };
 
+const updateFollowStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOW,
+  };
+};
+
+const updateFollowSuccess = (response: FollowModel) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOW_SUCCESS,
+    payload: response.followed,
+  };
+};
+
+const updateFollowFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOW_FAILURE,
+    payload: error,
+  };
+};
+
 export const getUserProfileAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getUserProfileStart());
   try {
@@ -175,5 +201,15 @@ export const updatePasswordAction = (data: formChangePassword) => async (dispatc
     dispatch(updatePasswordStartSuccess());
   } catch (error) {
     dispatch(updatePasswordStartFailure(`${error}`));
+  }
+};
+
+export const updateFollowAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateFollowStart());
+  try {
+    const response = await updateFollow(id);
+    dispatch(updateFollowSuccess(response as FollowModel));
+  } catch (error) {
+    dispatch(updateFollowFailure(`${error}`));
   }
 };

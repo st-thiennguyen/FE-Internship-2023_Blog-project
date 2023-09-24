@@ -61,7 +61,7 @@
     }
     .btn-following {
       background-color: map-get($map: $color, $key: defaultBg);
-      &:hover span {
+      &:hover .btn-label {
         display: none;
       }
       &:hover::before {

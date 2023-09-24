@@ -35,4 +35,7 @@ export const ENDPOINT = {
   signatures: {
     index: `${BASE_URL}/${RESOURCES.signatures}`,
   },
+  friends: {
+    index: `${BASE_URL}/${RESOURCES.friends}`,
+  },
 };

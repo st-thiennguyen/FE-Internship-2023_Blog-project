@@ -1,18 +1,25 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 import { convertDateToString } from '../../../shared/utils';
 import { ProfileModel } from '../../../models/user';
 import Button from '../../../shared/components/Button';
+import { updateFollowAction } from '../proflie.actions';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);
+  const isLoading = useSelector((state: RootState) => state.profile.isLoadingFollow);
 
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const [isErrAvt, setIsErrAvt] = useState(false);
+
+  const handleUpdateFollow = () => {
+    dispatch(updateFollowAction(id!) as any);
+  };
 
   return (
     <section className="section section-user-detail">
@@ -73,6 +80,8 @@ const UserDetail = () => {
           <Button
             label={profile.isFollowed ? 'Following' : 'Follow'}
             optionClassName={`btn btn-follow ${profile.isFollowed ? 'btn-following' : 'btn-gradient'}`}
+            handleClick={handleUpdateFollow}
+            isLoading={isLoading}
           ></Button>
         ) : (
           <Link to={'update'} className="btn btn-secondary">
