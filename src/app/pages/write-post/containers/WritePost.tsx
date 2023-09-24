@@ -97,6 +97,7 @@ const WritePost = () => {
   });
 
   const onPublishPost = () => {
+    validate();
     handleSubmitForm();
   };
 
