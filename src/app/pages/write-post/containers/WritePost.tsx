@@ -17,11 +17,6 @@ import TextEditor from '../components/TextEditor';
 import WritePostHeader from '../components/WritePostHeader';
 import { createPost } from '../write-post.action';
 
-const isValidFileType = (fileName: string): boolean => {
-  const validExtensions = ['.jpg', '.jpeg', '.png', '.gif']; // Add more extensions as needed
-  const ext = fileName.substr(fileName.lastIndexOf('.')).toLowerCase();
-  return validExtensions.includes(ext);
-};
 const schema = yup
   .object({
     title: yup
@@ -50,7 +45,7 @@ const WritePost = () => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
-  const formRef: any = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   let cover = useSelector((state: any) => state.imageSign.data.url);
   const isSuccess = useSelector((state: any) => state.writePost.isSuccess);
@@ -61,7 +56,7 @@ const WritePost = () => {
   const navigate = useNavigate();
 
   const handleReset = (data: any) => {
-    formRef.current.reset();
+    formRef.current!.reset();
     data.description = '';
     data.title = '';
     setPhotoPreview('');
@@ -102,7 +97,6 @@ const WritePost = () => {
   });
 
   const onPublishPost = () => {
-    validate();
     handleSubmitForm();
   };
 
@@ -136,14 +130,14 @@ const WritePost = () => {
                           rows={1}
                           {...register('title')}
                           className="editor-detail-input"
-                          placeholder="Title your story ..."
+                          placeholder="Title of your story ..."
                         />
                         <p className="editor-detail-error">{errors.title?.message}</p>
                         <textarea
                           rows={1}
                           {...register('description')}
                           className="editor-detail-input"
-                          placeholder="Description your story ..."
+                          placeholder="Description of your story ..."
                         />
                         <p className="editor-detail-error">{errors.description?.message}</p>
 
@@ -175,7 +169,12 @@ const WritePost = () => {
             </section>
 
             {isShowToast && isSuccess && (
-              <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle="Create post success" />
+              <ToastMessage
+                isSuccess={isSuccess}
+                isShow={isSuccess}
+                title="success"
+                subtitle="Create post successfully"
+              />
             )}
             {isShowToast && isError && (
               <ToastMessage isSuccess={isSuccess} isShow={isError} title={'Error'} subtitle={message} />

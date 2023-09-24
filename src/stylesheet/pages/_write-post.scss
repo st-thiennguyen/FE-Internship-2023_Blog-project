@@ -33,8 +33,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     min-height: 400px;
+    gap: 20px;
   }
 
   .ql-editor p {
@@ -70,9 +70,9 @@
   &-input {
     width: 100%;
     padding: 8px 12px;
-    font-size: 14px;
     border: 0.5px solid map-get($color, borderColor);
     border-radius: 12px;
+    font-size: 14px;
     outline: none;
   }
 
@@ -158,12 +158,12 @@
     display: none;
   }
   &-link {
-    margin-top: 15px;
     width: 50%;
     padding: 10px 15px;
+    margin-top: 15px;
     border-radius: 20px;
-    outline: none;
     border: 1px solid map-get($color, borderColor);
+    outline: none;
   }
 
   &-preview {
@@ -211,12 +211,12 @@
 
   &-input {
     width: 100%;
+    height: auto;
     padding: 10px 20px;
     border-radius: 12px;
     border: 0.5px solid map-get($color, borderColor);
     outline: none;
     resize: none;
-    height: auto;
     font-family: "Manrope", sans-serif;
   }
 

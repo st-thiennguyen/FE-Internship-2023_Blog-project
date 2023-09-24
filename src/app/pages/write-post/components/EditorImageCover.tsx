@@ -24,7 +24,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
     const file = event.target.files![0]; // Get the first selected file
 
     if (file) {
-      // Check if the file type is'nt an image
+      // Check if the file type isn't an image
       if (!file.type.startsWith('image/')) {
         setErrorCoverMessage('Please select a valid image file (jpg, png, etc.).');
         isImageValid = false;
@@ -64,13 +64,13 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
       <div className="editor-cover-select d-flex justify-center item-center">
         {photoPreview ? (
           <div className="editor-cover-preview d-flex justify-center">
-            <img src={photoPreview} alt="Image of preview of title" />
+            <img src={photoPreview} alt="Cover image preview" />
           </div>
         ) : (
           <>
             <h5 className="editor-cover-title">Cover Image</h5>
             <div className="editor-cover-content d-flex flex-column item-center">
-              <p className="editor-cover-txt">Select the cover image you would like attach.</p>
+              <p className="editor-cover-txt">Select the cover image you would like to attach.</p>
               <button className="btn btn-add-cover" type="button" onClick={clickSelectCover}>
                 <img src={iconImage} alt="Icon add image cover" width={30} height={30} />
               </button>
