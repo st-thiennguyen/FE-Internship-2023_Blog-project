@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
-
 import { getUserProfileAction } from '../proflie.actions';
+
 import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
-import Loading from '../../../shared/components/Loading';
 
 const ProfilePage = () => {
   const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
-  const isLoading = useSelector((state: RootState) => state.profile.isLoading);
   const isError = useSelector((state: RootState) => state.profile.isError);
 
   const dispatch = useDispatch();
@@ -20,12 +18,12 @@ const ProfilePage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (id === userId.toString() || id === 'me') {
-      navigate('/profile');
-    }
   }, []);
 
   useEffect(() => {
+    if (id === userId.toString() || id === 'me') {
+      navigate('/profile');
+    }
     dispatch(getUserProfileAction(id ? id : 'me') as any);
   }, [id]);
 
@@ -35,14 +33,8 @@ const ProfilePage = () => {
 
   return (
     <div className="main-profile-page">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <UserDetail />
-          <UserPost />
-        </>
-      )}
+      <UserDetail />
+      <UserPost />
     </div>
   );
 };
