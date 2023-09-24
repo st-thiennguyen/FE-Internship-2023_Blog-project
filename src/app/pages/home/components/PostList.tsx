@@ -5,9 +5,10 @@ import EmptyPost from './EmptyPost';
 
 interface PostListProps {
   posts: PostModel[];
+  isLoading?: Boolean;
 }
-const PostList = ({ posts }: PostListProps) => {
-  return posts.length > 0 ? (
+const PostList = ({ posts, isLoading }: PostListProps) => {
+  return posts.length > 0 || isLoading ? (
     <ul className="post-list row">
       {posts.map((post, index) => {
         return (
@@ -21,5 +22,4 @@ const PostList = ({ posts }: PostListProps) => {
     <EmptyPost />
   );
 };
-
 export default PostList;
