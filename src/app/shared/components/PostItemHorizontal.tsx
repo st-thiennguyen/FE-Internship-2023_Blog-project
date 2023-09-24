@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import imgDemo from '../../../assets/images/demo-cover.jpg';
+import TagItem from './TagItem';
 
 const PostItemHorizontal = () => {
   return (
@@ -33,8 +34,16 @@ const PostItemHorizontal = () => {
                   <span className="post-item-react-count">14</span>
                 </li>
               </ul>
-              <ul className="post-item-tags-list">
-                <li className="post-item-tag-item"></li>
+              <ul className="post-item-tags-list d-flex flex-wrap">
+                <li className="post-item-tag-item">
+                  <TagItem />
+                </li>
+                <li className="post-item-tag-item">
+                  <TagItem />
+                </li>
+                <li className="post-item-tag-item">
+                  <TagItem />
+                </li>
               </ul>
             </div>
           </div>
