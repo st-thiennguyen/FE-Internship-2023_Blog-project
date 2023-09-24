@@ -5,12 +5,13 @@ type ToastMessageProps = {
   isSuccess: boolean;
   title: string;
   subtitle: string;
+  onClose?: () => void;
 };
 
-const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps) => {
+const ToastMessage = ({ isShow, isSuccess, title, subtitle, onClose }: ToastMessageProps) => {
   const [isShowToast, setIsShowToast] = useState(isShow);
 
-  const closeClick = useRef(() => { });
+  const closeClick = useRef(() => {});
 
   closeClick.current = () => {
     if (isShowToast) {
@@ -19,19 +20,14 @@ const ToastMessage = ({ isShow, isSuccess, title, subtitle }: ToastMessageProps)
   };
 
   useEffect(() => {
-    setIsShowToast(isShow);
-  }, [isShow])
-
-  useEffect(() => {
-    if (isShow) {
-      setTimeout(() => {
-        closeClick.current();
-      }, 3000);
-    }
-  }, [isShow]);
+    setTimeout(() => {
+      closeClick.current();
+      onClose && onClose();
+    }, 4000);
+  }, []);
 
   return (
-    <div className={`toast ${isShowToast ? 'show' : ''} ${isSuccess ? 'success' : 'error'}`}>
+    <div className={`toast ${isShowToast && 'show'} ${isSuccess ? 'success' : 'error'}`}>
       <div className="toast-wrapper d-flex justify-between item-center">
         <div className="toast-content d-flex item-center">
           <div className="toast-icon">

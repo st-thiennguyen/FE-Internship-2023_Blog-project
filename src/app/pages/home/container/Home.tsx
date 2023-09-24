@@ -1,15 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
+import { getRecommend } from '../home.actions';
+
+import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import LatestPost from '../components/LatestPost';
 import Recommend from '../components/recommend';
 
 const Home = () => {
-  const [offset, setOffset] = useState(0);
   const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const recommendPosts = useSelector((state: RootState) => state.recommend.data);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getRecommend(1, 10) as any);
+  }, []);
 
   useEffect(() => {
     if (!isLogin) {
@@ -17,35 +26,20 @@ const Home = () => {
     }
   }, [isLogin]);
 
-  const goToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  };
-  useEffect(() => {
-    goToTop();
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => setOffset(window.pageYOffset);
-
-    window.removeEventListener('scroll', onScroll);
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
     <div className="home-page">
-      <Recommend />
+      {isLogin && recommendPosts.length > 0 && (
+        <>
+          <h2 className="section-title">Recommended for you</h2>
+          <Recommend />
+        </>
+      )}
       <div className="row">
         <div className="col col-12">
           <LatestPost />
         </div>
       </div>
-      {offset > 1000 && (
-        <button className="btn-backtotop  d-flex justify-center item-center" onClick={goToTop}>
-          <i className="icon icon-medium icon-arrow-up-24"></i>
-        </button>
-      )}
+      <GoToTopBtn />
     </div>
   );
 };

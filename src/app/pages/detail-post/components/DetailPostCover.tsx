@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import { isImageUrlValid } from '../../../shared/utils';
+import { convertDateToString } from '../../../shared/utils/date';
 
 import noImage from '../../../../assets/images/no-image.png';
 import avaDefault from '../../../../assets/images/user-default.png';
-import { isImageUrlValid } from '../../../shared/utils';
-import { convertDateToString } from '../../../shared/utils/date';
 
 type DetailPostCoverProps = {
   cover: string;
@@ -12,9 +13,10 @@ type DetailPostCoverProps = {
   authorAvatar: string;
   authorName: string;
   datePost: any;
+  authorId: number;
 };
 
-const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost }: DetailPostCoverProps) => {
+const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost, authorId }: DetailPostCoverProps) => {
   const [isErrorCover, setIsErrorCover] = useState(false);
   const [isErrorAvatar, setIsErrorAvatar] = useState(false);
 
@@ -30,9 +32,8 @@ const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost }: D
           <img src={!isErrorCover ? cover : noImage} alt={title} />
         </div>
         <div className="cover-content d-flex flex-column justify-end">
-          <h2 className="cover-title">{title}</h2>
           <div className="cover-info d-flex justify-between item-center">
-            <Link to="/" className="cover-author d-flex item-center">
+            <Link to={`/profile/${authorId}`} className="cover-author d-flex item-center">
               <div className="author-ava">
                 <img src={!isErrorAvatar ? authorAvatar : avaDefault} alt={authorName + ' Avatar'} />
               </div>
@@ -40,7 +41,7 @@ const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost }: D
             </Link>
             <div className="cover-date d-flex item-center">
               <i className="icon icon-small icon-date-20"></i>
-              <p className="cover-date-title">{convertDateToString(datePost)}</p>
+              <p className="cover-date-title">{convertDateToString(datePost, '-')}</p>
             </div>
           </div>
         </div>

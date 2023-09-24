@@ -1,10 +1,12 @@
 import { Dispatch } from 'react';
 
-import { PostModel, UserModel } from '../../models/post';
+import { PostModel } from '../../models/post';
+import { UserModel } from '../../models/user';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost, getPublicPosts } from '../../shared/services/index';
-import { getUsers } from '../../shared/services/user';
 import { RootAction } from '../../stores/store';
+
+import { getPublicPosts, getRecommendPosts, QueryPost } from '../../shared/services/index';
+import { getUsers } from '../../shared/services/user.service';
 
 export const getPublicPostStart = () => {
   return {
@@ -38,10 +40,10 @@ export const loadMore = () => {
   };
 };
 
-export const fetchPublicPosts = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+export const fetchPublicPosts = (query: QueryPost) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPublicPostStart());
   try {
-    const response = await getPublicPosts(page, size);
+    const response = await getPublicPosts(query);
     dispatch(getPublicPostSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPublicPostFailure(`${err}`));
@@ -76,5 +78,36 @@ export const fetchUsers = () => async (dispatch: Dispatch<RootAction>) => {
     dispatch(getUsersSuccess(response as UserModel[]));
   } catch (err) {
     dispatch(getUsersFailure(`${err}`));
+  }
+};
+
+// recommend
+export const getRecommendStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_RECOMMEND,
+  };
+};
+
+export const getRecommendSuccess = (data: PostModel[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_RECOMMEND_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getRecommendFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_RECOMMEND_FAILURE,
+    payload: error,
+  };
+};
+
+export const getRecommend = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getRecommendStart());
+  try {
+    const response = await getRecommendPosts(page, size);
+    dispatch(getRecommendSuccess(response as PostModel[]));
+  } catch (error) {
+    dispatch(getRecommendFailure(`${error}`));
   }
 };

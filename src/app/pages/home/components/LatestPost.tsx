@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { pageSize } from '../../../shared/constants/post';
 import { RootState } from '../../../stores/store';
 import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
+
 import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
+import { pageSize } from '../../../shared/constants/post';
+
+const threshold = 400;
 
 const LatestPost = () => {
-  const currentPage = useSelector((state: RootState) => state.post.currentPage);
   const isLoading = useSelector((state: RootState) => state.post.isLoading);
-  const posts = useSelector((state: RootState) => state.post.data);
+  const currentPage = useSelector((state: RootState) => state.post.currentPage);
   const totalPage = useSelector((state: RootState) => state.post.totalPage);
+  const posts = useSelector((state: RootState) => state.post.data);
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
@@ -19,32 +22,40 @@ const LatestPost = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchPublicPosts(currentPage, pageSize));
+    dispatch(fetchPublicPosts({ page: currentPage, size: pageSize }));
   }, [currentPage]);
 
-  const isLoadmore = () => {
-    return currentPage + 1 <= totalPage;
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage + 1 <= totalPage) {
+      dispatch(loadMore());
+    }
   };
+
+  useEffect(() => {
+    if (posts.length) {
+      window.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isLoading]);
 
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
-      <PostList posts={posts} />
-      {currentPage > 1 && isLoading && (
-        <div className="row">
+      {posts && <PostList posts={posts} isLoading={isLoading} />}
+      {isLoading && (
+        <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (
             <li className="post-item col col-6 col-md-12" key={index}>
               <PostItemLoading />
             </li>
           ))}
-        </div>
-      )}
-      {isLoadmore() && (
-        <div className="btn-load-more-wrapper d-flex justify-center">
-          <button className="btn btn-primary" onClick={() => dispatch(loadMore())}>
-            Load More
-          </button>
-        </div>
+        </ul>
       )}
     </section>
   );

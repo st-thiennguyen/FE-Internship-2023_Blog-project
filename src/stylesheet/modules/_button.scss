@@ -1,17 +1,19 @@
 .btn {
   position: relative;
-  text-transform: capitalize;
+  width: fit-content;
+  height: fit-content;
+
   padding: 12px 32px;
-  color: map-get($color, dark);
   border-radius: 6px;
+  border: transparent;
+  outline: none;
+
+  color: map-get($color, dark);
   font-size: map-get($font-size, sm);
   font-weight: map-get($font-size, semibold);
-  height: fit-content;
-  width: fit-content;
-  border: none;
-  outline: none;
+  text-transform: capitalize;
+
   cursor: pointer;
-  transition: none !important;
 }
 
 .btn.disabled {
@@ -36,6 +38,11 @@
 .btn-primary {
   background-color: map-get($color, primary);
   color: map-get($color, textButton);
+
+  &:hover {
+    color: map-get($color, primary);
+    background-color: map-get($color, backgroundFrame);
+  }
 }
 
 .btn-secondary {
@@ -43,21 +50,29 @@
   color: #fff;
 }
 
+.btn-gradient {
+  background-image: linear-gradient(to right, map-get($color, primary), map-get($color, secondary));
+  color: #fff;
+}
+
 button:disabled,
 button[disabled] {
+  opacity: 0.6;
   pointer-events: none;
 }
 
 .btn-loading {
   position: absolute;
   top: 0;
-  right: 38%;
+  right: 0;
+
   width: 20px;
   height: 20px;
   margin: 10px;
   border: 2px solid #f3f3f3;
   border-top: 2px solid #ff5722;
   border-radius: 50%;
+
   animation: spin 1.5s linear infinite;
   transition: none !important;
 }

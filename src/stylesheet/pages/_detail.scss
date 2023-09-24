@@ -1,53 +1,63 @@
 .detail-page {
+  .detail-action {
+    position: sticky;
+    height: fit-content;
+    top: 120px;
+  }
   .detail-cover {
-    height: 50vh;
-    min-height: 580px;
     position: relative;
+    min-height: 580px;
+    height: 50vh;
     border-radius: 15px;
+
     .cover-img {
       height: 100%;
       &::after {
-        position: absolute;
         content: "";
+        position: absolute;
         top: 0;
         bottom: 0;
         right: 0;
         left: 0;
-        background-color: rgba($color: #000000, $alpha: 0.5);
+
         border-radius: 15px;
+        background-color: rgba($color: #000000, $alpha: 0.5);
       }
+
       img {
         height: 100%;
         border-radius: 15px;
         object-fit: cover;
       }
     }
+
     .cover-content {
       @include position(0, 0, 0, 0, absolute);
       max-width: 1000px;
       padding: 50px;
       color: map-get($color, textLight);
       font-size: 25px;
+
       .cover-info {
         margin-top: 10px;
       }
       .cover-author {
+        color: map-get($color, textLight);
+        font-size: 15px;
         .author-ava {
           width: 30px;
           height: 30px;
           margin-right: 10px;
           img {
-            object-fit: cover;
             border-radius: 100%;
+            object-fit: cover;
           }
         }
-        font-size: 15px;
-        color: map-get($color, textLight);
       }
       .cover-date {
         &-title {
-          font-size: 14px;
           margin-left: 10px;
+          font-size: 14px;
         }
       }
     }
@@ -64,29 +74,33 @@
         background-color: transparent;
       }
       .action-count {
+        width: 20px;
         margin-left: 10px;
+        overflow-wrap: break-word;
       }
     }
 
     .detail-post {
       width: 100%;
       .detail-post-body {
+        margin-bottom: 16px;
         font-size: map-get($font-size, lg);
         letter-spacing: 0.3px;
-        margin-bottom: 16px;
+
+        .post-title {
+          margin-bottom: 40px;
+        }
+
         .post-desc {
+          margin-bottom: 60px;
           font-weight: map-get($font-weight, semibold);
           font-size: map-get($font-size, lg);
-          margin-bottom: 60px;
-          &::first-letter {
-            font-size: map-get($font-size, xxl);
-            background-color: map-get($color, backgroundFrame);
-            color: map-get($color, primary);
-            padding: 5px 12px;
-            border-radius: 12px;
-            margin-right: 5px;
-            line-height: 1.8;
-          }
+        }
+
+        .post-content {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
         }
       }
       .post-tag {
@@ -110,6 +124,99 @@
         img {
           border-radius: 100%;
         }
+      }
+    }
+  }
+
+  .section-comment {
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 40px;
+    scroll-margin-top: 100px;
+    .comment-title {
+      margin-bottom: 16px;
+    }
+    .comment-input {
+      display: inline-block;
+      width: 100%;
+      padding: 10px 10px 0;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 16px;
+
+      color: map-get($color, text);
+      font-size: map-get($font-size, md);
+      outline: none;
+      resize: none;
+
+      &:focus {
+        &::-webkit-input-placeholder {
+          opacity: 0;
+        }
+      }
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        display: none;
+      }
+      &-wrapper {
+        align-items: end;
+        width: 80%;
+        border-radius: 6px;
+        margin-bottom: 32px;
+      }
+      &-hidden {
+        padding: 12px 0 40px;
+        margin-bottom: 32px;
+        border-bottom: 1px solid rgb(178, 178, 178);
+
+        color: map-get($map: $color, $key: subtext);
+        font-size: 18px;
+      }
+    }
+
+    .btn-comment {
+      padding: 10px 12px;
+    }
+    .comment {
+      &-item {
+        width: 70%;
+        margin-bottom: 28px;
+      }
+      &-info-top {
+        align-items: flex-start;
+        margin-bottom: 4px;
+      }
+      .user-info {
+        margin-right: 10px;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+      .user-name {
+        margin-right: 10px;
+        font-size: map-get($font-size, xs);
+        font-weight: map-get($font-weight, bold);
+        color: map-get($color, subtext);
+      }
+      &-content {
+        border-radius: 6px;
+        font-size: map-get($font-size, lg);
+        color: map-get($color, text);
+      }
+      &-time {
+        color: map-get($color, subtext);
+        font-size: map-get($font-size, xs);
       }
     }
   }
@@ -147,13 +254,16 @@
       bottom: 0;
       right: 0;
       left: 0;
+      z-index: 5;
+
       .action-list {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background-color: map-get($color, backgroundFrame);
+
         padding: 10px 0;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        background-color: map-get($color, backgroundFrame);
         .action-item {
           margin-bottom: 0;
         }

@@ -1,12 +1,16 @@
 .container {
   max-width: 1240px;
-  margin: 0 auto;
   width: 100%;
   padding: 0 20px;
+  margin: 0 auto;
 }
 
 .d-flex {
   display: flex;
+}
+
+.item-start {
+  align-items: start;
 }
 
 .item-center {
@@ -43,10 +47,6 @@
 
 .justify-center {
   justify-content: center;
-}
-
-.item-center {
-  align-items: center;
 }
 
 .d-block {

@@ -1,8 +1,9 @@
-import { PostModel, UserModel } from '../../models/post';
+import { PostModel } from '../../models/post';
+import { UserModel } from '../../models/user';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
-interface PublicPostState {
+export interface PublicPostState {
   data: PostModel[];
   isLoading: boolean;
   isError: boolean;
@@ -34,9 +35,10 @@ export const lastesPostReducer = (state = initialLastesPostState, action: RootAc
         message: '',
       };
     case ACTIONS_TYPE.GET_ALL_POST_SUCCESS:
+      const newPosts = action.payload.currentPage === 1 ? action.payload.data : [...state.data, ...action.payload.data];
       return {
         ...state,
-        data: [...state.data, ...action.payload.data],
+        data: newPosts,
         totalPage: action.payload.totalPage,
         totalItems: action.payload.totalItems,
         isLoading: false,
@@ -99,6 +101,58 @@ export const userReducer = (state = initialState, action: RootAction): UserState
         message: '',
       };
     case ACTIONS_TYPE.GET_USERS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+interface RecommendPostState {
+  data: PostModel[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  message: string;
+  currentPage: number;
+  totalPage: number;
+  totalItems: number;
+}
+const initialRecommendPostState: RecommendPostState = {
+  data: [] as PostModel[],
+  isLoading: false,
+  isError: false,
+  isSuccess: false,
+  message: '',
+  currentPage: 1,
+  totalPage: 0,
+  totalItems: 0,
+};
+
+export const recommendPostReducer = (state = initialRecommendPostState, action: RootAction): RecommendPostState => {
+  switch (action.type) {
+    case ACTIONS_TYPE.GET_RECOMMEND:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_RECOMMEND_SUCCESS:
+      return {
+        ...state,
+        data: action.payload.data,
+        totalPage: action.payload.totalPage,
+        totalItems: action.payload.totalItems,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.GET_RECOMMEND_FAILURE:
       return {
         ...state,
         isLoading: false,

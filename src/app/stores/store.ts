@@ -4,10 +4,12 @@ import thunk, { ThunkAction } from 'redux-thunk';
 
 import authReducer from '../pages/auth/auth.reducer';
 import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
-import { lastesPostReducer, userReducer } from '../pages/home/home.reducer';
+import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 import { imageSignedReducer } from '../pages/write-post/image-sign.reducer';
 import { writePostReducer } from '../pages/write-post/write-port.reducer';
+import { postTagReducer } from '../pages/posts/posts.reducer';
+import { profileReducer } from '../pages/profile/profile.reducers';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -22,6 +24,9 @@ export const rootReducer = combineReducers({
   user: userReducer,
   imageSign: imageSignedReducer,
   writePost: writePostReducer,
+  postTag: postTagReducer,
+  profile: profileReducer,
+  recommend: recommendPostReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(loggerMiddleware, thunk)));

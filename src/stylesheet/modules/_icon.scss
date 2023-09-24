@@ -2,6 +2,7 @@
   display: inline-block;
   background-repeat: no-repeat;
   background-position: center;
+
   &-small {
     width: $icon-size-sm;
     height: $icon-size-sm;
@@ -11,6 +12,7 @@
     width: 25px;
     height: 25px;
   }
+
   &-user-20 {
     background-image: url("../../assets/icons/ic-user-20.svg");
   }
@@ -46,9 +48,6 @@
     background: url("../../assets/icons/ic-eye_slash-10.svg");
     background-size: cover;
   }
-  &-like {
-    background: url("../../assets/icons/ic-like.svg") top center / cover no-repeat;
-  }
 
   &-comment {
     background: url("../../assets/icons/ic-comment.svg") top center / cover no-repeat;
@@ -59,9 +58,17 @@
   &-comment-black {
     background: url("../../assets/icons/ic-comment-black.svg") top center / cover no-repeat;
   }
-  &-fire-ouline-20 {
+
+  &-fire-outline-20 {
     background-image: url("../../assets/icons/ic-fire-ouline-20.svg");
   }
+  &-fire-20 {
+    background-image: url("../../assets/icons/ic-fire-20.svg");
+  }
+  &-fire-fill-20 {
+    background-image: url("../../assets/icons/ic-fire-fill-20.svg");
+  }
+
   &-comment-20 {
     background-image: url("../../assets/icons/ic-comment-20.svg");
   }
@@ -71,13 +78,38 @@
   &-close-20 {
     background-image: url("../../assets/icons/ic-close-20.svg");
   }
+
+  &-camera-white-20 {
+    background-image: url("../../assets/icons/ic-camera-white-20.svg");
+  }
   &-date-20 {
     background-image: url("../../assets/icons/ic-date-20.svg");
+  }
+  &-date-outline-20 {
+    background-image: url("../../assets/icons/ic-date-outline-20.svg");
   }
   &-close-10 {
     background-image: url("../../assets/icons/ic-close-10.svg");
   }
   &-arrow-up-24 {
     background-image: url("../../assets/icons/ic-arrow-up-grey.svg");
+  }
+
+  &-mail-20 {
+    background-image: url("../../assets/icons/ic-mail-20.svg");
+  }
+  &-dob-20 {
+    background-image: url("../../assets/icons/ic-dob-20.svg");
+  }
+  &-phone-20 {
+    background-image: url("../../assets/icons/ic-phone-20.svg");
+  }
+
+  &-trash-20 {
+    background-image: url("../../assets/icons/ic-trash-20.svg");
+  }
+
+  &-trash-fill-20 {
+    background-image: url("../../assets/icons/ic-trash-fill-20.svg");
   }
 }

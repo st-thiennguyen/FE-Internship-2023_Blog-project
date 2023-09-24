@@ -1,9 +1,17 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
+import { regexEmail } from '../../../shared/constants';
+import { RootState } from '../../../stores/store';
+import { loginAction, registerReset } from '../auth.actions';
+import { AuthContext } from '../../../App';
+
+import Button from '../../../shared/components/Button';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
@@ -12,11 +20,6 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
-import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
-import { regexEmail } from '../../../shared/constants';
-import { RootState } from '../../../stores/store';
-import { loginAction, registerReset } from '../auth.actions';
 
 const schema = yup
   .object({
@@ -36,13 +39,16 @@ type FormData = {
 };
 
 const Login = () => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
+  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isLogin = authContext?.accessToken;
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
-  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
-  const errorLogin: any = useSelector((state: RootState) => state.auth.message);
+  const message: string = useSelector((state: RootState) => state.auth.message);
+  const isErrorLogin: any = useSelector((state: RootState) => state.auth.isError);
 
   const isRegisterSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
   const registerMessage: string = useSelector((state: RootState) => state.auth.message);
@@ -73,10 +79,10 @@ const Login = () => {
 
   useEffect(() => {
     removeStateRegister.current();
-    if (accessToken) {
+    if (isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   return (
     <div className="auth">
@@ -163,8 +169,8 @@ const Login = () => {
           subtitle={registerState.registerMessage}
         />
       )}
-      {isError && (
-        <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={errorLogin}></ToastMessage>
+      {isErrorLogin && (
+        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>
   );

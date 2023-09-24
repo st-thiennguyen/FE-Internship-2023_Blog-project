@@ -42,11 +42,10 @@ type FormData = {
 };
 
 interface writePostProps {
-  isUpdate: boolean
+  isUpdate: boolean;
 }
 
 const WritePost = ({ isUpdate }: writePostProps) => {
-
   const [tags, setTags] = useState<string[]>([]);
   const [statusPost, setStatusPost] = useState('public');
   const [photoPreview, setPhotoPreview] = useState<string>();
@@ -61,7 +60,6 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const isErrorUpdatePost = useSelector((state: any) => state.writePost.isError);
   const isMessageCreatePost = useSelector((state: any) => state.writePost.message);
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
-
 
   const { id } = useParams();
 
@@ -98,10 +96,10 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   });
 
   const handleUpdatePost = handleSubmit((data: any) => {
-    dispatch(updatePost(data, detailPost.id) as any)
-    setTimeout(()=>{
-      navigate(`/detail/${id}`)
-    },1500)
+    dispatch(updatePost(data, detailPost.id) as any);
+    setTimeout(() => {
+      navigate(`/detail/${id}`);
+    }, 1500);
   });
 
   const handleToggleStatus = (e: any) => {
@@ -110,7 +108,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     } else {
       setStatusPost('public');
     }
-  }
+  };
 
   useEffect(() => {
     if (!accessToken) {
@@ -120,35 +118,43 @@ const WritePost = ({ isUpdate }: writePostProps) => {
 
   useEffect(() => {
     dispatch(fetchDetailBlog(Number(id)) as any);
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (detailPost.description && isUpdate) {
       setValue('description', detailPost.description);
     }
-  }, [detailPost.description])
+  }, [detailPost.description]);
 
   useEffect(() => {
     if (detailPost.content && isUpdate) {
       setValue('content', detailPost.content);
     }
-  }, [detailPost.content])
+  }, [detailPost.content]);
 
   return (
     <>
-      {
-        isUpdate ? (<>
+      {isUpdate ? (
+        <>
           <WritePostHeader isUpdate={isUpdate} handleUpdatePost={handleUpdatePost} />
           <section className="section section-write-post">
             <div className="container">
               <div className="write-post">
                 <form className="write-post-form d-flex flex-column" ref={formRef}>
-                  <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..."
+                  <input
+                    {...register('title')}
+                    className="write-post-input"
+                    type="text"
+                    placeholder="Title here ..."
                     defaultValue={detailPost.title && detailPost.title}
                   />
                   <p className="write-post-form-error">{errors.title?.message}</p>
                   <div className="write-post-editor">
-                    <EditorImageCover photoPreview={imagePostUpdate} setPhotoPreview={setPhotoPreview} isUpdate={isUpdate} />
+                    <EditorImageCover
+                      photoPreview={imagePostUpdate}
+                      setPhotoPreview={setPhotoPreview}
+                      isUpdate={isUpdate}
+                    />
                     <div className="toggle-btn-status">
                       <div className="btn-status">
                         <div className="btn-toggle">
@@ -170,7 +176,11 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                     <TextEditor value={contentInput} placeholder={'Write your story ...'} onChange={onContentChange} />
                     <p className="write-post-form-error">{errors.content?.message}</p>
                   </div>
-                  <EditorPostTags tags={detailPost.tags ? detailPost.tags : tags} setTags={setTags} isUpdate={isUpdate} />
+                  <EditorPostTags
+                    tags={detailPost.tags ? detailPost.tags : tags}
+                    setTags={setTags}
+                    isUpdate={isUpdate}
+                  />
                 </form>
               </div>
             </div>
@@ -178,61 +188,60 @@ const WritePost = ({ isUpdate }: writePostProps) => {
           <ToastMessage
             isSuccess={isSuccessCreatePost}
             isShow={isSuccessCreatePost}
-            title='success'
+            title="success"
             subtitle={isMessageCreatePost}
           ></ToastMessage>
           <ToastMessage
             isSuccess={!isErrorUpdatePost}
             isShow={isErrorUpdatePost}
-            title='error'
+            title="error"
             subtitle={isMessageCreatePost}
           ></ToastMessage>
-        </>) : (
-          <>
-            <WritePostHeader onPublishPost={onPublishPost} />
-            <section className="section section-write-post">
-              <div className="container">
-                <div className="write-post">
-                  <form className="write-post-form d-flex flex-column" ref={formRef}>
-                    <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..."
-                    />
-                    <p className="write-post-form-error">{errors.title?.message}</p>
-                    <div className="write-post-editor">
-                      <EditorImageCover photoPreview={photoPreview} setPhotoPreview={setPhotoPreview} />
-                      <div className="toggle-btn-status">
-                        <div className="btn-status">
-                          <div className="btn-toggle">
-                            <input type="checkbox" className="checkbox" onClick={handleToggleStatus} />
-                            <div className="knobs"></div>
-                            <div className="layer"></div>
-                          </div>
+        </>
+      ) : (
+        <>
+          <WritePostHeader onPublishPost={onPublishPost} />
+          <section className="section section-write-post">
+            <div className="container">
+              <div className="write-post">
+                <form className="write-post-form d-flex flex-column" ref={formRef}>
+                  <input {...register('title')} className="write-post-input" type="text" placeholder="Title here ..." />
+                  <p className="write-post-form-error">{errors.title?.message}</p>
+                  <div className="write-post-editor">
+                    <EditorImageCover photoPreview={photoPreview} setPhotoPreview={setPhotoPreview} />
+                    <div className="toggle-btn-status">
+                      <div className="btn-status">
+                        <div className="btn-toggle">
+                          <input type="checkbox" className="checkbox" onClick={handleToggleStatus} />
+                          <div className="knobs"></div>
+                          <div className="layer"></div>
                         </div>
                       </div>
-                      <ReactQuill
-                        className="write-post-area"
-                        theme="bubble"
-                        value={descriptionInput}
-                        onChange={onDescChange}
-                        placeholder="Description your story ..."
-                      />
-                      <p className="write-post-form-error">{errors.description?.message}</p>
-                      <TextEditor value={contentInput} placeholder={'Write your story ...'} onChange={onContentChange} />
-                      <p className="write-post-form-error">{errors.content?.message}</p>
                     </div>
-                    <EditorPostTags tags={tags} setTags={setTags} />
-                  </form>
-                </div>
+                    <ReactQuill
+                      className="write-post-area"
+                      theme="bubble"
+                      value={descriptionInput}
+                      onChange={onDescChange}
+                      placeholder="Description your story ..."
+                    />
+                    <p className="write-post-form-error">{errors.description?.message}</p>
+                    <TextEditor value={contentInput} placeholder={'Write your story ...'} onChange={onContentChange} />
+                    <p className="write-post-form-error">{errors.content?.message}</p>
+                  </div>
+                  <EditorPostTags tags={tags} setTags={setTags} />
+                </form>
               </div>
-            </section>
-            <ToastMessage
-              isSuccess={isSuccessCreatePost}
-              isShow={isSuccessCreatePost}
-              title={isSuccessCreatePost ? 'success' : 'error'}
-              subtitle={isMessageCreatePost}
-            ></ToastMessage>
-          </>
-        )
-      }
+            </div>
+          </section>
+          <ToastMessage
+            isSuccess={isSuccessCreatePost}
+            isShow={isSuccessCreatePost}
+            title={isSuccessCreatePost ? 'success' : 'error'}
+            subtitle={isMessageCreatePost}
+          ></ToastMessage>
+        </>
+      )}
     </>
   );
 };

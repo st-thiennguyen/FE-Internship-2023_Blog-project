@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import avaDefault from '../../../../assets/images/user-default.png';
 import { PostModel } from '../../../models/post';
 import { isImageUrlValid } from '../../../shared/utils';
 
+import avaDefault from '../../../../assets/images/user-default.png';
+import DetailPostReaction from './DetailPostReaction';
+
 interface DetailPostProps {
   post: PostModel;
+  scrollToComment: () => void;
 }
 
-const DetailPostContent = ({ post }: DetailPostProps) => {
+const DetailPostContent = ({ post, scrollToComment }: DetailPostProps) => {
   const [isErrorCover, setIsErrorCover] = useState(false);
 
   useEffect(() => {
@@ -18,31 +21,17 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
 
   return (
     <>
-      <div className="detail-action">
-        <ul className="action-list">
-          <li className="action-item d-flex item-center">
-            <button className="btn btn-post-action">
-              <i className="icon icon-small icon-fire-ouline-20"></i>
-            </button>
-            <span className="action-count">{post.likes}</span>
-          </li>
-          <li className="action-item d-flex item-center">
-            <button className="btn btn-post-action">
-              <i className="icon icon-small icon-comment-20"></i>
-            </button>
-            <span className="action-count">{post.comments}</span>
-          </li>
-          <li className="action-item d-flex item-center">
-            <button className="btn btn-post-action">
-              <i className="icon icon-small icon-bookmark-20"></i>
-            </button>
-          </li>
-        </ul>
-      </div>
+      <DetailPostReaction
+        postId={post.id}
+        likeCount={post.likes}
+        commentCount={post.comments}
+        scrollToComment={scrollToComment}
+      />
       <div className="detail-post">
         <div className="detail-post-body">
-          <p className="post-desc">{post.description}</p>
-          <p className="post-content">{post.content}</p>
+          <h2 className="post-title">{post.title}</h2>
+          <div className="post-desc" dangerouslySetInnerHTML={{ __html: post.description }}></div>
+          <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </div>
         <div className="post-tag">
           <ul className="tag-list d-flex flex-wrap justify-end">
@@ -61,7 +50,7 @@ const DetailPostContent = ({ post }: DetailPostProps) => {
             <div className="author-img d-flex">
               <img src={!isErrorCover ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
             </div>
-            <p className="author-name">{post.user?.firstName + ' ' + post.user?.lastName}</p>
+            <p className="author-name">{post.user?.displayName}</p>
           </Link>
         </div>
       </div>
