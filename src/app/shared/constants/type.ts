@@ -9,7 +9,11 @@ const ACTIONS_TYPE = {
   GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
   GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
-  // GET DETAiL BLOG
+
+  // GET ALL POST WITH TAG
+  GET_RECYCLEBIN: 'get-recyclebin-post',
+  GET_RECYCLEBIN_SUCCESS: 'get-recyclebin-success',
+  GET_RECYCLEBIN_FAILURE: 'get-recyclebin-failure',
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',

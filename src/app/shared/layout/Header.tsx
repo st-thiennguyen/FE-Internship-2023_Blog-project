@@ -56,24 +56,27 @@ const Header = () => {
                 <li className="navbar-item navbar-item-auth">
                   {isLogin ? (
                     <>
-                      <Link to="/login" className="navbar-link">
-                        <div className="navbar-content d-flex justify-center item-center">
-                          {!isErrorCover ? (
-                            <img
-                              src={authContext.userInfo.picture}
-                              alt="avatar"
-                              className="icon icon-small avatar-user"
-                            />
-                          ) : (
-                            <img src={avatarDefault} alt="avatar" className={`post-img err`} />
-                          )}
-                        </div>
-                      </Link>
+                      <div className="navbar-content d-flex justify-center item-center">
+                        {!isErrorCover ? (
+                          <img
+                            src={authContext.userInfo.picture}
+                            alt="avatar"
+                            className="icon icon-small avatar-user"
+                          />
+                        ) : (
+                          <img src={avatarDefault} alt="avatar" className={`post-img err`} />
+                        )}
+                      </div>
                       <div className="navbar-auth">
                         <ul className="auth-list">
                           <li className="auth-item">
                             <Link to="/profile" className="auth-link">
                               {authContext.userInfo?.displayName}
+                            </Link>
+                          </li>
+                          <li className="auth-item">
+                            <Link to="/profile/recyclebin" className="auth-link">
+                              Recyclebin
                             </Link>
                           </li>
                           <li className="auth-item">

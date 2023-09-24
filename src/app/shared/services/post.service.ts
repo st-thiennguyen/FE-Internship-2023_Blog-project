@@ -44,3 +44,8 @@ export const postComment = (id: string, comment: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
 };
+
+export const getRecyclebinPost = (query: QueryPost) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recyclebin}`, query);
+};
