@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { RootState } from '../../../stores/store';
 import EditorImageCover from '../components/EditorImageCover';
+import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
 import EditorPostTags from '../components/EditorPostTags';
 import EditorPostVisibility from '../components/EditorPostVisibility';
@@ -132,12 +133,14 @@ const WritePost = () => {
                       <div className="editor-detail">
                         <h5 className="editor-detail-title">Post detail</h5>
                         <textarea
+                          rows={1}
                           {...register('title')}
                           className="editor-detail-input"
                           placeholder="Title your story ..."
                         />
                         <p className="editor-detail-error">{errors.title?.message}</p>
                         <textarea
+                          rows={1}
                           {...register('description')}
                           className="editor-detail-input"
                           placeholder="Description your story ..."
@@ -158,6 +161,12 @@ const WritePost = () => {
                   </div>
                   <aside className="aside aside-write-post d-flex flex-column  col col-3">
                     <EditorPostVisibility onChangeValue={setStatusPost} />
+                    {photoPreview && (
+                      <EditorImageCoverPreview
+                        photoPreview={photoPreview}
+                        onRemovePreview={() => setPhotoPreview('')}
+                      />
+                    )}
                     <EditorPostTags tags={tags} setTags={setTags} />
                     <EditorPostActions onPublish={onPublishPost} onSaveDraft={() => alert('COMMING SOON')} />
                   </aside>

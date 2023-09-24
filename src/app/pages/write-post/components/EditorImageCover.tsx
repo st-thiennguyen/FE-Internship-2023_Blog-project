@@ -74,7 +74,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
               <button className="btn btn-add-cover" type="button" onClick={clickSelectCover}>
                 <img src={iconImage} alt="Icon add image cover" width={30} height={30} />
               </button>
-              <p className="editor-cover-subtxt">Image or Video</p>
+              <p className="editor-cover-subtxt">Image type</p>
             </div>
           </>
         )}

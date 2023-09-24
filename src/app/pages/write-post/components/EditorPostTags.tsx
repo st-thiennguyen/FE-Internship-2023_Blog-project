@@ -13,7 +13,7 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
 
   const validateTags = (): boolean => {
     let valid = true;
-    if (tags.includes(tagRef.current!.value)) {
+    if (tags.includes(tagRef.current!.value.trim())) {
       setErrorMessage('Tags must be not duplicate !');
       valid = false;
     } else if (!(tags.length + 1 < 5)) {
