@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import icRemove from '../../../../assets/icons/ic-remove-20.svg';
 
@@ -9,10 +9,30 @@ interface EditorPostTagsProps {
 const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
   const tagRef = useRef<HTMLInputElement>(null);
 
-  const handleAddTag = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.keyCode === 13 && tagRef.current!.value !== '' && !tags.includes(tagRef.current!.value)) {
-      setTags([...tags, tagRef.current!.value.trim()]);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const validateTags = (): boolean => {
+    let valid = true;
+    if (tags.includes(tagRef.current!.value)) {
+      setErrorMessage('Tags must be not duplicate !');
+      valid = false;
+    } else if (!(tags.length + 1 < 5)) {
+      setErrorMessage('You can only enter a maximum of 4 tags !');
       tagRef.current!.value = '';
+      valid = false;
+    } else {
+      setErrorMessage('');
+      valid = true;
+    }
+    return valid;
+  };
+
+  const handleAddTag = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.keyCode === 13 && tagRef.current!.value !== '') {
+      if (validateTags()) {
+        setTags([...tags, tagRef.current!.value.trim()]);
+        tagRef.current!.value = '';
+      }
     }
   };
 
@@ -31,6 +51,7 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
         placeholder="Enter your tags ..."
       />
       <span className="tags-hint">Hit 'Enter' to add new tag</span>
+      <p className="editor-detail-error">{errorMessage}</p>
       <ul className="editor-tags-list d-flex flex-wrap">
         {tags &&
           tags.map((e, index) => {

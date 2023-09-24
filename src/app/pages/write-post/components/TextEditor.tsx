@@ -37,13 +37,9 @@ const TextEditor: React.FC<Props> = ({ value, setContent, placeholder, setError 
   const reactQuillRef = useRef<ReactQuill>(null);
 
   const onChange = (content: string) => {
-    console.log();
-
     const contentLength = content.replace(/<(.|\n)*?>/g, '').trim().length;
 
     const isValidContent = contentLength >= 50;
-
-    console.log(contentLength);
 
     if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
       setError('Content must not be null !');
