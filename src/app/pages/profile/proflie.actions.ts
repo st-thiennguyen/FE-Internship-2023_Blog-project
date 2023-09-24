@@ -130,17 +130,6 @@ const deletePostItemFailure = (error: string) => {
   };
 };
 
-export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(deletePostItemStart());
-  try {
-    const response: any = await deletePostItem(id);
-    dispatch(deletePostItemSuccess(id, response));
-  } catch (error) {
-   dispatch(deletePostItemFailure(error as string)) 
-  }
-}
-
-
 export const getUserProfileAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getUserProfileStart());
   try {
@@ -209,3 +198,13 @@ export const updatePasswordAction = (data: formChangePassword) => async (dispatc
     dispatch(updatePasswordStartFailure(`${error}`));
   }
 };
+
+export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(deletePostItemStart());
+  try {
+    const response: any = await deletePostItem(id);
+    dispatch(deletePostItemSuccess(id, response));
+  } catch (error) {
+   dispatch(deletePostItemFailure(error as string)) 
+  }
+}

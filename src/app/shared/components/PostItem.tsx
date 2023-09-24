@@ -47,6 +47,7 @@ const PostItem = ({ post }: PostItemProps) => {
   }, [isErrImg, post.cover]);
 
 
+
   return (
     <>
       <Link className="post-link" to={`/posts/detail/${post.id}`}>
@@ -110,6 +111,22 @@ const PostItem = ({ post }: PostItemProps) => {
           </div>
         </div>
       </Link>
+      {
+        isDeleteSuccess && <ToastMessage
+          isShow={isDeleteSuccess}
+          isSuccess={isDeleteSuccess}
+          title='Success'
+          subtitle={deleteMessage}
+        ></ToastMessage>
+      }
+      {
+        isDeleteFailure && <ToastMessage
+          isShow={isDeleteFailure}
+          isSuccess={isDeleteFailure}
+          title='Error'
+          subtitle={deleteMessage}
+        ></ToastMessage>
+      }
       {
         isShowModal &&
         <Modal
