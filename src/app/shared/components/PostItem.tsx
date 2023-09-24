@@ -23,7 +23,7 @@ const PostItem = ({ post }: PostItemProps) => {
   const dispatch = useDispatch()
   const { id } = useParams();
 
-  const handleDeletePostItem = (id: number) => {
+  const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
     setIsShowMessage(true);
   }
@@ -34,7 +34,7 @@ const PostItem = ({ post }: PostItemProps) => {
   }
 
   const handleDelete = () => {
-    handleDeletePostItem(post.id);
+    handleDeletePostItem(post.id as any);
     setIShowModal(false);
   }
 
@@ -48,9 +48,11 @@ const PostItem = ({ post }: PostItemProps) => {
   }, [isErrImg, post.cover]);
 
 
+
   return (
     <>
-      <Link className="post-link" to={`${post.status === 'public' ? `/detail/${post.id}` : '#'}`}>
+      <Link className="post-link" to={`/posts/detail/${post.id}`}>
+        {isDeleteSuccess || ''}
         <div className="post">
           <div className="post-delete d-flex item-center justify-center" onClick={(e) => {
             e.preventDefault();
@@ -85,7 +87,7 @@ const PostItem = ({ post }: PostItemProps) => {
                 <p className="post-created-date">{convertDateToString(post.createdAt, '-')}</p>
               </div>
               <h3 className="post-title">{post.title}</h3>
-              <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+              <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
             </div>
             <div className="post-footer d-flex justify-between">
               <span className="read-more">READ MORE</span>
@@ -98,7 +100,7 @@ const PostItem = ({ post }: PostItemProps) => {
               </ul>
               <ul className="post-reaction-list d-flex item-center">
                 <div className="post-reaction-item d-flex">
-                  <i className="icon icon-small icon-fire-ouline-20"></i>
+                  <i className="icon icon-small icon-fire-outline-20"></i>
                   <span className="post-reaction-number">{post.likes}</span>
                 </div>
                 <div className="post-reaction-item d-flex">
@@ -110,20 +112,24 @@ const PostItem = ({ post }: PostItemProps) => {
           </div>
         </div>
       </Link>
-      <ToastMessage
-        isShow={isDeleteSuccess}
-        isSuccess={isDeleteSuccess}
-        title='Success'
-        subtitle={deleteMessage}
-      ></ToastMessage>
-      <ToastMessage
-        isShow={isDeleteFailure}
-        isSuccess={isDeleteFailure}
-        title='Error'
-        subtitle={deleteMessage}
-      ></ToastMessage>
       {
-        isShowModal && 
+        isDeleteSuccess && <ToastMessage
+          isShow={isDeleteSuccess}
+          isSuccess={isDeleteSuccess}
+          title='Success'
+          subtitle={deleteMessage}
+        ></ToastMessage>
+      }
+      {
+        isDeleteFailure && <ToastMessage
+          isShow={isDeleteFailure}
+          isSuccess={isDeleteFailure}
+          title='Error'
+          subtitle={deleteMessage}
+        ></ToastMessage>
+      }
+      {
+        isShowModal &&
         <Modal
           onClickClose={handleClose}
           onClickConfirm={handleDelete}

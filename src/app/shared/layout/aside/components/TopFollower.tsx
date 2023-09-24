@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-
-import { UserModel } from '../../../../models/post';
+import { UserModel } from '../../../../models/user';
 
 interface TopFollowerProps {
   users: UserModel[];

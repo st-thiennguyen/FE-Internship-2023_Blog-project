@@ -72,6 +72,13 @@ export const logoutFailure = (error: string) => {
   };
 };
 
+export const reAssignmentAuth = (data: any) => {
+  return {
+    type: ACTIONS_TYPE.REASSIGNMENT_AUTH,
+    payload: data,
+  };
+};
+
 export const registerAction =
   (registerData: RegisterProps): RootThunk =>
   async (dispatch: Dispatch<RootAction>) => {

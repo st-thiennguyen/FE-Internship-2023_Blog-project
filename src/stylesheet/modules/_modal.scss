@@ -76,11 +76,7 @@
   }
 }
 
-.hide-modal {
-  display: none;
-}
-
-.overplay {
+.overlay {
   @include position(0, 0, 0, 0, fixed);
   width: 100%;
   z-index: 99;

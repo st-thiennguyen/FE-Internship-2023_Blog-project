@@ -1,6 +1,7 @@
 import { RootAction } from '../../stores/store';
-import { ProfileModel } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
+import { ProfileModel } from '../../models/user';
+import { PostModel } from '../../models/post';
 
 interface ProfileStateProps {
   profile: ProfileModel;
@@ -75,12 +76,11 @@ export const userProfileReducer = (state = initialState, action: RootAction): Pr
       return {
         ...state,
         isLoading: true,
-        isDeleteSuccess: false,
         isError: false,
         message: '',
       };
     case ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS:
-      const updatedPosts = state.postList.Posts.filter((post) => post.id !== (action.payload.id));
+      const updatedPosts = state.postList.Posts.filter((post: PostModel) => post.id !== (action.payload.id));
       return {
         ...state,
         isLoading: false,

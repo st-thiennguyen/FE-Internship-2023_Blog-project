@@ -1,4 +1,9 @@
 .detail-page {
+  .detail-action {
+    position: sticky;
+    height: fit-content;
+    top: 120px;
+  }
   .detail-cover {
     position: relative;
     min-height: 580px;
@@ -69,7 +74,9 @@
         background-color: transparent;
       }
       .action-count {
+        width: 20px;
         margin-left: 10px;
+        overflow-wrap: break-word;
       }
     }
 
@@ -80,21 +87,20 @@
         font-size: map-get($font-size, lg);
         letter-spacing: 0.3px;
 
+        .post-title {
+          margin-bottom: 40px;
+        }
+
         .post-desc {
           margin-bottom: 60px;
           font-weight: map-get($font-weight, semibold);
           font-size: map-get($font-size, lg);
+        }
 
-          &::first-letter {
-            padding: 5px 12px;
-            margin-right: 5px;
-            border-radius: 12px;
-
-            color: map-get($color, primary);
-            background-color: map-get($color, backgroundFrame);
-            font-size: map-get($font-size, xxl);
-            line-height: 1.8;
-          }
+        .post-content {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
         }
       }
       .post-tag {
@@ -118,6 +124,99 @@
         img {
           border-radius: 100%;
         }
+      }
+    }
+  }
+
+  .section-comment {
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 40px;
+    scroll-margin-top: 100px;
+    .comment-title {
+      margin-bottom: 16px;
+    }
+    .comment-input {
+      display: inline-block;
+      width: 100%;
+      padding: 10px 10px 0;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 16px;
+
+      color: map-get($color, text);
+      font-size: map-get($font-size, md);
+      outline: none;
+      resize: none;
+
+      &:focus {
+        &::-webkit-input-placeholder {
+          opacity: 0;
+        }
+      }
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        display: none;
+      }
+      &-wrapper {
+        align-items: end;
+        width: 80%;
+        border-radius: 6px;
+        margin-bottom: 32px;
+      }
+      &-hidden {
+        padding: 12px 0 40px;
+        margin-bottom: 32px;
+        border-bottom: 1px solid rgb(178, 178, 178);
+
+        color: map-get($map: $color, $key: subtext);
+        font-size: 18px;
+      }
+    }
+
+    .btn-comment {
+      padding: 10px 12px;
+    }
+    .comment {
+      &-item {
+        width: 70%;
+        margin-bottom: 28px;
+      }
+      &-info-top {
+        align-items: flex-start;
+        margin-bottom: 4px;
+      }
+      .user-info {
+        margin-right: 10px;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+      .user-name {
+        margin-right: 10px;
+        font-size: map-get($font-size, xs);
+        font-weight: map-get($font-weight, bold);
+        color: map-get($color, subtext);
+      }
+      &-content {
+        border-radius: 6px;
+        font-size: map-get($font-size, lg);
+        color: map-get($color, text);
+      }
+      &-time {
+        color: map-get($color, subtext);
+        font-size: map-get($font-size, xs);
       }
     }
   }
@@ -155,6 +254,7 @@
       bottom: 0;
       right: 0;
       left: 0;
+      z-index: 5;
 
       .action-list {
         display: flex;

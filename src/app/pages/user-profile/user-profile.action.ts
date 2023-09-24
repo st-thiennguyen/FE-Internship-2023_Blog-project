@@ -2,8 +2,8 @@ import { Dispatch } from 'react';
 import { RootAction } from '../../stores/store';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { getUserPosts, getUserProfile } from '../../shared/services/user.service';
-import { ProfileModel } from '../../models/post';
 import { deletePostItem } from '../../shared/services';
+import { ProfileModel } from '../../models/user';
 
 const getUserProfileStart = () => {
   return {
@@ -51,7 +51,7 @@ export const deletePostItemStart = () => {
   };
 };
 
-const deletePostItemSuccess = (id: number, res: string) => {
+const deletePostItemSuccess = (id: string, res: string) => {
   return {
     type: ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS,
     payload: {id, res},
@@ -65,11 +65,11 @@ const deletePostItemFailure = (error: string) => {
   };
 };
 
-export const deletePost = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(deletePostItemStart());
   try {
     const response: any = await deletePostItem(id);
-    dispatch(deletePostItemSuccess(id, response))
+    dispatch(deletePostItemSuccess(id, response));
   } catch (error) {
    dispatch(deletePostItemFailure(error as string)) 
   }

@@ -1,11 +1,12 @@
-import ProfilePage from './container/ProfilePage';
-import UserProfile from './container/UserProfile';
+import ProfilePage from './containers/ProfilePage';
+import ProfileUpdate from './containers/ProfileUpdate';
+import ProfileUser from './containers/ProfileUser';
 
 const userProfileRoutes = [
   {
     name: 'profile',
     path: '/profile',
-    component: UserProfile,
+    component: ProfileUser,
     children: [
       {
         name: 'my-profile',
@@ -17,6 +18,12 @@ const userProfileRoutes = [
         name: 'user-profile',
         path: ':id',
         component: ProfilePage,
+        isAuth: true,
+      },
+      {
+        name: 'update-profile',
+        path: 'update',
+        component: ProfileUpdate,
         isAuth: true,
       },
     ],
