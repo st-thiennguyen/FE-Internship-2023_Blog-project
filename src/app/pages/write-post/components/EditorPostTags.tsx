@@ -16,7 +16,7 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
     if (tags.includes(tagRef.current!.value.trim())) {
       setErrorMessage('Tags must not be duplicated !');
       valid = false;
-    } else if (!(tags.length < 4)) {
+    } else if (tags.length >= 4) {
       setErrorMessage('You can only enter a maximum of 4 tags !');
       tagRef.current!.value = '';
       valid = false;
