@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../../models/post';
-import { useEffect, useState } from 'react';
 import { isImageUrlValid } from '../../../../shared/utils';
 
 import NoImg from '../../../../../assets/images/no-image.png';

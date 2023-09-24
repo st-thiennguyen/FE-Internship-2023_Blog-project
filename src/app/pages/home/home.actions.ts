@@ -1,9 +1,11 @@
 import { Dispatch } from 'react';
 
-import { PostModel, UserModel } from '../../models/post';
+import { PostModel } from '../../models/post';
+import { UserModel } from '../../models/user';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getPublicPosts, getRecommendPosts } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
+
+import { getPublicPosts, getRecommendPosts, QueryPost } from '../../shared/services/index';
 import { getUsers } from '../../shared/services/user.service';
 
 export const getPublicPostStart = () => {
@@ -38,10 +40,10 @@ export const loadMore = () => {
   };
 };
 
-export const fetchPublicPosts = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+export const fetchPublicPosts = (query: QueryPost) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPublicPostStart());
   try {
-    const response = await getPublicPosts(page, size);
+    const response = await getPublicPosts(query);
     dispatch(getPublicPostSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPublicPostFailure(`${err}`));

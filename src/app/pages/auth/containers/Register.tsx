@@ -1,17 +1,18 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import logo from '../../../../assets/images/logo.svg';
-import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
-import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
-import { convertDateToString } from '../../../shared/utils/date';
 import { RootState } from '../../../stores/store';
 import { registerAction } from '../auth.actions';
+import { convertDateToString } from '../../../shared/utils/date';
+import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
+
+import Button from '../../../shared/components/Button';
+import ToastMessage from '../../../shared/components/ToastMessage';
+import logo from '../../../../assets/images/logo.svg';
 
 const schema = yup
   .object({

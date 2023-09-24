@@ -9,8 +9,8 @@ const Modal = ({onClickConfirm, onClickClose, isShow , children}: ModalProps) =>
 
   return (
     <>
-      <div className={`${isShow && 'overplay'}`}></div>
-      <div className={`${isShow ? 'modal': 'hide-modal'}`}>
+      <div className={`${isShow && 'overlay'}`}></div>
+      <div className={`${isShow ? 'modal': 'd-hidden'}`}>
         <div className="modal-confirm">
           <div className="modal-content text-center">
             <div className="modal-header flex-column">

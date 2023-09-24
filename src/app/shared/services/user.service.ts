@@ -1,5 +1,17 @@
-import { ENDPOINT } from '../constants/endpoint';
-import { ApiService } from './index';
+import { ApiService } from './config';
+import { ENDPOINT } from '../constants';
+import { UserInfo } from '../../models/auth';
+import { formChangePassword } from '../../models/user';
+
+export const updateProfile = (data: Omit<UserInfo, 'id' | 'email'>) => {
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.users.index}/me`, { ...data });
+};
+
+export const updatePassword = (data: formChangePassword) => {
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.users.updatePassword}`, data);
+};
 
 export const getUsers = () => {
   const api = new ApiService();

@@ -6,6 +6,32 @@
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
   background-color: #fff;
 
+  .post-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-clamp: 1;
+
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    color: #000;
+    font-size: map-get($font-size, xxl);
+  }
+  .post-desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+
+    margin-bottom: 8px;
+    overflow: hidden;
+
+    color: map-get($color, text);
+    font-size: 15px;
+    line-height: 1.44;
+  }
+
   &-list {
     margin-bottom: 20px;
   }
@@ -65,31 +91,6 @@
     }
   }
 
-  &-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    line-clamp: 1;
-
-    margin-bottom: 10px;
-    overflow: hidden;
-
-    color: #000;
-    font-size: map-get($font-size, xxl);
-  }
-  &-content {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-
-    margin-bottom: 8px;
-    overflow: hidden;
-
-    color: map-get($color, text);
-    font-size: 15px;
-    line-height: 1.44;
-  }
   &-body {
     margin-bottom: 6px;
     border-bottom: 1px solid map-get($color, borderColor);

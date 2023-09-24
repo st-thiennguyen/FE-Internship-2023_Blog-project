@@ -5,12 +5,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 import { regexEmail } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
 import { loginAction, registerReset } from '../auth.actions';
 import { AuthContext } from '../../../App';
+
+import Button from '../../../shared/components/Button';
+import ToastMessage from '../../../shared/components/ToastMessage';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
@@ -71,7 +72,7 @@ const Login = () => {
     dispatch(loginAction(data.email, data.password) as any);
   });
 
-  const removeStateRegister = useRef(() => { });
+  const removeStateRegister = useRef(() => {});
   removeStateRegister.current = () => {
     isRegisterSuccess && dispatch(registerReset());
   };

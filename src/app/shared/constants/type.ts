@@ -4,6 +4,12 @@ const ACTIONS_TYPE = {
   GET_ALL_POST_SUCCESS: 'get-all-post-success',
   GET_ALL_POST_FAILURE: 'get-all-post-failure',
   RESET_CURRENT_PAGE: 'reset-current-page',
+  // GET ALL POST WITH TAG
+  GET_POST_WITH_TAG: 'get-post-with-tag',
+  GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
+  GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
+  RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
+  // GET DETAiL BLOG
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
@@ -17,6 +23,7 @@ const ACTIONS_TYPE = {
   LOGIN: 'login',
   LOGIN_SUCCESS: 'login-success',
   LOGIN_FAILURE: 'login-failure',
+  REASSIGNMENT_AUTH: 'reassignment-auth',
   // LOGOUT
   LOGOUT: 'logout',
   LOGOUT_SUCCESS: 'logout-success',
@@ -57,7 +64,15 @@ const ACTIONS_TYPE = {
   RESET_USER_PROFILE_STATE : 'reset-user-profile-state',
   UPDATE_PROFILE: 'update-profile',
   UPDATE_PROFILE_SUCCESS: 'update-profile-success',
-  UPDATE_PROFILE_FAILURE: 'get-profile-failure',
+  UPDATE_PROFILE_FAILURE: 'update-profile-failure',
+  // UPDATE AVATAR
+  UPDATE_AVATAR: 'update-avatar',
+  UPDATE_AVATAR_SUCCESS: 'update-avatar-success',
+  UPDATE_AVATAR_FAILURE: 'update-avatar-failure',
+  // UPDATE PASSWORD
+  UPDATE_PASSWORD: 'update-password',
+  UPDATE_PASSWORD_SUCCESS: 'update-password-success',
+  UPDATE_PASSWORD_FAILURE: 'update-password-failure',
   // GET USER INFO
   GET_USER_INFO: 'get-user-info',
   GET_USER_INFO_SUCCESS: 'get-user-info-success',
@@ -72,6 +87,7 @@ const ACTIONS_TYPE = {
   GET_USERS_FAILURE: 'get-users-failure',
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
+  LOAD_MORE_POST_WITH_TAGS: 'load-more-post-with-tags',
   // GET RECOMMEND POSTS
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
@@ -80,6 +96,18 @@ const ACTIONS_TYPE = {
   REMOVE_POST_ITEM: 'remove-post-item',
   REMOVE_POST_ITEM_SUCCESS: 'remove-post-item-success',
   REMOVE_POST_ITEM_FAILURE: 'remove-post-item-failure',
+  // UPDATE LIKE
+  UPDATE_LIKE: 'update-like',
+  UPDATE_LIKE_SUCCESS: 'update-like-success',
+  UPDATE_LIKE_FAILURE: 'update-like-failure',
+  // GET POST COMMENTS
+  GET_COMMENTS: 'get-comments',
+  GET_COMMENTS_SUCCESS: 'get-comments-success',
+  GET_COMMENTS_FAILURE: 'get-comments-failure',
+  // POST COMMENT
+  POST_COMMENT: 'post-comment',
+  POST_COMMENT_SUCCESS: 'post-comment-success',
+  POST_COMMENT_FAILURE: 'post-comment-failure',
 };
 
 export default ACTIONS_TYPE;
