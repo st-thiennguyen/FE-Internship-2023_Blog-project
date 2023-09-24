@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
-import { useDispatch } from 'react-redux';
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch } from 'react-redux';
 
 const formats = [
   'header',
@@ -29,15 +29,31 @@ interface OnChangeHandler {
 type Props = {
   value: string;
   placeholder: string;
-  onChange: OnChangeHandler;
+  setContent: OnChangeHandler;
+  setError: (value: string) => void;
 };
 
-const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
+const TextEditor: React.FC<Props> = ({ value, setContent, placeholder, setError }) => {
   const reactQuillRef = useRef<ReactQuill>(null);
 
-  const dispatch = useDispatch()
+  const onChange = (content: string) => {
+    console.log();
 
-  // const imageHandler = () => {};
+    const contentLength = content.replace(/<(.|\n)*?>/g, '').trim().length;
+
+    const isValidContent = contentLength >= 50;
+
+    console.log(contentLength);
+
+    if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
+      setError('Content must not be null !');
+    } else if (!isValidContent) {
+      setError('Content must not be less than 50 characters !');
+    } else {
+      setError('');
+    }
+    setContent(content);
+  };
 
   const modules = React.useMemo(
     () => ({
@@ -50,9 +66,6 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
           [{ color: [] }, { background: [] }, { align: [] }],
           ['clean'],
         ],
-        handlers: {
-          // image: imageHandler,
-        },
       },
     }),
     [],
@@ -67,7 +80,7 @@ const TextEditor: React.FC<Props> = ({ value, onChange, placeholder }) => {
         value={value || ''}
         modules={modules}
         formats={formats}
-        onChange={onChange}
+        onChange={(content) => onChange(content)}
         placeholder={placeholder}
       />
     </>

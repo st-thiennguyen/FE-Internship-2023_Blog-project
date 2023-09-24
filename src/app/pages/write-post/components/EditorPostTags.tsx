@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 
+import icRemove from '../../../../assets/icons/ic-remove-20.svg';
+
 interface EditorPostTagsProps {
   tags: string[];
   setTags: (value: string[]) => void;
@@ -20,6 +22,7 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
   };
   return (
     <div className="editor-tags">
+      <h5 className="editor-tags-title">Post Tags</h5>
       <input
         ref={tagRef}
         className="editor-tags-input"
@@ -32,10 +35,9 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
         {tags &&
           tags.map((e, index) => {
             return (
-              <li className="editor-tags-item" key={index}>
-                <span className="tag editor-tags-text" onClick={() => handleRemoveTag(index)}>
-                  #{e}{' '}
-                </span>
+              <li className="editor-tags-item d-flex item-center" key={index}>
+                <span className="tag editor-tags-text">{e} </span>
+                <img src={icRemove} alt="Icon remove tags" title="Remove" onClick={() => handleRemoveTag(index)} />
               </li>
             );
           })}

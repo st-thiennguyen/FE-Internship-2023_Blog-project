@@ -11,15 +11,20 @@
 
 .quill-text-editor .ql-editor {
   min-height: 300px;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
-.section-write-post {
+.section-title-editor {
+  color: map-get($color, text);
+  margin-bottom: 20px;
+}
+
+.main-editor-post {
   background-color: #fff;
 }
 
 .write-post {
-  padding: 40px 0;
-
   &-form {
     gap: 16px;
   }
@@ -32,15 +37,6 @@
     min-height: 400px;
   }
 
-  &-input {
-    padding: 50px 0;
-    width: 100%;
-    border: 0;
-    outline: none;
-    background-color: transparent;
-    font-size: 64px;
-    font-family: "Times New Roman", Times, serif;
-  }
   .ql-editor p {
     font-family: "Times New Roman", Times, serif;
   }
@@ -61,18 +57,31 @@
 }
 
 .editor-tags {
+  width: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
   &-input {
     width: 100%;
-    padding: 20px;
-    font-size: 18px;
-    border: 0;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 0.5px solid map-get($color, borderColor);
+    border-radius: 12px;
     outline: none;
-  }
-  &-input::placeholder {
-    color: #b3b3b1;
   }
 
   .tags-hint {
+    color: map-get($color, subtext);
+    font-size: 12px;
+  }
+
+  &-input::placeholder {
     color: #b3b3b1;
   }
 
@@ -82,40 +91,67 @@
   }
 
   &-item {
-    padding: 10px 15px;
+    padding: 5px 8px;
     background-color: map-get($color, borderColor);
     border-radius: 16px;
+    line-height: 1;
+
+    img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
   }
 
   &-text {
-    padding: 10px 15px;
+    width: 100%;
+    height: 100%;
     background-color: transparent;
     border: 0;
-    cursor: pointer;
   }
 }
 
 .editor-cover {
-  .btn-add-cover,
-  .btn-pick-cover {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  .btn-add-cover {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px;
+    padding: 15px;
     border: 1px solid map-get($color, borderColor);
-    border-radius: 100%;
+    border-radius: 5px;
     background-color: transparent;
   }
-  .btn-pick-cover {
-    border: 1px solid map-get($color, primary);
+
+  &-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: map-get($font-size, lg);
+  }
+
+  &-txt {
+    font-weight: map-get($font-weight, semibold);
+  }
+  &-subtxt {
+    font-size: map-get($font-size, sm);
   }
 
   &-select {
-    position: absolute;
-    left: 50px;
-    top: 0;
     width: 100%;
-    gap: 16px;
+    height: 100%;
+    border: 0.5px solid map-get($color, borderColor);
+    border-radius: 12px;
+  }
+
+  &-content {
+    gap: 10px;
   }
 
   &-file {
@@ -131,115 +167,150 @@
   }
 
   &-preview {
+    width: 100%;
+    height: 100%;
     img {
-      max-width: 700px;
+      object-fit: cover;
+      border-radius: 12px;
     }
   }
 }
 
-*:focus {
-  outline: none;
-}
-
-.toggle-btn-status {
-  display: table-cell;
-  position: relative;
-  width: 200px;
-  height: 140px;
-  box-sizing: border-box;
-}
-
-.btn-status {
-  height: 100px;
-  margin: 20px;
-  border-radius: 4px;
-}
-
-.btn-status:before {
-  counter-increment: button-counter;
-  content: counter(button-counter);
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #d7e3e3;
-  font-size: 12px;
-  line-height: 1;
-  padding: 5px;
-}
-
-.btn-status,
-.knobs,
-.layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.btn-toggle {
-  position: relative;
-  top: 50%;
-  width: 140px;
-  height: 36px;
-  margin: -20px auto 0 auto;
-  overflow: hidden;
-}
-
-.btn-toggle.b2 {
-  border-radius: 2px;
-}
-
-.checkbox {
-  position: relative;
+.editor-detail {
   width: 100%;
   height: 100%;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 3;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
+  &-input {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 0.5px solid map-get($color, borderColor);
+    outline: none;
+    resize: none;
+    font-family: "Manrope", sans-serif;
+  }
+
+  &-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 400px;
+  }
+
+  &-error {
+    font-size: 14px;
+    color: red;
+    margin-bottom: 20px;
+  }
 }
 
-.knobs {
-  z-index: 2;
+.aside-write-post {
+  gap: 16px;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
 }
 
-.layer {
+.editor-visibility {
   width: 100%;
-  background-color: #ebf7fc;
-  transition: 0.3s ease all;
-  z-index: 1;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
+  &-item {
+    display: flex;
+    position: relative;
+    label {
+      cursor: pointer;
+      display: flex;
+      padding: 20px 20px 20px 30px;
+    }
+    input[type="radio"] {
+      position: relative;
+      transition: linear 0.8s;
+      height: 0;
+      width: 0;
+    }
+
+    input[type="radio"]:after {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      top: -10.5px;
+      left: -30px;
+      border-radius: 100%;
+      border: 2px solid map-get($color, secondary);
+      transition: linear 0.2s;
+      cursor: pointer;
+    }
+
+    input[type="radio"]:checked:after {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      background: map-get($color, secondary);
+      transition: linear 0.2s;
+      cursor: pointer;
+    }
+
+    input[type="radio"]:checked:before {
+      content: "";
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      border-radius: 4px;
+      background: #fff;
+      left: -24px;
+      top: -4.5px;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .icon {
+      font-size: 24px;
+      position: absolute;
+      right: 26px;
+      top: 11px;
+      transition: linear 0.3s;
+    }
+    input[type="radio"]:checked + span > .icon {
+      transform: scale(1.7);
+    }
+  }
 }
 
-.btn-toggle .knobs:before {
-  content: "Private";
-  position: absolute;
-  top: 4px;
-  width: 70px;
-  height: 10px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  background-color: #03a9f4;  
-  transition: 1.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
-}
+.editor-actions {
+  width: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
 
-.btn-toggle .checkbox:checked + .knobs:before {
-  content: "Public";
-  left: 60px;
-  background-color: #f44336;
-}
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
 
-.btn-toggle .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
-}
+  &-content {
+    gap: 16px;
+  }
 
-.btn-toggle .knobs,
-.btn-toggle .knobs:before,
-.btn-toggle .layer {
-  transition: 0.3s ease-in all;
+  .btn-editor-actions {
+    padding: 10px 15px;
+    flex: 1;
+  }
 }
