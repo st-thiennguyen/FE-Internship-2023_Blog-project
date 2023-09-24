@@ -1,15 +1,23 @@
-import Button from '../../../shared/components/Button';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { updatePasswordAction } from '../proflie.actions';
-import { formChangePassword } from '../../../models/user';
-import ToastMessage from '../../../shared/components/ToastMessage';
-import { RootState } from '../../../stores/store';
 import { useEffect } from 'react';
 
-const UpdatePasswordForm = () => {
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { updatePasswordAction } from '../proflie.actions';
+import { formChangePassword } from '../../../models/user';
+import { RootState } from '../../../stores/store';
+
+import ToastMessage from '../../../shared/components/ToastMessage';
+import Button from '../../../shared/components/Button';
+
+interface UpdateUserPasswordFormProps {
+  isShowToast: boolean;
+  setIsShowToast: (value: boolean) => void;
+}
+
+const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordFormProps) => {
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isError = useSelector((state: RootState) => state.profile.isError);
   const message = useSelector((state: RootState) => state.profile.message);
@@ -46,6 +54,7 @@ const UpdatePasswordForm = () => {
   const onUpdatePassword = (data: formChangePassword) => {
     delete data.confirmPassword;
     dispatch(updatePasswordAction(data) as any);
+    setIsShowToast(true);
   };
 
   useEffect(() => {
@@ -53,6 +62,7 @@ const UpdatePasswordForm = () => {
       reset();
     }
   }, [isSuccess]);
+
   type FormData = yup.InferType<typeof schema>;
   return (
     <>
@@ -104,8 +114,12 @@ const UpdatePasswordForm = () => {
           </div>
         </div>
       </div>
-      {isSuccess && <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'Success'} subtitle={message} />}
-      {isError && <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />}
+      {isShowToast && isSuccess && (
+        <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'Success'} subtitle={message} />
+      )}
+      {isShowToast && isError && (
+        <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />
+      )}
     </>
   );
 };

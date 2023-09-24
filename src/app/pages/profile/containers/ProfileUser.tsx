@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-const UserProfile = () => {
+const ProfileUser = () => {
   return <Outlet />;
 };
 
-export default UserProfile;
+export default ProfileUser;

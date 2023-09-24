@@ -2,13 +2,53 @@ import { Dispatch } from 'react';
 
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { updatePassword, updateProfile } from '../../shared/services/user.service';
-import { UserModel, formChangePassword } from '../../models/user';
+import { updatePassword, updateProfile, getUserPosts, getUserProfile } from '../../shared/services/user.service';
+import { UserModel, formChangePassword, ProfileModel } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
 import { getLocalStorage, setLocalStorage } from '../../shared/utils';
 import { reAssignmentAuth } from '../auth/auth.actions';
+
+const getUserProfileStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_PROFILE,
+  };
+};
+
+const getUserProfileSuccess = (data: ProfileModel) => {
+  return {
+    type: ACTIONS_TYPE.GET_PROFILE_SUCCESS,
+    payload: data,
+  };
+};
+
+const getUserProfileFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_PROFILE_FAILURE,
+    payload: error,
+  };
+};
+
+const getUserPostStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_USER_POST,
+  };
+};
+
+const getUserPostSuccess = (data: ProfileModel) => {
+  return {
+    type: ACTIONS_TYPE.GET_USER_POST_SUCCESS,
+    payload: data,
+  };
+};
+
+const getUserPostFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_USER_POST_FAILURE,
+    payload: error,
+  };
+};
 
 const updateAvatarStart = () => {
   return {
@@ -67,6 +107,27 @@ const updatePasswordStartFailure = (message: string) => {
     type: ACTIONS_TYPE.UPDATE_PASSWORD_FAILURE,
     payload: message,
   };
+};
+
+export const getUserProfileAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getUserProfileStart());
+  try {
+    const res = await getUserProfile(id);
+    dispatch(getUserPostAction(id) as any);
+    dispatch(getUserProfileSuccess(res as ProfileModel));
+  } catch (error) {
+    dispatch(getUserProfileFailure(`${error}`));
+  }
+};
+
+export const getUserPostAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getUserPostStart());
+  try {
+    const res = await getUserPosts(id);
+    dispatch(getUserPostSuccess(res as ProfileModel));
+  } catch (error) {
+    dispatch(getUserPostFailure(`${error}`));
+  }
 };
 
 export const uploadAvatar =
