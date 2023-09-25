@@ -60,17 +60,11 @@ const Header = () => {
                   {isLogin ? (
                     <>
                       <div className="navbar-content d-flex justify-center item-center">
-                        {!isErrorCover ? (
-                          <img
-                            src={authContext.userInfo.picture}
-                            alt="avatar"
-                            className="icon icon-small avatar-user-header"
-                          />
-                        ) : (
-                          <Link to="/login" className="navbar-link">
-                            <img src={avatarDefault} alt="avatar" className={`post-img err`} />
-                          </Link>
-                        )}
+                        <img
+                          src={!isErrorCover ? authContext.userInfo.picture : avatarDefault}
+                          alt="avatar"
+                          className="avatar-user-header"
+                        />
                       </div>
 
                       <div className="navbar-auth">
@@ -78,11 +72,7 @@ const Header = () => {
                           <li className="auth-item">
                             <Link to="/profile" className="auth-link auth-link-info">
                               <div className="auth-info d-flex item-center">
-                                <img
-                                  src={authContext.userInfo.picture}
-                                  alt="avatar"
-                                  className="icon icon-small avatar-user"
-                                />
+                                <img src={authContext.userInfo.picture} alt="avatar" className="avatar-user" />
                                 <div className="auth-info-text">
                                   <p className="auth-info-name text-truncate-1">{authContext.userInfo?.displayName}</p>
                                   <p className="auth-info-email text-truncate-1">{authContext.userInfo?.email}</p>
