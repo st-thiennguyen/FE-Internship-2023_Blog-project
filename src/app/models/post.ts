@@ -61,3 +61,17 @@ export interface DetailStateProps {
   isSuccess: boolean;
   message: string;
 }
+
+export interface PostProps {
+  data: PostModel;
+  isLoading: Boolean;
+  isSuccess: Boolean;
+  message: string;
+  isError?: Boolean;
+}
+
+export interface QueryPost {
+  page?: number;
+  size?: number;
+  tags?: string[];
+}

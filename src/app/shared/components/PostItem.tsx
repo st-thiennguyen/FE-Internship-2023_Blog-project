@@ -15,6 +15,7 @@ import NoImg from '../../../assets/images/no-image.png';
 interface PostItemProps {
   post: PostModel;
 }
+
 const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
@@ -23,7 +24,6 @@ const PostItem = ({ post }: PostItemProps) => {
   const deleteMessage = useSelector((state: RootState) => state.profile?.message);
   const [isShowToast, setIsShowToast] = useState(false);
   const dispatch = useDispatch();
-  const { id } = useParams();
 
   const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
@@ -95,7 +95,11 @@ const PostItem = ({ post }: PostItemProps) => {
               <span className="read-more">READ MORE</span>
               <ul className="post-action-list">
                 <li className="post-action-item">
-                  <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/posts/update/${post.id}`}>
+                  <Link
+                    onClick={(e) => e.stopPropagation()}
+                    className="post-action-link"
+                    to={`/posts/update/${post.id}`}
+                  >
                     <i className="icon icon-small icon-write-20"></i>
                   </Link>
                 </li>

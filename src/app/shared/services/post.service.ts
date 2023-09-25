@@ -1,16 +1,12 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
+import { QueryPost } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}`);
 };
 
-export interface QueryPost {
-  page?: number;
-  size?: number;
-  tags?: string[];
-}
 export const getPublicPosts = (query: QueryPost) => {
   const api = new ApiService();
 
@@ -68,10 +64,10 @@ export const UploadUrlImagePost = (url: string, file: any) => {
     },
   });
 };
-export const deletePostItem = (id : string) => {
+export const deletePostItem = (id: string) => {
   const api = new ApiService();
   return api.delete(`${ENDPOINT.post.index}/${id}`);
-}
+};
 
 export const updateLike = (id: number) => {
   const api = new ApiService();
