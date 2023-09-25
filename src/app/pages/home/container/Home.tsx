@@ -39,7 +39,7 @@ const Home = () => {
                   <LatestPost />
                 </div>
               </div>
-              <GoToTopBtn />{' '}
+              <GoToTopBtn />
             </div>
           </div>
         </div>

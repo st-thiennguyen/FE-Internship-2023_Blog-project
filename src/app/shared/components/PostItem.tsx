@@ -72,11 +72,7 @@ const PostItem = ({ post }: PostItemProps) => {
         <div className="post-body-wrapper">
           <div className="post-body">
             <div className="post-body-top d-flex item-center">
-              <Link
-                to={`/profile/${post.userId}`}
-                onClick={(e) => e.stopPropagation}
-                className="user-info-wrapper d-flex item-center"
-              >
+              <Link to={`/profile/${post.userId}`} className="user-info-wrapper d-flex item-center">
                 <img
                   className="user-avatar"
                   onError={() => setIsErrAvt(true)}
