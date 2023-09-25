@@ -59,9 +59,10 @@ export const logoutStart = () => {
   };
 };
 
-export const logoutSuccess = () => {
+export const logoutSuccess = (res: string) => {
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
+    payload: res
   };
 };
 
@@ -105,9 +106,9 @@ export const loginAction = (email: string, password: string) => async (dispatch:
 export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
-    await logout();
+    const response = await logout();
     removeLocalStorage(StorageKey.AUTH);
-    dispatch(logoutSuccess());
+    dispatch(logoutSuccess(response as string));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
   }

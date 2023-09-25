@@ -1,28 +1,30 @@
 import { useState, useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../App';
 import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
 import { logoutAction } from '../../pages/auth/auth.actions';
-import { isImageUrlValid } from '../utils';
+import { getLocalStorage, isImageUrlValid } from '../utils';
 import avatarDefault from '../../../assets/images/user-default.png';
+import { RootState } from '../../stores/store';
+import { StorageKey } from '../constants';
 
 const Header = () => {
   const [isShowToastMessage, setIsShowToastMessage] = useState(false);
+  const isSuccess = useSelector((state: RootState) => state.auth?.isLogoutSuccess);
+  const message = useSelector((state: RootState) => state.auth?.message);
+
   const dispatch = useDispatch();
-
   const authContext = useContext(AuthContext);
-  const isLogin = authContext?.accessToken;
-
-  const handleLogout = (e: any) => {
-    dispatch(logoutAction() as any);
-    e.preventDefault();
-    setIsShowToastMessage(true);
-  };
-
+  const isLogin: any = getLocalStorage(StorageKey.AUTH);
   const [isErrorCover, setIsErrorCover] = useState(false);
+
+  const handleLogout = () => {
+    dispatch(logoutAction() as any);
+    setIsShowToastMessage(!isShowToastMessage);
+  };
 
   useEffect(() => {
     isImageUrlValid(authContext?.userInfo.picture).then((value) => setIsErrorCover(!value));
@@ -97,8 +99,8 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isShowToastMessage && (
-        <ToastMessage isShow={true} isSuccess={true} title={'success'} subtitle={'Logout success!'}></ToastMessage>
+      {isShowToastMessage && isSuccess && (
+        <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'success'} subtitle={message}></ToastMessage>
       )}
     </header>
   );

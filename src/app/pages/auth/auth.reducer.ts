@@ -10,6 +10,7 @@ export interface AuthStateProps {
   isError: boolean;
   isSuccess: boolean;
   message: string;
+  isLogoutSuccess : boolean,
 }
 
 const initState: AuthStateProps = {
@@ -18,6 +19,7 @@ const initState: AuthStateProps = {
   isError: false,
   isSuccess: false,
   message: '',
+  isLogoutSuccess: false
 };
 
 export const authReducer = (state = initState, action: RootAction): AuthStateProps => {
@@ -100,7 +102,7 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
       return {
         ...state,
         isLoading: true,
-        isSuccess: false,
+        isLogoutSuccess: false,
         isError: false,
       };
     }
@@ -110,7 +112,9 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
         ...state,
         isLoading: false,
         isError: false,
-        message: '',
+        isLogoutSuccess: true,
+        isSuccess: false,
+        message: action.payload,
       };
     }
 
@@ -118,7 +122,6 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
       return {
         ...state,
         isLoading: false,
-        isSuccess: false,
         isError: true,
         message: action.payload,
       };
