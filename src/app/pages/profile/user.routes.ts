@@ -10,14 +10,17 @@ const userProfileRoutes = [
       {
         path: '',
         component: ProfilePage,
+        isProtected: true,
       },
       {
         path: ':id',
         component: ProfilePage,
+        isProtected: true,
       },
       {
         path: 'update',
         component: ProfileUpdate,
+        isProtected: true,
       },
     ],
   },

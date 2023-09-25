@@ -7,16 +7,14 @@ import { appRoutes } from './app.routes';
 import authRoutes from './pages/auth/auth.routes';
 
 import Layout from './pages/Layout';
-import PrivateRoute from './shared/components/privateRoute';
+import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
 import WritePost from './pages/write-post/containers/WritePost';
-import { publicRoutes } from './router/public.routes';
-import { privateRoutes } from './router/private.routes';
 
 interface RouteItem {
   path: string;
   component: (props: any) => JSX.Element;
-  isAuth?: Boolean;
+  isProtected?: Boolean;
   children?: RouteItem[];
   props?: Object;
 }
@@ -32,35 +30,27 @@ function App() {
           <Route key={val.name} path={val.path} element={<val.component />} />
         ))}
         <Route path="/" element={<Layout />}>
-          {publicRoutes.map((val: RouteItem, index) => (
+          {appRoutes.map((val: RouteItem, index) => (
             <Route key={index} path={val.path} element={<val.component />}>
               {val.children &&
                 val.children.map((item, idx) => (
-                  <Route key={idx} path={item.path} element={<item.component {...item.props} />} />
+                  <Route
+                    key={idx}
+                    path={item.path}
+                    element={
+                      item.isProtected ? (
+                        <PrivateRoute>
+                          <item.component {...item.props} />
+                        </PrivateRoute>
+                      ) : (
+                        <item.component {...item.props} />
+                      )
+                    }
+                  />
                 ))}
             </Route>
           ))}
         </Route>
-        <Route path="/" element={<Layout />}>
-          {privateRoutes.map((val: RouteItem, index) => (
-            <Route
-              key={index}
-              path={val.path}
-              element={
-                <PrivateRoute>
-                  <val.component />
-                </PrivateRoute>
-              }
-            >
-              {val.children &&
-                val.children.map((item, idx) => (
-                  <Route key={idx} path={item.path} element={<item.component {...item.props} />} />
-                ))}
-            </Route>
-          ))}
-        </Route>
-        <Route path="/posts/create" element={<WritePost isUpdate={false} />}></Route>
-        <Route path="/posts/update/:id" element={<WritePost isUpdate={true} />}></Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
     </AuthContext.Provider>
