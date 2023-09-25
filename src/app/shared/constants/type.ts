@@ -102,6 +102,10 @@ const ACTIONS_TYPE = {
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
   GET_RECOMMEND_FAILURE: 'get-recommend-failure',
+  // REMOVE POST ITEM
+  REMOVE_POST_ITEM: 'remove-post-item',
+  REMOVE_POST_ITEM_SUCCESS: 'remove-post-item-success',
+  REMOVE_POST_ITEM_FAILURE: 'remove-post-item-failure',
   // UPDATE LIKE
   UPDATE_LIKE: 'update-like',
   UPDATE_LIKE_SUCCESS: 'update-like-success',

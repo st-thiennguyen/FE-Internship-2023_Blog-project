@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { convertDateFormat, convertDateToString } from '../../../shared/utils';
 import { RootState } from '../../../stores/store';
-import { updateProfileAction, uploadAvatar } from '../proflie.actions';
+import { updateProfileAction, uploadAvatar } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
