@@ -78,7 +78,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
             <h5 className="editor-cover-title">Cover Image</h5>
             <div className="editor-cover-content d-flex flex-column item-center">
               <p className="editor-cover-txt">Select the cover image you would like to attach.</p>
-              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} disabled={isUpdate}>
+              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} >
                 <img src={iconImage} alt="Icon add image cover" width={30} height={30} />
               </button>
               <p className="editor-cover-subtxt">Image type</p>

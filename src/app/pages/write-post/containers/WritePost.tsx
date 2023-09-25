@@ -60,7 +60,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const detailPost: any = useSelector((state: RootState) => state.detail.data);
+  const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const { id } = useParams();
@@ -68,6 +68,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
@@ -87,8 +88,13 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     return isValid;
   };
 
+  useEffect(() => {
+    console.log(detailPost);
+  })
+
   const handleUpdatePost = handleSubmit((data: any) => {
-    dispatch(updatePost({...data, content: content, status: statusPost}, detailPost.id) as any);
+    console.log(data);
+    dispatch(updatePost({...data, content: content, status: statusPost, tags: tags, cover: cover}, detailPost.id) as any);
     setIsShowToast(true);
     setTimeout(() => {
       navigate(`/posts/detail/${id}`);
@@ -105,10 +111,10 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     }
   });
 
-  const onPublishPost = () => {
-    validate();
-    handleCreatePost();
-  };
+  useEffect(() => {
+    setValue('description', detailPost?.description || '')
+    setValue('title', detailPost?.title || '')
+  }, [detailPost])
 
   useEffect(() => {
     if (!accessToken) {
@@ -128,9 +134,9 @@ const WritePost = ({ isUpdate }: writePostProps) => {
 
   return (
     <>
-      {isUpdate ? (
+       (
         <>
-          <WritePostHeader handleUpdatePost={handleUpdatePost} isUpdate={isUpdate}/>
+          <WritePostHeader isUpdate={isUpdate} onPublishPost={handleCreatePost} handleUpdatePost={handleUpdatePost} />
           <main className="main main-editor-post">
             <div className="container">
               <div className="main-body">
@@ -141,77 +147,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                       <div className="col col-9">
                         <form className="write-post-form d-flex flex-column" ref={formRef}>
                           <EditorImageCover
-                            photoPreview={detailPost.cover}
-                            setPhotoPreview={setPhotoPreview}
-                            setErrorCoverMessage={setErrorCoverMessage}
-                            isUpdate= {isUpdate}
-                          />
-                          <p className="editor-detail-error">{errorCoverMessage}</p>
-                          <div className="editor-detail">
-                            <h5 className="editor-detail-title">Post detail</h5>
-                            <textarea
-                              rows={1}
-                              {...register('title')}
-                              className="editor-detail-input"
-                              placeholder="Title of your story ..."
-                              defaultValue={detailPost.title}
-                            />
-                            <p className="editor-detail-error">{errors.title?.message}</p>
-                            <textarea
-                              rows={1}
-                              {...register('description')}
-                              className="editor-detail-input"
-                              placeholder="Description of your story ..."
-                              defaultValue={detailPost.description}
-                              readOnly
-                            />
-                            <p className="editor-detail-error">{errors.description?.message}</p>
-
-                            <div className="editor-detail-area">
-                              <TextEditor
-                                value={content}
-                                placeholder={'Write your story ...'}
-                                setError={setErrorContentMessage}
-                                setContent={setContent}
-                              />
-                              <p className="editor-detail-error">{errorContentMessage}</p>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <aside className="aside aside-write-post d-flex flex-column  col col-3">
-                        <EditorPostVisibility onChangeValue={setStatusPost} />
-                        {photoPreview && (
-                          <EditorImageCoverPreview
-                            photoPreview={photoPreview}
-                            onRemovePreview={() => setPhotoPreview('')}
-                            isUpdate={isUpdate}
-                          />
-                        )}
-                        <EditorPostTags tags={detailPost.tags ? detailPost.tags : tags} setTags={setTags} isUpdate={isUpdate} />
-                        <EditorPostActions onPublish={onPublishPost} onSaveDraft={() => alert('COMMING SOON')} />
-                      </aside>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </main>
-        </>
-      ) : (
-        <>
-          <WritePostHeader onPublishPost={onPublishPost} />
-          <main className="main main-editor-post">
-            <div className="container">
-              <div className="main-body">
-                <section className="section section-write-post">
-                  <div className="container">
-                    <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
-                    <div className="section-body row">
-                      <div className="col col-9">
-                        <form className="write-post-form d-flex flex-column" ref={formRef}>
-                          <EditorImageCover
-                            photoPreview={photoPreview}
+                            photoPreview={photoPreview || detailPost?.cover}
                             setPhotoPreview={setPhotoPreview}
                             setErrorCoverMessage={setErrorCoverMessage}
                           />
@@ -246,16 +182,19 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                         </form>
                       </div>
                       <aside className="aside aside-write-post d-flex flex-column  col col-3">
-                        <EditorPostVisibility onChangeValue={setStatusPost} />
+                        <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={detailPost?.status} />
                         {photoPreview && (
                           <EditorImageCoverPreview
                             photoPreview={photoPreview}
-                            onRemovePreview={() => setPhotoPreview('')}
+                            onRemovePreview={() => {
+                              detailPost.cover = '';
+                              setPhotoPreview('');
+                            }}
                             isUpdate={isUpdate}
                           />
                         )}
-                        <EditorPostTags tags={tags} setTags={setTags} isUpdate={isUpdate} />
-                        <EditorPostActions onPublish={onPublishPost} onSaveDraft={() => alert('COMMING SOON')} />
+                        <EditorPostTags tags={tags.length ? tags : (detailPost?.tags || [])} setTags={setTags} isUpdate={isUpdate} />
+                        <EditorPostActions onPublish={handleCreatePost} onSaveDraft={() => alert('COMMING SOON')} />
                       </aside>
                     </div>
                   </div>
@@ -265,7 +204,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
             </div>
           </main>
         </>
-      )}
+      )
 
       {isShowToast && isSuccess && (
         <ToastMessage
