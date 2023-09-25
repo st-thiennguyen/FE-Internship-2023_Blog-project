@@ -9,7 +9,6 @@ const ACTIONS_TYPE = {
   GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
   GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
-  // GET DETAiL BLOG
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
@@ -61,7 +60,6 @@ const ACTIONS_TYPE = {
   GET_PROFILE_SUCCESS: 'get-profile-success',
   GET_PROFILE_FAILURE: 'get-profile-failure',
   // UPDATE PROFILE
-  RESET_USER_PROFILE_STATE : 'reset-user-profile-state',
   UPDATE_PROFILE: 'update-profile',
   UPDATE_PROFILE_SUCCESS: 'update-profile-success',
   UPDATE_PROFILE_FAILURE: 'update-profile-failure',

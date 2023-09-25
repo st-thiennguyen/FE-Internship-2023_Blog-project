@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Modal from './Modal';
-import ToastMessage from './ToastMessage';
+
 import { PostModel } from '../../models/post';
 import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
+import { deletePost } from '../../pages/profile/profile.actions';
+
+import Modal from './Modal';
+import ToastMessage from './ToastMessage';
 import NoImg from '../../../assets/images/no-image.png';
-import { deletePost } from '../../pages/profile/proflie.actions';
+import { RootState } from '../../stores/store';
 
 interface PostItemProps {
   post: PostModel;
@@ -16,9 +19,9 @@ interface PostItemProps {
 const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
-  const isDeleteSuccess = useSelector((state: any) => state.profile?.isDeleteSuccess);
-  const isDeleteFailure = useSelector((state: any) => state.profile?.isDeleteFailure);
-  const deleteMessage = useSelector((state: any) => state.profile?.message);
+  const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
+  const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
+  const deleteMessage = useSelector((state: RootState) => state.profile?.message);
   const dispatch = useDispatch()
   const { id } = useParams();
 

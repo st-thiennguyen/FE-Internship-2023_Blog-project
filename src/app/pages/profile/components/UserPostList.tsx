@@ -6,7 +6,6 @@ import { PostModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../home/components/EmptyPost';
 
-
 interface UserPostListProps {
   postList: PostModel[];
 }

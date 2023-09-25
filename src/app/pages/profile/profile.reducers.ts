@@ -1,5 +1,5 @@
 import { PostModel } from '../../models/post';
-import { ProfileModel, UserModel } from '../../models/user';
+import { ProfileModel } from '../../models/user';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
@@ -157,6 +157,8 @@ export const profileReducer = (state = initialState, action: RootAction): Update
       return {
         ...state,
         isError: false,
+        isDeleteFailure: false,
+        isDeleteSuccess: false,
         message: '',
       };
     case ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS:

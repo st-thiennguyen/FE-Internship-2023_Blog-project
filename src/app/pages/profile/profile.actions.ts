@@ -202,8 +202,8 @@ export const updatePasswordAction = (data: formChangePassword) => async (dispatc
 export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(deletePostItemStart());
   try {
-    const response: any = await deletePostItem(id);
-    dispatch(deletePostItemSuccess(id, response));
+    const response = await deletePostItem(id);
+    dispatch(deletePostItemSuccess(id, response as string));
   } catch (error) {
    dispatch(deletePostItemFailure(error as string)) 
   }
