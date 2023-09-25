@@ -1,7 +1,7 @@
 .footer {
   background-color: map-get($color, backgroundFrame);
   &-content {
-    padding: 80px 0;
+    padding: 12px 0;
   }
   &-logo {
     width: 133px;
@@ -14,7 +14,7 @@
   }
   &-copyright {
     border-top: 1px solid map-get($color, borderColor);
-    padding: 24px 0;
+    padding: 6px 0;
     .copyright {
       color: map-get($color, text);
       font-size: map-get($color, sm);
@@ -34,7 +34,7 @@
     }
     &-copyright {
       flex-direction: column;
-      padding: 12px 0;
+      padding: 6px 0;
       .copyright {
         margin-bottom: 16px;
       }
