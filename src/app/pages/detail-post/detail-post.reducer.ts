@@ -109,7 +109,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: '',
       };
     case ACTIONS_TYPE.POST_COMMENT_SUCCESS:
-      console.log(action.payload);
 
       return {
         ...state,
@@ -119,6 +118,30 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         isSuccess: true,
       };
     case ACTIONS_TYPE.POST_COMMENT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+
+    // Post bookmark
+    case ACTIONS_TYPE.ADD_BOOKMARK:
+      return {
+        ...state,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.ADD_BOOKMARK_SUCCESS:
+
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: true,
+        message: action.payload.res
+      };
+    case ACTIONS_TYPE.ADD_BOOKMARK_FAILURE:
       return {
         ...state,
         isLoading: false,

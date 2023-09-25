@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
+import { getDetailPost, getPostComments, postBookMark, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
@@ -131,3 +131,34 @@ export const postCommentAction =
       dispatch(postCommentFailure(`${error}`));
     }
   };
+
+// Post bookmark
+const postBookMarkStart = () => {
+  return {
+    type: ACTIONS_TYPE.POST_COMMENT,
+  };
+};
+
+const postBookMarkSuccess = (id: string, res: any) => {
+  return {
+    type: ACTIONS_TYPE.POST_COMMENT_SUCCESS,
+    payload: {id, res}
+  };
+};
+
+const postBookMarkFailure = (message: string) => {
+  return {
+    type: ACTIONS_TYPE.POST_COMMENT_FAILURE,
+    payload: message,
+  };
+};
+
+export const postBookMarkAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(postBookMarkStart());
+  try {
+    const response = await postBookMark(id);
+    dispatch(postBookMarkSuccess(id, response) as any);
+  } catch (error) {
+    dispatch(postBookMarkFailure(`${error}`));
+  }
+};

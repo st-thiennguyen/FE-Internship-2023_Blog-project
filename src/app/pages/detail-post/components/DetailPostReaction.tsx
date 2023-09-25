@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { updateLikeAction } from '../detail-post.actions';
+import { postBookMarkAction, updateLikeAction } from '../detail-post.actions';
 
 import ToastMessage from '../../../shared/components/ToastMessage';
+import { postBookMark } from '../../../shared/services';
 
 interface ReactionProps {
   postId: number;
@@ -17,6 +18,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
   const isError = useSelector((state: RootState) => state.detail.isError);
+  const message = useSelector((state: RootState) => state.detail?.message);
 
   const dispatch = useDispatch();
 
@@ -26,6 +28,12 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     }
   };
 
+  const handleClickBookMark = () => {
+    console.log('abc');
+    if (postId) {
+      dispatch(postBookMarkAction(postId as any) as any);
+    }
+  }
   return (
     <div className="detail-action">
       <ul className="action-list">
@@ -42,14 +50,19 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           <span className="action-count">{commentCount}</span>
         </li>
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action">
+          <button className="btn btn-post-action" onClick={handleClickBookMark}>
             <i className="icon icon-small icon-bookmark-20"></i>
           </button>
         </li>
       </ul>
 
       {isError && (
-        <ToastMessage isShow={isError} isSuccess={isSuccess} title="Success" subtitle="Login to do this action" />
+        <ToastMessage 
+          isShow={isError} 
+          isSuccess={isError} 
+          title="Success" 
+          subtitle={message} 
+        />
       )}
     </div>
   );
