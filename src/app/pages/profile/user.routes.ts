@@ -2,7 +2,7 @@ import ProfilePage from './containers/ProfilePage';
 import ProfileUpdate from './containers/ProfileUpdate';
 import ProfileUser from './containers/ProfileUser';
 
-const userProfileRoutes = [
+export const userProfileRoutes = [
   {
     path: '/profile',
     component: ProfileUser,
@@ -25,5 +25,3 @@ const userProfileRoutes = [
     ],
   },
 ];
-
-export default userProfileRoutes;

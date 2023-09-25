@@ -1,7 +1,7 @@
 import Login from './containers/Login';
 import Register from './containers/Register';
 
-const authRoutes = [
+export const authRoutes = [
   {
     name: 'register',
     path: 'register',
@@ -13,5 +13,3 @@ const authRoutes = [
     component: Login,
   },
 ];
-
-export default authRoutes;

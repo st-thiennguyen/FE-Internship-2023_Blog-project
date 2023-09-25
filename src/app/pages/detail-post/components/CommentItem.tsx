@@ -23,7 +23,9 @@ const CommentItem = ({ commentItem }: CommentItemProps) => {
       </Link>
       <div className="comment-info d-flex flex-column justify-between">
         <div className="comment-info-top d-flex ">
-          <span className="user-name">{commentItem.user.displayName}</span>
+          <Link to={`/profile/${commentItem.userId}`}>
+            <span className="user-name">{commentItem.user.displayName}</span>
+          </Link>
           <span className="comment-time">{timeAgoFromDate(commentItem.createdAt)}</span>
         </div>
         <p className="comment-content">{commentItem.comment}</p>

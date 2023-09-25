@@ -4,12 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RootState } from './stores/store';
 import { appRoutes } from './app.routes';
-import authRoutes from './pages/auth/auth.routes';
 
 import Layout from './pages/Layout';
 import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
-import WritePost from './pages/write-post/containers/WritePost';
+import { authRoutes } from './pages/auth/auth.routes';
 
 interface RouteItem {
   path: string;

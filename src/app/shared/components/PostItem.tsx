@@ -89,8 +89,6 @@ const PostItem = ({ post }: PostItemProps) => {
             </div>
             <Link to={`/posts/${post.id}`}>
               <h3 className="post-title">{post.title}</h3>
-            </Link>
-            <Link to={`/posts/${post.id}`}>
               <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
             </Link>
           </div>
