@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 
@@ -12,6 +12,10 @@ import DetailPostLoading from '../components/DetailPostLoading';
 import DetailPostComment from '../components/DetailPostComment';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import Aside from '../../../shared/layout/aside/container/Aside';
+import { isImageUrlValid } from '../../../shared/utils';
+
+import noImage from '../../../../assets/images/no-image.png';
+import avaDefault from '../../../../assets/images/user-default.png';
 
 const DetailPost = () => {
   const dispatch = useDispatch();
@@ -27,6 +31,14 @@ const DetailPost = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [isErrorCover, setIsErrorCover] = useState(false);
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
+    isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
+  }, [post.cover, post.user?.picture]);
 
   useEffect(() => {
     if (id) {
@@ -55,10 +67,10 @@ const DetailPost = () => {
             <div className="col col-9">
               <article>
                 <DetailPostCover
-                  cover={post.cover}
+                  cover={isErrorCover ? noImage : post.cover}
                   title={post.title}
                   authorName={post.user?.displayName}
-                  authorAvatar={post.user?.picture}
+                  authorAvatar={isErrorAvatar ? avaDefault : post.user?.picture}
                   datePost={post.createdAt}
                   authorId={post.userId}
                 />
