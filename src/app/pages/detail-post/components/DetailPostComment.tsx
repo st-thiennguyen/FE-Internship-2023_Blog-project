@@ -14,7 +14,7 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const dispatch = useDispatch();
-  const { postId } = useParams();
+  const { id } = useParams();
 
   const inputComment = useRef<HTMLTextAreaElement>(null);
 
@@ -35,7 +35,7 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const handleComment = () => {
     const comment = inputComment.current!.value.trim();
     if (comment) {
-      dispatch(postCommentAction(postId!, comment, currentUser) as any);
+      dispatch(postCommentAction(id!, comment, currentUser) as any);
       inputComment.current!.value = '';
     }
   };
