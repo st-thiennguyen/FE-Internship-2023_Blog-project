@@ -8,6 +8,7 @@ interface UpdateProfileStateProps {
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
+  isLoadingFollow: boolean;
   message: string;
   isDeleteSuccess?: boolean;
   isDeleteFailure?: boolean;
@@ -17,6 +18,7 @@ const initialState: UpdateProfileStateProps = {
   isLoading: false,
   isError: false,
   isSuccess: false,
+  isLoadingFollow: false,
   message: '',
   isDeleteSuccess: false,
   isDeleteFailure: false,
@@ -162,17 +164,45 @@ export const profileReducer = (state = initialState, action: RootAction): Update
         message: '',
       };
     case ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS:
-      const updatedPosts = state.data.posts.filter((post: PostModel) => post.id !== (action.payload.id));
+      const updatedPosts = state.data.posts.filter((post: PostModel) => post.id !== action.payload.id);
       return {
         ...state,
         isDeleteSuccess: true,
         data: { ...state.data, posts: updatedPosts },
-        message: action.payload.res
+        message: action.payload.res,
       };
     case ACTIONS_TYPE.REMOVE_POST_ITEM_FAILURE:
       return {
         ...state,
         isDeleteFailure: true,
+        message: action.payload,
+      };
+
+    case ACTIONS_TYPE.UPDATE_FOLLOW:
+      return {
+        ...state,
+        isLoadingFollow: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_FOLLOW_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          isFollowed: action.payload,
+          followers: action.payload ? state.data.followers + 1 : state.data.followers - 1,
+        },
+        isLoadingFollow: false,
+        isSuccess: true,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_FOLLOW_FAILURE:
+      return {
+        ...state,
+        isLoadingFollow: false,
+        isError: true,
         message: action.payload,
       };
     default:
