@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -17,10 +17,13 @@ interface UpdateUserPasswordFormProps {
 }
 
 const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordFormProps) => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isError = useSelector((state: RootState) => state.profile.isError);
   const message = useSelector((state: RootState) => state.profile.message);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
+
   const dispatch = useDispatch();
   const schema = yup
     .object({
@@ -56,6 +59,10 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
     setIsShowToast(true);
   };
 
+  const togglePassword = (): void => {
+    setIsShowPassword(!isShowPassword);
+  };
+
   useEffect(() => {
     if (isSuccess) {
       reset();
@@ -73,12 +80,18 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
                 <div className="row">
                   <div className="form-input-group col col-12">
                     <label className="form-label">Old Password</label>
-                    <input
-                      {...register('oldPassword')}
-                      className="form-input"
-                      type="password"
-                      placeholder="Enter old password..."
-                    />
+                    <div className="input-password-group">
+                      <input
+                        {...register('oldPassword')}
+                        className="form-input input-password"
+                        type={isShowPassword ? 'text' : 'password'}
+                        placeholder="Enter old password..."
+                      />
+                      <i
+                        onClick={togglePassword}
+                        className={`icon icon-password ${isShowPassword ? `icon-eye-slash` : `icon-eye`}`}
+                      />
+                    </div>
                     {errors.oldPassword && <p className="form-error">{errors.oldPassword?.message}</p>}
                   </div>
 
@@ -94,7 +107,7 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
                   </div>
 
                   <div className="form-input-group col col-6">
-                    <label className="form-label">Confirm Password</label>
+                    <label className="form-label">Confirm New Password</label>
                     <input
                       {...register('confirmPassword')}
                       className="form-input"
