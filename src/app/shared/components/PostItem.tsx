@@ -2,16 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-
+import { RootState } from '../../stores/store';
 import { PostModel } from '../../models/post';
+import { deletePost } from '../../pages/profile/profile.actions';
 import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
-import { deletePost } from '../../pages/profile/profile.actions';
 
 import Modal from './Modal';
 import ToastMessage from './ToastMessage';
 import NoImg from '../../../assets/images/no-image.png';
-import { RootState } from '../../stores/store';
 
 interface PostItemProps {
   post: PostModel;
@@ -22,42 +21,43 @@ const PostItem = ({ post }: PostItemProps) => {
   const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
   const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
   const deleteMessage = useSelector((state: RootState) => state.profile?.message);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
-  }
+  };
   const [isShowModal, setIShowModal] = useState(false);
 
   const handleClose = () => {
     setIShowModal(false);
-  }
+  };
 
   const handleDelete = () => {
     handleDeletePostItem(post.id as any);
     setIShowModal(false);
-  }
+  };
 
   const handleShowModal = () => {
     setIShowModal(!isShowModal);
-  }
+  };
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
   }, [isErrImg, post.cover]);
-
-
 
   return (
     <>
       <Link className="post-link" to={`/posts/detail/${post.id}`}>
         {isDeleteSuccess || ''}
         <div className="post">
-          <div className="post-delete d-flex item-center justify-center" onClick={(e) => {
-            e.preventDefault();
-            handleShowModal();
-          }}>
+          <div
+            className="post-delete d-flex item-center justify-center"
+            onClick={(e) => {
+              e.preventDefault();
+              handleShowModal();
+            }}
+          >
             <i className="icon icon-small icon-delete icon-trash-20"></i>
             <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
           </div>
@@ -112,49 +112,30 @@ const PostItem = ({ post }: PostItemProps) => {
           </div>
         </div>
       </Link>
-      {
-        isDeleteSuccess && <ToastMessage
+
+      {isDeleteSuccess && (
+        <ToastMessage
           isShow={isDeleteSuccess}
           isSuccess={isDeleteSuccess}
-          title='Success'
+          title="Success"
           subtitle={deleteMessage}
         ></ToastMessage>
-      }
-      {
-        isDeleteFailure && <ToastMessage
+      )}
+      {isDeleteFailure && (
+        <ToastMessage
           isShow={isDeleteFailure}
-          isSuccess={isDeleteFailure}
-          title='Error'
+          isSuccess={!isDeleteFailure}
+          title="Error"
           subtitle={deleteMessage}
         ></ToastMessage>
-      }
-      {
-        isShowModal &&
-        <Modal
-          onClickClose={handleClose}
-          onClickConfirm={handleDelete}
-          isShow={isShowModal}
-        >
+      )}
+
+      {isShowModal && (
+        <Modal onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowModal}>
           <h4 className="modal-title">Delete</h4>
           <p>Do you really want to delete?</p>
         </Modal>
-      }
-      {
-        isDeleteSuccess && <ToastMessage
-          isShow={isDeleteSuccess}
-          isSuccess={isDeleteSuccess}
-          title='Success'
-          subtitle={deleteMessage}
-        ></ToastMessage>
-      }
-      {
-        isDeleteFailure && <ToastMessage
-          isShow={isDeleteFailure}
-          isSuccess={!isDeleteFailure}
-          title='Error'
-          subtitle={deleteMessage}
-        ></ToastMessage>
-      }
+      )}
     </>
   );
 };
