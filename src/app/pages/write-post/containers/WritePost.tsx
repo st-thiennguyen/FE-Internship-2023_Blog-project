@@ -88,7 +88,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   };
 
   const handleUpdatePost = handleSubmit((data: any) => {
-    dispatch(updatePost({...data, content: content, status: statusPost}, detailPost.id) as any);
+    dispatch(updatePost({ ...data, content: content, status: statusPost }, detailPost.id) as any);
     setIsShowToast(true);
     setTimeout(() => {
       navigate(`/posts/detail/${id}`);
@@ -130,13 +130,12 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     <>
       {isUpdate ? (
         <>
-          <WritePostHeader handleUpdatePost={handleUpdatePost} isUpdate={isUpdate}/>
+          <WritePostHeader handleUpdatePost={handleUpdatePost} isUpdate={isUpdate} />
           <main className="main main-editor-post">
             <div className="container">
               <div className="main-body">
                 <section className="section section-write-post">
                   <div className="container">
-                    <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
                     <div className="section-body row">
                       <div className="col col-9">
                         <form className="write-post-form d-flex flex-column" ref={formRef}>
@@ -144,7 +143,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                             photoPreview={detailPost.cover}
                             setPhotoPreview={setPhotoPreview}
                             setErrorCoverMessage={setErrorCoverMessage}
-                            isUpdate= {isUpdate}
+                            isUpdate={isUpdate}
                           />
                           <p className="editor-detail-error">{errorCoverMessage}</p>
                           <div className="editor-detail">
@@ -188,7 +187,11 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                             isUpdate={isUpdate}
                           />
                         )}
-                        <EditorPostTags tags={detailPost.tags ? detailPost.tags : tags} setTags={setTags} isUpdate={isUpdate} />
+                        <EditorPostTags
+                          tags={detailPost.tags ? detailPost.tags : tags}
+                          setTags={setTags}
+                          isUpdate={isUpdate}
+                        />
                         <EditorPostActions onPublish={onPublishPost} onSaveDraft={() => alert('COMMING SOON')} />
                       </aside>
                     </div>
@@ -260,7 +263,6 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                     </div>
                   </div>
                 </section>
-
               </div>
             </div>
           </main>
@@ -268,19 +270,10 @@ const WritePost = ({ isUpdate }: writePostProps) => {
       )}
 
       {isShowToast && isSuccess && (
-        <ToastMessage
-          isSuccess={isSuccess}
-          isShow={isSuccess}
-          title="success"
-          subtitle={message}
-        />
+        <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle={message} />
       )}
       {isShowToast && isError && (
-        <ToastMessage 
-          isSuccess={isError} 
-          isShow={isError} 
-          title={'Error'} 
-          subtitle={message} />
+        <ToastMessage isSuccess={isError} isShow={isError} title={'Error'} subtitle={message} />
       )}
     </>
   );

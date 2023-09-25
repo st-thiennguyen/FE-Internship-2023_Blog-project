@@ -52,8 +52,8 @@ function App() {
             </Route>
           ))}
         </Route>
-        <Route path='/posts/create' element={<WritePost isUpdate={false} />}></Route>
-        <Route path='/posts/update/:id' element={<WritePost isUpdate={true} />}></Route>
+        <Route path="/posts/create" element={<WritePost isUpdate={false} />}></Route>
+        <Route path="/posts/update/:id" element={<WritePost isUpdate={true} />}></Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
     </AuthContext.Provider>

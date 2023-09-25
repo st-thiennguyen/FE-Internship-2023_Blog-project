@@ -1,7 +1,7 @@
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
 import { InteractionItemModel } from '../../models/interaction';
+import { ACTIONS_TYPE } from '../../shared/constants';
 
 interface DetailStateProps {
   data: PostModel;

@@ -1,5 +1,5 @@
 import { PostModel } from '../../models/post';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
 export interface PublicPostState {
