@@ -47,14 +47,10 @@ const ACTIONS_TYPE = {
   GET_FOLLOWING: 'get-following',
   GET_FOLLOWING_SUCCESS: 'get-following-success',
   GET_FOLLOWING_FAILURE: 'get-following-failure',
-  // ADD FOLLOW
-  ADD_FOLLOW: 'add-follow',
-  ADD_FOLLOW_SUCCESS: 'add-follow-success',
-  ADD_FOLLOW_FAILURE: 'add-follow-failure',
-  // UNFOLLOW
-  REMOVE_FOLLOW: 'remove-follow',
-  REMOVE_FOLLOW_SUCCESS: 'remove-follow-success',
-  REMOVE_FOLLOW_FAILURE: 'remove-follow-failure',
+  // UPDATE FOLLOW
+  UPDATE_FOLLOW: 'update-follow',
+  UPDATE_FOLLOW_SUCCESS: 'update-follow-success',
+  UPDATE_FOLLOW_FAILURE: 'update-follow-failure',
   // GET PROFILE
   GET_PROFILE: 'get-profile',
   GET_PROFILE_SUCCESS: 'get-profile-success',

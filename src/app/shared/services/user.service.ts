@@ -27,3 +27,8 @@ export const getUserPosts = (id: string) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.users.index}/${id}/posts`);
 };
+
+export const updateFollow = (id: string) => {
+  const api = new ApiService();
+  return api.post(`${ENDPOINT.friends.index}/follow`, { followingId: id });
+};
