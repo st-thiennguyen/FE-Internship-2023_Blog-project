@@ -20,6 +20,7 @@ const Recommend = () => {
 
   return (
     <section className="section section-recommend">
+      <h2 className="section-title">Recommended for you</h2>
       <Slider {...settings} className="recommend-list">
         {recommendPosts.map((post) => {
           return <RecommendItem post={post} key={post.id} />;
