@@ -52,11 +52,10 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const [photoPreview, setPhotoPreview] = useState<string>();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const cover = useSelector((state: any) => state.imageSign.data.url);
-  const isSuccess = useSelector((state: any) => state.writePost.isSuccess);
-  const isError = useSelector((state: any) => state.writePost.isError);
-  const message = useSelector((state: any) => state.writePost.message);
-  const idPost = useSelector((state: any) => state.writePost.data?.id);
+  const cover = useSelector((state: RootState) => state.imageSign.data.url);
+  const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
+  const isError = useSelector((state: RootState) => state.writePost.isError);
+  const message = useSelector((state: RootState) => state.writePost.message);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,17 +64,6 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const { id } = useParams();
-
-  const handleReset = (data: any) => {
-    formRef.current!.reset();
-    data.description = '';
-    data.title = '';
-    setPhotoPreview('');
-    setTags([]);
-    setContent('');
-    setErrorContentMessage('');
-    setErrorCoverMessage('');
-  };
 
   const {
     register,

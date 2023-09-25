@@ -21,6 +21,7 @@ const PostItem = ({ post }: PostItemProps) => {
   const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
   const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
   const deleteMessage = useSelector((state: RootState) => state.profile?.message);
+  const [isShowToast, setIsShowToast] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -35,6 +36,7 @@ const PostItem = ({ post }: PostItemProps) => {
 
   const handleDelete = () => {
     handleDeletePostItem(post.id as any);
+    setIsShowToast(true);
     setIShowModal(false);
   };
 
@@ -113,7 +115,7 @@ const PostItem = ({ post }: PostItemProps) => {
         </div>
       </Link>
 
-      {isDeleteSuccess && (
+      {isShowToast && isDeleteSuccess && (
         <ToastMessage
           isShow={isDeleteSuccess}
           isSuccess={isDeleteSuccess}
@@ -121,7 +123,7 @@ const PostItem = ({ post }: PostItemProps) => {
           subtitle={deleteMessage}
         ></ToastMessage>
       )}
-      {isDeleteFailure && (
+      {isShowToast && isDeleteFailure && (
         <ToastMessage
           isShow={isDeleteFailure}
           isSuccess={!isDeleteFailure}

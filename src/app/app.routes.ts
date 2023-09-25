@@ -28,23 +28,5 @@ export const appRoutes = [
       },
     ],
   },
-  {
-    name: 'create',
-    path: 'create',
-    component: WritePost,
-    props: {
-      isUpdate: false,
-    },
-    isAuth: true,
-  },
-  {
-    name: 'update',
-    path: 'update/:id',
-    component: WritePost,
-    props: {
-      isUpdate: true,
-    },
-    isAuth: true,
-  },
   ...userProfileRoutes,
 ];

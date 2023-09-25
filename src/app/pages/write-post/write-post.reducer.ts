@@ -3,7 +3,7 @@ import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
 
-interface PositionImageProps {
+interface PostProps {
   data: PostModel,
   isLoading: Boolean,
   isSuccess: Boolean,
@@ -11,7 +11,7 @@ interface PositionImageProps {
   isError?: Boolean
 }
 
-const initState: PositionImageProps = {
+const initState: PostProps = {
   data: {} as any,
   isLoading: false,
   isSuccess: false,

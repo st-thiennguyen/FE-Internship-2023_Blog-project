@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 type ToastMessageProps = {
   isShow: Boolean;
-  isSuccess: boolean;
+  isSuccess: Boolean;
   title: string;
   subtitle: string;
   onClose?: () => void;
