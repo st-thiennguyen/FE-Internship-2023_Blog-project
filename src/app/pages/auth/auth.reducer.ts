@@ -1,16 +1,8 @@
-import { Auth } from '../../models/auth';
+import { AuthStateProps } from '../../models/auth';
 import { StorageKey } from '../../shared/constants';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { getLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
-
-export interface AuthStateProps {
-  auth: Auth;
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-}
 
 const initState: AuthStateProps = {
   auth: getLocalStorage(StorageKey.AUTH) || null,

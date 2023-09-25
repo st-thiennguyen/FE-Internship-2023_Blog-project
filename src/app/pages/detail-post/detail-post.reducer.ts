@@ -1,16 +1,7 @@
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { PostModel } from '../../models/post';
+import { DetailStateProps, PostModel } from '../../models/post';
 import { InteractionItemModel } from '../../models/interaction';
-
-interface DetailStateProps {
-  data: PostModel;
-  comments: InteractionItemModel[];
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-}
 
 const initialState: DetailStateProps = {
   data: {} as PostModel,
