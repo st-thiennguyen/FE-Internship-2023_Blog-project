@@ -16,7 +16,6 @@ interface PostItemProps {
 const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
-  const [isShowMessage, setIsShowMessage] = useState(false);
   const isDeleteSuccess = useSelector((state: any) => state.profile?.isDeleteSuccess);
   const isDeleteFailure = useSelector((state: any) => state.profile?.isDeleteFailure);
   const deleteMessage = useSelector((state: any) => state.profile?.message);
@@ -25,7 +24,6 @@ const PostItem = ({ post }: PostItemProps) => {
 
   const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
-    setIsShowMessage(true);
   }
   const [isShowModal, setIShowModal] = useState(false);
 

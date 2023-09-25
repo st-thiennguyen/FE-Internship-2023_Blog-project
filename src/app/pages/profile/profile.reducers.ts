@@ -156,7 +156,6 @@ export const profileReducer = (state = initialState, action: RootAction): Update
     case ACTIONS_TYPE.REMOVE_POST_ITEM:
       return {
         ...state,
-        isLoading: true,
         isError: false,
         message: '',
       };
@@ -164,7 +163,6 @@ export const profileReducer = (state = initialState, action: RootAction): Update
       const updatedPosts = state.data.posts.filter((post: PostModel) => post.id !== (action.payload.id));
       return {
         ...state,
-        isLoading: false,
         isDeleteSuccess: true,
         data: { ...state.data, posts: updatedPosts },
         message: action.payload.res
@@ -172,7 +170,6 @@ export const profileReducer = (state = initialState, action: RootAction): Update
     case ACTIONS_TYPE.REMOVE_POST_ITEM_FAILURE:
       return {
         ...state,
-        isLoading: false,
         isDeleteFailure: true,
         message: action.payload,
       };
