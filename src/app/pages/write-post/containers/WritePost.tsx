@@ -91,7 +91,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     dispatch(updatePost({...data, content: content, status: statusPost}, detailPost.id) as any);
     setIsShowToast(true);
     setTimeout(() => {
-      navigate(`/posts/detail/${id}`);
+      navigate(`/posts/${id}`);
     }, 3000);
   });
 

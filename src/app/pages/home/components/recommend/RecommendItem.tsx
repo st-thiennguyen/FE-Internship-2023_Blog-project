@@ -26,7 +26,7 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
   });
 
   return (
-    <Link to={`/detail/${post.id}`} className="recommend-link">
+    <Link to={`/posts/${post.id}`} className="recommend-link">
       <div className="recommend-item">
         <div className="recommend d-flex flex-column">
           <div className="recommend-cover">
