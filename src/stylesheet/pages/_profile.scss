@@ -92,7 +92,7 @@
         background-color: map-get($color, primary);
       }
     }
-    .post-action-list {
+    .post-action-list, .post-delete {
       visibility: hidden;
     }
     .my-post {
@@ -102,9 +102,13 @@
       .read-more {
         display: none;
       }
-      .post:hover .post-delete {
-        visibility: visible;
+      .post:hover {
+        .post-delete {
+          visibility: visible;
+        }
       }
+    
+
     }
     .user-post-empty {
       width: 70%;

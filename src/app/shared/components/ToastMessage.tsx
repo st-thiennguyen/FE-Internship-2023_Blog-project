@@ -10,7 +10,6 @@ type ToastMessageProps = {
 
 const ToastMessage = ({ isShow, isSuccess, title, subtitle, onClose }: ToastMessageProps) => {
   const [isShowToast, setIsShowToast] = useState(isShow);
-
   const closeClick = useRef(() => {});
 
   closeClick.current = () => {

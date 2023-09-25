@@ -9,7 +9,6 @@ const ACTIONS_TYPE = {
   GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
   GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
-  // GET DETAiL BLOG
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
@@ -91,6 +90,10 @@ const ACTIONS_TYPE = {
   GET_RECOMMEND: 'get-recommend',
   GET_RECOMMEND_SUCCESS: 'get-recommend-success',
   GET_RECOMMEND_FAILURE: 'get-recommend-failure',
+  // REMOVE POST ITEM
+  REMOVE_POST_ITEM: 'remove-post-item',
+  REMOVE_POST_ITEM_SUCCESS: 'remove-post-item-success',
+  REMOVE_POST_ITEM_FAILURE: 'remove-post-item-failure',
   // UPDATE LIKE
   UPDATE_LIKE: 'update-like',
   UPDATE_LIKE_SUCCESS: 'update-like-success',
