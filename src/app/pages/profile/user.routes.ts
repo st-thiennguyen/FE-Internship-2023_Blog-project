@@ -2,32 +2,26 @@ import ProfilePage from './containers/ProfilePage';
 import ProfileUpdate from './containers/ProfileUpdate';
 import ProfileUser from './containers/ProfileUser';
 
-const userProfileRoutes = [
+export const userProfileRoutes = [
   {
-    name: 'profile',
     path: '/profile',
     component: ProfileUser,
     children: [
       {
-        name: 'my-profile',
         path: '',
         component: ProfilePage,
-        isAuth: true,
+        isProtected: true,
       },
       {
-        name: 'user-profile',
         path: ':id',
         component: ProfilePage,
-        isAuth: true,
+        isProtected: true,
       },
       {
-        name: 'update-profile',
         path: 'update',
         component: ProfileUpdate,
-        isAuth: true,
+        isProtected: true,
       },
     ],
   },
 ];
-
-export default userProfileRoutes;

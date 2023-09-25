@@ -21,7 +21,7 @@ const UserPostList = ({ postList }: UserPostListProps) => {
       {postList.length > 0 || isLoading ? (
         postList.map((post, index) => {
           return (
-            <li className="post-item col col-6 col-md-12" key={index}>
+            <li className="post-item col col-4 col-md-12" key={index}>
               <PostItem post={{ ...post, user: userProfile }} />
             </li>
           );
