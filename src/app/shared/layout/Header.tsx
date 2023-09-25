@@ -8,6 +8,9 @@ import logo from '../../../assets/images/logo.svg';
 import { logoutAction } from '../../pages/auth/auth.actions';
 import { isImageUrlValid } from '../utils';
 import avatarDefault from '../../../assets/images/user-default.png';
+import icRecyclebin from '../../../assets/icons/ic-recyclebin-24.svg';
+import icBookmark from '../../../assets/icons/ic-bookmark-24.svg';
+import icLogout from '../../../assets/icons/ic-logout-24.svg';
 
 const Header = () => {
   const [isShowToastMessage, setIsShowToastMessage] = useState(false);
@@ -45,7 +48,7 @@ const Header = () => {
               <ul className="navbar-list d-flex">
                 {isLogin && (
                   <li className="navbar-item">
-                    <Link to="/posts/create" className="navbar-link">
+                    <Link to="/write" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-write-20"></i>
                         <p className="navbar-subtext">Write</p>
@@ -56,29 +59,53 @@ const Header = () => {
                 <li className="navbar-item navbar-item-auth">
                   {isLogin ? (
                     <>
-                      <Link to="/login" className="navbar-link">
-                        <div className="navbar-content d-flex justify-center item-center">
-                          {!isErrorCover ? (
-                            <img
-                              src={authContext.userInfo.picture}
-                              alt="avatar"
-                              className="icon icon-small avatar-user"
-                            />
-                          ) : (
+                      <div className="navbar-content d-flex justify-center item-center">
+                        {!isErrorCover ? (
+                          <img
+                            src={authContext.userInfo.picture}
+                            alt="avatar"
+                            className="icon icon-small avatar-user-header"
+                          />
+                        ) : (
+                          <Link to="/login" className="navbar-link">
                             <img src={avatarDefault} alt="avatar" className={`post-img err`} />
-                          )}
-                        </div>
-                      </Link>
+                          </Link>
+                        )}
+                      </div>
+
                       <div className="navbar-auth">
                         <ul className="auth-list">
                           <li className="auth-item">
-                            <Link to="/profile" className="auth-link">
-                              {authContext.userInfo?.displayName}
+                            <Link to="/profile" className="auth-link auth-link-info">
+                              <div className="auth-info d-flex item-center">
+                                <img
+                                  src={authContext.userInfo.picture}
+                                  alt="avatar"
+                                  className="icon icon-small avatar-user"
+                                />
+                                <div className="auth-info-text">
+                                  <p className="auth-info-name text-truncate-1">{authContext.userInfo?.displayName}</p>
+                                  <p className="auth-info-email text-truncate-1">{authContext.userInfo?.email}</p>
+                                </div>
+                              </div>
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link" onClick={handleLogout}>
-                              Logout
+                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
+                              <img src={icRecyclebin} alt="Icon recyclebin" />
+                              <p>Recycle Bin</p>
+                            </Link>
+                          </li>
+                          <li className="auth-item">
+                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
+                              <img src={icBookmark} alt="Icon recyclebin" />
+                              <p>Bookmark</p>
+                            </Link>
+                          </li>
+                          <li className="auth-item">
+                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
+                              <img src={icLogout} alt="Icon recyclebin" />
+                              <p>Logout</p>
                             </Link>
                           </li>
                         </ul>

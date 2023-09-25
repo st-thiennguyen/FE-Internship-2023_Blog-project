@@ -64,11 +64,7 @@ const PostItem = ({ post }: PostItemProps) => {
             <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
           </div>
           <div className="post-img-wrapper">
-            {isErrImg ? (
-              <img src={NoImg} alt={post.title} className={`post-img err`} />
-            ) : (
-              <img src={post.cover} alt={post.title} className={`post-img`} />
-            )}
+            <img src={isErrImg ? NoImg : post.cover} alt={post.title} className={`post-img`} />
           </div>
           <div className="post-body-wrapper">
             <div className="post-body">
@@ -95,7 +91,11 @@ const PostItem = ({ post }: PostItemProps) => {
               <span className="read-more">READ MORE</span>
               <ul className="post-action-list">
                 <li className="post-action-item">
-                  <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/posts/update/${post.id}`}>
+                  <Link
+                    onClick={(e) => e.stopPropagation()}
+                    className="post-action-link"
+                    to={`/posts/update/${post.id}`}
+                  >
                     <i className="icon icon-small icon-write-20"></i>
                   </Link>
                 </li>
