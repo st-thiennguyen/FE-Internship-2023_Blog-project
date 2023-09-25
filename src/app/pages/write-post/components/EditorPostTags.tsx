@@ -58,9 +58,9 @@ const EditorPostTags = ({ tags, setTags, isUpdate }: EditorPostTagsProps) => {
       <ul className="editor-tags-list d-flex flex-wrap">
         {tags.map((tag, index) => {
           return (
-            <li className="editor-tags-item d-flex item-center" key={index} aria-disabled={isUpdate}>
+            <li className={`editor-tags-item d-flex item-center ${isUpdate && 'disable'}`} key={index} aria-disabled={isUpdate} >
               <span className="tag editor-tags-text">{tag} </span>
-              <img src={icRemove} alt="Icon remove tag" title="Remove" onClick={() => handleRemoveTag(index)}  />
+              <img src={icRemove} alt="Icon remove tag" title="Remove" onClick={() => handleRemoveTag(index)} className={`${isUpdate && ' disable'}`}  />
             </li>
           );
         })}

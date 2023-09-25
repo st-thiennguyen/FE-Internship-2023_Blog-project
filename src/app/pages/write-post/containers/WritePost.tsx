@@ -25,11 +25,17 @@ const schema = yup
       .required('Title must not be null!')
       .min(20, 'Title must not be less than 20 characters')
       .max(200, 'Title must not be more than 200 characters!'),
+    description: yup
+      .string()
+      .required('Description must not be null!')
+      .min(50, 'Description must not be less than 100 characters')
+      .max(300, 'Description must not be more than 300 characters!'),
   })
   .required();
 
 type FormData = {
   title: string;
+  description: string;
 };
 
 interface writePostProps {
@@ -50,32 +56,19 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const isSuccess = useSelector((state: any) => state.writePost.isSuccess);
   const isError = useSelector((state: any) => state.writePost.isError);
   const message = useSelector((state: any) => state.writePost.message);
+  const idPost = useSelector((state: any) => state.writePost.data?.id);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [description, setDescription] = useState('');
-  const [errorDescription, setErrorDescription] = useState('');
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data);
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const { id } = useParams();
 
-  const handleDescriptionChange = (event: any) => {
-    const inputValue = event.target.value;
-    setDescription(inputValue);
-
-    if (inputValue.length < 30) {
-      setErrorDescription('Text must be at least 30 characters.');
-    } else if (inputValue.length > 200) {
-      setErrorDescription('Text must not exceed 200 characters.');
-    } else {
-      setErrorDescription('');
-    }
-  };
-
-
   const handleReset = (data: any) => {
     formRef.current!.reset();
+    data.description = '';
     data.title = '';
     setPhotoPreview('');
     setTags([]);
@@ -114,18 +107,19 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     }, 3000);
   });
 
-  const handleSubmitForm = handleSubmit((data: any) => {
+  const handleCreatePost = handleSubmit((data: any) => {
     if (validate()) {
-      dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags, description: description }) as any);
-      navigate(`/posts/detail/${id}`);
+      dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
       setIsShowToast(true);
-      handleReset(data);
+      setTimeout(() => {
+        navigate(`/`);
+      }, 3000);
     }
   });
 
   const onPublishPost = () => {
     validate();
-    handleSubmitForm();
+    handleCreatePost();
   };
 
   useEffect(() => {
@@ -177,13 +171,14 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                             <p className="editor-detail-error">{errors.title?.message}</p>
                             <textarea
                               rows={1}
-                              value={detailPost.description}
+                              {...register('description')}
                               className="editor-detail-input"
                               placeholder="Description of your story ..."
                               defaultValue={detailPost.description}
-                              onChange={handleDescriptionChange}
+                              readOnly
                             />
-                            {errorDescription && <p style={{ color: 'red' }}>{errorDescription}</p>}
+                            <p className="editor-detail-error">{errors.description?.message}</p>
+
                             <div className="editor-detail-area">
                               <TextEditor
                                 value={content}
@@ -244,12 +239,11 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                             <p className="editor-detail-error">{errors.title?.message}</p>
                             <textarea
                               rows={1}
+                              {...register('description')}
                               className="editor-detail-input"
                               placeholder="Description of your story ..."
-                              onChange={handleDescriptionChange}
                             />
-                            {errorDescription && <p style={{ color: 'red' }}>{errorDescription}</p>}
-
+                            <p className="editor-detail-error">{errors.description?.message}</p>
 
                             <div className="editor-detail-area">
                               <TextEditor

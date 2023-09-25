@@ -96,6 +96,10 @@
     border-radius: 16px;
     line-height: 1;
 
+    &.disable:hover {
+      opacity: 1;
+    }
+
     img {
       width: 20px;
       height: 20px;
@@ -104,6 +108,10 @@
 
     &:hover {
       opacity: 0.6;
+    }
+    
+    .disable {
+      cursor: context-menu;
     }
   }
 
@@ -336,3 +344,4 @@
     flex: 1;
   }
 }
+
