@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { updatePasswordAction } from '../profile.actions';
-import { formChangePassword } from '../../../models/user';
+import { FormChangePassword } from '../../../models/user';
 import { RootState } from '../../../stores/store';
 
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -51,7 +50,7 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
     resolver: yupResolver(schema),
   });
 
-  const onUpdatePassword = (data: formChangePassword) => {
+  const onUpdatePassword = (data: FormChangePassword) => {
     delete data.confirmPassword;
     dispatch(updatePasswordAction(data) as any);
     setIsShowToast(true);

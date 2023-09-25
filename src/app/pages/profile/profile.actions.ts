@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { updatePassword, updateProfile, getUserPosts, getUserProfile } from '../../shared/services/user.service';
-import { UserModel, formChangePassword, ProfileModel } from '../../models/user';
+import { UserModel, FormChangePassword, ProfileModel } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
@@ -119,7 +119,7 @@ export const deletePostItemStart = () => {
 const deletePostItemSuccess = (id: string, res: string) => {
   return {
     type: ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS,
-    payload: {id, res},
+    payload: { id, res },
   };
 };
 
@@ -189,7 +189,7 @@ export const updateProfileAction =
     }
   };
 
-export const updatePasswordAction = (data: formChangePassword) => async (dispatch: Dispatch<RootAction>) => {
+export const updatePasswordAction = (data: FormChangePassword) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updatePasswordStart());
   try {
     await updatePassword(data);
@@ -205,6 +205,6 @@ export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>)
     const response = await deletePostItem(id);
     dispatch(deletePostItemSuccess(id, response as string));
   } catch (error) {
-   dispatch(deletePostItemFailure(error as string)) 
+    dispatch(deletePostItemFailure(error as string));
   }
-}
+};
