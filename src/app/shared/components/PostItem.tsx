@@ -93,7 +93,7 @@ const PostItem = ({ post }: PostItemProps) => {
               <span className="read-more">READ MORE</span>
               <ul className="post-action-list">
                 <li className="post-action-item">
-                  <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/update/${id}`}>
+                  <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/update/${post.id}`}>
                     <i className="icon icon-small icon-write-20"></i>
                   </Link>
                 </li>
