@@ -30,6 +30,11 @@ export const getRecommendPosts = (page: number, size: number) => {
   });
 };
 
+export const deletePostItem = (id : string) => {
+  const api = new ApiService();
+  return api.delete(`${ENDPOINT.post.index}/${id}`);
+}
+
 export const updateLike = (id: number) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.post.index}/${id}/likes`);

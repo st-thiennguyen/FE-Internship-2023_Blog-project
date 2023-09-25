@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 import { PostModel } from '../../../models/post';
-
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../home/components/EmptyPost';
 
@@ -16,6 +15,7 @@ const UserPostList = ({ postList }: UserPostListProps) => {
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
 
   const { id } = useParams();
+
   return (
     <ul className={`user-post-list row ${!id && 'my-post'}`}>
       {postList.length > 0 || isLoading ? (

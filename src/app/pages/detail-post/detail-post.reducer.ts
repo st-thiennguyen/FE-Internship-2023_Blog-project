@@ -109,8 +109,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: '',
       };
     case ACTIONS_TYPE.POST_COMMENT_SUCCESS:
-      console.log(action.payload);
-
       return {
         ...state,
         data: { ...state.data, comments: state.data?.comments + 1 },

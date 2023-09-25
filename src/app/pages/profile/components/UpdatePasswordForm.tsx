@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { updatePasswordAction } from '../proflie.actions';
+import { updatePasswordAction } from '../profile.actions';
 import { formChangePassword } from '../../../models/user';
 import { RootState } from '../../../stores/store';
 

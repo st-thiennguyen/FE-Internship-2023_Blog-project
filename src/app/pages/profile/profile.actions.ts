@@ -15,6 +15,7 @@ import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.se
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
 import { getLocalStorage, setLocalStorage } from '../../shared/utils';
 import { reAssignmentAuth } from '../auth/auth.actions';
+import { deletePostItem } from '../../shared/services';
 
 const getUserProfileStart = () => {
   return {
@@ -115,6 +116,26 @@ const updatePasswordStartFailure = (message: string) => {
   };
 };
 
+export const deletePostItemStart = () => {
+  return {
+    type: ACTIONS_TYPE.REMOVE_POST_ITEM,
+  };
+};
+
+const deletePostItemSuccess = (id: string, res: string) => {
+  return {
+    type: ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS,
+    payload: { id, res },
+  };
+};
+
+const deletePostItemFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.REMOVE_POST_ITEM_FAILURE,
+    payload: error,
+  };
+};
+
 const updateFollowStart = () => {
   return {
     type: ACTIONS_TYPE.UPDATE_FOLLOW,
@@ -201,6 +222,16 @@ export const updatePasswordAction = (data: formChangePassword) => async (dispatc
     dispatch(updatePasswordStartSuccess());
   } catch (error) {
     dispatch(updatePasswordStartFailure(`${error}`));
+  }
+};
+
+export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(deletePostItemStart());
+  try {
+    const response = await deletePostItem(id);
+    dispatch(deletePostItemSuccess(id, response as string));
+  } catch (error) {
+    dispatch(deletePostItemFailure(error as string));
   }
 };
 

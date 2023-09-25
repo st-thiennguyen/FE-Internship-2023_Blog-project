@@ -5,9 +5,9 @@ import { Link, useParams } from 'react-router-dom';
 import { RootState } from '../../../stores/store';
 import { convertDateToString } from '../../../shared/utils';
 import { ProfileModel } from '../../../models/user';
-import { updateFollowAction } from '../proflie.actions';
 
 import Button from '../../../shared/components/Button';
+import { updateFollowAction } from '../profile.actions';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
-import { getUserProfileAction } from '../proflie.actions';
 
+import { getUserProfileAction } from '../profile.actions';
 import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
 
