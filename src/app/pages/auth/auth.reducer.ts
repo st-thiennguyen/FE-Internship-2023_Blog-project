@@ -108,7 +108,6 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
     case ACTIONS_TYPE.LOGOUT_SUCCESS: {
       return {
         ...state,
-        auth: getLocalStorage(StorageKey.AUTH),
         isLoading: false,
         isError: false,
         message: '',

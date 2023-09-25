@@ -9,13 +9,15 @@ import authRoutes from './pages/auth/auth.routes';
 import Layout from './pages/Layout';
 import PrivateRoute from './shared/components/privateRoute';
 import PageNotFound from './pages/not-found/PageNotFound';
+import WritePost from './pages/write-post/containers/WritePost';
 
 interface RouteItem {
-  name: string;
+  name?: string;
   path: string;
-  component: () => JSX.Element;
+  component: (props: any) => JSX.Element;
   isAuth?: Boolean;
   children?: RouteItem[];
+  props?: Object;
 }
 
 export const AuthContext = createContext<any>(undefined);
@@ -39,10 +41,10 @@ function App() {
                     element={
                       item.isAuth ? (
                         <PrivateRoute>
-                          <item.component />
+                          <item.component {...item.props} />
                         </PrivateRoute>
                       ) : (
-                        <item.component />
+                        <item.component {...item.props} />
                       )
                     }
                   />
@@ -50,6 +52,8 @@ function App() {
             </Route>
           ))}
         </Route>
+        <Route path='/posts/create' element={<WritePost isUpdate={false} />}></Route>
+        <Route path='/posts/update/:id' element={<WritePost isUpdate={true} />}></Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
     </AuthContext.Provider>

@@ -1,0 +1,347 @@
+.ql-container {
+  font-size: 28px;
+}
+
+.header-write-post {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  &-external {
+    gap: 16px;
+  }
+}
+
+.quill-text-editor .ql-editor {
+  min-height: 300px;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.section-title-editor {
+  color: map-get($color, text);
+  margin-bottom: 20px;
+}
+
+.main-editor-post {
+  background-color: #fff;
+}
+
+.write-post {
+  &-form {
+    gap: 16px;
+  }
+
+  &-editor {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    gap: 20px;
+  }
+
+  .ql-editor p {
+    font-family: "Times New Roman", Times, serif;
+  }
+  &-input::placeholder,
+  &-input-tags::placeholder,
+  .ql-editor.ql-blank::before {
+    color: #b3b3b1;
+  }
+
+  &-area {
+    width: 100%;
+  }
+
+  &-form-error {
+    font-size: 12px;
+    color: red;
+  }
+}
+
+.editor-tags {
+  width: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
+  &-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 0.5px solid map-get($color, borderColor);
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .tags-hint {
+    color: map-get($color, subtext);
+    font-size: 12px;
+  }
+
+  &-input::placeholder {
+    color: #b3b3b1;
+  }
+
+  &-list {
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  &-item {
+    padding: 5px 8px;
+    background-color: map-get($color, borderColor);
+    border-radius: 16px;
+    line-height: 1;
+
+    &.disable:hover {
+      opacity: 1;
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+    
+    .disable {
+      cursor: context-menu;
+    }
+  }
+
+  &-text {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+.editor-cover {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  .btn-add-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid map-get($color, borderColor);
+    border-radius: 5px;
+    background-color: transparent;
+  }
+
+  &-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: map-get($font-size, lg);
+  }
+
+  &-txt {
+    font-weight: map-get($font-weight, semibold);
+  }
+  &-subtxt {
+    font-size: map-get($font-size, sm);
+  }
+
+  &-select {
+    width: 100%;
+    height: 100%;
+    border: 0.5px solid map-get($color, borderColor);
+    border-radius: 12px;
+  }
+
+  &-content {
+    gap: 10px;
+  }
+
+  &-file {
+    display: none;
+  }
+  &-link {
+    width: 50%;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: 1px solid map-get($color, borderColor);
+    outline: none;
+  }
+
+  &-preview {
+    width: 100%;
+    height: 100%;
+    img {
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  }
+}
+
+.editor-cover-preview {
+  width: 100%;
+  height: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+  &-img {
+    margin-bottom: 10px;
+  }
+
+  .btn-remove-preview {
+    background-color: brown;
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+}
+
+.editor-detail {
+  width: 100%;
+  height: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
+  &-input {
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 0.5px solid map-get($color, borderColor);
+    outline: none;
+    resize: none;
+    font-family: "Manrope", sans-serif;
+  }
+
+  &-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 400px;
+  }
+
+  &-error {
+    font-size: 14px;
+    color: red;
+    margin-bottom: 20px;
+  }
+}
+
+.aside-write-post {
+  gap: 16px;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.editor-visibility {
+  width: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
+  &-item {
+    display: flex;
+    position: relative;
+    label {
+      cursor: pointer;
+      display: flex;
+      padding: 20px 20px 20px 30px;
+    }
+    input[type="radio"] {
+      position: relative;
+      transition: linear 0.8s;
+      height: 0;
+      width: 0;
+    }
+
+    input[type="radio"]:after {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      top: -10.5px;
+      left: -30px;
+      border-radius: 100%;
+      border: 2px solid map-get($color, secondary);
+      transition: linear 0.2s;
+      cursor: pointer;
+    }
+
+    input[type="radio"]:checked:after {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      background: map-get($color, secondary);
+      transition: linear 0.2s;
+      cursor: pointer;
+    }
+
+    input[type="radio"]:checked:before {
+      content: "";
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      border-radius: 4px;
+      background: #fff;
+      left: -24px;
+      top: -4.5px;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .icon {
+      font-size: 24px;
+      position: absolute;
+      right: 26px;
+      top: 11px;
+      transition: linear 0.3s;
+    }
+    input[type="radio"]:checked + span > .icon {
+      transform: scale(1.7);
+    }
+  }
+}
+
+.editor-actions {
+  width: 100%;
+  border: 0.5px solid map-get($color, borderColor);
+  border-radius: 12px;
+  padding: 20px;
+
+  &-title {
+    font-size: map-get($font-size, lg);
+    margin-bottom: 20px;
+  }
+
+  &-content {
+    gap: 16px;
+  }
+
+  .btn-editor-actions {
+    padding: 10px 15px;
+    flex: 1;
+  }
+}
+

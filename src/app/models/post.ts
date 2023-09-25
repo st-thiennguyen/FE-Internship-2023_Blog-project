@@ -17,3 +17,10 @@ export interface PostModel {
   user: UserModel;
   [key: string]: any;
 }
+
+
+export interface SignatureImageModel {
+  signedRequest: string,
+  url: string,
+}
+
