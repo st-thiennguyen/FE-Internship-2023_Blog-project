@@ -80,17 +80,13 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link
-                              to="/posts/recyclebin"
-                              className="auth-link d-flex item-center"
-                              onClick={handleLogout}
-                            >
+                            <Link to="/posts/recyclebin" className="auth-link d-flex item-center">
                               <img src={icRecyclebin} alt="Icon recyclebin" />
                               <p>Recycle Bin</p>
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/posts/bookmark" className="auth-link d-flex item-center" onClick={handleLogout}>
+                            <Link to="/posts/bookmark" className="auth-link d-flex item-center">
                               <img src={icBookmark} alt="Icon recyclebin" />
                               <p>Bookmark</p>
                             </Link>
