@@ -21,7 +21,7 @@ const DetailPost = () => {
   const isError = useSelector((state: RootState) => state.detail.isError);
   const message = useSelector((state: RootState) => state.detail.message);
 
-  const { postId } = useParams();
+  const { id } = useParams();
   const commentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,11 +29,11 @@ const DetailPost = () => {
   }, []);
 
   useEffect(() => {
-    if (postId) {
-      dispatch(fetchDetailBlog(Number(postId)) as any);
-      dispatch(fetchComments(postId) as any);
+    if (id) {
+      dispatch(fetchDetailBlog(Number(id)) as any);
+      dispatch(fetchComments(id) as any);
     }
-  }, [postId]);
+  }, [id]);
 
   if (isLoading) {
     return <DetailPostLoading />;
