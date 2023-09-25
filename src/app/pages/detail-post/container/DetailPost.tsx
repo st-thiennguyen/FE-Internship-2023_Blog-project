@@ -49,31 +49,33 @@ const DetailPost = () => {
 
   return (
     <>
-      <div className="detail-page">
-        <div className="row">
-          <div className="col col-9">
-            <article>
-              <DetailPostCover
-                cover={post.cover}
-                title={post.title}
-                authorName={post.user?.displayName}
-                authorAvatar={post.user?.picture}
-                datePost={post.createdAt}
-                authorId={post.userId}
-              />
-              <section className="section section-detail-content">
-                <div className="detail-content d-flex">
-                  <DetailPostContent post={post} scrollToComment={scrollToComment} />
-                </div>
-              </section>
-            </article>
-            <DetailPostComment ref={commentRef} />
-          </div>
-          <div className="col col-3">
-            <Aside />
+      <section className="detail-page">
+        <div className="container">
+          <div className="row">
+            <div className="col col-9">
+              <article>
+                <DetailPostCover
+                  cover={post.cover}
+                  title={post.title}
+                  authorName={post.user?.displayName}
+                  authorAvatar={post.user?.picture}
+                  datePost={post.createdAt}
+                  authorId={post.userId}
+                />
+                <section className="section section-detail-content">
+                  <div className="detail-content d-flex">
+                    <DetailPostContent post={post} scrollToComment={scrollToComment} />
+                  </div>
+                </section>
+              </article>
+              <DetailPostComment ref={commentRef} />
+            </div>
+            <div className="col col-3">
+              <Aside />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
       {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
     </>
   );

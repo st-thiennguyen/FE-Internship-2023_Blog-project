@@ -87,13 +87,13 @@ const Header = () => {
                           </li>
                           <li className="auth-item">
                             <Link to="/posts/bookmark" className="auth-link d-flex item-center">
-                              <img src={icBookmark} alt="Icon recyclebin" />
+                              <img src={icBookmark} alt="Icon bookmark" />
                               <p>Bookmark</p>
                             </Link>
                           </li>
                           <li className="auth-item">
                             <Link to="/logout" className="auth-link d-flex item-center" onClick={handleLogout}>
-                              <img src={icLogout} alt="Icon recyclebin" />
+                              <img src={icLogout} alt="Icon logout" />
                               <p>Logout</p>
                             </Link>
                           </li>
