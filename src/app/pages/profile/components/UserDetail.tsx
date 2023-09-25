@@ -63,7 +63,7 @@ const UserDetail = () => {
               <h3 className="user-detail-fullname">{profile.firstName + ' ' + profile.lastName}</h3>
               <div className="detail-info-item d-flex item-center">
                 <i className="icon icon-small icon-dob-20" />
-                <p className="info-desc">{profile.dob}</p>
+                <p className="info-desc">{convertDateToString(profile?.dob, '/')}</p>
               </div>
               <div className="detail-info-item d-flex item-center">
                 <i className="icon icon-small icon-mail-20" />
