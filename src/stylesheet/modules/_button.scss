@@ -25,6 +25,16 @@
   border: 1px solid;
 }
 
+.btn-outline-primary {
+  border: 1px solid map-get($color, primary);
+  background-color: transparent;
+  color: map-get($color, primary);
+}
+
+.btn-rounded {
+  border-radius: 20px;
+}
+
 .btn-primary {
   background-color: map-get($color, primary);
   color: map-get($color, textButton);

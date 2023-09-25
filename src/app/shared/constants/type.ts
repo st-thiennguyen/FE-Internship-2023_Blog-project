@@ -47,14 +47,10 @@ const ACTIONS_TYPE = {
   GET_FOLLOWING: 'get-following',
   GET_FOLLOWING_SUCCESS: 'get-following-success',
   GET_FOLLOWING_FAILURE: 'get-following-failure',
-  // ADD FOLLOW
-  ADD_FOLLOW: 'add-follow',
-  ADD_FOLLOW_SUCCESS: 'add-follow-success',
-  ADD_FOLLOW_FAILURE: 'add-follow-failure',
-  // UNFOLLOW
-  REMOVE_FOLLOW: 'remove-follow',
-  REMOVE_FOLLOW_SUCCESS: 'remove-follow-success',
-  REMOVE_FOLLOW_FAILURE: 'remove-follow-failure',
+  // UPDATE FOLLOW
+  UPDATE_FOLLOW: 'update-follow',
+  UPDATE_FOLLOW_SUCCESS: 'update-follow-success',
+  UPDATE_FOLLOW_FAILURE: 'update-follow-failure',
   // GET PROFILE
   GET_PROFILE: 'get-profile',
   GET_PROFILE_SUCCESS: 'get-profile-success',
@@ -85,6 +81,18 @@ const ACTIONS_TYPE = {
   GET_USERS_FAILURE: 'get-users-failure',
   // LOADMORE POST
   LOAD_MORE_PUBLIC_POST: 'load-more-public-post',
+  // WRITE POST // RESIZE URL IMAGE POST
+  GET_SIGN_URL_IMAGE_POST: 'get-sign-image-post',
+  GET_SIGN_URL_IMAGE_POST_SUCCESS: 'get-sign-image-post-success',
+  GET_SIGN_URL_IMAGE_POST_FAILURE: 'get-sign-image-post-failure',
+  // ADD POST
+  ADD_POST: 'add-post',
+  ADD_POST_SUCCESS: 'add-post-success',
+  ADD_POST_FAILURE: 'add-post-failure',
+  // UPDATE POST
+  UPDATE_POST: 'update-post',
+  UPDATE_POST_SUCCESS: 'update-post-success',
+  UPDATE_POST_FAILURE: 'update-post-failure',
   LOAD_MORE_POST_WITH_TAGS: 'load-more-post-with-tags',
   // GET RECOMMEND POSTS
   GET_RECOMMEND: 'get-recommend',

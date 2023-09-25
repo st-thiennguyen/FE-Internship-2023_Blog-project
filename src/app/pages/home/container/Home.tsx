@@ -28,12 +28,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {isLogin && recommendPosts.length > 0 && (
-        <>
-          <h2 className="section-title">Recommended for you</h2>
-          <Recommend />
-        </>
-      )}
+      {isLogin && recommendPosts.length > 0 && <Recommend />}
       <div className="row">
         <div className="col col-12">
           <LatestPost />
