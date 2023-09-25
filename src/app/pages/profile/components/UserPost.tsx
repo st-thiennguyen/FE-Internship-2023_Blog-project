@@ -13,8 +13,8 @@ const UserPost = () => {
         <h2 className="section-title">Posts</h2>
         {isLoading ? (
           <ul className="row">
-            {Array.from({ length: 2 }, (item, index) => (
-              <li className="post-item col col-6 col-md-12" key={index}>
+            {Array.from({ length: 3 }, (item, index) => (
+              <li className="post-item col col-4 col-md-12" key={index}>
                 <PostItemLoading />
               </li>
             ))}
