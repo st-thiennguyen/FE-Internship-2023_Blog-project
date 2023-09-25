@@ -50,6 +50,8 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  const [coverFile, setCoverFile] = useState<File>();
+  const coverImageRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
@@ -126,6 +128,15 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     }
   }, [detailPost.content]);
 
+  const onRemovePreview = () => {
+    console.log('ACVSVSDV');
+    setPhotoPreview('');
+
+    if (coverImageRef.current) {
+      coverImageRef.current.value = '';
+    }
+  };
+
   return (
     <>
       {isUpdate ? (
@@ -183,7 +194,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                         {photoPreview && (
                           <EditorImageCoverPreview
                             photoPreview={photoPreview}
-                            onRemovePreview={() => setPhotoPreview('')}
+                            onRemovePreview={onRemovePreview}
                             isUpdate={isUpdate}
                           />
                         )}

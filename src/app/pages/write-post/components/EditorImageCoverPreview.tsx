@@ -1,7 +1,9 @@
+import { RefObject } from 'react';
+
 interface EditorImageCoverPreviewProps {
   photoPreview: string;
   onRemovePreview: () => void;
-  isUpdate ?: boolean
+  isUpdate?: boolean;
 }
 
 const EditorImageCoverPreview = ({ photoPreview, onRemovePreview, isUpdate }: EditorImageCoverPreviewProps) => {
