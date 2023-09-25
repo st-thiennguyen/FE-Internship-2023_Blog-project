@@ -26,25 +26,25 @@ export const appRoutes = [
         path: 'detail/:postId',
         component: DetailPost,
       },
-      {
-        name: 'create',
-        path: 'create',
-        component: WritePost,
-        props: {
-          isUpdate: false,
-        },
-        isAuth: true,
-      },
-      {
-        name: 'update',
-        path: 'update/:id',
-        component: WritePost,
-        props: {
-          isUpdate: true,
-        },
-        isAuth: true,
-      },
     ],
+  },
+  {
+    name: 'create',
+    path: 'create',
+    component: WritePost,
+    props: {
+      isUpdate: false,
+    },
+    isAuth: true,
+  },
+  {
+    name: 'update',
+    path: 'update/:id',
+    component: WritePost,
+    props: {
+      isUpdate: true,
+    },
+    isAuth: true,
   },
   ...userProfileRoutes,
 ];

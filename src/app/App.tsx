@@ -9,6 +9,7 @@ import authRoutes from './pages/auth/auth.routes';
 import Layout from './pages/Layout';
 import PrivateRoute from './shared/components/privateRoute';
 import PageNotFound from './pages/not-found/PageNotFound';
+import WritePost from './pages/write-post/containers/WritePost';
 
 interface RouteItem {
   name?: string;
@@ -51,6 +52,8 @@ function App() {
             </Route>
           ))}
         </Route>
+        <Route path='/posts/create' element={<WritePost isUpdate={false} />}></Route>
+        <Route path='/posts/update/:id' element={<WritePost isUpdate={true} />}></Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
     </AuthContext.Provider>
