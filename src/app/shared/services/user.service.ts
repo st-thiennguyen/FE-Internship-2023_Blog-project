@@ -32,3 +32,13 @@ export const updateFollow = (id: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.friends.index}/follow`, { followingId: id });
 };
+
+export const getBookmark = () => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.bookmark.index}`);
+};
+
+export const addBookmark = (postId: string) => {
+  const api = new ApiService();
+  return api.post(`${ENDPOINT.bookmark.index}`, { postId });
+};

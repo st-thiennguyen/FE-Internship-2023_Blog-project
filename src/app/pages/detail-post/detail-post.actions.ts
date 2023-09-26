@@ -3,10 +3,12 @@ import { Dispatch } from 'react';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
-import { PostModel } from '../../models/post';
+import { BookmarkModel, PostModel } from '../../models/post';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
 import { UserInfo } from '../../models/auth';
+import { getBookmark } from '../../shared/services/user.service';
+import { getRecommendFailure } from '../home/home.actions';
 
 const getDetailBlogStart = () => {
   return {
@@ -131,3 +133,35 @@ export const postCommentAction =
       dispatch(postCommentFailure(`${error}`));
     }
   };
+
+//Bookmark
+
+export const getBookmarkStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_BOOKMARK,
+  };
+};
+
+export const getBookmartSuccess = (data: BookmarkModel[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_BOOKMARK_SUCCESS,
+    payload: data,
+  };
+};
+
+export const getBookmarkFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_BOOKMARK_FAILURE,
+    payload: error,
+  };
+};
+
+export const fetchBookmark = () => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getBookmarkStart());
+  try {
+    const response = await getBookmark();
+    dispatch(getBookmartSuccess(response as BookmarkModel[]));
+  } catch (error) {
+    dispatch(getRecommendFailure(`${error}`));
+  }
+};

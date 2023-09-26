@@ -1,6 +1,6 @@
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { PostModel } from '../../models/post';
+import { BookmarkModel, PostModel } from '../../models/post';
 import { InteractionItemModel } from '../../models/interaction';
 
 interface DetailStateProps {
@@ -117,6 +117,50 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         isSuccess: true,
       };
     case ACTIONS_TYPE.POST_COMMENT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+interface BookmarkState {
+  data: BookmarkModel[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  message: string;
+}
+const initialBookMarkState: BookmarkState = {
+  data: [] as BookmarkModel[],
+  isLoading: false,
+  isError: false,
+  isSuccess: false,
+  message: '',
+};
+
+export const bookmarkReducer = (state = initialBookMarkState, action: RootAction): BookmarkState => {
+  switch (action.type) {
+    case ACTIONS_TYPE.GET_BOOKMARK:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_BOOKMARK_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.GET_BOOKMARK_FAILURE:
       return {
         ...state,
         isLoading: false,

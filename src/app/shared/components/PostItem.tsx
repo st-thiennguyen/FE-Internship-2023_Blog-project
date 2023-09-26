@@ -50,6 +50,7 @@ const PostItem = ({ post }: PostItemProps) => {
   return (
     <>
       <div className="post">
+        <div className="book-mark"></div>
         <div
           className="post-delete d-flex item-center justify-center"
           onClick={(e) => {

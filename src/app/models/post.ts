@@ -18,9 +18,13 @@ export interface PostModel {
   [key: string]: any;
 }
 
-
 export interface SignatureImageModel {
-  signedRequest: string,
-  url: string,
+  signedRequest: string;
+  url: string;
 }
 
+export interface BookmarkModel {
+  id: string;
+  userId: string;
+  postId: string;
+}
