@@ -20,7 +20,7 @@ export type RootThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, un
 export const rootReducer = combineReducers({
   auth: authReducer,
   detail: detailPostReducer,
-  post: lastesPostReducer,
+  latestPost: lastesPostReducer,
   user: userReducer,
   imageSign: imageSignedReducer,
   writePost: writePostReducer,

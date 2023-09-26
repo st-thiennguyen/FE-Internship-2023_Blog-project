@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../stores/store';
@@ -59,6 +59,9 @@ const PostItem = ({ post }: PostItemProps) => {
         >
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
+        </div>
+        <div className="post-restore">
+          <i className="icon icon-xxl icon-restore-60"></i>
         </div>
         <div className="post-img-wrapper">
           <Link to={`/posts/${post.id}`}>

@@ -68,10 +68,10 @@ export const UploadUrlImagePost = (url: string, file: any) => {
     },
   });
 };
-export const deletePostItem = (id : string) => {
+export const deletePostItem = (id: string) => {
   const api = new ApiService();
   return api.delete(`${ENDPOINT.post.index}/${id}`);
-}
+};
 
 export const updateLike = (id: number) => {
   const api = new ApiService();
@@ -86,4 +86,9 @@ export const getPostComments = (id: string) => {
 export const postComment = (id: string, comment: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
+};
+
+export const getSoftDeletedPosts = (page: number, size: number) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recyclebin}`, { page, size });
 };
