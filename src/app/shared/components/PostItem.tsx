@@ -123,7 +123,11 @@ const PostItem = ({ post }: PostItemProps) => {
                   </Link>
                 );
               })}
-              {post.tags.length > 3 && <li className="tag tag-red">+{post.tags.length - 3}</li>}
+              {post.tags.length > 3 && (
+                <Link to={''}>
+                  <li className="tag tag-red">+{post.tags.length - 3}</li>
+                </Link>
+              )}
             </ul>
             <ul className="post-action-list">
               <li className="post-action-item">

@@ -20,16 +20,19 @@ const PostResult = () => {
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-
+  const tagsQuery = searchParams.get('tags');
   useEffect(() => {
     dispatch(resetCurrentPage());
   }, []);
 
   const getQuery = (): string[] => {
-    const tagsQuery = searchParams.get('tags');
     const tagArray = tagsQuery?.split(',');
     return tagArray || [];
   };
+
+  useEffect(() => {
+    dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
+  }, [tagsQuery]);
 
   useEffect(() => {
     dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
