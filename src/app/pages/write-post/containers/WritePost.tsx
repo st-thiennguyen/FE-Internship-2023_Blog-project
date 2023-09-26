@@ -113,10 +113,6 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     handleCreatePost();
   };
 
-  // useEffect(() => {
-  //   isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
-  // }, []);
-
   useEffect(() => {
     setValue('description', detailPost?.description || '');
     setValue('title', detailPost?.title || '');
