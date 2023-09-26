@@ -20,7 +20,7 @@
   margin-bottom: 20px;
 }
 
-.main-editor-post {
+.section-write-post {
   background-color: #fff;
 }
 
@@ -109,7 +109,7 @@
     &:hover {
       opacity: 0.6;
     }
-    
+
     .disable {
       cursor: context-menu;
     }
@@ -344,4 +344,3 @@
     flex: 1;
   }
 }
-

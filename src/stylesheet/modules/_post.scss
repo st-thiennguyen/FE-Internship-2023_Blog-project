@@ -49,9 +49,9 @@
 
   &:hover {
     box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-    .post-title {
-      color: map-get($color, primary);
-    }
+  }
+  .post-title:hover {
+    color: map-get($color, primary);
   }
   .post-created-date {
     font-size: map-get($font-size, sm);

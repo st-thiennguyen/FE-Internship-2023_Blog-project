@@ -48,7 +48,7 @@ const Header = () => {
               <ul className="navbar-list d-flex">
                 {isLogin && (
                   <li className="navbar-item">
-                    <Link to="/write" className="navbar-link">
+                    <Link to="/posts/create" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-write-20"></i>
                         <p className="navbar-subtext">Write</p>
@@ -60,29 +60,18 @@ const Header = () => {
                   {isLogin ? (
                     <>
                       <div className="navbar-content d-flex justify-center item-center">
-                        {!isErrorCover ? (
-                          <img
-                            src={authContext.userInfo.picture}
-                            alt="avatar"
-                            className="icon icon-small avatar-user-header"
-                          />
-                        ) : (
-                          <Link to="/login" className="navbar-link">
-                            <img src={avatarDefault} alt="avatar" className={`post-img err`} />
-                          </Link>
-                        )}
+                        <img
+                          src={!isErrorCover ? authContext.userInfo.picture : avatarDefault}
+                          alt="avatar"
+                          className="avatar-user-header"
+                        />
                       </div>
-
                       <div className="navbar-auth">
                         <ul className="auth-list">
                           <li className="auth-item">
                             <Link to="/profile" className="auth-link auth-link-info">
                               <div className="auth-info d-flex item-center">
-                                <img
-                                  src={authContext.userInfo.picture}
-                                  alt="avatar"
-                                  className="icon icon-small avatar-user"
-                                />
+                                <img src={authContext.userInfo.picture} alt="avatar" className="avatar-user" />
                                 <div className="auth-info-text">
                                   <p className="auth-info-name text-truncate-1">{authContext.userInfo?.displayName}</p>
                                   <p className="auth-info-email text-truncate-1">{authContext.userInfo?.email}</p>
@@ -91,20 +80,20 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
+                            <Link to="/posts/recyclebin" className="auth-link d-flex item-center">
                               <img src={icRecyclebin} alt="Icon recyclebin" />
                               <p>Recycle Bin</p>
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
-                              <img src={icBookmark} alt="Icon recyclebin" />
+                            <Link to="/posts/bookmark" className="auth-link d-flex item-center">
+                              <img src={icBookmark} alt="Icon bookmark" />
                               <p>Bookmark</p>
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
-                              <img src={icLogout} alt="Icon recyclebin" />
+                            <Link to="/logout" className="auth-link d-flex item-center" onClick={handleLogout}>
+                              <img src={icLogout} alt="Icon logout" />
                               <p>Logout</p>
                             </Link>
                           </li>
