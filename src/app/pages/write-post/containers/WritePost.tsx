@@ -114,17 +114,15 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
 
   const handleSaveDraft = handleSubmit(async (data: FormData) => {
     setIsLoading(true);
-    if (validate()) {
-      await dispatch(
-        saveToDraft({
-          ...data,
-          content: content,
-          cover: cover,
-          status: 'draft',
-        }) as any,
-      );
-      setIsShowToast(true);
-    }
+    await dispatch(
+      saveToDraft({
+        ...data,
+        content: content,
+        cover: cover,
+        status: 'draft',
+      }) as any,
+    );
+    setIsShowToast(true);
   });
 
   const onPublishPost = () => {
@@ -153,7 +151,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }, 3000);
   }
 
-  // innit and dispose
+  // init and dispose
   useEffect(() => {
     window.scrollTo(0, 0);
     isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
