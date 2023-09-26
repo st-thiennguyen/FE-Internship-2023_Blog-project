@@ -12,6 +12,8 @@ const initState: PostProps = {
 
 export const writePostReducer = (state = initState, action: RootAction) => {
   switch (action.type) {
+    case 'RESET_STATE_WRITEPOST':
+      return initState;
     case ACTIONS_TYPE.ADD_POST:
       return {
         ...state,

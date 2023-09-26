@@ -10,16 +10,17 @@ import ToastMessage from '../../../shared/components/ToastMessage';
 import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
-import { RootState } from '../../../stores/store';
-import { createPost, updatePost } from '../write-post.action';
-import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
+
+import { RootState } from '../../../stores/store';
+import { createPost, resetWriteState, updatePost } from '../write-post.action';
+import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 import { Auth } from '../../../models/auth';
-import WritePostHeader from '../components/WritePostHeader';
+import { PostModel } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -53,19 +54,21 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  
   const formRef = useRef<HTMLFormElement>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const message = useSelector((state: RootState) => state.writePost.message);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const detailPost: any = useSelector((state: RootState) => state.detail.data);
+  const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
   const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
   const accessToken = localStorageAuth?.accessToken;
+  const post: PostModel = useSelector((state: RootState) => state.writePost.data);
 
   const { id } = useParams();
 
@@ -104,13 +107,10 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }
   });
 
-  const handleCreatePost = handleSubmit((data: any) => {
+  const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
-      dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
+      await dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
       setIsShowToast(true);
-      setTimeout(() => {
-        navigate(`/`);
-      }, 3000);
     }
   });
 
@@ -122,6 +122,9 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   useEffect(() => {
     setValue('description', detailPost?.description || '');
     setValue('title', detailPost?.title || '');
+    if (detailPost.content && isUpdate) {
+      setContent(detailPost.content);
+    }
   }, [detailPost]);
 
   useEffect(() => {
@@ -130,15 +133,17 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }
   }, [accessToken]);
 
-  useEffect(() => {
-    dispatch(fetchDetailBlog(Number(id)) as any);
-  }, []);
+  if (isSuccess && isShowToast) {
+    setTimeout(() => {
+      navigate(`/posts/${post.id}`);
+    }, 3000);
+  }
 
+  // init and dispose
   useEffect(() => {
-    if (detailPost.content && isUpdate) {
-      setContent(detailPost.content);
-    }
-  }, [detailPost.content]);
+    isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
+    return () => dispatch(resetWriteState() as any);
+  }, []);
 
   return (
     <>
@@ -209,7 +214,12 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
         </div>
       </section>
       {isShowToast && isSuccess && (
-        <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle={message} />
+        <ToastMessage
+          isSuccess={isSuccess}
+          isShow={isSuccess}
+          title="Success"
+          subtitle="Redirecting to detail post..."
+        />
       )}
       {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
     </>
