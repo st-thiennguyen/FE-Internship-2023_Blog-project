@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { regexEmail } from '../../../shared/constants';
+import { StorageKey, regexEmail } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
 import { loginAction, registerReset } from '../auth.actions';
 import { AuthContext } from '../../../App';
@@ -20,6 +20,7 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
+import { getLocalStorage } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -39,11 +40,10 @@ type FormData = {
 };
 
 const Login = () => {
-  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isLogin = authContext?.accessToken;
+  const localStorageAuth: any = getLocalStorage(StorageKey.AUTH) || null;
+  const isLogin = localStorageAuth?.accessToken;
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
@@ -72,14 +72,15 @@ const Login = () => {
     dispatch(loginAction(data.email, data.password) as any);
   });
 
-  const removeStateRegister = useRef(() => {});
+  const removeStateRegister = useRef(() => { });
+  
   removeStateRegister.current = () => {
     isRegisterSuccess && dispatch(registerReset());
   };
 
   useEffect(() => {
-    removeStateRegister.current();
     if (isLogin) {
+      removeStateRegister.current();
       navigate('/');
     }
   }, [isLogin]);
@@ -161,17 +162,26 @@ const Login = () => {
           <img src={loginImg} alt="background login" className="auth-img" />
         </div>
       </div>
-      {registerState.isRegisterSuccess && (
-        <ToastMessage
-          isShow={registerState.isRegisterSuccess}
-          isSuccess={registerState.isRegisterSuccess}
-          title={'Success'}
-          subtitle={registerState.registerMessage}
-        />
-      )}
-      {isErrorLogin && (
-        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
-      )}
+      {
+        registerState.isRegisterSuccess && (
+          <ToastMessage
+            isShow={registerState.isRegisterSuccess}
+            isSuccess={registerState.isRegisterSuccess}
+            title={'Success'}
+            subtitle={registerState.registerMessage}
+          />
+        )
+      }
+      {
+        isErrorLogin && (
+          <ToastMessage
+            isShow={isErrorLogin}
+            isSuccess={!isErrorLogin}
+            title={'Error'}
+            subtitle={message}
+          />
+        )
+      }
     </div>
   );
 };

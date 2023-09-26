@@ -61,7 +61,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const navigate = useNavigate();
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken || '');
 
   const { id } = useParams();
 

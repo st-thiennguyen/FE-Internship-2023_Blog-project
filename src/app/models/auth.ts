@@ -1,5 +1,5 @@
 export interface Auth {
-  accessToken: string;
+  accessToken: string | null;
   userInfo: UserInfo;
 }
 

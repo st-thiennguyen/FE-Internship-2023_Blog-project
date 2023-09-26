@@ -54,7 +54,7 @@ const Register = () => {
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.auth.isError);
   const message: string = useSelector((state: RootState) => state.auth.message);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken || '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
