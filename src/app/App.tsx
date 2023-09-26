@@ -4,18 +4,16 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RootState } from './stores/store';
 import { appRoutes } from './app.routes';
-import authRoutes from './pages/auth/auth.routes';
 
 import Layout from './pages/Layout';
-import PrivateRoute from './shared/components/privateRoute';
+import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
-import WritePost from './pages/write-post/containers/WritePost';
+import { authRoutes } from './pages/auth/auth.routes';
 
 interface RouteItem {
-  name?: string;
   path: string;
   component: (props: any) => JSX.Element;
-  isAuth?: Boolean;
+  isProtected?: Boolean;
   children?: RouteItem[];
   props?: Object;
 }
@@ -31,15 +29,15 @@ function App() {
           <Route key={val.name} path={val.path} element={<val.component />} />
         ))}
         <Route path="/" element={<Layout />}>
-          {appRoutes.map((val: RouteItem) => (
-            <Route key={val.name} path={val.path} element={<val.component />}>
+          {appRoutes.map((val: RouteItem, index) => (
+            <Route key={index} path={val.path} element={<val.component />}>
               {val.children &&
-                val.children.map((item) => (
+                val.children.map((item, idx) => (
                   <Route
-                    key={item.name}
+                    key={idx}
                     path={item.path}
                     element={
-                      item.isAuth ? (
+                      item.isProtected ? (
                         <PrivateRoute>
                           <item.component {...item.props} />
                         </PrivateRoute>
@@ -52,8 +50,6 @@ function App() {
             </Route>
           ))}
         </Route>
-        <Route path='/posts/create' element={<WritePost isUpdate={false} />}></Route>
-        <Route path='/posts/update/:id' element={<WritePost isUpdate={true} />}></Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
     </AuthContext.Provider>

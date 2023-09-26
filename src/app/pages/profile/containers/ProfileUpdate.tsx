@@ -20,55 +20,57 @@ const ProfileUpdate = () => {
   };
 
   return (
-    <div className="update-profile">
-      <section className="section section-update-profile">
-        <div className="update-profile-wrapper">
-          <nav>
-            <ul className="tabs-list">
-              <li className={`tabs-item ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}>
-                <div
-                  title="Update Information"
-                  className="tabs-link d-flex justify-center item-center"
-                  onClick={() => onChangeTab(Tab.UPDATE_USER_INFO)}
-                >
-                  <img src={icInfo} alt="Icon update infomation" />
-                  Update Information
-                </div>
-              </li>
-              <li className={`tabs-item ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}>
-                <div
-                  title="Update Information"
-                  className="tabs-link d-flex justify-center item-center"
-                  onClick={() => onChangeTab(Tab.CHANGE_PASSWORD)}
-                >
-                  <img src={icChangePass} alt="Icon update infomation" />
-                  Change Password
-                </div>
-              </li>
-            </ul>
-          </nav>
+    <section className="section section-update-profile">
+      <div className="container">
+        <div className="update-profile">
+          <div className="update-profile-wrapper">
+            <nav>
+              <ul className="tabs-list">
+                <li className={`tabs-item ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}>
+                  <div
+                    title="Update Information"
+                    className="tabs-link d-flex justify-center item-center"
+                    onClick={() => onChangeTab(Tab.UPDATE_USER_INFO)}
+                  >
+                    <img src={icInfo} alt="Icon update infomation" />
+                    Update Information
+                  </div>
+                </li>
+                <li className={`tabs-item ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}>
+                  <div
+                    title="Update Information"
+                    className="tabs-link d-flex justify-center item-center"
+                    onClick={() => onChangeTab(Tab.CHANGE_PASSWORD)}
+                  >
+                    <img src={icChangePass} alt="Icon update infomation" />
+                    Change Password
+                  </div>
+                </li>
+              </ul>
+            </nav>
 
-          <div className="tab-content-wrapper">
-            <section
-              id="tab-update-info-content"
-              className={`section section-update-info ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}
-              data-tab-content
-            >
-              <UserUpdateForm isShowToast={isShowToast} setIsShowToast={setIsShowToast} />
-            </section>
-            <section
-              id="tab-change-password-content"
-              className={`section section-change-password ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}
-              data-tab-content
-            >
-              <div className="tab-content">
-                <UpdatePasswordForm isShowToast={isShowToast} setIsShowToast={setIsShowToast} />
-              </div>
-            </section>
+            <div className="tab-content-wrapper">
+              <section
+                id="tab-update-info-content"
+                className={`section section-update-info ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}
+                data-tab-content
+              >
+                <UserUpdateForm isShowToast={isShowToast} setIsShowToast={setIsShowToast} />
+              </section>
+              <section
+                id="tab-change-password-content"
+                className={`section section-change-password ${tab === Tab.CHANGE_PASSWORD ? 'active' : ''}`}
+                data-tab-content
+              >
+                <div className="tab-content">
+                  <UpdatePasswordForm isShowToast={isShowToast} setIsShowToast={setIsShowToast} />
+                </div>
+              </section>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

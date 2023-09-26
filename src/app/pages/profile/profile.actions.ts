@@ -2,8 +2,14 @@ import { Dispatch } from 'react';
 
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { updatePassword, updateProfile, getUserPosts, getUserProfile } from '../../shared/services/user.service';
-import { UserModel, formChangePassword, ProfileModel } from '../../models/user';
+import {
+  updatePassword,
+  updateProfile,
+  getUserPosts,
+  getUserProfile,
+  updateFollow,
+} from '../../shared/services/user.service';
+import { UserModel, FormChangePassword, ProfileModel, FollowModel } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
@@ -119,13 +125,33 @@ export const deletePostItemStart = () => {
 const deletePostItemSuccess = (id: string, res: string) => {
   return {
     type: ACTIONS_TYPE.REMOVE_POST_ITEM_SUCCESS,
-    payload: {id, res},
+    payload: { id, res },
   };
 };
 
 const deletePostItemFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.REMOVE_POST_ITEM_FAILURE,
+    payload: error,
+  };
+};
+
+const updateFollowStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOW,
+  };
+};
+
+const updateFollowSuccess = (response: FollowModel) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOW_SUCCESS,
+    payload: response.followed,
+  };
+};
+
+const updateFollowFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOW_FAILURE,
     payload: error,
   };
 };
@@ -189,7 +215,7 @@ export const updateProfileAction =
     }
   };
 
-export const updatePasswordAction = (data: formChangePassword) => async (dispatch: Dispatch<RootAction>) => {
+export const updatePasswordAction = (data: FormChangePassword) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updatePasswordStart());
   try {
     await updatePassword(data);
@@ -205,6 +231,16 @@ export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>)
     const response = await deletePostItem(id);
     dispatch(deletePostItemSuccess(id, response as string));
   } catch (error) {
-   dispatch(deletePostItemFailure(error as string)) 
+    dispatch(deletePostItemFailure(error as string));
   }
-}
+};
+
+export const updateFollowAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateFollowStart());
+  try {
+    const response = await updateFollow(id);
+    dispatch(updateFollowSuccess(response as FollowModel));
+  } catch (error) {
+    dispatch(updateFollowFailure(`${error}`));
+  }
+};

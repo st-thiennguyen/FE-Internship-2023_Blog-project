@@ -12,8 +12,13 @@
   font-size: map-get($font-size, sm);
   font-weight: map-get($font-size, semibold);
   text-transform: capitalize;
+  transition: all ease 0.3s;
 
   cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.5;
 }
 
 .btn.disabled {

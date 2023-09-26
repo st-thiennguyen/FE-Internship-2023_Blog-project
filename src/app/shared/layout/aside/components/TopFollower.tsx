@@ -13,7 +13,7 @@ const TopFollower = ({ users }: TopFollowerProps) => {
           return (
             <li className="user-item d-flex justify-between flex-wrap" key={user.id}>
               <div className="user-info-wrapper d-flex">
-                <Link className="user-link" to={'/'}>
+                <Link className="user-link" to={`/profile/${user.id}`}>
                   <img
                     className="user-avatar"
                     src={require('../../../../../assets/images/demo-cover.jpg')}
@@ -21,7 +21,9 @@ const TopFollower = ({ users }: TopFollowerProps) => {
                   />
                 </Link>
                 <div className="user-info">
-                  <h4 className="user-name">{user.displayName}</h4>
+                  <Link className="user-link" to={`/profile/${user.id}`}>
+                    <h4 className="user-name">{user.displayName}</h4>
+                  </Link>
                   <span className="followers">{user.followers} followers</span>
                 </div>
               </div>

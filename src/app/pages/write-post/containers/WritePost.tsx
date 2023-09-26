@@ -93,7 +93,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
       dispatch(updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, detailPost.id) as any);
       setIsShowToast(true);
       setTimeout(() => {
-        navigate(`/posts/detail/${id}`);
+        navigate(`/posts/${id}`);
       }, 3000);
     }
   });
@@ -107,6 +107,11 @@ const WritePost = ({ isUpdate }: writePostProps) => {
       }, 3000);
     }
   });
+
+  const onPublishPost = () => {
+    validate();
+    handleCreatePost();
+  };
 
   useEffect(() => {
     setValue('description', detailPost?.description || '')
@@ -133,7 +138,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     <>
       (
       <>
-        <WritePostHeader isUpdate={isUpdate} onPublishPost={handleCreatePost} handleUpdatePost={handleUpdatePost} />
+        <WritePostHeader isUpdate={isUpdate} onPublishPost={onPublishPost} handleUpdatePost={handleUpdatePost} />
         <main className="main main-editor-post">
           <div className="container">
             <div className="main-body">
@@ -191,7 +196,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                         />
                       )}
                       <EditorPostTags tags={tags.length ? tags : (detailPost?.tags || [])} setTags={setTags} isUpdate={isUpdate} />
-                      <EditorPostActions onPublish={handleCreatePost} onSaveDraft={() => alert('COMMING SOON')} />
+                      <EditorPostActions onPublish={handleCreatePost} onSaveDraft={() => alert('COMMING SOON')} isUpdate={isUpdate} />
                     </aside>
                   </div>
                 </div>
@@ -204,12 +209,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
       )
 
       {isShowToast && isSuccess && (
-        <ToastMessage
-          isSuccess={isSuccess}
-          isShow={isSuccess}
-          title="success"
-          subtitle={message}
-        />
+        <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle={message} />
       )}
       {isShowToast && isError && (
         <ToastMessage

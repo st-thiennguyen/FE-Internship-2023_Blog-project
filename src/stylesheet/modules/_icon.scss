@@ -9,8 +9,8 @@
   }
 
   &-medium {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
   }
 
   &-user-20 {
@@ -107,6 +107,16 @@
 
   &-trash-20 {
     background-image: url("../../assets/icons/ic-trash-20.svg");
+  }
+
+  &-logout-24 {
+    background-image: url("../../assets/icons/ic-logout-24.svg");
+  }
+  &-recyclebin-24 {
+    background-image: url("../../assets/icons/ic-recyclebin-24.svg");
+  }
+  &-bookmark-24 {
+    background-image: url("../../assets/icons/ic-bookmark-24.svg");
   }
 
   &-trash-fill-20 {

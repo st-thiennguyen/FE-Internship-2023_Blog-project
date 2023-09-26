@@ -23,14 +23,17 @@
     font-weight: map-get($font-weight, semibold);
   }
 
-  .avatar-user {
+  .avatar-user-header {
+    width: 40px;
+    height: 40px;
+    padding: 1px;
     margin-left: 15px;
-    width: 25px;
-    height: 25px;
     border-radius: 50%;
+    border: 1px solid #333;
+    object-fit: cover;
   }
 
-  .header-btn-login{
+  .header-btn-login {
     border-radius: 25px;
     margin-left: 15px;
   }
