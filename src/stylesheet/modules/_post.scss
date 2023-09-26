@@ -154,3 +154,15 @@
     }
   }
 }
+
+.empty-post {
+  &-img {
+    width: 700px;
+  }
+  &-title {
+    font-size: 32px;
+  }
+  &-desc {
+    color: map-get($color, subtext);
+  }
+}
