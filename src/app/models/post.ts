@@ -73,10 +73,10 @@ export interface DetailState {
 
 export interface PostState {
   data: PostModel;
-  isLoading: Boolean;
-  isSuccess: Boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
   message: string;
-  isError?: Boolean;
+  isError?: boolean;
 }
 
 export interface QueryPost {

@@ -11,7 +11,7 @@ import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
 import { RootState } from '../../../stores/store';
-import { createPost, resetWriteState, updatePost } from '../write-post.action';
+import { createPost, resetWriteState, saveToDraft, updatePost } from '../write-post.action';
 import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
@@ -50,6 +50,8 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  const [isLoading, setIsLoading] = useState(false);
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
@@ -90,6 +92,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   };
 
   const handleUpdatePost = handleSubmit((data: any) => {
+    setIsLoading(true);
     if (validate()) {
       dispatch(
         updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, detailPost.id) as any,
@@ -102,8 +105,24 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   });
 
   const handleCreatePost = handleSubmit(async (data: any) => {
+    setIsLoading(true);
     if (validate()) {
       await dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
+      setIsShowToast(true);
+    }
+  });
+
+  const handleSaveDraft = handleSubmit(async (data: FormData) => {
+    setIsLoading(true);
+    if (validate()) {
+      await dispatch(
+        saveToDraft({
+          ...data,
+          content: content,
+          cover: cover,
+          status: 'draft',
+        }) as any,
+      );
       setIsShowToast(true);
     }
   });
@@ -129,12 +148,14 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
 
   if (isSuccess && isShowToast) {
     setTimeout(() => {
+      setIsLoading(false);
       navigate(`/posts/${post.id}`);
     }, 3000);
   }
 
   // innit and dispose
   useEffect(() => {
+    window.scrollTo(0, 0);
     isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
     return () => dispatch(resetWriteState() as any);
   }, []);
@@ -198,11 +219,13 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
                 setTags={setTags}
                 isUpdate={isUpdate}
               />
-              <EditorPostActions
-                onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
-                onSaveDraft={() => alert('COMMING SOON')}
-                isUpdate={isUpdate}
-              />
+              <div className={isLoading ? 'action-disabled' : 'action-wrapper'}>
+                <EditorPostActions
+                  onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
+                  onSaveDraft={handleSaveDraft}
+                  isUpdate={isUpdate}
+                />
+              </div>
             </aside>
           </div>
         </div>

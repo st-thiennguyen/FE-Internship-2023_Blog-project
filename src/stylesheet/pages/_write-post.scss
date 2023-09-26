@@ -23,6 +23,10 @@
 
 .section-write-post {
   background-color: #fff;
+  .action-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .write-post {
