@@ -38,11 +38,11 @@ type FormData = {
   description: string;
 };
 
-interface writePostProps {
+interface WritePostProps {
   isUpdate: boolean;
 }
 
-const WritePost = ({ isUpdate }: writePostProps) => {
+const WritePost = ({ isUpdate }: WritePostProps) => {
   const [statusPost, setStatusPost] = useState('public');
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
