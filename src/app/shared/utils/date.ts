@@ -32,7 +32,7 @@ export const timeAgoFromDate = (inputDate: string): string => {
   } else if (hoursDifference > 0) {
     return `${hoursDifference}h ago`;
   } else if (minutesDifference > 0) {
-    return `${minutesDifference}minute${minutesDifference > 1 ? 's' : ''} ago`;
+    return `${minutesDifference} minute${minutesDifference > 1 ? 's' : ''} ago`;
   } else {
     return `just now`;
   }

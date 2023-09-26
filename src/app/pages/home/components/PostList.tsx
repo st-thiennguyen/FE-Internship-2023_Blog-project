@@ -1,7 +1,7 @@
 import { PostModel } from '../../../models/post';
 
 import PostItem from '../../../shared/components/PostItem';
-import EmptyPost from './EmptyPost';
+import EmptyPost from '../../../shared/components/EmptyPost';
 
 interface PostListProps {
   posts: PostModel[];

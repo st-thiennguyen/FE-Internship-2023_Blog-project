@@ -82,23 +82,8 @@
     }
   }
   .section-latest-post {
-    .empty-post {
-      padding: 40px 20px;
-      border-radius: 6px;
-
-      background-color: #fff;
-      &-img {
-        width: 300px;
-        height: 300px;
-      }
-      &-title {
-        font-size: 32px;
-      }
-      &-desc {
-        color: map-get($color, subtext);
-      }
-    }
-    .post-action-list, .post-delete {
+    .post-action-list,
+    .post-delete {
       display: none;
     }
   }

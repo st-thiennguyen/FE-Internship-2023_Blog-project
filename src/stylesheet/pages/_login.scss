@@ -33,11 +33,6 @@
     }
   }
 
-  .register-link {
-    color: map-get($map: $color, $key: primary);
-    font-weight: map-get($map: $font-weight, $key: semibold);
-  }
-
   .error-login-fail {
     font-size: map-get($map: $font-size, $key: md);
   }
