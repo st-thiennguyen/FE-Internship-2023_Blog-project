@@ -206,9 +206,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
       {isShowToast && isSuccess && (
         <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle={message} />
       )}
-      {isShowToast && isError && (
-        <ToastMessage isSuccess={isError} isShow={isError} title={'Error'} subtitle={message} />
-      )}
+      {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
     </>
   );
 };
