@@ -1,6 +1,5 @@
 import { Dispatch } from 'react';
 
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import {
   updatePassword,
@@ -12,8 +11,8 @@ import {
 import { UserModel, FormChangePassword, ProfileModel, FollowModel } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
-import { StorageKey, TypeUploadImage } from '../../shared/constants';
-import { getLocalStorage, setLocalStorage } from '../../shared/utils';
+import { ACTIONS_TYPE, StorageKey, TypeUploadImage } from '../../shared/constants';
+import { getLocalStorage } from '../../shared/utils';
 import { reAssignmentAuth } from '../auth/auth.actions';
 import { deletePostItem } from '../../shared/services';
 
@@ -207,9 +206,8 @@ export const updateProfileAction =
           userData.userInfo[key] = userUpdated[key];
         }
       }
-      dispatch(reAssignmentAuth(userData));
 
-      setLocalStorage(StorageKey.AUTH, { ...userData });
+      dispatch(reAssignmentAuth(userData));
     } catch (error) {
       dispatch(updateProfileFailure(`${error}`));
     }

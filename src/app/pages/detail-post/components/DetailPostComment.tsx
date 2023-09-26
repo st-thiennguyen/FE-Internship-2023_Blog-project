@@ -13,7 +13,7 @@ import { Auth } from '../../../models/auth';
 
 const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const listComment = useSelector((state: RootState) => state.detail.comments);
-  const currentUser = useSelector((state: RootState) => state.auth.auth?.userInfo);
+  const currentUser = useSelector((state: RootState) => state.auth?.user);
   const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
   const isLogin = localStorageAuth?.accessToken;
 

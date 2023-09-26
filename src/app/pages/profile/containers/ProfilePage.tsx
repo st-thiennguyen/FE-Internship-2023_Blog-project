@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 
@@ -9,7 +9,8 @@ import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
 
 const ProfilePage = () => {
-  const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
+  const userId = useSelector((state: RootState) => state.auth?.user.id);
+  console.log(userId);
   const isError = useSelector((state: RootState) => state.profile.isError);
 
   const dispatch = useDispatch();

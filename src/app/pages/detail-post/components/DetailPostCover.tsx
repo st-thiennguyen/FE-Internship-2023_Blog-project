@@ -1,11 +1,6 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { isImageUrlValid } from '../../../shared/utils';
 import { convertDateToString } from '../../../shared/utils/date';
-
-import noImage from '../../../../assets/images/no-image.png';
-import avaDefault from '../../../../assets/images/user-default.png';
 
 type DetailPostCoverProps = {
   cover: string;
@@ -16,7 +11,7 @@ type DetailPostCoverProps = {
   authorId: number;
 };
 
-const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost, authorId }: DetailPostCoverProps) => {
+const DetailPostCover = ({ cover, authorAvatar, authorName, datePost, authorId }: DetailPostCoverProps) => {
   return (
     <section className="section section-detail-cover">
       <div className="detail-cover">

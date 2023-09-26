@@ -1,5 +1,5 @@
 import { PostProps } from '../../models/post';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
 const initState: PostProps = {
@@ -55,7 +55,7 @@ export const writePostReducer = (state = initState, action: RootAction) => {
       return {
         ...state,
         isLoading: false,
-        message: 'Update post fail !',
+        message: action.payload,
         isSuccess: false,
         isError: true,
       };

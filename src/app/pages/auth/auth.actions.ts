@@ -1,11 +1,10 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
-import { StorageKey } from '../../shared/constants';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
-import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../../stores/store';
+import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 export const loginStart = () => {
   return {
     type: ACTIONS_TYPE.LOGIN,

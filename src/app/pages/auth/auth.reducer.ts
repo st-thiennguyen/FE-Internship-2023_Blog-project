@@ -1,20 +1,22 @@
-import { Auth } from '../../models/auth';
-import { StorageKey } from '../../shared/constants';
-import ACTIONS_TYPE from '../../shared/constants/type';
-import { getLocalStorage } from '../../shared/utils';
+import { userInfo } from 'os';
+import { Auth, UserInfo } from '../../models/auth';
+import { StorageKey, ACTIONS_TYPE } from '../../shared/constants';
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
 
 export interface AuthState {
-  auth: Auth;
+  user: UserInfo;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
   message: string;
-  isLogoutSuccess : boolean
+  isLogoutSuccess: boolean
 }
 
+const info: any = getLocalStorage(StorageKey.AUTH, {} as any);
+
 const initState: AuthState = {
-  auth: getLocalStorage(StorageKey.AUTH) || null,
+  user: info.userInfo,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -71,9 +73,10 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       };
     }
     case ACTIONS_TYPE.LOGIN_SUCCESS: {
+      setLocalStorage(StorageKey.AUTH, action.payload);
       return {
         ...state,
-        auth: {...action.payload , accessToken: null},
+        user: action.payload.userInfo,
         isLoading: false,
         isSuccess: true,
         isError: false,
@@ -92,9 +95,10 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.REASSIGNMENT_AUTH: {
+      setLocalStorage(StorageKey.AUTH, { ...action.payload });
       return {
         ...state,
-        auth: action.payload,
+        user: action.payload,
       };
     }
 
@@ -108,6 +112,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.LOGOUT_SUCCESS: {
+      removeLocalStorage(StorageKey.AUTH);
       return {
         ...state,
         isLoading: false,

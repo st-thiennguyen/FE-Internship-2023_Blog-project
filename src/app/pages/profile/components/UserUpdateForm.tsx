@@ -48,12 +48,12 @@ interface UpdateUserFormProps {
 
 const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
-  const user = useSelector((state: RootState) => state.auth.auth?.userInfo);
+  const user = useSelector((state: RootState) => state.auth?.user);
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
   const isError = useSelector((state: RootState) => state.profile.isError);
   const message = useSelector((state: RootState) => state.profile.message);
-  const userPicture = useSelector((state: RootState) => state.profile.data.picture);
+  const userPicture = useSelector((state: RootState) => state.auth?.user.picture);
 
   const dispatch = useDispatch();
 
@@ -185,7 +185,9 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
                 {errors.phoneNumber && <p className="form-error">{errors.phoneNumber?.message}</p>}
               </div>
 
-              <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={false} />
+              <div className="d-flex justify-center mt-5">
+                <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
+              </div>
             </fieldset>
           </form>
         </div>
