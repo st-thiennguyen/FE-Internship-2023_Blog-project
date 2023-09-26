@@ -128,14 +128,6 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     }
   }, [detailPost.content]);
 
-  const onRemovePreview = () => {
-    setPhotoPreview('');
-
-    if (coverImageRef.current) {
-      coverImageRef.current.value = '';
-    }
-  };
-
   return (
     <>
       {isUpdate ? (
@@ -188,11 +180,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                 <aside className="aside aside-write-post d-flex flex-column  col col-3">
                   <EditorPostVisibility onChangeValue={setStatusPost} />
                   {photoPreview && (
-                    <EditorImageCoverPreview
-                      photoPreview={photoPreview}
-                      onRemovePreview={() => setPhotoPreview('')}
-                      isUpdate={isUpdate}
-                    />
+                    <EditorImageCoverPreview photoPreview={photoPreview} onRemovePreview={() => setPhotoPreview('')} />
                   )}
                   <EditorPostTags
                     tags={detailPost.tags ? detailPost.tags : tags}
@@ -255,11 +243,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
                 <aside className="aside aside-write-post d-flex flex-column  col col-3">
                   <EditorPostVisibility onChangeValue={setStatusPost} />
                   {photoPreview && (
-                    <EditorImageCoverPreview
-                      photoPreview={photoPreview}
-                      onRemovePreview={() => setPhotoPreview('')}
-                      isUpdate={isUpdate}
-                    />
+                    <EditorImageCoverPreview photoPreview={photoPreview} onRemovePreview={() => setPhotoPreview('')} />
                   )}
                   <EditorPostTags tags={tags} setTags={setTags} isUpdate={isUpdate} />
                   <EditorPostActions

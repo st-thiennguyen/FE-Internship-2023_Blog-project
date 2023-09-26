@@ -1,14 +1,6 @@
-import { PostModel } from '../../models/post';
+import { PostProps } from '../../models/post';
 import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
-
-interface PostProps {
-  data: PostModel;
-  isLoading: Boolean;
-  isSuccess: Boolean;
-  message: string;
-  isError?: Boolean;
-}
 
 const initState: PostProps = {
   data: {} as any,
