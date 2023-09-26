@@ -5,8 +5,9 @@ import { StorageKey } from '../constants';
 import { getLocalStorage } from '../utils';
 
 const PrivateRoute = ({ children }: any) => {
-  const localStorageToken: Auth = getLocalStorage(StorageKey.AUTH);
-  if (!localStorageToken?.accessToken) {
+  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
+  const accessToken = localStorageAuth?.accessToken;
+  if (!accessToken) {
     return <Navigate to="/login" />;
   }
   return <>{children}</>;

@@ -21,6 +21,7 @@ import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
 import { getLocalStorage } from '../../../shared/utils';
+import { Auth } from '../../../models/auth';
 
 const schema = yup
   .object({
@@ -42,8 +43,8 @@ type FormData = {
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const localStorageAuth: any = getLocalStorage(StorageKey.AUTH) || null;
-  const isLogin = localStorageAuth?.accessToken;
+  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
+  const isAccessToken = localStorageAuth?.accessToken;
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
@@ -79,11 +80,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isLogin) {
+    if (isAccessToken) {
       removeStateRegister.current();
       navigate('/');
     }
-  }, [isLogin]);
+  }, [isAccessToken]);
 
   return (
     <div className="auth">

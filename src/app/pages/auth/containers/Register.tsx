@@ -8,11 +8,13 @@ import * as yup from 'yup';
 import { RootState } from '../../../stores/store';
 import { registerAction } from '../auth.actions';
 import { convertDateToString } from '../../../shared/utils/date';
-import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
+import { Gender, StorageKey, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import logo from '../../../../assets/images/logo.svg';
+import { getLocalStorage } from '../../../shared/utils';
+import { Auth } from '../../../models/auth';
 
 const schema = yup
   .object({
@@ -54,7 +56,8 @@ const Register = () => {
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.auth.isError);
   const message: string = useSelector((state: RootState) => state.auth.message);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken || '');
+  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
+  const accessToken = localStorageAuth?.accessToken;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

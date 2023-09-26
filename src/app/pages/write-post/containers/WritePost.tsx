@@ -18,6 +18,7 @@ import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
+import { Auth } from '../../../models/auth';
 
 const schema = yup
   .object({
@@ -62,7 +63,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const navigate = useNavigate();
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data);
-  const localStorageAuth: any = getLocalStorage(StorageKey.AUTH) || null;
+  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
   const accessToken = localStorageAuth?.accessToken;
 
   const { id } = useParams();
