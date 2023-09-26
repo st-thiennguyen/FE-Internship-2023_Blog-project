@@ -4,7 +4,7 @@ import ACTIONS_TYPE from '../../shared/constants/type';
 import { getLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
 
-export interface AuthStateProps {
+export interface AuthState {
   auth: Auth;
   isLoading: boolean;
   isError: boolean;
@@ -13,7 +13,7 @@ export interface AuthStateProps {
   isLogoutSuccess : boolean
 }
 
-const initState: AuthStateProps = {
+const initState: AuthState = {
   auth: getLocalStorage(StorageKey.AUTH) || null,
   isLoading: false,
   isError: false,
@@ -22,7 +22,7 @@ const initState: AuthStateProps = {
   isLogoutSuccess: false
 };
 
-export const authReducer = (state = initState, action: RootAction): AuthStateProps => {
+export const authReducer = (state = initState, action: RootAction): AuthState => {
   switch (action.type) {
     case ACTIONS_TYPE.REGISTER_RESET_STATE: {
       return {

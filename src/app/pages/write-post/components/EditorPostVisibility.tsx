@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 
 interface EditorPostVisibilityProps {
   onChangeValue: (value: string) => void;
+  currentStatus?: string | undefined;
 }
 
-const EditorPostVisibility = ({ onChangeValue }: EditorPostVisibilityProps) => {
+const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibilityProps) => {
   const [status, setStatus] = useState('public');
-
+  useEffect(() => {
+    if(currentStatus) setStatus(currentStatus);
+  }, [currentStatus])
   useEffect(() => {
     onChangeValue(status);
   }, [status]);

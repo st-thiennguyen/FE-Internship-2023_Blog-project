@@ -1,17 +1,17 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import iconImage from '../../../../assets/icons/ic-image-25.svg';
 import { fetchSignUrlImage } from '../image-sign.action';
+
+import iconImage from '../../../../assets/icons/ic-image-25.svg';
 
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
   setPhotoPreview: (value: string) => void;
-  isUpdate?: boolean
   setErrorCoverMessage: (value: string) => void;
 }
 
-const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage , isUpdate }: EditorImageCoverProps) => {
+const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage }: EditorImageCoverProps) => {
   const coverImageRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
     if (photoPreview !== '') {
       setPhotoPreview(photoPreview as string);
     }
-  }, [photoPreview])
+  }, [photoPreview]);
 
   return (
     <div className="editor-cover">
@@ -78,7 +78,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
             <h5 className="editor-cover-title">Cover Image</h5>
             <div className="editor-cover-content d-flex flex-column item-center">
               <p className="editor-cover-txt">Select the cover image you would like to attach.</p>
-              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} disabled={isUpdate}>
+              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} >
                 <img src={iconImage} alt="Icon add image cover" width={30} height={30} />
               </button>
               <p className="editor-cover-subtxt">Image type</p>

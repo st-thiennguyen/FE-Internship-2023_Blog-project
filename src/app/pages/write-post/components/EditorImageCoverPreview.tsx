@@ -12,7 +12,7 @@ const EditorImageCoverPreview = ({ photoPreview, onRemovePreview, isUpdate }: Ed
         <img src={photoPreview} alt="Preview of image cover post" />
       </div>
       <div className="d-flex justify-end" onClick={onRemovePreview}>
-        <button type="button" className="btn btn-secondary btn-remove-preview" disabled={isUpdate}>
+        <button type="button" className="btn btn-secondary btn-remove-preview" >
           Remove Cover
         </button>
       </div>

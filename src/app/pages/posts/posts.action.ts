@@ -1,8 +1,8 @@
 import { Dispatch } from 'react';
 
-import { PostModel } from '../../models/post';
+import { PostModel, QueryPost } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
-import { QueryPost, getPublicPosts } from '../../shared/services/index';
+import { getPublicPosts } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 
 export const getPostWithTags = () => {
