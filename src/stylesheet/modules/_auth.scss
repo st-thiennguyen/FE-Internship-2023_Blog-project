@@ -34,11 +34,12 @@
     margin: 20px 0 10px;
     outline: 0;
     border: 1px solid transparent;
-
+  }
+  .auth-link {
+    color: map-get($map: $color, $key: primary);
+    font-weight: map-get($map: $font-weight, $key: semibold);
     &:hover {
-      border: 1px solid map-get($map: $color, $key: primary);
-      background-color: white;
-      color: map-get($map: $color, $key: primary);
+      opacity: 0.5;
     }
   }
 }

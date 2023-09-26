@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 
 interface CommentItemProps {
   commentItem: InteractionItemModel;
+  userId: number;
 }
 
-const CommentItem = ({ commentItem }: CommentItemProps) => {
+const CommentItem = ({ commentItem, userId }: CommentItemProps) => {
   const [isErrAvt, setIsErrAvt] = useState(false);
 
   return (
@@ -22,9 +23,11 @@ const CommentItem = ({ commentItem }: CommentItemProps) => {
         />
       </Link>
       <div className="comment-info d-flex flex-column justify-between">
-        <div className="comment-info-top d-flex ">
+        <div className="comment-info-top d-flex justify-between">
           <Link to={`/profile/${commentItem.userId}`}>
-            <span className="user-name">{commentItem.user.displayName}</span>
+            <span className="user-name">
+              {commentItem.user.displayName} {userId === commentItem.userId && '(You)'}
+            </span>
           </Link>
           <span className="comment-time">{timeAgoFromDate(commentItem.createdAt)}</span>
         </div>

@@ -1,16 +1,12 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
+import { QueryPost } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}`);
 };
 
-export interface QueryPost {
-  page?: number;
-  size?: number;
-  tags?: string[];
-}
 export const getPublicPosts = (query: QueryPost) => {
   const api = new ApiService();
 
@@ -37,41 +33,22 @@ export const postArticles = (data: any) => {
 
 export const updatePostArticles = (data: any, id: number) => {
   const formData = new URLSearchParams();
-  formData.append('title', data.title);
-  formData.append('content', data.content);
+  Object.keys(data).forEach((key) => {
+    formData.append(key, data[key]);
+  });
 
   const api = new ApiService();
-  return api.put(`${ENDPOINT.post.index}/${id}`, formData.toString(), {
+  return api.put(`${ENDPOINT.post.index}/${id}`, data, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 };
 
-export const getSignUrlImage = (file: any) => {
-  const api = new ApiService();
-  const params = {
-    type_upload: 'cover-post',
-    file_name: file.name,
-    file_type: file.type,
-  };
-  return api.get(`${ENDPOINT.signatures.index}`, params);
-};
-
-export const UploadUrlImagePost = (url: string, file: any) => {
-  const api = new ApiService();
-  const formData = new FormData();
-  formData.append('file', file);
-  return api.put(url, file, {
-    headers: {
-      'Content-Type': file.type,
-    },
-  });
-};
-export const deletePostItem = (id : string) => {
+export const deletePostItem = (id: string) => {
   const api = new ApiService();
   return api.delete(`${ENDPOINT.post.index}/${id}`);
-}
+};
 
 export const updateLike = (id: number) => {
   const api = new ApiService();

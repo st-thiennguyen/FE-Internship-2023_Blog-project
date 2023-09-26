@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { RootState } from '../../../stores/store';
 import { PostModel } from '../../../models/post';
 import PostItem from '../../../shared/components/PostItem';
-import EmptyPost from '../../home/components/EmptyPost';
+import EmptyPost from '../../../shared/components/EmptyPost';
 
 interface UserPostListProps {
   postList: PostModel[];
@@ -28,7 +28,7 @@ const UserPostList = ({ postList }: UserPostListProps) => {
         })
       ) : (
         <div className="user-post-empty">
-          <EmptyPost />
+          <EmptyPost desc={id ? `${userProfile.displayName}'s post list is empty` : 'Publish your first post now'} />
         </div>
       )}
     </ul>

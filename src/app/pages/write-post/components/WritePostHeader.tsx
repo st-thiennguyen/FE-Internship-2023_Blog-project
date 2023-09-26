@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../../../assets/images/logo.svg';
@@ -19,10 +18,15 @@ const WritePostHeader = ({ onPublishPost, isUpdate, handleUpdatePost }: WritePos
               <img src={logo} alt="Supremethod" />
             </Link>
           </h1>
-          {
-            !isUpdate ? <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>Publish</button> :
-              <button className="btn btn-primary btn-rounded" onClick={handleUpdatePost}>Update</button>
-          }
+          {!isUpdate ? (
+            <button className="btn btn-primary btn-rounded" onClick={onPublishPost}>
+              Publish
+            </button>
+          ) : (
+            <button className="btn btn-primary btn-rounded" onClick={handleUpdatePost}>
+              Update
+            </button>
+          )}
         </div>
       </div>
     </header>

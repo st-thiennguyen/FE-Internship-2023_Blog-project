@@ -1,42 +1,36 @@
 import { Dispatch } from 'react';
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { UploadUrlImagePost, getSignUrlImage } from '../../shared/services';
 import { SignatureImageModel } from '../../models/post';
+import { ACTIONS_TYPE, TypeUploadImage } from '../../shared/constants';
+import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 
 export const getSignUrlImagePostStart = () => {
   return {
-    type: ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST
-  }
-}
+    type: ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST,
+  };
+};
 
 export const getSignUrlImagePostSuccess = (data: SignatureImageModel) => {
   return {
     type: ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST_SUCCESS,
-    payload: data
-  }
-}
+    payload: data,
+  };
+};
 
-export const getSignUrlImagePostFailure = (error: any) => {
+export const getSignUrlImagePostFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.GET_SIGN_URL_IMAGE_POST_FAILURE,
-    payload: error
-  }
-}
+    payload: error,
+  };
+};
 
-
-
-export const fetchSignUrlImage = (file: any) => async (dispatch: Dispatch<RootAction>) => {
+export const fetchSignUrlImage = (file: File) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getSignUrlImagePostStart());
   try {
-    const response: any = await getSignUrlImage(file)
-    dispatch(getSignUrlImagePostSuccess(response))
-    UploadUrlImagePost(response.signedRequest, file)
+    const response: any = await getEmptyImageUrl(file, TypeUploadImage.COVER_POST);
+    dispatch(getSignUrlImagePostSuccess(response));
+    putImageToLink(response.signedRequest, file);
   } catch (error) {
-    dispatch(getSignUrlImagePostFailure(error))
+    dispatch(getSignUrlImagePostFailure(`${error}`));
   }
-}
-
-
-
-
+};

@@ -1,8 +1,8 @@
 import { Dispatch } from 'react';
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { postArticles, updatePostArticles } from '../../shared/services';
 import { PostModel } from '../../models/post';
+import { ACTIONS_TYPE } from '../../shared/constants';
 
 export const resetWriteState = () => {
   return {
