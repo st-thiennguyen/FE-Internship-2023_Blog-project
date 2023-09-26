@@ -44,15 +44,20 @@
         padding: 10px;
         color: map-get($color, textLight);
         font-size: 15px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(2px);
+        .author-name {
+          font-weight: 500;
+        }
 
         .author-ava {
           width: 30px;
           height: 30px;
           margin-right: 10px;
           img {
+            width: 100%;
+            height: 100%;
             border-radius: 100%;
             object-fit: cover;
           }
@@ -60,12 +65,13 @@
       }
       .cover-date {
         padding: 10px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(2px);
         &-title {
           margin-left: 10px;
           font-size: 14px;
+          font-weight: 500;
         }
       }
     }

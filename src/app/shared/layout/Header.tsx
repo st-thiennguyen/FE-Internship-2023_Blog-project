@@ -48,7 +48,7 @@ const Header = () => {
               <ul className="navbar-list d-flex">
                 {isLogin && (
                   <li className="navbar-item">
-                    <Link to="/write" className="navbar-link">
+                    <Link to="/posts/create" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-write-20"></i>
                         <p className="navbar-subtext">Write</p>
@@ -66,7 +66,6 @@ const Header = () => {
                           className="avatar-user-header"
                         />
                       </div>
-
                       <div className="navbar-auth">
                         <ul className="auth-list">
                           <li className="auth-item">
@@ -81,20 +80,20 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
+                            <Link to="/posts/recyclebin" className="auth-link d-flex item-center">
                               <img src={icRecyclebin} alt="Icon recyclebin" />
                               <p>Recycle Bin</p>
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
-                              <img src={icBookmark} alt="Icon recyclebin" />
+                            <Link to="/posts/bookmark" className="auth-link d-flex item-center">
+                              <img src={icBookmark} alt="Icon bookmark" />
                               <p>Bookmark</p>
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
-                              <img src={icLogout} alt="Icon recyclebin" />
+                            <Link to="/logout" className="auth-link d-flex item-center" onClick={handleLogout}>
+                              <img src={icLogout} alt="Icon logout" />
                               <p>Logout</p>
                             </Link>
                           </li>
