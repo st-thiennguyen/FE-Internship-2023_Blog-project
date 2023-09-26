@@ -124,7 +124,7 @@ const PostItem = ({ post }: PostItemProps) => {
                 );
               })}
               {post.tags.length > 3 && (
-                <Link to={''}>
+                <Link to="#">
                   <li className="tag tag-red">+{post.tags.length - 3}</li>
                 </Link>
               )}

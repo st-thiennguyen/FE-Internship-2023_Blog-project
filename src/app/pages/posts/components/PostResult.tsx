@@ -31,6 +31,7 @@ const PostResult = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
   }, [tagsQuery]);
 
