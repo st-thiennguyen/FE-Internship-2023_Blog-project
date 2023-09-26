@@ -29,11 +29,17 @@
       top: 30px;
       right: -350px;
       border: 0;
+
+      background-color: map-get($map: $color, $key: textLight);
+      color: map-get($map: $color, $key: danger);
       font-size: 30px;
       font-weight: 600;
-      background-color: map-get($map: $color, $key: textLight);
-      color: #ee3535;
+
+      transition: all ease 0.3s;
       cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
     }
 
     .modal-body {
