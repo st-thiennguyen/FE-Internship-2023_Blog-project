@@ -62,6 +62,9 @@ const PostItem = ({ post }: PostItemProps) => {
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
         </div>
+        <div className="post-restore">
+          <i className="icon icon-xxl icon-restore-60"></i>
+        </div>
         <div className="post-img-wrapper">
           <Link to={`/posts/${post.id}`}>
             {isErrImg ? (
