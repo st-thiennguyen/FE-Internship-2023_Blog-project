@@ -61,7 +61,6 @@ export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAct
 }
 
 export const updatePost = (data: PostModel, id: number) => async (dispatch: Dispatch<RootAction>) => { 
-  console.log(data);
   dispatch(updatePostStart());
   try {
     const res = await updatePostArticles(data, id);
