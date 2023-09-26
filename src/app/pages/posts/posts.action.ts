@@ -32,10 +32,13 @@ export const restorePost = () => {
   };
 };
 
-export const restorePostSuccess = (message: string) => {
+export const restorePostSuccess = (message: string, idPost: number) => {
   return {
     type: ACTIONS_TYPE.RESTORE_RECYCLEBIN_SUCCESS,
-    payload: message,
+    payload: {
+      message: message,
+      id: idPost,
+    },
   };
 };
 
@@ -46,22 +49,22 @@ export const restorePostFailure = (message: string) => {
   };
 };
 
-export const getPostWithTags = () => {
+export const getPosts = () => {
   return {
-    type: ACTIONS_TYPE.GET_POST_WITH_TAG,
+    type: ACTIONS_TYPE.GET_POSTS,
   };
 };
 
-export const getPostWithTagsSuccess = (data: PostModel[]) => {
+export const getPostsSuccess = (data: PostModel[]) => {
   return {
-    type: ACTIONS_TYPE.GET_POST_WITH_TAG_SUCCESS,
+    type: ACTIONS_TYPE.GET_POSTS_SUCCESS,
     payload: data,
   };
 };
 
-export const getPostWithTagsFailure = (message: string) => {
+export const getPostFailure = (message: string) => {
   return {
-    type: ACTIONS_TYPE.GET_POST_WITH_TAG_FAILURE,
+    type: ACTIONS_TYPE.GET_POSTS_FAILURE,
     payload: message,
   };
 };
@@ -79,12 +82,22 @@ export const loadMore = () => {
 };
 
 export const fetchPostWithTags = (query: QueryPost) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(getPostWithTags());
+  dispatch(getPosts());
   try {
     const response = await getPublicPosts(query);
-    dispatch(getPostWithTagsSuccess(response as PostModel[]));
+    dispatch(getPostsSuccess(response as PostModel[]));
   } catch (err) {
-    dispatch(getPostWithTagsFailure(`${err}`));
+    dispatch(getPostFailure(`${err}`));
+  }
+};
+
+export const fetchSoftDeletedPosts = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getPosts());
+  try {
+    const response = await getRecyclebinPost({ page, size });
+    dispatch(getPostsSuccess(response as PostModel[]));
+  } catch (err) {
+    dispatch(getPostFailure(`${err}`));
   }
 };
 
@@ -102,7 +115,7 @@ export const restorePostAction = (idPost: number) => async (dispatch: Dispatch<R
   dispatch(restorePost());
   try {
     const response = await restoreRecyclebinPost(idPost);
-    dispatch(restorePostSuccess(`${response}`));
+    dispatch(restorePostSuccess(`${response}`, idPost));
   } catch (err) {
     dispatch(restorePostFailure(`${err}`));
   }

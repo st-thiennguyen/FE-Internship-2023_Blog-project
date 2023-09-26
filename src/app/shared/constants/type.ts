@@ -5,9 +5,9 @@ export const ACTIONS_TYPE = {
   GET_ALL_POST_FAILURE: 'get-all-post-failure',
   RESET_CURRENT_PAGE: 'reset-current-page',
   // GET ALL POST WITH TAG
-  GET_POST_WITH_TAG: 'get-post-with-tag',
-  GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
-  GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
+  GET_POSTS: 'get-posts',
+  GET_POSTS_SUCCESS: 'get-posts-success',
+  GET_POSTS_FAILURE: 'get-posts-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
 
   // GET ALL POST FROM RECYCLEBIN
@@ -125,4 +125,8 @@ export const ACTIONS_TYPE = {
   POST_COMMENT: 'post-comment',
   POST_COMMENT_SUCCESS: 'post-comment-success',
   POST_COMMENT_FAILURE: 'post-comment-failure',
+  // Get Recycle Bin
+  GET_RECYCLE_BIN: 'get-recycle-bin',
+  GET_RECYCLE_BIN_SUCCESS: 'get-recycle-bin-success',
+  GET_RECYCLE_BIN_FAILURE: 'get-recycle-bin-failure',
 };

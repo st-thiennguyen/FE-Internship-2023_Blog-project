@@ -1,12 +1,14 @@
 import DetailPostPage from '../detail-post/container';
 import DetailPost from '../detail-post/container/DetailPost';
 import WritePost from '../write-post/containers/WritePost';
+import PostRecycleBin from './components/PostRecycleBin';
+import PostPage from './container';
 import Posts from './container/Posts';
 
 export const postsRoutes = [
   {
     path: '/posts',
-    component: DetailPostPage,
+    component: PostPage,
     children: [
       {
         path: '',
@@ -31,6 +33,11 @@ export const postsRoutes = [
         props: {
           isUpdate: true,
         },
+      },
+      {
+        path: 'recyclebin',
+        component: PostRecycleBin,
+        isProtected: true,
       },
     ],
   },
