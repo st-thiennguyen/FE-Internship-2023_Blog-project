@@ -61,7 +61,7 @@ const DetailPost = () => {
 
   return (
     <>
-      <section className="detail-page">
+      <section className="section section-detail-page">
         <div className="container">
           <div className="row">
             <div className="col col-9">

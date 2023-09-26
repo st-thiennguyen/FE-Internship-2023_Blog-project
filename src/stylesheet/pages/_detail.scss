@@ -1,4 +1,4 @@
-.detail-page {
+.section-detail-page {
   .detail-action {
     position: sticky;
     height: fit-content;
@@ -95,7 +95,8 @@
     }
 
     .detail-post {
-      width: 100%;
+      min-width: 300px;
+      flex: 1;
       .detail-post-body {
         margin-bottom: 16px;
         font-size: map-get($font-size, lg);
@@ -119,6 +120,7 @@
             background-color: #0d0c1a;
             padding: 10px;
             color: #fff;
+            overflow-y: scroll;
           }
         }
       }
@@ -267,7 +269,7 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
-  .detail-page {
+  .section-detail-page {
     .detail-content {
       width: 100%;
       gap: 20px;
@@ -276,7 +278,7 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, md)) {
-  .detail-page {
+  .section-detail-page {
     .detail-action {
       position: fixed;
       top: unset;

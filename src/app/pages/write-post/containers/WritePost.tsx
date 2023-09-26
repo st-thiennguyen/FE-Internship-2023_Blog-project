@@ -11,11 +11,12 @@ import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
 import { RootState } from '../../../stores/store';
-import { createPost, updatePost } from '../write-post.action';
+import { createPost, resetWriteState, updatePost } from '../write-post.action';
 import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
+import { PostModel } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -59,6 +60,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const post: PostModel = useSelector((state: RootState) => state.writePost.data);
   const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
@@ -99,13 +101,10 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }
   });
 
-  const handleCreatePost = handleSubmit((data: any) => {
+  const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
-      dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
+      await dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
       setIsShowToast(true);
-      setTimeout(() => {
-        navigate(`/`);
-      }, 3000);
     }
   });
 
@@ -117,6 +116,9 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   useEffect(() => {
     setValue('description', detailPost?.description || '');
     setValue('title', detailPost?.title || '');
+    if (detailPost.content && isUpdate) {
+      setContent(detailPost.content);
+    }
   }, [detailPost]);
 
   useEffect(() => {
@@ -125,15 +127,17 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }
   }, [accessToken]);
 
-  useEffect(() => {
-    dispatch(fetchDetailBlog(Number(id)) as any);
-  }, []);
+  if (isSuccess && isShowToast) {
+    setTimeout(() => {
+      navigate(`/posts/${post.id}`);
+    }, 3000);
+  }
 
+  // innit and dispose
   useEffect(() => {
-    if (detailPost.content && isUpdate) {
-      setContent(detailPost.content);
-    }
-  }, [detailPost.content]);
+    isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
+    return () => dispatch(resetWriteState() as any);
+  }, []);
 
   return (
     <>
@@ -204,7 +208,12 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
         </div>
       </section>
       {isShowToast && isSuccess && (
-        <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle={message} />
+        <ToastMessage
+          isSuccess={isSuccess}
+          isShow={isSuccess}
+          title="Success"
+          subtitle="Redirecting to detail post..."
+        />
       )}
       {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
     </>

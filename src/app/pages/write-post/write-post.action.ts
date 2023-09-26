@@ -4,6 +4,12 @@ import { postArticles, updatePostArticles } from '../../shared/services';
 import { PostModel } from '../../models/post';
 import { ACTIONS_TYPE } from '../../shared/constants';
 
+export const resetWriteState = () => {
+  return {
+    type: 'RESET_STATE_WRITEPOST',
+  };
+};
+
 export const addPostStart = () => {
   return {
     type: ACTIONS_TYPE.ADD_POST,
