@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { regexEmail } from '../../../shared/constants';
+import { ENDPOINT, regexEmail } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
 import { loginAction, registerReset } from '../auth.actions';
 import { AuthContext } from '../../../App';
@@ -96,7 +96,10 @@ const Login = () => {
           <h2 className="auth-title text-center">LOGIN</h2>
           <ul className="login-external-list row text-center">
             <li className="login-external-item col col-4">
-              <a href="/" className="external-item-link">
+              <a
+                href={`${ENDPOINT.auth.google}?redirect_to=http://localhost:3000/login-google`}
+                className="external-item-link"
+              >
                 <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
               </a>
             </li>

@@ -18,8 +18,8 @@ function App() {
   return (
     <AuthContext.Provider value={auth}>
       <Routes>
-        {authRoutes.map((val) => (
-          <Route key={val.name} path={val.path} element={<val.component />} />
+        {authRoutes.map((val,index) => (
+          <Route key={index} path={val.path} element={<val.component />} />
         ))}
         <Route path="/" element={<Layout />}>
           {appRoutes.map((val: RouteItem, index) => (
