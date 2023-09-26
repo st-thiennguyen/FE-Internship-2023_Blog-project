@@ -15,7 +15,7 @@ export interface UserModel {
   [key: string]: any;
 }
 
-export interface formChangePassword {
+export interface FormChangePassword {
   oldPassword: string;
   newPassword: string;
   confirmPassword?: string;

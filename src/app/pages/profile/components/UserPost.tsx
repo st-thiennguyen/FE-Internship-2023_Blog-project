@@ -9,18 +9,20 @@ const UserPost = () => {
 
   return (
     <section className="section section-user-post">
-      <h2 className="section-title">Posts</h2>
-      {isLoading ? (
-        <ul className="row">
-          {Array.from({ length: 2 }, (item, index) => (
-            <li className="post-item col col-6 col-md-12" key={index}>
-              <PostItemLoading />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        posts && <UserPostList postList={posts} />
-      )}
+      <div className="container">
+        <h2 className="section-title">Posts</h2>
+        {isLoading ? (
+          <ul className="row">
+            {Array.from({ length: 3 }, (item, index) => (
+              <li className="post-item col col-4 col-md-12" key={index}>
+                <PostItemLoading />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          posts && <UserPostList postList={posts} />
+        )}
+      </div>
     </section>
   );
 };

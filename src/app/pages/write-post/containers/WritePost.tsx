@@ -130,143 +130,137 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     <>
       {isUpdate ? (
         <>
-          <WritePostHeader handleUpdatePost={handleUpdatePost} isUpdate={isUpdate} />
-          <main className="main main-editor-post">
+          <section className="section section-write-post">
             <div className="container">
-              <div className="main-body">
-                <section className="section section-write-post">
-                  <div className="container">
-                    <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
-                    <div className="section-body row">
-                      <div className="col col-9">
-                        <form className="write-post-form d-flex flex-column" ref={formRef}>
-                          <EditorImageCover
-                            photoPreview={detailPost.cover}
-                            setPhotoPreview={setPhotoPreview}
-                            setErrorCoverMessage={setErrorCoverMessage}
-                            isUpdate={isUpdate}
-                          />
-                          <p className="editor-detail-error">{errorCoverMessage}</p>
-                          <div className="editor-detail">
-                            <h5 className="editor-detail-title">Post detail</h5>
-                            <textarea
-                              rows={1}
-                              {...register('title')}
-                              className="editor-detail-input"
-                              placeholder="Title of your story ..."
-                              defaultValue={detailPost.title}
-                            />
-                            <p className="editor-detail-error">{errors.title?.message}</p>
-                            <textarea
-                              rows={1}
-                              {...register('description')}
-                              className="editor-detail-input"
-                              placeholder="Description of your story ..."
-                              defaultValue={detailPost.description}
-                              readOnly
-                            />
-                            <p className="editor-detail-error">{errors.description?.message}</p>
+              <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
+              <div className="section-body row">
+                <div className="col col-9">
+                  <form className="write-post-form d-flex flex-column" ref={formRef}>
+                    <EditorImageCover
+                      photoPreview={detailPost.cover}
+                      setPhotoPreview={setPhotoPreview}
+                      setErrorCoverMessage={setErrorCoverMessage}
+                      isUpdate={isUpdate}
+                    />
+                    <p className="editor-detail-error">{errorCoverMessage}</p>
+                    <div className="editor-detail">
+                      <h5 className="editor-detail-title">Post detail</h5>
+                      <textarea
+                        rows={1}
+                        {...register('title')}
+                        className="editor-detail-input"
+                        placeholder="Title of your story ..."
+                        defaultValue={detailPost.title}
+                      />
+                      <p className="editor-detail-error">{errors.title?.message}</p>
+                      <textarea
+                        rows={1}
+                        {...register('description')}
+                        className="editor-detail-input"
+                        placeholder="Description of your story ..."
+                        defaultValue={detailPost.description}
+                        readOnly
+                      />
+                      <p className="editor-detail-error">{errors.description?.message}</p>
 
-                            <div className="editor-detail-area">
-                              <TextEditor
-                                value={content}
-                                placeholder={'Write your story ...'}
-                                setError={setErrorContentMessage}
-                                setContent={setContent}
-                              />
-                              <p className="editor-detail-error">{errorContentMessage}</p>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                      <aside className="aside aside-write-post d-flex flex-column  col col-3">
-                        <EditorPostVisibility onChangeValue={setStatusPost} />
-                        {photoPreview && (
-                          <EditorImageCoverPreview
-                            photoPreview={photoPreview}
-                            onRemovePreview={() => setPhotoPreview('')}
-                            isUpdate={isUpdate}
-                          />
-                        )}
-                        <EditorPostTags
-                          tags={detailPost.tags ? detailPost.tags : tags}
-                          setTags={setTags}
-                          isUpdate={isUpdate}
+                      <div className="editor-detail-area">
+                        <TextEditor
+                          value={content}
+                          placeholder={'Write your story ...'}
+                          setError={setErrorContentMessage}
+                          setContent={setContent}
                         />
-                        <EditorPostActions onPublish={onPublishPost} onSaveDraft={() => alert('COMMING SOON')} />
-                      </aside>
+                        <p className="editor-detail-error">{errorContentMessage}</p>
+                      </div>
                     </div>
-                  </div>
-                </section>
+                  </form>
+                </div>
+                <aside className="aside aside-write-post d-flex flex-column  col col-3">
+                  <EditorPostVisibility onChangeValue={setStatusPost} />
+                  {photoPreview && (
+                    <EditorImageCoverPreview
+                      photoPreview={photoPreview}
+                      onRemovePreview={() => setPhotoPreview('')}
+                      isUpdate={isUpdate}
+                    />
+                  )}
+                  <EditorPostTags
+                    tags={detailPost.tags ? detailPost.tags : tags}
+                    setTags={setTags}
+                    isUpdate={isUpdate}
+                  />
+                  <EditorPostActions
+                    isUpdate={isUpdate}
+                    onPublish={handleUpdatePost}
+                    onSaveDraft={() => alert('COMMING SOON')}
+                  />
+                </aside>
               </div>
             </div>
-          </main>
+          </section>
         </>
       ) : (
         <>
-          <WritePostHeader onPublishPost={onPublishPost} />
-          <main className="main main-editor-post">
+          <section className="section section-write-post">
             <div className="container">
-              <div className="main-body">
-                <section className="section section-write-post">
-                  <div className="container">
-                    <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
-                    <div className="section-body row">
-                      <div className="col col-9">
-                        <form className="write-post-form d-flex flex-column" ref={formRef}>
-                          <EditorImageCover
-                            photoPreview={photoPreview}
-                            setPhotoPreview={setPhotoPreview}
-                            setErrorCoverMessage={setErrorCoverMessage}
-                          />
-                          <p className="editor-detail-error">{errorCoverMessage}</p>
-                          <div className="editor-detail">
-                            <h5 className="editor-detail-title">Post detail</h5>
-                            <textarea
-                              rows={1}
-                              {...register('title')}
-                              className="editor-detail-input"
-                              placeholder="Title of your story ..."
-                            />
-                            <p className="editor-detail-error">{errors.title?.message}</p>
-                            <textarea
-                              rows={1}
-                              {...register('description')}
-                              className="editor-detail-input"
-                              placeholder="Description of your story ..."
-                            />
-                            <p className="editor-detail-error">{errors.description?.message}</p>
+              <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
+              <div className="section-body row">
+                <div className="col col-9">
+                  <form className="write-post-form d-flex flex-column" ref={formRef}>
+                    <EditorImageCover
+                      photoPreview={photoPreview}
+                      setPhotoPreview={setPhotoPreview}
+                      setErrorCoverMessage={setErrorCoverMessage}
+                    />
+                    <p className="editor-detail-error">{errorCoverMessage}</p>
+                    <div className="editor-detail">
+                      <h5 className="editor-detail-title">Post detail</h5>
+                      <textarea
+                        rows={1}
+                        {...register('title')}
+                        className="editor-detail-input"
+                        placeholder="Title of your story ..."
+                      />
+                      <p className="editor-detail-error">{errors.title?.message}</p>
+                      <textarea
+                        rows={1}
+                        {...register('description')}
+                        className="editor-detail-input"
+                        placeholder="Description of your story ..."
+                      />
+                      <p className="editor-detail-error">{errors.description?.message}</p>
 
-                            <div className="editor-detail-area">
-                              <TextEditor
-                                value={content}
-                                placeholder={'Write your story ...'}
-                                setError={setErrorContentMessage}
-                                setContent={setContent}
-                              />
-                              <p className="editor-detail-error">{errorContentMessage}</p>
-                            </div>
-                          </div>
-                        </form>
+                      <div className="editor-detail-area">
+                        <TextEditor
+                          value={content}
+                          placeholder={'Write your story ...'}
+                          setError={setErrorContentMessage}
+                          setContent={setContent}
+                        />
+                        <p className="editor-detail-error">{errorContentMessage}</p>
                       </div>
-                      <aside className="aside aside-write-post d-flex flex-column  col col-3">
-                        <EditorPostVisibility onChangeValue={setStatusPost} />
-                        {photoPreview && (
-                          <EditorImageCoverPreview
-                            photoPreview={photoPreview}
-                            onRemovePreview={() => setPhotoPreview('')}
-                            isUpdate={isUpdate}
-                          />
-                        )}
-                        <EditorPostTags tags={tags} setTags={setTags} isUpdate={isUpdate} />
-                        <EditorPostActions onPublish={onPublishPost} onSaveDraft={() => alert('COMMING SOON')} />
-                      </aside>
                     </div>
-                  </div>
-                </section>
+                  </form>
+                </div>
+                <aside className="aside aside-write-post d-flex flex-column  col col-3">
+                  <EditorPostVisibility onChangeValue={setStatusPost} />
+                  {photoPreview && (
+                    <EditorImageCoverPreview
+                      photoPreview={photoPreview}
+                      onRemovePreview={() => setPhotoPreview('')}
+                      isUpdate={isUpdate}
+                    />
+                  )}
+                  <EditorPostTags tags={tags} setTags={setTags} isUpdate={isUpdate} />
+                  <EditorPostActions
+                    isUpdate={false}
+                    onPublish={onPublishPost}
+                    onSaveDraft={() => alert('COMMING SOON')}
+                  />
+                </aside>
               </div>
             </div>
-          </main>
+          </section>
         </>
       )}
 

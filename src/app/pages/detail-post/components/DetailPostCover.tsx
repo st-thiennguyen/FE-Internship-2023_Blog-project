@@ -17,25 +17,17 @@ type DetailPostCoverProps = {
 };
 
 const DetailPostCover = ({ cover, title, authorAvatar, authorName, datePost, authorId }: DetailPostCoverProps) => {
-  const [isErrorCover, setIsErrorCover] = useState(false);
-  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
-
-  useEffect(() => {
-    isImageUrlValid(cover).then((value) => setIsErrorCover(!value));
-    isImageUrlValid(authorAvatar).then((value) => setIsErrorAvatar(!value));
-  }, [cover, authorAvatar]);
-
   return (
     <section className="section section-detail-cover">
       <div className="detail-cover">
         <div className="cover-img">
-          <img src={!isErrorCover ? cover : noImage} alt={title} />
+          <img src={cover} />
         </div>
         <div className="cover-content d-flex flex-column justify-end">
           <div className="cover-info d-flex justify-between item-center">
             <Link to={`/profile/${authorId}`} className="cover-author d-flex item-center">
               <div className="author-ava">
-                <img src={!isErrorAvatar ? authorAvatar : avaDefault} alt={authorName + ' Avatar'} />
+                <img src={authorAvatar} alt={authorName + ' Avatar'} />
               </div>
               <span className="author-name">{authorName}</span>
             </Link>

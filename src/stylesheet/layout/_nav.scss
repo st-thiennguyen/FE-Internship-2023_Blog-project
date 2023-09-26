@@ -31,25 +31,62 @@
       display: none;
 
       .auth-list {
-        width: max-content;
-        padding: 15px;
-
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+        width: 300px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 6px;
         background-color: map-get($color, backgroundFrame);
 
         .auth-item {
           width: 100%;
-          padding: 5px 10px;
-          margin-top: 10px;
+          &:hover {
+            background-color: #f4f4f4f4;
+          }
+          .auth-info {
+            padding: 12px;
+            img {
+              width: 50px;
+              height: 50px;
+              object-fit: cover;
+              border-radius: 100%;
+            }
+            &-text {
+              flex: 1;
+              margin-left: 10px;
+            }
+            &-name {
+              font-size: 16px;
+              font-weight: 700;
+            }
+            &-email {
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+        }
+        .auth-link {
+          padding: 10px 20px;
+          &-info {
+            padding: 0 0;
+          }
+          img {
+            width: 20px;
+            height: 20px;
+          }
+          p {
+            margin-left: 10px;
+            flex: 1;
+            font-size: 18px;
+            font-weight: 500;
+          }
         }
       }
-      ::before {
+      &::before {
         content: "";
         position: absolute;
         bottom: 100%;
         width: 100%;
         height: 25px;
+        cursor: default;
       }
     }
     &:hover {

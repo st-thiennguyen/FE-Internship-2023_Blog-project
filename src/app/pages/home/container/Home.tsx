@@ -28,28 +28,30 @@ const Home = () => {
   }, [isLogin]);
 
   return (
-    <div className=" main-body">
-      <div className="row">
-        <div className="col col-9 col-lg-12">
-          <div className="main-content">
-            <div className="home-page">
-              {isLogin && recommendPosts.length > 0 && <Recommend />}
-              <div className="row">
-                <div className="col col-12">
-                  <LatestPost />
+    <section className="section section-home">
+      <div className="container">
+        <div className="row">
+          <div className="col col-9 col-lg-12">
+            <div className="main-content">
+              <div className="home-page">
+                {isLogin && recommendPosts.length > 0 && <Recommend />}
+                <div className="row">
+                  <div className="col col-12">
+                    <LatestPost />
+                  </div>
                 </div>
+                <GoToTopBtn />
               </div>
-              <GoToTopBtn />
+            </div>
+          </div>
+          <div className="col col-3 col-lg-12">
+            <div className="main-aside">
+              <Aside />
             </div>
           </div>
         </div>
-        <div className="col col-3 col-lg-12">
-          <div className="main-aside">
-            <Aside />
-          </div>
-        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
