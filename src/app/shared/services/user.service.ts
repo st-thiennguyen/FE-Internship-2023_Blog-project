@@ -1,14 +1,14 @@
 import { ApiService } from './config';
 import { ENDPOINT } from '../constants';
 import { UserInfo } from '../../models/auth';
-import { formChangePassword } from '../../models/user';
+import { FormChangePassword } from '../../models/user';
 
 export const updateProfile = (data: Omit<UserInfo, 'id' | 'email'>) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.users.index}/me`, { ...data });
 };
 
-export const updatePassword = (data: formChangePassword) => {
+export const updatePassword = (data: FormChangePassword) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.users.updatePassword}`, data);
 };
@@ -26,4 +26,9 @@ export const getUserProfile = (id: string) => {
 export const getUserPosts = (id: string) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.users.index}/${id}/posts`);
+};
+
+export const updateFollow = (id: string) => {
+  const api = new ApiService();
+  return api.post(`${ENDPOINT.friends.index}/follow`, { followingId: id });
 };

@@ -104,10 +104,6 @@ export const authReducer = (state = initState, action: RootAction): AuthStatePro
         isLoading: true,
         isLogoutSuccess: false,
         isError: false,
-        auth: {
-          ...state.auth,
-          accessToken: null
-        }
       };
     }
 

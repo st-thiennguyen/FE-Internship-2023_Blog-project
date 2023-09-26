@@ -9,3 +9,17 @@
 .text-bold {
   font-weight: map-get($map: $font-weight, $key: bold);
 }
+
+.text-truncate-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+
+  margin-bottom: 8px;
+  overflow: hidden;
+
+  color: map-get($color, text);
+  font-size: 15px;
+  line-height: 1.44;
+}
