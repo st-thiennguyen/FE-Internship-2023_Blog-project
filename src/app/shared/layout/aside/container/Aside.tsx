@@ -17,7 +17,7 @@ const Aside = () => {
   }, []);
 
   const filterTopFollower = (users: UserModel[]) => {
-    const sortUsers = users.sort((a, b) => b.followings - a.followings);
+    const sortUsers = users.sort((a, b) => b.followers - a.followers);
     const top5Follower = sortUsers.slice(0, 5);
     return top5Follower;
   };

@@ -58,18 +58,26 @@
   }
 
   &-img {
-    height: 250px;
+    height: 100%;
     margin-bottom: 10px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     object-fit: cover;
+    &-wrapper {
+      height: 50%;
+    }
+    &-link {
+      display: block;
+      height: 100%;
+    }
     &.err {
       object-fit: contain;
     }
   }
 
   &-body-wrapper {
-    padding: 0 15px;
+    padding: 15px 15px 0;
+    height: 50%;
   }
 
   .user-name {
@@ -92,11 +100,11 @@
   }
 
   &-body {
-    margin-bottom: 6px;
     border-bottom: 1px solid map-get($color, borderColor);
+    height: 80%;
   }
   &-footer {
-    padding: 10px 0;
+    height: 20%;
   }
   &-reaction-item {
     margin-right: 10px;

@@ -20,11 +20,31 @@ const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
   const [isShowToast, setIsShowToast] = useState(false);
+  const [randomColor, setRandomColor] = useState<string[]>([]);
 
   const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
   const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
   const deleteMessage = useSelector((state: RootState) => state.profile?.message);
   const dispatch = useDispatch();
+
+  const colorList = ['red', 'orange', 'lime', 'green', 'blue', 'purple'];
+
+  const randomColorTag = () => {
+    let arrRandomColor: string[] = [];
+    let count = 0;
+    do {
+      let color = colorList[Math.floor(Math.random() * colorList.length)];
+      if (!arrRandomColor.includes(color)) {
+        arrRandomColor.push(color);
+        count++;
+      }
+    } while (count < 3);
+    setRandomColor(arrRandomColor);
+  };
+
+  useEffect(() => {
+    randomColorTag();
+  }, []);
 
   const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
@@ -45,6 +65,10 @@ const PostItem = ({ post }: PostItemProps) => {
     setIShowModal(!isShowModal);
   };
 
+  const sliceTagList = () => {
+    return post.tags.slice(0, 3);
+  };
+
   useEffect(() => {
     isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
   }, [isErrImg, post.cover]);
@@ -63,7 +87,7 @@ const PostItem = ({ post }: PostItemProps) => {
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
         </div>
         <div className="post-img-wrapper">
-          <Link to={`/posts/${post.id}`}>
+          <Link to={`/posts/${post.id}`} className="post-image-link">
             {isErrImg ? (
               <img src={NoImg} alt={post.title} className={`post-img err`} />
             ) : (
@@ -90,8 +114,17 @@ const PostItem = ({ post }: PostItemProps) => {
               <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
             </Link>
           </div>
-          <div className="post-footer d-flex justify-between">
-            <span className="read-more">READ MORE</span>
+          <div className="post-footer d-flex justify-between item-center">
+            <ul className="tag-list d-flex">
+              {sliceTagList().map((tag, index) => {
+                return (
+                  <Link to={`/posts?tags=${tag}`} key={index}>
+                    <li className={`tag tag-${randomColor[index]}`}>{tag}</li>
+                  </Link>
+                );
+              })}
+              {post.tags.length > 3 && <li className="tag tag-red">+{post.tags.length - 3}</li>}
+            </ul>
             <ul className="post-action-list">
               <li className="post-action-item">
                 <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/posts/update/${post.id}`}>

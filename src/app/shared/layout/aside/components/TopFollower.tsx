@@ -14,11 +14,7 @@ const TopFollower = ({ users }: TopFollowerProps) => {
             <li className="user-item d-flex justify-between flex-wrap" key={user.id}>
               <div className="user-info-wrapper d-flex">
                 <Link className="user-link" to={`/profile/${user.id}`}>
-                  <img
-                    className="user-avatar"
-                    src={require('../../../../../assets/images/demo-cover.jpg')}
-                    alt={user.displayName}
-                  />
+                  <img className="user-avatar" src={user.picture} alt={user.displayName} />
                 </Link>
                 <div className="user-info">
                   <Link className="user-link" to={`/profile/${user.id}`}>
