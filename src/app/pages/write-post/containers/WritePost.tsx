@@ -112,14 +112,14 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
   }, []);
 
+  if (isSuccess && isShowToast) {
+    setTimeout(() => {
+      navigate(`/posts/${post.id}`);
+    }, 3000);
+  }
   useEffect(() => {
-    if (isSuccess && isShowToast) {
-      setTimeout(() => {
-        navigate(`/posts/${post.id}`);
-      }, 3000);
-    }
     return () => dispatch(resetWriteState() as any);
-  }, [isSuccess, isShowToast]);
+  }, []);
 
   useEffect(() => {
     if (detailPost.content && isUpdate) {
@@ -266,7 +266,12 @@ const WritePost = ({ isUpdate }: writePostProps) => {
       )}
 
       {isShowToast && isSuccess && (
-        <ToastMessage isSuccess={isSuccess} isShow={isSuccess} title="success" subtitle={message} />
+        <ToastMessage
+          isSuccess={isSuccess}
+          isShow={isSuccess}
+          title="Success"
+          subtitle="Redirecting to detail post..."
+        />
       )}
       {isShowToast && isError && (
         <ToastMessage isSuccess={isError} isShow={isError} title={'Error'} subtitle={message} />
