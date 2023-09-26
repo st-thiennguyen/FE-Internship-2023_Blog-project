@@ -19,6 +19,15 @@ export interface PostModel {
   [key: string]: any;
 }
 
+export interface PostProps {
+  title: string;
+  cover: string;
+  content: string;
+  status: string;
+  description: string;
+  tags?: string[];
+}
+
 export interface SignatureImageModel {
   signedRequest: string;
   url: string;
@@ -62,7 +71,7 @@ export interface DetailState {
   message: string;
 }
 
-export interface PostProps {
+export interface PostState {
   data: PostModel;
   isLoading: Boolean;
   isSuccess: Boolean;
