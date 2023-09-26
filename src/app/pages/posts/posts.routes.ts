@@ -1,6 +1,7 @@
 import DetailPostPage from '../detail-post/container';
 import DetailPost from '../detail-post/container/DetailPost';
 import WritePost from '../write-post/containers/WritePost';
+import Bookmark from './container/Bookmark';
 import Posts from './container/Posts';
 
 export const postsRoutes = [
@@ -31,6 +32,11 @@ export const postsRoutes = [
         props: {
           isUpdate: true,
         },
+      },
+      {
+        path: 'bookmark',
+        component: Bookmark,
+        isProtected: true,
       },
     ],
   },

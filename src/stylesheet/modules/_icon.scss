@@ -13,6 +13,11 @@
     height: 24px;
   }
 
+  &-large {
+    width: 50px;
+    height: 50px;
+  }
+
   &-user-20 {
     background-image: url("../../assets/icons/ic-user-20.svg");
   }
@@ -74,6 +79,9 @@
   }
   &-bookmark-20 {
     background-image: url("../../assets/icons/ic-bookmark-20.svg");
+  }
+  &-bookmark-fill {
+    background-image: url("../../assets/icons/ic-bookmark-fill.svg");
   }
   &-close-20 {
     background-image: url("../../assets/icons/ic-close-20.svg");

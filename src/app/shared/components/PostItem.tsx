@@ -14,9 +14,9 @@ import NoImg from '../../../assets/images/no-image.png';
 
 interface PostItemProps {
   post: PostModel;
+  onClickBookmark?: () => void;
 }
-
-const PostItem = ({ post }: PostItemProps) => {
+const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
   const [isShowToast, setIsShowToast] = useState(false);
@@ -61,6 +61,11 @@ const PostItem = ({ post }: PostItemProps) => {
         >
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
+        </div>
+
+        <div className="post-bookmark d-hidden" onClick={onClickBookmark}>
+          <i className="icon icon-large icon-bookmark-fill" />
+          <span className="remove-bookmark">&times;</span>
         </div>
         <div className="post-img-wrapper">
           <Link to={`/posts/${post.id}`}>
