@@ -185,7 +185,9 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
                 {errors.phoneNumber && <p className="form-error">{errors.phoneNumber?.message}</p>}
               </div>
 
-              <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={false} />
+              <div className="d-flex justify-center mt-5">
+                <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
+              </div>
             </fieldset>
           </form>
         </div>

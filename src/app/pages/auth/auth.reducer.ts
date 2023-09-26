@@ -1,7 +1,6 @@
 import { AuthState } from '../../models/auth';
-import { StorageKey } from '../../shared/constants';
-import ACTIONS_TYPE from '../../shared/constants/type';
-import { getLocalStorage } from '../../shared/utils';
+import { StorageKey, ACTIONS_TYPE } from '../../shared/constants';
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
 
 const initState: AuthState = {
@@ -61,6 +60,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       };
     }
     case ACTIONS_TYPE.LOGIN_SUCCESS: {
+      setLocalStorage(StorageKey.AUTH, action.payload);
       return {
         ...state,
         auth: action.payload,
@@ -82,6 +82,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.REASSIGNMENT_AUTH: {
+      setLocalStorage(StorageKey.AUTH, { ...action.payload });
       return {
         ...state,
         auth: action.payload,
@@ -98,6 +99,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.LOGOUT_SUCCESS: {
+      removeLocalStorage(StorageKey.AUTH);
       return {
         ...state,
         isLoading: false,

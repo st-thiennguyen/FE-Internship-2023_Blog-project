@@ -1,12 +1,12 @@
 import { Dispatch } from 'react';
 
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
 import { UserInfo } from '../../models/auth';
+import { ACTIONS_TYPE } from '../../shared/constants';
 
 const getDetailBlogStart = () => {
   return {

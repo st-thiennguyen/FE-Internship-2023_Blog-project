@@ -1,4 +1,4 @@
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 import { SignatureImageState } from '../../models/post';
 

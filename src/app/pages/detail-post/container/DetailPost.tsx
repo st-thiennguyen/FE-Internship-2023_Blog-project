@@ -38,7 +38,7 @@ const DetailPost = () => {
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
     isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
-  }, [post.cover, post.user?.picture]);
+  }, [post, isErrorCover, isErrorAvatar]);
 
   useEffect(() => {
     if (id) {

@@ -1,10 +1,8 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
-import { StorageKey } from '../../shared/constants';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
-import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../../stores/store';
 
 export const loginStart = () => {
@@ -96,7 +94,6 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   try {
     const data: any = await login(email, password);
     dispatch(loginSuccess(data));
-    setLocalStorage(StorageKey.AUTH, data);
   } catch (error) {
     dispatch(loginFailure(`${error}`));
   }
@@ -106,7 +103,6 @@ export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
     await logout();
-    removeLocalStorage(StorageKey.AUTH);
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutFailure(`${error}`));

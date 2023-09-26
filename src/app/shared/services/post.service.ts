@@ -33,8 +33,8 @@ export const postArticles = (data: any) => {
 
 export const updatePostArticles = (data: any, id: number) => {
   const formData = new URLSearchParams();
-  Object.keys(data).forEach(key => {
-    formData.append(key, data[key])
+  Object.keys(data).forEach((key) => {
+    formData.append(key, data[key]);
   });
 
   const api = new ApiService();
@@ -45,26 +45,6 @@ export const updatePostArticles = (data: any, id: number) => {
   });
 };
 
-export const getSignUrlImage = (file: any) => {
-  const api = new ApiService();
-  const params = {
-    type_upload: 'cover-post',
-    file_name: file.name,
-    file_type: file.type,
-  };
-  return api.get(`${ENDPOINT.signatures.index}`, params);
-};
-
-export const UploadUrlImagePost = (url: string, file: any) => {
-  const api = new ApiService();
-  const formData = new FormData();
-  formData.append('file', file);
-  return api.put(url, file, {
-    headers: {
-      'Content-Type': file.type,
-    },
-  });
-};
 export const deletePostItem = (id: string) => {
   const api = new ApiService();
   return api.delete(`${ENDPOINT.post.index}/${id}`);
