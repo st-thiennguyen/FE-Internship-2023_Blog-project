@@ -24,7 +24,7 @@ export interface SignatureImageModel {
   url: string;
 }
 
-export interface SignatureImage {
+export interface SignatureImageState {
   data: SignatureImageModel;
   isLoading: boolean;
   isSuccess: boolean;
@@ -53,7 +53,7 @@ export interface RecommendPostState {
   totalItems: number;
 }
 
-export interface DetailStateProps {
+export interface DetailState {
   data: PostModel;
   comments: InteractionItemModel[];
   isLoading: boolean;

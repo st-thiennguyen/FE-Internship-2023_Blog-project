@@ -21,7 +21,7 @@ export interface RegisterProps extends Omit<UserInfo, 'id'> {
   picture: string;
 }
 
-export interface AuthStateProps {
+export interface AuthState {
   auth: Auth;
   isLoading: boolean;
   isError: boolean;

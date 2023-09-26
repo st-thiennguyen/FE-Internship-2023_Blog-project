@@ -1,9 +1,9 @@
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
-import { DetailStateProps, PostModel } from '../../models/post';
+import { DetailState, PostModel } from '../../models/post';
 import { InteractionItemModel } from '../../models/interaction';
 
-const initialState: DetailStateProps = {
+const initialState: DetailState = {
   data: {} as PostModel,
   comments: [] as InteractionItemModel[],
   isLoading: false,
@@ -12,7 +12,7 @@ const initialState: DetailStateProps = {
   message: '',
 };
 
-export const detailPostReducer = (state = initialState, action: RootAction): DetailStateProps => {
+export const detailPostReducer = (state = initialState, action: RootAction): DetailState => {
   switch (action.type) {
     case ACTIONS_TYPE.GET_DETAIL_BLOG:
       return {

@@ -1,8 +1,8 @@
-import { SignatureImage } from '../../models/post';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
+import { SignatureImageState } from '../../models/post';
 
-const initState: SignatureImage = {
+const initState: SignatureImageState = {
   data: {} as any,
   isLoading: false,
   isSuccess: false,
