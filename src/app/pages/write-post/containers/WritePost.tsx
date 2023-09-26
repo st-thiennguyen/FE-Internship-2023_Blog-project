@@ -17,6 +17,7 @@ import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
 import { PostModel } from '../../../models/post';
+import Modal from '../../../shared/components/Modal';
 
 const schema = yup
   .object({
@@ -47,9 +48,10 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
   const [content, setContent] = useState<string>('');
-  const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  const [isShowToast, setIsShowToast] = useState(false);
+  const [isShowModal, SetIsShowModal] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
@@ -139,6 +141,27 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     return () => dispatch(resetWriteState() as any);
   }, []);
 
+  const handleNavigation = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    if (confirm('reload')) {
+      alert('akakca');
+    }
+  };
+
+  const confirmNavigation = () => {
+    // Perform any additional actions here if needed
+    SetIsShowModal(false);
+    window.location.reload();
+  };
+
+  // Handle canceling navigation
+  const cancelNavigation = () => {
+    // Perform any actions or simply close the modal
+    SetIsShowModal(false);
+  };
+
+  window.onpopstate = handleNavigation;
+
   return (
     <>
       <section className="section section-write-post">
@@ -200,7 +223,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
               />
               <EditorPostActions
                 onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
-                onSaveDraft={() => alert('COMMING SOON')}
+                onSaveDraft={() => {}}
                 isUpdate={isUpdate}
               />
             </aside>
@@ -216,6 +239,14 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
         />
       )}
       {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
+
+      {/* Modal save confirm save draft or not */}
+      {isShowModal && (
+        <Modal onClickClose={() => {}} onClickConfirm={() => {}} isShow={isShowModal}>
+          <h4 className="modal-title">Save to draft</h4>
+          <p>Do you save this post to draft ?</p>
+        </Modal>
+      )}
     </>
   );
 };
