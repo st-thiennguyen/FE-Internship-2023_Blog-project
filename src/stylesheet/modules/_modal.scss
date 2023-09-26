@@ -4,7 +4,7 @@
   left: 40%;
   width: 20%;
   z-index: 99;
-  -webkit-animation: identifier .7s ease-in-out;
+  -webkit-animation: identifier 0.7s ease-in-out;
 
   .modal-confirm {
     width: 400px;
@@ -59,11 +59,6 @@
       }
     }
   }
-}
-
-.trigger-btn {
-  margin: 100px auto;
-  display: inline-block;
 }
 
 @keyframes identifier {
