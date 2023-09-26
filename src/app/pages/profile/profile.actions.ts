@@ -9,7 +9,7 @@ import {
   getUserProfile,
   updateFollow,
 } from '../../shared/services/user.service';
-import { UserModel, formChangePassword, ProfileModel, FollowModel } from '../../models/user';
+import { UserModel, FormChangePassword, ProfileModel, FollowModel } from '../../models/user';
 import { Auth, UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { StorageKey, TypeUploadImage } from '../../shared/constants';
@@ -215,7 +215,7 @@ export const updateProfileAction =
     }
   };
 
-export const updatePasswordAction = (data: formChangePassword) => async (dispatch: Dispatch<RootAction>) => {
+export const updatePasswordAction = (data: FormChangePassword) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updatePasswordStart());
   try {
     await updatePassword(data);
