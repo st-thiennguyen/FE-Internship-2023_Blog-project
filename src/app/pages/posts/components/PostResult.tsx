@@ -62,7 +62,7 @@ const PostResult = () => {
       {isLoading && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (
-            <li className="post-item col col-6 col-md-12" key={index}>
+            <li className="post-item col col-4 col-lg-6 col-sm-12" key={index}>
               <PostItemLoading />
             </li>
           ))}

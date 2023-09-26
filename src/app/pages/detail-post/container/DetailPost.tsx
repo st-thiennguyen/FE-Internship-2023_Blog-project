@@ -38,7 +38,7 @@ const DetailPost = () => {
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
     isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
-  }, [post.cover, post.user?.picture]);
+  }, [post, isErrorCover, isErrorAvatar]);
 
   useEffect(() => {
     if (id) {
@@ -61,7 +61,7 @@ const DetailPost = () => {
 
   return (
     <>
-      <section className="detail-page">
+      <section className="section section-detail-page">
         <div className="container">
           <div className="row">
             <div className="col col-9">

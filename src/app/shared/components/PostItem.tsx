@@ -15,13 +15,15 @@ import NoImg from '../../../assets/images/no-image.png';
 interface PostItemProps {
   post: PostModel;
 }
+
 const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
+  const [isShowToast, setIsShowToast] = useState(false);
+
   const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
   const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
   const deleteMessage = useSelector((state: RootState) => state.profile?.message);
-  const [isShowToast, setIsShowToast] = useState(false);
   const dispatch = useDispatch();
 
   const handleDeletePostItem = (id: string) => {

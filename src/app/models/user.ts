@@ -15,7 +15,7 @@ export interface UserModel {
   [key: string]: any;
 }
 
-export interface formChangePassword {
+export interface FormChangePassword {
   oldPassword: string;
   newPassword: string;
   confirmPassword?: string;
@@ -28,4 +28,12 @@ export interface ProfileModel extends UserModel {
 
 export interface FollowModel {
   followed: boolean;
+}
+
+export interface UserState {
+  data: UserModel[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  message: string;
 }

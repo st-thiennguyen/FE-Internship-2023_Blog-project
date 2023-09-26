@@ -1,9 +1,10 @@
 import { Dispatch } from 'react';
 
 import { PostModel } from '../../models/post';
-import ACTIONS_TYPE from '../../shared/constants/type';
-import { QueryPost, getPublicPosts, getSoftDeletedPosts } from '../../shared/services/index';
+import { getPublicPosts, getSoftDeletedPosts } from '../../shared/services/index';
+import { QueryPost } from '../../models/post';
 import { RootAction } from '../../stores/store';
+import { ACTIONS_TYPE } from '../../shared/constants';
 
 export const getPosts = () => {
   return {

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { pageSize } from '../../../shared/constants/post';
 import PostItemLoading from '../../home/components/PostItemLoading';
 import PostList from '../../home/components/PostList';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
 import { fetchSoftDeletedPosts, loadMore, resetCurrentPage } from '../posts.action';
 

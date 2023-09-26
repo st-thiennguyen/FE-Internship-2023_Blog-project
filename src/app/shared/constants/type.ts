@@ -1,4 +1,4 @@
-const ACTIONS_TYPE = {
+export const ACTIONS_TYPE = {
   // GET ALL POST
   GET_ALL_POST: 'get-all-post',
   GET_ALL_POST_SUCCESS: 'get-all-post-success',
@@ -119,5 +119,3 @@ const ACTIONS_TYPE = {
   GET_RECYCLE_BIN_SUCCESS: 'get-recycle-bin-success',
   GET_RECYCLE_BIN_FAILURE: 'get-recycle-bin-failure',
 };
-
-export default ACTIONS_TYPE;
