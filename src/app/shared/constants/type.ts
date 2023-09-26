@@ -9,6 +9,12 @@ export const ACTIONS_TYPE = {
   GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
   GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
+
+  // GET ALL DRAFT POST
+  GET_DRAFT_POST: 'get-draft-post',
+  GET_DRAFT_POST_SUCCESS: 'get-draft-post-success',
+  GET_DRAFT_POST_FAILURE: 'get-draft-post-failure',
+
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
