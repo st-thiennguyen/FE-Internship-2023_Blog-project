@@ -10,13 +10,14 @@ import ToastMessage from '../../../shared/components/ToastMessage';
 import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
-import WritePostHeader from '../components/WritePostHeader';
 import { RootState } from '../../../stores/store';
 import { createPost, updatePost } from '../write-post.action';
 import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 
 const schema = yup
   .object({
@@ -61,7 +62,8 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const navigate = useNavigate();
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken || '');
+  const localStorageAuth: any = getLocalStorage(StorageKey.AUTH) || null;
+  const accessToken = localStorageAuth?.accessToken;
 
   const { id } = useParams();
 
