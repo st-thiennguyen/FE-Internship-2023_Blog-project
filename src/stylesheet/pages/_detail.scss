@@ -141,7 +141,7 @@
       width: 100%;
       padding: 10px 10px 0;
       border: none;
-      border-radius: 6px;
+      border-radius: 12px;
       margin-bottom: 16px;
 
       color: map-get($color, text);
@@ -184,13 +184,23 @@
     .btn-comment {
       padding: 10px 12px;
     }
+
     .comment {
       &-item {
-        width: 70%;
+        width: 80%;
         margin-bottom: 28px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: white;
+      }
+      &-info {
+        width: 100%;
       }
       &-info-top {
+        align-items: baseline;
         margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid map-get($map: $color, $key: borderColor);
       }
       .user-info {
         margin-right: 10px;
