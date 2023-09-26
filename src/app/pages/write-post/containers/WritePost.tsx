@@ -12,11 +12,12 @@ import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
 import WritePostHeader from '../components/WritePostHeader';
 import { RootState } from '../../../stores/store';
-import { createPost, updatePost } from '../write-post.action';
+import { createPost, resetWriteState, updatePost } from '../write-post.action';
 import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
+import { PostModel } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -61,7 +62,7 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   const navigate = useNavigate();
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const post: PostModel = useSelector((state: RootState) => state.writePost.data);
 
   const { id } = useParams();
 
@@ -95,13 +96,10 @@ const WritePost = ({ isUpdate }: writePostProps) => {
     }, 3000);
   });
 
-  const handleCreatePost = handleSubmit((data: any) => {
+  const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
-      dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
+      await dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
       setIsShowToast(true);
-      setTimeout(() => {
-        navigate(`/`);
-      }, 3000);
     }
   });
 
@@ -111,14 +109,17 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   };
 
   useEffect(() => {
-    if (!accessToken) {
-      navigate('/');
-    }
-  }, [accessToken]);
+    isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
+  }, []);
 
   useEffect(() => {
-    dispatch(fetchDetailBlog(Number(id)) as any);
-  }, []);
+    if (isSuccess && isShowToast) {
+      setTimeout(() => {
+        navigate(`/posts/${post.id}`);
+      }, 3000);
+    }
+    return () => dispatch(resetWriteState() as any);
+  }, [isSuccess, isShowToast]);
 
   useEffect(() => {
     if (detailPost.content && isUpdate) {

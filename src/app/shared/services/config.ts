@@ -26,6 +26,8 @@ export class ApiService {
         if (auth && !config.url?.includes('.amazonaws.com')) {
           config.headers.Authorization = `Bearer ${auth.accessToken}`;
         }
+        console.log(config.url);
+
         return config;
       },
       (error: AxiosError) => {
