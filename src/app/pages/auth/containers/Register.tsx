@@ -212,7 +212,7 @@ const Register = () => {
           </form>
           <p className="text-center">
             Already had an account?{' '}
-            <Link className={`login-link ${isLoading && 'disable-link'}`} to="/login">
+            <Link className={`auth-link ${isLoading && 'disable-link'}`} to="/login">
               Login
             </Link>
           </p>

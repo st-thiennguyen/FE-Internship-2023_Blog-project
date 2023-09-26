@@ -85,7 +85,7 @@ const UserDetail = () => {
                 {id ? (
                   <Button
                     label={profile.isFollowed ? 'Following' : 'Follow'}
-                    optionClassName={`btn btn-follow ${profile.isFollowed ? 'btn-following' : 'btn-gradient'}`}
+                    optionClassName={`btn btn-follow ${profile.isFollowed ? 'btn-following' : 'btn-primary'}`}
                     handleClick={handleUpdateFollow}
                     isLoading={isLoadingFollow}
                   ></Button>

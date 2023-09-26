@@ -154,7 +154,7 @@ const Login = () => {
           </form>
           <p className="text-center">
             You"re new to Supremethod?{' '}
-            <Link to="/register" className={`register-link ${isLoading ? 'disable-link' : ''}`}>
+            <Link to="/register" className={`auth-link ${isLoading ? 'disable-link' : ''}`}>
               Register
             </Link>
           </p>
