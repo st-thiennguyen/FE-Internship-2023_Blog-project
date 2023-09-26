@@ -1,17 +1,7 @@
-import { userInfo } from 'os';
-import { Auth, UserInfo } from '../../models/auth';
+import { AuthState } from '../../models/auth';
 import { StorageKey, ACTIONS_TYPE } from '../../shared/constants';
 import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
-
-export interface AuthState {
-  user: UserInfo;
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-  isLogoutSuccess: boolean
-}
 
 const info: any = getLocalStorage(StorageKey.AUTH, {} as any);
 

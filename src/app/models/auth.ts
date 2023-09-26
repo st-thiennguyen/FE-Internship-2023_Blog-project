@@ -22,9 +22,11 @@ export interface RegisterProps extends Omit<UserInfo, 'id'> {
 }
 
 export interface AuthState {
-  auth: Auth;
+  auth?: Auth;
+  user: UserInfo;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
   message: string;
+  isLogoutSuccess: boolean
 }

@@ -96,7 +96,6 @@ export const loginAction = (email: string, password: string) =>
     try {
       const data = await login(email, password);
       dispatch(loginSuccess(data));
-      setLocalStorage(StorageKey.AUTH, data);
     } catch (error) {
       dispatch(loginFailure(`${error}`));
     }
@@ -106,7 +105,6 @@ export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
     const response = await logout();
-    removeLocalStorage(StorageKey.AUTH);
     dispatch(logoutSuccess(`${response}`));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
