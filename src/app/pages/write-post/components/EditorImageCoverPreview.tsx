@@ -1,5 +1,3 @@
-import { RefObject } from 'react';
-
 interface EditorImageCoverPreviewProps {
   photoPreview: string;
   onRemovePreview: () => void;
