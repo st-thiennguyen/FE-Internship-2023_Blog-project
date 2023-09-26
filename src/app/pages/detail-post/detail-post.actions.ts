@@ -61,7 +61,7 @@ const updateLikeFailure = (error: string) => {
   };
 };
 
-export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+export const updateLikeAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updateLikeStart());
   try {
     const response = await updateLike(id);

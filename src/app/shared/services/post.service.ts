@@ -35,7 +35,7 @@ export const postArticles = (data: any) => {
   return api.post(`${ENDPOINT.post.index}`, data);
 };
 
-export const updatePostArticles = (data: any, id: number) => {
+export const updatePostArticles = (data: any, id: string) => {
   const formData = new URLSearchParams();
   formData.append('title', data.title);
   formData.append('content', data.content);
@@ -73,7 +73,7 @@ export const deletePostItem = (id : string) => {
   return api.delete(`${ENDPOINT.post.index}/${id}`);
 }
 
-export const updateLike = (id: number) => {
+export const updateLike = (id: string) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.post.index}/${id}/likes`);
 };

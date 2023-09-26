@@ -4,9 +4,10 @@ import { RootState } from '../../../stores/store';
 import { updateLikeAction } from '../detail-post.actions';
 
 import ToastMessage from '../../../shared/components/ToastMessage';
+import { addBookmark } from '../../../shared/services/user.service';
 
 interface ReactionProps {
-  postId: number;
+  postId: string;
   likeCount: number;
   commentCount: number;
   scrollToComment: () => void;
@@ -26,6 +27,10 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     }
   };
 
+  const handleAddBookMark = () => {
+    addBookmark(postId);
+  }
+
   return (
     <div className="detail-action">
       <ul className="action-list">
@@ -41,7 +46,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           </button>
           <span className="action-count">{commentCount}</span>
         </li>
-        <li className="action-item d-flex item-center">
+        <li className="action-item d-flex item-center" onClick={handleAddBookMark}>
           <button className="btn btn-post-action">
             <i className="icon icon-small icon-bookmark-20"></i>
           </button>
