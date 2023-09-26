@@ -129,7 +129,6 @@ const WritePost = ({ isUpdate }: writePostProps) => {
   }, [detailPost.content]);
 
   const onRemovePreview = () => {
-    console.log('ACVSVSDV');
     setPhotoPreview('');
 
     if (coverImageRef.current) {
