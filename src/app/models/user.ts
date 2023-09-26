@@ -29,3 +29,11 @@ export interface ProfileModel extends UserModel {
 export interface FollowModel {
   followed: boolean;
 }
+
+export interface UserState {
+  data: UserModel[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  message: string;
+}

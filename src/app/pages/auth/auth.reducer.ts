@@ -1,18 +1,10 @@
-import { Auth } from '../../models/auth';
+import { AuthState } from '../../models/auth';
 import { StorageKey } from '../../shared/constants';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { getLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
 
-export interface AuthStateProps {
-  auth: Auth;
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-}
-
-const initState: AuthStateProps = {
+const initState: AuthState = {
   auth: getLocalStorage(StorageKey.AUTH) || null,
   isLoading: false,
   isError: false,
@@ -20,7 +12,7 @@ const initState: AuthStateProps = {
   message: '',
 };
 
-export const authReducer = (state = initState, action: RootAction): AuthStateProps => {
+export const authReducer = (state = initState, action: RootAction): AuthState => {
   switch (action.type) {
     case ACTIONS_TYPE.REGISTER_RESET_STATE: {
       return {

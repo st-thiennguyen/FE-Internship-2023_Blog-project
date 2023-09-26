@@ -1,18 +1,8 @@
-import { PostModel } from '../../models/post';
-import { UserModel } from '../../models/user';
+import { PostModel, PublicPostState, RecommendPostState } from '../../models/post';
+import { UserModel, UserState } from '../../models/user';
 import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 
-export interface PublicPostState {
-  data: PostModel[];
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-  currentPage: number;
-  totalPage: number;
-  totalItems: number;
-}
 const initialLastesPostState: PublicPostState = {
   data: [] as PostModel[],
   isLoading: false,
@@ -67,13 +57,6 @@ export const lastesPostReducer = (state = initialLastesPostState, action: RootAc
   }
 };
 
-interface UserState {
-  data: UserModel[];
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-}
 const initialState: UserState = {
   data: [] as UserModel[],
   isLoading: false,
@@ -112,16 +95,6 @@ export const userReducer = (state = initialState, action: RootAction): UserState
   }
 };
 
-interface RecommendPostState {
-  data: PostModel[];
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-  currentPage: number;
-  totalPage: number;
-  totalItems: number;
-}
 const initialRecommendPostState: RecommendPostState = {
   data: [] as PostModel[],
   isLoading: false,
