@@ -29,7 +29,9 @@ const UserDetail = () => {
         <div className="user-detail-wrapper">
           {!isLoadingPage && (
             <>
-              <h2 className="section-title text-center">{profile.displayName}</h2>
+              <h2 className="section-title text-center">
+                {profile.displayName ? profile.displayName : profile.firstName + ' ' + profile.lastName}
+              </h2>
               <div className="user-detail-header d-flex item-center">
                 <div className="user-avatar">
                   <img
@@ -60,32 +62,41 @@ const UserDetail = () => {
                   </li>
                 </ul>
               </div>
-              <div className="user-detail-footer d-flex justify-between">
+              <div className="user-detail-footer d-flex justify-between item-center">
                 <div className="user-detail-info">
                   <h3 className="user-detail-fullname">{profile.firstName + ' ' + profile.lastName}</h3>
+
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-dob-20" />
-                    <p className="info-desc">{convertDateToString(profile?.dob, '/')}</p>
+                    <p className="info-desc">{profile.dob ? convertDateToString(profile?.dob, '/') : '--------'}</p>
                   </div>
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-mail-20" />
-                    <p className="info-desc">{profile.email}</p>
+                    <a href={`mailto: ${profile.email}`} className="info-desc">
+                      {profile.email}
+                    </a>
                   </div>
                 </div>
                 <div className="user-detail-info">
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-phone-20" />
-                    <p className="info-desc">{profile.phone}</p>
+                    <a href={`tel:${profile.phone}`} className="info-desc">
+                      {profile.phone || '--------'}
+                    </a>
                   </div>
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-date-outline-20" />
-                    <p className="info-desc">Joined since {convertDateToString(profile?.verifyAt, '/')}</p>
+                    <p className="info-desc">
+                      {profile?.verifyAt ? `Joined since ${convertDateToString(profile?.verifyAt, '/')}` : '--------'}
+                    </p>
                   </div>
                 </div>
                 {id ? (
                   <Button
                     label={profile.isFollowed ? 'Following' : 'Follow'}
-                    optionClassName={`btn btn-follow ${profile.isFollowed ? 'btn-following' : 'btn-primary'}`}
+                    optionClassName={`btn btn-follow ${
+                      profile.isFollowed ? 'btn-outline-primary btn-following' : 'btn-primary'
+                    }`}
                     handleClick={handleUpdateFollow}
                     isLoading={isLoadingFollow}
                   ></Button>
