@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import PostItemLoading from '../../home/components/PostItemLoading';
 import PostList from '../../home/components/PostList';
 import { RootState } from '../../../stores/store';
-import { getDraftPostAction, loadMore } from '../posts.action';
+import { getDraftPostAction } from '../posts.action';
 
 const PostDraft = () => {
   const isLoading = useSelector((state: RootState) => state.postTag.isLoading);
