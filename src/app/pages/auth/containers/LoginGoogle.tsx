@@ -18,11 +18,12 @@ const LoginGoogle = () => {
   const accessToken = searchParams.get('accessToken');
   const jwt = parseJwt(`${accessToken}`);
   const userId = jwt?.userId;
+
   const getUser = async () => {
     const user = await getUserProfile('me');
-
     dispatch(loginSuccess({ accessToken, userInfo: { id: userId, ...(user as Omit<UserInfo, 'id'>) } }));
   };
+
   useEffect(() => {
     if (accessToken) {
       setLocalStorage(StorageKey.ACCESS_TOKEN, accessToken);
