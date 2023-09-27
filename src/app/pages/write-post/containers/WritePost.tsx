@@ -15,8 +15,7 @@ import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
 
 import { RootState } from '../../../stores/store';
-import { createPost, resetWriteState, updatePost } from '../write-post.action';
-import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
+import { createPost, updatePost } from '../write-post.action';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 import { PostModel } from '../../../models/post';
@@ -42,10 +41,10 @@ type FormData = {
 };
 
 interface WritePostProps {
-  isUpdate: boolean;
+  post?: PostModel;
 }
 
-const WritePost = ({ isUpdate }: WritePostProps) => {
+const WritePost = ({ post }: WritePostProps) => {
   const [statusPost, setStatusPost] = useState('public');
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
@@ -62,14 +61,18 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const message = useSelector((state: RootState) => state.writePost.message);
+  const currentPost = useSelector((state: RootState) => state.writePost.data);
 
-
-  const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
   const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
-  const post: PostModel = useSelector((state: RootState) => state.writePost.data);
-
   const { id } = useParams();
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  useEffect(() => {
+    if (post) {
+      setIsUpdate(true);
+    }
+  }, [])
 
   const {
     register,
@@ -97,7 +100,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const handleUpdatePost = handleSubmit((data: any) => {
     if (validate()) {
       dispatch(
-        updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, detailPost.id) as any,
+        updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, post!.id) as any,
       );
       setIsShowToast(true);
       setTimeout(() => {
@@ -118,13 +121,14 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     handleCreatePost();
   };
 
+  // innit and dispose
   useEffect(() => {
-    setValue('description', detailPost?.description || '');
-    setValue('title', detailPost?.title || '');
-    if (detailPost.content && isUpdate) {
-      setContent(detailPost.content);
+    setValue('description', post?.description || '');
+    setValue('title', post?.title || '');
+    if (post?.content) {
+      setContent(post.content);
     }
-  }, [detailPost]);
+  }, [post]);
 
   useEffect(() => {
     if (!isLogin) {
@@ -134,15 +138,9 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
 
   if (isSuccess && isShowToast) {
     setTimeout(() => {
-      navigate(`/posts/${post.id}`);
+      navigate(`/posts/${currentPost.id}`);
     }, 3000);
   }
-
-  // init and dispose
-  useEffect(() => {
-    isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
-    return () => dispatch(resetWriteState() as any);
-  }, []);
 
   return (
     <>
@@ -153,7 +151,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
             <div className="col col-9">
               <form className="write-post-form d-flex flex-column" ref={formRef}>
                 <EditorImageCover
-                  photoPreview={photoPreview || detailPost?.cover}
+                  photoPreview={post?.cover || photoPreview}
                   setPhotoPreview={setPhotoPreview}
                   setErrorCoverMessage={setErrorCoverMessage}
                 />
@@ -188,23 +186,22 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
               </form>
             </div>
             <aside className="aside aside-write-post d-flex flex-column  col col-3">
-              <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={detailPost?.status} />
+              <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
               {photoPreview && (
                 <EditorImageCoverPreview
                   photoPreview={photoPreview}
                   onRemovePreview={() => {
-                    detailPost.cover = '';
+                    post!.cover = '';
                     setPhotoPreview('');
                   }}
                 />
               )}
               <EditorPostTags
-                tags={tags.length ? tags : detailPost?.tags || []}
+                tags={tags || post?.tags}
                 setTags={setTags}
-                isUpdate={isUpdate}
               />
               <EditorPostActions
-                onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
+                onPublish={isUpdate ? handleUpdatePost : onPublishPost}
                 onSaveDraft={() => alert('COMMING SOON')}
                 isUpdate={isUpdate}
               />
