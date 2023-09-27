@@ -8,11 +8,11 @@ import * as yup from 'yup';
 import { RootState } from '../../../stores/store';
 import { registerAction } from '../auth.actions';
 import { convertDateToString } from '../../../shared/utils/date';
-import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
+import { Gender, StorageKey, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 
 import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 import logo from '../../../../assets/images/logo.svg';
+import { getLocalStorage } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -52,9 +52,7 @@ const Register = () => {
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
-  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
-  const message: string = useSelector((state: RootState) => state.auth.message);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,10 +68,10 @@ const Register = () => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (accessToken) {
+    if (isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   const {
     register,
@@ -209,7 +207,7 @@ const Register = () => {
           </form>
           <p className="text-center">
             Already had an account?{' '}
-            <Link className={`login-link ${isLoading && 'disable-link'}`} to="/login">
+            <Link className={`auth-link ${isLoading && 'disable-link'}`} to="/login">
               Login
             </Link>
           </p>
@@ -217,7 +215,6 @@ const Register = () => {
         <div className="auth-bg col col-6">
           <img className="auth-img" src={require('../../../../assets/images/bg-auth.png')} alt="Auth background" />
         </div>
-        {isError && <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />}
       </div>
     </div>
   );

@@ -1,21 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { fetchSignUrlImage } from '../image-sign.action';
-
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
 
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
   setPhotoPreview: (value: string) => void;
+  isUpdate?: boolean;
   setErrorCoverMessage: (value: string) => void;
+  setFile: (file: any) => void;
 }
 
-const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage }: EditorImageCoverProps) => {
+const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage, isUpdate, setFile }: EditorImageCoverProps) => {
   const coverImageRef = useRef<HTMLInputElement>(null);
-
-  const dispatch = useDispatch();
-
   const clickSelectCover = () => {
     coverImageRef.current?.click();
   };
@@ -51,9 +48,9 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
     if (handleFileChange(e)) {
       const file = e.target.files![0];
       if (file) {
-        dispatch(fetchSignUrlImage(file) as any);
         const previewUrl = URL.createObjectURL(file);
         setPhotoPreview(previewUrl);
+        setFile(file);
       } else {
         setPhotoPreview('');
       }
@@ -63,6 +60,8 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
   useEffect(() => {
     if (photoPreview !== '') {
       setPhotoPreview(photoPreview as string);
+    } else {
+      coverImageRef.current!.value = '';
     }
   }, [photoPreview]);
 
@@ -78,7 +77,7 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
             <h5 className="editor-cover-title">Cover Image</h5>
             <div className="editor-cover-content d-flex flex-column item-center">
               <p className="editor-cover-txt">Select the cover image you would like to attach.</p>
-              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} >
+              <button className="btn btn-add-cover" type="button" onClick={clickSelectCover} disabled={isUpdate}>
                 <img src={iconImage} alt="Icon add image cover" width={30} height={30} />
               </button>
               <p className="editor-cover-subtxt">Image type</p>

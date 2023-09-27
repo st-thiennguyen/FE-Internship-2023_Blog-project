@@ -1,4 +1,4 @@
-.detail-page {
+.section-detail-page {
   .detail-action {
     position: sticky;
     height: fit-content;
@@ -21,7 +21,6 @@
         left: 0;
 
         border-radius: 15px;
-        background-color: rgba($color: #000000, $alpha: 0.5);
       }
 
       img {
@@ -42,22 +41,37 @@
         margin-top: 10px;
       }
       .cover-author {
+        padding: 10px;
         color: map-get($color, textLight);
         font-size: 15px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(2px);
+        .author-name {
+          font-weight: 500;
+        }
+
         .author-ava {
           width: 30px;
           height: 30px;
           margin-right: 10px;
           img {
+            width: 100%;
+            height: 100%;
             border-radius: 100%;
             object-fit: cover;
           }
         }
       }
       .cover-date {
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        backdrop-filter: blur(2px);
         &-title {
           margin-left: 10px;
           font-size: 14px;
+          font-weight: 500;
         }
       }
     }
@@ -81,7 +95,8 @@
     }
 
     .detail-post {
-      width: 100%;
+      min-width: 300px;
+      flex: 1;
       .detail-post-body {
         margin-bottom: 16px;
         font-size: map-get($font-size, lg);
@@ -101,6 +116,12 @@
           display: flex;
           flex-direction: column;
           gap: 16px;
+          pre {
+            background-color: #0d0c1a;
+            padding: 10px;
+            color: #fff;
+            overflow-y: scroll;
+          }
         }
       }
       .post-tag {
@@ -123,6 +144,7 @@
         border-radius: 100%;
         img {
           border-radius: 100%;
+          object-fit: cover;
         }
       }
     }
@@ -141,7 +163,7 @@
       width: 100%;
       padding: 10px 10px 0;
       border: none;
-      border-radius: 6px;
+      border-radius: 12px;
       margin-bottom: 16px;
 
       color: map-get($color, text);
@@ -184,14 +206,23 @@
     .btn-comment {
       padding: 10px 12px;
     }
+
     .comment {
       &-item {
-        width: 70%;
+        width: 80%;
         margin-bottom: 28px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: white;
+      }
+      &-info {
+        width: 100%;
       }
       &-info-top {
-        align-items: flex-start;
+        align-items: baseline;
         margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid map-get($map: $color, $key: borderColor);
       }
       .user-info {
         margin-right: 10px;
@@ -239,7 +270,7 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
-  .detail-page {
+  .section-detail-page {
     .detail-content {
       width: 100%;
       gap: 20px;
@@ -248,7 +279,7 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, md)) {
-  .detail-page {
+  .section-detail-page {
     .detail-action {
       position: fixed;
       top: unset;

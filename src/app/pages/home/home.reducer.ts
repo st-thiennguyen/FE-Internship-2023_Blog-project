@@ -1,6 +1,6 @@
 import { PostModel, PublicPostState, RecommendPostState } from '../../models/post';
 import { UserModel, UserState } from '../../models/user';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
 const initialLastesPostState: PublicPostState = {

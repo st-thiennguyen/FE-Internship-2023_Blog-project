@@ -1,6 +1,6 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
-import { QueryPost } from '../../models/post';
+import { QueryPost, TypeImage } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
@@ -33,8 +33,8 @@ export const postArticles = (data: any) => {
 
 export const updatePostArticles = (data: any, id: number) => {
   const formData = new URLSearchParams();
-  Object.keys(data).forEach(key => {
-    formData.append(key, data[key])
+  Object.keys(data).forEach((key) => {
+    formData.append(key, data[key]);
   });
 
   const api = new ApiService();
@@ -83,4 +83,14 @@ export const getPostComments = (id: string) => {
 export const postComment = (id: string, comment: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
+};
+
+export const getRecyclebinPost = (query: QueryPost) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recyclebin}`, query);
+};
+
+export const restoreRecyclebinPost = (idPost: number) => {
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.post.index}/${idPost}/restore`);
 };

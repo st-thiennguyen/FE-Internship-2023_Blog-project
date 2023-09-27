@@ -15,15 +15,20 @@
   transition: all ease 0.3s;
 
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
-.btn:hover {
-  opacity: 0.5;
+.btn-primary {
+  background-color: map-get($color, primary);
+  color: map-get($color, textButton);
 }
 
-.btn.disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+.btn-secondary {
+  background-color: map-get($color, secondary);
+  color: #fff;
 }
 
 .btn-outline {
@@ -40,34 +45,20 @@
   border-radius: 20px;
 }
 
-.btn-primary {
-  background-color: map-get($color, primary);
-  color: map-get($color, textButton);
-
-  &:hover {
-    color: map-get($color, primary);
-    background-color: map-get($color, backgroundFrame);
-  }
-}
-
-.btn-secondary {
-  background-color: map-get($color, secondary);
-  color: #fff;
-}
-
-.btn-gradient {
-  background-image: linear-gradient(to right, map-get($color, primary), map-get($color, secondary));
-  color: #fff;
-}
-
-button:disabled,
-button[disabled] {
-  opacity: 0.6;
-  pointer-events: none;
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-danger {
   background-color: map-get($map: $color, $key: danger);
+  color: map-get($map: $color, $key: textLight);
+}
+
+button:disabled,
+button[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .btn-loading {
@@ -102,26 +93,6 @@ button[disabled] {
     text-decoration: none;
     background: #60c7c1;
     color: map-get($map: $color, $key: backgroundFrame);
-  }
-}
-
-.btn-secondary {
-  &:hover {
-    background: #0538c4;
-  }
-  &:focus {
-    background: #0538c4;
-  }
-}
-
-.btn-danger {
-  color: map-get($map: $color, $key: textLight);
-
-  &:hover {
-    background: #d70000;
-  }
-  &:focus {
-    background: #d70000;
   }
 }
 

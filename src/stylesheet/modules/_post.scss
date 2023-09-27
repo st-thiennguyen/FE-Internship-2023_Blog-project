@@ -60,8 +60,8 @@
   &-img {
     height: 100%;
     margin-bottom: 10px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     object-fit: cover;
     &-wrapper {
       height: 50%;
@@ -124,6 +124,7 @@
     position: absolute;
     top: 12px;
     left: 12px;
+
     padding: 6px 12px;
     border-radius: 12px;
     background: map-get($map: $color, $key: defaultBg);
@@ -135,12 +136,15 @@
     position: absolute;
     right: 12px;
     top: 12px;
+
     width: 40px;
     height: 40px;
     padding: 4px;
     z-index: 1;
     border-radius: 12px;
-    background-color: map-get($map: $color, $key: warning);
+
+    background-color: map-get($map: $color, $key: danger);
+    cursor: pointer;
 
     .icon-delete {
       display: block;
@@ -160,5 +164,37 @@
         display: block;
       }
     }
+  }
+  &-restore {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 12px;
+
+    background-color: rgba($color: #000000, $alpha: 0.2);
+  }
+
+  .icon-restore-60 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    cursor: pointer;
+  }
+}
+
+.empty-post {
+  &-img {
+    width: 700px;
+  }
+  &-title {
+    font-size: 32px;
+  }
+  &-desc {
+    color: map-get($color, subtext);
   }
 }

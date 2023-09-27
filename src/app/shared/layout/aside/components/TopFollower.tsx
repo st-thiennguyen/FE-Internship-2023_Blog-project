@@ -23,7 +23,7 @@ const TopFollower = ({ users }: TopFollowerProps) => {
                   <span className="followers">{user.followers} followers</span>
                 </div>
               </div>
-              <button className="btn btn-secondary btn-follow">Follow</button>
+              <button className="btn btn-primary btn-follow">Follow</button>
             </li>
           );
         })}

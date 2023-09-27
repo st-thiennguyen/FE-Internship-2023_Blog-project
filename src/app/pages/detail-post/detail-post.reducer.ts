@@ -1,7 +1,7 @@
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { RootAction } from '../../stores/store';
 import { DetailState, PostModel } from '../../models/post';
 import { InteractionItemModel } from '../../models/interaction';
+import { ACTIONS_TYPE } from '../../shared/constants';
 
 const initialState: DetailState = {
   data: {} as PostModel,

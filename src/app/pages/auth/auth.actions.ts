@@ -1,11 +1,11 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
-import { StorageKey } from '../../shared/constants';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
-import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../../stores/store';
+import { ToastType } from '../../models/toast';
+import { showToast } from '../../shared/components/toast/toast.actions';
 
 export const loginStart = () => {
   return {
@@ -59,9 +59,10 @@ export const logoutStart = () => {
   };
 };
 
-export const logoutSuccess = () => {
+export const logoutSuccess = (res: string) => {
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
+    payload: res,
   };
 };
 
@@ -86,8 +87,10 @@ export const registerAction =
     try {
       const response = await register(registerData);
       dispatch(registerSuccess(`${response}`));
+      dispatch(showToast(`${response}`, ToastType.SUCCESS));
     } catch (error) {
       dispatch(registerFailure(`${error}`));
+      dispatch(showToast(`${error}`, ToastType.ERROR));
     }
   };
 
@@ -96,18 +99,19 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   try {
     const data: any = await login(email, password);
     dispatch(loginSuccess(data));
-    setLocalStorage(StorageKey.AUTH, data);
+    dispatch(showToast('Login sucessfully', ToastType.SUCCESS));
   } catch (error) {
     dispatch(loginFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
 export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
-    await logout();
-    removeLocalStorage(StorageKey.AUTH);
-    dispatch(logoutSuccess());
+    const response = await logout();
+    dispatch(logoutSuccess(`${response}`));
+    dispatch(showToast(`${response}`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
   }

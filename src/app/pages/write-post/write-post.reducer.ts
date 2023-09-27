@@ -1,5 +1,5 @@
 import { PostProps } from '../../models/post';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
 const initState: PostProps = {
@@ -12,6 +12,8 @@ const initState: PostProps = {
 
 export const writePostReducer = (state = initState, action: RootAction) => {
   switch (action.type) {
+    case 'RESET_STATE_WRITEPOST':
+      return initState;
     case ACTIONS_TYPE.ADD_POST:
       return {
         ...state,
@@ -55,7 +57,7 @@ export const writePostReducer = (state = initState, action: RootAction) => {
       return {
         ...state,
         isLoading: false,
-        message: 'Update post fail !',
+        message: action.payload,
         isSuccess: false,
         isError: true,
       };
