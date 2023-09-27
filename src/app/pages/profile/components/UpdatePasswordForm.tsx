@@ -74,7 +74,7 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
   const confirmPass = watch('confirmPassword');
 
   useEffect(() => {
-    if (newPass) {
+    if (newPass && !isLoading) {
       trigger('confirmPassword');
     }
     if (confirmPass) {
