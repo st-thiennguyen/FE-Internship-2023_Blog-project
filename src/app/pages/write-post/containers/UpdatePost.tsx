@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import WritePost from "./WritePost";
+import WritePost from "../components/PostForm";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDetailBlog } from "../../detail-post/detail-post.actions";
@@ -15,7 +15,11 @@ const UpdatePost = () => {
   }, []);
 
   return (
-    <WritePost post={post} />
+    <section className="section section-write-post">
+      <div className="container">
+        <WritePost post={post} />
+      </div>
+    </section>
   );
 }
 export default UpdatePost;

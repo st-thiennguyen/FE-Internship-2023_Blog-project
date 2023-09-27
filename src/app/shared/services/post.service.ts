@@ -1,6 +1,6 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
-import { QueryPost } from '../../models/post';
+import { QueryPost, TypeImage } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();

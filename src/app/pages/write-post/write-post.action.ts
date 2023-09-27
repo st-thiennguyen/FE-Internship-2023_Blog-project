@@ -1,8 +1,9 @@
 import { Dispatch } from 'react';
 import { RootAction } from '../../stores/store';
 import { postArticles, updatePostArticles } from '../../shared/services';
-import { PostModel } from '../../models/post';
-import { ACTIONS_TYPE } from '../../shared/constants';
+import { PostModel, SignatureImageModel, TypeImage } from '../../models/post';
+import { ACTIONS_TYPE, TypeUploadImage } from '../../shared/constants';
+import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 
 export const resetWriteState = () => {
   return {
@@ -56,20 +57,28 @@ export const getUserProfileStart = () => {
   };
 };
 
-export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAction>) => {
+export const createPost = (data: PostModel, file: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(addPostStart());
   try {
-    const res = await postArticles(data);
+    const signatureImage: SignatureImageModel = await getEmptyImageUrl(file, TypeUploadImage.COVER_POST) as SignatureImageModel;
+    await putImageToLink(signatureImage.signedRequest, file);
+    const res = await postArticles({ ...data, cover: signatureImage.url });
     dispatch(addPostSuccess(res));
   } catch (error) {
     dispatch(addPostFailure(error));
   }
 };
 
-export const updatePost = (data: PostModel, id: number) => async (dispatch: Dispatch<RootAction>) => {
+export const updatePost = (data: PostModel, id: number, file: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updatePostStart());
   try {
-    const res = await updatePostArticles(data, id);
+    let coverImg = ''
+    if (file) {
+      const signatureImage: SignatureImageModel = await getEmptyImageUrl(file, TypeUploadImage.COVER_POST) as SignatureImageModel;
+      await putImageToLink(signatureImage.signedRequest, file)
+      coverImg = signatureImage.url;
+    }
+    const res = await updatePostArticles({ ...data, cover: coverImg ? coverImg : data.cover }, id);
     dispatch(updatePostSuccess(res));
   } catch (error) {
     dispatch(updatePostFailure(error));
