@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-quill/dist/quill.bubble.css';
 
-import ToastMessage from '../../../shared/components/ToastMessage';
 import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
@@ -47,15 +46,12 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
   const [content, setContent] = useState<string>('');
-  const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
   const formRef = useRef<HTMLFormElement>(null);
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
-  const isError = useSelector((state: RootState) => state.writePost.isError);
-  const message = useSelector((state: RootState) => state.writePost.message);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -94,7 +90,6 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
       dispatch(
         updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, detailPost.id) as any,
       );
-      setIsShowToast(true);
       setTimeout(() => {
         navigate(`/posts/${id}`);
       }, 3000);
@@ -104,7 +99,6 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
       await dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
-      setIsShowToast(true);
     }
   });
 
@@ -127,7 +121,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }
   }, [accessToken]);
 
-  if (isSuccess && isShowToast) {
+  if (isSuccess) {
     setTimeout(() => {
       navigate(`/posts/${post.id}`);
     }, 3000);
@@ -207,15 +201,6 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
           </div>
         </div>
       </section>
-      {isShowToast && isSuccess && (
-        <ToastMessage
-          isSuccess={isSuccess}
-          isShow={isSuccess}
-          title="Success"
-          subtitle="Redirecting to detail post..."
-        />
-      )}
-      {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
     </>
   );
 };

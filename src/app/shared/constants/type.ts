@@ -129,4 +129,8 @@ export const ACTIONS_TYPE = {
   GET_RECYCLE_BIN: 'get-recycle-bin',
   GET_RECYCLE_BIN_SUCCESS: 'get-recycle-bin-success',
   GET_RECYCLE_BIN_FAILURE: 'get-recycle-bin-failure',
+
+  // TOAST MESSAGE
+  SHOW_TOAST: 'show-toast',
+  CLOSE_TOAST: 'close-toast',
 };

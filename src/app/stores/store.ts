@@ -10,6 +10,7 @@ import { imageSignedReducer } from '../pages/write-post/image-sign.reducer';
 import { writePostReducer } from '../pages/write-post/write-post.reducer';
 import { postTagReducer } from '../pages/posts/posts.reducer';
 import { profileReducer } from '../pages/profile/profile.reducers';
+import toastReducer from '../shared/components/toast/toast.reducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -27,6 +28,7 @@ export const rootReducer = combineReducers({
   postTag: postTagReducer,
   profile: profileReducer,
   recommend: recommendPostReducer,
+  toast: toastReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(loggerMiddleware, thunk)));

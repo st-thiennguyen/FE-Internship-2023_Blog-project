@@ -15,6 +15,8 @@ import { ACTIONS_TYPE, StorageKey, TypeUploadImage } from '../../shared/constant
 import { getLocalStorage } from '../../shared/utils';
 import { reAssignmentAuth } from '../auth/auth.actions';
 import { deletePostItem } from '../../shared/services';
+import { ToastType } from '../../models/toast';
+import { showToast } from '../../shared/components/toast/toast.actions';
 
 const getUserProfileStart = () => {
   return {
@@ -163,6 +165,7 @@ export const getUserProfileAction = (id: string) => async (dispatch: Dispatch<Ro
     dispatch(getUserProfileSuccess(res as ProfileModel));
   } catch (error) {
     dispatch(getUserProfileFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -173,6 +176,7 @@ export const getUserPostAction = (id: string) => async (dispatch: Dispatch<RootA
     dispatch(getUserPostSuccess(res as ProfileModel));
   } catch (error) {
     dispatch(getUserPostFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -186,6 +190,7 @@ export const uploadAvatar =
       dispatch(updateProfileAction(data, response.url) as any);
     } catch (error) {
       dispatch(updateAvatarFailure(`${error}`));
+      dispatch(showToast(`${error}`, ToastType.ERROR));
     }
   };
 
@@ -208,8 +213,10 @@ export const updateProfileAction =
       }
 
       dispatch(reAssignmentAuth(userData));
+      dispatch(showToast(`Update information success`, ToastType.SUCCESS));
     } catch (error) {
       dispatch(updateProfileFailure(`${error}`));
+      dispatch(showToast(`${error}`, ToastType.ERROR));
     }
   };
 
@@ -218,8 +225,10 @@ export const updatePasswordAction = (data: FormChangePassword) => async (dispatc
   try {
     await updatePassword(data);
     dispatch(updatePasswordStartSuccess());
+    dispatch(showToast(`Change password success`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(updatePasswordStartFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -228,8 +237,10 @@ export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>)
   try {
     const response = await deletePostItem(id);
     dispatch(deletePostItemSuccess(id, response as string));
+    dispatch(showToast(`Delete Post success`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(deletePostItemFailure(error as string));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -240,5 +251,6 @@ export const updateFollowAction = (id: string) => async (dispatch: Dispatch<Root
     dispatch(updateFollowSuccess(response as FollowModel));
   } catch (error) {
     dispatch(updateFollowFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

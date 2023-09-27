@@ -10,6 +10,7 @@ import Layout from './pages/Layout';
 import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
 import { authRoutes } from './pages/auth/auth.routes';
+import ToastMessage from './shared/components/toast/ToastMessage';
 
 export const AuthContext = createContext<any>(undefined);
 
@@ -45,6 +46,7 @@ function App() {
         </Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
       </Routes>
+      <ToastMessage />
     </AuthContext.Provider>
   );
 }

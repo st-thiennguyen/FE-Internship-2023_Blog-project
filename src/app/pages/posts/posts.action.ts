@@ -4,6 +4,8 @@ import { PostModel, QueryPost } from '../../models/post';
 import { getPublicPosts, getRecyclebinPost, restoreRecyclebinPost } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 import { ACTIONS_TYPE } from '../../shared/constants';
+import { ToastType } from '../../models/toast';
+import { showToast } from '../../shared/components/toast/toast.actions';
 
 export const getPostsRecyclebin = (page: number) => {
   return {
@@ -88,6 +90,7 @@ export const fetchPostWithTags = (query: QueryPost) => async (dispatch: Dispatch
     dispatch(getPostsSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPostFailure(`${err}`));
+    dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
 
@@ -98,6 +101,7 @@ export const fetchSoftDeletedPosts = (page: number, size: number) => async (disp
     dispatch(getPostsSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPostFailure(`${err}`));
+    dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
 
@@ -108,6 +112,7 @@ export const getRecyclebinAction = (query: QueryPost) => async (dispatch: Dispat
     dispatch(getPostsRecyclebinSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPostsRecyclebinFailure(`${err}`));
+    dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
 
@@ -116,7 +121,9 @@ export const restorePostAction = (idPost: number) => async (dispatch: Dispatch<R
   try {
     const response = await restoreRecyclebinPost(idPost);
     dispatch(restorePostSuccess(`${response}`, idPost));
+    dispatch(showToast(`Restore post successfully`, ToastType.SUCCESS));
   } catch (err) {
     dispatch(restorePostFailure(`${err}`));
+    dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };

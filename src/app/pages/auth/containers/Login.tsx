@@ -11,7 +11,6 @@ import { loginAction, registerReset } from '../auth.actions';
 import { AuthContext } from '../../../App';
 
 import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
@@ -47,20 +46,10 @@ const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
-  const message: string = useSelector((state: RootState) => state.auth.message);
-  const isErrorLogin: any = useSelector((state: RootState) => state.auth.isError);
-
-  const isRegisterSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
-  const registerMessage: string = useSelector((state: RootState) => state.auth.message);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
   };
-
-  const [registerState] = useState({
-    isRegisterSuccess,
-    registerMessage,
-  });
 
   const {
     register,
@@ -72,13 +61,7 @@ const Login = () => {
     dispatch(loginAction(data.email, data.password) as any);
   });
 
-  const removeStateRegister = useRef(() => {});
-  removeStateRegister.current = () => {
-    isRegisterSuccess && dispatch(registerReset());
-  };
-
   useEffect(() => {
-    removeStateRegister.current();
     if (isLogin) {
       navigate('/');
     }
@@ -161,17 +144,6 @@ const Login = () => {
           <img src={loginImg} alt="background login" className="auth-img" />
         </div>
       </div>
-      {registerState.isRegisterSuccess && (
-        <ToastMessage
-          isShow={registerState.isRegisterSuccess}
-          isSuccess={registerState.isRegisterSuccess}
-          title={'Success'}
-          subtitle={registerState.registerMessage}
-        />
-      )}
-      {isErrorLogin && (
-        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
-      )}
     </div>
   );
 };

@@ -11,7 +11,6 @@ import { convertDateToString } from '../../../shared/utils/date';
 import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 
 import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 import logo from '../../../../assets/images/logo.svg';
 
 const schema = yup
@@ -52,8 +51,6 @@ const Register = () => {
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
-  const isError: boolean = useSelector((state: RootState) => state.auth.isError);
-  const message: string = useSelector((state: RootState) => state.auth.message);
   const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const dispatch = useDispatch();
@@ -217,7 +214,6 @@ const Register = () => {
         <div className="auth-bg col col-6">
           <img className="auth-img" src={require('../../../../assets/images/bg-auth.png')} alt="Auth background" />
         </div>
-        {isError && <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />}
       </div>
     </div>
   );
