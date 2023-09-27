@@ -6,12 +6,14 @@ interface EditorPostVisibilityProps {
 }
 
 const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibilityProps) => {
-  const [status, setStatus] = useState('public');
+  const [status, setStatus] = useState(currentStatus || 'public');
   useEffect(() => {
-    if(currentStatus) setStatus(currentStatus);
+    if (currentStatus) setStatus(currentStatus);
   }, [currentStatus])
   useEffect(() => {
-    onChangeValue(status);
+    if (status) {
+      onChangeValue(status);
+    }
   }, [status]);
   return (
     <div className="editor-visibility">
