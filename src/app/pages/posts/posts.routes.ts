@@ -21,17 +21,11 @@ export const postsRoutes = [
         path: 'create',
         component: CreatePost,
         isProtected: true,
-        props: {
-          isUpdate: false,
-        },
       },
       {
         path: 'update/:id',
         component: UpdatePost,
         isProtected: true,
-        props: {
-          isUpdate: true,
-        },
       },
     ],
   },
