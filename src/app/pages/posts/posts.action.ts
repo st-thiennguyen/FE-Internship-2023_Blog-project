@@ -94,24 +94,13 @@ export const fetchPostWithTags = (query: QueryPost) => async (dispatch: Dispatch
   }
 };
 
-export const fetchSoftDeletedPosts = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
+export const getRecyclebinAction = (page: number, size: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getPosts());
   try {
     const response = await getRecyclebinPost({ page, size });
     dispatch(getPostsSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPostFailure(`${err}`));
-    dispatch(showToast(`${err}`, ToastType.ERROR));
-  }
-};
-
-export const getRecyclebinAction = (query: QueryPost) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(getPostsRecyclebin(query.page || 1));
-  try {
-    const response = await getRecyclebinPost(query);
-    dispatch(getPostsRecyclebinSuccess(response as PostModel[]));
-  } catch (err) {
-    dispatch(getPostsRecyclebinFailure(`${err}`));
     dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
