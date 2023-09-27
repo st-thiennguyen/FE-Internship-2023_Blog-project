@@ -100,7 +100,7 @@ const WritePost = ({ post }: WritePostProps) => {
   const handleUpdatePost = handleSubmit((data: any) => {
     if (validate()) {
       dispatch(
-        updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, post!.id) as any,
+        updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, post!.id as number) as any,
       );
       setIsShowToast(true);
       setTimeout(() => {

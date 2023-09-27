@@ -1,203 +1,192 @@
-.post {
-  position: relative;
-  height: 450px;
-  margin-bottom: $p-col * 2;
-  border-radius: 12px;
-  box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
-
-  .post-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    line-clamp: 1;
-
-    margin-bottom: 10px;
-    overflow: hidden;
-
-    color: #000;
-    font-size: map-get($font-size, xxl);
-  }
-  .post-desc {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-
-    margin-bottom: 8px;
-    overflow: hidden;
-
-    color: map-get($color, text);
-    font-size: 15px;
-    line-height: 1.44;
-  }
-
-  &-list {
-    margin-bottom: 20px;
-  }
-  &-body-top {
-    margin-bottom: 10px;
-  }
-
-  .user-avatar {
-    width: 30px;
-    height: 30px;
-    margin-right: 6px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-  }
-
-  &:hover {
-    box-shadow: 0 0 15px rgba(33, 33, 33, 0.2);
-  }
-  .post-title:hover {
-    color: map-get($color, primary);
-  }
-  .post-created-date {
-    font-size: map-get($font-size, sm);
-  }
-
-  &-img {
-    height: 100%;
-    object-fit: cover;
-
-    &-wrapper {
-      height: 250px;
-      margin-bottom: 10px;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      overflow: hidden;
-    }
-
-    &:hover {
-      transform: scale(1.1);
-      transition: all 0.3s ease-in;
-    }
-    &.err {
-      object-fit: contain;
-    }
-  }
-
-  &-body-wrapper {
-    padding: 0 15px;
-  }
-
-  .user-name {
+  .post {
     position: relative;
-    margin-right: 16px;
-    font-size: map-get($font-size, sm);
-    font-weight: map-get($font-weight, medium);
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -11px;
-      transform: translateY(-50%);
+    height: 450px;
+    margin-bottom: $p-col * 2;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
 
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: map-get($color, text);
+    .post-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      line-clamp: 1;
+
+      margin-bottom: 10px;
+      overflow: hidden;
+
+      color: #000;
+      font-size: map-get($font-size, xxl);
     }
-  }
 
-  &-body {
-    margin-bottom: 6px;
-    border-bottom: 1px solid map-get($color, borderColor);
-  }
-  &-footer {
-    padding: 10px 0;
-  }
-  &-reaction-item {
-    margin-right: 10px;
-  }
-  &-reaction-number {
-    font-size: map-get($font-size, sm);
-  }
-  .icon {
-    margin-right: 4px;
-  }
-  .read-more {
-    font-size: map-get($font-size, sm);
-    font-weight: map-get($font-weight, medium);
-  }
+    .post-desc {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
 
-  .post-status {
-    position: absolute;
-    top: 12px;
-    left: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
 
-    padding: 6px 12px;
-    border-radius: 12px;
-    background: map-get($map: $color, $key: defaultBg);
-    color: map-get($map: $color, $key: text);
-  }
+      color: map-get($color, text);
+      font-size: 15px;
+      line-height: 1.44;
+    }
 
-  .post-delete {
-    visibility: hidden;
-    position: absolute;
-    right: 12px;
-    top: 12px;
+    &-list {
+      margin-bottom: 20px;
+    }
 
-    width: 40px;
-    height: 40px;
-    padding: 4px;
-    z-index: 1;
-    border-radius: 12px;
+    &-body-top {
+      margin-bottom: 10px;
+    }
 
-    background-color: map-get($map: $color, $key: danger);
-    cursor: pointer;
-
-    .icon-delete {
-      display: block;
-      margin: 0 auto;
-
-      &.icon-trash-fill-20 {
-        display: none;
-      }
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      margin-right: 6px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
     }
 
     &:hover {
-      background-color: map-get($map: $color, $key: backgroundFrame);
-      .icon-trash-20 {
-        display: none;
+      box-shadow: 0 0 15px rgba(33, 33, 33, 0.2);
+    }
+
+    .post-title:hover {
+      color: map-get($color, primary);
+    }
+
+    .post-created-date {
+      font-size: map-get($font-size, sm);
+    }
+
+    &-img {
+      height: 100%;
+      object-fit: cover;
+
+      &-wrapper {
+        height: 250px;
+        margin-bottom: 10px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        overflow: hidden;
       }
-      .icon-trash-fill-20 {
+
+      &.err {
+        object-fit: contain;
+      }
+    }
+
+    &-body-wrapper {
+      padding: 0 15px;
+    }
+
+    .user-name {
+      position: relative;
+      margin-right: 16px;
+      font-size: map-get($font-size, sm);
+      font-weight: map-get($font-weight, medium);
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: -11px;
+        transform: translateY(-50%);
+
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: map-get($color, text);
+      }
+    }
+
+    &-body {
+      margin-bottom: 6px;
+      border-bottom: 1px solid map-get($color, borderColor);
+    }
+
+    &-footer {
+      padding: 10px 0;
+    }
+
+    &-reaction-item {
+      margin-right: 10px;
+    }
+
+    &-reaction-number {
+      font-size: map-get($font-size, sm);
+    }
+
+    .icon {
+      margin-right: 4px;
+    }
+
+    .read-more {
+      font-size: map-get($font-size, sm);
+      font-weight: map-get($font-weight, medium);
+    }
+
+    .post-status {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+
+      padding: 6px 12px;
+      border-radius: 12px;
+      background: map-get($map: $color, $key: defaultBg);
+      color: map-get($map: $color, $key: text);
+    }
+
+    .post-delete {
+      visibility: hidden;
+      position: absolute;
+      right: 12px;
+      top: 12px;
+
+      width: 40px;
+      height: 40px;
+      padding: 4px;
+      z-index: 1;
+      border-radius: 12px;
+
+      background-color: map-get($map: $color, $key: danger);
+      cursor: pointer;
+
+      .icon-delete {
         display: block;
+        margin: 0 auto;
+
+        &.icon-trash-fill-20 {
+          display: none;
+        }
+      }
+
+      &:hover {
+        background-color: map-get($map: $color, $key: backgroundFrame);
+
+        .icon-trash-20 {
+          display: none;
+        }
+
+        .icon-trash-fill-20 {
+          display: block;
+        }
       }
     }
   }
-  .book-mark {
-    position: absolute;
-    left: 30px;
-    top: -5px;
 
-    width: 0px;
-    height: 40px;
-    background-color: transparent;
-    border: solid 15px #5c5b5b;
-    border-bottom: solid 15px transparent;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    transition: all 0.2s;
+  .empty-post {
+    &-img {
+      width: 700px;
+    }
 
-    z-index: 7;
-    cursor: pointer;
-    &.active {
-      border: solid 15px map-get($color, primary);
-      border-bottom: solid 15px transparent;
+    &-title {
+      font-size: 32px;
+    }
+
+    &-desc {
+      color: map-get($color, subtext);
     }
   }
-}
-
-.empty-post {
-  &-img {
-    width: 700px;
-  }
-  &-title {
-    font-size: 32px;
-  }
-  &-desc {
-    color: map-get($color, subtext);
-  }
-}

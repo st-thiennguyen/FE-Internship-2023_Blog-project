@@ -38,7 +38,7 @@ export const getBookmark = () => {
   return api.get(`${ENDPOINT.bookmark.index}`);
 };
 
-export const addBookmark = (postId: string) => {
+export const addBookmark = (postId: number) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.bookmark.index}`, {postId: postId.toString()} );
 };

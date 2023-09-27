@@ -2,7 +2,7 @@ import { InteractionItemModel } from './interaction';
 import { UserModel } from './user';
 
 export interface PostModel {
-  id: string;
+  id: number;
   title: string;
   description: string;
   content: string;
@@ -28,6 +28,7 @@ export interface BookmarkModel {
   id: string;
   userId: string;
   postId: string;
+  post: PostModel;
 }
 export interface SignatureImageState {
   data: SignatureImageModel;

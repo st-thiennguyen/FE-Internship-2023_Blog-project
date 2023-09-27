@@ -9,7 +9,7 @@ import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 
 interface ReactionProps {
-  postId: string;
+  postId: number;
   likeCount: number;
   commentCount: number;
   scrollToComment: () => void;
