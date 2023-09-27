@@ -162,6 +162,18 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
 
   window.onpopstate = handleNavigation;
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: any) => {
+      e.preventDefault();
+      e.returnValue = '';
+      SetIsShowModal(true);
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   return (
     <>
       <section className="section section-write-post">
