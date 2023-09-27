@@ -5,6 +5,8 @@ import { StorageKey } from '../../../shared/constants';
 import { getUserProfile } from '../../../shared/services/user.service';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../auth.actions';
+import { parseJwt } from '../../../shared/utils/jwt';
+import { UserInfo } from '../../../models/auth';
 
 const LoginGoogle = () => {
   const location = useLocation();
@@ -13,17 +15,16 @@ const LoginGoogle = () => {
   const navigate = useNavigate();
 
   const accessToken = searchParams.get('accessToken');
+  const jwt = parseJwt(`${accessToken}`);
+  const userId = jwt?.userId;
   const getUser = async () => {
-    const userInfo = await getUserProfile('me');
+    const user = await getUserProfile('me');
 
-    dispatch(loginSuccess({ accessToken, userInfo }));
+    dispatch(loginSuccess({ accessToken, userInfo: { id: userId, ...(user as Omit<UserInfo, 'id'>) } }));
   };
   useEffect(() => {
     if (accessToken) {
-      console.log('ACCESS', accessToken);
-      setLocalStorage(StorageKey.AUTH, {
-        accessToken,
-      });
+      setLocalStorage(StorageKey.ACCESS_TOKEN, accessToken);
       getUser();
 
       navigate('/');
