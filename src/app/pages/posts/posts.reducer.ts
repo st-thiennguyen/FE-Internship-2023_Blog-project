@@ -52,35 +52,6 @@ export const postTagReducer = (state = initialPostsState, action: RootAction): P
         currentPage: 1,
       };
 
-    case ACTIONS_TYPE.GET_RECYCLEBIN:
-      return {
-        ...state,
-        data: action.payload === 1 ? [] : state.data,
-        isLoading: true,
-        isSuccess: false,
-        isError: false,
-        message: '',
-      };
-
-    case ACTIONS_TYPE.GET_RECYCLEBIN_SUCCESS:
-      return {
-        ...state,
-        data: [...state.data, action.payload],
-        totalPage: action.payload.totalPage,
-        totalItems: action.payload.totalItems,
-        isLoading: false,
-        isSuccess: true,
-        message: '',
-      };
-
-    case ACTIONS_TYPE.GET_RECYCLEBIN_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        message: action.payload,
-      };
-
     case ACTIONS_TYPE.RESTORE_RECYCLEBIN:
       return {
         ...state,

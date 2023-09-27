@@ -7,44 +7,23 @@ import { ACTIONS_TYPE } from '../../shared/constants';
 import { ToastType } from '../../models/toast';
 import { showToast } from '../../shared/components/toast/toast.actions';
 
-export const getPostsRecyclebin = (page: number) => {
-  return {
-    type: ACTIONS_TYPE.GET_RECYCLEBIN,
-    payload: page,
-  };
-};
-
-export const getPostsRecyclebinSuccess = (data: PostModel[]) => {
-  return {
-    type: ACTIONS_TYPE.GET_RECYCLEBIN_SUCCESS,
-    payload: data,
-  };
-};
-
-export const getPostsRecyclebinFailure = (message: string) => {
-  return {
-    type: ACTIONS_TYPE.GET_RECYCLEBIN_FAILURE,
-    payload: message,
-  };
-};
-
-export const restorePost = () => {
+const restorePost = () => {
   return {
     type: ACTIONS_TYPE.RESTORE_RECYCLEBIN,
   };
 };
 
-export const restorePostSuccess = (message: string, idPost: number) => {
+const restorePostSuccess = (message: string, postId: number) => {
   return {
     type: ACTIONS_TYPE.RESTORE_RECYCLEBIN_SUCCESS,
     payload: {
       message: message,
-      id: idPost,
+      id: postId,
     },
   };
 };
 
-export const restorePostFailure = (message: string) => {
+const restorePostFailure = (message: string) => {
   return {
     type: ACTIONS_TYPE.RESTORE_RECYCLEBIN_FAILURE,
     payload: message,
@@ -105,12 +84,12 @@ export const getRecyclebinAction = (page: number, size: number) => async (dispat
   }
 };
 
-export const restorePostAction = (idPost: number) => async (dispatch: Dispatch<RootAction>) => {
+export const restorePostAction = (postId: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(restorePost());
   try {
-    const response = await restoreRecyclebinPost(idPost);
-    dispatch(restorePostSuccess(`${response}`, idPost));
-    dispatch(showToast(`Restore post successfully`, ToastType.SUCCESS));
+    const response = await restoreRecyclebinPost(postId);
+    dispatch(restorePostSuccess(`${response}`, postId));
+    dispatch(showToast('Restore post successfully', ToastType.SUCCESS));
   } catch (err) {
     dispatch(restorePostFailure(`${err}`));
     dispatch(showToast(`${err}`, ToastType.ERROR));

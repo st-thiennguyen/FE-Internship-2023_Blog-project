@@ -63,7 +63,7 @@ export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAct
   try {
     const res = await postArticles(data);
     dispatch(addPostSuccess(res));
-    dispatch(showToast(`Create post success`, ToastType.SUCCESS));
+    dispatch(showToast('Create post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(addPostFailure(error));
     dispatch(showToast(`${error}`, ToastType.ERROR));
@@ -75,7 +75,7 @@ export const updatePost = (data: PostModel, id: number) => async (dispatch: Disp
   try {
     const res = await updatePostArticles(data, id);
     dispatch(updatePostSuccess(res));
-    dispatch(showToast(`Update post success`, ToastType.SUCCESS));
+    dispatch(showToast('Update post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(updatePostFailure(error));
     dispatch(showToast(`${error}`, ToastType.ERROR));

@@ -213,7 +213,7 @@ export const updateProfileAction =
       }
 
       dispatch(reAssignmentAuth(userData));
-      dispatch(showToast(`Update information success`, ToastType.SUCCESS));
+      dispatch(showToast('Update information success', ToastType.SUCCESS));
     } catch (error) {
       dispatch(updateProfileFailure(`${error}`));
       dispatch(showToast(`${error}`, ToastType.ERROR));
@@ -225,7 +225,7 @@ export const updatePasswordAction = (data: FormChangePassword) => async (dispatc
   try {
     await updatePassword(data);
     dispatch(updatePasswordStartSuccess());
-    dispatch(showToast(`Change password success`, ToastType.SUCCESS));
+    dispatch(showToast('Change password success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(updatePasswordStartFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
@@ -237,7 +237,7 @@ export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>)
   try {
     const response = await deletePostItem(id);
     dispatch(deletePostItemSuccess(id, response as string));
-    dispatch(showToast(`Delete Post success`, ToastType.SUCCESS));
+    dispatch(showToast('Delete Post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(deletePostItemFailure(error as string));
     dispatch(showToast(`${error}`, ToastType.ERROR));

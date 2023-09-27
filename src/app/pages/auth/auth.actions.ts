@@ -98,7 +98,7 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   try {
     const data: any = await login(email, password);
     dispatch(loginSuccess(data));
-    dispatch(showToast('Login sucess', ToastType.SUCCESS));
+    dispatch(showToast('Login sucessfully', ToastType.SUCCESS));
   } catch (error) {
     dispatch(loginFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
@@ -110,7 +110,7 @@ export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   try {
     await logout();
     dispatch(logoutSuccess());
-    dispatch(showToast('Logout sucess', ToastType.SUCCESS));
+    dispatch(showToast('Logout sucessfully', ToastType.SUCCESS));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
