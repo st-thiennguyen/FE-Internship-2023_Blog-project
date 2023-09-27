@@ -10,11 +10,14 @@ import ToastMessage from '../../../shared/components/ToastMessage';
 import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
-import { RootState } from '../../../stores/store';
-import { createPost, updatePost } from '../write-post.action';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
+
+import { RootState } from '../../../stores/store';
+import { createPost, updatePost } from '../write-post.action';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 import { PostModel } from '../../../models/post';
 
 const schema = yup
@@ -49,17 +52,19 @@ const WritePost = ({ post }: WritePostProps) => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  
   const formRef = useRef<HTMLFormElement>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const message = useSelector((state: RootState) => state.writePost.message);
+  const currentPost = useSelector((state: RootState) => state.writePost.data);
+  console.log(currentPost);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const { id } = useParams();
   const [isUpdate, setIsUpdate] = useState(false);
@@ -127,14 +132,14 @@ const WritePost = ({ post }: WritePostProps) => {
   }, [post]);
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   if (isSuccess && isShowToast) {
     setTimeout(() => {
-      navigate(`/posts/${id}`);
+      navigate(`/posts/${currentPost.id}`);
     }, 3000);
   }
 
