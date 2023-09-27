@@ -6,7 +6,6 @@ import authReducer from '../pages/auth/auth.reducer';
 import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
 import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
-import { imageSignedReducer } from '../pages/write-post/image-sign.reducer';
 import { writePostReducer } from '../pages/write-post/write-post.reducer';
 import { postTagReducer } from '../pages/posts/posts.reducer';
 import { profileReducer } from '../pages/profile/profile.reducers';
@@ -22,7 +21,6 @@ export const rootReducer = combineReducers({
   detail: detailPostReducer,
   post: lastesPostReducer,
   user: userReducer,
-  imageSign: imageSignedReducer,
   writePost: writePostReducer,
   postTag: postTagReducer,
   profile: profileReducer,

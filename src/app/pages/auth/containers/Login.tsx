@@ -43,6 +43,7 @@ const Login = () => {
   const navigate = useNavigate();
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowMessage, setIsShowMessage] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
   const message: string = useSelector((state: RootState) => state.auth.message);
@@ -68,6 +69,7 @@ const Login = () => {
 
   const onSubmit = handleSubmit((data) => {
     dispatch(loginAction(data.email, data.password) as any);
+    setIsShowMessage(true);
   });
 
   const removeStateRegister = useRef(() => {});
@@ -171,8 +173,8 @@ const Login = () => {
           subtitle={registerState.registerMessage}
         />
       )}
-      {isErrorLogin && (
-        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message} />
+      {isErrorLogin && isShowMessage && (
+        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>
   );

@@ -15,6 +15,7 @@ import { ACTIONS_TYPE, StorageKey, TypeUploadImage } from '../../shared/constant
 import { getLocalStorage } from '../../shared/utils';
 import { reAssignmentAuth } from '../auth/auth.actions';
 import { deletePostItem } from '../../shared/services';
+import { TypeImage } from '../../models/post';
 
 const getUserProfileStart = () => {
   return {
