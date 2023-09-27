@@ -45,6 +45,7 @@ const Login = () => {
 
   const isLogin = authContext?.accessToken;
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowMessage, setShowMessage] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
   const message: string = useSelector((state: RootState) => state.auth.message);
@@ -70,6 +71,7 @@ const Login = () => {
 
   const onSubmit = handleSubmit((data) => {
     dispatch(loginAction(data.email, data.password) as any);
+    setShowMessage(true);
   });
 
   const removeStateRegister = useRef(() => {});
@@ -169,7 +171,7 @@ const Login = () => {
           subtitle={registerState.registerMessage}
         />
       )}
-      {isErrorLogin && (
+      {isErrorLogin && isShowMessage && (
         <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
       )}
     </div>

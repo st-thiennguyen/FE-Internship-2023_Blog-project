@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,7 +37,6 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
       confirmPassword: yup
         .string()
         .trim()
-        .required('Confirm password must not be null')
         .test('passwords-match', 'Confirm password must match new password', function (value) {
           return this.parent.newPassword === value;
         }),
@@ -47,6 +46,8 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
   const {
     reset,
     register,
+    watch,
+    trigger,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
@@ -68,6 +69,18 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
       reset();
     }
   }, [isSuccess]);
+
+  const newPass = watch('newPassword');
+  const confirmPass = watch('confirmPassword');
+
+  useEffect(() => {
+    if (newPass) {
+      trigger('confirmPassword');
+    }
+    if (confirmPass) {
+      trigger('newPassword');
+    }
+  }, [newPass, confirmPass]);
 
   type FormData = yup.InferType<typeof schema>;
   return (
