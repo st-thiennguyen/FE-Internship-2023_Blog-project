@@ -25,6 +25,7 @@ export const ENDPOINT = {
   },
   post: {
     index: `${BASE_URL}/${RESOURCES.posts}`,
+    draft: `${BASE_URL}/${RESOURCES.posts}/draft`,
     public: `${BASE_URL}/${RESOURCES.posts}/public`,
     recommend: `${BASE_URL}/${RESOURCES.posts}/recommend`,
   },
@@ -36,6 +37,9 @@ export const ENDPOINT = {
     index: `${BASE_URL}/${RESOURCES.signatures}`,
   },
   friends: {
+    index: `${BASE_URL}/${RESOURCES.friends}`,
+  },
+  draft: {
     index: `${BASE_URL}/${RESOURCES.friends}`,
   },
 };
