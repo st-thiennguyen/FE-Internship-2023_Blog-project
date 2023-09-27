@@ -120,4 +120,8 @@ export const ACTIONS_TYPE = {
   POST_COMMENT: 'post-comment',
   POST_COMMENT_SUCCESS: 'post-comment-success',
   POST_COMMENT_FAILURE: 'post-comment-failure',
+  // ADD TO DRAFT
+  ADD_DRAFT: 'add-draft',
+  ADD_DRAFT_SUCCESS: 'add-draft-success',
+  ADD_DRAFT_FAILURE: 'add-draft-failure',
 };
