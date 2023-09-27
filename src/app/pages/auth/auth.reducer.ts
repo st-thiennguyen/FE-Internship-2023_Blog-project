@@ -1,14 +1,18 @@
-import { AuthState } from '../../models/auth';
+import { userInfo } from 'os';
+import { AuthState, UserInfo } from '../../models/auth';
 import { StorageKey, ACTIONS_TYPE } from '../../shared/constants';
 import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
 
+
+
 const initState: AuthState = {
-  auth: getLocalStorage(StorageKey.AUTH) || null,
+  userInfo: getLocalStorage(StorageKey.USER, {} as UserInfo),
   isLoading: false,
   isError: false,
   isSuccess: false,
   message: '',
+  isLogoutSuccess: false
 };
 
 export const authReducer = (state = initState, action: RootAction): AuthState => {
@@ -60,10 +64,11 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       };
     }
     case ACTIONS_TYPE.LOGIN_SUCCESS: {
-      setLocalStorage(StorageKey.AUTH, action.payload);
+      setLocalStorage(StorageKey.USER, action.payload.userInfo);
+      setLocalStorage(StorageKey.ACCESS_TOKEN, action.payload.accessToken);
       return {
         ...state,
-        auth: action.payload,
+        userInfo: action.payload.userInfo,
         isLoading: false,
         isSuccess: true,
         isError: false,
@@ -82,10 +87,10 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.REASSIGNMENT_AUTH: {
-      setLocalStorage(StorageKey.AUTH, { ...action.payload });
+      setLocalStorage(StorageKey.USER, action.payload);
       return {
         ...state,
-        auth: action.payload,
+        userInfo: action.payload,
       };
     }
 
@@ -93,18 +98,21 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       return {
         ...state,
         isLoading: true,
-        isSuccess: false,
+        isLogoutSuccess: false,
         isError: false,
       };
     }
 
     case ACTIONS_TYPE.LOGOUT_SUCCESS: {
-      removeLocalStorage(StorageKey.AUTH);
+      removeLocalStorage(StorageKey.USER);
+      removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
         isLoading: false,
         isError: false,
-        message: '',
+        isLogoutSuccess: true,
+        isSuccess: false,
+        message: action.payload,
       };
     }
 
@@ -112,7 +120,6 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       return {
         ...state,
         isLoading: false,
-        isSuccess: false,
         isError: true,
         message: action.payload,
       };
