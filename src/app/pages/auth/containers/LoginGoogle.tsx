@@ -10,13 +10,14 @@ import { parseJwt } from '../../../shared/utils/jwt';
 import { UserInfo } from '../../../models/auth';
 
 const LoginGoogle = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
 
+  const searchParams = new URLSearchParams(location.search);
   const accessToken = searchParams.get('accessToken');
-  const jwt = parseJwt(`${accessToken}`);
+
+  const jwt = accessToken && parseJwt(`${accessToken}`);
   const userId = jwt?.userId;
 
   const getUser = async () => {
@@ -25,7 +26,9 @@ const LoginGoogle = () => {
   };
 
   useEffect(() => {
-    if (accessToken) {
+    if (!accessToken) {
+      navigate('/');
+    } else {
       setLocalStorage(StorageKey.ACCESS_TOKEN, accessToken);
       getUser();
 

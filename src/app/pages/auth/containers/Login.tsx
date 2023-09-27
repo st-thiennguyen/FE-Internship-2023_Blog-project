@@ -61,6 +61,19 @@ const Login = () => {
     registerMessage,
   });
 
+  const currentHost = () => {
+    const protocol = window.location.protocol;
+    let host = '';
+
+    if (process.env.NODE_ENV === 'production') {
+      host = process.env.REACT_APP_HOST_DEVELOPMENT || '';
+    } else {
+      host = `${protocol}//${window.location.hostname}:3000`;
+    }
+
+    return host;
+  };
+
   const {
     register,
     handleSubmit,
@@ -98,7 +111,7 @@ const Login = () => {
           <ul className="login-external-list row text-center">
             <li className="login-external-item col col-4">
               <a
-                href={`${ENDPOINT.auth.google}?redirect_to=http://localhost:3000/login-google`}
+                href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/login-google`}
                 className="external-item-link"
               >
                 <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
