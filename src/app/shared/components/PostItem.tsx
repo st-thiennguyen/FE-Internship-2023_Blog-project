@@ -11,6 +11,7 @@ import { convertDateToString } from '../utils/date';
 import Modal from './Modal';
 import ToastMessage from './ToastMessage';
 import NoImg from '../../../assets/images/no-image.png';
+import Tags from './Tags';
 
 interface PostItemProps {
   post: PostModel;
@@ -20,31 +21,11 @@ const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
   const [isShowToast, setIsShowToast] = useState(false);
-  const [randomColor, setRandomColor] = useState<string[]>([]);
 
   const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
   const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
   const deleteMessage = useSelector((state: RootState) => state.profile?.message);
   const dispatch = useDispatch();
-
-  const colorList = ['red', 'orange', 'lime', 'green', 'blue', 'purple'];
-
-  const randomColorTag = () => {
-    let arrRandomColor: string[] = [];
-    let count = 0;
-    do {
-      let color = colorList[Math.floor(Math.random() * colorList.length)];
-      if (!arrRandomColor.includes(color)) {
-        arrRandomColor.push(color);
-        count++;
-      }
-    } while (count < 3);
-    setRandomColor(arrRandomColor);
-  };
-
-  useEffect(() => {
-    randomColorTag();
-  }, []);
 
   const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
@@ -63,10 +44,6 @@ const PostItem = ({ post }: PostItemProps) => {
 
   const handleShowModal = () => {
     setIShowModal(!isShowModal);
-  };
-
-  const sliceTagList = () => {
-    return post.tags.slice(0, 3);
   };
 
   useEffect(() => {
@@ -116,18 +93,7 @@ const PostItem = ({ post }: PostItemProps) => {
           </div>
           <div className="post-footer d-flex justify-between item-center">
             <ul className="tag-list d-flex">
-              {sliceTagList().map((tag, index) => {
-                return (
-                  <Link to={`/posts?tags=${tag}`} key={index}>
-                    <li className={`tag tag-${randomColor[index]}`}>{tag}</li>
-                  </Link>
-                );
-              })}
-              {post.tags.length > 3 && (
-                <Link to="#">
-                  <li className="tag tag-red">+{post.tags.length - 3}</li>
-                </Link>
-              )}
+              <Tags post={post} />
             </ul>
             <ul className="post-action-list">
               <li className="post-action-item">

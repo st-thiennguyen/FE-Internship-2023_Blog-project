@@ -29,7 +29,7 @@
 
     color: map-get($color, text);
     font-size: 15px;
-    line-height: 1.44;
+    line-height: 1.6;
   }
 
   &-list {
@@ -101,10 +101,10 @@
 
   &-body {
     border-bottom: 1px solid map-get($color, borderColor);
-    height: 80%;
+    height: 75%;
   }
   &-footer {
-    height: 20%;
+    height: 25%;
   }
   &-reaction-item {
     margin-right: 10px;
