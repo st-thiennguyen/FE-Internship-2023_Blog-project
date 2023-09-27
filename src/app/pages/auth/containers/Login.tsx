@@ -1,4 +1,4 @@
-import {  useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -41,8 +41,9 @@ type FormData = {
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowMessage, setIsShowMessage] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
   const message: string = useSelector((state: RootState) => state.auth.message);
@@ -68,10 +69,11 @@ const Login = () => {
 
   const onSubmit = handleSubmit((data) => {
     dispatch(loginAction(data.email, data.password) as any);
+    setIsShowMessage(true);
   });
 
-  const removeStateRegister = useRef(() => { });
-  
+  const removeStateRegister = useRef(() => {});
+
   removeStateRegister.current = () => {
     isRegisterSuccess && dispatch(registerReset());
   };
@@ -160,26 +162,17 @@ const Login = () => {
           <img src={loginImg} alt="background login" className="auth-img" />
         </div>
       </div>
-      {
-        registerState.isRegisterSuccess && (
-          <ToastMessage
-            isShow={registerState.isRegisterSuccess}
-            isSuccess={registerState.isRegisterSuccess}
-            title={'Success'}
-            subtitle={registerState.registerMessage}
-          />
-        )
-      }
-      {
-        isErrorLogin && (
-          <ToastMessage
-            isShow={isErrorLogin}
-            isSuccess={!isErrorLogin}
-            title={'Error'}
-            subtitle={message}
-          />
-        )
-      }
+      {registerState.isRegisterSuccess && (
+        <ToastMessage
+          isShow={registerState.isRegisterSuccess}
+          isSuccess={registerState.isRegisterSuccess}
+          title={'Success'}
+          subtitle={registerState.registerMessage}
+        />
+      )}
+      {isErrorLogin && isShowMessage && (
+        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
+      )}
     </div>
   );
 };
