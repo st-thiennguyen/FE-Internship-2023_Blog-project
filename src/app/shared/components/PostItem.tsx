@@ -93,7 +93,7 @@ const PostItem = ({ post }: PostItemProps) => {
           </div>
           <div className="post-footer d-flex justify-between item-center">
             <ul className="tag-list d-flex">
-              <Tags post={post} />
+              <Tags tags={post.tags} />
             </ul>
             <ul className="post-action-list">
               <li className="post-action-item">

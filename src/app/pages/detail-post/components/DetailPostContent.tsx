@@ -6,6 +6,7 @@ import { isImageUrlValid } from '../../../shared/utils';
 
 import avaDefault from '../../../../assets/images/user-default.png';
 import DetailPostReaction from './DetailPostReaction';
+import Tags from '../../../shared/components/Tags';
 
 interface DetailPostProps {
   post: PostModel;
@@ -35,14 +36,7 @@ const DetailPostContent = ({ post, scrollToComment }: DetailPostProps) => {
         </div>
         <div className="post-tag">
           <ul className="tag-list d-flex flex-wrap justify-end">
-            {post.tags?.length > 0 &&
-              post.tags?.map((item, index) => (
-                <li className="tag-item" key={index}>
-                  <Link to="/" className="tag">
-                    #{item}
-                  </Link>
-                </li>
-              ))}
+            {post.tags && post.tags.length > 0 && <Tags tags={post.tags} />}
           </ul>
         </div>
         <div className="detail-author text-center d-flex justify-center">

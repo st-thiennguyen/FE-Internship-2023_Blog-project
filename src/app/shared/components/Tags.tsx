@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PostModel } from '../../models/post';
 import { Link } from 'react-router-dom';
 
 interface TagsProps {
-  post: PostModel;
+  tags: string[];
 }
-const Tags = ({ post }: TagsProps) => {
+const Tags = ({ tags }: TagsProps) => {
   const [randomColor, setRandomColor] = useState<string[]>([]);
   const colorList = ['red', 'orange', 'lime', 'green', 'blue', 'purple'];
 
@@ -23,7 +22,7 @@ const Tags = ({ post }: TagsProps) => {
   };
 
   const sliceTagList = () => {
-    return post.tags.slice(0, 3);
+    return tags.slice(0, 3);
   };
 
   useEffect(() => {
@@ -38,9 +37,9 @@ const Tags = ({ post }: TagsProps) => {
           </Link>
         );
       })}
-      {post.tags.length > 3 && (
-        <Link to="#" className="d-flex item-center">
-          <li className="tag tag-red">+{post.tags.length - 3}</li>
+      {tags.length > 3 && (
+        <Link to="#" className="d-flex item-center tag-disabled">
+          <li className="tag tag-red">+{tags.length - 3}</li>
         </Link>
       )}
     </>
