@@ -1,0 +1,43 @@
+.section-bookmark {
+  .section-header {
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+
+  .post {
+    &:hover {
+      .remove-bookmark {
+        opacity: 1;
+      }
+    }
+    .post-action-link {
+      display: none;
+    }
+  }
+
+  .post-bookmark {
+    position: absolute;
+    right: 0;
+
+    display: block;
+    transition: all ease 0.5s;
+    cursor: pointer;
+    .icon {
+      margin: 0;
+    }
+    &:hover {
+      height: 45px;
+    }
+    .remove-bookmark {
+      opacity: 0;
+      @include position(4px, 0, 0, 0, absolute);
+      text-align: center;
+      font-size: 24px;
+      color: map-get($map: $color, $key: textLight);
+      transition: all ease 0.3s;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}
