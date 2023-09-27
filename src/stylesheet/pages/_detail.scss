@@ -4,6 +4,7 @@
     height: fit-content;
     top: 120px;
   }
+
   .detail-cover {
     position: relative;
     min-height: 580px;
@@ -12,6 +13,7 @@
 
     .cover-img {
       height: 100%;
+
       &::after {
         content: "";
         position: absolute;
@@ -40,6 +42,7 @@
       .cover-info {
         margin-top: 10px;
       }
+
       .cover-author {
         padding: 10px;
         color: map-get($color, textLight);
@@ -47,6 +50,7 @@
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(2px);
+
         .author-name {
           font-weight: 500;
         }
@@ -55,6 +59,7 @@
           width: 30px;
           height: 30px;
           margin-right: 10px;
+
           img {
             width: 100%;
             height: 100%;
@@ -63,11 +68,13 @@
           }
         }
       }
+
       .cover-date {
         padding: 10px;
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 12px;
         backdrop-filter: blur(2px);
+
         &-title {
           margin-left: 10px;
           font-size: 14px;
@@ -79,14 +86,22 @@
 
   .detail-content {
     gap: 40px;
+
     .action-item {
       margin-bottom: 16px;
+
       .btn-post-action {
         width: min-content;
         height: min-content;
         padding: 5px;
         background-color: transparent;
+
+        .ic-bookmark-blue-20 {
+          width: 20px;
+          height: 20px;
+        }
       }
+
       .action-count {
         width: 20px;
         margin-left: 10px;
@@ -97,6 +112,7 @@
     .detail-post {
       min-width: 300px;
       flex: 1;
+
       .detail-post-body {
         margin-bottom: 16px;
         font-size: map-get($font-size, lg);
@@ -116,6 +132,7 @@
           display: flex;
           flex-direction: column;
           gap: 16px;
+
           pre {
             background-color: #0d0c1a;
             padding: 10px;
@@ -124,24 +141,29 @@
           }
         }
       }
+
       .post-tag {
         .tag-list {
           gap: 10px;
         }
       }
     }
+
     .detail-author {
       padding: 60px 0;
       border-bottom: 1px solid map-get($color, borderColor);
+
       .author-name {
         font-weight: map-get($font-weight, bold);
         font-size: map-get($font-size, lg);
       }
+
       .author-img {
         width: 100px;
         height: 100px;
         margin-bottom: 16px;
         border-radius: 100%;
+
         img {
           border-radius: 100%;
         }
@@ -154,9 +176,11 @@
     padding: 20px;
     margin-bottom: 40px;
     scroll-margin-top: 100px;
+
     .comment-title {
       margin-bottom: 16px;
     }
+
     .comment-input {
       display: inline-block;
       width: 100%;
@@ -175,6 +199,7 @@
           opacity: 0;
         }
       }
+
       &::-webkit-scrollbar {
         width: 2px;
       }
@@ -186,12 +211,14 @@
       &::-webkit-scrollbar-thumb {
         display: none;
       }
+
       &-wrapper {
         align-items: end;
         width: 80%;
         border-radius: 6px;
         margin-bottom: 32px;
       }
+
       &-hidden {
         padding: 12px 0 40px;
         margin-bottom: 32px;
@@ -214,18 +241,22 @@
         border-radius: 12px;
         background-color: white;
       }
+
       &-info {
         width: 100%;
       }
+
       &-info-top {
         align-items: baseline;
         margin-bottom: 4px;
         padding-bottom: 4px;
         border-bottom: 1px solid map-get($map: $color, $key: borderColor);
       }
+
       .user-info {
         margin-right: 10px;
       }
+
       .user-avatar {
         width: 40px;
         height: 40px;
@@ -233,17 +264,20 @@
         border-radius: 10px;
         object-fit: cover;
       }
+
       .user-name {
         margin-right: 10px;
         font-size: map-get($font-size, xs);
         font-weight: map-get($font-weight, bold);
         color: map-get($color, subtext);
       }
+
       &-content {
         border-radius: 6px;
         font-size: map-get($font-size, lg);
         color: map-get($color, text);
       }
+
       &-time {
         color: map-get($color, subtext);
         font-size: map-get($font-size, xs);
@@ -263,6 +297,7 @@
   height: 20px;
   margin-bottom: 10px;
 }
+
 .skeleton.author-name {
   width: 150px;
   height: 20px;
@@ -295,6 +330,7 @@
         padding: 10px 0;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
         background-color: map-get($color, backgroundFrame);
+
         .action-item {
           margin-bottom: 0;
         }
