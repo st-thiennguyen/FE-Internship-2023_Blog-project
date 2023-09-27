@@ -65,7 +65,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
 
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
-  const accessToken  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const post: PostModel = useSelector((state: RootState) => state.writePost.data);
 
@@ -127,10 +127,10 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   }, [detailPost]);
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   if (isSuccess && isShowToast) {
     setTimeout(() => {

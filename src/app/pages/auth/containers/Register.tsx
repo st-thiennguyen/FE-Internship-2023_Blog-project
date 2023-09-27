@@ -55,7 +55,7 @@ const Register = () => {
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.auth.isError);
   const message: string = useSelector((state: RootState) => state.auth.message);
-  const accessToken  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,10 +71,10 @@ const Register = () => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (accessToken) {
+    if (isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   const {
     register,

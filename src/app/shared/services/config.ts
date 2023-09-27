@@ -21,9 +21,9 @@ export class ApiService {
   private _setInterceptors = () => {
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        const accessToken = getLocalStorage(StorageKey.ACCESS_TOKEN);
-        if (accessToken && !config.url?.includes('.amazonaws.com')) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
+        const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN);
+        if (isLogin && !config.url?.includes('.amazonaws.com')) {
+          config.headers.Authorization = `Bearer ${isLogin}`;
         }
 
         return config;

@@ -41,7 +41,7 @@ type FormData = {
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAccessToken  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
@@ -77,11 +77,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isAccessToken) {
+    if (isLogin) {
       removeStateRegister.current();
       navigate('/');
     }
-  }, [isAccessToken]);
+  }, [isLogin]);
 
   return (
     <div className="auth">

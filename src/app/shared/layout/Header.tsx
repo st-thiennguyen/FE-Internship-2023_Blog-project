@@ -25,7 +25,6 @@ const Header = () => {
   const authContext = useContext(AuthContext);
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN) ? true : false;
   const [isErrorCover, setIsErrorCover] = useState(false);
-  console.log(authContext);
 
   const handleLogout = () => {
     dispatch(logoutAction() as any);
