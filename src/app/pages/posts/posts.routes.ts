@@ -23,7 +23,7 @@ export const postsRoutes = [
         isProtected: true,
       },
       {
-        path: 'update/:id',
+        path: ':id/edit',
         component: UpdatePost,
         isProtected: true,
       },

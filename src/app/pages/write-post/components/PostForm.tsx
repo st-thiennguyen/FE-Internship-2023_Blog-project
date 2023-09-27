@@ -7,18 +7,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-quill/dist/quill.bubble.css';
 
 import ToastMessage from '../../../shared/components/ToastMessage';
-import EditorImageCover from '../components/EditorImageCover';
-import EditorPostTags from '../components/EditorPostTags';
-import TextEditor from '../components/TextEditor';
-import EditorPostVisibility from '../components/EditorPostVisibility';
-import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
-import EditorPostActions from '../components/EditorPostActions';
+import EditorImageCover from './EditorImageCover';
+import EditorPostTags from './EditorPostTags';
+import TextEditor from './TextEditor';
+import EditorPostVisibility from './EditorPostVisibility';
+import EditorImageCoverPreview from './EditorImageCoverPreview';
+import EditorPostActions from './EditorPostActions';
 
 import { RootState } from '../../../stores/store';
 import { createPost, updatePost } from '../write-post.action';
 import { getLocalStorage } from '../../../shared/utils';
-import { StorageKey } from '../../../shared/constants';
-import { PostModel } from '../../../models/post';
+import { StorageKey, TypeUploadImage } from '../../../shared/constants';
+import { PostModel, TypeImage } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -50,26 +50,27 @@ const WritePost = ({ post }: WritePostProps) => {
   const [errorContentMessage, setErrorContentMessage] = useState('');
   const [content, setContent] = useState<string>('');
   const [isShowToast, setIsShowToast] = useState(false);
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>();
   const [photoPreview, setPhotoPreview] = useState<string>();
-  
+  const [file, setFile] = useState<File>();
+
   const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const cover = useSelector((state: RootState) => state.imageSign.data.url);
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const message = useSelector((state: RootState) => state.writePost.message);
   const currentPost = useSelector((state: RootState) => state.writePost.data);
 
-  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const { id } = useParams();
   const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
     if (post) {
+      setTags(post.tags)
       setIsUpdate(true);
     }
   }, [])
@@ -98,20 +99,19 @@ const WritePost = ({ post }: WritePostProps) => {
   };
 
   const handleUpdatePost = handleSubmit((data: any) => {
-    if (validate()) {
-      dispatch(
-        updatePost({ ...data, content: content, status: statusPost, tags: tags, cover: cover }, post!.id) as any,
-      );
-      setIsShowToast(true);
-      setTimeout(() => {
-        navigate(`/posts/${id}`);
-      }, 3000);
-    }
+    dispatch(
+      updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any,
+    );
+    setIsShowToast(true);
+    setTimeout(() => {
+      navigate(`/posts/${id}`);
+    }, 3000);
   });
+
 
   const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
-      await dispatch(createPost({ ...data, content: content, cover: cover, status: statusPost, tags: tags }) as any);
+      await dispatch(createPost({ ...data, content, status: statusPost, tags }, file) as any);
       setIsShowToast(true);
     }
   });
@@ -144,71 +144,71 @@ const WritePost = ({ post }: WritePostProps) => {
 
   return (
     <>
-      <section className="section section-write-post">
-        <div className="container">
-          <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
-          <div className="section-body row">
-            <div className="col col-9">
-              <form className="write-post-form d-flex flex-column" ref={formRef}>
-                <EditorImageCover
-                  photoPreview={post?.cover || photoPreview}
-                  setPhotoPreview={setPhotoPreview}
-                  setErrorCoverMessage={setErrorCoverMessage}
-                />
-                <p className="editor-detail-error">{errorCoverMessage}</p>
-                <div className="editor-detail">
-                  <h5 className="editor-detail-title">Post detail</h5>
-                  <textarea
-                    rows={1}
-                    {...register('title')}
-                    className="editor-detail-input"
-                    placeholder="Title of your story ..."
-                  />
-                  <p className="editor-detail-error">{errors.title?.message}</p>
-                  <textarea
-                    rows={1}
-                    {...register('description')}
-                    className="editor-detail-input"
-                    placeholder="Description of your story ..."
-                  />
-                  <p className="editor-detail-error">{errors.description?.message}</p>
+      <div className="section-body row">
+        <div className="col col-9">
+          <form className="write-post-form d-flex flex-column" ref={formRef}>
+            <EditorImageCover
+              photoPreview={post?.cover || photoPreview}
+              setPhotoPreview={setPhotoPreview}
+              setErrorCoverMessage={setErrorCoverMessage}
+              setFile={setFile}
+            />
+            <p className="editor-detail-error">{errorCoverMessage}</p>
+            <div className="editor-detail">
+              <h5 className="editor-detail-title">Post detail</h5>
+              <textarea
+                rows={1}
+                {...register('title')}
+                className="editor-detail-input"
+                placeholder="Title of your story ..."
+              />
+              <p className="editor-detail-error">{errors.title?.message}</p>
+              <textarea
+                rows={1}
+                {...register('description')}
+                className="editor-detail-input"
+                placeholder="Description of your story ..."
+              />
+              <p className="editor-detail-error">{errors.description?.message}</p>
 
-                  <div className="editor-detail-area">
-                    <TextEditor
-                      value={content}
-                      placeholder={'Write your story ...'}
-                      setError={setErrorContentMessage}
-                      setContent={setContent}
-                    />
-                    <p className="editor-detail-error">{errorContentMessage}</p>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <aside className="aside aside-write-post d-flex flex-column  col col-3">
-              <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
-              {photoPreview && (
-                <EditorImageCoverPreview
-                  photoPreview={photoPreview}
-                  onRemovePreview={() => {
-                    post!.cover = '';
-                    setPhotoPreview('');
-                  }}
+              <div className="editor-detail-area">
+                <TextEditor
+                  value={content}
+                  placeholder={'Write your story ...'}
+                  setError={setErrorContentMessage}
+                  setContent={setContent}
                 />
-              )}
-              <EditorPostTags
-                tags={tags || post?.tags}
-                setTags={setTags}
-              />
-              <EditorPostActions
-                onPublish={isUpdate ? handleUpdatePost : onPublishPost}
-                onSaveDraft={() => alert('COMMING SOON')}
-                isUpdate={isUpdate}
-              />
-            </aside>
-          </div>
+                <p className="editor-detail-error">{errorContentMessage}</p>
+              </div>
+            </div>
+          </form>
         </div>
-      </section>
+        <aside className="aside aside-write-post d-flex flex-column  col col-3">
+          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
+          {photoPreview && (
+            <EditorImageCoverPreview
+              photoPreview={photoPreview}
+              onRemovePreview={() => {
+                if (post?.cover) {
+                  post!.cover = '';
+                } else {
+                  setPhotoPreview('');
+                }
+              }}
+            />
+          )}
+          <EditorPostTags
+            tags={tags || []}
+            setTags={setTags}
+
+          />
+          <EditorPostActions
+            onPublish={isUpdate ? handleUpdatePost : onPublishPost}
+            onSaveDraft={() => alert('COMMING SOON')}
+            isUpdate={isUpdate}
+          />
+        </aside>
+      </div>
       {isShowToast && isSuccess && (
         <ToastMessage
           isSuccess={isSuccess}
