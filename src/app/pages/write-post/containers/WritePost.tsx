@@ -10,12 +10,15 @@ import ToastMessage from '../../../shared/components/ToastMessage';
 import EditorImageCover from '../components/EditorImageCover';
 import EditorPostTags from '../components/EditorPostTags';
 import TextEditor from '../components/TextEditor';
-import { RootState } from '../../../stores/store';
-import { createPost, resetWriteState, updatePost } from '../write-post.action';
-import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import EditorPostVisibility from '../components/EditorPostVisibility';
 import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
+
+import { RootState } from '../../../stores/store';
+import { createPost, resetWriteState, updatePost } from '../write-post.action';
+import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 import { PostModel } from '../../../models/post';
 
 const schema = yup
@@ -50,19 +53,21 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string>();
+  
   const formRef = useRef<HTMLFormElement>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cover = useSelector((state: RootState) => state.imageSign.data.url);
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const message = useSelector((state: RootState) => state.writePost.message);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const post: PostModel = useSelector((state: RootState) => state.writePost.data);
-  const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
 
   const { id } = useParams();
 
@@ -122,10 +127,10 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
   }, [detailPost]);
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   if (isSuccess && isShowToast) {
     setTimeout(() => {
@@ -133,7 +138,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     }, 3000);
   }
 
-  // innit and dispose
+  // init and dispose
   useEffect(() => {
     isUpdate && dispatch(fetchDetailBlog(Number(id)) as any);
     return () => dispatch(resetWriteState() as any);

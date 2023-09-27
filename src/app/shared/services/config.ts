@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
-import { Auth } from '../../models/auth';
 import { StorageKey } from '../constants';
 import { getLocalStorage } from '../utils';
 
@@ -22,9 +21,9 @@ export class ApiService {
   private _setInterceptors = () => {
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        const auth = getLocalStorage(StorageKey.AUTH) as Auth;
-        if (auth && !config.url?.includes('.amazonaws.com')) {
-          config.headers.Authorization = `Bearer ${auth.accessToken}`;
+        const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN);
+        if (isLogin && !config.url?.includes('.amazonaws.com')) {
+          config.headers.Authorization = `Bearer ${isLogin}`;
         }
 
         return config;
