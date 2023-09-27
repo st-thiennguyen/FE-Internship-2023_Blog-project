@@ -9,7 +9,7 @@ import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
 
 const ProfilePage = () => {
-  const userId = useSelector((state: RootState) => state.auth.auth?.userInfo.id);
+  const userId = useSelector((state: RootState) => state.auth?.userInfo.id);
   const isError = useSelector((state: RootState) => state.profile.isError);
 
   const dispatch = useDispatch();

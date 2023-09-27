@@ -2,16 +2,15 @@ import { useEffect, useState } from 'react';
 
 interface EditorPostVisibilityProps {
   onChangeValue: (value: string) => void;
-  currentStatus?: string | undefined;
+  currentStatus?: string ;
 }
 
 const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibilityProps) => {
-  const [status, setStatus] = useState('public');
+  const [status, setStatus] = useState(currentStatus || 'public');
   useEffect(() => {
-    if(currentStatus) setStatus(currentStatus);
-  }, [currentStatus])
-  useEffect(() => {
-    onChangeValue(status);
+    if (status) {
+      onChangeValue(status);
+    }
   }, [status]);
   return (
     <div className="editor-visibility">

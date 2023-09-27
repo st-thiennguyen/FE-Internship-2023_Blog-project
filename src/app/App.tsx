@@ -14,7 +14,7 @@ import { authRoutes } from './pages/auth/auth.routes';
 export const AuthContext = createContext<any>(undefined);
 
 function App() {
-  const auth = useSelector((state: RootState) => state.auth.auth);
+  const auth = useSelector((state: RootState) => state.auth);
   return (
     <AuthContext.Provider value={auth}>
       <Routes>

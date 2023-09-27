@@ -1,14 +1,13 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { regexEmail } from '../../../shared/constants';
+import { StorageKey, regexEmail } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
 import { loginAction, registerReset } from '../auth.actions';
-import { AuthContext } from '../../../App';
 
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -20,6 +19,7 @@ import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
+import { getLocalStorage } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -39,11 +39,9 @@ type FormData = {
 };
 
 const Login = () => {
-  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isLogin = authContext?.accessToken;
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowMessage, setShowMessage] = useState(false);
 
@@ -75,13 +73,14 @@ const Login = () => {
   });
 
   const removeStateRegister = useRef(() => {});
+
   removeStateRegister.current = () => {
     isRegisterSuccess && dispatch(registerReset());
   };
 
   useEffect(() => {
-    removeStateRegister.current();
     if (isLogin) {
+      removeStateRegister.current();
       navigate('/');
     }
   }, [isLogin]);
