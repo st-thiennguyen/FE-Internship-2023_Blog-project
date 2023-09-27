@@ -81,7 +81,7 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
             listComment.map((commentItem) => {
               return (
                 <li className="comment-item">
-                  <CommentItem commentItem={commentItem} userId={currentUser.id} />
+                  <CommentItem commentItem={commentItem} userId={currentUser?.id} />
                 </li>
               );
             })}

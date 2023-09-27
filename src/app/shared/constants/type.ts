@@ -9,6 +9,17 @@ export const ACTIONS_TYPE = {
   GET_POSTS_SUCCESS: 'get-posts-success',
   GET_POSTS_FAILURE: 'get-posts-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
+
+  // GET ALL POST FROM RECYCLEBIN
+  GET_RECYCLEBIN: 'get-recyclebin',
+  GET_RECYCLEBIN_SUCCESS: 'get-recyclebin-success',
+  GET_RECYCLEBIN_FAILURE: 'get-recyclebin-failure',
+
+  // GET ALL POST FROM RECYCLEBIN
+  RESTORE_RECYCLEBIN: 'restore-recyclebin',
+  RESTORE_RECYCLEBIN_SUCCESS: 'restore-recyclebin-success',
+  RESTORE_RECYCLEBIN_FAILURE: 'restore-recyclebin-failure',
+
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
@@ -118,4 +129,8 @@ export const ACTIONS_TYPE = {
   GET_RECYCLE_BIN: 'get-recycle-bin',
   GET_RECYCLE_BIN_SUCCESS: 'get-recycle-bin-success',
   GET_RECYCLE_BIN_FAILURE: 'get-recycle-bin-failure',
+
+  // TOAST MESSAGE
+  SHOW_TOAST: 'show-toast',
+  CLOSE_TOAST: 'close-toast',
 };

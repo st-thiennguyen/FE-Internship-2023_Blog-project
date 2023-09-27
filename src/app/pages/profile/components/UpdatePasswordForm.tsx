@@ -8,20 +8,12 @@ import { updatePasswordAction } from '../profile.actions';
 import { FormChangePassword } from '../../../models/user';
 import { RootState } from '../../../stores/store';
 
-import ToastMessage from '../../../shared/components/ToastMessage';
 import Button from '../../../shared/components/Button';
 
-interface UpdateUserPasswordFormProps {
-  isShowToast: boolean;
-  setIsShowToast: (value: boolean) => void;
-}
-
-const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordFormProps) => {
+const UpdatePasswordForm = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
-  const isError = useSelector((state: RootState) => state.profile.isError);
-  const message = useSelector((state: RootState) => state.profile.message);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
 
   const dispatch = useDispatch();
@@ -56,7 +48,6 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
   const onUpdatePassword = (data: FormChangePassword) => {
     delete data.confirmPassword;
     dispatch(updatePasswordAction(data) as any);
-    setIsShowToast(true);
   };
 
   const togglePassword = (): void => {
@@ -126,12 +117,6 @@ const UpdatePasswordForm = ({ isShowToast, setIsShowToast }: UpdateUserPasswordF
           </div>
         </div>
       </div>
-      {isShowToast && isSuccess && (
-        <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'Success'} subtitle={message} />
-      )}
-      {isShowToast && isError && (
-        <ToastMessage isShow={isError} isSuccess={!isError} title={'Error'} subtitle={message} />
-      )}
     </>
   );
 };

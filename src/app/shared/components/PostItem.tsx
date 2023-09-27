@@ -9,8 +9,8 @@ import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
 
 import Modal from './Modal';
-import ToastMessage from './ToastMessage';
 import NoImg from '../../../assets/images/no-image.png';
+import { restorePostAction } from '../../pages/posts/posts.action';
 
 interface PostItemProps {
   post: PostModel;
@@ -19,11 +19,9 @@ interface PostItemProps {
 const PostItem = ({ post }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
-  const [isShowToast, setIsShowToast] = useState(false);
 
-  const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
-  const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
-  const deleteMessage = useSelector((state: RootState) => state.profile?.message);
+  const [isShowModalRestore, setShowModalRestore] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleDeletePostItem = (id: string) => {
@@ -33,16 +31,25 @@ const PostItem = ({ post }: PostItemProps) => {
 
   const handleClose = () => {
     setIShowModal(false);
+    setShowModalRestore(false);
   };
 
   const handleDelete = () => {
     handleDeletePostItem(post.id as any);
-    setIsShowToast(true);
     setIShowModal(false);
+  };
+
+  const handleRestoreItem = () => {
+    dispatch(restorePostAction(post.id) as any);
+    setShowModalRestore(false);
   };
 
   const handleShowModal = () => {
     setIShowModal(!isShowModal);
+  };
+
+  const handleShowModalRestore = () => {
+    setShowModalRestore(!isShowModalRestore);
   };
 
   useEffect(() => {
@@ -52,17 +59,11 @@ const PostItem = ({ post }: PostItemProps) => {
   return (
     <>
       <div className="post">
-        <div
-          className="post-delete d-flex item-center justify-center"
-          onClick={(e) => {
-            e.preventDefault();
-            handleShowModal();
-          }}
-        >
+        <div className="post-delete d-flex item-center justify-center" onClick={handleShowModal}>
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
         </div>
-        <div className="post-restore">
+        <div className="post-restore" onClick={handleShowModalRestore}>
           <i className="icon icon-xxl icon-restore-60"></i>
         </div>
         <div className="post-img-wrapper">
@@ -116,29 +117,15 @@ const PostItem = ({ post }: PostItemProps) => {
         </div>
       </div>
 
-      {isShowToast && isDeleteSuccess && (
-        <ToastMessage
-          isShow={isDeleteSuccess}
-          isSuccess={isDeleteSuccess}
-          title="Success"
-          subtitle={deleteMessage}
-        ></ToastMessage>
-      )}
-      {isShowToast && isDeleteFailure && (
-        <ToastMessage
-          isShow={isDeleteFailure}
-          isSuccess={!isDeleteFailure}
-          title="Error"
-          subtitle={deleteMessage}
-        ></ToastMessage>
-      )}
+      <Modal onClickClose={handleClose} onClickConfirm={handleRestoreItem} isShow={isShowModalRestore}>
+        <h4 className="modal-title">Restore</h4>
+        <p>Do you want restore this post ?</p>
+      </Modal>
 
-      {isShowModal && (
-        <Modal onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowModal}>
-          <h4 className="modal-title">Delete</h4>
-          <p>Do you really want to delete?</p>
-        </Modal>
-      )}
+      <Modal onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowModal}>
+        <h4 className="modal-title">Delete</h4>
+        <p>Do you really want to delete?</p>
+      </Modal>
     </>
   );
 };

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../App';
-import ToastMessage from '../components/ToastMessage';
 import logo from '../../../assets/images/logo.svg';
 import { logoutAction } from '../../pages/auth/auth.actions';
 import { isImageUrlValid } from '../utils';
@@ -13,7 +12,6 @@ import icBookmark from '../../../assets/icons/ic-bookmark-24.svg';
 import icLogout from '../../../assets/icons/ic-logout-24.svg';
 
 const Header = () => {
-  const [isShowToastMessage, setIsShowToastMessage] = useState(false);
   const dispatch = useDispatch();
 
   const authContext = useContext(AuthContext);
@@ -22,7 +20,6 @@ const Header = () => {
   const handleLogout = (e: any) => {
     dispatch(logoutAction() as any);
     e.preventDefault();
-    setIsShowToastMessage(true);
   };
 
   const [isErrorCover, setIsErrorCover] = useState(false);
@@ -113,9 +110,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isShowToastMessage && (
-        <ToastMessage isShow={true} isSuccess={true} title={'success'} subtitle={'Logout success!'}></ToastMessage>
-      )}
     </header>
   );
 };

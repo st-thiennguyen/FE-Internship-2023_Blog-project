@@ -3,6 +3,8 @@ import { RootAction } from '../../stores/store';
 import { postArticles, updatePostArticles } from '../../shared/services';
 import { PostModel } from '../../models/post';
 import { ACTIONS_TYPE } from '../../shared/constants';
+import { showToast } from '../../shared/components/toast/toast.actions';
+import { ToastType } from '../../models/toast';
 
 export const resetWriteState = () => {
   return {
@@ -61,8 +63,10 @@ export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAct
   try {
     const res = await postArticles(data);
     dispatch(addPostSuccess(res));
+    dispatch(showToast('Create post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(addPostFailure(error));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -71,7 +75,9 @@ export const updatePost = (data: PostModel, id: number) => async (dispatch: Disp
   try {
     const res = await updatePostArticles(data, id);
     dispatch(updatePostSuccess(res));
+    dispatch(showToast('Update post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(updatePostFailure(error));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

@@ -51,6 +51,33 @@ export const postTagReducer = (state = initialPostsState, action: RootAction): P
         ...state,
         currentPage: 1,
       };
+
+    case ACTIONS_TYPE.RESTORE_RECYCLEBIN:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+
+    case ACTIONS_TYPE.RESTORE_RECYCLEBIN_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data.filter((item) => item.id !== action.payload.id)],
+        isLoading: false,
+        isSuccess: true,
+        message: action.payload.message,
+      };
+
+    case ACTIONS_TYPE.RESTORE_RECYCLEBIN_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+
     default:
       return state;
   }

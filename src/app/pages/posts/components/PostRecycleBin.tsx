@@ -5,7 +5,7 @@ import { pageSize } from '../../../shared/constants/post';
 import PostItemLoading from '../../home/components/PostItemLoading';
 import PostList from '../../home/components/PostList';
 import { RootState } from '../../../stores/store';
-import { fetchSoftDeletedPosts, loadMore, resetCurrentPage } from '../posts.action';
+import { getRecyclebinAction, loadMore, resetCurrentPage } from '../posts.action';
 
 const threshold = 400;
 
@@ -22,7 +22,7 @@ const PostRecycleBin = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchSoftDeletedPosts(currentPage, pageSize));
+    dispatch(getRecyclebinAction(currentPage, pageSize));
   }, [currentPage]);
 
   const handleScroll = () => {
