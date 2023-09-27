@@ -1,17 +1,7 @@
-import { PostModel } from '../../models/post';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { PostModel, PublicPostState } from '../../models/post';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
-export interface PublicPostState {
-  data: PostModel[];
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  message: string;
-  currentPage: number;
-  totalPage: number;
-  totalItems: number;
-}
 const initialPostsState: PublicPostState = {
   data: [] as PostModel[],
   isLoading: false,

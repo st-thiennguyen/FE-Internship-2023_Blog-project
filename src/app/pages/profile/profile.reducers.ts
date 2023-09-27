@@ -1,6 +1,6 @@
 import { PostModel } from '../../models/post';
 import { ProfileModel } from '../../models/user';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
 interface UpdateProfileStateProps {

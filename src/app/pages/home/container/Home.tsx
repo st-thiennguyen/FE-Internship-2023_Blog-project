@@ -9,9 +9,11 @@ import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import LatestPost from '../components/LatestPost';
 import Recommend from '../components/recommend';
 import Aside from '../../../shared/layout/aside/container/Aside';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 
 const Home = () => {
-  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
 
   const dispatch = useDispatch();
@@ -28,28 +30,30 @@ const Home = () => {
   }, [isLogin]);
 
   return (
-    <div className=" main-body">
-      <div className="row">
-        <div className="col col-9 col-lg-12">
-          <div className="main-content">
-            <div className="home-page">
-              {isLogin && recommendPosts.length > 0 && <Recommend />}
-              <div className="row">
-                <div className="col col-12">
-                  <LatestPost />
+    <section className="section section-home">
+      <div className="container">
+        <div className="row">
+          <div className="col col-9 col-lg-12">
+            <div className="main-content">
+              <div className="home-page">
+                {isLogin && recommendPosts.length > 0 && <Recommend />}
+                <div className="row">
+                  <div className="col col-12">
+                    <LatestPost />
+                  </div>
                 </div>
+                <GoToTopBtn />
               </div>
-              <GoToTopBtn />
+            </div>
+          </div>
+          <div className="col col-3 col-lg-12">
+            <div className="main-aside">
+              <Aside />
             </div>
           </div>
         </div>
-        <div className="col col-3 col-lg-12">
-          <div className="main-aside">
-            <Aside />
-          </div>
-        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

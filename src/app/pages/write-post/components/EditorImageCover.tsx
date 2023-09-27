@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import iconImage from '../../../../assets/icons/ic-image-25.svg';
@@ -7,11 +7,11 @@ import { fetchSignUrlImage } from '../image-sign.action';
 interface EditorImageCoverProps {
   photoPreview: string | undefined;
   setPhotoPreview: (value: string) => void;
-  isUpdate?: boolean
+  isUpdate?: boolean;
   setErrorCoverMessage: (value: string) => void;
 }
 
-const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage , isUpdate }: EditorImageCoverProps) => {
+const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage, isUpdate }: EditorImageCoverProps) => {
   const coverImageRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
@@ -63,8 +63,10 @@ const EditorImageCover = ({ photoPreview, setPhotoPreview, setErrorCoverMessage 
   useEffect(() => {
     if (photoPreview !== '') {
       setPhotoPreview(photoPreview as string);
+    } else {
+      coverImageRef.current!.value = '';
     }
-  }, [photoPreview])
+  }, [photoPreview]);
 
   return (
     <div className="editor-cover">

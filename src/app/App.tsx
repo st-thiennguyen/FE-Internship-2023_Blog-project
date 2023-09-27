@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import { RootState } from './stores/store';
+import { RouteItem } from './models/route';
 import { appRoutes } from './app.routes';
 
 import Layout from './pages/Layout';
@@ -10,18 +11,10 @@ import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
 import { authRoutes } from './pages/auth/auth.routes';
 
-interface RouteItem {
-  path: string;
-  component: (props: any) => JSX.Element;
-  isProtected?: Boolean;
-  children?: RouteItem[];
-  props?: Object;
-}
-
 export const AuthContext = createContext<any>(undefined);
 
 function App() {
-  const auth = useSelector((state: RootState) => state.auth.auth);
+  const auth = useSelector((state: RootState) => state.auth);
   return (
     <AuthContext.Provider value={auth}>
       <Routes>

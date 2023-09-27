@@ -1,4 +1,4 @@
-const ACTIONS_TYPE = {
+export const ACTIONS_TYPE = {
   // GET ALL POST
   GET_ALL_POST: 'get-all-post',
   GET_ALL_POST_SUCCESS: 'get-all-post-success',
@@ -115,5 +115,3 @@ const ACTIONS_TYPE = {
   POST_COMMENT_SUCCESS: 'post-comment-success',
   POST_COMMENT_FAILURE: 'post-comment-failure',
 };
-
-export default ACTIONS_TYPE;

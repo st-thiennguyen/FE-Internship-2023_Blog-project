@@ -1,4 +1,4 @@
-import GoToTopBTn from '../../../shared/components/GoToTopBtn';
+import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import PostResult from '../components/PostResult';
 
 const Posts = () => {
@@ -9,7 +9,7 @@ const Posts = () => {
           <PostResult />
         </div>
       </div>
-      <GoToTopBTn />
+      <GoToTopBtn />
     </div>
   );
 };

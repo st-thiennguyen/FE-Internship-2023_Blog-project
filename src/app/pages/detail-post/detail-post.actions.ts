@@ -1,14 +1,14 @@
 import { Dispatch } from 'react';
 
-import ACTIONS_TYPE from '../../shared/constants/type';
 import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
-import { BookmarkModel, PostModel } from '../../models/post';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
 import { UserInfo } from '../../models/auth';
 import { getBookmark } from '../../shared/services/user.service';
 import { getRecommendFailure } from '../home/home.actions';
+import { ACTIONS_TYPE } from '../../shared/constants';
+import { BookmarkModel, PostModel } from '../../models/post';
 
 const getDetailBlogStart = () => {
   return {

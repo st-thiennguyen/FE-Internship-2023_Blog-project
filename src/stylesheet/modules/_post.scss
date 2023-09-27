@@ -126,6 +126,7 @@
     position: absolute;
     top: 12px;
     left: 12px;
+
     padding: 6px 12px;
     border-radius: 12px;
     background: map-get($map: $color, $key: defaultBg);
@@ -137,12 +138,15 @@
     position: absolute;
     right: 12px;
     top: 12px;
+
     width: 40px;
     height: 40px;
     padding: 4px;
     z-index: 1;
     border-radius: 12px;
-    background-color: map-get($map: $color, $key: warning);
+
+    background-color: map-get($map: $color, $key: danger);
+    cursor: pointer;
 
     .icon-delete {
       display: block;
@@ -183,5 +187,17 @@
       border: solid 15px map-get($color, primary);
       border-bottom: solid 15px transparent;
     }
+  }
+}
+
+.empty-post {
+  &-img {
+    width: 700px;
+  }
+  &-title {
+    font-size: 32px;
+  }
+  &-desc {
+    color: map-get($color, subtext);
   }
 }

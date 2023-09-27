@@ -1,12 +1,10 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
-import { StorageKey } from '../../shared/constants';
-import ACTIONS_TYPE from '../../shared/constants/type';
+import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
-import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction, RootThunk } from '../../stores/store';
-
+import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
 export const loginStart = () => {
   return {
     type: ACTIONS_TYPE.LOGIN,
@@ -59,9 +57,10 @@ export const logoutStart = () => {
   };
 };
 
-export const logoutSuccess = () => {
+export const logoutSuccess = (res: string) => {
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
+    payload: res
   };
 };
 
@@ -81,33 +80,32 @@ export const reAssignmentAuth = (data: any) => {
 
 export const registerAction =
   (registerData: RegisterProps): RootThunk =>
+    async (dispatch: Dispatch<RootAction>) => {
+      dispatch(registerStart());
+      try {
+        const response = await register(registerData);
+        dispatch(registerSuccess(`${response}`));
+      } catch (error) {
+        dispatch(registerFailure(`${error}`));
+      }
+    };
+
+export const loginAction = (email: string, password: string) =>
   async (dispatch: Dispatch<RootAction>) => {
-    dispatch(registerStart());
+    dispatch(loginStart());
     try {
-      const response = await register(registerData);
-      dispatch(registerSuccess(`${response}`));
+      const data = await login(email, password);
+      dispatch(loginSuccess(data));
     } catch (error) {
-      dispatch(registerFailure(`${error}`));
+      dispatch(loginFailure(`${error}`));
     }
   };
-
-export const loginAction = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(loginStart());
-  try {
-    const data: any = await login(email, password);
-    dispatch(loginSuccess(data));
-    setLocalStorage(StorageKey.AUTH, data);
-  } catch (error) {
-    dispatch(loginFailure(`${error}`));
-  }
-};
 
 export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
-    await logout();
-    removeLocalStorage(StorageKey.AUTH);
-    dispatch(logoutSuccess());
+    const response = await logout();
+    dispatch(logoutSuccess(`${response}`));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
   }

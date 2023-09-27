@@ -1,16 +1,18 @@
 .main-profile-page {
   // user-detail section
   .section-user-detail {
-    height: 380px;
-    padding: 30px 50px;
-    margin: 0px 0 36px;
-    border-radius: 12px;
-    background-color: map-get($map: $color, $key: backgroundFrame);
-
     .section-title {
       color: map-get($map: $color, $key: primary);
       font-size: 32px;
       letter-spacing: 4px;
+    }
+
+    .user-detail-wrapper {
+      height: 380px;
+      padding: 30px 50px;
+      margin: 0px 0 36px;
+      border-radius: 12px;
+      background-color: map-get($map: $color, $key: backgroundFrame);
     }
 
     .user-avatar {
@@ -93,7 +95,8 @@
         background-color: map-get($color, primary);
       }
     }
-    .post-action-list, .post-delete {
+    .post-action-list,
+    .post-delete {
       visibility: hidden;
     }
     .my-post {
@@ -108,8 +111,6 @@
           visibility: visible;
         }
       }
-    
-
     }
     .user-post-empty {
       width: 70%;
