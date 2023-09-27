@@ -1,14 +1,14 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { regexEmail } from '../../../shared/constants';
+import { StorageKey, regexEmail } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
-import { loginAction, registerReset } from '../auth.actions';
-import { AuthContext } from '../../../App';
+import { loginAction } from '../auth.actions';
+import { getLocalStorage } from '../../../shared/utils';
 
 import Button from '../../../shared/components/Button';
 
@@ -38,11 +38,9 @@ type FormData = {
 };
 
 const Login = () => {
-  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isLogin = authContext?.accessToken;
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);

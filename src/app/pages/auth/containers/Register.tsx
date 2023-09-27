@@ -8,10 +8,11 @@ import * as yup from 'yup';
 import { RootState } from '../../../stores/store';
 import { registerAction } from '../auth.actions';
 import { convertDateToString } from '../../../shared/utils/date';
-import { Gender, regexEmail, regexPhoneNumber } from '../../../shared/constants';
+import { Gender, StorageKey, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 
 import Button from '../../../shared/components/Button';
 import logo from '../../../../assets/images/logo.svg';
+import { getLocalStorage } from '../../../shared/utils';
 
 const schema = yup
   .object({
@@ -51,7 +52,7 @@ const Register = () => {
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
-  const accessToken: string = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,10 +68,10 @@ const Register = () => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (accessToken) {
+    if (isLogin) {
       navigate('/');
     }
-  }, [accessToken]);
+  }, [isLogin]);
 
   const {
     register,

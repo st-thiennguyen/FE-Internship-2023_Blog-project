@@ -4,7 +4,7 @@ import { RegisterProps } from '../../models/auth';
 import { ACTIONS_TYPE } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
 import { RootAction, RootThunk } from '../../stores/store';
-import { ToastModel, ToastType } from '../../models/toast';
+import { ToastType } from '../../models/toast';
 import { showToast } from '../../shared/components/toast/toast.actions';
 
 export const loginStart = () => {
@@ -59,9 +59,10 @@ export const logoutStart = () => {
   };
 };
 
-export const logoutSuccess = () => {
+export const logoutSuccess = (res: string) => {
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
+    payload: res,
   };
 };
 
@@ -108,9 +109,9 @@ export const loginAction = (email: string, password: string) => async (dispatch:
 export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
-    await logout();
-    dispatch(logoutSuccess());
-    dispatch(showToast('Logout sucessfully', ToastType.SUCCESS));
+    const response = await logout();
+    dispatch(logoutSuccess(`${response}`));
+    dispatch(showToast(`${response}`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));

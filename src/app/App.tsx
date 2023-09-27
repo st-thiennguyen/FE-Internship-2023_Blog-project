@@ -15,7 +15,7 @@ import ToastMessage from './shared/components/toast/ToastMessage';
 export const AuthContext = createContext<any>(undefined);
 
 function App() {
-  const auth = useSelector((state: RootState) => state.auth.auth);
+  const auth = useSelector((state: RootState) => state.auth);
   return (
     <AuthContext.Provider value={auth}>
       <Routes>

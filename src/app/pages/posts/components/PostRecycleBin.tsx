@@ -46,18 +46,20 @@ const PostRecycleBin = () => {
 
   return (
     <section className="section section-post-recycle">
-      <h2 className="section-title text-primary">Posts Deleted</h2>
+      <div className="container">
+        <h2 className="section-title text-primary">Posts Deleted</h2>
 
-      {posts && <PostList posts={posts} isLoading={isLoading} />}
-      {isLoading && (
-        <ul className="row">
-          {Array.from({ length: 6 }, (item, index) => (
-            <li className="post-item col col-6 col-md-12" key={index}>
-              <PostItemLoading />
-            </li>
-          ))}
-        </ul>
-      )}
+        {posts && <PostList posts={posts} isLoading={isLoading} />}
+        {isLoading && (
+          <ul className="row">
+            {Array.from({ length: 6 }, (item, index) => (
+              <li className="post-item col col-6 col-md-12" key={index}>
+                <PostItemLoading />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </section>
   );
 };

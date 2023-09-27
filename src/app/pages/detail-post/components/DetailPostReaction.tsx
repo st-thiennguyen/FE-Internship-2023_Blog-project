@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
 import { updateLikeAction } from '../detail-post.actions';
 
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
+
 interface ReactionProps {
   postId: number;
   likeCount: number;
@@ -11,7 +14,7 @@ interface ReactionProps {
 }
 
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
-  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
 
   const dispatch = useDispatch();

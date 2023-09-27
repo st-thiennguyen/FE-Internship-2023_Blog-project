@@ -42,9 +42,9 @@ type FormData = yup.InferType<typeof schema>;
 
 const UserUpdateForm = () => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
-  const user = useSelector((state: RootState) => state.auth.auth?.userInfo);
+  const user = useSelector((state: RootState) => state.auth.userInfo);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
-  const userPicture = useSelector((state: RootState) => state.profile.data.picture);
+  const userPicture = useSelector((state: RootState) => state.auth.userInfo.picture);
 
   const dispatch = useDispatch();
 
