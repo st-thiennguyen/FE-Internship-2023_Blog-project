@@ -4,15 +4,13 @@ import { StorageKey, ACTIONS_TYPE } from '../../shared/constants';
 import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shared/utils';
 import { RootAction } from '../../stores/store';
 
-
-
 const initState: AuthState = {
   userInfo: getLocalStorage(StorageKey.USER, {} as UserInfo),
   isLoading: false,
   isError: false,
   isSuccess: false,
   message: '',
-  isLogoutSuccess: false
+  isLogoutSuccess: false,
 };
 
 export const authReducer = (state = initState, action: RootAction): AuthState => {
@@ -95,6 +93,8 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.LOGOUT: {
+      removeLocalStorage(StorageKey.USER);
+      removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
         isLoading: true,
