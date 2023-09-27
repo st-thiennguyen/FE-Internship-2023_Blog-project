@@ -114,6 +114,5 @@ export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
     dispatch(showToast(`${response}`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

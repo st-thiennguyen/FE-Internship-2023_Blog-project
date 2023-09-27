@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { StorageKey, regexEmail } from '../../../shared/constants';
+import { StorageKey, regexEmail, ENDPOINT } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
 import { loginAction } from '../auth.actions';
 import { getLocalStorage } from '../../../shared/utils';
@@ -49,6 +49,19 @@ const Login = () => {
     setIsShowPassword(!isShowPassword);
   };
 
+  const currentHost = () => {
+    const protocol = window.location.protocol;
+    let host = '';
+
+    if (process.env.NODE_ENV === 'production') {
+      host = process.env.REACT_APP_HOST_DEVELOPMENT || '';
+    } else {
+      host = `${protocol}//${window.location.hostname}:3000`;
+    }
+
+    return host;
+  };
+
   const {
     register,
     handleSubmit,
@@ -77,7 +90,10 @@ const Login = () => {
           <h2 className="auth-title text-center">LOGIN</h2>
           <ul className="login-external-list row text-center">
             <li className="login-external-item col col-4">
-              <a href="/" className="external-item-link">
+              <a
+                href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/login-google`}
+                className="external-item-link"
+              >
                 <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
               </a>
             </li>
