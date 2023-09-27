@@ -72,13 +72,17 @@ const UserDetail = () => {
                   </div>
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-mail-20" />
-                    <p className="info-desc">{profile.email}</p>
+                    <a href={`mailto: ${profile.email}`} className="info-desc">
+                      {profile.email}
+                    </a>
                   </div>
                 </div>
                 <div className="user-detail-info">
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-phone-20" />
-                    <p className="info-desc">{profile.phone || '--------'}</p>
+                    <a href={`tel:${profile.phone}`} className="info-desc">
+                      {profile.phone || '--------'}
+                    </a>
                   </div>
                   <div className="detail-info-item d-flex item-center">
                     <i className="icon icon-small icon-date-outline-20" />
