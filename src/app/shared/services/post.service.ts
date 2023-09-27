@@ -65,6 +65,11 @@ export const postComment = (id: string, comment: string) => {
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
 };
 
+export const getPostDraft = () => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.draft}`);
+};
+
 export const createDraft = (data: PostProps) => {
   const api = new ApiService();
   return api.post(ENDPOINT.post.draft, data);

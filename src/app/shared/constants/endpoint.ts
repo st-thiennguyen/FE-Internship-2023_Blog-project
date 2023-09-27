@@ -25,6 +25,7 @@ export const ENDPOINT = {
   },
   post: {
     index: `${BASE_URL}/${RESOURCES.posts}`,
+    draft: `${BASE_URL}/${RESOURCES.posts}/draft`,
     public: `${BASE_URL}/${RESOURCES.posts}/public`,
     recommend: `${BASE_URL}/${RESOURCES.posts}/recommend`,
     draft: `${BASE_URL}/${RESOURCES.posts}/draft`,
