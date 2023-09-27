@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { RootAction } from '../../stores/store';
-import { postArticles, updatePostArticles } from '../../shared/services';
-import { PostModel } from '../../models/post';
+import { createDraft, postArticles, updatePostArticles } from '../../shared/services';
+import { PostModel, PostProps } from '../../models/post';
 import { ACTIONS_TYPE } from '../../shared/constants';
 
 export const resetWriteState = () => {
@@ -56,6 +56,26 @@ export const getUserProfileStart = () => {
   };
 };
 
+export const createDraftStart = () => {
+  return {
+    type: ACTIONS_TYPE.ADD_DRAFT,
+  };
+};
+
+export const createDraftSuccess = (post: PostModel) => {
+  return {
+    type: ACTIONS_TYPE.ADD_DRAFT_SUCCESS,
+    payload: post,
+  };
+};
+
+export const createDraftFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.ADD_DRAFT_FAILURE,
+    payload: error,
+  };
+};
+
 export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(addPostStart());
   try {
@@ -73,5 +93,15 @@ export const updatePost = (data: PostModel, id: number) => async (dispatch: Disp
     dispatch(updatePostSuccess(res));
   } catch (error) {
     dispatch(updatePostFailure(error));
+  }
+};
+
+export const saveToDraft = (data: PostProps) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(createDraftStart());
+  try {
+    const res = await createDraft(data);
+    dispatch(createDraftSuccess(res as PostModel));
+  } catch (error) {
+    dispatch(createDraftFailure(`${error}`));
   }
 };

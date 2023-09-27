@@ -1,6 +1,6 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
-import { QueryPost } from '../../models/post';
+import { PostProps, QueryPost } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
@@ -63,4 +63,9 @@ export const getPostComments = (id: string) => {
 export const postComment = (id: string, comment: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
+};
+
+export const createDraft = (data: PostProps) => {
+  const api = new ApiService();
+  return api.post(ENDPOINT.post.draft, data);
 };

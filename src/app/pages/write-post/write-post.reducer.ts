@@ -1,8 +1,8 @@
-import { PostProps } from '../../models/post';
+import { PostModel, PostState } from '../../models/post';
 import { ACTIONS_TYPE } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
 
-const initState: PostProps = {
+const initState: PostState = {
   data: {} as any,
   isLoading: false,
   isSuccess: false,
@@ -60,6 +60,29 @@ export const writePostReducer = (state = initState, action: RootAction) => {
         message: action.payload,
         isSuccess: false,
         isError: true,
+      };
+    case ACTIONS_TYPE.ADD_DRAFT:
+      return {
+        ...state,
+        data: {} as PostModel,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+      };
+
+    case ACTIONS_TYPE.ADD_DRAFT_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.ADD_DRAFT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
       };
     default:
       return state;
