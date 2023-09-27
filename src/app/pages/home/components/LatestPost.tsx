@@ -5,16 +5,17 @@ import { RootState } from '../../../stores/store';
 import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
 
 import PostItemLoading from './PostItemLoading';
-import PostList from './PostList';
 import { pageSize } from '../../../shared/constants/post';
+import PostItem from '../../../shared/components/PostItem';
+import EmptyPost from '../../../shared/components/EmptyPost';
 
 const threshold = 400;
 
 const LatestPost = () => {
-  const isLoading = useSelector((state: RootState) => state.post.isLoading);
-  const currentPage = useSelector((state: RootState) => state.post.currentPage);
-  const totalPage = useSelector((state: RootState) => state.post.totalPage);
-  const posts = useSelector((state: RootState) => state.post.data);
+  const isLoading = useSelector((state: RootState) => state.latestPost.isLoading);
+  const currentPage = useSelector((state: RootState) => state.latestPost.currentPage);
+  const totalPage = useSelector((state: RootState) => state.latestPost.totalPage);
+  const posts = useSelector((state: RootState) => state.latestPost.data);
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
@@ -47,7 +48,19 @@ const LatestPost = () => {
   return (
     <section className="section section-latest-post">
       <h2 className="section-title">Latest Post</h2>
-      {posts && <PostList posts={posts} isLoading={isLoading} />}
+      {(posts && posts.length > 0) || isLoading ? (
+        <ul className="post-list row">
+          {posts.map((post, index) => {
+            return (
+              <li className="post-item col col-6 col-sm-12" key={index}>
+                <PostItem post={post} />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <EmptyPost />
+      )}
       {isLoading && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (

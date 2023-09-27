@@ -11,12 +11,10 @@ enum Tab {
 }
 
 const ProfileUpdate = () => {
-  const [isShowToast, setIsShowToast] = useState(false);
   const [tab, setTab] = useState<Tab>(Tab.UPDATE_USER_INFO);
 
   const onChangeTab = (value: Tab) => {
     setTab(value);
-    setIsShowToast(false);
   };
 
   return (
@@ -55,7 +53,7 @@ const ProfileUpdate = () => {
                 className={`section section-update-info ${tab === Tab.UPDATE_USER_INFO ? 'active' : ''}`}
                 data-tab-content
               >
-                <UserUpdateForm isShowToast={isShowToast} setIsShowToast={setIsShowToast} />
+                <UserUpdateForm />
               </section>
               <section
                 id="tab-change-password-content"
@@ -63,7 +61,7 @@ const ProfileUpdate = () => {
                 data-tab-content
               >
                 <div className="tab-content">
-                  <UpdatePasswordForm isShowToast={isShowToast} setIsShowToast={setIsShowToast} />
+                  <UpdatePasswordForm />
                 </div>
               </section>
             </div>

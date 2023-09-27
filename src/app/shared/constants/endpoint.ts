@@ -27,6 +27,7 @@ export const ENDPOINT = {
     index: `${BASE_URL}/${RESOURCES.posts}`,
     public: `${BASE_URL}/${RESOURCES.posts}/public`,
     recommend: `${BASE_URL}/${RESOURCES.posts}/recommend`,
+    recyclebin: `${BASE_URL}/${RESOURCES.posts}/recyclebin`,
   },
   users: {
     index: `${BASE_URL}/${RESOURCES.users}`,
