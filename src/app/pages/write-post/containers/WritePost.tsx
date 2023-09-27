@@ -62,7 +62,6 @@ const WritePost = ({ post }: WritePostProps) => {
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const message = useSelector((state: RootState) => state.writePost.message);
   const currentPost = useSelector((state: RootState) => state.writePost.data);
-  console.log(currentPost);
 
   const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
