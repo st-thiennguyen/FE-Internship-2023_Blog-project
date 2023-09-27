@@ -9,6 +9,7 @@ import { loggerMiddleware } from './middleware';
 import { writePostReducer } from '../pages/write-post/write-post.reducer';
 import { postTagReducer } from '../pages/posts/posts.reducer';
 import { profileReducer } from '../pages/profile/profile.reducers';
+import toastReducer from '../shared/components/toast/toast.reducer';
 
 export type RootState = ReturnType<typeof rootReducer>;
 
@@ -19,12 +20,13 @@ export type RootThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, un
 export const rootReducer = combineReducers({
   auth: authReducer,
   detail: detailPostReducer,
-  post: lastesPostReducer,
+  latestPost: lastesPostReducer,
   user: userReducer,
   writePost: writePostReducer,
   postTag: postTagReducer,
   profile: profileReducer,
   recommend: recommendPostReducer,
+  toast: toastReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(loggerMiddleware, thunk)));

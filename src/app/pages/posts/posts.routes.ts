@@ -1,5 +1,6 @@
-import DetailPostPage from '../detail-post/container';
 import DetailPost from '../detail-post/container/DetailPost';
+import PostRecycleBin from './components/PostRecycleBin';
+import PostPage from './container';
 import CreatePost from '../write-post/containers/CreatePost';
 import UpdatePost from '../write-post/containers/UpdatePost';
 import Posts from './container/Posts';
@@ -7,7 +8,7 @@ import Posts from './container/Posts';
 export const postsRoutes = [
   {
     path: '/posts',
-    component: DetailPostPage,
+    component: PostPage,
     children: [
       {
         path: '',
@@ -25,6 +26,11 @@ export const postsRoutes = [
       {
         path: ':id/edit',
         component: UpdatePost,
+        isProtected: true,
+      },
+      {
+        path: 'recyclebin',
+        component: PostRecycleBin,
         isProtected: true,
       },
     ],

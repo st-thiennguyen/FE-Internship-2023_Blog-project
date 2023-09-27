@@ -15,15 +15,6 @@ const initState: AuthState = {
 
 export const authReducer = (state = initState, action: RootAction): AuthState => {
   switch (action.type) {
-    case ACTIONS_TYPE.REGISTER_RESET_STATE: {
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        isSuccess: false,
-        message: '',
-      };
-    }
     case ACTIONS_TYPE.REGISTER: {
       return {
         ...state,
@@ -93,8 +84,6 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.LOGOUT: {
-      removeLocalStorage(StorageKey.USER);
-      removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
         isLoading: true,
@@ -117,6 +106,8 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
     }
 
     case ACTIONS_TYPE.LOGOUT_FAILURE: {
+      removeLocalStorage(StorageKey.USER);
+      removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
         isLoading: false,

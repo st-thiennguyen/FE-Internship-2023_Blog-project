@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-quill/dist/quill.bubble.css';
 
-import ToastMessage from '../../../shared/components/ToastMessage';
 import EditorImageCover from './EditorImageCover';
 import EditorPostTags from './EditorPostTags';
 import TextEditor from './TextEditor';
@@ -48,8 +47,8 @@ const WritePost = ({ post }: WritePostProps) => {
   const [statusPost, setStatusPost] = useState('public');
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
+  const [isClick, setIsClick] = useState(false);
   const [content, setContent] = useState<string>('');
-  const [isShowToast, setIsShowToast] = useState(false);
   const [tags, setTags] = useState<string[]>();
   const [photoPreview, setPhotoPreview] = useState<string>();
   const [file, setFile] = useState<File>();
@@ -59,10 +58,7 @@ const WritePost = ({ post }: WritePostProps) => {
   const navigate = useNavigate();
 
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
-  const isError = useSelector((state: RootState) => state.writePost.isError);
-  const message = useSelector((state: RootState) => state.writePost.message);
   const currentPost = useSelector((state: RootState) => state.writePost.data);
-
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const { id } = useParams();
@@ -70,10 +66,10 @@ const WritePost = ({ post }: WritePostProps) => {
 
   useEffect(() => {
     if (post) {
-      setTags(post.tags)
+      setTags(post.tags);
       setIsUpdate(true);
     }
-  }, [])
+  }, []);
 
   const {
     register,
@@ -99,26 +95,23 @@ const WritePost = ({ post }: WritePostProps) => {
   };
 
   const handleUpdatePost = handleSubmit((data: any) => {
-    dispatch(
-      updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any,
-    );
-    setIsShowToast(true);
+    dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
     setTimeout(() => {
       navigate(`/posts/${id}`);
     }, 3000);
+    setIsClick(true);
   });
-
 
   const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
       await dispatch(createPost({ ...data, content, status: statusPost, tags }, file) as any);
-      setIsShowToast(true);
     }
   });
 
   const onPublishPost = () => {
     validate();
     handleCreatePost();
+    setIsClick(true);
   };
 
   // innit and dispose
@@ -136,7 +129,7 @@ const WritePost = ({ post }: WritePostProps) => {
     }
   }, [isLogin]);
 
-  if (isSuccess && isShowToast) {
+  if (isSuccess && isClick) {
     setTimeout(() => {
       navigate(`/posts/${currentPost.id}`);
     }, 3000);
@@ -197,11 +190,7 @@ const WritePost = ({ post }: WritePostProps) => {
               }}
             />
           )}
-          <EditorPostTags
-            tags={tags || []}
-            setTags={setTags}
-
-          />
+          <EditorPostTags tags={tags || []} setTags={setTags} />
           <EditorPostActions
             onPublish={isUpdate ? handleUpdatePost : onPublishPost}
             onSaveDraft={() => alert('COMMING SOON')}
@@ -209,15 +198,6 @@ const WritePost = ({ post }: WritePostProps) => {
           />
         </aside>
       </div>
-      {isShowToast && isSuccess && (
-        <ToastMessage
-          isSuccess={isSuccess}
-          isShow={isSuccess}
-          title="Success"
-          subtitle="Redirecting to detail post..."
-        />
-      )}
-      {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
     </>
   );
 };

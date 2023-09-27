@@ -1,4 +1,4 @@
-import WritePost from "../components/PostForm";
+import WritePost from '../components/PostForm';
 
 const CreatePost = () => {
   return (
@@ -11,5 +11,5 @@ const CreatePost = () => {
       </section>
     </>
   );
-}
+};
 export default CreatePost;
