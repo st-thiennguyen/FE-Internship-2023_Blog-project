@@ -19,7 +19,6 @@ import { createPost, resetWriteState, updatePost } from '../write-post.action';
 import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-import { Auth } from '../../../models/auth';
 import { PostModel } from '../../../models/post';
 
 const schema = yup
@@ -66,8 +65,8 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
 
 
   const detailPost: any = useSelector((state: RootState) => state.detail.data || {});
-  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
-  const accessToken = localStorageAuth?.accessToken;
+  const accessToken  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+
   const post: PostModel = useSelector((state: RootState) => state.writePost.data);
 
   const { id } = useParams();

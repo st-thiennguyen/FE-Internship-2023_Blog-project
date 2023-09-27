@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,12 +48,12 @@ interface UpdateUserFormProps {
 
 const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
-  const user = useSelector((state: RootState) => state.auth?.user);
+  const user = useSelector((state: RootState) => state.auth.userInfo);
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
   const isError = useSelector((state: RootState) => state.profile.isError);
   const message = useSelector((state: RootState) => state.profile.message);
-  const userPicture = useSelector((state: RootState) => state.auth?.user.picture);
+  const userPicture = useSelector((state: RootState) => state.auth.userInfo.picture);
 
   const dispatch = useDispatch();
 

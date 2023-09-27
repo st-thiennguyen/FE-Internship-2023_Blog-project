@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import {  useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -8,7 +8,6 @@ import * as yup from 'yup';
 import { StorageKey, regexEmail } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
 import { loginAction, registerReset } from '../auth.actions';
-import { AuthContext } from '../../../App';
 
 import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
@@ -21,7 +20,6 @@ import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
 import { getLocalStorage } from '../../../shared/utils';
-import { Auth } from '../../../models/auth';
 
 const schema = yup
   .object({
@@ -43,8 +41,7 @@ type FormData = {
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
-  const isAccessToken = localStorageAuth?.accessToken;
+  const isAccessToken  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);

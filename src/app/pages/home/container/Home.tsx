@@ -11,11 +11,9 @@ import Recommend from '../components/recommend';
 import Aside from '../../../shared/layout/aside/container/Aside';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-import { Auth } from '../../../models/auth';
 
 const Home = () => {
-  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
-  const isLogin = localStorageAuth?.accessToken;
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
 
   const dispatch = useDispatch();

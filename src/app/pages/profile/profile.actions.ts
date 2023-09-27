@@ -9,7 +9,7 @@ import {
   updateFollow,
 } from '../../shared/services/user.service';
 import { UserModel, FormChangePassword, ProfileModel, FollowModel } from '../../models/user';
-import { Auth, UserInfo } from '../../models/auth';
+import { UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { ACTIONS_TYPE, StorageKey, TypeUploadImage } from '../../shared/constants';
 import { getLocalStorage } from '../../shared/utils';
@@ -198,12 +198,12 @@ export const updateProfileAction =
       }
       const response = await updateProfile(data);
       dispatch(updateProfileSuccess(response as UserModel));
-      const userData: Auth = getLocalStorage(StorageKey.AUTH);
+      const userData: UserInfo = getLocalStorage(StorageKey.USER);
       const userUpdated = response as UserModel;
 
       for (const key in userUpdated) {
-        if (userData.userInfo.hasOwnProperty(key)) {
-          userData.userInfo[key] = userUpdated[key];
+        if (userData.hasOwnProperty(key)) {
+          userData[key] = userUpdated[key];
         }
       }
 

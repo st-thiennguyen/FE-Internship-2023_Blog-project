@@ -14,7 +14,6 @@ import Button from '../../../shared/components/Button';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import logo from '../../../../assets/images/logo.svg';
 import { getLocalStorage } from '../../../shared/utils';
-import { Auth } from '../../../models/auth';
 
 const schema = yup
   .object({
@@ -56,8 +55,7 @@ const Register = () => {
   const isSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
   const isError: boolean = useSelector((state: RootState) => state.auth.isError);
   const message: string = useSelector((state: RootState) => state.auth.message);
-  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
-  const accessToken = localStorageAuth?.accessToken;
+  const accessToken  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

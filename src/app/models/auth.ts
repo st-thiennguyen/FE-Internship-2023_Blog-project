@@ -1,8 +1,3 @@
-export interface Auth {
-  accessToken: string | null;
-  userInfo: UserInfo;
-}
-
 export interface UserInfo {
   id: number;
   email: string;
@@ -22,8 +17,7 @@ export interface RegisterProps extends Omit<UserInfo, 'id'> {
 }
 
 export interface AuthState {
-  auth?: Auth;
-  user: UserInfo;
+  userInfo: UserInfo;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;

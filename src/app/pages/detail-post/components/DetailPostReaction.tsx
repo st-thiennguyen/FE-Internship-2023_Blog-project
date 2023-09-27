@@ -6,7 +6,6 @@ import { updateLikeAction } from '../detail-post.actions';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-import { Auth } from '../../../models/auth';
 
 interface ReactionProps {
   postId: number;
@@ -16,8 +15,7 @@ interface ReactionProps {
 }
 
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
-  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
-  const isLogin = localStorageAuth?.accessToken;
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
   const isError = useSelector((state: RootState) => state.detail.isError);

@@ -9,13 +9,11 @@ import CommentItem from './CommentItem';
 import React from 'react';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-import { Auth } from '../../../models/auth';
 
 const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const listComment = useSelector((state: RootState) => state.detail.comments);
-  const currentUser = useSelector((state: RootState) => state.auth?.user);
-  const localStorageAuth  = getLocalStorage(StorageKey.AUTH, {} as Auth);
-  const isLogin = localStorageAuth?.accessToken;
+  const currentUser = useSelector((state: RootState) => state.auth.userInfo);
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const { id } = useParams();

@@ -1,5 +1,6 @@
 export enum StorageKey {
-  AUTH = 'auth',
+  ACCESS_TOKEN = 'access-token',
+  USER = 'user'
 }
 
 export enum Gender {
