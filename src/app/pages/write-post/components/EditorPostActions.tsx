@@ -1,3 +1,5 @@
+import Button from '../../../shared/components/Button';
+
 interface EditorPostActionsProps {
   isUpdate: boolean;
   onPublish: () => void;

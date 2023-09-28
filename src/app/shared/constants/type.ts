@@ -10,15 +10,15 @@ export const ACTIONS_TYPE = {
   GET_POSTS_FAILURE: 'get-posts-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
 
-  // GET ALL POST FROM RECYCLEBIN
-  GET_RECYCLEBIN: 'get-recyclebin',
-  GET_RECYCLEBIN_SUCCESS: 'get-recyclebin-success',
-  GET_RECYCLEBIN_FAILURE: 'get-recyclebin-failure',
-
-  // GET ALL POST FROM RECYCLEBIN
+  // RESTORE POST FROM RECYCLEBIN
   RESTORE_RECYCLEBIN: 'restore-recyclebin',
   RESTORE_RECYCLEBIN_SUCCESS: 'restore-recyclebin-success',
   RESTORE_RECYCLEBIN_FAILURE: 'restore-recyclebin-failure',
+
+  // GET ALL DRAFT POST
+  GET_DRAFT_POST: 'get-draft-post',
+  GET_DRAFT_POST_SUCCESS: 'get-draft-post-success',
+  GET_DRAFT_POST_FAILURE: 'get-draft-post-failure',
 
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
@@ -133,10 +133,11 @@ export const ACTIONS_TYPE = {
   TOGGLE_BOOKMARK: 'toggle-bookmark',
   TOGGLE_BOOKMARK_SUCCESS: 'toggle-bookmark-success',
   TOGGLE_BOOKMARK_FAILURE: 'toggle-bookmark-failure',
-  // Get Recycle Bin
-  GET_RECYCLE_BIN: 'get-recycle-bin',
-  GET_RECYCLE_BIN_SUCCESS: 'get-recycle-bin-success',
-  GET_RECYCLE_BIN_FAILURE: 'get-recycle-bin-failure',
+
+  // ADD TO DRAFT
+  ADD_DRAFT: 'add-draft',
+  ADD_DRAFT_SUCCESS: 'add-draft-success',
+  ADD_DRAFT_FAILURE: 'add-draft-failure',
 
   // TOAST MESSAGE
   SHOW_TOAST: 'show-toast',

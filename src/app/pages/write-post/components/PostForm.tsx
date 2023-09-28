@@ -6,18 +6,18 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-quill/dist/quill.bubble.css';
 
+import { RootState } from '../../../stores/store';
+import { createPost, saveToDraft, updatePost } from '../write-post.action';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
+import { PostModel } from '../../../models/post';
+
 import EditorImageCover from './EditorImageCover';
 import EditorPostTags from './EditorPostTags';
 import TextEditor from './TextEditor';
 import EditorPostVisibility from './EditorPostVisibility';
 import EditorImageCoverPreview from './EditorImageCoverPreview';
 import EditorPostActions from './EditorPostActions';
-
-import { RootState } from '../../../stores/store';
-import { createPost, updatePost } from '../write-post.action';
-import { getLocalStorage } from '../../../shared/utils';
-import { StorageKey, TypeUploadImage } from '../../../shared/constants';
-import { PostModel, TypeImage } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -52,12 +52,14 @@ const WritePost = ({ post }: WritePostProps) => {
   const [tags, setTags] = useState<string[]>();
   const [photoPreview, setPhotoPreview] = useState<string>();
   const [file, setFile] = useState<File>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
+  const isError = useSelector((state: RootState) => state.writePost.isError);
   const currentPost = useSelector((state: RootState) => state.writePost.data);
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
@@ -68,8 +70,9 @@ const WritePost = ({ post }: WritePostProps) => {
     if (post) {
       setTags(post.tags);
       setIsUpdate(true);
+      setStatusPost(post.status);
     }
-  }, []);
+  }, [post]);
 
   const {
     register,
@@ -95,6 +98,7 @@ const WritePost = ({ post }: WritePostProps) => {
   };
 
   const handleUpdatePost = handleSubmit((data: any) => {
+    setIsLoading(true);
     dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
     setTimeout(() => {
       navigate(`/posts/${id}`);
@@ -103,6 +107,7 @@ const WritePost = ({ post }: WritePostProps) => {
   });
 
   const handleCreatePost = handleSubmit(async (data: any) => {
+    setIsLoading(true);
     if (validate()) {
       await dispatch(createPost({ ...data, content, status: statusPost, tags }, file) as any);
     }
@@ -114,7 +119,22 @@ const WritePost = ({ post }: WritePostProps) => {
     setIsClick(true);
   };
 
-  // innit and dispose
+  const handleSaveDraft = handleSubmit(async (data: FormData) => {
+    setIsLoading(true);
+    await dispatch(
+      saveToDraft(
+        {
+          ...data,
+          content: content,
+          status: 'draft',
+        },
+        file!,
+      ) as any,
+    );
+    setIsClick(true);
+  });
+
+  // init and dispose
   useEffect(() => {
     setValue('description', post?.description || '');
     setValue('title', post?.title || '');
@@ -131,6 +151,7 @@ const WritePost = ({ post }: WritePostProps) => {
 
   if (isSuccess && isClick) {
     setTimeout(() => {
+      setIsLoading(false);
       navigate(`/posts/${currentPost.id}`);
     }, 3000);
   }
@@ -177,7 +198,7 @@ const WritePost = ({ post }: WritePostProps) => {
           </form>
         </div>
         <aside className="aside aside-write-post d-flex flex-column  col col-3">
-          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
+          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={statusPost} />
           {photoPreview && (
             <EditorImageCoverPreview
               photoPreview={photoPreview}
@@ -191,11 +212,13 @@ const WritePost = ({ post }: WritePostProps) => {
             />
           )}
           <EditorPostTags tags={tags || []} setTags={setTags} />
-          <EditorPostActions
-            onPublish={isUpdate ? handleUpdatePost : onPublishPost}
-            onSaveDraft={() => alert('COMMING SOON')}
-            isUpdate={isUpdate}
-          />
+          <div className={isLoading && !isError ? 'action-disabled' : 'action-wrapper'}>
+            <EditorPostActions
+              onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
+              onSaveDraft={handleSaveDraft}
+              isUpdate={isUpdate}
+            />
+          </div>
         </aside>
       </div>
     </>

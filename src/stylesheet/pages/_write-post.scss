@@ -23,6 +23,10 @@
 
 .section-write-post {
   background-color: #fff;
+  .action-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .write-post {
@@ -262,6 +266,9 @@
     margin-bottom: 20px;
   }
 
+  .icon {
+    margin: 8px 0;
+  }
   &-item {
     display: flex;
     position: relative;

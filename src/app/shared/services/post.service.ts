@@ -1,16 +1,12 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
+import { PostProps, QueryPost } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}`);
 };
 
-export interface QueryPost {
-  page?: number;
-  size?: number;
-  tags?: string[];
-}
 export const getPublicPosts = (query: QueryPost) => {
   const api = new ApiService();
 
@@ -36,16 +32,8 @@ export const postArticles = (data: any) => {
 };
 
 export const updatePostArticles = (data: any, id: number) => {
-  const formData = new URLSearchParams();
-  formData.append('title', data.title);
-  formData.append('content', data.content);
-
   const api = new ApiService();
-  return api.put(`${ENDPOINT.post.index}/${id}`, formData.toString(), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  });
+  return api.put(`${ENDPOINT.post.index}/${id}`, data);
 };
 
 export const getSignUrlImage = (file: any) => {
@@ -96,4 +84,14 @@ export const getRecyclebinPost = (query: QueryPost) => {
 export const restoreRecyclebinPost = (idPost: number) => {
   const api = new ApiService();
   return api.put(`${ENDPOINT.post.index}/${idPost}/restore`);
+};
+
+export const getPostDraft = () => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.draft}`);
+};
+
+export const createDraft = (data: PostProps) => {
+  const api = new ApiService();
+  return api.post(ENDPOINT.post.draft, data);
 };
