@@ -1,17 +1,16 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { regexEmail } from '../../../shared/constants';
+import { StorageKey, regexEmail, ENDPOINT } from '../../../shared/constants';
 import { RootState } from '../../../stores/store';
-import { loginAction, registerReset } from '../auth.actions';
-import { AuthContext } from '../../../App';
+import { loginAction } from '../auth.actions';
+import { getLocalStorage } from '../../../shared/utils';
 
 import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
@@ -39,28 +38,29 @@ type FormData = {
 };
 
 const Login = () => {
-  const authContext = useContext(AuthContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isLogin = authContext?.accessToken;
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const isLoading: boolean = useSelector((state: RootState) => state.auth.isLoading);
-  const message: string = useSelector((state: RootState) => state.auth.message);
-  const isErrorLogin: any = useSelector((state: RootState) => state.auth.isError);
-
-  const isRegisterSuccess: boolean = useSelector((state: RootState) => state.auth.isSuccess);
-  const registerMessage: string = useSelector((state: RootState) => state.auth.message);
 
   const togglePassword = () => {
     setIsShowPassword(!isShowPassword);
   };
 
-  const [registerState] = useState({
-    isRegisterSuccess,
-    registerMessage,
-  });
+  const currentHost = () => {
+    const protocol = window.location.protocol;
+    let host = '';
+
+    if (process.env.NODE_ENV === 'production') {
+      host = process.env.REACT_APP_HOST_DEVELOPMENT || '';
+    } else {
+      host = `${protocol}//${window.location.hostname}:3000`;
+    }
+
+    return host;
+  };
 
   const {
     register,
@@ -72,13 +72,7 @@ const Login = () => {
     dispatch(loginAction(data.email, data.password) as any);
   });
 
-  const removeStateRegister = useRef(() => {});
-  removeStateRegister.current = () => {
-    isRegisterSuccess && dispatch(registerReset());
-  };
-
   useEffect(() => {
-    removeStateRegister.current();
     if (isLogin) {
       navigate('/');
     }
@@ -96,7 +90,10 @@ const Login = () => {
           <h2 className="auth-title text-center">LOGIN</h2>
           <ul className="login-external-list row text-center">
             <li className="login-external-item col col-4">
-              <a href="/" className="external-item-link">
+              <a
+                href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/login-google`}
+                className="external-item-link"
+              >
                 <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
               </a>
             </li>
@@ -161,17 +158,6 @@ const Login = () => {
           <img src={loginImg} alt="background login" className="auth-img" />
         </div>
       </div>
-      {registerState.isRegisterSuccess && (
-        <ToastMessage
-          isShow={registerState.isRegisterSuccess}
-          isSuccess={registerState.isRegisterSuccess}
-          title={'Success'}
-          subtitle={registerState.registerMessage}
-        />
-      )}
-      {isErrorLogin && (
-        <ToastMessage isShow={isErrorLogin} isSuccess={!isErrorLogin} title={'Error'} subtitle={message}></ToastMessage>
-      )}
     </div>
   );
 };

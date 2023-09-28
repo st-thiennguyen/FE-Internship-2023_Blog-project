@@ -7,6 +7,8 @@ import { InteractionItemModel, InteractionProps } from '../../models/interaction
 
 import { UserInfo } from '../../models/auth';
 import { ACTIONS_TYPE } from '../../shared/constants';
+import { showToast } from '../../shared/components/toast/toast.actions';
+import { ToastType } from '../../models/toast';
 
 const getDetailBlogStart = () => {
   return {
@@ -35,6 +37,7 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
     dispatch(getDetailBlogSuccess(response as PostModel));
   } catch (error) {
     dispatch(getDetailBlogFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -66,6 +69,7 @@ export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAc
     dispatch(updateLikeSuccess(response as InteractionProps));
   } catch (error) {
     dispatch(updateLikeFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -97,6 +101,7 @@ export const fetchComments = (id: string) => async (dispatch: Dispatch<RootActio
     dispatch(getCommentsSuccess(response as InteractionItemModel[]));
   } catch (error) {
     dispatch(getCommentsFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -129,5 +134,6 @@ export const postCommentAction =
       dispatch(postCommentSuccess(response as InteractionItemModel, user));
     } catch (error) {
       dispatch(postCommentFailure(`${error}`));
+      dispatch(showToast(`${error}`, ToastType.ERROR));
     }
   };

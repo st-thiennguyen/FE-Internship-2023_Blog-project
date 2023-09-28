@@ -9,8 +9,9 @@ import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
 
 import Modal from './Modal';
-import ToastMessage from './ToastMessage';
 import NoImg from '../../../assets/images/no-image.png';
+import Tags from './Tags';
+import { restorePostAction } from '../../pages/posts/posts.action';
 
 interface PostItemProps {
   post: PostModel;
@@ -19,11 +20,9 @@ interface PostItemProps {
 const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
-  const [isShowToast, setIsShowToast] = useState(false);
 
-  const isDeleteSuccess = useSelector((state: RootState) => state.profile?.isDeleteSuccess);
-  const isDeleteFailure = useSelector((state: RootState) => state.profile?.isDeleteFailure);
-  const deleteMessage = useSelector((state: RootState) => state.profile?.message);
+  const [isShowModalRestore, setShowModalRestore] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleDeletePostItem = (id: string) => {
@@ -33,16 +32,25 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
 
   const handleClose = () => {
     setIShowModal(false);
+    setShowModalRestore(false);
   };
 
   const handleDelete = () => {
     handleDeletePostItem(post.id as any);
-    setIsShowToast(true);
     setIShowModal(false);
+  };
+
+  const handleRestoreItem = () => {
+    dispatch(restorePostAction(post.id) as any);
+    setShowModalRestore(false);
   };
 
   const handleShowModal = () => {
     setIShowModal(!isShowModal);
+  };
+
+  const handleShowModalRestore = () => {
+    setShowModalRestore(!isShowModalRestore);
   };
 
   useEffect(() => {
@@ -52,23 +60,20 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
   return (
     <>
       <div className="post">
-        <div
-          className="post-delete d-flex item-center justify-center"
-          onClick={(e) => {
-            e.preventDefault();
-            handleShowModal();
-          }}
-        >
+        <div className="post-delete d-flex item-center justify-center" onClick={handleShowModal}>
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
         </div>
 
         <div className="post-bookmark d-hidden" onClick={onClickBookmark}>
-          <i className="icon icon-large icon-bookmark-fill" />
           <span className="remove-bookmark">&times;</span>
+          <i className="icon icon-large icon-bookmark-fill" />
+        </div>
+        <div className="post-restore" onClick={handleShowModalRestore}>
+          <i className="icon icon-xxl icon-restore-60"></i>
         </div>
         <div className="post-img-wrapper">
-          <Link to={`/posts/${post.id}`}>
+          <Link to={`/posts/${post.id}`} className="post-image-link">
             {isErrImg ? (
               <img src={NoImg} alt={post.title} className={`post-img err`} />
             ) : (
@@ -95,11 +100,13 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
               <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
             </Link>
           </div>
-          <div className="post-footer d-flex justify-between">
-            <span className="read-more">READ MORE</span>
+          <div className="post-footer d-flex justify-between item-center">
+            <ul className="tag-list d-flex">
+              <Tags tags={post.tags} />
+            </ul>
             <ul className="post-action-list">
               <li className="post-action-item">
-                <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/posts/update/${post.id}`}>
+                <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/posts/${post.id}/edit`}>
                   <i className="icon icon-small icon-write-20"></i>
                 </Link>
               </li>
@@ -118,29 +125,15 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
         </div>
       </div>
 
-      {isShowToast && isDeleteSuccess && (
-        <ToastMessage
-          isShow={isDeleteSuccess}
-          isSuccess={isDeleteSuccess}
-          title="Success"
-          subtitle={deleteMessage}
-        ></ToastMessage>
-      )}
-      {isShowToast && isDeleteFailure && (
-        <ToastMessage
-          isShow={isDeleteFailure}
-          isSuccess={!isDeleteFailure}
-          title="Error"
-          subtitle={deleteMessage}
-        ></ToastMessage>
-      )}
+      <Modal onClickClose={handleClose} onClickConfirm={handleRestoreItem} isShow={isShowModalRestore}>
+        <h4 className="modal-title">Restore</h4>
+        <p>Do you want restore this post ?</p>
+      </Modal>
 
-      {isShowModal && (
-        <Modal onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowModal}>
-          <h4 className="modal-title">Delete</h4>
-          <p>Do you really want to delete?</p>
-        </Modal>
-      )}
+      <Modal onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowModal}>
+        <h4 className="modal-title">Delete</h4>
+        <p>Do you really want to delete?</p>
+      </Modal>
     </>
   );
 };

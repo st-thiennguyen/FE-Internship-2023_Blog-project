@@ -18,6 +18,11 @@
     height: 50px;
   }
 
+  &-xxl {
+    width: 60px;
+    height: 60px;
+  }
+
   &-user-20 {
     background-image: url("../../assets/icons/ic-user-20.svg");
   }
@@ -129,5 +134,9 @@
 
   &-trash-fill-20 {
     background-image: url("../../assets/icons/ic-trash-fill-20.svg");
+  }
+
+  &-restore-60 {
+    background-image: url("../../assets/icons/ic-restore-60.svg");
   }
 }

@@ -4,12 +4,13 @@ import icRemove from '../../../../assets/icons/ic-remove-20.svg';
 
 interface EditorPostTagsProps {
   tags: string[];
-  setTags: any;
+  setTags: (val: string[]) => void;
   isUpdate?: boolean
 }
 const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
+
   const tagRef = useRef<HTMLInputElement>(null);
-  
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const validateTags = (): boolean => {
@@ -38,8 +39,8 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
   };
 
   const handleRemoveTag = (id: number) => {
-      const newTags = tags.filter((item, index) => index !== id);
-      setTags([...newTags]);
+    const newTags = tags.filter((item , index: number) => index !== id);
+    setTags([...newTags]);
   };
   return (
     <div className="editor-tags">

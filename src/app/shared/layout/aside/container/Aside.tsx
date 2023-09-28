@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchUsers } from '../../../../pages/home/home.actions';
 import { RootState } from '../../../../stores/store';
+import { UserModel } from '../../../../models/user';
+
 import TopFollower from '../components/TopFollower';
 import TopPost from '../components/TopPost';
-import { UserModel } from '../../../../models/user';
 
 const Aside = () => {
   const users = useSelector((state: RootState) => state.user.data);
@@ -17,7 +18,7 @@ const Aside = () => {
   }, []);
 
   const filterTopFollower = (users: UserModel[]) => {
-    const sortUsers = users.sort((a, b) => b.followings - a.followings);
+    const sortUsers = users.sort((a, b) => b.followers - a.followers);
     const top5Follower = sortUsers.slice(0, 5);
     return top5Follower;
   };
