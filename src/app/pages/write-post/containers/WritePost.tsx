@@ -18,6 +18,8 @@ import EditorImageCoverPreview from '../components/EditorImageCoverPreview';
 import EditorPostActions from '../components/EditorPostActions';
 import { PostModel } from '../../../models/post';
 import Modal from '../../../shared/components/Modal';
+import { watch } from 'fs';
+import UsePrompt from '../../../shared/common/UsePrompt';
 
 const schema = yup
   .object({
@@ -44,6 +46,8 @@ interface WritePostProps {
 }
 
 const WritePost = ({ isUpdate }: WritePostProps) => {
+  const [formData, setFormData] = useState({});
+  const [formDataChanged, setFormDataChanged] = useState(false);
   const [statusPost, setStatusPost] = useState('public');
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
@@ -74,6 +78,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
 
@@ -160,6 +165,14 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     return () => dispatch(resetWriteState() as any);
   }, []);
 
+  const currentFormData = watch();
+
+  // Kiểm tra sự thay đổi của formData
+  if (JSON.stringify(currentFormData) !== JSON.stringify(formData)) {
+    setFormData(currentFormData);
+    setFormDataChanged(true);
+  }
+
   return (
     <>
       <section className="section section-write-post">
@@ -167,6 +180,7 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
           <h2 className="section-title text-primary section-title-editor">What's for today ? </h2>
           <div className="section-body row">
             <div className="col col-9">
+              <UsePrompt when={formDataChanged} message="Unsaved Changes. Are you sure you wish to exit?" />
               <form className="write-post-form d-flex flex-column" ref={formRef}>
                 <EditorImageCover
                   photoPreview={photoPreview || detailPost?.cover}
