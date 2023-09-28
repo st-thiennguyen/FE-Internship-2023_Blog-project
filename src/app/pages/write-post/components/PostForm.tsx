@@ -6,18 +6,18 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-quill/dist/quill.bubble.css';
 
+import { RootState } from '../../../stores/store';
+import { createPost, saveToDraft, updatePost } from '../write-post.action';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
+import { PostModel } from '../../../models/post';
+
 import EditorImageCover from './EditorImageCover';
 import EditorPostTags from './EditorPostTags';
 import TextEditor from './TextEditor';
 import EditorPostVisibility from './EditorPostVisibility';
 import EditorImageCoverPreview from './EditorImageCoverPreview';
 import EditorPostActions from './EditorPostActions';
-
-import { RootState } from '../../../stores/store';
-import { createPost, saveToDraft, updatePost } from '../write-post.action';
-import { getLocalStorage } from '../../../shared/utils';
-import { StorageKey, TypeUploadImage } from '../../../shared/constants';
-import { PostModel, TypeImage } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -70,8 +70,9 @@ const WritePost = ({ post }: WritePostProps) => {
     if (post) {
       setTags(post.tags);
       setIsUpdate(true);
+      setStatusPost(post.status);
     }
-  }, []);
+  }, [post]);
 
   const {
     register,
@@ -197,7 +198,7 @@ const WritePost = ({ post }: WritePostProps) => {
           </form>
         </div>
         <aside className="aside aside-write-post d-flex flex-column  col col-3">
-          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
+          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={statusPost} />
           {photoPreview && (
             <EditorImageCoverPreview
               photoPreview={photoPreview}

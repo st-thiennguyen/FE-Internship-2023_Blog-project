@@ -18,6 +18,10 @@
     color: #000;
     font-size: map-get($font-size, xxl);
   }
+
+  .post-body {
+    min-height: 138px;
+  }
   .post-desc {
     display: -webkit-box;
     -webkit-box-orient: vertical;
