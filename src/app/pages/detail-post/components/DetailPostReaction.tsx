@@ -53,7 +53,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action" onClick={handleAddBookMark}> {
             !isBookmark ? <i className="icon icon-small icon-bookmark-20"></i> :
-              <img src={icBookmarkBlue} alt="icon bookmark" className='icon icon-small ic-bookmark-blue-20' />
+              <i className='icon icon-small icon-bookmark-blue-20'></i>
           }
           </button>
         </li>
