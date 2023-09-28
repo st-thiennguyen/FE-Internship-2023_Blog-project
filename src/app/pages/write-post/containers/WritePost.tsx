@@ -160,39 +160,6 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
     return () => dispatch(resetWriteState() as any);
   }, []);
 
-  const handleNavigation = (e: BeforeUnloadEvent) => {
-    e.preventDefault();
-    if (confirm('reload')) {
-      alert('akakca');
-    }
-  };
-
-  const confirmNavigation = () => {
-    // Perform any additional actions here if needed
-    SetIsShowModal(false);
-    window.location.reload();
-  };
-
-  // Handle canceling navigation
-  const cancelNavigation = () => {
-    // Perform any actions or simply close the modal
-    SetIsShowModal(false);
-  };
-
-  window.onpopstate = handleNavigation;
-
-  useEffect(() => {
-    const handleBeforeUnload = (e: any) => {
-      e.preventDefault();
-      e.returnValue = '';
-      SetIsShowModal(true);
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
   return (
     <>
       <section className="section section-write-post">
@@ -273,7 +240,6 @@ const WritePost = ({ isUpdate }: WritePostProps) => {
       )}
       {isShowToast && isError && <ToastMessage isSuccess={isError} isShow={isError} title="Error" subtitle={message} />}
 
-      {/* Modal save confirm save draft or not */}
       {isShowModal && (
         <Modal onClickClose={() => {}} onClickConfirm={() => {}} isShow={isShowModal}>
           <h4 className="modal-title">Save to draft</h4>
