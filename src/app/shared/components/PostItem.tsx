@@ -14,7 +14,7 @@ import { restorePostAction } from '../../pages/posts/posts.action';
 
 interface PostItemProps {
   post: PostModel;
-  onClickBookmark?: () => void;
+  onClickBookmark?: (id: number) => void;
 }
 const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
@@ -56,6 +56,7 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
     isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
   }, [isErrImg, post.cover]);
 
+
   return (
     <>
       <div className="post">
@@ -67,7 +68,7 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
           <i className="icon icon-xxl icon-restore-60"></i>
         </div>
 
-        <div className="post-bookmark d-hidden" onClick={onClickBookmark}>
+        <div className="post-bookmark d-hidden" onClick={() => onClickBookmark && onClickBookmark(post.id)}>
           <i className="icon icon-large icon-bookmark-fill" />
           <span className="remove-bookmark">&times;</span>
         </div>
