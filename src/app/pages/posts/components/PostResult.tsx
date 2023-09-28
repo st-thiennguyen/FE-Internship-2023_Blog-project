@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
 import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
 import { useLocation } from 'react-router-dom';
+import Loading from '../../../shared/components/Loading';
 
 const threshold = 400;
 
@@ -64,7 +65,7 @@ const PostResult = () => {
         <h2 className="section-title text-primary">RESULT OF FOUND</h2>
 
         {posts && <PostList posts={posts} isLoading={isLoading} />}
-        {isLoading && (
+        {isLoading && posts.length === 0 && (
           <ul className="row">
             {Array.from({ length: 6 }, (item, index) => (
               <li className="post-item col col-4 col-lg-6 col-sm-12" key={index}>
@@ -72,6 +73,10 @@ const PostResult = () => {
               </li>
             ))}
           </ul>
+        )}
+
+{isLoading && posts.length && (
+          <Loading/>
         )}
       </div>
     </section>
