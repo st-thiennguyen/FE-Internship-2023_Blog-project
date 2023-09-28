@@ -40,7 +40,4 @@ export const ENDPOINT = {
   friends: {
     index: `${BASE_URL}/${RESOURCES.friends}`,
   },
-  draft: {
-    index: `${BASE_URL}/${RESOURCES.friends}`,
-  },
 };
