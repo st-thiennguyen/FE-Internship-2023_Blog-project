@@ -10,6 +10,7 @@ import { convertDateToString } from '../utils/date';
 
 import Modal from './Modal';
 import NoImg from '../../../assets/images/no-image.png';
+import Tags from './Tags';
 import { restorePostAction } from '../../pages/posts/posts.action';
 
 interface PostItemProps {
@@ -67,7 +68,7 @@ const PostItem = ({ post }: PostItemProps) => {
           <i className="icon icon-xxl icon-restore-60"></i>
         </div>
         <div className="post-img-wrapper">
-          <Link to={`/posts/${post.id}`}>
+          <Link to={`/posts/${post.id}`} className="post-image-link">
             {isErrImg ? (
               <img src={NoImg} alt={post.title} className={`post-img err`} />
             ) : (
@@ -94,8 +95,10 @@ const PostItem = ({ post }: PostItemProps) => {
               <p className="post-desc">{post.description.replace(/<[^>]*>/g, '')}</p>
             </Link>
           </div>
-          <div className="post-footer d-flex justify-between">
-            <span className="read-more">READ MORE</span>
+          <div className="post-footer d-flex justify-between item-center">
+            <ul className="tag-list d-flex">
+              <Tags tags={post.tags} />
+            </ul>
             <ul className="post-action-list">
               <li className="post-action-item">
                 <Link onClick={(e) => e.stopPropagation()} className="post-action-link" to={`/posts/${post.id}/edit`}>
