@@ -118,7 +118,6 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
     case ACTIONS_TYPE.TOGGLE_BOOKMARK:
       return {
         ...state,
-        // isLoading: true,
         isSuccess: false,
         isError: false,
         message: '',
@@ -185,7 +184,6 @@ export const bookmarkReducer = (state = initialBookMarkState, action: RootAction
     case ACTIONS_TYPE.UPDATE_BOOKMARK:
       return {
         ...state,
-        // isLoading: true,
         isSuccess: false,
         isError: false,
         message: '',

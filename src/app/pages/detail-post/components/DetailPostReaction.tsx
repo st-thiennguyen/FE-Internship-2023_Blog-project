@@ -6,7 +6,6 @@ import { toggleBookmarkAction, updateLikeAction } from '../detail-post.actions';
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-import icBookmarkBlue from '../../../../assets/icons/ic-bookmark-blue-20.svg';
 
 interface ReactionProps {
   postId: number;
