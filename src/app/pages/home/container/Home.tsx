@@ -9,9 +9,11 @@ import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import LatestPost from '../components/LatestPost';
 import Recommend from '../components/recommend';
 import Aside from '../../../shared/layout/aside/container/Aside';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 
 const Home = () => {
-  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
 
   const dispatch = useDispatch();

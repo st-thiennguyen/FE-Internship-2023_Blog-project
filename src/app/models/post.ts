@@ -1,3 +1,4 @@
+import { TypeUploadImage } from '../shared/constants';
 import { InteractionItemModel } from './interaction';
 import { UserModel } from './user';
 
@@ -21,7 +22,7 @@ export interface PostModel {
 
 export interface PostProps {
   title: string;
-  cover: string;
+  cover?: string;
   content: string;
   status: string;
   description: string;
@@ -83,4 +84,10 @@ export interface QueryPost {
   page?: number;
   size?: number;
   tags?: string[];
+}
+
+export interface TypeImage {
+  type_upload: TypeUploadImage;
+  file_name: string;
+  file_type: string;
 }

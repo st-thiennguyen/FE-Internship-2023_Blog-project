@@ -28,7 +28,13 @@ const UserPostList = ({ postList }: UserPostListProps) => {
         })
       ) : (
         <div className="user-post-empty">
-          <EmptyPost desc={id ? `${userProfile.displayName}'s post list is empty` : 'Publish your first post now'} />
+          <EmptyPost
+            desc={
+              id
+                ? `${userProfile.displayName || userProfile.firstName}'s post list is empty`
+                : 'Publish your first post now'
+            }
+          />
         </div>
       )}
     </ul>

@@ -41,7 +41,9 @@
     .social-desc {
       font-size: map-get($map: $font-size, $key: lg);
     }
+
     .user-detail-footer {
+      min-height: 114px;
       align-items: end;
     }
 
@@ -63,7 +65,6 @@
       width: 150px;
     }
     .btn-following {
-      background-color: map-get($map: $color, $key: defaultBg);
       &:hover .btn-label {
         display: none;
       }

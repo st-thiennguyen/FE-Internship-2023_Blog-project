@@ -5,10 +5,15 @@ export const ACTIONS_TYPE = {
   GET_ALL_POST_FAILURE: 'get-all-post-failure',
   RESET_CURRENT_PAGE: 'reset-current-page',
   // GET ALL POST WITH TAG
-  GET_POST_WITH_TAG: 'get-post-with-tag',
-  GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
-  GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
+  GET_POSTS: 'get-posts',
+  GET_POSTS_SUCCESS: 'get-posts-success',
+  GET_POSTS_FAILURE: 'get-posts-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
+
+  // RESTORE POST FROM RECYCLEBIN
+  RESTORE_RECYCLEBIN: 'restore-recyclebin',
+  RESTORE_RECYCLEBIN_SUCCESS: 'restore-recyclebin-success',
+  RESTORE_RECYCLEBIN_FAILURE: 'restore-recyclebin-failure',
 
   // GET ALL DRAFT POST
   GET_DRAFT_POST: 'get-draft-post',
@@ -120,8 +125,13 @@ export const ACTIONS_TYPE = {
   POST_COMMENT: 'post-comment',
   POST_COMMENT_SUCCESS: 'post-comment-success',
   POST_COMMENT_FAILURE: 'post-comment-failure',
+
   // ADD TO DRAFT
   ADD_DRAFT: 'add-draft',
   ADD_DRAFT_SUCCESS: 'add-draft-success',
   ADD_DRAFT_FAILURE: 'add-draft-failure',
+
+  // TOAST MESSAGE
+  SHOW_TOAST: 'show-toast',
+  CLOSE_TOAST: 'close-toast',
 };

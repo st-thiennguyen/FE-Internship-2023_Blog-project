@@ -1,107 +1,139 @@
 import { Dispatch } from 'react';
 import { RootAction } from '../../stores/store';
 import { createDraft, postArticles, updatePostArticles } from '../../shared/services';
-import { PostModel, PostProps } from '../../models/post';
-import { ACTIONS_TYPE } from '../../shared/constants';
+import { PostModel, PostProps, SignatureImageModel } from '../../models/post';
+import { ACTIONS_TYPE, TypeUploadImage } from '../../shared/constants';
+import { showToast } from '../../shared/components/toast/toast.actions';
+import { ToastType } from '../../models/toast';
+import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 
-export const resetWriteState = () => {
+const resetWriteState = () => {
   return {
     type: 'RESET_STATE_WRITEPOST',
   };
 };
 
-export const addPostStart = () => {
+const addPostStart = () => {
   return {
     type: ACTIONS_TYPE.ADD_POST,
   };
 };
 
-export const addPostSuccess = (data: any) => {
+const addPostSuccess = (data: any) => {
   return {
     type: ACTIONS_TYPE.ADD_POST_SUCCESS,
     payload: data,
   };
 };
 
-export const addPostFailure = (error: any) => {
+const addPostFailure = (error: any) => {
   return {
     type: ACTIONS_TYPE.ADD_POST_FAILURE,
     payload: error,
   };
 };
 
-export const updatePostStart = () => {
+const updatePostStart = () => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST,
   };
 };
 
-export const updatePostSuccess = (data: any) => {
+const updatePostSuccess = (data: any) => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST_SUCCESS,
     payload: data,
   };
 };
 
-export const updatePostFailure = (error: any) => {
+const updatePostFailure = (error: any) => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST_FAILURE,
     payload: error,
   };
 };
 
-export const getUserProfileStart = () => {
+const getUserProfileStart = () => {
   return {
     type: ACTIONS_TYPE.GET_PROFILE,
   };
 };
 
-export const createDraftStart = () => {
+const createDraftStart = () => {
   return {
     type: ACTIONS_TYPE.ADD_DRAFT,
   };
 };
 
-export const createDraftSuccess = (post: PostModel) => {
+const createDraftSuccess = (post: PostProps) => {
   return {
     type: ACTIONS_TYPE.ADD_DRAFT_SUCCESS,
     payload: post,
   };
 };
 
-export const createDraftFailure = (error: string) => {
+const createDraftFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.ADD_DRAFT_FAILURE,
     payload: error,
   };
 };
 
-export const createPost = (data: PostModel) => async (dispatch: Dispatch<RootAction>) => {
+export const createPost = (data: PostModel, file: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(addPostStart());
   try {
-    const res = await postArticles(data);
+    const signatureImage: SignatureImageModel = (await getEmptyImageUrl(
+      file,
+      TypeUploadImage.COVER_POST,
+    )) as SignatureImageModel;
+    await putImageToLink(signatureImage.signedRequest, file);
+    const res = await postArticles({ ...data, cover: signatureImage.url });
     dispatch(addPostSuccess(res));
+    dispatch(showToast('Create post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(addPostFailure(error));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
-export const updatePost = (data: PostModel, id: number) => async (dispatch: Dispatch<RootAction>) => {
+export const updatePost = (data: PostModel, id: number, file: any) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updatePostStart());
   try {
-    const res = await updatePostArticles(data, id);
+    let coverImg = '';
+    if (file) {
+      const signatureImage: SignatureImageModel = (await getEmptyImageUrl(
+        file,
+        TypeUploadImage.COVER_POST,
+      )) as SignatureImageModel;
+      await putImageToLink(signatureImage.signedRequest, file);
+      coverImg = signatureImage.url;
+    }
+    const res = await updatePostArticles({ ...data, cover: coverImg ? coverImg : data.cover }, id);
     dispatch(updatePostSuccess(res));
+    dispatch(showToast('Update post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(updatePostFailure(error));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
-export const saveToDraft = (data: PostProps) => async (dispatch: Dispatch<RootAction>) => {
+export const saveToDraft = (data: PostProps, file?: File) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(createDraftStart());
   try {
-    const res = await createDraft(data);
-    dispatch(createDraftSuccess(res as PostModel));
+    let signatureImageUrl = '';
+    if (file) {
+      const signatureImage: SignatureImageModel = (await getEmptyImageUrl(
+        file,
+        TypeUploadImage.COVER_POST,
+      )) as SignatureImageModel;
+      await putImageToLink(signatureImage.signedRequest, file);
+      signatureImageUrl = signatureImage.url;
+    }
+    const res = await createDraft({ ...data, cover: signatureImageUrl || '' });
+    dispatch(createDraftSuccess(res as PostProps));
+    dispatch(showToast('Create draft successfully', ToastType.SUCCESS));
   } catch (error) {
     dispatch(createDraftFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
