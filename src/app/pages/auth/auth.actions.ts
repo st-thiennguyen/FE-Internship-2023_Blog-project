@@ -1,10 +1,12 @@
 import { Dispatch } from 'react';
 
 import { RegisterProps } from '../../models/auth';
-import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
+import { ACTIONS_TYPE } from '../../shared/constants';
 import { login, logout, register } from '../../shared/services/index';
 import { RootAction, RootThunk } from '../../stores/store';
-import { removeLocalStorage, setLocalStorage } from '../../shared/utils';
+import { ToastType } from '../../models/toast';
+import { showToast } from '../../shared/components/toast/toast.actions';
+
 export const loginStart = () => {
   return {
     type: ACTIONS_TYPE.LOGIN,
@@ -60,7 +62,7 @@ export const logoutStart = () => {
 export const logoutSuccess = (res: string) => {
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
-    payload: res
+    payload: res,
   };
 };
 
@@ -80,32 +82,36 @@ export const reAssignmentAuth = (data: any) => {
 
 export const registerAction =
   (registerData: RegisterProps): RootThunk =>
-    async (dispatch: Dispatch<RootAction>) => {
-      dispatch(registerStart());
-      try {
-        const response = await register(registerData);
-        dispatch(registerSuccess(`${response}`));
-      } catch (error) {
-        dispatch(registerFailure(`${error}`));
-      }
-    };
-
-export const loginAction = (email: string, password: string) =>
   async (dispatch: Dispatch<RootAction>) => {
-    dispatch(loginStart());
+    dispatch(registerStart());
     try {
-      const data = await login(email, password);
-      dispatch(loginSuccess(data));
+      const response = await register(registerData);
+      dispatch(registerSuccess(`${response}`));
+      dispatch(showToast(`${response}`, ToastType.SUCCESS));
     } catch (error) {
-      dispatch(loginFailure(`${error}`));
+      dispatch(registerFailure(`${error}`));
+      dispatch(showToast(`${error}`, ToastType.ERROR));
     }
   };
+
+export const loginAction = (email: string, password: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(loginStart());
+  try {
+    const data: any = await login(email, password);
+    dispatch(loginSuccess(data));
+    dispatch(showToast('Login sucessfully', ToastType.SUCCESS));
+  } catch (error) {
+    dispatch(loginFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
+  }
+};
 
 export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
     const response = await logout();
     dispatch(logoutSuccess(`${response}`));
+    dispatch(showToast(`${response}`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
   }

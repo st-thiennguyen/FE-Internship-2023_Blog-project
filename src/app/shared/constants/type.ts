@@ -5,10 +5,21 @@ export const ACTIONS_TYPE = {
   GET_ALL_POST_FAILURE: 'get-all-post-failure',
   RESET_CURRENT_PAGE: 'reset-current-page',
   // GET ALL POST WITH TAG
-  GET_POST_WITH_TAG: 'get-post-with-tag',
-  GET_POST_WITH_TAG_SUCCESS: 'get-post-with-tag-success',
-  GET_POST_WITH_TAG_FAILURE: 'get-post-with-tag-failure',
+  GET_POSTS: 'get-posts',
+  GET_POSTS_SUCCESS: 'get-posts-success',
+  GET_POSTS_FAILURE: 'get-posts-failure',
   RESET_CURRENT_PAGE_POST_WITH_TAG: 'reset-current-page-post-with-tag',
+
+  // GET ALL POST FROM RECYCLEBIN
+  GET_RECYCLEBIN: 'get-recyclebin',
+  GET_RECYCLEBIN_SUCCESS: 'get-recyclebin-success',
+  GET_RECYCLEBIN_FAILURE: 'get-recyclebin-failure',
+
+  // GET ALL POST FROM RECYCLEBIN
+  RESTORE_RECYCLEBIN: 'restore-recyclebin',
+  RESTORE_RECYCLEBIN_SUCCESS: 'restore-recyclebin-success',
+  RESTORE_RECYCLEBIN_FAILURE: 'restore-recyclebin-failure',
+
   // GET DETAIL BLOG
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
@@ -122,4 +133,12 @@ export const ACTIONS_TYPE = {
   TOGGLE_BOOKMARK: 'toggle-bookmark',
   TOGGLE_BOOKMARK_SUCCESS: 'toggle-bookmark-success',
   TOGGLE_BOOKMARK_FAILURE: 'toggle-bookmark-failure',
+  // Get Recycle Bin
+  GET_RECYCLE_BIN: 'get-recycle-bin',
+  GET_RECYCLE_BIN_SUCCESS: 'get-recycle-bin-success',
+  GET_RECYCLE_BIN_FAILURE: 'get-recycle-bin-failure',
+
+  // TOAST MESSAGE
+  SHOW_TOAST: 'show-toast',
+  CLOSE_TOAST: 'close-toast',
 };

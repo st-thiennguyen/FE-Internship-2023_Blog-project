@@ -68,7 +68,7 @@ export const UploadUrlImagePost = (url: string, file: any) => {
     },
   });
 };
-export const deletePostItem = (id : string) => {
+export const deletePostItem = (id: string) => {
   const api = new ApiService();
   return api.delete(`${ENDPOINT.post.index}/${id}`);
 }
@@ -86,4 +86,14 @@ export const getPostComments = (id: string) => {
 export const postComment = (id: string, comment: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
+};
+
+export const getRecyclebinPost = (query: QueryPost) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recyclebin}`, query);
+};
+
+export const restoreRecyclebinPost = (idPost: number) => {
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.post.index}/${idPost}/restore`);
 };

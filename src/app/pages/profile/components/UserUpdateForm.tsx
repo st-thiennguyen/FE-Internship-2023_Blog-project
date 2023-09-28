@@ -11,7 +11,6 @@ import { RootState } from '../../../stores/store';
 import { updateProfileAction, uploadAvatar } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
 
 const schema = yup
   .object({
@@ -41,18 +40,10 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-interface UpdateUserFormProps {
-  isShowToast: boolean;
-  setIsShowToast: (value: boolean) => void;
-}
-
-const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) => {
+const UserUpdateForm = () => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
   const user = useSelector((state: RootState) => state.auth.userInfo);
-  const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
-  const isError = useSelector((state: RootState) => state.profile.isError);
-  const message = useSelector((state: RootState) => state.profile.message);
   const userPicture = useSelector((state: RootState) => state.auth.userInfo.picture);
 
   const dispatch = useDispatch();
@@ -84,7 +75,6 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
         }) as any,
       );
     }
-    setIsShowToast(true);
   };
 
   const onUpdateProfile = handleSubmit((data: FormData) => {
@@ -99,7 +89,6 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
         picture: user.picture,
       }) as any,
     );
-    setIsShowToast(true);
   });
 
   return (
@@ -192,17 +181,6 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
           </form>
         </div>
       </div>
-      {isShowToast && isSuccess && (
-        <ToastMessage
-          isShow={isSuccess}
-          isSuccess={isSuccess}
-          title={'Success'}
-          subtitle={'Update profile successfully'}
-        ></ToastMessage>
-      )}
-      {isShowToast && isError && (
-        <ToastMessage isShow={isError} isSuccess={isSuccess} title={'Error'} subtitle={message}></ToastMessage>
-      )}
     </div>
   );
 };

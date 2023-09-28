@@ -1,12 +1,9 @@
 import { useState, useContext, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../App';
-import ToastMessage from '../components/ToastMessage';
-
 import { logoutAction } from '../../pages/auth/auth.actions';
-import { RootState } from '../../stores/store';
 import { StorageKey } from '../constants';
 import { getLocalStorage, isImageUrlValid } from '../utils';
 
@@ -17,10 +14,6 @@ import icLogout from '../../../assets/icons/ic-logout-24.svg';
 import avatarDefault from '../../../assets/images/user-default.png';
 
 const Header = () => {
-  const [isShowToastMessage, setIsShowToastMessage] = useState(false);
-  const isSuccess = useSelector((state: RootState) => state.auth?.isLogoutSuccess);
-  const message = useSelector((state: RootState) => state.auth?.message);
-
   const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN) ? true : false;
@@ -28,7 +21,6 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutAction() as any);
-    setIsShowToastMessage(!isShowToastMessage);
   };
 
   useEffect(() => {
@@ -117,9 +109,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {isShowToastMessage && isSuccess && (
-        <ToastMessage isShow={isSuccess} isSuccess={isSuccess} title={'success'} subtitle={message}></ToastMessage>
-      )}
     </header>
   );
 };

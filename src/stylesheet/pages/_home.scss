@@ -4,6 +4,7 @@
     color: map-get($color, text);
   }
   .section-recommend {
+    padding-top: 0px;
     .recommend {
       position: relative;
       justify-content: end;
@@ -24,6 +25,7 @@
         &-img {
           height: 100%;
           object-fit: cover;
+          border-radius: 12px;
         }
       }
       &::after {

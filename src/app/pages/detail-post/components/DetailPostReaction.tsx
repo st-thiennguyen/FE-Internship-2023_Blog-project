@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
 import { toggleBookmarkAction, updateLikeAction } from '../detail-post.actions';
 
-import ToastMessage from '../../../shared/components/ToastMessage';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 
@@ -16,8 +15,6 @@ interface ReactionProps {
 
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
-  const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
-  const isError = useSelector((state: RootState) => state.detail.isError);
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
   const dispatch = useDispatch();
@@ -57,10 +54,6 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           </button>
         </li>
       </ul>
-
-      {isError && (
-        <ToastMessage isShow={isError} isSuccess={isSuccess} title="Success" subtitle="Login to do this action" />
-      )}
     </div>
   );
 };

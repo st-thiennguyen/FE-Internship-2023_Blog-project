@@ -10,7 +10,6 @@ import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
 import DetailPostLoading from '../components/DetailPostLoading';
 import DetailPostComment from '../components/DetailPostComment';
-import ToastMessage from '../../../shared/components/ToastMessage';
 import Aside from '../../../shared/layout/aside/container/Aside';
 import { isImageUrlValid } from '../../../shared/utils';
 
@@ -23,7 +22,6 @@ const DetailPost = () => {
   const post: PostModel = useSelector((state: RootState) => state.detail.data);
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
   const isError = useSelector((state: RootState) => state.detail.isError);
-  const message = useSelector((state: RootState) => state.detail.message);
 
   const { id } = useParams();
   const commentRef = useRef<HTMLDivElement>(null);
@@ -88,7 +86,6 @@ const DetailPost = () => {
           </div>
         </div>
       </section>
-      {isError && <ToastMessage isShow={isError} isSuccess={false} title={'Error'} subtitle={message} />}
     </>
   );
 };
