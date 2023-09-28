@@ -115,22 +115,22 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: action.payload,
       };
     // update bookmark
-    case ACTIONS_TYPE.UPDATE_BOOKMARK:
+    case ACTIONS_TYPE.TOGGLE_BOOKMARK:
       return {
         ...state,
-        isLoading: true,
+        // isLoading: true,
         isSuccess: false,
         isError: false,
         message: '',
       };
-    case ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS:
+    case ACTIONS_TYPE.TOGGLE_BOOKMARK_SUCCESS:
       return {
         ...state,
         data: { ...state.data, isInBookmark: action.payload.isInBookmark },
         isLoading: false,
         isSuccess: true,
       };
-    case ACTIONS_TYPE.UPDATE_BOOKMARK_FAILURE:
+    case ACTIONS_TYPE.TOGGLE_BOOKMARK_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -181,6 +181,29 @@ export const bookmarkReducer = (state = initialBookMarkState, action: RootAction
         isLoading: false,
         isError: true,
         message: action.payload,
+      };
+    case ACTIONS_TYPE.UPDATE_BOOKMARK:
+      return {
+        ...state,
+        // isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS:
+      const newListBookmark = state.data.filter((item) => { return item.postId !== action.payload })
+      return {
+        ...state,
+        data: newListBookmark,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.UPDATE_BOOKMARK_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: 'update bookmark fail !',
       };
     default:
       return state;

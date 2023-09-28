@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import PostItem from '../../../shared/components/PostItem';
-import { fetchBookmark } from '../../detail-post/detail-post.actions';
+import { fetchBookmark, updateBookmark } from '../../detail-post/detail-post.actions';
 import { RootState } from '../../../stores/store';
 import { useEffect } from 'react';
 import { addBookmark } from '../../../shared/services/user.service';
@@ -10,11 +10,12 @@ const Bookmark = () => {
   const postListBookmark = useSelector((state: RootState) => state.bookmark.data);
 
   const handleUpdateBookmark = (id: number) => {
-    // dispatch(addBookmark(id) as any);
+    dispatch(updateBookmark(Number(id))as any);
   };
   useEffect(() => {
     dispatch(fetchBookmark() as any);
   }, [])
+
 
   return (
     <section className="section section-bookmark">

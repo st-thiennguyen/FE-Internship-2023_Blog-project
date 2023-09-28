@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { fetchBookmark, updateBookmark, updateLikeAction } from '../detail-post.actions';
+import { fetchBookmark, toggleBookmark, updateBookmark, updateLikeAction } from '../detail-post.actions';
 
 import ToastMessage from '../../../shared/components/ToastMessage';
 import { addBookmark } from '../../../shared/services/user.service';
@@ -33,7 +33,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
 
   const handleAddBookMark = () => {
     if (postId) {
-      dispatch(updateBookmark(postId) as any)
+      dispatch(toggleBookmark(postId) as any)
     }
   }
 

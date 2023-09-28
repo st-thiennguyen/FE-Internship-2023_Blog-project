@@ -166,6 +166,27 @@ export const fetchBookmark = () => async (dispatch: Dispatch<RootAction>) => {
   }
 };
 
+// Toggle Bookmark
+const toggleBookmarkStart = () => {
+  return {
+    type: ACTIONS_TYPE.TOGGLE_BOOKMARK,
+  };
+};
+
+const toggleBookmarkSuccess = (res : any) => {
+  return {
+    type: ACTIONS_TYPE.TOGGLE_BOOKMARK_SUCCESS,
+    payload: res,
+  };
+};
+
+const toggleBookmarkFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.TOGGLE_BOOKMARK_FAILURE,
+    payload: error,
+  };
+};
+
 
 // Update Bookmark
 const updateBookmarkStart = () => {
@@ -174,10 +195,10 @@ const updateBookmarkStart = () => {
   };
 };
 
-const updateBookmarkSuccess = (response: any) => {
+const updateBookmarkSuccess = (id : number) => {
   return {
     type: ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS,
-    payload: response,
+    payload: id,
   };
 };
 
@@ -191,9 +212,19 @@ const updateBookmarkFailure = (error: string) => {
 export const updateBookmark = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updateBookmarkStart());
   try {
-    const response = await addBookmark(id);
-    dispatch(updateBookmarkSuccess(response as any));
+    await addBookmark(id);
+    dispatch(updateBookmarkSuccess(id));
   } catch (error) {
     dispatch(updateBookmarkFailure(`${error}`));
+  }
+};
+
+export const toggleBookmark = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(toggleBookmarkStart());
+  try {
+    const response = await addBookmark(id);
+    dispatch(toggleBookmarkSuccess(response as any));
+  } catch (error) {
+    dispatch(toggleBookmarkFailure(`${error}`));
   }
 };

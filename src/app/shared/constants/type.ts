@@ -118,4 +118,8 @@ export const ACTIONS_TYPE = {
   UPDATE_BOOKMARK: 'update-bookmark',
   UPDATE_BOOKMARK_SUCCESS: 'update-bookmark-success',
   UPDATE_BOOKMARK_FAILURE: 'update-bookmark-failure',
+  // TOGGLE BOOKMARK
+  TOGGLE_BOOKMARK: 'toggle-bookmark',
+  TOGGLE_BOOKMARK_SUCCESS: 'toggle-bookmark-success',
+  TOGGLE_BOOKMARK_FAILURE: 'toggle-bookmark-failure',
 };
