@@ -1,13 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { fetchBookmark, toggleBookmark, updateBookmark, updateLikeAction } from '../detail-post.actions';
+import { toggleBookmarkAction, updateLikeAction } from '../detail-post.actions';
 
 import ToastMessage from '../../../shared/components/ToastMessage';
-import { addBookmark } from '../../../shared/services/user.service';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-import { useEffect, useState } from 'react';
 import icBookmarkBlue from '../../../../assets/icons/ic-bookmark-blue-20.svg';
 
 interface ReactionProps {
@@ -33,7 +31,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
 
   const handleAddBookMark = () => {
     if (postId) {
-      dispatch(toggleBookmark(postId) as any)
+      dispatch(toggleBookmarkAction(postId) as any)
     }
   }
 

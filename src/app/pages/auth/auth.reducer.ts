@@ -1,4 +1,3 @@
-import { userInfo } from 'os';
 import { AuthState, UserInfo } from '../../models/auth';
 import { StorageKey, ACTIONS_TYPE } from '../../shared/constants';
 import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shared/utils';

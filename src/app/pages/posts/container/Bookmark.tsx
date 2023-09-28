@@ -3,7 +3,6 @@ import PostItem from '../../../shared/components/PostItem';
 import { fetchBookmark, updateBookmark } from '../../detail-post/detail-post.actions';
 import { RootState } from '../../../stores/store';
 import { useEffect } from 'react';
-import { addBookmark } from '../../../shared/services/user.service';
 
 const Bookmark = () => {
   const dispatch = useDispatch();

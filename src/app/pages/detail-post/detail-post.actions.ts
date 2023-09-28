@@ -5,10 +5,10 @@ import { RootAction } from '../../stores/store';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
 import { UserInfo } from '../../models/auth';
-import { addBookmark, getBookmark } from '../../shared/services/user.service';
 import { getRecommendFailure } from '../home/home.actions';
 import { ACTIONS_TYPE } from '../../shared/constants';
 import { BookmarkModel, PostModel } from '../../models/post';
+import { getBookmark, toggleBookmark } from '../../shared/services/user.service';
 
 const getDetailBlogStart = () => {
   return {
@@ -212,17 +212,17 @@ const updateBookmarkFailure = (error: string) => {
 export const updateBookmark = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updateBookmarkStart());
   try {
-    await addBookmark(id);
+    await toggleBookmark(id);
     dispatch(updateBookmarkSuccess(id));
   } catch (error) {
     dispatch(updateBookmarkFailure(`${error}`));
   }
 };
 
-export const toggleBookmark = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+export const toggleBookmarkAction = (id: number) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(toggleBookmarkStart());
   try {
-    const response = await addBookmark(id);
+    const response = await toggleBookmark(id);
     dispatch(toggleBookmarkSuccess(response as any));
   } catch (error) {
     dispatch(toggleBookmarkFailure(`${error}`));
