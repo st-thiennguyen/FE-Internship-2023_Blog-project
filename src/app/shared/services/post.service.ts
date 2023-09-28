@@ -75,6 +75,11 @@ export const updateLike = (id: number) => {
   return api.put(`${ENDPOINT.post.index}/${id}/likes`);
 };
 
+export const updateBookmark = (id: number) => {
+  const api = new ApiService();
+  return api.post(`${ENDPOINT.bookmark.index}`, { postId: id.toString() });
+};
+
 export const getPostComments = (id: string) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}/comments`);

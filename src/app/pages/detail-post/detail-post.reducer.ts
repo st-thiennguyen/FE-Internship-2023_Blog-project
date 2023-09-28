@@ -66,6 +66,32 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: action.payload,
       };
 
+    // Toggle Bookmark
+    case ACTIONS_TYPE.ADD_BOOKMARK:
+      return {
+        ...state,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.ADD_BOOKMARK_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          isInBookmark: action.payload.isInBookmark,
+        },
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.ADD_BOOKMARK_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+
     // Get comments
     case ACTIONS_TYPE.GET_COMMENTS:
       return {
