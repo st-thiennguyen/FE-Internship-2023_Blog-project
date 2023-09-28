@@ -1,6 +1,6 @@
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { RootState } from './stores/store';
 import { RouteItem } from './models/route';
@@ -15,6 +15,12 @@ import ToastMessage from './shared/components/toast/ToastMessage';
 export const AuthContext = createContext<any>(undefined);
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   const auth = useSelector((state: RootState) => state.auth);
   return (
     <AuthContext.Provider value={auth}>
