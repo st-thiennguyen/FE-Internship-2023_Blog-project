@@ -88,28 +88,8 @@
     .post-delete {
       display: none;
     }
-  }
-  .btn-backtotop {
-    position: fixed;
-    bottom: 80px;
-    right: 80px;
-
-    width: 46px;
-    height: 46px;
-    border: 1px solid #cecece;
-    border-radius: 1.5rem;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-
-    background-color: #fff;
-    opacity: 0.5;
-    cursor: pointer;
-
-    &:hover {
-      background-color: map-get($color, primary);
-      opacity: 1;
-      .icon-arrow-up-24 {
-        background-image: url("../../assets/icons/ic-arrow-up-white.svg");
-      }
+    .book-mark {
+      display: none;
     }
   }
 }

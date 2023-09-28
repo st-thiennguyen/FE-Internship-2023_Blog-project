@@ -29,10 +29,11 @@
 
     color: map-get($color, text);
     font-size: 15px;
-    line-height: 1.44;
+    line-height: 1.6;
   }
 
   &-list {
+    min-height: 100vh;
     margin-bottom: 20px;
   }
   &-body-top {
@@ -58,18 +59,26 @@
   }
 
   &-img {
-    height: 250px;
+    height: 100%;
     margin-bottom: 10px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     object-fit: cover;
+    &-wrapper {
+      height: 50%;
+    }
+    &-link {
+      display: block;
+      height: 100%;
+    }
     &.err {
       object-fit: contain;
     }
   }
 
   &-body-wrapper {
-    padding: 0 15px;
+    padding: 15px 15px 0;
+    height: 50%;
   }
 
   .user-name {
@@ -92,11 +101,11 @@
   }
 
   &-body {
-    margin-bottom: 6px;
     border-bottom: 1px solid map-get($color, borderColor);
+    height: 75%;
   }
   &-footer {
-    padding: 10px 0;
+    height: 25%;
   }
   &-reaction-item {
     margin-right: 10px;

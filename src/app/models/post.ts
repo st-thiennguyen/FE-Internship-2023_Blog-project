@@ -34,6 +34,12 @@ export interface SignatureImageModel {
   url: string;
 }
 
+export interface BookmarkModel {
+  id: string;
+  userId: string;
+  postId: string;
+  post: PostModel;
+}
 export interface SignatureImageState {
   data: SignatureImageModel;
   isLoading: boolean;

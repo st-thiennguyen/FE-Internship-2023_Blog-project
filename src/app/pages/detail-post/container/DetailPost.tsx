@@ -4,7 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
-import { fetchComments, fetchDetailBlog } from '../detail-post.actions';
+import { fetchBookmark, fetchComments, fetchDetailBlog } from '../detail-post.actions';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';

@@ -13,6 +13,15 @@
     height: 24px;
   }
 
+  &-large {
+    width: 50px;
+    height: 50px;
+  }
+  &-xxl {
+    width: 60px;
+    height: 60px;
+  }
+
   &-xxl {
     width: 60px;
     height: 60px;
@@ -38,6 +47,10 @@
   }
   &-twitter-20 {
     background-image: url("../../assets/icons/ic-twitter-20.svg");
+  }
+
+  &-bookmark-blue-20 {
+    background-image: url("../../assets/icons/ic-bookmark-blue-20.svg");
   }
 
   &-eye {
@@ -79,6 +92,9 @@
   }
   &-bookmark-20 {
     background-image: url("../../assets/icons/ic-bookmark-20.svg");
+  }
+  &-bookmark-fill {
+    background-image: url("../../assets/icons/ic-bookmark-fill.svg");
   }
   &-close-20 {
     background-image: url("../../assets/icons/ic-close-20.svg");

@@ -101,6 +101,9 @@
       visibility: hidden;
     }
     .my-post {
+      .user-info-wrapper {
+        pointer-events: none;
+      }
       .post-action-list {
         visibility: visible;
       }

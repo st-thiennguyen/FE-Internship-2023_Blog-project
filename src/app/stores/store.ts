@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkAction } from 'redux-thunk';
 
 import authReducer from '../pages/auth/auth.reducer';
-import { detailPostReducer } from '../pages/detail-post/detail-post.reducer';
+import { bookmarkReducer, detailPostReducer } from '../pages/detail-post/detail-post.reducer';
 import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 import { writePostReducer } from '../pages/write-post/write-post.reducer';
@@ -26,6 +26,7 @@ export const rootReducer = combineReducers({
   postTag: postTagReducer,
   profile: profileReducer,
   recommend: recommendPostReducer,
+  bookmark: bookmarkReducer,
   toast: toastReducer,
 });
 

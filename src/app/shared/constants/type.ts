@@ -125,6 +125,14 @@ export const ACTIONS_TYPE = {
   POST_COMMENT: 'post-comment',
   POST_COMMENT_SUCCESS: 'post-comment-success',
   POST_COMMENT_FAILURE: 'post-comment-failure',
+  // UPDATE BOOKMARK
+  UPDATE_BOOKMARK: 'update-bookmark',
+  UPDATE_BOOKMARK_SUCCESS: 'update-bookmark-success',
+  UPDATE_BOOKMARK_FAILURE: 'update-bookmark-failure',
+  // TOGGLE BOOKMARK
+  TOGGLE_BOOKMARK: 'toggle-bookmark',
+  TOGGLE_BOOKMARK_SUCCESS: 'toggle-bookmark-success',
+  TOGGLE_BOOKMARK_FAILURE: 'toggle-bookmark-failure',
 
   // ADD TO DRAFT
   ADD_DRAFT: 'add-draft',
