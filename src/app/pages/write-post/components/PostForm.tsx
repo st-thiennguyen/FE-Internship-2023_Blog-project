@@ -44,7 +44,7 @@ interface WritePostProps {
 }
 
 const WritePost = ({ post }: WritePostProps) => {
-  const [statusPost, setStatusPost] = useState('');
+  const [statusPost, setStatusPost] = useState('public');
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
   const [isClick, setIsClick] = useState(false);
