@@ -114,4 +114,8 @@ export const ACTIONS_TYPE = {
   POST_COMMENT: 'post-comment',
   POST_COMMENT_SUCCESS: 'post-comment-success',
   POST_COMMENT_FAILURE: 'post-comment-failure',
+  // UPDATE BOOKMARK
+  UPDATE_BOOKMARK: 'update-bookmark',
+  UPDATE_BOOKMARK_SUCCESS: 'update-bookmark-success',
+  UPDATE_BOOKMARK_FAILURE: 'update-bookmark-failure',
 };

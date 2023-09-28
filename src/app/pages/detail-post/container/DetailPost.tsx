@@ -44,7 +44,6 @@ const DetailPost = () => {
     if (id) {
       dispatch(fetchDetailBlog(Number(id)) as any);
       dispatch(fetchComments(id) as any);
-      dispatch(fetchBookmark() as any);
     }
   }, [id]);
 

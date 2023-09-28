@@ -114,6 +114,29 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         isError: true,
         message: action.payload,
       };
+    // update bookmark
+    case ACTIONS_TYPE.UPDATE_BOOKMARK:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS:
+      return {
+        ...state,
+        data: { ...state.data, isInBookmark: action.payload.isInBookmark },
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.UPDATE_BOOKMARK_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: 'update bookmark fail !',
+      };
     default:
       return state;
   }
@@ -125,6 +148,7 @@ interface BookmarkState {
   isError: boolean;
   isSuccess: boolean;
   message: string;
+
 }
 const initialBookMarkState: BookmarkState = {
   data: [] as BookmarkModel[],

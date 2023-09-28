@@ -5,7 +5,7 @@ import { RootAction } from '../../stores/store';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 
 import { UserInfo } from '../../models/auth';
-import { getBookmark } from '../../shared/services/user.service';
+import { addBookmark, getBookmark } from '../../shared/services/user.service';
 import { getRecommendFailure } from '../home/home.actions';
 import { ACTIONS_TYPE } from '../../shared/constants';
 import { BookmarkModel, PostModel } from '../../models/post';
@@ -163,5 +163,37 @@ export const fetchBookmark = () => async (dispatch: Dispatch<RootAction>) => {
     dispatch(getBookmartSuccess(response as BookmarkModel[]));
   } catch (error) {
     dispatch(getRecommendFailure(`${error}`));
+  }
+};
+
+
+// Update Bookmark
+const updateBookmarkStart = () => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_BOOKMARK,
+  };
+};
+
+const updateBookmarkSuccess = (response: any) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS,
+    payload: response,
+  };
+};
+
+const updateBookmarkFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_BOOKMARK_FAILURE,
+    payload: error,
+  };
+};
+
+export const updateBookmark = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateBookmarkStart());
+  try {
+    const response = await addBookmark(id);
+    dispatch(updateBookmarkSuccess(response as any));
+  } catch (error) {
+    dispatch(updateBookmarkFailure(`${error}`));
   }
 };

@@ -38,10 +38,7 @@ export const getBookmark = () => {
   return api.get(`${ENDPOINT.bookmark.index}`);
 };
 
-export const addBookmark = (postId: number, actionSuccess?: () => void) => {
+export const addBookmark = (postId: number) => {
   const api = new ApiService();
-  return api.post(`${ENDPOINT.bookmark.index}`, {postId: postId.toString()} )
-  .then(()=>{
-    actionSuccess && actionSuccess();
-  });
+  return api.post(`${ENDPOINT.bookmark.index}`, {postId: postId.toString()} );
 };
