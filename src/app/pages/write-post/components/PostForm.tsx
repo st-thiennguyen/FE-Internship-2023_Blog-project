@@ -44,7 +44,7 @@ interface WritePostProps {
 }
 
 const WritePost = ({ post }: WritePostProps) => {
-  const [statusPost, setStatusPost] = useState('public');
+  const [statusPost, setStatusPost] = useState('');
   const [errorCoverMessage, setErrorCoverMessage] = useState('');
   const [errorContentMessage, setErrorContentMessage] = useState('');
   const [isClick, setIsClick] = useState(false);
@@ -70,8 +70,9 @@ const WritePost = ({ post }: WritePostProps) => {
     if (post) {
       setTags(post.tags);
       setIsUpdate(true);
+      setStatusPost(post.status);
     }
-  }, []);
+  }, [post]);
 
   const {
     register,
@@ -155,6 +156,14 @@ const WritePost = ({ post }: WritePostProps) => {
     }, 3000);
   }
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+
   return (
     <>
       <div className="section-body row">
@@ -197,7 +206,7 @@ const WritePost = ({ post }: WritePostProps) => {
           </form>
         </div>
         <aside className="aside aside-write-post d-flex flex-column  col col-3">
-          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
+          <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={statusPost} />
           {photoPreview && (
             <EditorImageCoverPreview
               photoPreview={photoPreview}
