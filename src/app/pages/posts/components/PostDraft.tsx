@@ -21,7 +21,7 @@ const PostDraft = () => {
       <div className="container">
         <h2 className="section-title text-primary">Posts Draft</h2>
 
-        {posts && <PostList posts={posts} isLoading={isLoading} />}
+        {posts && <PostList cols={4} posts={posts} isLoading={isLoading} />}
         {isLoading && (
           <ul className="row">
             {Array.from({ length: 6 }, (item, index) => (

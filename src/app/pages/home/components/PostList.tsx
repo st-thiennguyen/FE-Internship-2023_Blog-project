@@ -6,13 +6,14 @@ import EmptyPost from '../../../shared/components/EmptyPost';
 interface PostListProps {
   posts: PostModel[];
   isLoading?: Boolean;
+  cols?: number;
 }
-const PostList = ({ posts, isLoading }: PostListProps) => {
+const PostList = ({ cols, posts, isLoading }: PostListProps) => {
   return posts.length > 0 || isLoading ? (
     <ul className="post-list row">
       {posts.map((post, index) => {
         return (
-          <li className="post-item col col-4 col-lg-6 col-sm-12" key={index}>
+          <li className={`post-item col col-${cols || '6'} col-md-12`} key={index}>
             <PostItem post={post} />
           </li>
         );

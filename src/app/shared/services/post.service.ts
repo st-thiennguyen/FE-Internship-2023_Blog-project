@@ -32,17 +32,8 @@ export const postArticles = (data: any) => {
 };
 
 export const updatePostArticles = (data: any, id: number) => {
-  const formData = new URLSearchParams();
-  Object.keys(data).forEach((key) => {
-    formData.append(key, data[key]);
-  });
-
   const api = new ApiService();
-  return api.put(`${ENDPOINT.post.index}/${id}`, data, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  });
+  return api.put(`${ENDPOINT.post.index}/${id}`, data);
 };
 
 export const getSignUrlImage = (file: any) => {
