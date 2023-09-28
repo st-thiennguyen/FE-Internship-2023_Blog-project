@@ -1,12 +1,16 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
-import { QueryPost, TypeImage } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
   return api.get(`${ENDPOINT.post.index}/${id}`);
 };
 
+export interface QueryPost {
+  page?: number;
+  size?: number;
+  tags?: string[];
+}
 export const getPublicPosts = (query: QueryPost) => {
   const api = new ApiService();
 
@@ -33,12 +37,11 @@ export const postArticles = (data: any) => {
 
 export const updatePostArticles = (data: any, id: number) => {
   const formData = new URLSearchParams();
-  Object.keys(data).forEach((key) => {
-    formData.append(key, data[key]);
-  });
+  formData.append('title', data.title);
+  formData.append('content', data.content);
 
   const api = new ApiService();
-  return api.put(`${ENDPOINT.post.index}/${id}`, data, {
+  return api.put(`${ENDPOINT.post.index}/${id}`, formData.toString(), {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },

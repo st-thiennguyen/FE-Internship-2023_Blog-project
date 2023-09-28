@@ -15,7 +15,7 @@ import { restorePostAction } from '../../pages/posts/posts.action';
 
 interface PostItemProps {
   post: PostModel;
-  onClickBookmark?: () => void;
+  onClickBookmark?: (id: number) => void;
 }
 const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
@@ -64,8 +64,11 @@ const PostItem = ({ post, onClickBookmark }: PostItemProps) => {
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
         </div>
+        <div className="post-restore" onClick={handleShowModalRestore}>
+          <i className="icon icon-xxl icon-restore-60"></i>
+        </div>
 
-        <div className="post-bookmark d-hidden" onClick={onClickBookmark}>
+        <div className="post-bookmark d-hidden" onClick={() => onClickBookmark && onClickBookmark(post.id)}>
           <span className="remove-bookmark">&times;</span>
           <i className="icon icon-large icon-bookmark-fill" />
         </div>
