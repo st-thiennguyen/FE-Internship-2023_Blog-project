@@ -1,4 +1,5 @@
 import DetailPost from '../detail-post/container/DetailPost';
+import Bookmark from './container/Bookmark';
 import PostRecycleBin from './components/PostRecycleBin';
 import PostPage from './container';
 import CreatePost from '../write-post/containers/CreatePost';
@@ -31,6 +32,11 @@ export const postsRoutes = [
       {
         path: 'recyclebin',
         component: PostRecycleBin,
+        isProtected: true,
+      },
+      {
+        path: 'bookmark',
+        component: Bookmark,
         isProtected: true,
       },
     ],

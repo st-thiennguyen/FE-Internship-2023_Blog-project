@@ -75,9 +75,7 @@ const PostResult = () => {
           </ul>
         )}
 
-{isLoading && posts.length && (
-          <Loading/>
-        )}
+        {isLoading && posts.length && <Loading />}
       </div>
     </section>
   );

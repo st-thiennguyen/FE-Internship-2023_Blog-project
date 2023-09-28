@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchUsers } from '../../../../pages/home/home.actions';
@@ -37,4 +37,4 @@ const Aside = () => {
   );
 };
 
-export default Aside;
+export default memo(Aside);
