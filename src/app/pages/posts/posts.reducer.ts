@@ -15,7 +15,7 @@ const initialPostsState: PublicPostState = {
 
 export const postTagReducer = (state = initialPostsState, action: RootAction): PublicPostState => {
   switch (action.type) {
-    case ACTIONS_TYPE.GET_POST_WITH_TAG:
+    case ACTIONS_TYPE.GET_POSTS:
       return {
         ...state,
         isLoading: true,
@@ -23,7 +23,7 @@ export const postTagReducer = (state = initialPostsState, action: RootAction): P
         isError: false,
         message: '',
       };
-    case ACTIONS_TYPE.GET_POST_WITH_TAG_SUCCESS:
+    case ACTIONS_TYPE.GET_POSTS_SUCCESS:
       const newPosts = action.payload.currentPage === 1 ? action.payload.data : [...state.data, ...action.payload.data];
       return {
         ...state,
@@ -34,7 +34,7 @@ export const postTagReducer = (state = initialPostsState, action: RootAction): P
         isSuccess: true,
         message: '',
       };
-    case ACTIONS_TYPE.GET_POST_WITH_TAG_FAILURE:
+    case ACTIONS_TYPE.GET_POSTS_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -50,6 +50,32 @@ export const postTagReducer = (state = initialPostsState, action: RootAction): P
       return {
         ...state,
         currentPage: 1,
+      };
+
+    case ACTIONS_TYPE.RESTORE_RECYCLEBIN:
+      return {
+        ...state,
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+
+    case ACTIONS_TYPE.RESTORE_RECYCLEBIN_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data.filter((item) => item.id !== action.payload.id)],
+        isLoading: false,
+        isSuccess: true,
+        message: action.payload.message,
+      };
+
+    case ACTIONS_TYPE.RESTORE_RECYCLEBIN_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
       };
 
     case ACTIONS_TYPE.GET_DRAFT_POST:

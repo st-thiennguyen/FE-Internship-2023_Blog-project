@@ -4,4 +4,8 @@ The branch develop for development
 
 # initial sprint 3 for project
 
-- Story As a user, I want to choose save draft or not, when exit from article create page without saving.
+- Story As a user, after delete articles, those should be store in recycle bin or somewhere for restore
+
+- Task handle api for restore post from recycle bin
+
+- Save a post to draft

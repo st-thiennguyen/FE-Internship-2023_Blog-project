@@ -1,0 +1,16 @@
+.posts-page {
+  .section-title {
+    margin-bottom: 15px;
+  }
+  .post-action-list {
+    display: none;
+  }
+
+  .section-post-recycle {
+    .post:hover {
+      .post-restore {
+        display: block;
+      }
+    }
+  }
+}
