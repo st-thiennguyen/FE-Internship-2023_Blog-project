@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { updateBookmarkAction, updateLikeAction } from '../detail-post.actions';
+import { updateLikeAction } from '../detail-post.actions';
+
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 
@@ -15,19 +16,12 @@ interface ReactionProps {
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
-  const isInBookmark = useSelector((state: RootState) => state.detail.data.isInBookmark);
 
   const dispatch = useDispatch();
 
   const handleUpdateLike = () => {
     if (postId) {
       dispatch(updateLikeAction(postId) as any);
-    }
-  };
-
-  const toggleBookmark = () => {
-    if (postId) {
-      dispatch(updateBookmarkAction(postId) as any);
     }
   };
 
@@ -47,10 +41,8 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           <span className="action-count">{commentCount}</span>
         </li>
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action" onClick={toggleBookmark}>
-            <i
-              className={`icon icon-small ${isInBookmark && isLogin ? 'icon-bookmark-20' : 'icon-bookmark-blue-20'}`}
-            ></i>
+          <button className="btn btn-post-action">
+            <i className="icon icon-small icon-bookmark-20"></i>
           </button>
         </li>
       </ul>

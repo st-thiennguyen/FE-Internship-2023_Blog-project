@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 
-import { getDetailPost, getPostComments, postComment, updateBookmark, updateLike } from '../../shared/services/index';
+import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
 import { PostModel } from '../../models/post';
 import { InteractionItemModel, InteractionProps } from '../../models/interaction';
@@ -69,39 +69,6 @@ export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAc
     dispatch(updateLikeSuccess(response as InteractionProps));
   } catch (error) {
     dispatch(updateLikeFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
-  }
-};
-
-// Toggle Bookmark
-
-const updateBookmarkStart = () => {
-  return {
-    type: ACTIONS_TYPE.ADD_BOOKMARK,
-  };
-};
-
-const updateBookmarkSuccess = (response: { isInBookmark: boolean }) => {
-  return {
-    type: ACTIONS_TYPE.ADD_BOOKMARK_SUCCESS,
-    payload: response,
-  };
-};
-
-const updateBookmarkFailure = (error: string) => {
-  return {
-    type: ACTIONS_TYPE.ADD_BOOKMARK_FAILURE,
-    payload: error,
-  };
-};
-
-export const updateBookmarkAction = (id: number) => async (dispatch: Dispatch<RootAction>) => {
-  dispatch(updateBookmarkStart());
-  try {
-    const response = await updateBookmark(id);
-    dispatch(updateBookmarkSuccess(response as any));
-  } catch (error) {
-    dispatch(updateBookmarkFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
