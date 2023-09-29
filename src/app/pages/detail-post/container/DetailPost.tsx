@@ -72,7 +72,6 @@ const DetailPost = () => {
                   datePost={post.createdAt}
                   authorId={post.userId}
                 />
-                <pre>{post.description}</pre>
                 <section className="section section-detail-content">
                   <div className="detail-content d-flex">
                     <DetailPostContent post={post} scrollToComment={scrollToComment} />
