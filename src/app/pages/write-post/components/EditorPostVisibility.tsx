@@ -23,7 +23,7 @@ const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibi
               id="public"
               name="visibility"
               onChange={(e) => setStatus(e.target.value)}
-              checked={status === 'public'}
+              checked={currentStatus === 'public'}
               value="public"
             />
             <span>
@@ -38,7 +38,7 @@ const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibi
               id="private"
               name="visibility"
               value="private"
-              checked={status === 'private'}
+              checked={currentStatus === 'private'}
               onChange={(e) => setStatus(e.target.value)}
             />
             <span>

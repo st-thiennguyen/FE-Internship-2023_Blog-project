@@ -95,6 +95,7 @@ const WritePost = ({ post }: WritePostProps) => {
   };
 
   const handleUpdatePost = handleSubmit((data: any) => {
+    console.log(data , ' : ', statusPost);
     dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
     setTimeout(() => {
       navigate(`/posts/${id}`);
