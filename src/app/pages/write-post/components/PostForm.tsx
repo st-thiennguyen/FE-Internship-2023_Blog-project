@@ -1,16 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import {
+  useNavigate,
+  useParams,
+  unstable_BlockerFunction as BlockerFunction,
+  unstable_useBlocker as useBlocker,
+} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import 'react-quill/dist/quill.bubble.css';
 
 import { RootState } from '../../../stores/store';
-import { createPost, saveToDraft, updatePost } from '../write-post.action';
-import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 import { PostModel } from '../../../models/post';
+import { getLocalStorage } from '../../../shared/utils';
+import { createPost, resetWriteState, saveToDraft, updatePost } from '../write-post.action';
 
 import EditorImageCover from './EditorImageCover';
 import EditorPostTags from './EditorPostTags';
@@ -18,6 +23,7 @@ import TextEditor from './TextEditor';
 import EditorPostVisibility from './EditorPostVisibility';
 import EditorImageCoverPreview from './EditorImageCoverPreview';
 import EditorPostActions from './EditorPostActions';
+import ConfirmNavigation from './ConfirmNavigation';
 
 const schema = yup
   .object({
@@ -45,28 +51,63 @@ interface WritePostProps {
 
 const WritePost = ({ post }: WritePostProps) => {
   const [statusPost, setStatusPost] = useState('public');
-  const [errorCoverMessage, setErrorCoverMessage] = useState('');
-  const [errorContentMessage, setErrorContentMessage] = useState('');
-  const [isClick, setIsClick] = useState(false);
   const [content, setContent] = useState<string>('');
   const [tags, setTags] = useState<string[]>();
   const [photoPreview, setPhotoPreview] = useState<string>();
   const [file, setFile] = useState<File>();
-  const [isLoading, setIsLoading] = useState(false);
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [errorCoverMessage, setErrorCoverMessage] = useState('');
+  const [errorContentMessage, setErrorContentMessage] = useState('');
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [isClick, setIsClick] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFormDirty, setIsFormDirty] = useState(false);
 
   const isSuccess = useSelector((state: RootState) => state.writePost.isSuccess);
   const isError = useSelector((state: RootState) => state.writePost.isError);
   const currentPost = useSelector((state: RootState) => state.writePost.data);
-  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
-  const [isUpdate, setIsUpdate] = useState(false);
+
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    setValue,
+    formState: { errors, isDirty },
+  } = useForm<FormData>({ resolver: yupResolver(schema), defaultValues: { title: '', description: '' } });
+
+  // Activate blocker when form is dirty & not on click button
+  const shouldBlock = useCallback<BlockerFunction>(
+    ({ currentLocation, nextLocation }) => currentLocation.pathname !== nextLocation.pathname,
+    [],
+  );
+  const blocker = useBlocker(!isUpdate && isFormDirty && !isClick && shouldBlock);
 
   useEffect(() => {
+    if (!isLogin) {
+      navigate('/');
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetWriteState());
+    };
+  }, []);
+
+  // init and dispose
+  useEffect(() => {
+    setValue('description', post?.description || '');
+    setValue('title', post?.title || '');
+    if (post?.content) {
+      setContent(post.content);
+    }
     if (post) {
       setTags(post.tags);
       setIsUpdate(true);
@@ -74,12 +115,12 @@ const WritePost = ({ post }: WritePostProps) => {
     }
   }, [post]);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  // Check if user enter data to form
+  useEffect(() => {
+    if (isDirty || content || tags || file) {
+      setIsFormDirty(true);
+    } else setIsFormDirty(false);
+  }, [isDirty, content, tags, file]);
 
   const validate = (): boolean => {
     let isValid = true;
@@ -107,8 +148,8 @@ const WritePost = ({ post }: WritePostProps) => {
   });
 
   const handleCreatePost = handleSubmit(async (data: any) => {
-    setIsLoading(true);
     if (validate()) {
+      setIsLoading(true);
       await dispatch(createPost({ ...data, content, status: statusPost, tags }, file) as any);
     }
   });
@@ -119,35 +160,23 @@ const WritePost = ({ post }: WritePostProps) => {
     setIsClick(true);
   };
 
-  const handleSaveDraft = handleSubmit(async (data: FormData) => {
-    setIsLoading(true);
-    await dispatch(
-      saveToDraft(
-        {
-          ...data,
-          content: content,
-          status: 'draft',
-        },
-        file!,
-      ) as any,
-    );
-    setIsClick(true);
-  });
-
-  // init and dispose
-  useEffect(() => {
-    setValue('description', post?.description || '');
-    setValue('title', post?.title || '');
-    if (post?.content) {
-      setContent(post.content);
+  const handleSaveDraft = async () => {
+    if (isFormDirty) {
+      const data = getValues();
+      setIsLoading(true);
+      await dispatch(
+        saveToDraft(
+          {
+            ...data,
+            content: content,
+            status: 'draft',
+          },
+          file!,
+        ) as any,
+      );
+      setIsClick(true);
     }
-  }, [post]);
-
-  useEffect(() => {
-    if (!isLogin) {
-      navigate('/');
-    }
-  }, [isLogin]);
+  };
 
   if (isSuccess && isClick) {
     setTimeout(() => {
@@ -212,7 +241,7 @@ const WritePost = ({ post }: WritePostProps) => {
             />
           )}
           <EditorPostTags tags={tags || []} setTags={setTags} />
-          <div className={isLoading && !isError ? 'action-disabled' : 'action-wrapper'}>
+          <div className={isLoading || isError ? 'action-disabled' : 'action-wrapper'}>
             <EditorPostActions
               onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
               onSaveDraft={handleSaveDraft}
@@ -221,6 +250,7 @@ const WritePost = ({ post }: WritePostProps) => {
           </div>
         </aside>
       </div>
+      {blocker && <ConfirmNavigation blocker={blocker} handleSaveDraft={handleSaveDraft} />}
     </>
   );
 };

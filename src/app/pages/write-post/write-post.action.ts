@@ -1,13 +1,15 @@
 import { Dispatch } from 'react';
+
 import { RootAction } from '../../stores/store';
-import { createDraft, postArticles, updatePostArticles } from '../../shared/services';
+import { ToastType } from '../../models/toast';
 import { PostModel, PostProps, SignatureImageModel } from '../../models/post';
 import { ACTIONS_TYPE, TypeUploadImage } from '../../shared/constants';
-import { showToast } from '../../shared/components/toast/toast.actions';
-import { ToastType } from '../../models/toast';
-import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 
-const resetWriteState = () => {
+import { createDraft, postArticles, updatePostArticles } from '../../shared/services';
+import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
+import { showToast } from '../../shared/components/toast/toast.actions';
+
+export const resetWriteState = () => {
   return {
     type: 'RESET_STATE_WRITEPOST',
   };
@@ -50,12 +52,6 @@ const updatePostFailure = (error: any) => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST_FAILURE,
     payload: error,
-  };
-};
-
-const getUserProfileStart = () => {
-  return {
-    type: ACTIONS_TYPE.GET_PROFILE,
   };
 };
 

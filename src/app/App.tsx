@@ -1,31 +1,24 @@
-import { createContext, useEffect } from 'react';
+import { createContext } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import { RootState } from './stores/store';
 import { RouteItem } from './models/route';
 import { appRoutes } from './app.routes';
+import { authRoutes } from './pages/auth/auth.routes';
 
 import Layout from './pages/Layout';
 import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
-import { authRoutes } from './pages/auth/auth.routes';
 import ToastMessage from './shared/components/toast/ToastMessage';
 
 export const AuthContext = createContext<any>(undefined);
 
 function App() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  const auth = useSelector((state: RootState) => state.auth);
-  return (
-    <AuthContext.Provider value={auth}>
-      <Routes>
-        {authRoutes.map((val,index) => (
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        {authRoutes.map((val, index) => (
           <Route key={index} path={val.path} element={<val.component />} />
         ))}
         <Route path="/" element={<Layout />}>
@@ -51,7 +44,14 @@ function App() {
           ))}
         </Route>
         <Route path={'*'} element={<PageNotFound />}></Route>
-      </Routes>
+      </>,
+    ),
+  );
+  const auth = useSelector((state: RootState) => state.auth);
+
+  return (
+    <AuthContext.Provider value={auth}>
+      <RouterProvider router={router} />
       <ToastMessage />
     </AuthContext.Provider>
   );
