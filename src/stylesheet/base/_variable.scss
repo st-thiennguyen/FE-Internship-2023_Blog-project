@@ -4,7 +4,8 @@ $color: (
   danger: #ef4a4a,
   text: #2f323d,
   textLight: #fff,
-  subtext: #67717a,
+  textHeading: #111827,
+  subtext: #6b7280,
   textButton: #fff,
   defaultBg: #f5f5f5,
   borderColor: #e9ecef,
@@ -13,7 +14,7 @@ $color: (
   loader-highlight-color: #dedede,
 );
 
-$font-family-base: "Manrope", sans-serif;
+$font-family-base: "Poppins", sans-serif;
 $line-height-txt: 1.5;
 
 $header-height: 73px;

@@ -5,9 +5,9 @@
 
   padding: 12px 32px;
   border-radius: 6px;
-  border: transparent;
+  border: 1px solid transparent;
   outline: none;
-
+  background-color: #f9fafb;
   color: map-get($color, dark);
   font-size: map-get($font-size, sm);
   font-weight: map-get($font-size, semibold);
