@@ -84,7 +84,7 @@ export interface QueryPost {
 }
 
 export interface TypeImage {
-  type_upload: TypeUploadImage,
-  file_name: string,
-  file_type: string,
+  type_upload: TypeUploadImage;
+  file_name: string;
+  file_type: string;
 }
