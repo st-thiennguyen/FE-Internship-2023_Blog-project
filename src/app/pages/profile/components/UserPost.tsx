@@ -14,7 +14,7 @@ const UserPost = () => {
         {isLoading ? (
           <ul className="row">
             {Array.from({ length: 3 }, (item, index) => (
-              <li className="post-item col col-4 col-md-12" key={index}>
+              <li className="post-item col col-3 col-md-4" key={index}>
                 <PostItemLoading />
               </li>
             ))}

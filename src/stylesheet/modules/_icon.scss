@@ -90,6 +90,9 @@
   &-comment-20 {
     background-image: url("../../assets/icons/ic-comment-20.svg");
   }
+  &-comment-outline-green-20 {
+    background-image: url("../../assets/icons/ic-comment-outline-green-20.svg");
+  }
   &-bookmark-20 {
     background-image: url("../../assets/icons/ic-bookmark-20.svg");
   }
@@ -147,8 +150,17 @@
   &-restore-60 {
     background-image: url("../../assets/icons/ic-restore-60.svg");
   }
+  &-arrow-right-20 {
+    background-image: url("../../assets/icons/ic-arrow-right-20.svg");
+  }
+  &-heart-20 {
+    background-image: url("../../assets/icons/ic-heart-20.svg");
+  }
+  &-heart-outline-red-20 {
+    background-image: url("../../assets/icons/ic-heart-outline-red-20.svg");
 
-  &-heart {
-    background-image: url("../../assets/icons/ic-heart.svg");
+    &-heart {
+      background-image: url("../../assets/icons/ic-heart.svg");
+    }
   }
 }

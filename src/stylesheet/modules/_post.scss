@@ -1,139 +1,122 @@
 .post {
   position: relative;
-  height: 450px;
-  margin-bottom: $p-col * 2;
-  border-radius: 12px;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
+  gap: 30px;
+  padding: 16px;
+  border-radius: 24px;
+  margin-bottom: 20px;
 
-  .post-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    line-clamp: 1;
+  border: 1px solid map-get($color, borderColor);
 
-    margin-bottom: 10px;
-    overflow: hidden;
-
-    color: #000;
-    font-size: map-get($font-size, xxl);
-  }
-  .post-desc {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-
-    margin-bottom: 8px;
-    overflow: hidden;
-
+  &-title {
+    font-size: map-get($font-size, xl);
+    font-weight: map-get($font-weight, semibold);
+    @include truncate-text(2);
     color: map-get($color, text);
-    font-size: 15px;
-    line-height: 1.6;
+    margin-bottom: 12px;
+    margin-top: 8px;
+    &:hover {
+      color: map-get($color, primary);
+    }
   }
-
-  &-list {
-    min-height: 100vh;
-    margin-bottom: 20px;
+  &-desc {
+    font-size: map-get($font-size, md);
+    color: map-get($color, subtext);
+    @include truncate-text(2);
+    margin-bottom: 12px;
   }
-  &-body-top {
-    margin-bottom: 10px;
+  &-date {
+    min-width: 80px;
+    font-size: map-get($font-size, xs);
+    color: map-get($color, subtext);
   }
-
-  .user-avatar {
-    width: 30px;
-    height: 30px;
-    margin-right: 6px;
-    border: 1px solid #ccc;
+  .author-name {
+    @include truncate-text(1);
+    font-size: map-get($font-size, sm);
+    color: map-get($color, light-black);
+    font-weight: map-get($font-weight, medium);
+  }
+  .author-avatar {
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
   }
-
-  &:hover {
-    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-  }
-  .post-title:hover {
-    color: map-get($color, primary);
-  }
-  .post-created-date {
-    font-size: map-get($font-size, sm);
-  }
-
-  &-img {
-    height: 100%;
-    margin-bottom: 10px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+  .post-cover {
+    width: 220px;
+    height: 220px;
+    border-radius: 20px;
     object-fit: cover;
-    &-wrapper {
-      height: 50%;
+  }
+
+  .post-info {
+    margin-bottom: 8px;
+    .post-author {
+      margin-right: 14px;
     }
-    &-link {
+    .author-avatar {
+      margin-right: 9px;
+    }
+  }
+  .post-content-footer {
+    .reaction-item {
+      margin-right: 14px;
+    }
+  }
+  .post-img-wrapper {
+    .post-link {
       display: block;
-      height: 100%;
-    }
-    &.err {
-      object-fit: contain;
-    }
-  }
-
-  &-body-wrapper {
-    padding: 15px 15px 0;
-    height: 50%;
-  }
-
-  .user-name {
-    position: relative;
-    margin-right: 16px;
-    font-size: map-get($font-size, sm);
-    font-weight: map-get($font-weight, medium);
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -11px;
-      transform: translateY(-50%);
-
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: map-get($color, text);
+      height: 90%;
+      overflow: hidden;
+      border-radius: 24px;
     }
   }
-
-  &-body {
-    border-bottom: 1px solid map-get($color, borderColor);
-    height: 75%;
+  &:hover {
+    .post-cover {
+      transform: scale(1.05);
+      transition: all 0.6s linear;
+    }
   }
-  &-footer {
-    height: 25%;
+  .icon-like-wrapper,
+  .icon-comment-wrapper,
+  .icon-bookmark-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #f9fafb;
   }
-  &-reaction-item {
-    margin-right: 10px;
+  .icon-like-wrapper,
+  .icon-comment-wrapper {
+    margin-right: 6px;
   }
-  &-reaction-number {
-    font-size: map-get($font-size, sm);
+  .reaction-item:first-child:hover {
+    color: red;
   }
-  .icon {
-    margin-right: 4px;
+  .reaction-item:last-child:hover {
+    color: #00d082;
   }
-  .read-more {
-    font-size: map-get($font-size, sm);
-    font-weight: map-get($font-weight, medium);
+  .icon-like-wrapper:hover {
+    background-color: #fff1f0;
+    transition: all 0.3s;
+    .icon {
+      background-image: url("../../assets/icons/ic-heart-outline-red-20.svg");
+    }
   }
-
-  .post-status {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-
-    padding: 6px 12px;
-    border-radius: 12px;
-    background: map-get($map: $color, $key: defaultBg);
-    color: map-get($map: $color, $key: text);
+  .icon-comment-wrapper:hover {
+    background-color: #ddf5ed;
+    transition: all 0.3s;
+    .icon {
+      background-image: url("../../assets/icons/ic-comment-outline-green-20.svg");
+    }
   }
-
+  .icon-bookmark-wrapper:hover {
+    background-color: #fff7e6;
+    transition: all 0.3s;
+    .icon {
+      background-image: url("../../assets/icons/ic-bookmark-primary-20.svg");
+    }
+  }
   .post-delete {
-    visibility: hidden;
+    display: none;
     position: absolute;
     right: 12px;
     top: 12px;
@@ -141,12 +124,17 @@
     width: 40px;
     height: 40px;
     padding: 4px;
-    z-index: 1;
+    z-index: 3;
     border-radius: 12px;
 
     background-color: map-get($map: $color, $key: danger);
     cursor: pointer;
-
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     .icon-delete {
       display: block;
       margin: 0 auto;
@@ -174,6 +162,7 @@
     left: 0;
     bottom: 0;
     border-radius: 12px;
+    z-index: 1;
 
     background-color: rgba($color: #000000, $alpha: 0.2);
   }
@@ -186,16 +175,47 @@
 
     cursor: pointer;
   }
-}
+  &.post-vertical {
+    flex-direction: column-reverse;
+    gap: 0;
+    padding: 0;
+    .post-img-wrapper {
+      display: block;
+      .post-link {
+        height: 220px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    .post-title {
+      @include truncate-text(1);
+    }
+    .post-cover {
+      border-radius: 24px;
+      height: 100%;
+      width: 100%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .post-info {
+      margin-bottom: 8px;
+    }
+    .tag-list {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 6;
+    }
+    .post-content-wrapper {
+      padding: 14px;
+    }
+    .post-content-body {
+      flex-direction: column-reverse;
+    }
+    .post-desc {
+      display: none;
+    }
+  }
 
-.empty-post {
-  &-img {
-    width: 700px;
-  }
-  &-title {
-    font-size: 32px;
-  }
-  &-desc {
-    color: map-get($color, subtext);
-  }
+  // SKELETON LOADING
 }
