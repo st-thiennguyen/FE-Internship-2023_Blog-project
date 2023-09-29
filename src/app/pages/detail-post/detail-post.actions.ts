@@ -148,7 +148,7 @@ export const getBookmarkStart = () => {
   };
 };
 
-export const getBookmartSuccess = (data: BookmarkModel[]) => {
+export const getBookmarkSuccess = (data: BookmarkModel[]) => {
   return {
     type: ACTIONS_TYPE.GET_BOOKMARK_SUCCESS,
     payload: data,
@@ -166,7 +166,7 @@ export const fetchBookmark = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getBookmarkStart());
   try {
     const response = await getBookmark();
-    dispatch(getBookmartSuccess(response as BookmarkModel[]));
+    dispatch(getBookmarkSuccess(response as BookmarkModel[]));
   } catch (error) {
     dispatch(getRecommendFailure(`${error}`));
   }
@@ -179,7 +179,7 @@ const toggleBookmarkStart = () => {
   };
 };
 
-const toggleBookmarkSuccess = (res : any) => {
+const toggleBookmarkSuccess = (res: any) => {
   return {
     type: ACTIONS_TYPE.TOGGLE_BOOKMARK_SUCCESS,
     payload: res,
@@ -201,7 +201,7 @@ const updateBookmarkStart = () => {
   };
 };
 
-const updateBookmarkSuccess = (id : number) => {
+const updateBookmarkSuccess = (id: number) => {
   return {
     type: ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS,
     payload: id,
@@ -232,5 +232,6 @@ export const toggleBookmarkAction = (id: number) => async (dispatch: Dispatch<Ro
     dispatch(toggleBookmarkSuccess(response as any));
   } catch (error) {
     dispatch(toggleBookmarkFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

@@ -170,10 +170,10 @@ const WritePost = ({ post }: WritePostProps) => {
     }
   };
 
-  const handleCreatePost = handleSubmit(async (data: any) => {
+  const handleCreatePost = handleSubmit(async (data: FormData) => {
     if (validate()) {
       setIsLoading(true);
-      await dispatch(createPost({ ...data, content, status: statusPost, tags }, file) as any);
+      await dispatch(createPost({ ...data, content, status: statusPost, tags: tags }, file) as any);
     }
   });
 
@@ -223,9 +223,9 @@ const WritePost = ({ post }: WritePostProps) => {
             <div className="editor-detail">
               <h5 className="editor-detail-title">Post detail</h5>
               <textarea
-                rows={1}
+                rows={2}
                 {...register('title')}
-                className="editor-detail-input"
+                className="editor-detail-input editor-detail-input-title"
                 placeholder="Title of your story ..."
               />
               <p className="editor-detail-error">{errors.title?.message}</p>
