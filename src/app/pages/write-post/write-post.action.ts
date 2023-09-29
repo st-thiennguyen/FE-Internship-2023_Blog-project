@@ -1,61 +1,81 @@
 import { Dispatch } from 'react';
 import { RootAction } from '../../stores/store';
-import { postArticles, updatePostArticles } from '../../shared/services';
-import { PostModel, SignatureImageModel } from '../../models/post';
+import { createDraft, postArticles, updatePostArticles } from '../../shared/services';
+import { PostModel, PostProps, SignatureImageModel } from '../../models/post';
 import { ACTIONS_TYPE, TypeUploadImage } from '../../shared/constants';
 import { showToast } from '../../shared/components/toast/toast.actions';
 import { ToastType } from '../../models/toast';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 
-export const resetWriteState = () => {
+const resetWriteState = () => {
   return {
     type: 'RESET_STATE_WRITEPOST',
   };
 };
 
-export const addPostStart = () => {
+const addPostStart = () => {
   return {
     type: ACTIONS_TYPE.ADD_POST,
   };
 };
 
-export const addPostSuccess = (data: any) => {
+const addPostSuccess = (data: any) => {
   return {
     type: ACTIONS_TYPE.ADD_POST_SUCCESS,
     payload: data,
   };
 };
 
-export const addPostFailure = (error: any) => {
+const addPostFailure = (error: any) => {
   return {
     type: ACTIONS_TYPE.ADD_POST_FAILURE,
     payload: error,
   };
 };
 
-export const updatePostStart = () => {
+const updatePostStart = () => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST,
   };
 };
 
-export const updatePostSuccess = (data: any) => {
+const updatePostSuccess = (data: any) => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST_SUCCESS,
     payload: data,
   };
 };
 
-export const updatePostFailure = (error: any) => {
+const updatePostFailure = (error: any) => {
   return {
     type: ACTIONS_TYPE.UPDATE_POST_FAILURE,
     payload: error,
   };
 };
 
-export const getUserProfileStart = () => {
+const getUserProfileStart = () => {
   return {
     type: ACTIONS_TYPE.GET_PROFILE,
+  };
+};
+
+const createDraftStart = () => {
+  return {
+    type: ACTIONS_TYPE.ADD_DRAFT,
+  };
+};
+
+const createDraftSuccess = (post: PostProps) => {
+  return {
+    type: ACTIONS_TYPE.ADD_DRAFT_SUCCESS,
+    payload: post,
+  };
+};
+
+const createDraftFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.ADD_DRAFT_FAILURE,
+    payload: error,
   };
 };
 
@@ -93,6 +113,27 @@ export const updatePost = (data: PostModel, id: number, file: any) => async (dis
     dispatch(showToast('Update post success', ToastType.SUCCESS));
   } catch (error) {
     dispatch(updatePostFailure(error));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
+  }
+};
+
+export const saveToDraft = (data: PostProps, file?: File) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(createDraftStart());
+  try {
+    let signatureImageUrl = '';
+    if (file) {
+      const signatureImage: SignatureImageModel = (await getEmptyImageUrl(
+        file,
+        TypeUploadImage.COVER_POST,
+      )) as SignatureImageModel;
+      await putImageToLink(signatureImage.signedRequest, file);
+      signatureImageUrl = signatureImage.url;
+    }
+    const res = await createDraft({ ...data, cover: signatureImageUrl || '' });
+    dispatch(createDraftSuccess(res as PostProps));
+    dispatch(showToast('Create draft successfully', ToastType.SUCCESS));
+  } catch (error) {
+    dispatch(createDraftFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

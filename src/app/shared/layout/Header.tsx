@@ -10,6 +10,7 @@ import { getLocalStorage, isImageUrlValid } from '../utils';
 import logo from '../../../assets/images/logo.svg';
 import icRecyclebin from '../../../assets/icons/ic-recyclebin-24.svg';
 import icBookmark from '../../../assets/icons/ic-bookmark-24.svg';
+import icDraft from '../../../assets/icons/ic-draft-24.svg';
 import icLogout from '../../../assets/icons/ic-logout-24.svg';
 import avatarDefault from '../../../assets/images/user-default.png';
 
@@ -85,6 +86,12 @@ const Header = () => {
                             <Link to="/posts/bookmark" className="auth-link d-flex item-center">
                               <img src={icBookmark} alt="Icon bookmark" />
                               <p>Bookmark</p>
+                            </Link>
+                          </li>
+                          <li className="auth-item">
+                            <Link to="/posts/draft" className="auth-link d-flex item-center">
+                              <img src={icDraft} alt="Icon bookmark" />
+                              <p>Draft</p>
                             </Link>
                           </li>
                           <li className="auth-item">

@@ -4,6 +4,7 @@ import PostRecycleBin from './components/PostRecycleBin';
 import PostPage from './container';
 import CreatePost from '../write-post/containers/CreatePost';
 import UpdatePost from '../write-post/containers/UpdatePost';
+import PostDraft from './components/PostDraft';
 import Posts from './container/Posts';
 
 export const postsRoutes = [
@@ -27,6 +28,11 @@ export const postsRoutes = [
       {
         path: ':id/edit',
         component: UpdatePost,
+        isProtected: true,
+      },
+      {
+        path: 'draft',
+        component: PostDraft,
         isProtected: true,
       },
       {
