@@ -19,7 +19,7 @@ import avaDefault from '../../../../assets/images/user-default.png';
 const DetailPost = () => {
   const dispatch = useDispatch();
 
-  const post: PostModel = useSelector((state: RootState) => state.detail.data);
+  const post: PostModel = useSelector((state: RootState) => state.detail?.data);
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
   const isError = useSelector((state: RootState) => state.detail.isError);
 
@@ -72,6 +72,7 @@ const DetailPost = () => {
                   datePost={post.createdAt}
                   authorId={post.userId}
                 />
+                <pre>{post.description}</pre>
                 <section className="section section-detail-content">
                   <div className="detail-content d-flex">
                     <DetailPostContent post={post} scrollToComment={scrollToComment} />

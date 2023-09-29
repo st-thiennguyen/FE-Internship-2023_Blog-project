@@ -16,8 +16,8 @@ import EditorPostActions from './EditorPostActions';
 import { RootState } from '../../../stores/store';
 import { createPost, updatePost } from '../write-post.action';
 import { getLocalStorage } from '../../../shared/utils';
-import { StorageKey, TypeUploadImage } from '../../../shared/constants';
-import { PostModel, TypeImage } from '../../../models/post';
+import { StorageKey } from '../../../shared/constants';
+import { PostModel } from '../../../models/post';
 
 const schema = yup
   .object({
@@ -104,7 +104,8 @@ const WritePost = ({ post }: WritePostProps) => {
 
   const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
-      await dispatch(createPost({ ...data, content, status: statusPost, tags }, file) as any);
+      const { title, description } = data
+      await dispatch(createPost({ ...data, content, status: statusPost, tags: tags }, file) as any);
     }
   });
 
@@ -116,8 +117,8 @@ const WritePost = ({ post }: WritePostProps) => {
 
   // innit and dispose
   useEffect(() => {
-    setValue('description', post?.description || '');
     setValue('title', post?.title || '');
+    setValue('description', post?.description || '');
     if (post?.content) {
       setContent(post.content);
     }
