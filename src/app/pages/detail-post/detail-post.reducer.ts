@@ -147,7 +147,6 @@ interface BookmarkState {
   isError: boolean;
   isSuccess: boolean;
   message: string;
-
 }
 const initialBookMarkState: BookmarkState = {
   data: [] as BookmarkModel[],
@@ -189,7 +188,9 @@ export const bookmarkReducer = (state = initialBookMarkState, action: RootAction
         message: '',
       };
     case ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS:
-      const newListBookmark = state.data.filter((item) => { return item.postId !== action.payload })
+      const newListBookmark = state.data.filter((item) => {
+        return item.postId !== action.payload;
+      });
       return {
         ...state,
         data: newListBookmark,

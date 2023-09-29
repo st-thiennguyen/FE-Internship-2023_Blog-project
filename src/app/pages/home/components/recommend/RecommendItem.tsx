@@ -11,7 +11,6 @@ interface RecommendItemProps {
   post: PostModel;
 }
 const RecommendItem = ({ post }: RecommendItemProps) => {
-  const tags = ['React', 'Vue', 'NodeJS'];
   const [isErrAvt, setIsErrAvt] = useState(false);
 
   useEffect(() => {
@@ -21,7 +20,9 @@ const RecommendItem = ({ post }: RecommendItemProps) => {
   return (
     <li className="recommend-post-item col col-4 col-md-6 col-sm-12">
       <div className="post d-flex flex-column justify-between">
-        <Tags tags={tags} />
+        <div className="d-flex">
+          <Tags tags={post.tags} />
+        </div>
         <Link to={`/posts/${post.id}`}>
           <h3 className="post-title">{post.title}</h3>
         </Link>

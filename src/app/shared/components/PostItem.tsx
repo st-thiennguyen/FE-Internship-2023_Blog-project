@@ -12,6 +12,8 @@ import NoImg from '../../../assets/images/no-image.png';
 import userDefault from '../../../assets/images/user-default.png';
 import Tags from './Tags';
 import { restorePostAction } from '../../pages/posts/posts.action';
+import IconComment from './icon/IconComment';
+import IconHeart from './icon/IconHeart';
 
 interface PostItemProps {
   post: PostModel;
@@ -74,6 +76,7 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
         </div>
         <div className="post-content-wrapper d-flex flex-column justify-between">
           <Tags tags={post.tags} />
+
           <div className="post-content-body d-flex justify-between flex-column">
             <Link to={`/posts/${post.id}`} className="post-link">
               <h4 className="post-title">{post.title}</h4>
@@ -101,13 +104,13 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
             <ul className="reaction-list d-flex item-center">
               <li className="reaction-item d-flex item-center">
                 <div className="icon-like-wrapper d-flex item-center justify-center">
-                  <i className="icon icon-small icon-heart-20"></i>
+                  <IconHeart />
                 </div>
                 {post.likes}
               </li>
               <li className="reaction-item d-flex item-center">
                 <div className="icon-comment-wrapper d-flex item-center justify-center">
-                  <i className="icon icon-small icon-comment-20"></i>
+                  <IconComment />
                 </div>
                 {post.comments}
               </li>

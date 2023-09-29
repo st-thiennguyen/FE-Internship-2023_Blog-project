@@ -1,85 +1,198 @@
 .section-detail-page {
+  .tag {
+    &:hover {
+      width: fit-content;
+      max-width: 200px;
+    }
+  }
+  .detail-header {
+    max-width: 768px;
+    margin: 0 auto;
+    .detail-header-tags {
+      margin-bottom: 20px;
+    }
+    &-title {
+      margin-bottom: 15px;
+      font-size: 44px;
+      text-transform: capitalize;
+      color: map-get($color, textHeading);
+    }
+    &-desc {
+      color: map-get($color, subtext);
+      font-size: map-get($font-size, lg);
+    }
+    &-author {
+      .author-info {
+        .author-avatar {
+          width: 44px;
+          height: 44px;
+          padding: 1px;
+          margin-right: 10px;
+          border: 1px solid #0d0c1a;
+          border-radius: 100%;
+          img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 100%;
+          }
+        }
+        .author-name {
+          font-size: 16px;
+        }
+        .post-date {
+          font-size: 12px;
+        }
+      }
+    }
+  }
   .detail-action {
+    .btn-post-action {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: 100%;
+    }
+    .action-count {
+      margin: 0 8px 0 8px;
+      min-width: 20px;
+      font-size: 12px;
+    }
+
+    .like-active > .btn-post-action {
+      background-color: #fff1f2;
+    }
+
+    .like-active > .action-count {
+      color: #e11d48;
+    }
+  }
+
+  .aside-detail {
     position: sticky;
+    top: -30%;
     height: fit-content;
-    top: 120px;
+
+    padding: 0;
+    gap: 24px;
+    .detail-author {
+      border: 1px solid rgb(229 229 229);
+      border-radius: 12px;
+      .detail-author-link {
+        padding: 20px;
+      }
+      .author-info {
+        margin-right: 10px;
+        .author-name {
+          font-weight: map-get($font-weight, bold);
+          font-size: map-get($font-size, lg);
+        }
+        .author-email,
+        .author-gender {
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+
+      .author-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 16px;
+        border-radius: 100%;
+        border: 1px solid #1f2937;
+        padding: 1px;
+
+        img {
+          height: 100%;
+          border-radius: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .author-connect {
+        font-size: 13px;
+        gap: 12px;
+        font-weight: 600;
+        :nth-child(1) {
+          color: green;
+        }
+        :nth-child(2) {
+          color: blue;
+        }
+        .follow {
+          .follow-label {
+            color: map-get($color, text);
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .detail-author-post {
+      border: 1px solid rgb(229 229 229);
+      border-radius: 12px;
+      .author-posts {
+        padding: 20px;
+        .author-post-title {
+          margin-bottom: 20px;
+        }
+      }
+
+      //user post item recent
+      .user-post-list {
+        gap: 20px;
+      }
+      .user-post-item {
+        padding: 10px;
+        border: 1px solid rgb(229 229 229);
+        border-radius: 12px;
+        .upost-cover {
+          flex: 1;
+          margin-right: 10px;
+          img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+            transition: transform 0.2s;
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+        .upost-info {
+          width: 70%;
+          gap: 8px;
+          .upost-title {
+            font-size: 16px;
+            margin-bottom: 0;
+          }
+          .upost-date {
+            font-size: 12px;
+            font-weight: 600;
+          }
+        }
+        .upost-reaction {
+          font-size: 14px;
+          gap: 16px;
+          .reaction-count {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
   }
 
   .detail-cover {
     position: relative;
-    min-height: 580px;
-    height: 50vh;
     border-radius: 15px;
 
     .cover-img {
       height: 100%;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-
-        border-radius: 15px;
-      }
+      object-fit: contain;
 
       img {
         height: 100%;
         border-radius: 15px;
         object-fit: cover;
-      }
-    }
-
-    .cover-content {
-      @include position(0, 0, 0, 0, absolute);
-      max-width: 1000px;
-      padding: 50px;
-      color: map-get($color, textLight);
-      font-size: 25px;
-
-      .cover-info {
-        margin-top: 10px;
-      }
-
-      .cover-author {
-        padding: 10px;
-        color: map-get($color, textLight);
-        font-size: 15px;
-        background-color: rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        backdrop-filter: blur(2px);
-
-        .author-name {
-          font-weight: 500;
-        }
-
-        .author-ava {
-          width: 30px;
-          height: 30px;
-          margin-right: 10px;
-
-          img {
-            width: 100%;
-            height: 100%;
-            border-radius: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-
-      .cover-date {
-        padding: 10px;
-        background-color: rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        backdrop-filter: blur(2px);
-
-        &-title {
-          margin-left: 10px;
-          font-size: 14px;
-          font-weight: 500;
-        }
       }
     }
   }
@@ -110,63 +223,33 @@
     }
 
     .detail-post {
-      min-width: 300px;
-      flex: 1;
+      // min-width: 300px;
+      // flex: 1;
 
       .detail-post-body {
         margin-bottom: 16px;
         font-size: map-get($font-size, lg);
         letter-spacing: 0.3px;
-
-        .post-title {
+        .detail-body {
+          padding-right: 40px;
+        }
+        article {
           margin-bottom: 40px;
         }
-
-        .post-desc {
-          margin-bottom: 60px;
-          font-weight: map-get($font-weight, semibold);
-          font-size: map-get($font-size, lg);
-        }
-
         .post-content {
           display: flex;
           flex-direction: column;
           gap: 16px;
 
           pre {
-            background-color: #0d0c1a;
-            padding: 10px;
+            background-color: #1f2937;
+            font-size: 14px;
+            padding: 16px 24px;
+            margin: 32px 0;
             color: #fff;
-            overflow-y: scroll;
+            white-space: pre-wrap;
+            border-radius: 6px;
           }
-        }
-      }
-
-      .post-tag {
-        .tag-list {
-          gap: 10px;
-        }
-      }
-    }
-
-    .detail-author {
-      padding: 60px 0;
-      border-bottom: 1px solid map-get($color, borderColor);
-
-      .author-name {
-        font-weight: map-get($font-weight, bold);
-        font-size: map-get($font-size, lg);
-      }
-
-      .author-img {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 16px;
-        border-radius: 100%;
-
-        img {
-          border-radius: 100%;
-          object-fit: cover;
         }
       }
     }
@@ -174,11 +257,11 @@
 
   .section-comment {
     border-radius: 6px;
-    padding: 20px;
     margin-bottom: 40px;
     scroll-margin-top: 100px;
 
     .comment-title {
+      font-size: 20px;
       margin-bottom: 16px;
     }
 
@@ -186,7 +269,7 @@
       display: inline-block;
       width: 100%;
       padding: 10px 10px 0;
-      border: none;
+      border: 1px solid rgb(229 229 229);
       border-radius: 12px;
       margin-bottom: 16px;
 
@@ -215,7 +298,6 @@
 
       &-wrapper {
         align-items: end;
-        width: 80%;
         border-radius: 6px;
         margin-bottom: 32px;
       }
@@ -223,35 +305,35 @@
       &-hidden {
         padding: 12px 0 40px;
         margin-bottom: 32px;
-        border-bottom: 1px solid rgb(178, 178, 178);
-
         color: map-get($map: $color, $key: subtext);
         font-size: 18px;
       }
     }
 
     .btn-comment {
-      padding: 10px 12px;
+      padding: 14px 24px;
+      font-size: 16px;
+      border-radius: 20px;
     }
 
     .comment {
       &-item {
-        width: 80%;
         margin-bottom: 28px;
-        padding: 20px;
         border-radius: 12px;
         background-color: white;
       }
 
       &-info {
         width: 100%;
+        padding: 16px;
+        border: 1px solid rgb(229 229 229);
+        border-radius: 12px;
       }
 
       &-info-top {
         align-items: baseline;
         margin-bottom: 4px;
         padding-bottom: 4px;
-        border-bottom: 1px solid map-get($map: $color, $key: borderColor);
       }
 
       .user-info {
@@ -268,14 +350,14 @@
 
       .user-name {
         margin-right: 10px;
-        font-size: map-get($font-size, xs);
-        font-weight: map-get($font-weight, bold);
-        color: map-get($color, subtext);
+        font-size: map-get($font-size, md);
+        font-weight: map-get($font-weight, semibold);
+        color: map-get($color, text);
       }
 
       &-content {
         border-radius: 6px;
-        font-size: map-get($font-size, lg);
+        font-size: map-get($font-size, md);
         color: map-get($color, text);
       }
 
@@ -302,6 +384,18 @@
 .skeleton.author-name {
   width: 150px;
   height: 20px;
+}
+
+@media screen and (max-width: map-get($breakpoints, xl)) {
+  .section-detail-page {
+    .detail-post {
+      .detail-post-body {
+        .detail-body {
+          padding-right: unset !important;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
