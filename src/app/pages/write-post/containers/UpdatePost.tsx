@@ -20,17 +20,17 @@ const UpdatePost = () => {
       try {
         const res: any = await getDetailPost(Number(id));
         if (Number(res.user.id) !== Number(userID)) {
-          dispatch(showToast('This article is not yours !', ToastType.ERROR));
+          dispatch(showToast('Permission denied', ToastType.ERROR));
           navigate('/');
         } else {
           setPostData(res);
         }
       } catch (error) {
-        dispatch(showToast('This article is not exist !', ToastType.ERROR));
+        dispatch(showToast('Article not found', ToastType.ERROR));
         navigate('/')
       }
     }
-    )()
+    )();
   }, []);
 
   return (
