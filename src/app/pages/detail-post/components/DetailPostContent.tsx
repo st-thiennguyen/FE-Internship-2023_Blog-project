@@ -67,9 +67,11 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                 <div className="detail-author">
                   <Link to={`/profile/${post.user?.id}`} className="detail-author-link d-flex item-center">
                     <div className="author-info flex-1">
-                      <h5 className="author-name text-truncate-1">{post.user?.displayName} </h5>
+                      <h5 className="author-name text-truncate-1">
+                        {post.user?.displayName || post.user?.firstName + ' ' + post.user?.lastName}{' '}
+                      </h5>
                       <p className="author-email text-truncate-1">{post.user?.email}</p>
-                      <p className="author-gender text-truncate-1">Gender : {post.user?.gender}</p>
+                      <p className="author-gender text-truncate-1">Gender : {post.user?.gender || '----'}</p>
                       <div className="author-connect d-flex">
                         <span className="follow">
                           <span className="follow-label">Follower : </span> {post.user?.followers}
@@ -85,7 +87,7 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                     </div>
                   </Link>
                 </div>
-                {isLogin && postList.length > 0 && (
+                {isLogin && postList && (
                   <div className="detail-author-post">
                     <div className="author-posts">
                       <h3 className="author-post-title">{post.user?.firstName}'s recent posts </h3>

@@ -179,7 +179,7 @@ const toggleBookmarkStart = () => {
   };
 };
 
-const toggleBookmarkSuccess = (res : any) => {
+const toggleBookmarkSuccess = (res: any) => {
   return {
     type: ACTIONS_TYPE.TOGGLE_BOOKMARK_SUCCESS,
     payload: res,
@@ -193,7 +193,6 @@ const toggleBookmarkFailure = (error: string) => {
   };
 };
 
-
 // Update Bookmark
 const updateBookmarkStart = () => {
   return {
@@ -201,7 +200,7 @@ const updateBookmarkStart = () => {
   };
 };
 
-const updateBookmarkSuccess = (id : number) => {
+const updateBookmarkSuccess = (id: number) => {
   return {
     type: ACTIONS_TYPE.UPDATE_BOOKMARK_SUCCESS,
     payload: id,
@@ -232,5 +231,6 @@ export const toggleBookmarkAction = (id: number) => async (dispatch: Dispatch<Ro
     dispatch(toggleBookmarkSuccess(response as any));
   } catch (error) {
     dispatch(toggleBookmarkFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
