@@ -96,7 +96,12 @@ const WritePost = ({ post }: WritePostProps) => {
   }, [isLogin]);
 
   useEffect(() => {
+    window.onbeforeunload = (e) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
     return () => {
+      window.onbeforeunload = () => {};
       dispatch(resetWriteState());
     };
   }, []);
@@ -138,7 +143,7 @@ const WritePost = ({ post }: WritePostProps) => {
     return isValid;
   };
 
-  const handleUpdatePost = handleSubmit((data: any) => {
+  const handleUpdatePost = handleSubmit((data: FormData) => {
     setIsLoading(true);
     dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
     setTimeout(() => {
@@ -146,6 +151,24 @@ const WritePost = ({ post }: WritePostProps) => {
     }, 3000);
     setIsClick(true);
   });
+
+  const handleUpdateDraft = () => {
+    const data = getValues();
+    setIsLoading(true);
+    dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
+    setTimeout(() => {
+      navigate(`/posts/${id}`);
+    }, 3000);
+    setIsClick(true);
+  };
+
+  const handleUpdate = () => {
+    if (statusPost === 'draft') {
+      handleUpdateDraft();
+    } else if (validate()) {
+      handleUpdatePost();
+    }
+  };
 
   const handleCreatePost = handleSubmit(async (data: any) => {
     if (validate()) {
@@ -243,7 +266,7 @@ const WritePost = ({ post }: WritePostProps) => {
           <EditorPostTags tags={tags || []} setTags={setTags} />
           <div className={isLoading || isError ? 'action-disabled' : 'action-wrapper'}>
             <EditorPostActions
-              onPublish={!isUpdate ? onPublishPost : handleUpdatePost}
+              onPublish={!isUpdate ? onPublishPost : handleUpdate}
               onSaveDraft={handleSaveDraft}
               isUpdate={isUpdate}
             />
