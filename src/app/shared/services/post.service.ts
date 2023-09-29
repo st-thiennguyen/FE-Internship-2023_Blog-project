@@ -36,13 +36,8 @@ export const postArticles = (data: any) => {
 };
 
 export const updatePostArticles = (data: any, id: number) => {
-  const formData = new URLSearchParams();
-  formData.append('title', data.title);
-  formData.append('description', data.description);
-  formData.append('content', data.content);
-
   const api = new ApiService();
-  return api.put(`${ENDPOINT.post.index}/${id}`, formData.toString(), {
+  return api.put(`${ENDPOINT.post.index}/${id}`, data, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },

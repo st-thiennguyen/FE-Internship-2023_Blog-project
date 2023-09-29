@@ -3,13 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import WritePost from '../components/PostForm';
-import { fetchDetailBlog } from '../../detail-post/detail-post.actions';
-import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
 import { showToast } from '../../../shared/components/toast/toast.actions';
 import { ToastType } from '../../../models/toast';
 import axios from 'axios';
-import { ENDPOINT } from '../../../shared/constants';
+import { ENDPOINT, StorageKey } from '../../../shared/constants';
+import { getLocalStorage } from '../../../shared/utils';
 
 const UpdatePost = () => {
   const { id } = useParams();
@@ -20,7 +19,7 @@ const UpdatePost = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`${ENDPOINT.post.index}/${id}`)
+      const res = await axios.get(`${ENDPOINT.post.index}/${id}`,  { headers: { Authorization: `Bearer ${getLocalStorage(StorageKey.ACCESS_TOKEN)}` } })
       if (Number(res.data.user.id) !== Number(userID)) {
         dispatch(showToast('This article is not yours !', ToastType.ERROR));
         navigate('/');
@@ -34,7 +33,7 @@ const UpdatePost = () => {
   return (
     <section className="section section-write-post">
       <div className="container">
-        <WritePost post={postData} />
+        <WritePost post={postData} /> 
       </div>
     </section>
   );
