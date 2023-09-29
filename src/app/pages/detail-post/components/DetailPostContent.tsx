@@ -68,17 +68,16 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                   <Link to={`/profile/${post.user?.id}`} className="detail-author-link d-flex item-center">
                     <div className="author-info flex-1">
                       <h5 className="author-name text-truncate-1">
-                        {post.user?.displayName || post.user?.firstName + ' ' + post.user?.lastName}{' '}
+                        {post.user?.displayName || post.user?.firstName + ' ' + post.user?.lastName}
                       </h5>
                       <p className="author-email text-truncate-1">{post.user?.email}</p>
                       <p className="author-gender text-truncate-1">Gender : {post.user?.gender || '----'}</p>
                       <div className="author-connect d-flex">
                         <span className="follow">
-                          <span className="follow-label">Follower : </span> {post.user?.followers}
+                          <span className="follow-label">Followers : </span> {post.user?.followers}
                         </span>
                         <span className="follow">
-                          {' '}
-                          <span className="follow-label">Followings : </span> {post.user?.followings}
+                          <span className="follow-label">Following : </span> {post.user?.followings}
                         </span>
                       </div>
                     </div>
@@ -90,10 +89,12 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                 {isLogin && postList && (
                   <div className="detail-author-post">
                     <div className="author-posts">
-                      <h3 className="author-post-title">{post.user?.firstName}'s recent posts </h3>
+                      <h3 className="author-post-title">
+                        {post.user?.displayName || post.user?.firstName}'s recent posts
+                      </h3>
                       <div className="divided"></div>
                       <ul className="user-post-list d-flex flex-column">
-                        {postList && postList.map((e: PostModel) => <UserPostItem post={e} />)}
+                        {postList && postList.map((item: PostModel) => <UserPostItem key={post.id} post={item} />)}
                       </ul>
                     </div>
                   </div>

@@ -36,7 +36,6 @@ const Tags = ({ tags, showAll = false }: TagsProps) => {
       {sliceTagList()?.map((tag, index) => {
         return <TagItem key={index} tagName={tag} color={randomColor[index]} />;
       })}
-      {/* {!showAll && tags?.length > 3 && <TagItem linkTo="#" tagName={`+${tags?.length - 3}`} color={'red'} />} */}
     </>
   );
 };
