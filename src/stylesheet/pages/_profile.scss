@@ -96,8 +96,7 @@
         background-color: map-get($color, primary);
       }
     }
-    .post-action-list,
-    .post-delete {
+    .post-action-list {
       visibility: hidden;
     }
     .my-post {
@@ -112,7 +111,7 @@
       }
       .post:hover {
         .post-delete {
-          visibility: visible;
+          display: block;
         }
       }
     }

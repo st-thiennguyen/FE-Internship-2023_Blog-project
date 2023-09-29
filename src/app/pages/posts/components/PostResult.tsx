@@ -9,7 +9,7 @@ import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
 import { useLocation } from 'react-router-dom';
 import Loading from '../../../shared/components/Loading';
 
-const threshold = 400;
+const threshold = 100;
 
 const PostResult = () => {
   const isLoading = useSelector((state: RootState) => state.postTag.isLoading);
@@ -68,7 +68,7 @@ const PostResult = () => {
         {isLoading && posts.length === 0 && (
           <ul className="row">
             {Array.from({ length: 6 }, (item, index) => (
-              <li className="post-item col col-4 col-lg-6 col-sm-12" key={index}>
+              <li className="post-item col col-6 col-lg-12" key={index}>
                 <PostItemLoading />
               </li>
             ))}

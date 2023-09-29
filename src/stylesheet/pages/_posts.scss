@@ -5,12 +5,11 @@
   .post-action-list {
     display: none;
   }
-
-  .section-post-recycle {
-    .post:hover {
-      .post-restore {
-        display: block;
-      }
+}
+.section-post-recycle {
+  .post:hover {
+    .post-restore {
+      display: block !important;
     }
   }
 }

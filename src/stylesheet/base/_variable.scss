@@ -2,18 +2,19 @@ $color: (
   primary: #ff7f0e,
   secondary: #2d5de0,
   danger: #ef4a4a,
-  text: #2f323d,
+  text: #1f2937,
+  subtext: #6b7280,
+  light-black: #374151,
   textLight: #fff,
-  subtext: #67717a,
   textButton: #fff,
   defaultBg: #f5f5f5,
-  borderColor: #e9ecef,
+  borderColor: #f3f4f6,
   backgroundFrame: #fff,
   loader-background-color: #eeeeee,
   loader-highlight-color: #dedede,
 );
 
-$font-family-base: "Manrope", sans-serif;
+$font-family-base: "Poppins", sans-serif;
 $line-height-txt: 1.5;
 
 $header-height: 73px;
@@ -39,13 +40,13 @@ $font-weight: (
 $breakpoints: (
   sm: 576px,
   md: 768px,
-  lg: 1000px,
+  lg: 992px,
   xl: 1200px,
 );
 
 $opacity-base: 0.5;
 
-$p-col: 15px;
+$p-col: 10px;
 $p-col-lg: 10px;
 $p-col-sm: 4px;
 

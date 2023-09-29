@@ -1,95 +1,120 @@
 .home-page {
   .section-title {
-    margin-bottom: 20px;
-    color: map-get($color, text);
+    font-size: 38px;
+    font-weight: map-get($font-weight, semibold);
+    color: map-get($color, primary);
+    &-wrapper {
+      padding-bottom: 20px;
+      border-bottom: 1px solid map-get($color, borderColor);
+      margin-bottom: 20px;
+    }
   }
+  .section-sub-title {
+    color: map-get($color, subtext);
+  }
+
   .section-recommend {
-    padding-top: 0px;
+    margin-bottom: 60px;
     .recommend {
-      position: relative;
-      justify-content: end;
-
-      height: 400px;
-      padding: 24px 32px;
-      border-radius: 12px;
-      color: map-get($color, textButton);
-
-      &-title {
-        max-width: 80%;
-        font-size: 32px;
-        line-height: 1.4;
+      width: 70%;
+      &-wrapper {
+        position: relative;
       }
-      &-cover {
-        @include position(0, 0, 0, 0, absolute);
-        border-radius: 12px;
-        &-img {
-          height: 100%;
-          object-fit: cover;
-          border-radius: 12px;
+      &-banner {
+        position: relative;
+        height: 500px;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          border-radius: 36px;
+          background-color: rgba(0, 0, 0, 0.5);
         }
-      }
-      &::after {
-        content: "";
-        @include position(0, 0, 0, 0, absolute);
-        border-radius: 12px;
-        background-color: rgba(0, 0, 0, 0.6);
-      }
-      &-content {
-        z-index: 1;
-      }
+        &-content {
+          position: absolute;
+          left: 3.5rem;
+          top: 3.5rem;
+        }
+        &-title {
+          margin-bottom: 18px;
+          font-weight: map-get($font-weight, semibold);
+          @include truncate-text(1);
 
-      &-author {
-        margin: 6px 0 10px;
-        .author-avatar {
-          width: 24px;
-          height: 30px;
-          margin-right: 10px;
-          img {
-            border-radius: 100%;
-            object-fit: cover;
+          font-size: 36px;
+          color: #fff;
+        }
+        &-desc {
+          color: #d1d5db;
+          margin-bottom: 18px;
+          @include truncate-text(2);
+        }
+        .btn-read-more {
+          padding: 14px 24px;
+          border-radius: 16px;
+          background-color: map-get($color, primary);
+          font-size: map-get($font-size, md);
+          .post-link {
+            color: #fff;
           }
         }
-        .author-name {
-          color: map-get($map: $color, $key: textLight);
+        .icon-arrow-right-20 {
+          margin-left: 10px;
         }
       }
-      .reaction-item {
-        margin-right: 10px;
-        .icon {
-          margin-right: 4px;
+      &-post-list {
+        position: absolute;
+        padding-left: 4rem;
+        padding-right: 4rem;
+        bottom: -5rem;
+        left: 0;
+        right: 0;
+      }
+      &-post-item {
+        .post {
+          height: 184px;
+          border-radius: 22px;
+          padding: 20px;
+          background-color: #fff;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+          gap: 0;
+          &:hover {
+            box-shadow:
+              0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -4px rgba(0, 0, 0, 0.1);
+          }
+        }
+        .post-info {
+          margin-bottom: 0;
+        }
+        .user-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 6px;
+        }
+        .user-name {
+          margin-bottom: 4px;
         }
       }
-    }
-    .tag-list {
-      flex-wrap: wrap;
-      max-width: 500px;
-    }
-    .tag-item:not(:last-child) {
-      margin-right: 5px;
-      margin-bottom: 5px;
-    }
-    .slick-slide {
-      padding: 0 2px;
-    }
-    .slick-slider {
-      overflow: hidden;
-      border-radius: 12px;
-    }
-    .slick-prev {
-      left: 20px;
-      z-index: 1;
-    }
-    .slick-next {
-      right: 20px;
+
+      &-banner-img {
+        height: 100%;
+        border-radius: 36px;
+        object-fit: cover;
+      }
     }
   }
   .section-latest-post {
-    .post-action-list,
-    .post-delete {
-      display: none;
-    }
-    .book-mark {
-      display: none;
+    .post {
+      .icon-like-wrapper,
+      .icon-comment-wrapper,
+      .icon-bookmark-wrapper {
+        cursor: context-menu !important;
+      }
     }
   }
 }
@@ -111,27 +136,44 @@
     .username::after {
       display: none;
     }
+    .section-recommend {
+      .recommend-post-list {
+        position: relative;
+        padding: 0;
+        bottom: 60px;
+      }
+    }
   }
 }
 
 @media screen and (max-width: map-get($breakpoints, md)) {
-  .section-detail-page {
-    .detail-action {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      .action-list {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+  .home-page {
+    .section-detail-page {
+      .detail-action {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        .action-list {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
 
-        padding: 10px 0;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-        background-color: map-get($color, backgroundFrame);
-        .action-item {
-          margin-bottom: 0;
+          padding: 10px 0;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+          background-color: map-get($color, backgroundFrame);
+          .action-item {
+            margin-bottom: 0;
+          }
         }
+      }
+    }
+    .section-recommend {
+      .recommend-post-list {
+        bottom: -20px;
+      }
+      .recommend-post-item:not(:last-child) {
+        margin-bottom: 14px;
       }
     }
   }

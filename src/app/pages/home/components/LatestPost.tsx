@@ -6,10 +6,10 @@ import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
 
 import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
-import PostItem from '../../../shared/components/PostItem';
-import EmptyPost from '../../../shared/components/EmptyPost';
+import PostList from './PostList';
+import Loading from '../../../shared/components/Loading';
 
-const threshold = 400;
+const threshold = 100;
 
 const LatestPost = () => {
   const isLoading = useSelector((state: RootState) => state.latestPost.isLoading);
@@ -47,29 +47,22 @@ const LatestPost = () => {
 
   return (
     <section className="section section-latest-post">
-      <h2 className="section-title">Latest Post</h2>
-      {(posts && posts.length > 0) || isLoading ? (
-        <ul className="post-list row">
-          {posts.map((post, index) => {
-            return (
-              <li className="post-item col col-6 col-sm-12" key={index}>
-                <PostItem post={post} />
-              </li>
-            );
-          })}
-        </ul>
-      ) : (
-        <EmptyPost />
-      )}
-      {isLoading && (
+      <div className="section-title-wrapper">
+        <h2 className="section-title">Latest Post 🎈</h2>
+        <p className="section-sub-title">Discover the most outstanding articles ins all topics of life.</p>
+      </div>
+      {posts && <PostList posts={posts} isLoading={isLoading} />}
+      {isLoading && posts.length === 0 && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (
-            <li className="post-item col col-6 col-md-12" key={index}>
+            <li className="post-item col col-6 col-lg-12" key={index}>
               <PostItemLoading />
             </li>
           ))}
         </ul>
       )}
+
+      {isLoading && posts.length && <Loading />}
     </section>
   );
 };
