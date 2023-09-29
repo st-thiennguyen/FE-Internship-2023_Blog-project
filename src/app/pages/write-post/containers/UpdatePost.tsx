@@ -6,11 +6,7 @@ import WritePost from '../components/PostForm';
 import { RootState } from '../../../stores/store';
 import { showToast } from '../../../shared/components/toast/toast.actions';
 import { ToastType } from '../../../models/toast';
-import axios from 'axios';
-import { ENDPOINT, StorageKey } from '../../../shared/constants';
-import { getLocalStorage } from '../../../shared/utils';
 import { getDetailPost } from '../../../shared/services';
-import { PostModel, PostProps } from '../../../models/post';
 
 const UpdatePost = () => {
   const { id } = useParams();
@@ -30,7 +26,7 @@ const UpdatePost = () => {
           setPostData(res);
         }
       } catch (error) {
-        dispatch(showToast('This article is not exits !', ToastType.ERROR));
+        dispatch(showToast('This article is not exist !', ToastType.ERROR));
         navigate('/')
       }
     }
