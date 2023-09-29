@@ -9,6 +9,8 @@ import { ToastType } from '../../../models/toast';
 import axios from 'axios';
 import { ENDPOINT, StorageKey } from '../../../shared/constants';
 import { getLocalStorage } from '../../../shared/utils';
+import { getDetailPost } from '../../../shared/services';
+import { PostModel, PostProps } from '../../../models/post';
 
 const UpdatePost = () => {
   const { id } = useParams();
@@ -19,12 +21,17 @@ const UpdatePost = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`${ENDPOINT.post.index}/${id}`,  { headers: { Authorization: `Bearer ${getLocalStorage(StorageKey.ACCESS_TOKEN)}` } })
-      if (Number(res.data.user.id) !== Number(userID)) {
-        dispatch(showToast('This article is not yours !', ToastType.ERROR));
-        navigate('/');
-      } else {
-        setPostData(res.data)
+      try {
+        const res: any = await getDetailPost(Number(id));
+        if (Number(res.user.id) !== Number(userID)) {
+          dispatch(showToast('This article is not yours !', ToastType.ERROR));
+          navigate('/');
+        } else {
+          setPostData(res);
+        }
+      } catch (error) {
+        dispatch(showToast('This article is not exits !', ToastType.ERROR));
+        navigate('/')
       }
     }
     )()
@@ -33,7 +40,7 @@ const UpdatePost = () => {
   return (
     <section className="section section-write-post">
       <div className="container">
-        <WritePost post={postData} /> 
+        <WritePost post={postData} />
       </div>
     </section>
   );
