@@ -1,15 +1,17 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
-import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
+import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
 
-import Tags from '../../../shared/components/Tags';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserPostAction, getUserProfileAction } from '../../profile/profile.actions';
+import { getUserPostAction } from '../../profile/profile.actions';
 import { RootState } from '../../../stores/store';
 import UserPostItem from './UserPostItem';
 import DetailPostComment from './DetailPostComment';
+import { StorageKey } from '../../../shared/constants';
+
+import avatarDefault from '../../../../assets/images/user-default.png';
 
 interface DetailPostProps {
   post: PostModel;
@@ -17,17 +19,21 @@ interface DetailPostProps {
 }
 
 const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
-  const [isErrorCover, setIsErrorCover] = useState(false);
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN) || false;
 
   const userPosts = useSelector((state: RootState) => state.profile.data.posts);
 
-  const postList = userPosts?.slice(0, 4);
+  const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
+
+  const postList = userPosts?.slice(0, 4).filter((item) => item.id !== post.id);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    isImageUrlValid(post.user?.picture).then((value) => setIsErrorCover(!value));
-  }, [post.user?.picture]);
+    post.user?.picture && isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
+  }, [isSuccess]);
 
   const removeEmptyTags = (htmlString: string) => {
     const doc = new DOMParser().parseFromString(htmlString, 'text/html');
@@ -39,7 +45,7 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
   };
 
   useEffect(() => {
-    if (post.user?.id) {
+    if (post.user?.id && isLogin) {
       dispatch(getUserPostAction(`${post.user?.id}`) as any);
     }
   }, [post.user?.id]);
@@ -75,31 +81,25 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                       </div>
                     </div>
                     <div className="author-img">
-                      <img src={post.user?.picture} alt="Image of author" />
+                      <img src={!isErrorAvatar ? post.user?.picture : avatarDefault} alt="Image of author" />
                     </div>
                   </Link>
                 </div>
-                <div className="detail-author-post">
-                  <div className="author-posts">
-                    <h3 className="author-post-title">{post.user?.firstName}'s recent posts </h3>
-                    <div className="divided"></div>
-                    <ul className="user-post-list d-flex flex-column">
-                      {postList && postList.map((e: PostModel) => <UserPostItem post={e} />)}
-                    </ul>
+                {isLogin && postList.length > 0 && (
+                  <div className="detail-author-post">
+                    <div className="author-posts">
+                      <h3 className="author-post-title">{post.user?.firstName}'s recent posts </h3>
+                      <div className="divided"></div>
+                      <ul className="user-post-list d-flex flex-column">
+                        {postList && postList.map((e: PostModel) => <UserPostItem post={e} />)}
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                )}
               </aside>
             </div>
           </div>
         </div>
-        {/* <div className="detail-author text-center d-flex justify-center">
-          <Link to="/" className="detail-author-action d-flex flex-column item-center">
-            <div className="author-img d-flex">
-              <img src={!isErrorCover ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
-            </div>
-            <p className="author-name">{post.user?.displayName}</p>
-          </Link>
-        </div> */}
       </div>
     </>
   );

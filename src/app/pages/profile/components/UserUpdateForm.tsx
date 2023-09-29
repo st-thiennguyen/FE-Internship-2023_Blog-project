@@ -11,6 +11,7 @@ import { RootState } from '../../../stores/store';
 import { updateProfileAction, uploadAvatar } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
+import IconEdit from '../../../shared/components/icon/IconEdit';
 
 const schema = yup
   .object({
@@ -94,10 +95,13 @@ const UserUpdateForm = () => {
   return (
     <div className="update-info-tab">
       <div className="update-info-wrapper">
+        <p className="label-img">Profile picture</p>
         <div className="profile-avatar" onClick={clickSelectImage}>
           <img src={user.picture} alt={user.displayName} />
           <div className="profile-avatar-mark d-flex item-center justify-center">
-            <i className="icon icon-small icon-camera-white-20"></i>
+            <div className="mark-icon">
+              <IconEdit />
+            </div>
           </div>
           <input ref={avatarInputRef} className="profile-avatar-input" type="file" onChange={handleUploadAvatar} />
         </div>
@@ -175,7 +179,7 @@ const UserUpdateForm = () => {
               </div>
 
               <div className="d-flex justify-center mt-5">
-                <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
+                <Button label="Update Profile" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
               </div>
             </fieldset>
           </form>
