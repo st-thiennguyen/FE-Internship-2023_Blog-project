@@ -158,9 +158,11 @@
   }
   &-heart-outline-red-20 {
     background-image: url("../../assets/icons/ic-heart-outline-red-20.svg");
-
-    &-heart {
-      background-image: url("../../assets/icons/ic-heart.svg");
-    }
+  }
+  &-heart {
+    background-image: url("../../assets/icons/ic-heart.svg");
+  }
+  &-email-20 {
+    background-image: url("../../assets/icons/ic-email-20.svg");
   }
 }

@@ -6,6 +6,8 @@ import { RootAction } from '../../stores/store';
 import { ACTIONS_TYPE } from '../../shared/constants';
 import { ToastType } from '../../models/toast';
 import { showToast } from '../../shared/components/toast/toast.actions';
+import { getBookmark, getUserPosts } from '../../shared/services/user.service';
+import { GetPostResponse } from '../../models/response';
 
 const restorePost = () => {
   return {
@@ -36,7 +38,7 @@ export const getPosts = () => {
   };
 };
 
-export const getPostsSuccess = (data: PostModel[]) => {
+export const getPostsSuccess = (data: GetPostResponse) => {
   return {
     type: ACTIONS_TYPE.GET_POSTS_SUCCESS,
     payload: data,
@@ -66,7 +68,7 @@ export const fetchPostWithTags = (query: QueryPost) => async (dispatch: Dispatch
   dispatch(getPosts());
   try {
     const response = await getPublicPosts(query);
-    dispatch(getPostsSuccess(response as PostModel[]));
+    dispatch(getPostsSuccess(response as GetPostResponse));
   } catch (err) {
     dispatch(getPostFailure(`${err}`));
     dispatch(showToast(`${err}`, ToastType.ERROR));
@@ -77,7 +79,7 @@ export const getRecyclebinAction = (page: number, size: number) => async (dispat
   dispatch(getPosts());
   try {
     const response = await getRecyclebinPost({ page, size });
-    dispatch(getPostsSuccess(response as PostModel[]));
+    dispatch(getPostsSuccess(response as GetPostResponse));
   } catch (err) {
     dispatch(getPostFailure(`${err}`));
     dispatch(showToast(`${err}`, ToastType.ERROR));

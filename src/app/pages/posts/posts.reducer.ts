@@ -13,7 +13,7 @@ const initialPostsState: PublicPostState = {
   totalItems: 0,
 };
 
-export const postTagReducer = (state = initialPostsState, action: RootAction): PublicPostState => {
+export const postReducer = (state = initialPostsState, action: RootAction): PublicPostState => {
   switch (action.type) {
     case ACTIONS_TYPE.GET_POSTS:
       return {

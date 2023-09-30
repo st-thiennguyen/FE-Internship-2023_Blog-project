@@ -13,10 +13,10 @@ import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 const threshold = 400;
 
 const PostRecycleBin = () => {
-  const isLoading = useSelector((state: RootState) => state.postTag.isLoading);
-  const currentPage = useSelector((state: RootState) => state.postTag.currentPage);
-  const totalPage = useSelector((state: RootState) => state.postTag.totalPage);
-  const posts = useSelector((state: RootState) => state.postTag.data);
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
+  const currentPage = useSelector((state: RootState) => state.post.currentPage);
+  const totalPage = useSelector((state: RootState) => state.post.totalPage);
+  const posts = useSelector((state: RootState) => state.post.data);
 
   const dispatch = useDispatch<any>();
 

@@ -14,6 +14,7 @@ import Tags from './Tags';
 import { restorePostAction } from '../../pages/posts/posts.action';
 import IconComment from './icon/IconComment';
 import IconHeart from './icon/IconHeart';
+import IconBookmark from './icon/IconBookmark';
 
 interface PostItemProps {
   post: PostModel;
@@ -66,7 +67,7 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
 
   return (
     <>
-      <div className={`post d-flex ${isVertical && 'post-vertical'}`}>
+      <div className={`post d-flex item-center ${isVertical && 'post-vertical'}`}>
         <div className="post-delete d-flex item-center justify-center" onClick={handleShowModal}>
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
@@ -78,12 +79,14 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
           <Tags tags={post.tags} />
 
           <div className="post-content-body d-flex justify-between flex-column">
-            <Link to={`/posts/${post.id}`} className="post-link">
-              <h4 className="post-title">{post.title}</h4>
-            </Link>
-            <Link to={`/posts/${post.id}`} className="post-link">
-              <p className="post-desc">{post.description}</p>
-            </Link>
+            <div className="d-flex flex-column post-content">
+              <Link to={`/posts/${post.id}`} className="post-link">
+                <h4 className="post-title">{post.title}</h4>
+              </Link>
+              <Link to={`/posts/${post.id}`} className="post-link">
+                <p className="post-desc">{post.description}</p>
+              </Link>
+            </div>
             <div className="post-info d-flex item-center">
               <div className="post-author d-flex item-center">
                 <Link to={`/profile/${post.userId}`} className="post-link d-flex item-center">
@@ -115,11 +118,8 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
                 {post.comments}
               </li>
             </ul>
-            <div
-              className="icon-bookmark-wrapper d-flex item-center justify-center"
-              onClick={() => onClickBookmark && onClickBookmark(post.id)}
-            >
-              <i className="icon icon-small icon-bookmark-20"></i>
+            <div className="icon-bookmark-wrapper d-flex item-center justify-center">
+              <IconBookmark />
             </div>
           </div>
         </div>

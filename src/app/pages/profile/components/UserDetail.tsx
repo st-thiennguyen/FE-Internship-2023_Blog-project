@@ -49,11 +49,15 @@ const UserDetail = () => {
                       <span className="username">({profile.displayName})</span>
                     </h3>
                     <div className="user-contact d-flex item-center">
+                      <i className="icon icon-small icon-email-20"></i>
                       <a href={`mailto: ${profile.email}`} className="user-desc">
-                        Email: {profile.email}
+                        {profile.email}
                       </a>
+                    </div>
+                    <div className="user-contact d-flex item-center">
+                      <i className="icon icon-small icon-phone-20"></i>
                       <a href={`tel: ${profile.phone}`} className="user-desc">
-                        Phone: {profile.phone}
+                        {profile.phone}
                       </a>
                     </div>
                     <div className="user-event d-flex item-center">

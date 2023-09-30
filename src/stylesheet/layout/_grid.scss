@@ -145,7 +145,7 @@
 
 @media screen and (max-width: map-get($breakpoints, md)) {
   .container {
-    max-width: 100%;
+    max-width: 540px;
   }
   .row {
     margin: calc(0px - $p-col-sm);
