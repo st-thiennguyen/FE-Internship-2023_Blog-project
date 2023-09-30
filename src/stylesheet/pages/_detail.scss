@@ -1,3 +1,6 @@
+.detail-page {
+  min-height: 100vh;
+}
 .section-detail-page {
   .tag {
     &:hover {
@@ -223,8 +226,7 @@
     }
 
     .detail-post {
-      // min-width: 300px;
-      // flex: 1;
+      width: 100%;
 
       .detail-post-body {
         margin-bottom: 16px;

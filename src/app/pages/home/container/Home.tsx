@@ -12,26 +12,18 @@ import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
 
 const Home = () => {
-  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getRecommend(1, 10) as any);
   }, []);
 
-  useEffect(() => {
-    if (!isLogin) {
-      navigate('/');
-    }
-  }, [isLogin]);
-
   return (
     <div className="home-page">
       <div className="container">
-        {isLogin && recommendPosts.length > 0 && <Recommend />}
+        {recommendPosts.length > 0 && <Recommend />}
         <LatestPost />
         <GoToTopBtn />
       </div>

@@ -8,6 +8,7 @@ import { getRecyclebinAction, loadMore, resetCurrentPage } from '../posts.action
 import PostItem from '../../../shared/components/PostItem';
 import Loading from '../../../shared/components/Loading';
 import EmptyPost from '../../../shared/components/EmptyPost';
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
 const threshold = 400;
 
@@ -75,7 +76,7 @@ const PostRecycleBin = () => {
           </ul>
         )}
 
-        {isLoading && posts.length && <Loading />}
+        {isLoading && posts.length && <CirculatorLoading />}
       </div>
     </section>
   );

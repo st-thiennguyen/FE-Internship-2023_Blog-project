@@ -28,7 +28,7 @@ export const lastesPostReducer = (state = initialLastesPostState, action: RootAc
       const newPosts = action.payload.currentPage === 1 ? action.payload.data : [...state.data, ...action.payload.data];
       return {
         ...state,
-        data: newPosts,
+        data: [...state.data, ...action.payload.data],
         totalPage: action.payload.totalPage,
         totalItems: action.payload.totalItems,
         isLoading: false,
