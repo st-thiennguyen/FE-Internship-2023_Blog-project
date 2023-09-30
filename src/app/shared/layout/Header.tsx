@@ -95,7 +95,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/" className="auth-link d-flex item-center" onClick={handleLogout}>
+                            <Link to="/login" className="auth-link d-flex item-center" onClick={handleLogout}>
                               <img src={icLogout} alt="Icon logout" />
                               <p>Logout</p>
                             </Link>
