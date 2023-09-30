@@ -8,14 +8,15 @@ import { RootState } from '../../../stores/store';
 import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
 import { useLocation } from 'react-router-dom';
 import Loading from '../../../shared/components/Loading';
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
-const threshold = 400;
+const threshold = 100;
 
 const PostResult = () => {
-  const isLoading = useSelector((state: RootState) => state.postTag.isLoading);
-  const currentPage = useSelector((state: RootState) => state.postTag.currentPage);
-  const totalPage = useSelector((state: RootState) => state.postTag.totalPage);
-  const posts = useSelector((state: RootState) => state.postTag.data);
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
+  const currentPage = useSelector((state: RootState) => state.post.currentPage);
+  const totalPage = useSelector((state: RootState) => state.post.totalPage);
+  const posts = useSelector((state: RootState) => state.post.data);
 
   const dispatch = useDispatch<any>();
   const location = useLocation();
@@ -60,7 +61,7 @@ const PostResult = () => {
   }, [isLoading]);
 
   return (
-    <section className="section section-latest-post">
+    <section className="section section-post-result">
       <div className="container">
         <h2 className="section-title text-primary">RESULT OF FOUND</h2>
 
@@ -68,14 +69,14 @@ const PostResult = () => {
         {isLoading && posts.length === 0 && (
           <ul className="row">
             {Array.from({ length: 6 }, (item, index) => (
-              <li className="post-item col col-4 col-lg-6 col-sm-12" key={index}>
+              <li className="post-item col col-6 col-lg-12" key={index}>
                 <PostItemLoading />
               </li>
             ))}
           </ul>
         )}
 
-        {isLoading && posts.length && <Loading />}
+        {isLoading && posts.length && <CirculatorLoading />}
       </div>
     </section>
   );

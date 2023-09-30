@@ -193,7 +193,6 @@ const toggleBookmarkFailure = (error: string) => {
   };
 };
 
-
 // Update Bookmark
 const updateBookmarkStart = () => {
   return {

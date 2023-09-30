@@ -7,8 +7,8 @@ import { RootState } from '../../../stores/store';
 import { getDraftPostAction } from '../posts.action';
 
 const PostDraft = () => {
-  const isLoading = useSelector((state: RootState) => state.postTag.isLoading);
-  const posts = useSelector((state: RootState) => state.postTag.data);
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
+  const posts = useSelector((state: RootState) => state.post.data);
 
   const dispatch = useDispatch<any>();
 

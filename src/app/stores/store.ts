@@ -7,7 +7,7 @@ import { bookmarkReducer, detailPostReducer } from '../pages/detail-post/detail-
 import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 import { writePostReducer } from '../pages/write-post/write-post.reducer';
-import { postTagReducer } from '../pages/posts/posts.reducer';
+import { postReducer } from '../pages/posts/posts.reducer';
 import { profileReducer } from '../pages/profile/profile.reducers';
 import toastReducer from '../shared/components/toast/toast.reducer';
 
@@ -23,7 +23,7 @@ export const rootReducer = combineReducers({
   latestPost: lastesPostReducer,
   user: userReducer,
   writePost: writePostReducer,
-  postTag: postTagReducer,
+  post: postReducer,
   profile: profileReducer,
   recommend: recommendPostReducer,
   bookmark: bookmarkReducer,

@@ -9,12 +9,11 @@ const Bookmark = () => {
   const postListBookmark = useSelector((state: RootState) => state.bookmark.data);
 
   const handleUpdateBookmark = (id: number) => {
-    dispatch(updateBookmark(Number(id))as any);
+    dispatch(updateBookmark(Number(id)) as any);
   };
   useEffect(() => {
     dispatch(fetchBookmark() as any);
-  }, [])
-
+  }, []);
 
   return (
     <section className="section section-bookmark">
@@ -24,12 +23,15 @@ const Bookmark = () => {
           <p className="bookmark-count">Total: {postListBookmark.length}</p>
         </div>
         <ul className="row">
-          {postListBookmark && postListBookmark.map((bookmarkItem, index) => (
-            bookmarkItem.post &&
-            <li className="post-item col col-4" key={index}>
-              <PostItem post={bookmarkItem.post} onClickBookmark={handleUpdateBookmark} />
-            </li>
-          ))}
+          {postListBookmark &&
+            postListBookmark.map(
+              (bookmarkItem, index) =>
+                bookmarkItem.post && (
+                  <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
+                    <PostItem post={bookmarkItem.post} onClickBookmark={handleUpdateBookmark} isVertical={true} />
+                  </li>
+                ),
+            )}
         </ul>
       </div>
     </section>

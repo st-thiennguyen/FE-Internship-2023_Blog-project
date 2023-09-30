@@ -2,74 +2,47 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../../models/post';
-import { isImageUrlValid } from '../../../../shared/utils';
+import { convertDateToString, isImageUrlValid } from '../../../../shared/utils';
 
-import NoImg from '../../../../../assets/images/no-image.png';
+import userDefault from '../../../../../assets/images/user-default.png';
+import Tags from '../../../../shared/components/Tags';
 
 interface RecommendItemProps {
   post: PostModel;
 }
 const RecommendItem = ({ post }: RecommendItemProps) => {
-  const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
   useEffect(() => {
-    isImageUrlValid(post.cover).then((result) => setIsErrImg(!result));
-  }, [isErrImg, post.cover]);
-
-  const sliceTags = post.tags.slice(0, 3).map((tag) => {
-    return (
-      <li className="tag-item" key={tag}>
-        <span className="tag">#{tag}</span>
-      </li>
-    );
-  });
+    isImageUrlValid(post.user.picture).then((result) => setIsErrAvt(!result));
+  }, [isErrAvt, post.user.picture]);
 
   return (
-    <Link to={`/posts/${post.id}`} className="recommend-link">
-      <div className="recommend-item">
-        <div className="recommend d-flex flex-column">
-          <div className="recommend-cover">
-            <img className="recommend-cover-img" src={isErrImg ? NoImg : post.cover} alt={post.description} />
-          </div>
-          <div className="recommend-content">
-            <h3 className="recommend-title">{post.title}</h3>
-            <div className="recommend-author d-flex item-center flex-row">
-              <Link to={`profile/${post.userId}`} className="d-flex">
-                <div className="author-avatar">
-                  <img
-                    onError={() => setIsErrAvt(true)}
-                    src={!isErrAvt ? post.user.picture : require('../../../../../assets/images/user-default.png')}
-                    alt={post.user.displayName}
-                  />
-                </div>
-                <span className="author-name">{post.user.displayName}</span>
-              </Link>
-            </div>
-            <div className="recommend-footer d-flex justify-between">
-              <ul className="reaction-list d-flex">
-                <li className="reaction-item d-flex">
-                  <i className="icon icon-small icon-fire-20"></i>
-                  <span className="reaction-number">{post.likes}</span>
-                </li>
-                <li className="reaction-item d-flex">
-                  <i className="icon icon-small icon-comment"></i>
-                  <span className="reaction-number">{post.comments}</span>
-                </li>
-              </ul>
-              <ul className="tag-list d-flex">
-                {sliceTags}
-                {post.tags.length > 3 && (
-                  <li className="tag-item" key="more">
-                    <span className="tag">+{post.tags.length - 3}</span>
-                  </li>
-                )}
-              </ul>
-            </div>
+    <li className="recommend-post-item col col-4 col-md-6 col-sm-12">
+      <div className="post d-flex flex-column justify-between">
+        <div className="d-flex">
+          <Tags tags={post.tags} />
+        </div>
+        <Link to={`/posts/${post.id}`}>
+          <h3 className="post-title">{post.title}</h3>
+        </Link>
+        <div className="post-info-wrapper d-flex item-center">
+          <Link to={`/profile/${post.userId}`}>
+            {isErrAvt ? (
+              <img src={userDefault} alt={post.user.displayName} className="user-avatar" />
+            ) : (
+              <img src={post.user.picture} alt={post.user.displayName} className="user-avatar" />
+            )}
+          </Link>
+          <div className="post-info d-flex flex-column justify-between ">
+            <Link to={`/profile/${post.userId}`}>
+              <p className="author-name">{post.user.name || `${post.user.firstName} ${post.user.lastName}`}</p>
+            </Link>
+            <span className="post-date">{convertDateToString(post.createdAt, '-')}</span>
           </div>
         </div>
       </div>
-    </Link>
+    </li>
   );
 };
 

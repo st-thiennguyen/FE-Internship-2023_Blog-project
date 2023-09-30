@@ -1,5 +1,5 @@
 .container {
-  max-width: 1240px;
+  max-width: 1300px;
   width: 100%;
   padding: 0 20px;
   margin: 0 auto;
@@ -19,6 +19,14 @@
 
 .text-center {
   text-align: center;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.flex-1 {
+  flex: 1;
 }
 
 .flex-wrap {
@@ -97,9 +105,28 @@
   }
 }
 
+@media screen and (max-width: map-get($breakpoints, xl)) {
+  .container {
+    max-width: 960px;
+  }
+  .row {
+    margin: calc(0px - $p-col-lg);
+  }
+
+  .col {
+    padding: 0 $p-col-lg;
+  }
+
+  @for $i from 1 through 12 {
+    .col-xl-#{$i} {
+      width: percentage(calc($i / 12));
+    }
+  }
+}
+
 @media screen and (max-width: map-get($breakpoints, lg)) {
   .container {
-    max-width: 940px;
+    max-width: 960px;
   }
   .row {
     margin: calc(0px - $p-col-lg);
@@ -118,7 +145,7 @@
 
 @media screen and (max-width: map-get($breakpoints, md)) {
   .container {
-    max-width: 720px;
+    max-width: 540px;
   }
   .row {
     margin: calc(0px - $p-col-sm);
@@ -136,6 +163,9 @@
 }
 
 @media screen and (max-width: map-get($breakpoints, sm)) {
+  .container {
+    max-width: 100%;
+  }
   .row {
     margin: calc(0px - $p-col-sm);
   }

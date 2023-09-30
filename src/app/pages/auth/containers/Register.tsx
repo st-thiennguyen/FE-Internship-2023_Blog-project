@@ -111,7 +111,7 @@ const Register = () => {
   return (
     <div className="auth-page register-page">
       <div className="auth-wrapper row justify-between">
-        <div className="auth-body col col-6 col-sm-12">
+        <div className="auth-body col col-6 col-md-12">
           <h1 className="header-logo d-flex justify-between item-center">
             <Link to="/" className={isLoading ? 'logo-link disable-link' : 'logo-link'}>
               <img className="logo-img" src={logo} alt="Supremethod" />

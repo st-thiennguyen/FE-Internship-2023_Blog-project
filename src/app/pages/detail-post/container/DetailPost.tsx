@@ -11,10 +11,14 @@ import DetailPostCover from '../components/DetailPostCover';
 import DetailPostLoading from '../components/DetailPostLoading';
 import DetailPostComment from '../components/DetailPostComment';
 import Aside from '../../../shared/layout/aside/container/Aside';
-import { isImageUrlValid } from '../../../shared/utils';
+import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
 
 import noImage from '../../../../assets/images/no-image.png';
 import avaDefault from '../../../../assets/images/user-default.png';
+import DetailPostHeader from '../components/DetailPostHeader';
+import Loading from '../../../shared/components/Loading';
+import GoToTopBtn from '../../../shared/components/GoToTopBtn';
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
 const DetailPost = () => {
   const dispatch = useDispatch();
@@ -45,10 +49,6 @@ const DetailPost = () => {
     }
   }, [id]);
 
-  if (isLoading) {
-    return <DetailPostLoading />;
-  }
-
   if (isError && !post.id) {
     return <Navigate to="/page-not-found" />;
   }
@@ -59,33 +59,28 @@ const DetailPost = () => {
 
   return (
     <>
-      <section className="section section-detail-page">
-        <div className="container">
-          <div className="row">
-            <div className="col col-9">
-              <article>
-                <DetailPostCover
-                  cover={isErrorCover ? noImage : post.cover}
-                  title={post.title}
-                  authorName={post.user?.displayName}
-                  authorAvatar={isErrorAvatar ? avaDefault : post.user?.picture}
-                  datePost={post.createdAt}
-                  authorId={post.userId}
-                />
-                <section className="section section-detail-content">
-                  <div className="detail-content d-flex">
-                    <DetailPostContent post={post} scrollToComment={scrollToComment} />
-                  </div>
-                </section>
-              </article>
-              <DetailPostComment ref={commentRef} />
+      <div className="detail-page">
+        {isLoading ? (
+          <CirculatorLoading />
+        ) : (
+          <section className="section section-detail-page">
+            <div className="container">
+              <div className="row">
+                <div className="col col-12">
+                  <DetailPostHeader post={post} scrollToComment={scrollToComment} />
+                  <DetailPostCover cover={isErrorCover ? noImage : post.cover} />
+                  <section className="section section-detail-content">
+                    <div className="detail-content d-flex">
+                      <DetailPostContent post={post} commentRef={commentRef} />
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <GoToTopBtn />
             </div>
-            <div className="col col-3">
-              <Aside />
-            </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        )}
+      </div>
     </>
   );
 };

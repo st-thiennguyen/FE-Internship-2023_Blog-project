@@ -5,3 +5,12 @@
   right: $right;
   position: $position;
 }
+
+@mixin truncate-text($line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  line-clamp: $line;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

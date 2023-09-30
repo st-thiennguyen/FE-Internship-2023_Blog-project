@@ -81,7 +81,7 @@ const Login = () => {
   return (
     <div className="auth">
       <div className="auth-wrapper row">
-        <div className="auth-body col col-6 col-sm-12">
+        <div className="auth-body col col-6 col-md-12">
           <h1 className="logo">
             <Link to="/" className={isLoading ? 'disable-link' : ''}>
               <img className="logo-img" src={logoImg} alt="Supremethod" />

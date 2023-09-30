@@ -225,6 +225,7 @@
   border: 0.5px solid map-get($color, borderColor);
   border-radius: 12px;
   padding: 20px;
+  margin-bottom: 16px;
 
   &-title {
     font-size: map-get($font-size, lg);
@@ -233,12 +234,13 @@
 
   &-input {
     width: 100%;
-    height: auto;
     padding: 10px 20px;
+    min-height: 100px;
+    height: auto;
     border-radius: 12px;
     border: 0.5px solid map-get($color, borderColor);
     outline: none;
-    resize: none;
+    resize: vertical;
     font-family: "Manrope", sans-serif;
     font-size: map-get($font-size, lg);
   }
