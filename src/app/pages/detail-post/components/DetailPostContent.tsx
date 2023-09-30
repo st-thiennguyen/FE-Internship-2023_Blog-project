@@ -57,7 +57,10 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
           <div className="row">
             <div className="detail-body col col-8 col-xl-12">
               <article>
-                <div className="post-content" dangerouslySetInnerHTML={{ __html: removeEmptyTags(post.content) }}></div>
+                <div
+                  className="post-content"
+                  dangerouslySetInnerHTML={{ __html: post.content ? removeEmptyTags(post.content) : '' }}
+                ></div>
               </article>
               <div className="divided"></div>
               <DetailPostComment ref={commentRef} />
