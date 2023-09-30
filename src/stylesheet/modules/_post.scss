@@ -14,11 +14,6 @@
     font-size: map-get($font-size, xl);
     font-weight: map-get($font-weight, semibold);
     @include truncate-text(2);
-  }
-  .post-body {
-    min-height: 138px;
-  }
-  .post-desc {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -34,6 +29,10 @@
       color: map-get($color, primary);
     }
   }
+  .post-body {
+    min-height: 138px;
+  }
+
   &-desc {
     min-height: 48px;
     font-size: map-get($font-size, md);
