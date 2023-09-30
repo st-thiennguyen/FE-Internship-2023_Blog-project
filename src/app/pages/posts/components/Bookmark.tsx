@@ -1,8 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-import PostItem from '../../../shared/components/PostItem';
-import { fetchBookmark, updateBookmark } from '../../detail-post/detail-post.actions';
-import { RootState } from '../../../stores/store';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '../../../stores/store';
+import { fetchBookmark, updateBookmark } from '../../detail-post/detail-post.actions';
+
+import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../../shared/components/EmptyPost';
 
 const Bookmark = () => {
