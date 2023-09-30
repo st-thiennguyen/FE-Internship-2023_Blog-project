@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { RootState } from '../../../stores/store';
 import { Gender, regexPhoneNumber } from '../../../shared/constants';
 import { convertDateFormat, convertDateToString } from '../../../shared/utils';
-import { RootState } from '../../../stores/store';
 import { updateProfileAction, uploadAvatar } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
@@ -43,6 +43,7 @@ type FormData = yup.InferType<typeof schema>;
 
 const UserUpdateForm = () => {
   const [errorAvatarMessage, setErrorAvatarMessage] = useState('');
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
 
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
   const user = useSelector((state: RootState) => state.auth.userInfo);
@@ -126,7 +127,12 @@ const UserUpdateForm = () => {
       <div className="update-info-wrapper">
         <p className="label-img">Profile picture</p>
         <div className="profile-avatar" onClick={clickSelectImage}>
-          <img src={user.picture} alt={user.displayName} />
+          <img
+            onError={() => setIsErrorAvatar(true)}
+            src={!isErrorAvatar ? user.picture : require('../../../../assets/images/user-default.png')}
+            alt={user.displayName}
+            className="user-avatar-img"
+          />
           <div className="profile-avatar-mark d-flex item-center justify-center">
             <div className="mark-icon">
               <IconEdit />

@@ -1,5 +1,6 @@
 .auth {
   .auth-title {
+    margin: 40px 0;
     &::after {
       content: "";
       position: absolute;
@@ -12,16 +13,24 @@
     }
   }
 
+  .login-subtext {
+    width: 50px;
+    margin: 0 4px;
+    font-size: map-get($map: $font-size, $key: sm);
+    color: map-get($map: $color, $key: subtext);
+  }
   .login-icon {
-    width: 30px;
+    width: 20px;
+    margin-right: 10px;
   }
 
-  .login-external-list {
-    width: 30%;
-    padding: 30px 0;
-    margin: 0 auto;
+  .login-external {
+    padding: 8px;
+    margin-bottom: 50px;
+    border-radius: 12px;
+    border: 1px solid #c8c8c8;
+    font-size: map-get($map: $font-size, $key: sm);
   }
-
   .input-password-group {
     .icon-eye {
       position: absolute;
