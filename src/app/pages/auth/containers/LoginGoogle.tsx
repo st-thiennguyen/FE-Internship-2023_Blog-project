@@ -26,14 +26,11 @@ const LoginGoogle = () => {
   };
 
   useEffect(() => {
-    if (!accessToken) {
-      navigate('/');
-    } else {
+    if (accessToken) {
       setLocalStorage(StorageKey.ACCESS_TOKEN, accessToken);
       getUser();
-
-      navigate('/');
     }
+    navigate('/');
   }, []);
 
   return <></>;
