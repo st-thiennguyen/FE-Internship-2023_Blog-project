@@ -1,15 +1,15 @@
 import { RefObject, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
-import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserPostAction } from '../../profile/profile.actions';
 import { RootState } from '../../../stores/store';
+import { StorageKey } from '../../../shared/constants';
+import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
+import { getUserPostAction } from '../../profile/profile.actions';
+
 import UserPostItem from './UserPostItem';
 import DetailPostComment from './DetailPostComment';
-import { StorageKey } from '../../../shared/constants';
 
 import avatarDefault from '../../../../assets/images/user-default.png';
 
@@ -82,7 +82,7 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                       </div>
                     </div>
                     <div className="author-img">
-                      <img src={!isErrorAvatar ? post.user?.picture : avatarDefault} alt="Image of author" />
+                      <img src={!isErrorAvatar ? post.user?.picture : avatarDefault} alt="avatar" />
                     </div>
                   </Link>
                 </div>

@@ -4,19 +4,14 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
-import { fetchBookmark, fetchComments, fetchDetailBlog } from '../detail-post.actions';
+import { fetchComments, fetchDetailBlog } from '../detail-post.actions';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
-import DetailPostLoading from '../components/DetailPostLoading';
-import DetailPostComment from '../components/DetailPostComment';
-import Aside from '../../../shared/layout/aside/container/Aside';
-import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
+import { isImageUrlValid } from '../../../shared/utils';
 
 import noImage from '../../../../assets/images/no-image.png';
-import avaDefault from '../../../../assets/images/user-default.png';
 import DetailPostHeader from '../components/DetailPostHeader';
-import Loading from '../../../shared/components/Loading';
 import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
@@ -35,12 +30,10 @@ const DetailPost = () => {
   }, []);
 
   const [isErrorCover, setIsErrorCover] = useState(false);
-  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
-    isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
-  }, [post, isErrorCover, isErrorAvatar]);
+  }, [post, isErrorCover]);
 
   useEffect(() => {
     if (id) {
