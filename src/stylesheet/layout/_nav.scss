@@ -38,8 +38,11 @@
 
         .auth-item {
           width: 100%;
+          &:not(:last-child) {
+            border-bottom: 1px solid map-get($map: $color, $key: borderColor);
+          }
           &:hover {
-            background-color: #f4f4f4f4;
+            background-color: #ebe9e9f4;
           }
           .auth-info {
             padding: 12px;

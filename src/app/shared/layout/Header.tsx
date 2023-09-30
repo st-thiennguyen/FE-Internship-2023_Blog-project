@@ -18,14 +18,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const authContext = useContext(AuthContext);
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN) ? true : false;
-  const [isErrorCover, setIsErrorCover] = useState(false);
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
 
   const handleLogout = () => {
     dispatch(logoutAction() as any);
   };
 
   useEffect(() => {
-    isImageUrlValid(authContext?.userInfo.picture).then((value) => setIsErrorCover(!value));
+    isImageUrlValid(authContext?.userInfo.picture).then((value) => setIsErrorAvatar(!value));
   }, [authContext?.userInfo.picture]);
 
   return (
@@ -58,7 +58,7 @@ const Header = () => {
                     <>
                       <div className="navbar-content d-flex justify-center item-center">
                         <img
-                          src={!isErrorCover ? authContext.userInfo.picture : avatarDefault}
+                          src={!isErrorAvatar ? authContext.userInfo.picture : avatarDefault}
                           alt="avatar"
                           className="avatar-user-header"
                         />
@@ -68,7 +68,11 @@ const Header = () => {
                           <li className="auth-item">
                             <Link to="/profile" className="auth-link auth-link-info">
                               <div className="auth-info d-flex item-center">
-                                <img src={authContext.userInfo.picture} alt="avatar" className="avatar-user" />
+                                <img
+                                  src={!isErrorAvatar ? authContext.userInfo.picture : avatarDefault}
+                                  alt="avatar"
+                                  className="avatar-user"
+                                />
                                 <div className="auth-info-text">
                                   <p className="auth-info-name text-truncate-1">{authContext.userInfo?.displayName}</p>
                                   <p className="auth-info-email text-truncate-1">{authContext.userInfo?.email}</p>
