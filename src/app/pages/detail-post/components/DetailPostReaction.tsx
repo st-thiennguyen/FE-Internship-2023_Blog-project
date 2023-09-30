@@ -47,10 +47,13 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           <span className="action-count">{commentCount}</span>
         </li>
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action" onClick={handleAddBookMark}> {
-            !isBookmark && !isLogin ? <i className="icon icon-small icon-bookmark-20"></i> :
-              <i className='icon icon-small icon-bookmark-blue-20'></i>
-          }
+          <button className="btn btn-post-action" onClick={handleAddBookMark}>
+            {
+              isLogin ? !isBookmark ?
+                <i className="icon icon-small icon-bookmark-20"></i> :
+                <i className='icon icon-small icon-bookmark-blue-20'></i> :
+                <i className="icon icon-small icon-bookmark-20"></i>
+            }
           </button>
         </li>
       </ul>
