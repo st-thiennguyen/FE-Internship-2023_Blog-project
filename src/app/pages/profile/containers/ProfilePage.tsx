@@ -22,7 +22,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (id === userId.toString() || id === 'me') {
-      // navigate('/profile');
+      navigate('/profile');
     }
     dispatch(getUserProfileAction(id ? id : 'me') as any);
   }, [id]);
