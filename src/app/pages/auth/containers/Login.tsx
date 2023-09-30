@@ -14,8 +14,6 @@ import Button from '../../../shared/components/Button';
 
 import icEye from '../../../../assets/icons/ic-eye-10.svg';
 import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
-import icFacebook from '../../../../assets/icons/ic-facebook-30.svg';
-import icGithub from '../../../../assets/icons/ic-github-30.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
 import loginImg from '../../../../assets/images/bg-auth.png';
 import logoImg from '../../../../assets/images/logo.png';
@@ -88,26 +86,6 @@ const Login = () => {
             </Link>
           </h1>
           <h2 className="auth-title text-center">LOGIN</h2>
-          <ul className="login-external-list row text-center">
-            <li className="login-external-item col col-4">
-              <a
-                href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/login-google`}
-                className="external-item-link"
-              >
-                <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
-              </a>
-            </li>
-            <li className="login-external-item col col-4">
-              <a href="/" className="external-item-link">
-                <img src={icFacebook} alt="icon facebook" className="login-icon icon-facebook" />
-              </a>
-            </li>
-            <li className="login-external-item col col-4">
-              <a href="/" className="external-item-link">
-                <img src={icGithub} alt="icon github" className="login-icon icon-github" />
-              </a>
-            </li>
-          </ul>
           <form className="form login-form" onSubmit={onSubmit}>
             <fieldset className="form-fieldset" disabled={isLoading}>
               <div className="form-input-group">
@@ -147,8 +125,19 @@ const Login = () => {
               <Button label="login" isLoading={isLoading} optionClassName="btn-primary btn-auth" />
             </fieldset>
           </form>
-          <p className="text-center">
-            You"re new to Supremethod?{' '}
+          <div className="d-flex item-center">
+            <div className="divided"></div>
+            <p className="login-subtext text-center">Or</p>
+            <div className="divided"></div>
+          </div>
+          <a href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/login-google`} className="external-item-link">
+            <div className="login-external d-flex item-center justify-center">
+              <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
+              <p>Login with Google</p>
+            </div>
+          </a>
+          <p className="text-center login-footer">
+            You're new to Supremethod?{' '}
             <Link to="/register" className={`auth-link ${isLoading ? 'disable-link' : ''}`}>
               Register
             </Link>
