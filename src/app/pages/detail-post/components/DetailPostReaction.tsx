@@ -43,6 +43,10 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     }
   };
 
+  const handleClose = () => {
+    setIsShowLike(false);
+  };
+
   return (
     <div className="detail-action">
       <ul className="action-list d-flex">
@@ -66,7 +70,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           </button>
         </li>
       </ul>
-      {isShowLike && <UserList likes={likeList} />}
+      {isShowLike && <UserList likes={likeList} show={isShowLike} handleClose={handleClose} />}
     </div>
   );
 };

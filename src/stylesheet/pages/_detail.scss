@@ -59,8 +59,11 @@
       margin: 0 8px 0 8px;
       min-width: 20px;
       font-size: 12px;
+      cursor: default;
     }
-
+    .like-count {
+      cursor: pointer;
+    }
     .like-active > .btn-post-action {
       background-color: #fff1f2;
     }
@@ -260,7 +263,7 @@
   .section-comment {
     border-radius: 6px;
     margin-bottom: 40px;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 90px;
 
     .comment-title {
       font-size: 20px;
