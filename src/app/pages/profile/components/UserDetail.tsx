@@ -8,12 +8,19 @@ import { ProfileModel } from '../../../models/user';
 
 import Button from '../../../shared/components/Button';
 import { updateFollowAction } from '../profile.actions';
-import Loading from '../../../shared/components/Loading';
+import UserList from '../../../shared/components/UserList';
+import { UserInfo } from '../../../models/auth';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);
   const isLoadingPage = useSelector((state: RootState) => state.profile.isLoading);
   const isLoadingFollow = useSelector((state: RootState) => state.profile.isLoadingFollow);
+  const followers = useSelector((state: RootState) => state.profile.followers);
+  const following = useSelector((state: RootState) => state.profile.following);
+
+  const [isShowList, setIsShowList] = useState(false);
+  const [listTitle, setListTitle] = useState('');
+  const [userList, setUserList] = useState<UserInfo[]>([]);
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -22,6 +29,18 @@ const UserDetail = () => {
 
   const handleUpdateFollow = () => {
     dispatch(updateFollowAction(id!) as any);
+  };
+
+  const handleClose = () => {
+    setIsShowList(false);
+  };
+
+  const handleShow = (title: string, type: UserInfo[]) => {
+    setIsShowList(true);
+    if (title === 'Following' && !id) {
+      setListTitle('My Following');
+    } else setListTitle(title);
+    setUserList(type);
   };
 
   return (
@@ -78,14 +97,14 @@ const UserDetail = () => {
                   <div className="social-external">
                     <div className="user-social d-flex justify-between item-center">
                       <ul className="user-social-list d-flex">
-                        <li className="user-social-item">
+                        <li className="user-social-item" onClick={() => handleShow('Followers', followers)}>
                           <div className="d-flex item-center">
                             <p className="social-count text-center ">{profile.followers}</p>
                             <p className="social-desc text-center">Followers</p>
                           </div>
                         </li>
                         <li className="user-social-item">
-                          <div className="d-flex item-center">
+                          <div className="d-flex item-center" onClick={() => handleShow('Following', following)}>
                             <p className="social-count text-center">{profile.followings}</p>
                             <p className="social-desc text-center">Following</p>
                           </div>
@@ -113,6 +132,7 @@ const UserDetail = () => {
           </div>
         </section>
       </div>
+      {isShowList && <UserList title={listTitle} show={isShowList} handleClose={handleClose} list={userList} />}
     </section>
   );
 };

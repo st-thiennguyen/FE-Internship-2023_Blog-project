@@ -70,7 +70,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           </button>
         </li>
       </ul>
-      {isShowLike && <UserList likes={likeList} show={isShowLike} handleClose={handleClose} />}
+      {isShowLike && <UserList title="Like list" list={likeList} show={isShowLike} handleClose={handleClose} />}
     </div>
   );
 };

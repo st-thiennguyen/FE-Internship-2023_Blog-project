@@ -1,7 +1,9 @@
 import { RootAction } from '../../stores/store';
+import { UserInfo } from '../../models/auth';
 import { BookmarkModel, DetailState, PostModel } from '../../models/post';
 import { InteractionItemModel } from '../../models/interaction';
-import { ACTIONS_TYPE } from '../../shared/constants';
+import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
+import { getLocalStorage } from '../../shared/utils';
 
 const initialState: DetailState = {
   data: {} as PostModel,
@@ -73,6 +75,17 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: '',
       };
     case ACTIONS_TYPE.UPDATE_LIKE_SUCCESS:
+      // add/remove user from like list
+      const currentUser: UserInfo = getLocalStorage(StorageKey.USER);
+      const interact = {} as InteractionItemModel;
+      const newLikes = () => {
+        if (action.payload) {
+          state.likes.push({ ...interact, user: currentUser });
+          return state.likes;
+        } else {
+          return state.likes.filter((item) => item.userId !== currentUser.id);
+        }
+      };
       return {
         ...state,
         data: {
@@ -80,6 +93,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
           isLiked: action.payload,
           likes: action.payload ? state.data?.likes + 1 : state.data?.likes - 1,
         },
+        likes: newLikes(),
         isLoading: false,
         isSuccess: true,
       };

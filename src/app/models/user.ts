@@ -1,3 +1,4 @@
+import { UserInfo } from './auth';
 import { PostModel } from './post';
 
 export interface UserModel {
@@ -36,4 +37,17 @@ export interface UserState {
   isError: boolean;
   isSuccess: boolean;
   message: string;
+}
+
+export interface ProfileState {
+  data: ProfileModel;
+  followers: UserInfo[];
+  following: UserInfo[];
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+  isLoadingFollow: boolean;
+  message: string;
+  isDeleteSuccess?: boolean;
+  isDeleteFailure?: boolean;
 }

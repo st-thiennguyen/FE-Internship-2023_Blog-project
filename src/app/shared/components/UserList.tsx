@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
 import { InteractionItemModel } from '../../models/interaction';
+import { UserInfo } from '../../models/auth';
 import UserItem from './UserItem';
 
 interface UserListProps {
+  title: string;
   show: boolean;
   handleClose: () => void;
-  likes: InteractionItemModel[];
+  list: InteractionItemModel[] | UserInfo[];
 }
 
-const UserList = ({ show, likes, handleClose }: UserListProps) => {
+const UserList = ({ title, show, list, handleClose }: UserListProps) => {
   useEffect(() => {
     document.body.style.overflowY = 'hidden';
     return () => {
@@ -20,16 +22,16 @@ const UserList = ({ show, likes, handleClose }: UserListProps) => {
     <div className="user-list-backdrop">
       <div className="user-list-wrapper">
         <div className="user-list-header d-flex item-center justify-between">
-          <h3 className="user-list-title">Like list</h3>
+          <h3 className="user-list-title">{title}</h3>
           <div className="btn btn-close" onClick={handleClose}>
             &times;
           </div>
         </div>
         <div className="divided"></div>
         <ul className="user-list">
-          {likes.map((item, id) => (
+          {list.map((item, id) => (
             <li className="user-item" key={id}>
-              <UserItem user={item.user} />
+              <UserItem user={item.user ? item.user : item} type={title} />
             </li>
           ))}
         </ul>
