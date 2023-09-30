@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
@@ -22,16 +23,21 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUpdateLike = () => {
-    if (postId) {
+    if (postId && isLogin) {
       dispatch(updateLikeAction(postId) as any);
+    } else {
+      navigate('/login');
     }
   };
 
   const handleAddBookMark = () => {
-    if (postId) {
+    if (postId && isLogin) {
       dispatch(toggleBookmarkAction(postId) as any);
+    } else {
+      navigate('/login');
     }
   };
 
