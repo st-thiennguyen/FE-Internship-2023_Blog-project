@@ -23,7 +23,7 @@ import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 const DetailPost = () => {
   const dispatch = useDispatch();
 
-  const post: PostModel = useSelector((state: RootState) => state.detail.data);
+  const post: PostModel = useSelector((state: RootState) => state.detail?.data);
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
   const isError = useSelector((state: RootState) => state.detail.isError);
 

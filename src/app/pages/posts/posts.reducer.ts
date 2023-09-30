@@ -78,6 +78,30 @@ export const postReducer = (state = initialPostsState, action: RootAction): Publ
         message: action.payload,
       };
 
+    case ACTIONS_TYPE.GET_DRAFT_POST:
+      return {
+        ...state,
+        data: [],
+        isLoading: true,
+        isSuccess: false,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_DRAFT_POST_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        isSuccess: true,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_DRAFT_POST_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
     default:
       return state;
   }

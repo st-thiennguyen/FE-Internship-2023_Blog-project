@@ -14,6 +14,19 @@
     font-size: map-get($font-size, xl);
     font-weight: map-get($font-weight, semibold);
     @include truncate-text(2);
+  }
+  .post-body {
+    min-height: 138px;
+  }
+  .post-desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+
+    margin-bottom: 8px;
+    overflow: hidden;
+
     color: map-get($color, text);
     margin-bottom: 12px;
     margin-top: 8px;

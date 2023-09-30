@@ -148,7 +148,7 @@ export const getBookmarkStart = () => {
   };
 };
 
-export const getBookmartSuccess = (data: BookmarkModel[]) => {
+export const getBookmarkSuccess = (data: BookmarkModel[]) => {
   return {
     type: ACTIONS_TYPE.GET_BOOKMARK_SUCCESS,
     payload: data,
@@ -166,7 +166,7 @@ export const fetchBookmark = () => async (dispatch: Dispatch<RootAction>) => {
   dispatch(getBookmarkStart());
   try {
     const response = await getBookmark();
-    dispatch(getBookmartSuccess(response as BookmarkModel[]));
+    dispatch(getBookmarkSuccess(response as BookmarkModel[]));
   } catch (error) {
     dispatch(getRecommendFailure(`${error}`));
   }

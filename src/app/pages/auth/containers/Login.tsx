@@ -74,7 +74,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLogin) {
-      navigate('/');
+      navigate(-1);
     }
   }, [isLogin]);
 

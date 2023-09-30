@@ -134,7 +134,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         ...state,
         isLoading: false,
         isError: true,
-        message: 'update bookmark fail !',
+        message: action.payload,
       };
     default:
       return state;
