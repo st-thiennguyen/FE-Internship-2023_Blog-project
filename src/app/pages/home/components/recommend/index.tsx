@@ -1,31 +1,22 @@
 import { useSelector } from 'react-redux';
 
-import Slider from 'react-slick';
-
 import { RootState } from '../../../../stores/store';
-import RecommendItem from './RecommendItem';
-
+import PostItem from '../../../../shared/components/PostItem';
 const Recommend = () => {
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
   return (
     <section className="section section-recommend">
-      <h2 className="section-title">Recommended for you</h2>
-      <Slider {...settings} className="recommend-list">
-        {recommendPosts.map((post) => {
-          return <RecommendItem post={post} key={post.id} />;
+      <h2 className="section-title">Recommend</h2>
+      <ul className="recommend-list">
+        {recommendPosts.slice(0, 5).map((post) => {
+          return (
+            <li className="recommend-item">
+              <PostItem post={post} isVertical={true} />
+            </li>
+          );
         })}
-      </Slider>
+      </ul>
     </section>
   );
 };

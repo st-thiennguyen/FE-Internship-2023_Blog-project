@@ -3,7 +3,7 @@
   top: calc($header-height + 8px);
   left: 50%;
 
-  visibility: hidden;
+  display: none;
   min-width: 360px;
   margin-left: -180px;
   z-index: 9;
@@ -62,7 +62,7 @@
 }
 
 .toast.show {
-  visibility: visible;
+  display: block;
   animation:
     fadein 0.5s,
     fadeout 0.5s 3.6s;

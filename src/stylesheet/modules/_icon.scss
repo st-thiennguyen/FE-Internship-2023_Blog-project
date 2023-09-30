@@ -13,6 +13,20 @@
     height: 24px;
   }
 
+  &-large {
+    width: 50px;
+    height: 50px;
+  }
+  &-xxl {
+    width: 60px;
+    height: 60px;
+  }
+
+  &-xxl {
+    width: 60px;
+    height: 60px;
+  }
+
   &-user-20 {
     background-image: url("../../assets/icons/ic-user-20.svg");
   }
@@ -33,6 +47,10 @@
   }
   &-twitter-20 {
     background-image: url("../../assets/icons/ic-twitter-20.svg");
+  }
+
+  &-bookmark-blue-20 {
+    background-image: url("../../assets/icons/ic-bookmark-blue-20.svg");
   }
 
   &-eye {
@@ -72,8 +90,14 @@
   &-comment-20 {
     background-image: url("../../assets/icons/ic-comment-20.svg");
   }
+  &-comment-outline-green-20 {
+    background-image: url("../../assets/icons/ic-comment-outline-green-20.svg");
+  }
   &-bookmark-20 {
     background-image: url("../../assets/icons/ic-bookmark-20.svg");
+  }
+  &-bookmark-fill {
+    background-image: url("../../assets/icons/ic-bookmark-fill.svg");
   }
   &-close-20 {
     background-image: url("../../assets/icons/ic-close-20.svg");
@@ -121,5 +145,30 @@
 
   &-trash-fill-20 {
     background-image: url("../../assets/icons/ic-trash-fill-20.svg");
+  }
+
+  &-restore-60 {
+    background-image: url("../../assets/icons/ic-restore-60.svg");
+  }
+  &-arrow-right-20 {
+    background-image: url("../../assets/icons/ic-arrow-right-20.svg");
+  }
+  &-heart-20 {
+    background-image: url("../../assets/icons/ic-heart-20.svg");
+  }
+  &-heart-outline-red-20 {
+    background-image: url("../../assets/icons/ic-heart-outline-red-20.svg");
+  }
+  &-heart {
+    background-image: url("../../assets/icons/ic-heart.svg");
+  }
+  &-email-20 {
+    background-image: url("../../assets/icons/ic-email-20.svg");
+  }
+  &-public {
+    background-image: url("../../assets/icons/ic-public.svg");
+  }
+  &-private {
+    background-image: url("../../assets/icons/ic-private.svg");
   }
 }

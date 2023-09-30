@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 interface EditorPostVisibilityProps {
   onChangeValue: (value: string) => void;
-  currentStatus?: string | undefined;
+  currentStatus?: string;
 }
 
 const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibilityProps) => {
-  const [status, setStatus] = useState('public');
   useEffect(() => {
-    if(currentStatus) setStatus(currentStatus);
-  }, [currentStatus])
-  useEffect(() => {
-    onChangeValue(status);
-  }, [status]);
+    onChangeValue(currentStatus!);
+  }, [currentStatus]);
+
   return (
     <div className="editor-visibility">
       <h5 className="editor-visibility-title">Visibility</h5>
@@ -23,12 +20,12 @@ const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibi
               type="radio"
               id="public"
               name="visibility"
-              onChange={(e) => setStatus(e.target.value)}
-              checked={status === 'public'}
+              onChange={(e) => onChangeValue(e.target.value)}
+              checked={currentStatus === 'public'}
               value="public"
             />
             <span>
-              Public <span className="icon">📢</span>{' '}
+              Public <i className="icon icon-public icon-small" />
             </span>
           </label>
         </li>
@@ -39,11 +36,11 @@ const EditorPostVisibility = ({ onChangeValue, currentStatus }: EditorPostVisibi
               id="private"
               name="visibility"
               value="private"
-              checked={status === 'private'}
-              onChange={(e) => setStatus(e.target.value)}
+              checked={currentStatus === 'private'}
+              onChange={(e) => onChangeValue(e.target.value)}
             />
             <span>
-              Private <span className="icon">🔏</span>{' '}
+              Private <i className="icon icon-private icon-small" />
             </span>
           </label>
         </li>

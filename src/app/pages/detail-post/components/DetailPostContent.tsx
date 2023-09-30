@@ -1,57 +1,107 @@
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
-import { isImageUrlValid } from '../../../shared/utils';
+import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
 
-import avaDefault from '../../../../assets/images/user-default.png';
-import DetailPostReaction from './DetailPostReaction';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserPostAction } from '../../profile/profile.actions';
+import { RootState } from '../../../stores/store';
+import UserPostItem from './UserPostItem';
+import DetailPostComment from './DetailPostComment';
+import { StorageKey } from '../../../shared/constants';
+
+import avatarDefault from '../../../../assets/images/user-default.png';
 
 interface DetailPostProps {
   post: PostModel;
-  scrollToComment: () => void;
+  commentRef: RefObject<HTMLDivElement>;
 }
 
-const DetailPostContent = ({ post, scrollToComment }: DetailPostProps) => {
-  const [isErrorCover, setIsErrorCover] = useState(false);
+const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN) || false;
+
+  const userPosts = useSelector((state: RootState) => state.profile.data.posts);
+
+  const isSuccess = useSelector((state: RootState) => state.detail.isSuccess);
+
+  const postList = userPosts?.slice(0, 4).filter((item) => item.id !== post.id);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    isImageUrlValid(post.user?.picture).then((value) => setIsErrorCover(!value));
-  }, [post.user?.picture]);
+    post.user?.picture && isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
+  }, [isSuccess]);
+
+  const removeEmptyTags = (htmlString: string) => {
+    const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+    const tagsToRemove = doc.querySelectorAll('*:empty');
+    tagsToRemove.forEach((tag) => {
+      tag.remove();
+    });
+    return doc.body.innerHTML;
+  };
+
+  useEffect(() => {
+    if (post.user?.id && isLogin) {
+      dispatch(getUserPostAction(`${post.user?.id}`) as any);
+    }
+  }, [post.user?.id]);
 
   return (
     <>
-      <DetailPostReaction
-        postId={post.id}
-        likeCount={post.likes}
-        commentCount={post.comments}
-        scrollToComment={scrollToComment}
-      />
       <div className="detail-post">
         <div className="detail-post-body">
-          <h2 className="post-title">{post.title}</h2>
-          <div className="post-desc" dangerouslySetInnerHTML={{ __html: post.description }}></div>
-          <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
-        </div>
-        <div className="post-tag">
-          <ul className="tag-list d-flex flex-wrap justify-end">
-            {post.tags?.length > 0 &&
-              post.tags?.map((item, index) => (
-                <li className="tag-item" key={index}>
-                  <Link to="/" className="tag">
-                    #{item}
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-        <div className="detail-author text-center d-flex justify-center">
-          <Link to="/" className="detail-author-action d-flex flex-column item-center">
-            <div className="author-img d-flex">
-              <img src={!isErrorCover ? post.user?.picture : avaDefault} alt={post.user?.displayName} />
+          <div className="row">
+            <div className="detail-body col col-8 col-xl-12">
+              <article>
+                <div className="post-content" dangerouslySetInnerHTML={{ __html: removeEmptyTags(post.content) }}></div>
+              </article>
+              <div className="divided"></div>
+              <DetailPostComment ref={commentRef} />
             </div>
-            <p className="author-name">{post.user?.displayName}</p>
-          </Link>
+            <div className="col col-4 col-xl-12">
+              <aside className="aside aside-detail d-flex flex-column">
+                <div className="detail-author">
+                  <Link to={`/profile/${post.user?.id}`} className="detail-author-link d-flex item-center">
+                    <div className="author-info flex-1">
+                      <h5 className="author-name text-truncate-1">
+                        {post.user?.displayName || post.user?.firstName + ' ' + post.user?.lastName}
+                      </h5>
+                      <p className="author-email text-truncate-1">{post.user?.email}</p>
+                      <p className="author-gender text-truncate-1">Gender : {post.user?.gender || '----'}</p>
+                      <div className="author-connect d-flex">
+                        <span className="follow">
+                          <span className="follow-label">Followers : </span> {post.user?.followers}
+                        </span>
+                        <span className="follow">
+                          <span className="follow-label">Following : </span> {post.user?.followings}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="author-img">
+                      <img src={!isErrorAvatar ? post.user?.picture : avatarDefault} alt="Image of author" />
+                    </div>
+                  </Link>
+                </div>
+                {isLogin && postList && (
+                  <div className="detail-author-post">
+                    <div className="author-posts">
+                      <h3 className="author-post-title">
+                        {post.user?.displayName || post.user?.firstName}'s recent posts
+                      </h3>
+                      <div className="divided"></div>
+                      <ul className="user-post-list d-flex flex-column">
+                        {postList && postList.map((item: PostModel) => <UserPostItem key={post.id} post={item} />)}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </aside>
+            </div>
+          </div>
         </div>
       </div>
     </>

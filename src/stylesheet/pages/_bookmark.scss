@@ -1,0 +1,20 @@
+.section-bookmark {
+  .section-header {
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+
+  .post {
+    &:hover {
+      .post-bookmark {
+        display: block;
+      }
+      .remove-bookmark {
+        opacity: 1;
+      }
+    }
+    .post-action-link {
+      display: none;
+    }
+  }
+}

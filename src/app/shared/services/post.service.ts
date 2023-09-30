@@ -1,6 +1,6 @@
 import { ApiService } from './index';
 import { ENDPOINT } from '../constants/endpoint';
-import { QueryPost } from '../../models/post';
+import { PostProps, QueryPost } from '../../models/post';
 
 export const getDetailPost = (id: number) => {
   const api = new ApiService();
@@ -32,19 +32,30 @@ export const postArticles = (data: any) => {
 };
 
 export const updatePostArticles = (data: any, id: number) => {
-  const formData = new URLSearchParams();
-  Object.keys(data).forEach((key) => {
-    formData.append(key, data[key]);
-  });
-
   const api = new ApiService();
-  return api.put(`${ENDPOINT.post.index}/${id}`, data, {
+  return api.put(`${ENDPOINT.post.index}/${id}`, data);
+};
+
+export const getSignUrlImage = (file: any) => {
+  const api = new ApiService();
+  const params = {
+    type_upload: 'cover-post',
+    file_name: file.name,
+    file_type: file.type,
+  };
+  return api.get(`${ENDPOINT.signatures.index}`, params);
+};
+
+export const UploadUrlImagePost = (url: string, file: any) => {
+  const api = new ApiService();
+  const formData = new FormData();
+  formData.append('file', file);
+  return api.put(url, file, {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': file.type,
     },
   });
 };
-
 export const deletePostItem = (id: string) => {
   const api = new ApiService();
   return api.delete(`${ENDPOINT.post.index}/${id}`);
@@ -63,4 +74,24 @@ export const getPostComments = (id: string) => {
 export const postComment = (id: string, comment: string) => {
   const api = new ApiService();
   return api.post(`${ENDPOINT.post.index}/${id}/comments`, { content: comment });
+};
+
+export const getRecyclebinPost = (query: QueryPost) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.recyclebin}`, query);
+};
+
+export const restoreRecyclebinPost = (idPost: number) => {
+  const api = new ApiService();
+  return api.put(`${ENDPOINT.post.index}/${idPost}/restore`);
+};
+
+export const getPostDraft = () => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.draft}`);
+};
+
+export const createDraft = (data: PostProps) => {
+  const api = new ApiService();
+  return api.post(ENDPOINT.post.draft, data);
 };

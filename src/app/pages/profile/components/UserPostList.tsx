@@ -21,14 +21,20 @@ const UserPostList = ({ postList }: UserPostListProps) => {
       {postList.length > 0 || isLoading ? (
         postList.map((post, index) => {
           return (
-            <li className="post-item col col-4 col-md-12" key={index}>
-              <PostItem post={{ ...post, user: userProfile }} />
+            <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
+              <PostItem post={{ ...post, user: userProfile }} isVertical={true} />
             </li>
           );
         })
       ) : (
         <div className="user-post-empty">
-          <EmptyPost desc={id ? `${userProfile.displayName}'s post list is empty` : 'Publish your first post now'} />
+          <EmptyPost
+            desc={
+              id
+                ? `${userProfile.displayName || userProfile.firstName}'s post list is empty`
+                : 'Publish your first post now'
+            }
+          />
         </div>
       )}
     </ul>

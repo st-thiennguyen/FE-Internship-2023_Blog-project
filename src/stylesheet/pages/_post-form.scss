@@ -4,6 +4,7 @@
 
 .header-write-post {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
   &-external {
     gap: 16px;
   }
@@ -23,6 +24,11 @@
 
 .section-write-post {
   background-color: #fff;
+
+  .action-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .write-post {
@@ -41,6 +47,7 @@
   .ql-editor p {
     font-family: "Times New Roman", Times, serif;
   }
+
   &-input::placeholder,
   &-input-tags::placeholder,
   .ql-editor.ql-blank::before {
@@ -128,6 +135,7 @@
   width: 100%;
   height: 450px;
   position: relative;
+
   .btn-add-cover {
     display: flex;
     justify-content: center;
@@ -148,6 +156,7 @@
   &-txt {
     font-weight: map-get($font-weight, semibold);
   }
+
   &-subtxt {
     font-size: map-get($font-size, sm);
   }
@@ -166,6 +175,7 @@
   &-file {
     display: none;
   }
+
   &-link {
     width: 50%;
     padding: 10px 15px;
@@ -178,6 +188,7 @@
   &-preview {
     width: 100%;
     height: 100%;
+
     img {
       object-fit: cover;
       border-radius: 12px;
@@ -191,10 +202,12 @@
   border: 0.5px solid map-get($color, borderColor);
   border-radius: 12px;
   padding: 20px;
+
   &-title {
     font-size: map-get($font-size, lg);
     margin-bottom: 20px;
   }
+
   &-img {
     margin-bottom: 10px;
   }
@@ -212,6 +225,7 @@
   border: 0.5px solid map-get($color, borderColor);
   border-radius: 12px;
   padding: 20px;
+  margin-bottom: 16px;
 
   &-title {
     font-size: map-get($font-size, lg);
@@ -220,13 +234,20 @@
 
   &-input {
     width: 100%;
-    height: auto;
     padding: 10px 20px;
+    min-height: 100px;
+    height: auto;
     border-radius: 12px;
     border: 0.5px solid map-get($color, borderColor);
     outline: none;
-    resize: none;
+    resize: vertical;
     font-family: "Manrope", sans-serif;
+    font-size: map-get($font-size, lg);
+  }
+
+  &-input-title {
+    font-size: map-get($font-size , xxl);
+    font-weight: map-get($font-weight , $key: bold);
   }
 
   &-area {
@@ -262,14 +283,20 @@
     margin-bottom: 20px;
   }
 
+  .icon {
+    margin: 8px 0;
+  }
+
   &-item {
     display: flex;
     position: relative;
+
     label {
       cursor: pointer;
       display: flex;
       padding: 20px 20px 20px 30px;
     }
+
     input[type="radio"] {
       position: relative;
       transition: linear 0.8s;
@@ -312,6 +339,7 @@
       z-index: 1;
       cursor: pointer;
     }
+
     .icon {
       font-size: 24px;
       position: absolute;
@@ -319,7 +347,8 @@
       top: 11px;
       transition: linear 0.3s;
     }
-    input[type="radio"]:checked + span > .icon {
+
+    input[type="radio"]:checked+span>.icon {
       transform: scale(1.7);
     }
   }

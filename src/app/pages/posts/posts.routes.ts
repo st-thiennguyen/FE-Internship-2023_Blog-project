@@ -1,12 +1,16 @@
-import DetailPostPage from '../detail-post/container';
 import DetailPost from '../detail-post/container/DetailPost';
-import WritePost from '../write-post/containers/WritePost';
+import Bookmark from './container/Bookmark';
+import PostRecycleBin from './components/PostRecycleBin';
+import PostPage from './container';
+import CreatePost from '../write-post/containers/CreatePost';
+import UpdatePost from '../write-post/containers/UpdatePost';
+import PostDraft from './components/PostDraft';
 import Posts from './container/Posts';
 
 export const postsRoutes = [
   {
     path: '/posts',
-    component: DetailPostPage,
+    component: PostPage,
     children: [
       {
         path: '',
@@ -18,19 +22,28 @@ export const postsRoutes = [
       },
       {
         path: 'create',
-        component: WritePost,
+        component: CreatePost,
         isProtected: true,
-        props: {
-          isUpdate: false,
-        },
       },
       {
-        path: 'update/:id',
-        component: WritePost,
+        path: ':id/edit',
+        component: UpdatePost,
         isProtected: true,
-        props: {
-          isUpdate: true,
-        },
+      },
+      {
+        path: 'draft',
+        component: PostDraft,
+        isProtected: true,
+      },
+      {
+        path: 'recyclebin',
+        component: PostRecycleBin,
+        isProtected: true,
+      },
+      {
+        path: 'bookmark',
+        component: Bookmark,
+        isProtected: true,
       },
     ],
   },

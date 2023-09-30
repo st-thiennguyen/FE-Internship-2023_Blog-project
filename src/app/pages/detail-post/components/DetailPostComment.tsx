@@ -7,11 +7,13 @@ import { postCommentAction } from '../detail-post.actions';
 
 import CommentItem from './CommentItem';
 import React from 'react';
+import { getLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 
 const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const listComment = useSelector((state: RootState) => state.detail.comments);
-  const currentUser = useSelector((state: RootState) => state.auth.auth?.userInfo);
-  const isLogin = useSelector((state: RootState) => state.auth.auth?.accessToken);
+  const currentUser = useSelector((state: RootState) => state.auth.userInfo);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -52,13 +54,14 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
 
   return (
     <section ref={ref} className="section section-comment">
-      <h2 className="comment-title">Comments {`(${listComment.length})`}</h2>
+      <h3 className="comment-title">Comments {`(${listComment.length})`}</h3>
       <div className="comment-wrapper">
         {isLogin ? (
           <div className="comment-input-wrapper d-flex flex-column">
             <textarea
               placeholder="Add comment"
               ref={inputComment}
+              rows={4}
               className="comment-input"
               onBlur={handleTrimInput}
               onChange={handleKeyDown}
@@ -81,7 +84,7 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
             listComment.map((commentItem) => {
               return (
                 <li className="comment-item">
-                  <CommentItem commentItem={commentItem} userId={currentUser.id} />
+                  <CommentItem commentItem={commentItem} userId={currentUser?.id} />
                 </li>
               );
             })}

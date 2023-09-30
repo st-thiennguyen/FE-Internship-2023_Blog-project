@@ -1,12 +1,14 @@
 import { Dispatch } from 'react';
 
-import { PostModel, QueryPost } from '../../models/post';
 import { UserModel } from '../../models/user';
 import { RootAction } from '../../stores/store';
 
 import { getPublicPosts, getRecommendPosts } from '../../shared/services/index';
 import { getUsers } from '../../shared/services/user.service';
 import { ACTIONS_TYPE } from '../../shared/constants';
+import { PostModel, QueryPost } from '../../models/post';
+import { showToast } from '../../shared/components/toast/toast.actions';
+import { ToastType } from '../../models/toast';
 
 export const getPublicPostStart = () => {
   return {
@@ -47,6 +49,7 @@ export const fetchPublicPosts = (query: QueryPost) => async (dispatch: Dispatch<
     dispatch(getPublicPostSuccess(response as PostModel[]));
   } catch (err) {
     dispatch(getPublicPostFailure(`${err}`));
+    dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
 
@@ -78,6 +81,7 @@ export const fetchUsers = () => async (dispatch: Dispatch<RootAction>) => {
     dispatch(getUsersSuccess(response as UserModel[]));
   } catch (err) {
     dispatch(getUsersFailure(`${err}`));
+    dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
 
@@ -109,5 +113,6 @@ export const getRecommend = (page: number, size: number) => async (dispatch: Dis
     dispatch(getRecommendSuccess(response as PostModel[]));
   } catch (error) {
     dispatch(getRecommendFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

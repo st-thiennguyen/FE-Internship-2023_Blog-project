@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ import { RootState } from '../../../stores/store';
 import { updateProfileAction, uploadAvatar } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
-import ToastMessage from '../../../shared/components/ToastMessage';
+import IconEdit from '../../../shared/components/icon/IconEdit';
 
 const schema = yup
   .object({
@@ -41,19 +41,13 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-interface UpdateUserFormProps {
-  isShowToast: boolean;
-  setIsShowToast: (value: boolean) => void;
-}
+const UserUpdateForm = () => {
+  const [errorAvatarMessage, setErrorAvatarMessage] = useState('');
 
-const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) => {
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
-  const user = useSelector((state: RootState) => state.auth.auth?.userInfo);
-  const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
+  const user = useSelector((state: RootState) => state.auth.userInfo);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
-  const isError = useSelector((state: RootState) => state.profile.isError);
-  const message = useSelector((state: RootState) => state.profile.message);
-  const userPicture = useSelector((state: RootState) => state.profile.data.picture);
+  const userPicture = useSelector((state: RootState) => state.auth.userInfo.picture);
 
   const dispatch = useDispatch();
 
@@ -69,9 +63,36 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
     avatarInputRef.current!.click();
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): boolean => {
+    let isImageValid = true;
+    const file = event.target.files![0]; // Get the first selected file
+
+    if (file) {
+      // Check if the file type isn't an image
+      if (!file.type.startsWith('image/')) {
+        setErrorAvatarMessage('Please select a valid image file (jpg, png, etc.).');
+        isImageValid = false;
+      } else {
+        // Check file size (in bytes)
+        const maxSizeInBytes = 1 * 1024 * 1024; // 1MB
+        if (file.size > maxSizeInBytes) {
+          setErrorAvatarMessage('File size exceeds the maximum allowed (1MB).');
+          isImageValid = false;
+        } else {
+          setErrorAvatarMessage('');
+          isImageValid = true;
+        }
+      }
+    } else {
+      setErrorAvatarMessage('Image is required !');
+      isImageValid = false;
+    }
+    return isImageValid;
+  };
+
   const handleUploadAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    if (file) {
+    if (handleFileChange(e)) {
       dispatch(
         uploadAvatar(file, {
           firstName: user.firstName,
@@ -84,7 +105,6 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
         }) as any,
       );
     }
-    setIsShowToast(true);
   };
 
   const onUpdateProfile = handleSubmit((data: FormData) => {
@@ -99,19 +119,22 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
         picture: user.picture,
       }) as any,
     );
-    setIsShowToast(true);
   });
 
   return (
     <div className="update-info-tab">
       <div className="update-info-wrapper">
+        <p className="label-img">Profile picture</p>
         <div className="profile-avatar" onClick={clickSelectImage}>
           <img src={user.picture} alt={user.displayName} />
           <div className="profile-avatar-mark d-flex item-center justify-center">
-            <i className="icon icon-small icon-camera-white-20"></i>
+            <div className="mark-icon">
+              <IconEdit />
+            </div>
           </div>
           <input ref={avatarInputRef} className="profile-avatar-input" type="file" onChange={handleUploadAvatar} />
         </div>
+        <p className="editor-detail-error">{errorAvatarMessage}</p>
         <div className="profile-update-form">
           <form className="form form-register" onSubmit={onUpdateProfile}>
             <fieldset className="form-fieldset" disabled={isLoading}>
@@ -186,23 +209,12 @@ const UserUpdateForm = ({ isShowToast, setIsShowToast }: UpdateUserFormProps) =>
               </div>
 
               <div className="d-flex justify-center mt-5">
-                <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
+                <Button label="Update Profile" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
               </div>
             </fieldset>
           </form>
         </div>
       </div>
-      {isShowToast && isSuccess && (
-        <ToastMessage
-          isShow={isSuccess}
-          isSuccess={isSuccess}
-          title={'Success'}
-          subtitle={'Update profile successfully'}
-        ></ToastMessage>
-      )}
-      {isShowToast && isError && (
-        <ToastMessage isShow={isError} isSuccess={isSuccess} title={'Error'} subtitle={message}></ToastMessage>
-      )}
     </div>
   );
 };

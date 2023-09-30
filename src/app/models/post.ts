@@ -1,3 +1,4 @@
+import { TypeUploadImage } from '../shared/constants';
 import { InteractionItemModel } from './interaction';
 import { UserModel } from './user';
 
@@ -19,11 +20,26 @@ export interface PostModel {
   [key: string]: any;
 }
 
+export interface PostProps {
+  title: string;
+  cover?: string;
+  content: string;
+  status: string;
+  description: string;
+  tags?: string[];
+}
+
 export interface SignatureImageModel {
   signedRequest: string;
   url: string;
 }
 
+export interface BookmarkModel {
+  id: string;
+  userId: string;
+  postId: string;
+  post: PostModel;
+}
 export interface SignatureImageState {
   data: SignatureImageModel;
   isLoading: boolean;
@@ -62,16 +78,22 @@ export interface DetailState {
   message: string;
 }
 
-export interface PostProps {
+export interface PostState {
   data: PostModel;
-  isLoading: Boolean;
-  isSuccess: Boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
   message: string;
-  isError?: Boolean;
+  isError?: boolean;
 }
 
 export interface QueryPost {
   page?: number;
   size?: number;
   tags?: string[];
+}
+
+export interface TypeImage {
+  type_upload: TypeUploadImage;
+  file_name: string;
+  file_type: string;
 }

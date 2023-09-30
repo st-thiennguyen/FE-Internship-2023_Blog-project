@@ -1,8 +1,79 @@
 .tag {
-  padding: 2px 4px;
-  border-radius: 4px;
+  display: inline-block;
+  max-width: 100px;
+  border-radius: 20px;
   border: 1px solid #d9d9d9;
-
+  margin-inline-end: 6px;
+  margin-bottom: 6px;
+  padding: 4px 12px;
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 12px;
-  line-height: 20px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  transition: all ease-in-out 0.2s;
+}
+
+.tag-red {
+  color: #cf1322;
+  background: #fff1f0;
+  border-color: #ffa39e;
+  &:hover {
+    color: #fff;
+    background: #cf1322;
+  }
+}
+
+.tag-orange {
+  color: #d46b08;
+  background: #fff7e6;
+  border-color: #ffd591;
+  &:hover {
+    color: #fff;
+    background: #d46b08;
+  }
+}
+
+.tag-lime {
+  color: #7cb305;
+  background: #fcffe6;
+  border-color: #eaff8f;
+  &:hover {
+    color: #fff;
+    background: #7cb305;
+  }
+}
+
+.tag-green {
+  color: #389e0d;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+  &:hover {
+    color: #fff;
+    background: #389e0d;
+  }
+}
+
+.tag-blue {
+  color: #0958d9;
+  background: #e6f4ff;
+  border-color: #91caff;
+  &:hover {
+    color: #fff;
+    background: #0958d9;
+  }
+}
+
+.tag-purple {
+  color: #531dab;
+  background: #f9f0ff;
+  border-color: #d3adf7;
+  &:hover {
+    color: #fff;
+    background: #531dab;
+  }
+}
+
+.tag-disabled {
+  pointer-events: none;
 }
