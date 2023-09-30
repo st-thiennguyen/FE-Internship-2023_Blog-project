@@ -138,7 +138,7 @@ const WritePost = ({ post }: WritePostProps) => {
   return (
     <>
       <div className="section-body row">
-        <div className="col col-9">
+        <div className="col col-9 col-xl-8 col-lg-12">
           <form className="write-post-form d-flex flex-column" ref={formRef}>
             <EditorImageCover
               photoPreview={post?.cover || photoPreview}
@@ -150,13 +150,14 @@ const WritePost = ({ post }: WritePostProps) => {
             <div className="editor-detail">
               <h5 className="editor-detail-title">Post detail</h5>
               <textarea
-                rows={1}
+                rows={4}
                 {...register('title')}
                 className="editor-detail-input"
                 placeholder="Title of your story ..."
               />
               <p className="editor-detail-error">{errors.title?.message}</p>
               <textarea
+                id="description-input-js"
                 rows={1}
                 {...register('description')}
                 className="editor-detail-input"
@@ -176,7 +177,7 @@ const WritePost = ({ post }: WritePostProps) => {
             </div>
           </form>
         </div>
-        <aside className="aside aside-write-post d-flex flex-column  col col-3">
+        <aside className="aside aside-write-post d-flex flex-column  col col-3 col-xl-4 col-lg-12">
           <EditorPostVisibility onChangeValue={setStatusPost} currentStatus={post?.status} />
           {photoPreview && (
             <EditorImageCoverPreview

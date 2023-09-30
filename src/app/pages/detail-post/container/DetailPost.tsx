@@ -18,6 +18,7 @@ import avaDefault from '../../../../assets/images/user-default.png';
 import DetailPostHeader from '../components/DetailPostHeader';
 import Loading from '../../../shared/components/Loading';
 import GoToTopBtn from '../../../shared/components/GoToTopBtn';
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
 const DetailPost = () => {
   const dispatch = useDispatch();
@@ -48,10 +49,6 @@ const DetailPost = () => {
     }
   }, [id]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   if (isError && !post.id) {
     return <Navigate to="/page-not-found" />;
   }
@@ -62,22 +59,28 @@ const DetailPost = () => {
 
   return (
     <>
-      <section className="section section-detail-page">
-        <div className="container">
-          <div className="row">
-            <div className="col col-12">
-              <DetailPostHeader post={post} scrollToComment={scrollToComment} />
-              <DetailPostCover cover={isErrorCover ? noImage : post.cover} />
-              <section className="section section-detail-content">
-                <div className="detail-content d-flex">
-                  <DetailPostContent post={post} commentRef={commentRef} />
+      <div className="detail-page">
+        {isLoading ? (
+          <CirculatorLoading />
+        ) : (
+          <section className="section section-detail-page">
+            <div className="container">
+              <div className="row">
+                <div className="col col-12">
+                  <DetailPostHeader post={post} scrollToComment={scrollToComment} />
+                  <DetailPostCover cover={isErrorCover ? noImage : post.cover} />
+                  <section className="section section-detail-content">
+                    <div className="detail-content d-flex">
+                      <DetailPostContent post={post} commentRef={commentRef} />
+                    </div>
+                  </section>
                 </div>
-              </section>
+              </div>
+              <GoToTopBtn />
             </div>
-          </div>
-          <GoToTopBtn />
-        </div>
-      </section>
+          </section>
+        )}
+      </div>
     </>
   );
 };

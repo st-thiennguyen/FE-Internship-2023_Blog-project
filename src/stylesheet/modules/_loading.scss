@@ -81,3 +81,34 @@
     transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
   }
 }
+
+.circulator-progress {
+  width: 100%;
+  height: 100%;
+}
+.circulator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  .circulator-icon {
+    width: 20px;
+    height: 20px;
+    border: solid 3px transparent;
+    border-top-color: map-get($color, primary) !important;
+    border-left-color: map-get($color, primary) !important;
+    border-radius: 60%;
+    animation: circulator-loading 800ms linear infinite;
+  }
+}
+
+@keyframes circulator-loading {
+  0% {
+    transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
