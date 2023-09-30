@@ -113,12 +113,11 @@ const Login = () => {
                     type={isShowPassword ? 'text' : 'password'}
                     placeholder="Enter Password..."
                   />
-                  <img
-                    src={isShowPassword ? icEyeSlash : icEye}
-                    alt="icon eye"
-                    className="login-icon icon-eye text-center"
+
+                  <i
                     onClick={togglePassword}
-                  />
+                    className={`icon icon-password ${isShowPassword ? `icon-eye-slash` : `icon-eye`}`}
+                  ></i>
                   <p className="form-error">{errors.password?.message}</p>
                 </div>
               </div>

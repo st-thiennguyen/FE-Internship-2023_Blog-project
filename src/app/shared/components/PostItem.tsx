@@ -7,7 +7,7 @@ import { deletePost } from '../../pages/profile/profile.actions';
 import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
 
-import Modal from './Modal';
+import Dialog from './Dialog';
 import NoImg from '../../../assets/images/no-image.png';
 import userDefault from '../../../assets/images/user-default.png';
 import Tags from './Tags';
@@ -25,36 +25,36 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
-  const [isShowModalRestore, setShowModalRestore] = useState(false);
+  const [isShowDialogRestore, setShowDialogRestore] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleDeletePostItem = (id: string) => {
     dispatch(deletePost(id) as any);
   };
-  const [isShowModal, setIShowModal] = useState(false);
+  const [isShowDialog, setIShowDialog] = useState(false);
 
   const handleClose = () => {
-    setIShowModal(false);
-    setShowModalRestore(false);
+    setIShowDialog(false);
+    setShowDialogRestore(false);
   };
 
   const handleDelete = () => {
     handleDeletePostItem(post.id as any);
-    setIShowModal(false);
+    setIShowDialog(false);
   };
 
   const handleRestoreItem = () => {
     dispatch(restorePostAction(post.id) as any);
-    setShowModalRestore(false);
+    setShowDialogRestore(false);
   };
 
-  const handleShowModal = () => {
-    setIShowModal(!isShowModal);
+  const handleShowDialog = () => {
+    setIShowDialog(!isShowDialog);
   };
 
-  const handleShowModalRestore = () => {
-    setShowModalRestore(!isShowModalRestore);
+  const handleShowDialogRestore = () => {
+    setShowDialogRestore(!isShowDialogRestore);
   };
 
   useEffect(() => {
@@ -68,11 +68,11 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
   return (
     <>
       <div className={`post d-flex item-center ${isVertical && 'post-vertical'}`}>
-        <div className="post-delete d-flex item-center justify-center" onClick={handleShowModal}>
+        <div className="post-delete d-flex item-center justify-center" onClick={handleShowDialog}>
           <i className="icon icon-small icon-delete icon-trash-20"></i>
           <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
         </div>
-        <div className="post-restore" onClick={handleShowModalRestore}>
+        <div className="post-restore" onClick={handleShowDialogRestore}>
           <i className="icon icon-xxl icon-restore-60"></i>
         </div>
         <div className="post-content-wrapper d-flex flex-column justify-between">
@@ -134,15 +134,15 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
         </div>
       </div>
 
-      <Modal onClickClose={handleClose} onClickConfirm={handleRestoreItem} isShow={isShowModalRestore}>
-        <h4 className="modal-title">Restore</h4>
+      <Dialog onClickClose={handleClose} onClickConfirm={handleRestoreItem} isShow={isShowDialogRestore}>
+        <h4 className="dialog-title">Restore</h4>
         <p>Do you want restore this post ?</p>
-      </Modal>
+      </Dialog>
 
-      <Modal onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowModal}>
-        <h4 className="modal-title">Delete</h4>
+      <Dialog onClickClose={handleClose} onClickConfirm={handleDelete} isShow={isShowDialog}>
+        <h4 className="dialog-title">Delete</h4>
         <p>Do you really want to delete?</p>
-      </Modal>
+      </Dialog>
     </>
   );
 };
