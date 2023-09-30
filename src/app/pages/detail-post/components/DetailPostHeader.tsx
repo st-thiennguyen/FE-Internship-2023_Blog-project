@@ -1,9 +1,10 @@
-import React from 'react';
-import Tags from '../../../shared/components/Tags';
 import { Link } from 'react-router-dom';
-import DetailPostReaction from './DetailPostReaction';
+
 import { PostModel } from '../../../models/post';
 import { convertDateToString } from '../../../shared/utils';
+
+import Tags from '../../../shared/components/Tags';
+import DetailPostReaction from './DetailPostReaction';
 
 interface DetailPostHeaderProps {
   post: PostModel;

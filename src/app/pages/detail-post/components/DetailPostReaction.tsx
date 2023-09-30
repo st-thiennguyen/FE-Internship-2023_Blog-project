@@ -1,14 +1,13 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { toggleBookmarkAction, updateLikeAction } from '../detail-post.actions';
 
-import { getLocalStorage } from '../../../shared/utils';
-import { StorageKey } from '../../../shared/constants';
-
 import IconHeart from '../../../shared/components/icon/IconHeart';
 import IconComment from '../../../shared/components/icon/IconComment';
 import IconBookmark from '../../../shared/components/icon/IconBookmark';
+import UserList from '../../../shared/components/UserList';
 
 interface ReactionProps {
   postId: number;
@@ -18,9 +17,12 @@ interface ReactionProps {
 }
 
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
-  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+  const [isShowLike, setIsShowLike] = useState(false);
+
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
+  const likeList = useSelector((state: RootState) => state.detail.likes);
+
   const dispatch = useDispatch();
 
   const handleUpdateLike = () => {
@@ -35,6 +37,12 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     }
   };
 
+  const handleShowList = () => {
+    if (likeList.length) {
+      setIsShowLike(true);
+    }
+  };
+
   return (
     <div className="detail-action">
       <ul className="action-list d-flex">
@@ -42,7 +50,9 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           <button className="btn btn-post-action" onClick={handleUpdateLike}>
             <IconHeart color={isLiked ? '#e11d48' : ''} />
           </button>
-          <span className="action-count">{likeCount}</span>
+          <span className="action-count like-count" onClick={handleShowList}>
+            {likeCount}
+          </span>
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action" onClick={scrollToComment}>
@@ -56,6 +66,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           </button>
         </li>
       </ul>
+      {isShowLike && <UserList likes={likeList} />}
     </div>
   );
 };

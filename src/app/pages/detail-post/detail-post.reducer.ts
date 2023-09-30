@@ -6,6 +6,7 @@ import { ACTIONS_TYPE } from '../../shared/constants';
 const initialState: DetailState = {
   data: {} as PostModel,
   comments: [] as InteractionItemModel[],
+  likes: [] as InteractionItemModel[],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -32,6 +33,30 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
         message: '',
       };
     case ACTIONS_TYPE.GET_DETAIL_BLOG_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload,
+      };
+    // get like
+    case ACTIONS_TYPE.GET_LIKES:
+      return {
+        ...state,
+        likes: [] as InteractionItemModel[],
+        isSuccess: false,
+        isLoading: true,
+        isError: false,
+        message: '',
+      };
+    case ACTIONS_TYPE.GET_LIKES_SUCCESS:
+      return {
+        ...state,
+        likes: action.payload,
+        isLoading: false,
+        isSuccess: true,
+      };
+    case ACTIONS_TYPE.GET_LIKES_FAILURE:
       return {
         ...state,
         isLoading: false,

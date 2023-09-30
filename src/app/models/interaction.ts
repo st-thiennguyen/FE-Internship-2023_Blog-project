@@ -9,7 +9,7 @@ export interface InteractionItemModel {
   id: number;
   userId: number;
   postId: number;
-  comment: string;
+  comment?: string;
   user: UserModel;
   createdAt: string;
 }

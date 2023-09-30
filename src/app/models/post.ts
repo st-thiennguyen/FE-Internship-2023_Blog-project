@@ -72,6 +72,7 @@ export interface RecommendPostState {
 export interface DetailState {
   data: PostModel;
   comments: InteractionItemModel[];
+  likes: InteractionItemModel[];
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
