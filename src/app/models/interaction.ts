@@ -1,4 +1,4 @@
-import { UserModel } from './user';
+import { UserInfo } from './auth';
 
 export interface InteractionProps {
   liked: boolean;
@@ -9,7 +9,7 @@ export interface InteractionItemModel {
   id: number;
   userId: number;
   postId: number;
-  comment: string;
-  user: UserModel;
+  comment?: string;
+  user: UserInfo;
   createdAt: string;
 }

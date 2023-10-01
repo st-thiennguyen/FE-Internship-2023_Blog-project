@@ -61,6 +61,7 @@ export const ACTIONS_TYPE = {
   // UPDATE FOLLOW
   UPDATE_FOLLOW: 'update-follow',
   UPDATE_FOLLOW_SUCCESS: 'update-follow-success',
+  UPDATE_FOLLOWING_SUCCESS: 'update-following-success',
   UPDATE_FOLLOW_FAILURE: 'update-follow-failure',
   // GET PROFILE
   GET_PROFILE: 'get-profile',
@@ -113,10 +114,16 @@ export const ACTIONS_TYPE = {
   REMOVE_POST_ITEM: 'remove-post-item',
   REMOVE_POST_ITEM_SUCCESS: 'remove-post-item-success',
   REMOVE_POST_ITEM_FAILURE: 'remove-post-item-failure',
+
+  // GET POST COMMENTS
+  GET_LIKES: 'get-likes',
+  GET_LIKES_SUCCESS: 'get-likes-success',
+  GET_LIKES_FAILURE: 'get-likes-failure',
   // UPDATE LIKE
   UPDATE_LIKE: 'update-like',
   UPDATE_LIKE_SUCCESS: 'update-like-success',
   UPDATE_LIKE_FAILURE: 'update-like-failure',
+
   // GET POST COMMENTS
   GET_COMMENTS: 'get-comments',
   GET_COMMENTS_SUCCESS: 'get-comments-success',

@@ -4,17 +4,17 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
-import { fetchComments, fetchDetailBlog } from '../detail-post.actions';
+import { StorageKey } from '../../../shared/constants';
+import { fetchComments, fetchDetailBlog, fetchLikes } from '../detail-post.actions';
+import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
-import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
-
-import noImage from '../../../../assets/images/no-image.png';
 import DetailPostHeader from '../components/DetailPostHeader';
 import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
-import { StorageKey } from '../../../shared/constants';
+
+import noImage from '../../../../assets/images/no-image.png';
 
 const DetailPost = () => {
   const dispatch = useDispatch();
@@ -42,6 +42,7 @@ const DetailPost = () => {
     if (id) {
       dispatch(fetchDetailBlog(Number(id)) as any);
       dispatch(fetchComments(id) as any);
+      dispatch(fetchLikes(Number(id)) as any);
     }
   }, [id]);
 
@@ -50,7 +51,7 @@ const DetailPost = () => {
   }
 
   const scrollToComment = () => {
-    if(isLogin) {
+    if (isLogin) {
       commentRef.current!.scrollIntoView({ behavior: 'smooth' });
     } else {
       navigate('/login');
