@@ -5,6 +5,7 @@ import PostItemLoading from '../../home/components/PostItemLoading';
 import PostList from '../../home/components/PostList';
 import { RootState } from '../../../stores/store';
 import { getDraftPostAction } from '../posts.action';
+import SectionTitle from '../../../shared/components/SectionTitle';
 
 const PostDraft = () => {
   const isLoading = useSelector((state: RootState) => state.post.isLoading);
@@ -19,7 +20,7 @@ const PostDraft = () => {
   return (
     <section className="section section-post-recycle">
       <div className="container">
-        <h2 className="section-title text-primary">Posts Draft</h2>
+        <SectionTitle title="Posts Draft" />
 
         {posts && <PostList cols={4} posts={posts} isLoading={isLoading} />}
         {isLoading && (

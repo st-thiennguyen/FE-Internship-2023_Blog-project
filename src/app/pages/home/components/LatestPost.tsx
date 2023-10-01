@@ -46,7 +46,7 @@ const LatestPost = () => {
 
   return (
     <section className="section section-latest-post">
-      <SectionTitle />
+      <SectionTitle title="Lastest Post 🎈" subtitle="Discover the most outstanding articles ins all topics of life." />
       {data && <PostList posts={data} isLoading={isLoading} />}
       {isLoading && data.length === 0 && (
         <ul className="row">

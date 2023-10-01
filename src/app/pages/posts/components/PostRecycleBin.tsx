@@ -9,6 +9,7 @@ import PostItem from '../../../shared/components/PostItem';
 import Loading from '../../../shared/components/Loading';
 import EmptyPost from '../../../shared/components/EmptyPost';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
+import SectionTitle from '../../../shared/components/SectionTitle';
 
 const threshold = 400;
 
@@ -50,7 +51,7 @@ const PostRecycleBin = () => {
   return (
     <section className="section section-post-recycle">
       <div className="container">
-        <h2 className="section-title text-primary">Posts Deleted</h2>
+        <SectionTitle title="Posts Deleted" subtitle="A list of all your posts. Let’s get you some views! 🚀" />
 
         {posts &&
           (posts.length > 0 || isLoading ? (

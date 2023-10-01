@@ -27,47 +27,57 @@
     .navbar-auth {
       position: absolute;
       top: calc(100% + 15px);
+      width: 260px;
       right: 0;
       display: none;
 
       .auth-list {
-        width: 300px;
+        width: 100%;
+        padding: 28px 24px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        border-radius: 6px;
+        border-radius: 12px;
         background-color: map-get($color, backgroundFrame);
 
         .auth-item {
           width: 100%;
-          &:not(:last-child) {
+          &:first-child {
             border-bottom: 1px solid map-get($map: $color, $key: borderColor);
           }
-          &:hover {
-            background-color: #ebe9e9f4;
+
+          &:not(:first-child) {
+            border-radius: 6px;
+            &:hover {
+              background-color: map-get($map: $color, $key: borderColor);
+            }
           }
+
           .auth-info {
-            padding: 12px;
+            margin-bottom: 28px;
             img {
-              width: 50px;
-              height: 50px;
+              width: 48px;
+              height: 48px;
               object-fit: cover;
               border-radius: 100%;
             }
             &-text {
               flex: 1;
-              margin-left: 10px;
             }
             &-name {
+              margin-bottom: 2px;
               font-size: 16px;
               font-weight: 700;
             }
             &-email {
-              font-size: 14px;
-              font-weight: 500;
+              font-size: 12px;
+            }
+
+            &:hover {
+              background-color: none !important;
             }
           }
         }
         .auth-link {
-          padding: 10px 20px;
+          padding: 10px 8px;
           &-info {
             padding: 0 0;
           }
@@ -78,7 +88,7 @@
           p {
             margin-left: 10px;
             flex: 1;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 500;
           }
         }

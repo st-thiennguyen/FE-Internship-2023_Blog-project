@@ -1,10 +1,12 @@
-import React from 'react';
-
-const SectionTitle = () => {
+interface SectionTitleProps {
+  title: string;
+  subtitle?: string;
+}
+const SectionTitle = ({ title, subtitle }: SectionTitleProps) => {
   return (
     <div className="section-title-wrapper">
-      <h2 className="section-title">Latest Post 🎈</h2>
-      <p className="section-sub-title">Discover the most outstanding articles ins all topics of life.</p>
+      <h2 className="section-title">{title}</h2>
+      <p className="section-sub-title">{subtitle}</p>
     </div>
   );
 };

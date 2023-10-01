@@ -84,3 +84,11 @@
   background-color: #141616;
   opacity: 0.5;
 }
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+  .dialog {
+    .dialog-confirm {
+      width: 300px;
+    }
+  }
+}

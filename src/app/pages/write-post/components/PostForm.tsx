@@ -106,7 +106,6 @@ const WritePost = ({ post }: WritePostProps) => {
     };
   }, []);
 
-  // init and dispose
   useEffect(() => {
     setValue('description', post?.description || '');
     setValue('title', post?.title || '');
