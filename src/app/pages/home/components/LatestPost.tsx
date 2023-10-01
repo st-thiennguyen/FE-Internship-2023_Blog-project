@@ -10,10 +10,11 @@ import { pageSize } from '../../../shared/constants/post';
 import PostList from './PostList';
 import SectionTitle from '../../../shared/components/SectionTitle';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
+import Button from '../../../shared/components/Button';
 
 const LatestPost = () => {
   const isLoading = useSelector((state: RootState) => state.latestPost.isLoading);
-  const { data } = useSelector((state: RootState) => state.latestPost);
+  const { data, totalPage } = useSelector((state: RootState) => state.latestPost);
   const dispatch = useDispatch<any>();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -52,12 +53,16 @@ const LatestPost = () => {
           ))}
         </ul>
       )}
-      {isLoading && data.length && <CirculatorLoading />}
-      <div className="d-flex justify-center">
-        <button className="btn btn-primary" onClick={() => setCurrentPage(currentPage + 1)}>
-          Load more
-        </button>
-      </div>
+      {currentPage + 1 < totalPage && (
+        <div className="d-flex justify-center">
+          <Button
+            handleClick={() => setCurrentPage(currentPage + 1)}
+            label="Load more"
+            isLoading={isLoading}
+            optionClassName="btn-primary"
+          />
+        </div>
+      )}
     </section>
   );
 };
