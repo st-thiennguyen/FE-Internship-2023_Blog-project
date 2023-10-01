@@ -70,9 +70,6 @@
 
 @media screen and (max-width: map-get($breakpoints , xl)) {
   .home-page {
-    .section-title {
-      margin-bottom: 20px;
-    }
     .section-recommend {
       padding-bottom: 0;
       .recommend-list {
@@ -120,9 +117,6 @@
 }
 @media screen and (max-width: map-get($breakpoints, lg)) {
   .home-page {
-    .section-title {
-      font-size: 30px;
-    }
     .section-latest-post {
       .post {
         gap: 10px;
