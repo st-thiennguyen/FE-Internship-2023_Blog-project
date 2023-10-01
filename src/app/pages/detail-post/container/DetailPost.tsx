@@ -32,13 +32,11 @@ const DetailPost = () => {
   }, []);
 
   const [isErrorCover, setIsErrorCover] = useState(false);
-  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
-    isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
-  }, [post, isErrorCover, isErrorAvatar]);
+  }, [post, isErrorCover]);
 
   useEffect(() => {
     if (id) {

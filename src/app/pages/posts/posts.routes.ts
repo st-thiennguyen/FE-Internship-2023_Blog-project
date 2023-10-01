@@ -1,11 +1,11 @@
 import DetailPost from '../detail-post/container/DetailPost';
-import Bookmark from './container/Bookmark';
 import PostRecycleBin from './components/PostRecycleBin';
 import PostPage from './container';
 import CreatePost from '../write-post/containers/CreatePost';
 import UpdatePost from '../write-post/containers/UpdatePost';
-import PostDraft from './components/PostDraft';
 import Posts from './container/Posts';
+import PostDraft from './components/PostDraft';
+import Bookmark from './components/Bookmark';
 
 export const postsRoutes = [
   {

@@ -18,10 +18,11 @@ import IconBookmark from './icon/IconBookmark';
 
 interface PostItemProps {
   post: PostModel;
+  isInBookmark?: boolean;
   onClickBookmark?: (id: number) => void;
   isVertical?: boolean;
 }
-const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
+const PostItem = ({ post, onClickBookmark, isInBookmark, isVertical }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
@@ -68,9 +69,16 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
   return (
     <>
       <div className={`post d-flex item-center ${isVertical && 'post-vertical'}`}>
-        <div className="post-delete d-flex item-center justify-center" onClick={handleShowModal}>
-          <i className="icon icon-small icon-delete icon-trash-20"></i>
-          <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
+        <div className="post-action d-flex">
+          <div className="post-delete d-flex item-center justify-center" onClick={handleShowModal}>
+            <i className="icon icon-small icon-delete icon-trash-20"></i>
+            <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
+          </div>
+          <div className="post-edit d-flex item-center justify-center">
+            <Link to={`/posts/${post.id}/edit`} className="post-edit-link d-flex item-center justify-center">
+              <i className="icon icon-small icon-edit-20"></i>
+            </Link>
+          </div>
         </div>
         <div className="post-restore" onClick={handleShowModalRestore}>
           <i className="icon icon-xxl icon-restore-60"></i>
@@ -118,8 +126,11 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
                 {post.comments}
               </li>
             </ul>
-            <div className="icon-bookmark-wrapper d-flex item-center justify-center">
-              <IconBookmark />
+            <div
+              className="icon-bookmark-wrapper d-flex item-center justify-center"
+              onClick={() => onClickBookmark?.(post.id)}
+            >
+              <IconBookmark color={isInBookmark ? '#111827' : ''} />
             </div>
           </div>
         </div>

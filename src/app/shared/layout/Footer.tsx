@@ -10,7 +10,9 @@ const Footer = () => {
           <div className="footer-content d-flex justify-between item-center">
             <div className="footer-content">
               <h2 className="footer-logo">
-                <img src={logo} alt="Supremethod" />
+                <a href="/">
+                  <img src={logo} alt="Supremethod" />
+                </a>
               </h2>
               <p className="footer-subtext">
                 Our architecture and design blog features daily articles, news, interviews, and insights from leading

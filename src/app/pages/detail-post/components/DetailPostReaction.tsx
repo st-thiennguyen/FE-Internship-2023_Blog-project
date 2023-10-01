@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { toggleBookmarkAction, updateLikeAction } from '../detail-post.actions';
-
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-
 import IconHeart from '../../../shared/components/icon/IconHeart';
 import IconComment from '../../../shared/components/icon/IconComment';
 import IconBookmark from '../../../shared/components/icon/IconBookmark';
+
 
 interface ReactionProps {
   postId: number;
@@ -19,9 +18,10 @@ interface ReactionProps {
 }
 
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
-  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

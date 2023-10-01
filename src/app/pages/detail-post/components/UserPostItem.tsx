@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
+import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
+
 import IconComment from '../../../shared/components/icon/IconComment';
 import IconHeart from '../../../shared/components/icon/IconHeart';
-import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
 import noImage from '../../../../assets/images/no-image.png';
 
 interface UserPostItemProps {
