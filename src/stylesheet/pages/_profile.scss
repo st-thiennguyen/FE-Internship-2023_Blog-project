@@ -76,7 +76,7 @@
         }
       }
       .user-contact {
-        gap: 10px;
+        gap: 15px;
         padding-right: 15px;
         margin-right: 15px;
         margin-bottom: 10px;
@@ -196,6 +196,9 @@
       .post:hover {
         .post-delete {
           display: block;
+        }
+        .post-edit {
+          display: inline-block;
         }
       }
     }

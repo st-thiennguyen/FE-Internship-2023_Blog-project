@@ -134,17 +134,21 @@
       background-image: url("../../assets/icons/ic-bookmark-primary-20.svg");
     }
   }
-  .post-delete {
-    display: none;
+  .post-action {
     position: absolute;
-    right: 12px;
-    top: 12px;
-
+    flex-direction: column;
+    right: 10px;
+    top: 10px;
+    z-index: 3;
+  }
+  .post-delete {
+    position: relative;
+    display: none;
     width: 40px;
     height: 40px;
     padding: 4px;
-    z-index: 3;
     border-radius: 12px;
+    margin-bottom: 12px;
 
     background-color: map-get($map: $color, $key: danger);
     cursor: pointer;
@@ -170,6 +174,31 @@
       }
       .icon-trash-fill-20 {
         display: block;
+      }
+    }
+  }
+  .post-edit {
+    position: relative;
+    display: none;
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    border-radius: 12px;
+
+    background-color: map-get($color, $key: secondary);
+    cursor: pointer;
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: map-get($map: $color, $key: backgroundFrame);
+
+      .icon-edit-20 {
+        background-image: url("../../assets/icons/ic-edit-blue-20.svg");
       }
     }
   }
@@ -207,7 +236,7 @@
       }
     }
     .post-title {
-      @include truncate-text(1);
+      @include truncate-text(2);
       margin-top: 0;
     }
     .post-cover {
@@ -236,5 +265,15 @@
     .post-desc {
       display: none;
     }
+  }
+}
+
+.empty-post {
+  width: 100%;
+  &-img {
+    width: 400px;
+  }
+  &-desc {
+    color: map-get($map: $color, $key: subtext);
   }
 }

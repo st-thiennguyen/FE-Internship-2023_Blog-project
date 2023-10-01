@@ -8,7 +8,6 @@ import { ProfileModel } from '../../../models/user';
 
 import Button from '../../../shared/components/Button';
 import { updateFollowAction } from '../profile.actions';
-import Loading from '../../../shared/components/Loading';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);
@@ -45,8 +44,8 @@ const UserDetail = () => {
                 <div className="col col-10 col-lg-9">
                   <div className="user-content">
                     <h3 className="user-fullname">
-                      {profile.firstName + ' ' + profile.lastName}
-                      <span className="username">({profile.displayName})</span>
+                      {profile.firstName + ' ' + profile.lastName}{' '}
+                      {profile.displayName && <span className="username">({profile.displayName})</span>}
                     </h3>
                     <div className="user-contact d-flex item-center">
                       <i className="icon icon-small icon-email-20"></i>
@@ -57,7 +56,7 @@ const UserDetail = () => {
                     <div className="user-contact d-flex item-center">
                       <i className="icon icon-small icon-phone-20"></i>
                       <a href={`tel: ${profile.phone}`} className="user-desc">
-                        {profile.phone}
+                        {profile.phone ? profile.phone : '--------'}
                       </a>
                     </div>
                     <div className="user-event d-flex item-center">

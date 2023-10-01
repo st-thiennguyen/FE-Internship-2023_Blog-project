@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { fetchPublicPosts, loadMore } from '../home.actions';
+import { Link } from 'react-router-dom';
 
 import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
@@ -46,7 +47,16 @@ const LatestPost = () => {
 
   return (
     <section className="section section-latest-post">
-      <SectionTitle title="Lastest Post 🎈" subtitle="Discover the most outstanding articles ins all topics of life." />
+      <div className="section-header d-flex justify-between item-center">
+        <SectionTitle
+          title="Lastest Post 🎈"
+          subtitle="Discover the most outstanding articles ins all topics of life."
+        />
+
+        <Link to={'/posts'}>
+          <button className="btn btn-primary">Show More </button>
+        </Link>
+      </div>
       {data && <PostList posts={data} isLoading={isLoading} />}
       {isLoading && data.length === 0 && (
         <ul className="row">

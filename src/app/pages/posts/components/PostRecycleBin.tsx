@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { pageSize } from '../../../shared/constants/post';
-import PostItemLoading from '../../home/components/PostItemLoading';
 import { RootState } from '../../../stores/store';
+import { pageSize } from '../../../shared/constants/post';
 import { getRecyclebinAction, loadMore, resetCurrentPage } from '../posts.action';
+
 import PostItem from '../../../shared/components/PostItem';
-import Loading from '../../../shared/components/Loading';
 import EmptyPost from '../../../shared/components/EmptyPost';
+import PostItemLoading from '../../home/components/PostItemLoading';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 import SectionTitle from '../../../shared/components/SectionTitle';
 

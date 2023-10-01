@@ -62,7 +62,7 @@
       .icon-like-wrapper,
       .icon-comment-wrapper,
       .icon-bookmark-wrapper {
-        cursor: context-menu !important;
+        cursor: default;
       }
     }
   }
@@ -70,10 +70,14 @@
 
 @media screen and (max-width: map-get($breakpoints , xl)) {
   .home-page {
+    .section-title {
+      margin-bottom: 20px;
+    }
     .section-recommend {
+      padding-bottom: 0;
       .recommend-list {
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr);
         grid-template-areas:
           "item-1 item-1 item-3 item-3 item-3 item-3"
           "item-1 item-1 item-3 item-3 item-3 item-3"
@@ -100,7 +104,7 @@
           .post-cover,
           .post-link {
             width: 160px;
-            height: 160px;
+            height: 180px;
           }
         }
         &-info {
@@ -121,7 +125,27 @@
     }
     .section-latest-post {
       .post {
+        gap: 10px;
         margin-bottom: $p-col-lg * 2;
+        flex-direction: column-reverse;
+        padding: 0;
+        .tag-list {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+        }
+        &-content-wrapper {
+          padding: 0 20px 20px;
+          width: 100%;
+        }
+        .post-img-wrapper {
+          width: 100%;
+          .post-cover,
+          .post-link {
+            height: 200px;
+            width: 100%;
+          }
+        }
       }
     }
     .recommend-title {
