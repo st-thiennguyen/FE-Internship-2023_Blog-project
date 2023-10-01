@@ -5,10 +5,9 @@ import icRemove from '../../../../assets/icons/ic-remove-20.svg';
 interface EditorPostTagsProps {
   tags: string[];
   setTags: (val: string[]) => void;
-  isUpdate?: boolean
+  isUpdate?: boolean;
 }
 const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
-
   const tagRef = useRef<HTMLInputElement>(null);
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -39,7 +38,7 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
   };
 
   const handleRemoveTag = (id: number) => {
-    const newTags = tags.filter((item , index: number) => index !== id);
+    const newTags = tags.filter((item, index: number) => index !== id);
     setTags([...newTags]);
   };
   return (
@@ -58,8 +57,8 @@ const EditorPostTags = ({ tags, setTags }: EditorPostTagsProps) => {
       <ul className="editor-tags-list d-flex flex-wrap">
         {tags.map((tag, index) => {
           return (
-            <li className="editor-tags-item d-flex item-center" key={index} >
-              <span className="tag editor-tags-text">{tag} </span>
+            <li className="editor-tags-item d-flex item-center" key={index}>
+              <span className="editor-tags-text">{tag} </span>
               <img src={icRemove} alt="Icon remove tag" title="Remove" onClick={() => handleRemoveTag(index)} />
             </li>
           );

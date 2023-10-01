@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import { InteractionItemModel } from '../../models/interaction';
+import { useLocation } from 'react-router-dom';
+
 import { UserInfo } from '../../models/auth';
+import { InteractionItemModel } from '../../models/interaction';
 import UserItem from './UserItem';
 
 interface UserListProps {
@@ -11,6 +13,13 @@ interface UserListProps {
 }
 
 const UserList = ({ title, show, list, handleClose }: UserListProps) => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    return () => {
+      handleClose();
+    };
+  }, [pathname]);
+
   useEffect(() => {
     document.body.style.overflowY = 'hidden';
     return () => {

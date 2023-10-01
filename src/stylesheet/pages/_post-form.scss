@@ -112,6 +112,7 @@
       width: 20px;
       height: 20px;
       cursor: pointer;
+      backdrop-filter: red;
     }
 
     &:hover {
@@ -124,6 +125,7 @@
   }
 
   &-text {
+    padding: 5px 10px;
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -246,8 +248,8 @@
   }
 
   &-input-title {
-    font-size: map-get($font-size , xxl);
-    font-weight: map-get($font-weight , $key: bold);
+    font-size: map-get($font-size, xxl);
+    font-weight: map-get($font-weight, $key: bold);
   }
 
   &-area {
@@ -348,7 +350,7 @@
       transition: linear 0.3s;
     }
 
-    input[type="radio"]:checked+span>.icon {
+    input[type="radio"]:checked + span > .icon {
       transform: scale(1.7);
     }
   }

@@ -154,6 +154,7 @@
         .upost-cover {
           flex: 1;
           margin-right: 10px;
+          max-height: 81px;
           img {
             height: 100%;
             object-fit: cover;

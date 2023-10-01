@@ -6,6 +6,7 @@ import { fetchBookmark, updateBookmark } from '../../detail-post/detail-post.act
 
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../../shared/components/EmptyPost';
+import SectionTitle from '../../../shared/components/SectionTitle';
 
 const Bookmark = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Bookmark = () => {
   return (
     <section className="section section-bookmark">
       <div className="container">
-        <h2 className="section-title text-primary">Your Saved Bookmarks</h2>
+        <SectionTitle title="Your Saved Bookmarks" subtitle="A list of all your posts. Let’s get you some views! 🚀" />
         <ul className="row">
           {postListBookmark &&
             postListBookmark.map(
