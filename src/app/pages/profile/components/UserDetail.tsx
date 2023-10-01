@@ -5,11 +5,11 @@ import { Link, useParams } from 'react-router-dom';
 import { RootState } from '../../../stores/store';
 import { convertDateToString } from '../../../shared/utils';
 import { ProfileModel } from '../../../models/user';
+import { UserInfo } from '../../../models/auth';
+import { updateFollowAction } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
-import { updateFollowAction } from '../profile.actions';
 import UserList from '../../../shared/components/UserList';
-import { UserInfo } from '../../../models/auth';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);
@@ -21,11 +21,10 @@ const UserDetail = () => {
   const [isShowList, setIsShowList] = useState(false);
   const [listTitle, setListTitle] = useState('');
   const [userList, setUserList] = useState<UserInfo[]>([]);
+  const [isErrAvt, setIsErrAvt] = useState(false);
 
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  const [isErrAvt, setIsErrAvt] = useState(false);
 
   const handleUpdateFollow = () => {
     dispatch(updateFollowAction(id!) as any);
@@ -36,11 +35,13 @@ const UserDetail = () => {
   };
 
   const handleShow = (title: string, type: UserInfo[]) => {
-    setIsShowList(true);
-    if (title === 'Following' && !id) {
-      setListTitle('My Following');
-    } else setListTitle(title);
-    setUserList(type);
+    if (type.length) {
+      setIsShowList(true);
+      if (title === 'Following' && !id) {
+        setListTitle('My Following');
+      } else setListTitle(title);
+      setUserList(type);
+    }
   };
 
   return (

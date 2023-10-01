@@ -61,6 +61,7 @@ export const ACTIONS_TYPE = {
   // UPDATE FOLLOW
   UPDATE_FOLLOW: 'update-follow',
   UPDATE_FOLLOW_SUCCESS: 'update-follow-success',
+  UPDATE_FOLLOWING_SUCCESS: 'update-following-success',
   UPDATE_FOLLOW_FAILURE: 'update-follow-failure',
   // GET PROFILE
   GET_PROFILE: 'get-profile',

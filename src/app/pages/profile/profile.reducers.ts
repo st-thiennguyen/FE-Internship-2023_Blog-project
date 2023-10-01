@@ -196,10 +196,34 @@ export const profileReducer = (state = initialState, action: RootAction): Profil
         ...state,
         data: {
           ...state.data,
-          isFollowed: action.payload.isFollowed,
-          followers: action.payload.isFollowed ? state.data.followers + 1 : state.data.followers - 1,
+          isFollowed: action.payload,
+          followers: action.payload ? state.data.followers + 1 : state.data.followers - 1,
         },
         followers: newFollower(),
+        isLoadingFollow: false,
+        isSuccess: true,
+        message: '',
+      };
+
+    case ACTIONS_TYPE.UPDATE_FOLLOWING_SUCCESS:
+      // add/remove following user
+      const newFollowing = () => {
+        if (action.payload.isFollowing) {
+          const user: UserInfo = action.payload.initialUser;
+          state.following.push(user);
+          return state.following;
+        } else {
+          return state.following.filter((user) => user.id !== Number(action.payload.id));
+        }
+      };
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          followings: action.payload.isFollowing ? state.data.followings + 1 : state.data.followings - 1,
+        },
+        following: newFollowing(),
         isLoadingFollow: false,
         isSuccess: true,
         message: '',

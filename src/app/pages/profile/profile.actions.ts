@@ -146,10 +146,17 @@ const updateFollowStart = () => {
   };
 };
 
-const updateFollowSuccess = (response: FollowModel, id?: string) => {
+const updateFollowSuccess = (response: FollowModel) => {
   return {
     type: ACTIONS_TYPE.UPDATE_FOLLOW_SUCCESS,
-    payload: { isFollowed: response.followed, profileId: id },
+    payload: response.followed,
+  };
+};
+
+const updateFollowingSuccess = (response: FollowModel, id: string, initialUser: UserInfo) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOWING_SUCCESS,
+    payload: { isFollowing: response.followed, id: id, initialUser: initialUser },
   };
 };
 
@@ -283,11 +290,22 @@ export const deletePost = (id: string) => async (dispatch: Dispatch<RootAction>)
   }
 };
 
-export const updateFollowAction = (id: string, profileId?: string) => async (dispatch: Dispatch<RootAction>) => {
+export const updateFollowAction = (id: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(updateFollowStart());
   try {
     const response = await updateFollow(id);
-    dispatch(updateFollowSuccess(response as FollowModel, profileId));
+    dispatch(updateFollowSuccess(response as FollowModel));
+  } catch (error) {
+    dispatch(updateFollowFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
+  }
+};
+
+export const updateFollowingAction = (id: string, initialUser: UserInfo) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateFollowStart());
+  try {
+    const response = await updateFollow(id);
+    dispatch(updateFollowingSuccess(response as FollowModel, id, initialUser));
   } catch (error) {
     dispatch(updateFollowFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));

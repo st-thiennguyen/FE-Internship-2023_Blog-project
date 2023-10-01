@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom';
-import { UserInfo } from '../../models/auth';
-import IconHeart from './icon/IconHeart';
-import Button from './Button';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateFollowAction } from '../../pages/profile/profile.actions';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { UserInfo } from '../../models/auth';
+import { isImageUrlValid } from '../utils';
+import { updateFollowingAction } from '../../pages/profile/profile.actions';
+
+import Button from './Button';
+import IconHeart from './icon/IconHeart';
+import avatarDefault from '../../../assets/images/user-default.png';
 
 interface UserItemProps {
   user: UserInfo;
@@ -13,11 +17,12 @@ interface UserItemProps {
 
 const ActionType = ({ user, type }: UserItemProps) => {
   const [isFollowed, setIsFollowed] = useState(true);
+  const initialUser = JSON.parse(JSON.stringify(user));
 
   const dispatch = useDispatch();
 
   const handleUpdateFollow = () => {
-    dispatch(updateFollowAction(`${user.id}`, 'me') as any);
+    dispatch(updateFollowingAction(`${user.id}`, initialUser) as any);
     setIsFollowed(!isFollowed);
   };
 
@@ -38,11 +43,20 @@ const ActionType = ({ user, type }: UserItemProps) => {
 };
 
 const UserItem = ({ user, type }: UserItemProps) => {
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+  useEffect(() => {
+    isImageUrlValid(user.picture).then((result) => setIsErrorAvatar(!result));
+  }, [isErrorAvatar, user.picture]);
+
   return (
     <div className="user-item-info d-flex item-center justify-between">
       <Link className="user-detail d-flex item-center" to={`/profile/${user.id}`}>
         <div className="user-avatar-wrapper">
-          <img className="user-avatar" src={user.picture} alt="" />
+          <img
+            className="user-avatar"
+            src={!isErrorAvatar ? user.picture : avatarDefault}
+            alt={`${user.firstName} avatar`}
+          />
         </div>
         <h4 className="user-item-name">{user.displayName ? user.displayName : user.firstName + ' ' + user.lastName}</h4>
       </Link>

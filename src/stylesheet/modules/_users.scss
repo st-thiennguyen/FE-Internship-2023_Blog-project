@@ -10,9 +10,9 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    padding: 12px 24px;
 
-    width: 30%;
+    padding: 12px 24px;
+    width: 500px;
     border-radius: 12px;
     background: #f9fafb;
   }
@@ -22,14 +22,14 @@
   }
   .btn-close {
     padding: 6px;
-    font-size: map-get($map: $font-size, $key: xl);
     background: transparent;
+    font-size: map-get($map: $font-size, $key: xl);
   }
   .divided {
     margin: 0 0 12px;
   }
   .user-list {
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: auto;
   }
   .user-item {
@@ -39,13 +39,14 @@
       height: 44px;
       padding: 1px;
       margin-right: 12px;
+
       border: 1px solid #0d0c1a;
       border-radius: 100%;
     }
     .user-avatar {
       height: 100%;
-      object-fit: cover;
       border-radius: 100%;
+      object-fit: cover;
     }
   }
   .user-action > :first-child {
@@ -54,5 +55,11 @@
   .btn-follow {
     width: 100px !important;
     padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .user-list-wrapper {
+    max-width: 80%;
   }
 }
