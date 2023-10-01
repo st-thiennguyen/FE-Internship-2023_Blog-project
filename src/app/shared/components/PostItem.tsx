@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { PostModel } from '../../models/post';
-import { deletePost } from '../../pages/profile/profile.actions';
 import { isImageUrlValid } from '../utils';
 import { convertDateToString } from '../utils/date';
-
-import Dialog from './Dialog';
-import NoImg from '../../../assets/images/no-image.png';
-import userDefault from '../../../assets/images/user-default.png';
-import Tags from './Tags';
+import { deletePost } from '../../pages/profile/profile.actions';
 import { restorePostAction } from '../../pages/posts/posts.action';
+
+import Tags from './Tags';
+import Dialog from './Dialog';
 import IconComment from './icon/IconComment';
 import IconHeart from './icon/IconHeart';
 import IconBookmark from './icon/IconBookmark';
+import NoImg from '../../../assets/images/no-image.png';
+import userDefault from '../../../assets/images/user-default.png';
 
 interface PostItemProps {
   post: PostModel;

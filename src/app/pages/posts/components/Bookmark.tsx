@@ -7,10 +7,12 @@ import { fetchBookmark, updateBookmark } from '../../detail-post/detail-post.act
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../../shared/components/EmptyPost';
 import SectionTitle from '../../../shared/components/SectionTitle';
+import PostItemLoading from '../../home/components/PostItemLoading';
 
 const Bookmark = () => {
   const dispatch = useDispatch();
   const postListBookmark = useSelector((state: RootState) => state.bookmark.data);
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
 
   const handleUpdateBookmark = (id: number) => {
     dispatch(updateBookmark(Number(id)) as any);
@@ -25,8 +27,8 @@ const Bookmark = () => {
   return (
     <section className="section section-bookmark">
       <div className="container">
-        <SectionTitle title="Your Saved Bookmarks" subtitle="A list of all your posts. Let’s get you some views! 🚀" />
-        <ul className="row">
+        <SectionTitle title="Bookmarks" subtitle="A list of all your saved posts." />
+        <ul className="post-list row">
           {postListBookmark &&
             postListBookmark.map(
               (bookmarkItem, index) =>
@@ -41,6 +43,15 @@ const Bookmark = () => {
                   </li>
                 ),
             )}
+          {isLoading && postListBookmark.length === 0 && (
+            <ul className="row">
+              {Array.from({ length: 6 }, (item, index) => (
+                <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
+                  <PostItemLoading />
+                </li>
+              ))}
+            </ul>
+          )}
           {isEmptyBookmark && <EmptyPost desc="Your bookmark list is empty" />}
         </ul>
       </div>
