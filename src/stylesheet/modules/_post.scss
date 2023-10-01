@@ -25,6 +25,7 @@
     color: map-get($color, text);
     margin-bottom: 12px;
     margin-top: 8px;
+    transition: all ease-in 0.4s;
     &:hover {
       color: map-get($color, primary);
     }
