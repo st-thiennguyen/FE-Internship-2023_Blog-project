@@ -73,7 +73,6 @@
 
   .section-latest-post {
     .post {
-
       .icon-like-wrapper,
       .icon-comment-wrapper,
       .icon-bookmark-wrapper {
@@ -101,11 +100,13 @@
           "item-4 item-4 item-4 item-5 item-5 item-5";
       }
 
-      .grid-item .recommend-item:nth-child(3) {
-        .post {
-          border: 0;
+      .recommend-item:nth-child(3) {
+        .post-img-wrapper {
+          .post-link {
+            border-bottom-right-radius: 24px;
+            border-bottom-left-radius: 24px;
+          }
         }
-
         .post-cover {
           border-bottom-right-radius: 24px;
           border-bottom-left-radius: 24px;
@@ -121,7 +122,6 @@
 
       .post {
         .post-img-wrapper {
-
           .post-cover,
           .post-link {
             width: 160px;

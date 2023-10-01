@@ -4,7 +4,7 @@ import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shar
 import { RootAction } from '../../stores/store';
 
 const initState: AuthState = {
-  userInfo: getLocalStorage(StorageKey.USER, {} as UserInfo),
+  userInfo: getLocalStorage(StorageKey.USER, {} as UserInfo) || null,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -96,6 +96,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
+        userInfo: initState.userInfo,
         isLoading: false,
         isError: false,
         isLogoutSuccess: true,

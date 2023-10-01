@@ -4,7 +4,7 @@ import thunk, { ThunkAction } from 'redux-thunk';
 
 import authReducer from '../pages/auth/auth.reducer';
 import { bookmarkReducer, detailPostReducer } from '../pages/detail-post/detail-post.reducer';
-import { lastesPostReducer, recommendPostReducer, userReducer } from '../pages/home/home.reducer';
+import { lastesPostReducer, recommendPostReducer } from '../pages/home/home.reducer';
 import { loggerMiddleware } from './middleware';
 import { writePostReducer } from '../pages/write-post/write-post.reducer';
 import { postReducer } from '../pages/posts/posts.reducer';
@@ -21,7 +21,6 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   detail: detailPostReducer,
   latestPost: lastesPostReducer,
-  user: userReducer,
   writePost: writePostReducer,
   post: postReducer,
   profile: profileReducer,
