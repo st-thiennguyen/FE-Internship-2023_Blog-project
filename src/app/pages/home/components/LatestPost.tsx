@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { RootState } from '../../../stores/store';
-import { fetchPublicPosts } from '../home.actions';
 import { Link } from 'react-router-dom';
 
-import PostItemLoading from './PostItemLoading';
+import { RootState } from '../../../stores/store';
 import { pageSize } from '../../../shared/constants/post';
+import { fetchPublicPosts } from '../home.actions';
+
+import PostItemLoading from './PostItemLoading';
 import PostList from './PostList';
 import SectionTitle from '../../../shared/components/SectionTitle';
 import Button from '../../../shared/components/Button';
@@ -32,13 +32,10 @@ const LatestPost = () => {
   return (
     <section className="section section-latest-post">
       <div className="section-header d-flex justify-between item-center">
-        <SectionTitle
-          title="Lastest Post 🎈"
-          subtitle="Discover the most outstanding articles ins all topics of life."
-        />
+        <SectionTitle title="Latest Post 🎈" subtitle="Discover the most outstanding articles in all topics of life." />
 
         <Link to={'/posts'}>
-          <button className="btn btn-primary">Show More </button>
+          <button className="btn btn-primary">Show More</button>
         </Link>
       </div>
       {data && <PostList posts={data} isLoading={isLoading} />}

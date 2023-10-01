@@ -72,7 +72,6 @@ const WritePost = ({ post }: WritePostProps) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const {
     register,
@@ -145,9 +144,6 @@ const WritePost = ({ post }: WritePostProps) => {
   const handleUpdatePost = handleSubmit((data: FormData) => {
     setIsLoading(true);
     dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
-    setTimeout(() => {
-      navigate(`/posts/${id}`);
-    }, 3000);
     setIsClick(true);
   });
 
@@ -155,9 +151,6 @@ const WritePost = ({ post }: WritePostProps) => {
     const data = getValues();
     setIsLoading(true);
     dispatch(updatePost({ ...data, content, status: statusPost, tags: tags }, post!.id, file) as any);
-    setTimeout(() => {
-      navigate(`/posts/${id}`);
-    }, 3000);
     setIsClick(true);
   };
 
@@ -201,10 +194,9 @@ const WritePost = ({ post }: WritePostProps) => {
   };
 
   if (isSuccess && isClick) {
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate(`/posts/${currentPost.id}`);
-    }, 3000);
+    setIsLoading(false);
+    navigate(`/posts/${currentPost.id}`);
+    dispatch(resetWriteState());
   }
 
   return (

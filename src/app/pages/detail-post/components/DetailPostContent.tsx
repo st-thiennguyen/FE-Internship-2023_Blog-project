@@ -33,7 +33,7 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
 
   useEffect(() => {
     post.user?.picture && isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
-  }, [isSuccess]);
+  }, [isSuccess, post.user]);
 
   const removeEmptyTags = (htmlString: string) => {
     const doc = new DOMParser().parseFromString(htmlString, 'text/html');
