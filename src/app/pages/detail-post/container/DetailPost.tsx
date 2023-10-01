@@ -5,14 +5,14 @@ import { Navigate, useParams } from 'react-router-dom';
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
 import { fetchComments, fetchDetailBlog, fetchLikes } from '../detail-post.actions';
+import { isImageUrlValid } from '../../../shared/utils';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
-import { isImageUrlValid } from '../../../shared/utils';
-
 import DetailPostHeader from '../components/DetailPostHeader';
 import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
+
 import noImage from '../../../../assets/images/no-image.png';
 
 const DetailPost = () => {
@@ -30,12 +30,10 @@ const DetailPost = () => {
   }, []);
 
   const [isErrorCover, setIsErrorCover] = useState(false);
-  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
-    isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
-  }, [post, isErrorCover, isErrorAvatar]);
+  }, [post, isErrorCover]);
 
   useEffect(() => {
     if (id) {

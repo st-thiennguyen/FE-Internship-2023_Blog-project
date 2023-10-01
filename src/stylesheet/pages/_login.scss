@@ -1,6 +1,6 @@
 .auth {
   .auth-title {
-    margin: 40px 0;
+    margin: 40px 0 60px;
     &::after {
       content: "";
       position: absolute;
@@ -26,7 +26,7 @@
 
   .login-external {
     padding: 8px;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     border-radius: 12px;
     border: 1px solid #c8c8c8;
     font-size: map-get($map: $font-size, $key: sm);
