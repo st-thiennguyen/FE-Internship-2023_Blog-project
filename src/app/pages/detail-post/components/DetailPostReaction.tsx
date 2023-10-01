@@ -1,14 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { toggleBookmarkAction, updateLikeAction } from '../detail-post.actions';
-
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
-
 import IconHeart from '../../../shared/components/icon/IconHeart';
 import IconComment from '../../../shared/components/icon/IconComment';
 import IconBookmark from '../../../shared/components/icon/IconBookmark';
+
 
 interface ReactionProps {
   postId: number;
@@ -21,17 +21,24 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUpdateLike = () => {
-    if (postId) {
+    if (postId && isLogin) {
       dispatch(updateLikeAction(postId) as any);
+    } else {
+      navigate('/login');
     }
   };
 
   const handleAddBookMark = () => {
-    if (postId) {
+    if (postId && isLogin) {
       dispatch(toggleBookmarkAction(postId) as any);
+    } else {
+      navigate('/login');
     }
   };
 
