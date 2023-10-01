@@ -6,9 +6,11 @@ import { getDraftPostAction } from '../posts.action';
 import SectionTitle from '../../../shared/components/SectionTitle';
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../../shared/components/EmptyPost';
+import PostItemLoading from '../../home/components/PostItemLoading';
 
 const PostDraft = () => {
   const posts = useSelector((state: RootState) => state.post.data);
+  const isLoading = useSelector((state: RootState) => state.post.isLoading);
 
   const dispatch = useDispatch<any>();
 
@@ -19,18 +21,30 @@ const PostDraft = () => {
   return (
     <section className="section section-draft">
       <div className="container">
-        <SectionTitle title="Posts Draft" subtitle="A list of all your posts. Let’s get you some views! 🚀" />
-        <ul className="row">
-          {posts.length ? (
-            posts.map((post, index) => (
-              <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
-                <PostItem post={post} isVertical={true} />
-              </li>
-            ))
+        <SectionTitle title="Draft" subtitle="A list of all your draft posts." />
+        {posts &&
+          (posts.length > 0 || isLoading ? (
+            <ul className="post-list row">
+              {posts.map((post, index) => {
+                return (
+                  <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
+                    <PostItem post={post} isVertical={true} />
+                  </li>
+                );
+              })}
+            </ul>
           ) : (
-            <EmptyPost desc="Your draft list is empty" />
-          )}
-        </ul>
+            <EmptyPost />
+          ))}
+        {isLoading && (
+          <ul className="row">
+            {Array.from({ length: 6 }, (item, index) => (
+              <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
+                <PostItemLoading />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

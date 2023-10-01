@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
-
-import { pageSize } from '../../../shared/constants/post';
-import PostItemLoading from '../../home/components/PostItemLoading';
-import PostList from '../../home/components/PostList';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../stores/store';
-import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
 import { useLocation } from 'react-router-dom';
-import CirculatorLoading from '../../../shared/components/CirculatorLoading';
+
+import { RootState } from '../../../stores/store';
+import { pageSize } from '../../../shared/constants/post';
+import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
+
 import SectionTitle from '../../../shared/components/SectionTitle';
+import PostList from '../../home/components/PostList';
+import PostItemLoading from '../../home/components/PostItemLoading';
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
 const threshold = 100;
 

@@ -51,7 +51,7 @@ const PostRecycleBin = () => {
   return (
     <section className="section section-post-recycle">
       <div className="container">
-        <SectionTitle title="Posts Deleted" subtitle="A list of all your posts. Let’s get you some views! 🚀" />
+        <SectionTitle title="Posts Deleted" subtitle="A list of all your deleted posts." />
 
         {posts &&
           (posts.length > 0 || isLoading ? (
@@ -68,8 +68,8 @@ const PostRecycleBin = () => {
             <EmptyPost />
           ))}
         {isLoading && posts.length === 0 && (
-          <ul className="row">
-            {Array.from({ length: 6 }, (item, index) => (
+          <ul className="post-list row">
+            {Array.from({ length: 8 }, (item, index) => (
               <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
                 <PostItemLoading />
               </li>

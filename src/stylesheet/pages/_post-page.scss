@@ -16,3 +16,12 @@
     cursor: pointer;
   }
 }
+
+.section-post-recycle,
+.section-bookmark {
+  .post {
+    &:hover .post-edit {
+      display: none;
+    }
+  }
+}

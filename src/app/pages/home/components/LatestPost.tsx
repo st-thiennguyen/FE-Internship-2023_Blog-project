@@ -9,7 +9,6 @@ import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
 import PostList from './PostList';
 import SectionTitle from '../../../shared/components/SectionTitle';
-import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 import Button from '../../../shared/components/Button';
 
 const LatestPost = () => {
