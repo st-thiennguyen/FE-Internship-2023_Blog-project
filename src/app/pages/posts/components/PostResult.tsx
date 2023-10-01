@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../stores/store';
 import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
 import { useLocation } from 'react-router-dom';
-import Loading from '../../../shared/components/Loading';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
+import SectionTitle from '../../../shared/components/SectionTitle';
 
 const threshold = 100;
 
@@ -24,7 +24,10 @@ const PostResult = () => {
   const searchParams = new URLSearchParams(location.search);
   const tagsQuery = searchParams.get('tags');
   useEffect(() => {
-    dispatch(resetCurrentPage());
+    dispatch(fetchPostWithTags({ page: 1, size: pageSize, tags: getQuery() }));
+    return () => {
+      dispatch(resetCurrentPage());
+    };
   }, []);
 
   const getQuery = (): string[] => {
@@ -34,7 +37,9 @@ const PostResult = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
+    if (tagsQuery) {
+      dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
+    }
   }, [tagsQuery]);
 
   useEffect(() => {
@@ -63,7 +68,7 @@ const PostResult = () => {
   return (
     <section className="section section-post-result">
       <div className="container">
-        <h2 className="section-title text-primary">RESULT OF FOUND</h2>
+        <SectionTitle title={`${tagsQuery ? `Result of found #${tagsQuery}` : 'Lastest posts'}`} />
 
         {posts && <PostList posts={posts} isLoading={isLoading} />}
         {isLoading && posts.length === 0 && (

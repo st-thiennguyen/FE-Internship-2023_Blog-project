@@ -25,6 +25,7 @@
     color: map-get($color, text);
     margin-bottom: 12px;
     margin-top: 8px;
+    transition: all ease-in 0.4s;
     &:hover {
       color: map-get($color, primary);
     }
@@ -209,10 +210,10 @@
     right: 0;
     left: 0;
     bottom: 0;
-    border-radius: 12px;
+    border-radius: 24px;
     z-index: 1;
 
-    background-color: rgba($color: #000000, $alpha: 0.2);
+    background-color: rgba($color: #000000, $alpha: 0.4);
   }
 
   .icon-restore-60 {

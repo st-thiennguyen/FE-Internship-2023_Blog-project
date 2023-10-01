@@ -1,20 +1,4 @@
 .home-page {
-  .section-title {
-    font-size: 38px;
-    font-weight: map-get($font-weight, semibold);
-    color: map-get($color, primary);
-
-    &-wrapper {
-      padding-bottom: 20px;
-      border-bottom: 1px solid map-get($color, borderColor);
-      margin-bottom: 20px;
-    }
-  }
-
-  .section-sub-title {
-    color: map-get($color, subtext);
-  }
-
   .section-recommend {
     .recommend-list {
       display: grid;
@@ -101,10 +85,6 @@
 
 @media screen and (max-width: map-get($breakpoints , xl)) {
   .home-page {
-    .section-title {
-      margin-bottom: 20px;
-    }
-
     .section-recommend {
       padding-bottom: 0;
 
@@ -164,10 +144,6 @@
 
 @media screen and (max-width: map-get($breakpoints, lg)) {
   .home-page {
-    .section-title {
-      font-size: 30px;
-    }
-
     .section-latest-post {
       .post {
         gap: 10px;

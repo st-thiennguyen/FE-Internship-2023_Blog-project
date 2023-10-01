@@ -118,6 +118,7 @@
     .user-social-list {
       .user-social-item {
         margin-right: 15px;
+        cursor: pointer;
       }
 
       .user-social {
@@ -139,15 +140,6 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-    }
-
-    .social-count {
-      font-size: map-get($map: $font-size, $key: xxl);
-      font-weight: map-get($map: $font-weight, $key: semibold);
-    }
-
-    .social-desc {
-      font-size: map-get($map: $font-size, $key: lg);
     }
 
     .user-detail-footer {

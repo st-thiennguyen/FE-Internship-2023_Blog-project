@@ -95,3 +95,8 @@ export const createDraft = (data: PostProps) => {
   const api = new ApiService();
   return api.post(ENDPOINT.post.draft, data);
 };
+
+export const getUserLike = (id: number) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.post.index}/${id}/likes`);
+};

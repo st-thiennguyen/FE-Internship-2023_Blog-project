@@ -1,0 +1,94 @@
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+  transform: translate(-50%, -50%);
+  animation: identifier 0.7s ease-in-out;
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 0;
+
+    background-color: map-get($map: $color, $key: textLight);
+    color: map-get($map: $color, $key: danger);
+    font-size: 30px;
+    font-weight: 600;
+
+    transition: all ease 0.3s;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .dialog-confirm {
+    width: 400px;
+    background-color: map-get($map: $color, $key: textLight);
+    color: map-get($map: $color, $key: text);
+    border-radius: 12px;
+
+    .dialog-content {
+      padding: 20px;
+      border: none;
+      font-size: 14px;
+    }
+
+    .dialog-header {
+      position: absolute;
+      top: -20px;
+      border-bottom: none;
+    }
+
+    .dialog-body {
+      padding: 30px 0 20px 0;
+      color: map-get($map: $color, $key: subtext);
+
+      .dialog-title {
+        margin: 30px 0 -10px;
+        position: absolute;
+        top: -20px;
+        font-size: 26px;
+      }
+    }
+
+    .dialog-footer {
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      font-size: 13px;
+
+      a {
+        color: map-get($map: $color, $key: subtext);
+      }
+    }
+  }
+}
+
+@keyframes identifier {
+  0% {
+    top: -100%;
+  }
+
+  100% {
+    top: 50%;
+  }
+}
+
+.overlay {
+  @include position(0, 0, 0, 0, fixed);
+  width: 100%;
+  z-index: 99;
+  background-color: #141616;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: map-get($breakpoints, sm)) {
+  .dialog {
+    .dialog-confirm {
+      width: 300px;
+    }
+  }
+}
