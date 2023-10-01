@@ -1,15 +1,25 @@
-import React from 'react';
-import Tags from '../../../shared/components/Tags';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import DetailPostReaction from './DetailPostReaction';
+
 import { PostModel } from '../../../models/post';
-import { convertDateToString } from '../../../shared/utils';
+import { convertDateToString, isImageUrlValid } from '../../../shared/utils';
+
+import Tags from '../../../shared/components/Tags';
+import DetailPostReaction from './DetailPostReaction';
+import avatarDefault from '../../../../assets/images/user-default.png';
 
 interface DetailPostHeaderProps {
   post: PostModel;
   scrollToComment: () => void;
 }
+
 const DetailPostHeader = ({ post, scrollToComment }: DetailPostHeaderProps) => {
+  const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+
+  useEffect(() => {
+    isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
+  }, [post, isErrorAvatar]);
+
   return (
     <div className="detail-header">
       <div className="detail-header-tags">
@@ -23,7 +33,7 @@ const DetailPostHeader = ({ post, scrollToComment }: DetailPostHeaderProps) => {
       <div className="detail-header-author d-flex item-center justify-between">
         <Link to={`/profile/${post.user?.id}`} className="author-info d-flex item-center">
           <div className="author-avatar">
-            <img src={post.user?.picture} alt="Avatar of author" />
+            <img src={!isErrorAvatar ? post.user?.picture : avatarDefault} alt="Image of author" />
           </div>
           <div className="detail-author-date">
             <h5 className="author-name">
