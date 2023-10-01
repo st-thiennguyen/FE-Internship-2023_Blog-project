@@ -100,12 +100,6 @@
   }
 }
 
-@media screen and (max-width: map-get($breakpoints, xl)) {
-  .navbar-item:nth-child(1) {
-    display: none;
-  }
-}
-
 @media screen and (max-width: map-get($breakpoints, md)) {
   .header-welcome {
     display: none;

@@ -3,12 +3,14 @@
     font-size: 38px;
     font-weight: map-get($font-weight, semibold);
     color: map-get($color, primary);
+
     &-wrapper {
       padding-bottom: 20px;
       border-bottom: 1px solid map-get($color, borderColor);
       margin-bottom: 20px;
     }
   }
+
   .section-sub-title {
     color: map-get($color, subtext);
   }
@@ -24,44 +26,57 @@
         "item-1 item-3 item-4"
         "item-2 item-3 item-5";
     }
+
     .recommend-item:nth-child(1) {
       grid-area: item-1;
     }
+
     .recommend-item:nth-child(2) {
       grid-area: item-2;
     }
+
     .recommend-item:nth-child(3) {
       grid-area: item-3;
+
       .post {
         height: 100%;
+
         &-img-wrapper {
           height: 70%;
+
           .post-link {
             height: 100%;
           }
+
           .post-cover {
             height: 100%;
           }
         }
+
         &-content-wrapper {
           height: 30%;
         }
+
         &-desc {
           display: inline-block;
         }
       }
     }
+
     .recommend-item:nth-child(4) {
       grid-area: item-4;
     }
+
     .recommend-item:nth-child(5) {
       grid-area: item-5;
     }
+
     .recommend-item {
       .post {
         margin-bottom: 0;
       }
     }
+
     .recommend-item:not(:nth-child(3)) {
       .post {
         &-title {
@@ -71,8 +86,10 @@
       }
     }
   }
+
   .section-latest-post {
     .post {
+
       .icon-like-wrapper,
       .icon-comment-wrapper,
       .icon-bookmark-wrapper {
@@ -87,8 +104,10 @@
     .section-title {
       margin-bottom: 20px;
     }
+
     .section-recommend {
       padding-bottom: 0;
+
       .recommend-list {
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(6, 1fr);
@@ -106,25 +125,35 @@
         .post {
           border: 0;
         }
+
         .post-cover {
           border-bottom-right-radius: 24px;
           border-bottom-left-radius: 24px;
         }
       }
     }
+
     .section-latest-post {
+      .section-header {
+        flex-wrap: wrap;
+        padding: 0 0 25px 0;
+      }
+
       .post {
         .post-img-wrapper {
+
           .post-cover,
           .post-link {
             width: 160px;
             height: 180px;
           }
         }
+
         &-info {
           flex-direction: column;
           align-items: flex-start;
         }
+
         &-date {
           padding-left: 40px;
         }
@@ -132,28 +161,34 @@
     }
   }
 }
+
 @media screen and (max-width: map-get($breakpoints, lg)) {
   .home-page {
     .section-title {
       font-size: 30px;
     }
+
     .section-latest-post {
       .post {
         gap: 10px;
         margin-bottom: $p-col-lg * 2;
         flex-direction: column-reverse;
         padding: 0;
+
         .tag-list {
           position: absolute;
           top: 10px;
           left: 10px;
         }
+
         &-content-wrapper {
           padding: 0 20px 20px;
           width: 100%;
         }
+
         .post-img-wrapper {
           width: 100%;
+
           .post-cover,
           .post-link {
             height: 200px;
@@ -162,6 +197,7 @@
         }
       }
     }
+
     .recommend-title {
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -169,9 +205,11 @@
       line-clamp: 2;
       overflow: hidden;
     }
+
     .username::after {
       display: none;
     }
+
     .section-recommend {
       .recommend-post-list {
         position: relative;
@@ -190,6 +228,7 @@
         bottom: 0;
         right: 0;
         left: 0;
+
         .action-list {
           display: flex;
           justify-content: space-around;
@@ -198,12 +237,14 @@
           padding: 10px 0;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
           background-color: map-get($color, backgroundFrame);
+
           .action-item {
             margin-bottom: 0;
           }
         }
       }
     }
+
     .section-recommend {
       .recommend-list {
         display: block;
@@ -224,25 +265,31 @@
         flex-direction: column-reverse;
         align-items: normal;
         padding: 0;
+
         &-content-wrapper {
           max-width: 180px;
         }
+
         .tag-list {
           position: absolute;
           top: 10px;
           left: 10px;
         }
+
         &-content-wrapper {
           width: 100%;
           max-width: 100%;
           padding: 10px;
         }
+
         &-title {
           margin-top: 0;
           margin-bottom: 4px;
         }
+
         .post-img-wrapper {
           width: 100%;
+
           .post-cover,
           .post-link {
             width: 100%;
