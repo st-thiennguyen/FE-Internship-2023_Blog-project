@@ -60,7 +60,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     <div className="detail-action">
       <ul className="action-list d-flex">
         <li className={`action-item d-flex item-center ${isLiked && isLogin ? 'like-active' : ''}`}>
-          <button className="btn btn-post-action" onClick={handleUpdateLike}>
+          <button className="btn btn-post-action  d-flex item-center justify-center" onClick={handleUpdateLike}>
             <IconHeart color={isLiked && isLogin ? '#e11d48' : ''} />
           </button>
           <span className="action-count like-count" onClick={handleShowList}>
@@ -68,13 +68,13 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
           </span>
         </li>
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action" onClick={scrollToComment}>
+          <button className="btn btn-post-action d-flex item-center justify-center" onClick={scrollToComment}>
             <IconComment />
           </button>
           <span className="action-count">{commentCount}</span>
         </li>
         <li className="action-item d-flex item-center">
-          <button className="btn btn-post-action" onClick={handleAddBookMark}>
+          <button className="btn btn-post-action  d-flex item-center justify-center" onClick={handleAddBookMark}>
             <IconBookmark color={isBookmark && isLogin ? '#111827' : ''} />
           </button>
         </li>
