@@ -25,10 +25,12 @@ export const lastesPostReducer = (state = initialLastesPostState, action: RootAc
         message: '',
       };
     case ACTIONS_TYPE.GET_ALL_POST_SUCCESS:
+      const newPosts = action.payload.currentPage === 1 ? action.payload.data : [...state.data, ...action.payload.data];
       return {
         ...state,
-        data: action.payload.data,
+        data: newPosts,
         totalPage: action.payload.totalPage,
+        currentPage: action.payload.currentPage,
         totalItems: action.payload.totalItems,
         isLoading: false,
         isSuccess: true,

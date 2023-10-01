@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
@@ -9,15 +9,25 @@ import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
 import PostList from './PostList';
 import SectionTitle from '../../../shared/components/SectionTitle';
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
 const LatestPost = () => {
   const isLoading = useSelector((state: RootState) => state.latestPost.isLoading);
   const { data } = useSelector((state: RootState) => state.latestPost);
   const dispatch = useDispatch<any>();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
     dispatch(fetchPublicPosts({ page: 1, size: pageSize }));
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchPublicPosts({ page: currentPage, size: pageSize }));
+  }, [currentPage]);
 
   return (
     <section className="section section-latest-post">
@@ -42,10 +52,11 @@ const LatestPost = () => {
           ))}
         </ul>
       )}
+      {isLoading && data.length && <CirculatorLoading />}
       <div className="d-flex justify-center">
-        <Link to={'/posts'}>
-          <button className="btn btn-primary">Show More </button>
-        </Link>
+        <button className="btn btn-primary" onClick={() => setCurrentPage(currentPage + 1)}>
+          Load more
+        </button>
       </div>
     </section>
   );
