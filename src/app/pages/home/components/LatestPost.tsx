@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { fetchPublicPosts, loadMore } from '../home.actions';
+import { Link } from 'react-router-dom';
 
 import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
 import PostList from './PostList';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
-import { Link } from 'react-router-dom';
 
 const threshold = 100;
 
