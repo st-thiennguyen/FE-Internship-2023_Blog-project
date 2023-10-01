@@ -12,10 +12,8 @@ import { getLocalStorage } from '../../../shared/utils';
 
 import Button from '../../../shared/components/Button';
 
-import icEye from '../../../../assets/icons/ic-eye-10.svg';
-import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
-import loginImg from '../../../../assets/images/bg-auth.png';
+import loginImg from '../../../../assets/images/authen-bg.jpg';
 import logoImg from '../../../../assets/images/logo.png';
 
 const schema = yup
