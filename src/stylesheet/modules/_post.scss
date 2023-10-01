@@ -108,33 +108,6 @@
   .icon-comment-wrapper {
     margin-right: 6px;
   }
-  .reaction-item:first-child:hover {
-    color: red;
-  }
-  .reaction-item:last-child:hover {
-    color: #00d082;
-  }
-  .icon-like-wrapper:hover {
-    background-color: #fff1f0;
-    transition: all 0.3s;
-    .icon {
-      background-image: url("../../assets/icons/ic-heart-outline-red-20.svg");
-    }
-  }
-  .icon-comment-wrapper:hover {
-    background-color: #ddf5ed;
-    transition: all 0.3s;
-    .icon {
-      background-image: url("../../assets/icons/ic-comment-outline-green-20.svg");
-    }
-  }
-  .icon-bookmark-wrapper:hover {
-    background-color: #fff7e6;
-    transition: all 0.3s;
-    .icon {
-      background-image: url("../../assets/icons/ic-bookmark-primary-20.svg");
-    }
-  }
   .post-action {
     position: absolute;
     flex-direction: column;
