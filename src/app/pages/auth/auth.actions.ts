@@ -60,6 +60,7 @@ export const logoutStart = () => {
 };
 
 export const logoutSuccess = (res: string) => {
+  console.log('res-----------------------: ',res);
   return {
     type: ACTIONS_TYPE.LOGOUT_SUCCESS,
     payload: res,

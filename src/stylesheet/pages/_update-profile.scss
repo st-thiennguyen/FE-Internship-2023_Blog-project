@@ -25,6 +25,11 @@
       }
     }
 
+    .tabs-item:hover {
+      color: #fff !important;
+      background-color: #e97e107a;
+    }
+
     .tabs-item.active {
       color: map-get($color, primary);
       border-bottom: 2px solid map-get($color, primary);

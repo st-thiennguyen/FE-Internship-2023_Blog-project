@@ -215,7 +215,7 @@ const UserUpdateForm = () => {
               </div>
 
               <div className="d-flex justify-center mt-5">
-                <Button label="Update Profile" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
+                <Button label="Update" optionClassName="btn btn-primary btn-auth" isLoading={isLoading} />
               </div>
             </fieldset>
           </form>
