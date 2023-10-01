@@ -100,13 +100,18 @@ const UserDetail = () => {
                       <ul className="user-social-list d-flex">
                         <li className="user-social-item" onClick={() => handleShow('Followers', followers)}>
                           <div className="d-flex item-center">
-                            <p className="social-count text-center ">{profile.followers}</p>
+                            <p className="social-count text-center ">
+                              {' '}
+                              {profile.followers > 0 ? profile.followers : '0'}
+                            </p>
                             <p className="social-desc text-center">Followers</p>
                           </div>
                         </li>
                         <li className="user-social-item">
                           <div className="d-flex item-center" onClick={() => handleShow('Following', following)}>
-                            <p className="social-count text-center">{profile.followings}</p>
+                            <p className="social-count text-center">
+                              {profile.followings > 0 ? profile.followings : '0'}
+                            </p>
                             <p className="social-desc text-center">Following</p>
                           </div>
                         </li>

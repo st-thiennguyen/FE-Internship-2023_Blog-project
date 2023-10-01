@@ -153,10 +153,10 @@ const updateFollowSuccess = (response: FollowModel) => {
   };
 };
 
-const updateFollowingSuccess = (response: FollowModel, id: string, initialUser: UserInfo) => {
+const updateFollowingSuccess = (response: FollowModel, initialUser: UserInfo) => {
   return {
     type: ACTIONS_TYPE.UPDATE_FOLLOWING_SUCCESS,
-    payload: { isFollowing: response.followed, id: id, initialUser: initialUser },
+    payload: { isFollowing: response.followed, initialUser: initialUser },
   };
 };
 
@@ -305,7 +305,7 @@ export const updateFollowingAction = (id: string, initialUser: UserInfo) => asyn
   dispatch(updateFollowStart());
   try {
     const response = await updateFollow(id);
-    dispatch(updateFollowingSuccess(response as FollowModel, id, initialUser));
+    dispatch(updateFollowingSuccess(response as FollowModel, initialUser));
   } catch (error) {
     dispatch(updateFollowFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));

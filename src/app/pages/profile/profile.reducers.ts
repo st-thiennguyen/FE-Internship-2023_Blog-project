@@ -184,7 +184,7 @@ export const profileReducer = (state = initialState, action: RootAction): Profil
       // add/remove current user from follower list
       const currentUser: UserInfo = getLocalStorage(StorageKey.USER);
       const newFollower = () => {
-        if (action.payload.isFollowed) {
+        if (action.payload) {
           state.followers.push(currentUser);
           return state.followers;
         } else {
@@ -208,12 +208,12 @@ export const profileReducer = (state = initialState, action: RootAction): Profil
     case ACTIONS_TYPE.UPDATE_FOLLOWING_SUCCESS:
       // add/remove following user
       const newFollowing = () => {
+        const user: UserInfo = action.payload.initialUser;
         if (action.payload.isFollowing) {
-          const user: UserInfo = action.payload.initialUser;
           state.following.push(user);
           return state.following;
         } else {
-          return state.following.filter((user) => user.id !== Number(action.payload.id));
+          return state.following.filter((u) => u.id !== user.id);
         }
       };
 
