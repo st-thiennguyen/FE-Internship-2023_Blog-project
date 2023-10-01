@@ -268,3 +268,13 @@
     }
   }
 }
+
+.empty-post {
+  width: 100%;
+  &-img {
+    width: 400px;
+  }
+  &-desc {
+    color: map-get($map: $color, $key: subtext);
+  }
+}

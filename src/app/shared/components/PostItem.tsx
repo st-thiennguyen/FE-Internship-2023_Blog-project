@@ -18,10 +18,11 @@ import IconBookmark from './icon/IconBookmark';
 
 interface PostItemProps {
   post: PostModel;
+  isInBookmark?: boolean;
   onClickBookmark?: (id: number) => void;
   isVertical?: boolean;
 }
-const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
+const PostItem = ({ post, onClickBookmark, isInBookmark, isVertical }: PostItemProps) => {
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
@@ -125,8 +126,11 @@ const PostItem = ({ post, onClickBookmark, isVertical }: PostItemProps) => {
                 {post.comments}
               </li>
             </ul>
-            <div className="icon-bookmark-wrapper d-flex item-center justify-center">
-              <IconBookmark />
+            <div
+              className="icon-bookmark-wrapper d-flex item-center justify-center"
+              onClick={() => onClickBookmark?.(post.id)}
+            >
+              <IconBookmark color={isInBookmark ? '#111827' : ''} />
             </div>
           </div>
         </div>
