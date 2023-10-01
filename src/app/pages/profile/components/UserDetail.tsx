@@ -52,7 +52,7 @@ const UserDetail = () => {
           <div className="container">
             {!isLoadingPage && (
               <div className="user-info d-flex item-center row">
-                <div className="col col-2 col-lg-3">
+                <div className="col col-3 col-lg-3">
                   <div className="user-avatar">
                     <img
                       onError={() => setIsErrAvt(true)}
@@ -62,7 +62,7 @@ const UserDetail = () => {
                     />
                   </div>
                 </div>
-                <div className="col col-10 col-lg-9">
+                <div className="col col-9 col-lg-9">
                   <div className="user-content">
                     <h3 className="user-fullname">
                       {profile.firstName + ' ' + profile.lastName}{' '}

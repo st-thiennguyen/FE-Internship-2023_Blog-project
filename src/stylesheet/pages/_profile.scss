@@ -1,6 +1,7 @@
 .main-profile-page {
   .user-actions {
     border-bottom: 1px solid map-get($color, borderColor);
+
     .tab-item {
       padding: 20px 0;
       margin-right: 30px;
@@ -9,27 +10,34 @@
         color: map-get($color, subtext);
         font-weight: map-get($font-weight, normal);
       }
+
       .icon {
         margin-bottom: 10px;
       }
+
       &.active {
         border-bottom: 2px solid map-get($color, text);
+
         .tab-name {
           color: map-get($color, text);
         }
       }
+
       &:hover {
         border-bottom: 2px solid map-get($color, subtext);
         cursor: pointer;
+
         .tab-name {
           color: map-get($color, text);
         }
       }
     }
   }
+
   // user-detail section
   .section-user-detail {
     padding-top: 0;
+
     .section-title {
       color: map-get($map: $color, $key: primary);
       font-size: 32px;
@@ -55,26 +63,31 @@
       background-color: #fff;
       border-radius: 36px;
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
       .user-avatar {
-        width: 150px;
-        height: 150px;
+        width: 130px;
+        height: 130px;
         padding: 4px;
         border-radius: 50%;
         border: 1px solid #111827;
+        margin: 0 auto;
 
-        margin-right: 32px;
       }
+
       .user-content {
         flex: 1;
       }
+
       .user-fullname {
         font-size: 30px;
         margin-bottom: 15px;
+
         .username {
           font-size: 18px;
           font-weight: 600;
         }
       }
+
       .user-contact {
         gap: 15px;
         padding-right: 15px;
@@ -91,6 +104,7 @@
         margin-bottom: 15px;
         font-size: 14px;
         color: #6b7280;
+
         .user-desc {
           margin-left: 15px;
         }
@@ -106,6 +120,7 @@
         margin-right: 15px;
         cursor: pointer;
       }
+
       .user-social {
         font-size: 14px;
       }
@@ -134,12 +149,15 @@
 
     .user-detail-info {
       margin: 20px 0 0 12px;
+
       .user-detail-fullname {
         margin: 8px 0;
       }
+
       .detail-info-item {
         margin: 4px 0;
       }
+
       .info-desc {
         margin-left: 6px;
         font-size: map-get($map: $font-size, $key: sm);
@@ -149,10 +167,12 @@
     .btn-follow {
       width: 150px;
     }
+
     .btn-following {
       &:hover .btn-label {
         display: none;
       }
+
       &:hover::before {
         content: "Unfollow";
       }
@@ -181,28 +201,35 @@
         background-color: map-get($color, primary);
       }
     }
+
     .post-action-list {
       visibility: hidden;
     }
+
     .my-post {
       .user-info-wrapper {
         pointer-events: none;
       }
+
       .post-action-list {
         visibility: visible;
       }
+
       .read-more {
         display: none;
       }
+
       .post:hover {
         .post-delete {
           display: block;
         }
+
         .post-edit {
           display: inline-block;
         }
       }
     }
+
     .user-post-empty {
       width: 70%;
       margin: 0 auto;
@@ -210,31 +237,53 @@
   }
 }
 
+@media screen and (max-width: map-get($breakpoints, lg)) {
+  .user-info {
+    justify-content: space-between;
+  }
+}
+
 @media screen and (max-width: map-get($breakpoints, md)) {
   .main-profile-page {
     .section-user-detail {
       .user-info {
+        margin-top: -150px;
+        flex-direction: column;
+        align-items: center;
+
         .user-avatar {
-          width: 100px;
-          height: 100px;
+          width: 100%;
+          height: 130px;
         }
-        .user-fullname {
-          font-size: 15px;
-          .username {
+
+        .user-content {
+          text-align: center;
+
+          .user-fullname {
+            font-size: 15px;
+
+            .username {
+              font-size: 12px;
+            }
+          }
+
+          .user-contact {
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
+            align-items: flex-start;
             font-size: 12px;
           }
+
+          .user-event {
+            display: none;
+          }
         }
-        .user-contact {
+
+        .user-social {
           flex-direction: column;
-          gap: 10px;
-          align-items: flex-start;
-          font-size: 12px;
-        }
-        .user-event {
-          display: none;
-        }
-        .user-social-list {
-          .user-social {
+
+          .user-social-list {
             font-size: 12px;
           }
         }
@@ -247,6 +296,8 @@
   .main-profile-page {
     .section-user-detail {
       .user-info {
+        justify-content: space-between;
+
         .user-avatar {
           width: 80px;
           height: 80px;
