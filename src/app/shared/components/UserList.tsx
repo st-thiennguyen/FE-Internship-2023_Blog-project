@@ -28,8 +28,8 @@ const UserList = ({ title, show, list, handleClose }: UserListProps) => {
   }, [show]);
 
   return (
-    <div className="user-list-backdrop">
-      <div className="user-list-wrapper">
+    <div className="user-list-backdrop" onClick={handleClose}>
+      <div className="user-list-wrapper" onClick={(e) => e.stopPropagation()}>
         <div className="user-list-header d-flex item-center justify-between">
           <h3 className="user-list-title">{title}</h3>
           <div className="btn btn-close" onClick={handleClose}>

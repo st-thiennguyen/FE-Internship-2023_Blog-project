@@ -24,7 +24,10 @@ const PostResult = () => {
   const searchParams = new URLSearchParams(location.search);
   const tagsQuery = searchParams.get('tags');
   useEffect(() => {
-    dispatch(resetCurrentPage());
+    dispatch(fetchPostWithTags({ page: 1, size: pageSize, tags: getQuery() }));
+    return () => {
+      dispatch(resetCurrentPage());
+    };
   }, []);
 
   const getQuery = (): string[] => {
@@ -34,7 +37,9 @@ const PostResult = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
+    if (tagsQuery) {
+      dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
+    }
   }, [tagsQuery]);
 
   useEffect(() => {

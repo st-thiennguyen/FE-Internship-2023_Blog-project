@@ -1,49 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { fetchPublicPosts, loadMore } from '../home.actions';
+import { fetchPublicPosts } from '../home.actions';
 import { Link } from 'react-router-dom';
 
 import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
 import PostList from './PostList';
-import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 import SectionTitle from '../../../shared/components/SectionTitle';
-
-const threshold = 100;
+import CirculatorLoading from '../../../shared/components/CirculatorLoading';
 
 const LatestPost = () => {
   const isLoading = useSelector((state: RootState) => state.latestPost.isLoading);
-  const { currentPage, totalPage, data } = useSelector((state: RootState) => state.latestPost);
+  const { data } = useSelector((state: RootState) => state.latestPost);
   const dispatch = useDispatch<any>();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (currentPage === 1) {
-      dispatch(fetchPublicPosts({ page: 1, size: pageSize }));
-      dispatch(loadMore());
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    dispatch(fetchPublicPosts({ page: 1, size: pageSize }));
   }, []);
 
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage <= totalPage) {
-      dispatch(loadMore());
-      dispatch(fetchPublicPosts({ page: currentPage, size: pageSize }));
-    }
-  };
-
   useEffect(() => {
-    if (data.length) {
-      window.addEventListener('scroll', handleScroll);
-    }
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isLoading]);
+    dispatch(fetchPublicPosts({ page: currentPage, size: pageSize }));
+  }, [currentPage]);
 
   return (
     <section className="section section-latest-post">
@@ -58,6 +42,7 @@ const LatestPost = () => {
         </Link>
       </div>
       {data && <PostList posts={data} isLoading={isLoading} />}
+
       {isLoading && data.length === 0 && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (
@@ -67,8 +52,12 @@ const LatestPost = () => {
           ))}
         </ul>
       )}
-
       {isLoading && data.length && <CirculatorLoading />}
+      <div className="d-flex justify-center">
+        <button className="btn btn-primary" onClick={() => setCurrentPage(currentPage + 1)}>
+          Load more
+        </button>
+      </div>
     </section>
   );
 };
