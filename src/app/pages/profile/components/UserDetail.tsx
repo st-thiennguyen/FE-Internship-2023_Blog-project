@@ -101,7 +101,6 @@ const UserDetail = () => {
                         <li className="user-social-item" onClick={() => handleShow('Followers', followers)}>
                           <div className="d-flex item-center">
                             <p className="social-count text-center ">
-                              {' '}
                               {profile.followers > 0 ? profile.followers : '0'}
                             </p>
                             <p className="social-desc text-center">Followers</p>
