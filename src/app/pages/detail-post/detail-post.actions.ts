@@ -71,7 +71,6 @@ export const updateLikeAction = (id: number) => async (dispatch: Dispatch<RootAc
     dispatch(updateLikeSuccess(response as InteractionProps));
   } catch (error) {
     dispatch(updateLikeFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -136,7 +135,6 @@ export const postCommentAction =
       dispatch(postCommentSuccess(response as InteractionItemModel, user));
     } catch (error) {
       dispatch(postCommentFailure(`${error}`));
-      dispatch(showToast(`${error}`, ToastType.ERROR));
     }
   };
 
@@ -168,7 +166,7 @@ export const fetchBookmark = () => async (dispatch: Dispatch<RootAction>) => {
     const response = await getBookmark();
     dispatch(getBookmarkSuccess(response as BookmarkModel[]));
   } catch (error) {
-    dispatch(getRecommendFailure(`${error}`));
+    dispatch(getBookmarkFailure(`${error}`));
   }
 };
 
@@ -231,6 +229,5 @@ export const toggleBookmarkAction = (id: number) => async (dispatch: Dispatch<Ro
     dispatch(toggleBookmarkSuccess(response as any));
   } catch (error) {
     dispatch(toggleBookmarkFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };

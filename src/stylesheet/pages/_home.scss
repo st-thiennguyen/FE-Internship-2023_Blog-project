@@ -1,18 +1,4 @@
 .home-page {
-  .section-title {
-    font-size: 38px;
-    font-weight: map-get($font-weight, semibold);
-    color: map-get($color, primary);
-    &-wrapper {
-      padding-bottom: 20px;
-      border-bottom: 1px solid map-get($color, borderColor);
-      margin-bottom: 20px;
-    }
-  }
-  .section-sub-title {
-    color: map-get($color, subtext);
-  }
-
   .section-recommend {
     .recommend-list {
       display: grid;

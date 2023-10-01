@@ -8,7 +8,6 @@ import { ProfileModel } from '../../../models/user';
 
 import Button from '../../../shared/components/Button';
 import { updateFollowAction } from '../profile.actions';
-import Loading from '../../../shared/components/Loading';
 
 const UserDetail = () => {
   const profile: ProfileModel = useSelector((state: RootState) => state.profile.data);

@@ -12,10 +12,8 @@ import { getLocalStorage } from '../../../shared/utils';
 
 import Button from '../../../shared/components/Button';
 
-import icEye from '../../../../assets/icons/ic-eye-10.svg';
-import icEyeSlash from '../../../../assets/icons/ic-eye_slash-10.svg';
 import icGoogle from '../../../../assets/icons/ic-google-30.svg';
-import loginImg from '../../../../assets/images/bg-auth.png';
+import loginImg from '../../../../assets/images/authen-bg.jpg';
 import logoImg from '../../../../assets/images/logo.png';
 
 const schema = yup
@@ -113,12 +111,11 @@ const Login = () => {
                     type={isShowPassword ? 'text' : 'password'}
                     placeholder="Enter Password..."
                   />
-                  <img
-                    src={isShowPassword ? icEyeSlash : icEye}
-                    alt="icon eye"
-                    className="login-icon icon-eye text-center"
+
+                  <i
                     onClick={togglePassword}
-                  />
+                    className={`icon icon-password ${isShowPassword ? `icon-eye-slash` : `icon-eye`}`}
+                  ></i>
                   <p className="form-error">{errors.password?.message}</p>
                 </div>
               </div>

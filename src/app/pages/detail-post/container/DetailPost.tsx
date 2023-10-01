@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
@@ -8,12 +8,13 @@ import { fetchComments, fetchDetailBlog } from '../detail-post.actions';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
-import { isImageUrlValid } from '../../../shared/utils';
+import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
 
 import noImage from '../../../../assets/images/no-image.png';
 import DetailPostHeader from '../components/DetailPostHeader';
 import GoToTopBtn from '../../../shared/components/GoToTopBtn';
 import CirculatorLoading from '../../../shared/components/CirculatorLoading';
+import { StorageKey } from '../../../shared/constants';
 
 const DetailPost = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const DetailPost = () => {
   const post: PostModel = useSelector((state: RootState) => state.detail?.data);
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
   const isError = useSelector((state: RootState) => state.detail.isError);
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const { id } = useParams();
   const commentRef = useRef<HTMLDivElement>(null);
@@ -30,6 +32,7 @@ const DetailPost = () => {
   }, []);
 
   const [isErrorCover, setIsErrorCover] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
@@ -47,7 +50,11 @@ const DetailPost = () => {
   }
 
   const scrollToComment = () => {
-    commentRef.current!.scrollIntoView({ behavior: 'smooth' });
+    if(isLogin) {
+      commentRef.current!.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/login');
+    }
   };
 
   return (

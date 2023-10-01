@@ -31,13 +31,18 @@
     border: 1px solid #c8c8c8;
     font-size: map-get($map: $font-size, $key: sm);
   }
-  .input-password-group {
-    .icon-eye {
-      position: absolute;
-      width: 20px;
-      height: 20px;
 
-      margin: 10px 0 10px -40px;
+  .input-password-group {
+    position: relative;
+
+    .icon-password {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      transform: translateY(-50%);
+      text-align: center;
       cursor: pointer;
     }
   }

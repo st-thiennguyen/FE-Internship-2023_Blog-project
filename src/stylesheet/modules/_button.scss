@@ -77,20 +77,13 @@ button[disabled] {
   transition: none !important;
 }
 
-.btn-modal {
-  margin: 0 5px;
-  width: 140px;
+.btn-dialog {
+  background-color: #fff;
+  border: 1px solid map-get($color, text);
 
   &:active {
-    margin: 0 5px;
-    min-height: 40px;
-    min-width: 120px;
-    border: none;
-    border-radius: 4px;
-
+    border: 1px solid transparent;
     transition: all 0.4s;
-    line-height: normal;
-    text-decoration: none;
     background: #60c7c1;
     color: map-get($map: $color, $key: backgroundFrame);
   }
