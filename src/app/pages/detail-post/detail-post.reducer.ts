@@ -83,7 +83,7 @@ export const detailPostReducer = (state = initialState, action: RootAction): Det
           state.likes.push({ ...interact, user: currentUser });
           return state.likes;
         } else {
-          return state.likes.filter((item) => item.userId !== currentUser.id);
+          return state.likes.filter((item) => item.user.id !== currentUser.id);
         }
       };
       return {
