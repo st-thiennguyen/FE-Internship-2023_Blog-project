@@ -1,20 +1,14 @@
-import { PostModel } from '../../models/post';
-import { ProfileModel } from '../../models/user';
-import { ACTIONS_TYPE } from '../../shared/constants';
+import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
 import { RootAction } from '../../stores/store';
+import { UserInfo } from '../../models/auth';
+import { PostModel } from '../../models/post';
+import { ProfileModel, ProfileState } from '../../models/user';
+import { getLocalStorage } from '../../shared/utils';
 
-interface UpdateProfileStateProps {
-  data: ProfileModel;
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  isLoadingFollow: boolean;
-  message: string;
-  isDeleteSuccess?: boolean;
-  isDeleteFailure?: boolean;
-}
-const initialState: UpdateProfileStateProps = {
+const initialState: ProfileState = {
   data: {} as ProfileModel,
+  followers: [] as UserInfo[],
+  following: [] as UserInfo[],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -24,7 +18,7 @@ const initialState: UpdateProfileStateProps = {
   isDeleteFailure: false,
 };
 
-export const profileReducer = (state = initialState, action: RootAction): UpdateProfileStateProps => {
+export const profileReducer = (state = initialState, action: RootAction): ProfileState => {
   switch (action.type) {
     case ACTIONS_TYPE.GET_PROFILE:
       return {
@@ -187,6 +181,17 @@ export const profileReducer = (state = initialState, action: RootAction): Update
         message: '',
       };
     case ACTIONS_TYPE.UPDATE_FOLLOW_SUCCESS:
+      // add/remove current user from follower list
+      const currentUser: UserInfo = getLocalStorage(StorageKey.USER);
+      const newFollower = () => {
+        if (action.payload) {
+          state.followers.push(currentUser);
+          return state.followers;
+        } else {
+          return state.followers.filter((user) => user.id !== currentUser.id);
+        }
+      };
+
       return {
         ...state,
         data: {
@@ -194,6 +199,31 @@ export const profileReducer = (state = initialState, action: RootAction): Update
           isFollowed: action.payload,
           followers: action.payload ? state.data.followers + 1 : state.data.followers - 1,
         },
+        followers: newFollower(),
+        isLoadingFollow: false,
+        isSuccess: true,
+        message: '',
+      };
+
+    case ACTIONS_TYPE.UPDATE_FOLLOWING_SUCCESS:
+      // add/remove following user
+      const newFollowing = () => {
+        const user: UserInfo = action.payload.initialUser;
+        if (action.payload.isFollowing) {
+          state.following.push(user);
+          return state.following;
+        } else {
+          return state.following.filter((u) => u.id !== user.id);
+        }
+      };
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          followings: action.payload.isFollowing ? state.data.followings + 1 : state.data.followings - 1,
+        },
+        following: newFollowing(),
         isLoadingFollow: false,
         isSuccess: true,
         message: '',
@@ -204,6 +234,40 @@ export const profileReducer = (state = initialState, action: RootAction): Update
         isLoadingFollow: false,
         isError: true,
         message: action.payload,
+      };
+
+    // get followers
+    case ACTIONS_TYPE.GET_FOLLOWER:
+      return {
+        ...state,
+        followers: [] as UserInfo[],
+      };
+    case ACTIONS_TYPE.GET_FOLLOWER_SUCCESS:
+      return {
+        ...state,
+        followers: action.payload,
+      };
+    case ACTIONS_TYPE.GET_FOLLOWER_FAILURE:
+      return {
+        ...state,
+        isError: action.payload,
+      };
+
+    // get following
+    case ACTIONS_TYPE.GET_FOLLOWING:
+      return {
+        ...state,
+        following: [] as UserInfo[],
+      };
+    case ACTIONS_TYPE.GET_FOLLOWING_SUCCESS:
+      return {
+        ...state,
+        following: action.payload,
+      };
+    case ACTIONS_TYPE.GET_FOLLOWING_FAILURE:
+      return {
+        ...state,
+        isError: action.payload,
       };
     default:
       return state;

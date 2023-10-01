@@ -40,5 +40,15 @@ export const getBookmark = () => {
 
 export const toggleBookmark = (postId: number) => {
   const api = new ApiService();
-  return api.post(`${ENDPOINT.bookmark.index}`, {postId: postId.toString()} );
+  return api.post(`${ENDPOINT.bookmark.index}`, { postId: postId.toString() });
+};
+
+export const getFollowers = (id: string) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.friends.index}/${id}/followers`);
+};
+
+export const getFollowings = (id: string) => {
+  const api = new ApiService();
+  return api.get(`${ENDPOINT.friends.index}/${id}/followings`);
 };

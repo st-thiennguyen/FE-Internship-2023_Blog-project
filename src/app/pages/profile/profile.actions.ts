@@ -1,21 +1,24 @@
 import { Dispatch } from 'react';
 
 import { RootAction } from '../../stores/store';
+import { UserInfo } from '../../models/auth';
+import { ToastType } from '../../models/toast';
+import { UserModel, FormChangePassword, ProfileModel, FollowModel } from '../../models/user';
+import { ACTIONS_TYPE, StorageKey, TypeUploadImage } from '../../shared/constants';
+
 import {
   updatePassword,
   updateProfile,
   getUserPosts,
   getUserProfile,
   updateFollow,
+  getFollowers,
+  getFollowings,
 } from '../../shared/services/user.service';
-import { UserModel, FormChangePassword, ProfileModel, FollowModel } from '../../models/user';
-import { UserInfo } from '../../models/auth';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
-import { ACTIONS_TYPE, StorageKey, TypeUploadImage } from '../../shared/constants';
 import { getLocalStorage } from '../../shared/utils';
 import { reAssignmentAuth } from '../auth/auth.actions';
 import { deletePostItem } from '../../shared/services';
-import { ToastType } from '../../models/toast';
 import { showToast } from '../../shared/components/toast/toast.actions';
 
 const getUserProfileStart = () => {
@@ -150,9 +153,52 @@ const updateFollowSuccess = (response: FollowModel) => {
   };
 };
 
+const updateFollowingSuccess = (response: FollowModel, initialUser: UserInfo) => {
+  return {
+    type: ACTIONS_TYPE.UPDATE_FOLLOWING_SUCCESS,
+    payload: { isFollowing: response.followed, initialUser: initialUser },
+  };
+};
+
 const updateFollowFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.UPDATE_FOLLOW_FAILURE,
+    payload: error,
+  };
+};
+
+const getFollowerStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_FOLLOWER,
+  };
+};
+const getFollowerSuccess = (data: UserInfo[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_FOLLOWER_SUCCESS,
+    payload: data,
+  };
+};
+const getFollowerFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_FOLLOWER_FAILURE,
+    payload: error,
+  };
+};
+
+const getFollowingStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_FOLLOWING,
+  };
+};
+const getFollowingSuccess = (data: UserInfo[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_FOLLOWING_SUCCESS,
+    payload: data,
+  };
+};
+const getFollowingFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_FOLLOWING_FAILURE,
     payload: error,
   };
 };
@@ -252,5 +298,36 @@ export const updateFollowAction = (id: string) => async (dispatch: Dispatch<Root
   } catch (error) {
     dispatch(updateFollowFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
+  }
+};
+
+export const updateFollowingAction = (id: string, initialUser: UserInfo) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(updateFollowStart());
+  try {
+    const response = await updateFollow(id);
+    dispatch(updateFollowingSuccess(response as FollowModel, initialUser));
+  } catch (error) {
+    dispatch(updateFollowFailure(`${error}`));
+    dispatch(showToast(`${error}`, ToastType.ERROR));
+  }
+};
+
+export const fetchFollower = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getFollowerStart());
+  try {
+    const response = await getFollowers(id);
+    dispatch(getFollowerSuccess(response as UserInfo[]));
+  } catch (error) {
+    dispatch(getFollowerFailure(`${error}`));
+  }
+};
+
+export const fetchFollowing = (id: string) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getFollowingStart());
+  try {
+    const response = await getFollowings(id);
+    dispatch(getFollowingSuccess(response as UserInfo[]));
+  } catch (error) {
+    dispatch(getFollowingFailure(`${error}`));
   }
 };

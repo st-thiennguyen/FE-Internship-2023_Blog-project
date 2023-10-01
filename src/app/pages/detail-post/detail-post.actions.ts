@@ -1,16 +1,15 @@
 import { Dispatch } from 'react';
 
-import { getDetailPost, getPostComments, postComment, updateLike } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
-import { InteractionItemModel, InteractionProps } from '../../models/interaction';
-
 import { UserInfo } from '../../models/auth';
-import { getRecommendFailure } from '../home/home.actions';
-import { ACTIONS_TYPE } from '../../shared/constants';
 import { BookmarkModel, PostModel } from '../../models/post';
-import { getBookmark, toggleBookmark } from '../../shared/services/user.service';
-import { showToast } from '../../shared/components/toast/toast.actions';
+import { ACTIONS_TYPE } from '../../shared/constants';
+import { InteractionItemModel, InteractionProps } from '../../models/interaction';
 import { ToastType } from '../../models/toast';
+
+import { showToast } from '../../shared/components/toast/toast.actions';
+import { getBookmark, toggleBookmark } from '../../shared/services/user.service';
+import { getDetailPost, getPostComments, getUserLike, postComment, updateLike } from '../../shared/services/index';
 
 const getDetailBlogStart = () => {
   return {
@@ -139,21 +138,20 @@ export const postCommentAction =
   };
 
 //Bookmark
-
-export const getBookmarkStart = () => {
+const getBookmarkStart = () => {
   return {
     type: ACTIONS_TYPE.GET_BOOKMARK,
   };
 };
 
-export const getBookmarkSuccess = (data: BookmarkModel[]) => {
+const getBookmarkSuccess = (data: BookmarkModel[]) => {
   return {
     type: ACTIONS_TYPE.GET_BOOKMARK_SUCCESS,
     payload: data,
   };
 };
 
-export const getBookmarkFailure = (error: string) => {
+const getBookmarkFailure = (error: string) => {
   return {
     type: ACTIONS_TYPE.GET_BOOKMARK_FAILURE,
     payload: error,
@@ -229,5 +227,36 @@ export const toggleBookmarkAction = (id: number) => async (dispatch: Dispatch<Ro
     dispatch(toggleBookmarkSuccess(response as any));
   } catch (error) {
     dispatch(toggleBookmarkFailure(`${error}`));
+  }
+};
+
+// get like list
+const getLikesStart = () => {
+  return {
+    type: ACTIONS_TYPE.GET_LIKES,
+  };
+};
+
+const getLikesSuccess = (data: InteractionItemModel[]) => {
+  return {
+    type: ACTIONS_TYPE.GET_LIKES_SUCCESS,
+    payload: data,
+  };
+};
+
+const getLikesFailure = (error: string) => {
+  return {
+    type: ACTIONS_TYPE.GET_LIKES_FAILURE,
+    payload: error,
+  };
+};
+
+export const fetchLikes = (id: number) => async (dispatch: Dispatch<RootAction>) => {
+  dispatch(getLikesStart());
+  try {
+    const response = await getUserLike(id);
+    dispatch(getLikesSuccess(response as InteractionItemModel[]));
+  } catch (error) {
+    dispatch(getLikesFailure(`${error}`));
   }
 };

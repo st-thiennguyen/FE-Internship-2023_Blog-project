@@ -1,0 +1,65 @@
+.user-list-backdrop {
+  @include position(0, 0, 0, 0, fixed);
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #141616, $alpha: 0.5);
+  z-index: 9999;
+
+  .user-list-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 12px 24px;
+    width: 500px;
+    border-radius: 12px;
+    background: #f9fafb;
+  }
+  .user-list-title {
+    color: map-get($map: $color, $key: subtext);
+    letter-spacing: 2px;
+  }
+  .btn-close {
+    padding: 6px;
+    background: transparent;
+    font-size: map-get($map: $font-size, $key: xl);
+  }
+  .divided {
+    margin: 0 0 12px;
+  }
+  .user-list {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  .user-item {
+    padding: 12px 0;
+    .user-avatar-wrapper {
+      width: 44px;
+      height: 44px;
+      padding: 1px;
+      margin-right: 12px;
+
+      border: 1px solid #0d0c1a;
+      border-radius: 100%;
+    }
+    .user-avatar {
+      height: 100%;
+      border-radius: 100%;
+      object-fit: cover;
+    }
+  }
+  .user-action > :first-child {
+    vertical-align: middle;
+  }
+  .btn-follow {
+    width: 100px !important;
+    padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, md)) {
+  .user-list-wrapper {
+    max-width: 80%;
+  }
+}
