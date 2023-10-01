@@ -69,7 +69,7 @@ export const getPostsSuccess = (data: GetPostResponse) => {
   };
 };
 
-export const getPostFailure = (message: string) => {
+export const getPostsFailure = (message: string) => {
   return {
     type: ACTIONS_TYPE.GET_POSTS_FAILURE,
     payload: message,
@@ -94,7 +94,7 @@ export const fetchPostWithTags = (query: QueryPost) => async (dispatch: Dispatch
     const response = await getPublicPosts(query);
     dispatch(getPostsSuccess(response as GetPostResponse));
   } catch (err) {
-    dispatch(getPostFailure(`${err}`));
+    dispatch(getPostsFailure(`${err}`));
     dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };
@@ -105,7 +105,7 @@ export const getRecyclebinAction = (page: number, size: number) => async (dispat
     const response = await getRecyclebinPost({ page, size });
     dispatch(getPostsSuccess(response as GetPostResponse));
   } catch (err) {
-    dispatch(getPostFailure(`${err}`));
+    dispatch(getPostsFailure(`${err}`));
     dispatch(showToast(`${err}`, ToastType.ERROR));
   }
 };

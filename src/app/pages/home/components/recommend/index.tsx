@@ -11,7 +11,7 @@ const Recommend = () => {
       <ul className="recommend-list">
         {recommendPosts.slice(0, 5).map((post) => {
           return (
-            <li className="recommend-item">
+            <li className="recommend-item" key={post.id}>
               <PostItem post={post} isVertical={true} />
             </li>
           );

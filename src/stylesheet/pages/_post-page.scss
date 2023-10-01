@@ -4,6 +4,11 @@
   .section-title {
     margin-bottom: 24px;
   }
+  .post:hover {
+    .post-edit {
+      display: inline-block;
+    }
+  }
 }
 
 .section-bookmark {

@@ -2,46 +2,22 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
-import { fetchPublicPosts, loadMore } from '../home.actions';
+import { fetchPublicPosts, loadMore, resetCurrentPage } from '../home.actions';
 import { Link } from 'react-router-dom';
 
 import PostItemLoading from './PostItemLoading';
 import { pageSize } from '../../../shared/constants/post';
 import PostList from './PostList';
-import CirculatorLoading from '../../../shared/components/CirculatorLoading';
-
-const threshold = 100;
 
 const LatestPost = () => {
   const isLoading = useSelector((state: RootState) => state.latestPost.isLoading);
-  const { currentPage, totalPage, data } = useSelector((state: RootState) => state.latestPost);
+  const { currentPage, data } = useSelector((state: RootState) => state.latestPost);
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    if (currentPage === 1) {
-      dispatch(fetchPublicPosts({ page: 1, size: pageSize }));
-    }
+    resetCurrentPage();
+    dispatch(fetchPublicPosts({ page: 1, size: pageSize }));
   }, []);
-
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage <= totalPage) {
-      dispatch(loadMore());
-      dispatch(fetchPublicPosts({ page: currentPage, size: pageSize }));
-    }
-  };
-
-  useEffect(() => {
-    if (data.length) {
-      window.addEventListener('scroll', handleScroll);
-    }
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isLoading]);
 
   return (
     <section className="section section-latest-post">
@@ -56,6 +32,7 @@ const LatestPost = () => {
         </Link>
       </div>
       {data && <PostList posts={data} isLoading={isLoading} />}
+
       {isLoading && data.length === 0 && (
         <ul className="row">
           {Array.from({ length: 6 }, (item, index) => (
@@ -65,8 +42,11 @@ const LatestPost = () => {
           ))}
         </ul>
       )}
-
-      {isLoading && data.length && <CirculatorLoading />}
+      <div className="d-flex justify-center">
+        <Link to={'/posts'}>
+          <button className="btn btn-primary">Show More </button>
+        </Link>
+      </div>
     </section>
   );
 };
