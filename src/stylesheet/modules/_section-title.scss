@@ -1,0 +1,21 @@
+.section-title-wrapper {
+  padding-bottom: 20px;
+  border-bottom: 1px solid map-get($color, borderColor);
+  margin-bottom: 20px;
+  .section-title {
+    font-size: 38px;
+    font-weight: map-get($font-weight, semibold);
+    color: map-get($color, primary);
+  }
+  .section-sub-title {
+    color: map-get($color, subtext);
+  }
+}
+
+@media screen and (max-width: map-get($breakpoints, lg)) {
+  .section-title-wrapper {
+    .section-title {
+      font-size: 30px;
+    }
+  }
+}

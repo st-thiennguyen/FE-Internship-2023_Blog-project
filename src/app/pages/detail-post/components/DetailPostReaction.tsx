@@ -18,6 +18,7 @@ interface ReactionProps {
 }
 
 const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }: ReactionProps) => {
+  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
   const dispatch = useDispatch();
@@ -37,9 +38,9 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
   return (
     <div className="detail-action">
       <ul className="action-list d-flex">
-        <li className={`action-item d-flex item-center ${isLiked ? 'like-active' : ''}`}>
+        <li className={`action-item d-flex item-center ${isLiked && isLogin ? 'like-active' : ''}`}>
           <button className="btn btn-post-action" onClick={handleUpdateLike}>
-            <IconHeart color={isLiked ? '#e11d48' : ''} />
+            <IconHeart color={isLiked && isLogin ? '#e11d48' : ''} />
           </button>
           <span className="action-count">{likeCount}</span>
         </li>
@@ -51,7 +52,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
         </li>
         <li className="action-item d-flex item-center">
           <button className="btn btn-post-action" onClick={handleAddBookMark}>
-            <IconBookmark color={isBookmark ? '#111827' : ''} />
+            <IconBookmark color={isBookmark && isLogin ? '#111827' : ''} />
           </button>
         </li>
       </ul>

@@ -13,6 +13,7 @@ import { Gender, StorageKey, regexEmail, regexPhoneNumber } from '../../../share
 import Button from '../../../shared/components/Button';
 import logo from '../../../../assets/images/logo.svg';
 import { getLocalStorage } from '../../../shared/utils';
+import loginImg from '../../../../assets/images/authen-bg.jpg';
 
 const schema = yup
   .object({
@@ -213,7 +214,7 @@ const Register = () => {
           </p>
         </div>
         <div className="auth-bg col col-6">
-          <img className="auth-img" src={require('../../../../assets/images/bg-auth.png')} alt="Auth background" />
+          <img className="auth-img" src={loginImg} alt="Auth background" />
         </div>
       </div>
     </div>

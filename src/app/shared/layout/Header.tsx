@@ -13,6 +13,10 @@ import icBookmark from '../../../assets/icons/ic-bookmark-24.svg';
 import icDraft from '../../../assets/icons/ic-draft-24.svg';
 import icLogout from '../../../assets/icons/ic-logout-24.svg';
 import avatarDefault from '../../../assets/images/user-default.png';
+import IconBookmark from '../components/icon/IconBookmark';
+import IconLogout from '../components/icon/IconLogout';
+import IconPost from '../components/icon/IconPost';
+import IconFolder from '../components/icon/IconFolder';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -82,26 +86,34 @@ const Header = () => {
                           </li>
                           <li className="auth-item">
                             <Link to="/posts/recyclebin" className="auth-link d-flex item-center">
-                              <img src={icRecyclebin} alt="Icon recyclebin" />
-                              <p>Recycle Bin</p>
+                              <div className="icon icon-small">
+                                <IconFolder />
+                              </div>
+                              <p>Recycle bin</p>
                             </Link>
                           </li>
                           <li className="auth-item">
                             <Link to="/posts/bookmark" className="auth-link d-flex item-center">
-                              <img src={icBookmark} alt="Icon bookmark" />
-                              <p>Bookmark</p>
+                              <div className="icon icon-small">
+                                <IconBookmark />
+                              </div>
+                              <p>Reading list</p>
                             </Link>
                           </li>
                           <li className="auth-item">
                             <Link to="/posts/draft" className="auth-link d-flex item-center">
-                              <img src={icDraft} alt="Icon bookmark" />
+                              <div className="icon icon-small">
+                                <IconPost />
+                              </div>
                               <p>Draft</p>
                             </Link>
                           </li>
                           <li className="auth-item">
                             <Link to="/login" className="auth-link d-flex item-center" onClick={handleLogout}>
-                              <img src={icLogout} alt="Icon logout" />
-                              <p>Logout</p>
+                              <div className="icon icon-small">
+                                <IconLogout />
+                              </div>
+                              <p>Log out</p>
                             </Link>
                           </li>
                         </ul>
