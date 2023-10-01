@@ -9,7 +9,6 @@ import IconHeart from '../../../shared/components/icon/IconHeart';
 import IconComment from '../../../shared/components/icon/IconComment';
 import IconBookmark from '../../../shared/components/icon/IconBookmark';
 
-
 interface ReactionProps {
   postId: number;
   likeCount: number;
@@ -21,7 +20,6 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   const isLiked = useSelector((state: RootState) => state.detail.data?.isLiked);
   const isBookmark = useSelector((state: RootState) => state.detail.data?.isInBookmark);
-  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
