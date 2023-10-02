@@ -41,7 +41,7 @@ const Header = () => {
             <span className="header-welcome">
               {isLogin
                 ? `Welcome ${authContext.userInfo.displayName || authContext.userInfo.firstName}`
-                : 'Welcome to Supremethod !'}
+                : 'Welcome to Supremethod!'}
             </span>
             <nav className="navbar">
               <ul className="navbar-list d-flex">

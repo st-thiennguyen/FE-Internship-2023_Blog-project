@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -9,7 +10,6 @@ import { FormChangePassword } from '../../../models/user';
 import { RootState } from '../../../stores/store';
 
 import Button from '../../../shared/components/Button';
-import { useNavigate } from 'react-router-dom';
 
 const UpdatePasswordForm = () => {
   const [isShowOldPassword, setIsShowOldPassword] = useState(false);
