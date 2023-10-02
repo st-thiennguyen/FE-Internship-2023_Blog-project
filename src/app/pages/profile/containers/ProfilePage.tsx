@@ -9,7 +9,6 @@ import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
 
 const ProfilePage = () => {
-  const userId = useSelector((state: RootState) => state.auth?.userInfo.id);
   const isError = useSelector((state: RootState) => state.profile.isError);
 
   const dispatch = useDispatch();
@@ -17,13 +16,11 @@ const ProfilePage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id === userId.toString() || id === 'me') {
-      navigate('/profile');
-    }
-    dispatch(getUserProfileAction(id ? id : 'me') as any);
-    dispatch(fetchFollower(id ? id : 'me') as any);
-    dispatch(fetchFollowing(id ? id : 'me') as any);
-  }, [id]);
+    const userId = id ? id : 'me';
+    dispatch(getUserProfileAction(userId) as any);
+    dispatch(fetchFollower(userId) as any);
+    dispatch(fetchFollowing(userId) as any);
+  }, []);
 
   if (isError) {
     navigate('/page-not-found');

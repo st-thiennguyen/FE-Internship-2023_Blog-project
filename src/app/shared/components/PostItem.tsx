@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { PostModel } from '../../models/post';
 import { isImageUrlValid } from '../utils';
@@ -15,6 +15,7 @@ import IconHeart from './icon/IconHeart';
 import IconBookmark from './icon/IconBookmark';
 import NoImg from '../../../assets/images/no-image.png';
 import userDefault from '../../../assets/images/user-default.png';
+import { RootState } from '../../stores/store';
 
 interface PostItemProps {
   post: PostModel;
@@ -26,6 +27,7 @@ const PostItem = ({ post, onClickBookmark, isInBookmark, isVertical }: PostItemP
   const [isErrImg, setIsErrImg] = useState(false);
   const [isErrAvt, setIsErrAvt] = useState(false);
 
+  const userId = useSelector((state: RootState) => state.auth?.userInfo.id);
   const [isShowDialogRestore, setShowDialogRestore] = useState(false);
 
   const dispatch = useDispatch();
@@ -97,14 +99,20 @@ const PostItem = ({ post, onClickBookmark, isInBookmark, isVertical }: PostItemP
             </div>
             <div className="post-info d-flex item-center">
               <div className="post-author d-flex item-center">
-                <Link to={`/profile/${post.userId}`} className="post-link d-flex item-center">
+                <Link
+                  to={`/profile${userId !== post.userId ? `/${post.userId}` : ''}`}
+                  className="post-link d-flex item-center"
+                >
                   {isErrAvt ? (
                     <img src={userDefault} alt={post.user.displayName} className="author-avatar" />
                   ) : (
                     <img src={post.user.picture} alt={post.user.displayName} className="author-avatar" />
                   )}
                 </Link>
-                <Link to={`/profile/${post.userId}`} className="post-link d-flex item-center">
+                <Link
+                  to={`/profile${userId !== post.userId ? `/${post.userId}` : ''}`}
+                  className="post-link d-flex item-center"
+                >
                   <span className="author-name">{post.user.displayName}</span>
                 </Link>
               </div>

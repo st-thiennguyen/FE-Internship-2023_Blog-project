@@ -6,6 +6,7 @@ import { RootState } from '../../../../stores/store';
 import { getRecommend } from '../../home.actions';
 import { useEffect } from 'react';
 import SectionTitle from '../../../../shared/components/SectionTitle';
+import RecommendLoading from './RecommendLoading';
 
 const settings = {
   dots: true,
@@ -19,6 +20,7 @@ const settings = {
 
 const Recommend = () => {
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
+  const { isLoading } = useSelector((state: RootState) => state.recommend);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,11 +29,14 @@ const Recommend = () => {
 
   return (
     <section className="section section-recommend">
-      <Slider {...settings} className="recommend-list">
-        {recommendPosts.map((post) => {
-          return <RecommendItem post={post} key={post.id} />;
-        })}
-      </Slider>
+      {recommendPosts.length > 0 && !isLoading && (
+        <Slider {...settings} className="recommend-list">
+          {recommendPosts.map((post) => {
+            return <RecommendItem post={post} key={post.id} />;
+          })}
+        </Slider>
+      )}
+      {isLoading && <RecommendLoading />}
     </section>
   );
 };
