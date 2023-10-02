@@ -29,6 +29,8 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
 
   const postList = userPosts?.slice(0, 4).filter((item) => item.id !== post.id);
 
+  const userId = useSelector((state: RootState) => state.auth.userInfo.id);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -68,7 +70,10 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
             <div className="col col-4 col-xl-12">
               <aside className="aside aside-detail d-flex flex-column">
                 <div className="detail-author">
-                  <Link to={`/profile/${post.user?.id}`} className="detail-author-link d-flex item-center">
+                  <Link
+                    to={`/profile${userId !== post.userId ? `/${post.user?.id}` : ''}`}
+                    className="detail-author-link d-flex item-center"
+                  >
                     <div className="author-info flex-1">
                       <h5 className="author-name text-truncate-1">
                         {post.user?.displayName || post.user?.firstName + ' ' + post.user?.lastName}

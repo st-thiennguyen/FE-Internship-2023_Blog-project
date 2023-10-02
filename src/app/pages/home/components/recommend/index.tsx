@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 
 import { RootState } from '../../../../stores/store';
 import { getRecommend } from '../../home.actions';
+import RecommendLoading from './RecommendLoading';
 import RecommendItem from './RecommendItem';
 
 const settings = {
@@ -18,6 +19,7 @@ const settings = {
 
 const Recommend = () => {
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
+  const { isLoading } = useSelector((state: RootState) => state.recommend);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,11 +28,14 @@ const Recommend = () => {
 
   return (
     <section className="section section-recommend">
-      <Slider {...settings} className="recommend-list">
-        {recommendPosts.map((post) => {
-          return <RecommendItem post={post} key={post.id} />;
-        })}
-      </Slider>
+      {recommendPosts.length > 0 && !isLoading && (
+        <Slider {...settings} className="recommend-list">
+          {recommendPosts.map((post) => {
+            return <RecommendItem post={post} key={post.id} />;
+          })}
+        </Slider>
+      )}
+      {isLoading && <RecommendLoading />}
     </section>
   );
 };

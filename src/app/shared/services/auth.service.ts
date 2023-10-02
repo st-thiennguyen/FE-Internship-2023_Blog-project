@@ -1,6 +1,6 @@
 import { RegisterProps } from '../../models/auth';
 import { ENDPOINT } from '../constants/endpoint';
-import { ApiService } from './config';
+import { ApiService } from './api-service';
 
 export const register = (registerData: RegisterProps) => {
   const api = new ApiService();

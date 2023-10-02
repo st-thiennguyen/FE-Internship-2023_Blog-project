@@ -1,4 +1,4 @@
-import { ApiService } from './config';
+import { ApiService } from './api-service';
 import { ENDPOINT } from '../constants';
 import { UserInfo } from '../../models/auth';
 import { FormChangePassword } from '../../models/user';

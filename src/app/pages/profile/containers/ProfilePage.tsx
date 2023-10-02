@@ -9,8 +9,8 @@ import UserDetail from '../components/UserDetail';
 import UserPost from '../components/UserPost';
 
 const ProfilePage = () => {
-  const userId = useSelector((state: RootState) => state.auth?.userInfo.id);
   const isError = useSelector((state: RootState) => state.profile.isError);
+  const userId = useSelector((state: RootState) => state.auth.userInfo.id);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,9 +20,10 @@ const ProfilePage = () => {
     if (id === userId.toString() || id === 'me') {
       navigate('/profile');
     }
-    dispatch(getUserProfileAction(id ? id : 'me') as any);
-    dispatch(fetchFollower(id ? id : 'me') as any);
-    dispatch(fetchFollowing(id ? id : 'me') as any);
+    const idParams = id ? id : 'me';
+    dispatch(getUserProfileAction(idParams) as any);
+    dispatch(fetchFollower(idParams) as any);
+    dispatch(fetchFollowing(idParams) as any);
   }, [id]);
 
   if (isError) {

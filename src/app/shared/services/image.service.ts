@@ -1,5 +1,5 @@
 import { ENDPOINT, TypeUploadImage } from '../constants';
-import { ApiService } from './config';
+import { ApiService } from './api-service';
 
 export const getEmptyImageUrl = (file: File, type: TypeUploadImage) => {
   const api = new ApiService();
