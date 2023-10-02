@@ -3,10 +3,8 @@
 }
 .section-detail-page {
   .tag {
-    &:hover {
-      width: fit-content;
-      max-width: 200px;
-    }
+    width: fit-content;
+    max-width: 200px;
   }
   .detail-header {
     max-width: 768px;
