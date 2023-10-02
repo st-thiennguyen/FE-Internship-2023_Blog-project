@@ -95,15 +95,19 @@ const WritePost = ({ post }: WritePostProps) => {
   }, [isLogin]);
 
   useEffect(() => {
-    window.onbeforeunload = (e) => {
-      e.preventDefault();
-      e.returnValue = '';
-    };
+    if (isFormDirty) {
+      window.onbeforeunload = (e) => {
+        e.preventDefault();
+        e.returnValue = '';
+      };
+    }
+
     return () => {
       window.onbeforeunload = () => {};
+      setIsClick(false);
       dispatch(resetWriteState());
     };
-  }, []);
+  }, [isFormDirty]);
 
   useEffect(() => {
     setValue('description', post?.description || '');
@@ -166,13 +170,13 @@ const WritePost = ({ post }: WritePostProps) => {
     if (validate()) {
       setIsLoading(true);
       await dispatch(createPost({ ...data, content, status: statusPost, tags: tags }, file) as any);
+      setIsClick(true);
     }
   });
 
   const onPublishPost = () => {
     validate();
     handleCreatePost();
-    setIsClick(true);
   };
 
   const handleSaveDraft = async () => {
