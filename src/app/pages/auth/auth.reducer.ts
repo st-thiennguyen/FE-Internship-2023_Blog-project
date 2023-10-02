@@ -110,9 +110,11 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
+        userInfo: initState.userInfo,
         isLoading: false,
-        isError: true,
-        message: action.payload,
+        isError: false,
+        isLogoutSuccess: true,
+        isSuccess: false,
       };
     }
     default:
