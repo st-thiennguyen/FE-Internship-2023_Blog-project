@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeToast, showToast } from './toast.actions';
+import { closeToast } from './toast.actions';
 import { RootState } from '../../../stores/store';
 import { ToastModel } from '../../../models/toast';
 

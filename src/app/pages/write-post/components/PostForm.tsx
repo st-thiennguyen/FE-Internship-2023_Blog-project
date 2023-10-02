@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useNavigate,
-  useParams,
   unstable_BlockerFunction as BlockerFunction,
   unstable_useBlocker as useBlocker,
 } from 'react-router-dom';
