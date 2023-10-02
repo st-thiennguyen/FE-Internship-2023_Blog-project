@@ -24,6 +24,7 @@ export const ACTIONS_TYPE = {
   GET_DETAIL_BLOG: 'get-detail-blog',
   GET_DETAIL_BLOG_SUCCESS: 'get-detail-blog-success',
   GET_DETAIL_BLOG_FAILURE: 'get-detail-blog-failure',
+  RESET_STATE_BLOG_DETAIL: 'reset-detail-blog-state',
   // REGISTER
   REGISTER: 'register',
   REGISTER_SUCCESS: 'register-success',
