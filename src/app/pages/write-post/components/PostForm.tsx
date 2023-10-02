@@ -101,6 +101,7 @@ const WritePost = ({ post }: WritePostProps) => {
     };
     return () => {
       window.onbeforeunload = () => {};
+
       dispatch(resetWriteState());
     };
   }, []);
@@ -159,20 +160,24 @@ const WritePost = ({ post }: WritePostProps) => {
       handleUpdateDraft();
     } else if (validate()) {
       handleUpdatePost();
+    } else {
+      setIsClick(false);
     }
   };
 
   const handleCreatePost = handleSubmit(async (data: FormData) => {
     if (validate()) {
       setIsLoading(true);
+      setIsClick(true);
       await dispatch(createPost({ ...data, content, status: statusPost, tags: tags }, file) as any);
+    } else {
+      setIsClick(false);
     }
   });
 
   const onPublishPost = () => {
     validate();
     handleCreatePost();
-    setIsClick(true);
   };
 
   const handleSaveDraft = async () => {
