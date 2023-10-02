@@ -51,11 +51,7 @@ const DetailPost = () => {
   }
 
   const scrollToComment = () => {
-    if (isLogin) {
-      commentRef.current!.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/auth/login');
-    }
+    commentRef.current!.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
