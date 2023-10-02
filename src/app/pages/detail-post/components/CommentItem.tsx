@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { InteractionItemModel } from '../../../models/interaction';
 import { timeAgoFromDate } from '../../../shared/utils';
-import { Link } from 'react-router-dom';
 
 interface CommentItemProps {
   commentItem: InteractionItemModel;

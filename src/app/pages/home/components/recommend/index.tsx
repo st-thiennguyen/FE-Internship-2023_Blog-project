@@ -1,11 +1,10 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 
-import RecommendItem from './RecommendItem';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../stores/store';
 import { getRecommend } from '../../home.actions';
-import { useEffect } from 'react';
-import SectionTitle from '../../../../shared/components/SectionTitle';
+import RecommendItem from './RecommendItem';
 
 const settings = {
   dots: true,

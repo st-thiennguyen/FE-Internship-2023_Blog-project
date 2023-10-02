@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
@@ -32,7 +32,6 @@ const DetailPost = () => {
   }, []);
 
   const [isErrorCover, setIsErrorCover] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));

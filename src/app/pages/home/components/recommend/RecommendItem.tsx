@@ -1,13 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { PostModel } from '../../../../models/post';
-import { useEffect, useState } from 'react';
 import { isImageUrlValid } from '../../../../shared/utils';
 
-import NoImg from '../../../../../assets/images/no-image.png';
 import Tags from '../../../../shared/components/Tags';
 import IconHeart from '../../../../shared/components/icon/IconHeart';
 import IconComment from '../../../../shared/components/icon/IconComment';
+import NoImg from '../../../../../assets/images/no-image.png';
 
 interface RecommendItemProps {
   post: PostModel;

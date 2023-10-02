@@ -1,14 +1,13 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 import { postCommentAction } from '../detail-post.actions';
-
-import CommentItem from './CommentItem';
-import React from 'react';
 import { getLocalStorage } from '../../../shared/utils';
 import { StorageKey } from '../../../shared/constants';
+
+import CommentItem from './CommentItem';
 
 const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
   const listComment = useSelector((state: RootState) => state.detail.comments);

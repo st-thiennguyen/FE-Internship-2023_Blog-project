@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { updatePasswordAction } from '../profile.actions';
-import { FormChangePassword } from '../../../models/user';
 import { RootState } from '../../../stores/store';
+import { FormChangePassword } from '../../../models/user';
+import { updatePasswordAction } from '../profile.actions';
 
 import Button from '../../../shared/components/Button';
 

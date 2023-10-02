@@ -1,4 +1,3 @@
-import { TypeImage } from '../../models/post';
 import { ENDPOINT, TypeUploadImage } from '../constants';
 import { ApiService } from './config';
 
@@ -20,5 +19,3 @@ export const putImageToLink = (url: string, file: File) => {
     },
   });
 };
-
-
