@@ -54,7 +54,7 @@ const DetailPost = () => {
     if (isLogin) {
       commentRef.current!.scrollIntoView({ behavior: 'smooth' });
     } else {
-      navigate('/login');
+      navigate('/auth/login');
     }
   };
 

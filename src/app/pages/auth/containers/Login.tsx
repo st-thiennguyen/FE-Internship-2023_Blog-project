@@ -127,7 +127,7 @@ const Login = () => {
             <p className="login-subtext text-center">Or</p>
             <div className="divided"></div>
           </div>
-          <a href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/login-google`} className="external-item-link">
+          <a href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/auth/login-google`} className="external-item-link">
             <div className="login-external d-flex item-center justify-center">
               <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
               <p>Login with Google</p>
@@ -135,7 +135,7 @@ const Login = () => {
           </a>
           <p className="text-center login-footer">
             You're new to Supremethod?{' '}
-            <Link to="/register" className={`auth-link ${isLoading ? 'disable-link' : ''}`}>
+            <Link to="/auth/register" className={`auth-link ${isLoading ? 'disable-link' : ''}`}>
               Register
             </Link>
           </p>

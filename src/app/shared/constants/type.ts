@@ -97,6 +97,7 @@ export const ACTIONS_TYPE = {
   GET_SIGN_URL_IMAGE_POST: 'get-sign-image-post',
   GET_SIGN_URL_IMAGE_POST_SUCCESS: 'get-sign-image-post-success',
   GET_SIGN_URL_IMAGE_POST_FAILURE: 'get-sign-image-post-failure',
+  RESET_STATE_WRITEPOST: 'reset-state-write-post',
   // ADD POST
   ADD_POST: 'add-post',
   ADD_POST_SUCCESS: 'add-post-success',

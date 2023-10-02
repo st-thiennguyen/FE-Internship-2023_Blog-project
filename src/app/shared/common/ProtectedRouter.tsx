@@ -6,7 +6,7 @@ import { getLocalStorage } from '../utils';
 const PrivateRoute = ({ children }: any) => {
   const isLogin  = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
   if (!isLogin) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth/login" />;
   }
   return <>{children}</>;
 };

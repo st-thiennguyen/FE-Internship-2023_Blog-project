@@ -4,15 +4,15 @@ import Register from './containers/Register';
 
 export const authRoutes = [
   {
-    path: 'register',
+    path: 'auth/register',
     component: Register,
   },
   {
-    path: 'login',
+    path: 'auth/login',
     component: Login,
   },
   {
-    path: '/login-google',
+    path: 'auth/login-google',
     component: LoginGoogle,
   },
 ];

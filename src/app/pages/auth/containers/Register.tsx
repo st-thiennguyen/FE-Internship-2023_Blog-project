@@ -64,7 +64,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate('/login');
+      navigate('/auth/login');
     }
   }, [isSuccess]);
 
@@ -208,7 +208,7 @@ const Register = () => {
           </form>
           <p className="text-center">
             Already had an account?{' '}
-            <Link className={`auth-link ${isLoading && 'disable-link'}`} to="/login">
+            <Link className={`auth-link ${isLoading && 'disable-link'}`} to="/auth/login">
               Login
             </Link>
           </p>

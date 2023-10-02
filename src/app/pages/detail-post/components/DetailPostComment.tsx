@@ -73,7 +73,7 @@ const DetailPostComment = React.forwardRef<HTMLDivElement>((props, ref) => {
           </div>
         ) : (
           <div className="comment-input-hidden text-center">
-            <Link to="/login" className="text-primary text-bold">
+            <Link to="/auth/login" className="text-primary text-bold">
               Login
             </Link>
             <span> to comment on this post</span>
