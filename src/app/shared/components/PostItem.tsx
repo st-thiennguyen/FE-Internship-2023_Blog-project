@@ -13,6 +13,7 @@ import Dialog from './Dialog';
 import IconComment from './icon/IconComment';
 import IconHeart from './icon/IconHeart';
 import IconBookmark from './icon/IconBookmark';
+
 import NoImg from '../../../assets/images/no-image.png';
 import userDefault from '../../../assets/images/user-default.png';
 import { RootState } from '../../stores/store';
@@ -92,8 +93,6 @@ const PostItem = ({ post, onClickBookmark, isInBookmark, isVertical }: PostItemP
             <div className="d-flex flex-column post-content">
               <Link to={`/posts/${post.id}`} className="post-link">
                 <h4 className="post-title">{post.title}</h4>
-              </Link>
-              <Link to={`/posts/${post.id}`} className="post-link">
                 <p className="post-desc">{post.description}</p>
               </Link>
             </div>

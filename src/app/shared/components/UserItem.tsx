@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { UserInfo } from '../../models/auth';
@@ -9,6 +9,7 @@ import { updateFollowingAction } from '../../pages/profile/profile.actions';
 import Button from './Button';
 import IconHeart from './icon/IconHeart';
 import avatarDefault from '../../../assets/images/user-default.png';
+import { RootState } from '../../stores/store';
 
 interface UserItemProps {
   user: UserInfo;
@@ -44,13 +45,18 @@ const ActionType = ({ user, type }: UserItemProps) => {
 
 const UserItem = ({ user, type }: UserItemProps) => {
   const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+  const userId = useSelector((state: RootState) => state.auth.userInfo.id);
+
   useEffect(() => {
     isImageUrlValid(user.picture).then((result) => setIsErrorAvatar(!result));
   }, [isErrorAvatar, user.picture]);
 
   return (
     <div className="user-item-info d-flex item-center justify-between">
-      <Link className="user-detail d-flex item-center" to={`/profile/${user.id}`}>
+      <Link
+        className="user-detail d-flex item-center"
+        to={`/profile${userId && userId !== user.id ? `/${user.id}` : ''}`}
+      >
         <div className="user-avatar-wrapper">
           <img
             className="user-avatar"

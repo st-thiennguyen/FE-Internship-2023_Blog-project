@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
 import { pageSize } from '../../../shared/constants/post';
-import { fetchPostWithTags, loadMore, resetCurrentPage } from '../posts.action';
+import { fetchPostWithTags, loadMore } from '../posts.action';
 
 import SectionTitle from '../../../shared/components/SectionTitle';
 import PostList from '../../home/components/PostList';

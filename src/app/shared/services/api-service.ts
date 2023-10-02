@@ -9,7 +9,6 @@ export class ApiService {
   constructor() {
     this.axiosInstance = axios.create({
       baseURL: process.env.REACT_APP_BASE_API,
-      withCredentials: false,
       timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
@@ -21,9 +20,9 @@ export class ApiService {
   private _setInterceptors = () => {
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN);
-        if (isLogin && !config.url?.includes('.amazonaws.com')) {
-          config.headers.Authorization = `Bearer ${isLogin}`;
+        const accessToken = getLocalStorage(StorageKey.ACCESS_TOKEN);
+        if (accessToken && !config.url?.includes('.amazonaws.com')) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
         }
 
         return config;
