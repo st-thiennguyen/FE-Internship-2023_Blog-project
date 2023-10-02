@@ -1,15 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import Slider from 'react-slick';
 
+import RecommendItem from './RecommendItem';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../stores/store';
-import PostItem from '../../../../shared/components/PostItem';
-import SectionTitle from '../../../../shared/components/SectionTitle';
-import RecommendItemLoading from './RecommendLoading';
-import { useEffect } from 'react';
 import { getRecommend } from '../../home.actions';
+import { useEffect } from 'react';
+import SectionTitle from '../../../../shared/components/SectionTitle';
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+};
+
 const Recommend = () => {
   const recommendPosts = useSelector((state: RootState) => state.recommend.data);
-  const isLoading = useSelector((state: RootState) => state.recommend.isLoading);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,24 +27,11 @@ const Recommend = () => {
 
   return (
     <section className="section section-recommend">
-      <SectionTitle title="Recommend for you" />
-      <ul className="recommend-list">
-        {isLoading
-          ? Array.from({ length: 5 }, () => {
-              return (
-                <div className="recommend-item">
-                  <RecommendItemLoading isVertical={true} />
-                </div>
-              );
-            })
-          : recommendPosts.slice(0, 5).map((post) => {
-              return (
-                <li className="recommend-item" key={post.id}>
-                  <PostItem post={post} isVertical={true} />
-                </li>
-              );
-            })}
-      </ul>
+      <Slider {...settings} className="recommend-list">
+        {recommendPosts.map((post) => {
+          return <RecommendItem post={post} key={post.id} />;
+        })}
+      </Slider>
     </section>
   );
 };

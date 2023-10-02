@@ -25,10 +25,9 @@ const PostResult = () => {
   const searchParams = new URLSearchParams(location.search);
   const tagsQuery = searchParams.get('tags');
   useEffect(() => {
-    dispatch(fetchPostWithTags({ page: 1, size: pageSize, tags: getQuery() }));
-    return () => {
-      dispatch(resetCurrentPage());
-    };
+    if (currentPage === 1) {
+      dispatch(fetchPostWithTags({ page: 1, size: pageSize, tags: getQuery() }));
+    }
   }, []);
 
   const getQuery = (): string[] => {
@@ -39,13 +38,9 @@ const PostResult = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (tagsQuery) {
-      dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
+      dispatch(fetchPostWithTags({ page: 1, size: pageSize, tags: getQuery() }));
     }
   }, [tagsQuery]);
-
-  useEffect(() => {
-    dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
-  }, [currentPage]);
 
   const handleScroll = () => {
     const scrollY = window.scrollY;
@@ -54,6 +49,7 @@ const PostResult = () => {
 
     if (scrollY + windowHeight >= documentHeight - threshold && !isLoading && currentPage + 1 <= totalPage) {
       dispatch(loadMore());
+      dispatch(fetchPostWithTags({ page: currentPage, size: pageSize, tags: getQuery() }));
     }
   };
 
