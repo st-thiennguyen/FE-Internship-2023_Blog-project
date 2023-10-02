@@ -44,7 +44,7 @@ const Header = () => {
             <nav className="navbar">
               <ul className="navbar-list d-flex">
                 {isLogin && (
-                  <li className="navbar-item">
+                  <li className="navbar-item item-write">
                     <Link to="/posts/create" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <i className="icon icon-small icon-write-20"></i>

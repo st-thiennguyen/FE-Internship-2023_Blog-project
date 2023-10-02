@@ -118,7 +118,7 @@
 
 
 @media screen and (max-width: map-get($breakpoints, sm)) {
-  .navbar-item:nth-child(1) {
-    display: none !important;
+  .item-write {
+    display: none;
   }
 }
