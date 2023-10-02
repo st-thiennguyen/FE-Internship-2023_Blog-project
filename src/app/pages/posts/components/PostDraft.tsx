@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../stores/store';
 import { getDraftPostAction } from '../posts.action';
+
 import SectionTitle from '../../../shared/components/SectionTitle';
 import PostItem from '../../../shared/components/PostItem';
 import EmptyPost from '../../../shared/components/EmptyPost';

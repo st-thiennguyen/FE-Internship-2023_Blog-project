@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { RootState } from '../../../stores/store';
-import { convertDateToString } from '../../../shared/utils';
 import { ProfileModel } from '../../../models/user';
 import { UserInfo } from '../../../models/auth';
 import { updateFollowAction } from '../profile.actions';
+import { convertDateToString } from '../../../shared/utils';
 
 import Button from '../../../shared/components/Button';
 import UserList from '../../../shared/components/UserList';

@@ -7,12 +7,13 @@ import { logoutAction } from '../../pages/auth/auth.actions';
 import { StorageKey } from '../constants';
 import { getLocalStorage, isImageUrlValid } from '../utils';
 
-import logo from '../../../assets/images/logo.svg';
-import avatarDefault from '../../../assets/images/user-default.png';
 import IconBookmark from '../components/icon/IconBookmark';
 import IconLogout from '../components/icon/IconLogout';
 import IconPost from '../components/icon/IconPost';
 import IconFolder from '../components/icon/IconFolder';
+
+import logo from '../../../assets/images/logo.svg';
+import avatarDefault from '../../../assets/images/user-default.png';
 
 const Header = () => {
   const dispatch = useDispatch();

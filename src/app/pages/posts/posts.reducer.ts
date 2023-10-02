@@ -1,6 +1,6 @@
+import { RootAction } from '../../stores/store';
 import { PostModel, PublicPostState } from '../../models/post';
 import { ACTIONS_TYPE } from '../../shared/constants';
-import { RootAction } from '../../stores/store';
 
 const initialPostsState: PublicPostState = {
   data: [] as PostModel[],

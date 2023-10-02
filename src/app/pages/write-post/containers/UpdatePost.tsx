@@ -2,18 +2,19 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import WritePost from '../components/PostForm';
 import { RootState } from '../../../stores/store';
 import { showToast } from '../../../shared/components/toast/toast.actions';
 import { ToastType } from '../../../models/toast';
 import { getDetailPost } from '../../../shared/services';
+
+import WritePost from '../components/PostForm';
 
 const UpdatePost = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userID = useSelector((state: RootState) => state.auth.userInfo.id);
-  const [postData, setPostData] = useState<any>([])
+  const [postData, setPostData] = useState<any>([]);
 
   useEffect(() => {
     (async () => {
@@ -27,10 +28,9 @@ const UpdatePost = () => {
         }
       } catch (error) {
         dispatch(showToast('Article not found', ToastType.ERROR));
-        navigate('/')
+        navigate('/');
       }
-    }
-    )();
+    })();
   }, []);
 
   return (

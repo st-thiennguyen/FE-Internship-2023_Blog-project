@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { RootAction } from '../../stores/store';
 import { ToastType } from '../../models/toast';
-import { PostModel, PostProps, SignatureImageModel } from '../../models/post';
+import { PostProps, SignatureImageModel } from '../../models/post';
 import { ACTIONS_TYPE, TypeUploadImage } from '../../shared/constants';
 
 import { createDraft, postArticles, updatePostArticles } from '../../shared/services';

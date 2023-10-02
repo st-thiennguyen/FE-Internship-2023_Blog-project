@@ -1,13 +1,14 @@
 import { Dispatch } from 'react';
 
-import { PostModel, QueryPost } from '../../models/post';
-import { getPostDraft, getPublicPosts, getRecyclebinPost, restoreRecyclebinPost } from '../../shared/services/index';
 import { RootAction } from '../../stores/store';
-import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
+import { PostModel, QueryPost } from '../../models/post';
 import { ToastType } from '../../models/toast';
-import { showToast } from '../../shared/components/toast/toast.actions';
 import { GetPostResponse } from '../../models/response';
+import { ACTIONS_TYPE, StorageKey } from '../../shared/constants';
+
 import { getLocalStorage } from '../../shared/utils';
+import { getPostDraft, getPublicPosts, getRecyclebinPost, restoreRecyclebinPost } from '../../shared/services/index';
+import { showToast } from '../../shared/components/toast/toast.actions';
 
 const restorePost = () => {
   return {
