@@ -34,7 +34,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     if (postId && isLogin) {
       dispatch(updateLikeAction(postId) as any);
     } else {
-      navigate('/login');
+      navigate('/auth/login');
     }
   };
 
@@ -42,7 +42,7 @@ const DetailPostReaction = ({ postId, likeCount, commentCount, scrollToComment }
     if (postId && isLogin) {
       dispatch(toggleBookmarkAction(postId) as any);
     } else {
-      navigate('/login');
+      navigate('/auth/login');
     }
   };
 

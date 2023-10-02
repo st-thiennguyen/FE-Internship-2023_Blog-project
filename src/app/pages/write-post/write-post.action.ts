@@ -11,7 +11,7 @@ import { showToast } from '../../shared/components/toast/toast.actions';
 
 export const resetWriteState = () => {
   return {
-    type: 'RESET_STATE_WRITEPOST',
+    type: ACTIONS_TYPE.RESET_STATE_WRITEPOST,
   };
 };
 
