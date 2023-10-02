@@ -40,7 +40,7 @@ const schema = yup
     email: yup.string().trim().matches(regexEmail, 'Invalid email address').required('Email must not be null'),
     password: yup
       .string()
-      .min(4, 'Password must not be less than 4 characters')
+      .min(6, 'Password must not be less than 6 characters')
       .max(40, 'Password must be less than 40 characters')
       .required('Password must not be null'),
   })
