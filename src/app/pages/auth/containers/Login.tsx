@@ -24,7 +24,7 @@ const schema = yup
       .trim()
       .required('Password must not be null!')
       .max(40, 'Password must not be more than 40 characters!')
-      .min(4, 'Password must not be less than 4 characters!'),
+      .min(6, 'Password must not be less than 6 characters!'),
   })
   .required();
 
@@ -127,7 +127,10 @@ const Login = () => {
             <p className="login-subtext text-center">Or</p>
             <div className="divided"></div>
           </div>
-          <a href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/auth/login-google`} className="external-item-link">
+          <a
+            href={`${ENDPOINT.auth.google}?redirect_to=${currentHost()}/auth/login-google`}
+            className="external-item-link"
+          >
             <div className="login-external d-flex item-center justify-center">
               <img src={icGoogle} alt="icon google" className="login-icon icon-google" />
               <p>Login with Google</p>

@@ -7,7 +7,7 @@ import { logoutAction } from '../../pages/auth/auth.actions';
 import { StorageKey } from '../constants';
 import { getLocalStorage, isImageUrlValid } from '../utils';
 
-import logo from '../../../assets/images/logo.svg'; 
+import logo from '../../../assets/images/logo.svg';
 import avatarDefault from '../../../assets/images/user-default.png';
 import IconBookmark from '../components/icon/IconBookmark';
 import IconLogout from '../components/icon/IconLogout';
@@ -39,7 +39,9 @@ const Header = () => {
           </h1>
           <div className="header-right d-flex item-center">
             <span className="header-welcome">
-              {isLogin ? `Welcome ${authContext.userInfo.displayName}` : 'Welcome to Supremethod !'}
+              {isLogin
+                ? `Welcome ${authContext.userInfo.displayName || authContext.userInfo.firstName}`
+                : 'Welcome to Supremethod!'}
             </span>
             <nav className="navbar">
               <ul className="navbar-list d-flex">

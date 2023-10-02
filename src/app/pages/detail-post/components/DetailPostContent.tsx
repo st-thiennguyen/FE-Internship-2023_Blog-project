@@ -89,7 +89,7 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
                     </div>
                   </Link>
                 </div>
-                {isLogin && postList && (
+                {isLogin && postList?.length > 0 && (
                   <div className="detail-author-post">
                     <div className="author-posts">
                       <h3 className="author-post-title">

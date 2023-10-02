@@ -22,18 +22,15 @@ const LoginGoogle = () => {
 
   const getUser = async () => {
     const user = await getUserProfile('me');
-    dispatch(loginSuccess({ accessToken, userInfo: { id: userId, ...(user as Omit<UserInfo, 'id'>) } }));
+    dispatch(loginSuccess({ accessToken, userInfo: { ...(user as UserInfo), id: userId } }));
   };
 
   useEffect(() => {
-    if (!accessToken) {
-      navigate('/');
-    } else {
+    if (accessToken) {
       setLocalStorage(StorageKey.ACCESS_TOKEN, accessToken);
       getUser();
-
-      navigate('/');
     }
+    navigate('/');
   }, []);
 
   return <></>;

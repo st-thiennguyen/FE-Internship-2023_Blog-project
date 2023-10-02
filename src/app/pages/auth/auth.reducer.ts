@@ -14,6 +14,10 @@ const initState: AuthState = {
 
 export const authReducer = (state = initState, action: RootAction): AuthState => {
   switch (action.type) {
+    case ACTIONS_TYPE.REGISTER_RESET_STATE: {
+      return initState;
+    }
+
     case ACTIONS_TYPE.REGISTER: {
       return {
         ...state,
@@ -48,6 +52,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
         isLoading: true,
         isSuccess: false,
         isError: false,
+        isLogoutSuccess: false,
         message: '',
       };
     }

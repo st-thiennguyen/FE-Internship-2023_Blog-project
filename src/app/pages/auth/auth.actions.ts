@@ -106,12 +106,12 @@ export const loginAction = (email: string, password: string) => async (dispatch:
   }
 };
 
-export const logoutAction = () => async (dispatch: Dispatch<RootAction>) => {
+export const logoutAction = (message?: string) => async (dispatch: Dispatch<RootAction>) => {
   dispatch(logoutStart());
   try {
     const response = await logout();
     dispatch(logoutSuccess(`${response}`));
-    dispatch(showToast(`${response}`, ToastType.SUCCESS));
+    dispatch(showToast(message || `${response}`, ToastType.SUCCESS));
   } catch (error) {
     dispatch(logoutFailure(`${error}`));
   }

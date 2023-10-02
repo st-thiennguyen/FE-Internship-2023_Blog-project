@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -19,16 +20,23 @@ const UpdatePasswordForm = () => {
 
   const isSuccess = useSelector((state: RootState) => state.profile.isSuccess);
   const isLoading = useSelector((state: RootState) => state.profile.isLoading);
+  const isLogoutSuccess = useSelector((state: RootState) => state.auth.isLogoutSuccess);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const schema = yup
     .object({
-      oldPassword: yup.string().trim().required('Old password must not be null'),
+      oldPassword: yup
+        .string()
+        .trim()
+        .required('Old password must not be null')
+        .min(6, 'Password must not be less than 6 characters')
+        .max(40, 'Password must be less than 40 characters'),
       newPassword: yup
         .string()
         .trim()
         .required('new password password must not be null')
-        .min(4, 'New Password must not be less than 4 characters')
+        .min(6, 'New Password must not be less than 6 characters')
         .max(40, 'New Password must be less than 40 characters'),
       confirmPassword: yup
         .string()
@@ -70,7 +78,10 @@ const UpdatePasswordForm = () => {
     if (isSuccess) {
       reset();
     }
-  }, [isSuccess]);
+    if (isLogoutSuccess) {
+      navigate('/');
+    }
+  }, [isSuccess, isLogoutSuccess]);
 
   const newPass = watch('newPassword');
   const confirmPass = watch('confirmPassword');

@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { RootState } from '../../../stores/store';
-import { registerAction } from '../auth.actions';
+import { registerAction, registerReset } from '../auth.actions';
 import { convertDateToString } from '../../../shared/utils/date';
 import { Gender, StorageKey, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 
@@ -40,7 +40,7 @@ const schema = yup
     email: yup.string().trim().matches(regexEmail, 'Invalid email address').required('Email must not be null'),
     password: yup
       .string()
-      .min(4, 'Password must not be less than 4 characters')
+      .min(6, 'Password must not be less than 6 characters')
       .max(40, 'Password must be less than 40 characters')
       .required('Password must not be null'),
   })
@@ -61,6 +61,12 @@ const Register = () => {
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(registerReset());
+    };
+  }, []);
 
   useEffect(() => {
     if (isSuccess) {
