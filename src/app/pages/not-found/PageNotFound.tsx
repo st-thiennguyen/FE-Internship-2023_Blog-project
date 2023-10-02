@@ -5,6 +5,7 @@ import banner from '../../../assets/images/banner-404.svg';
 
 const PageNotFound = () => {
   const navigate = useNavigate();
+
   return (
     <div className="page-404">
       <div className="container">

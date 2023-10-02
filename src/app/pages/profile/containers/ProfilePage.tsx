@@ -29,8 +29,6 @@ const ProfilePage = () => {
     navigate('/page-not-found');
   }
 
-  window.onpopstate = () => navigate('/');
-
   return (
     <div className="main-profile-page">
       <UserDetail />
