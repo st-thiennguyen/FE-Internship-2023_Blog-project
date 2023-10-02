@@ -105,7 +105,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li className="auth-item">
-                            <Link to="/login" className="auth-link d-flex item-center" onClick={handleLogout}>
+                            <Link to="/auth/login" className="auth-link d-flex item-center" onClick={handleLogout}>
                               <div className="icon icon-small">
                                 <IconLogout />
                               </div>
@@ -116,7 +116,7 @@ const Header = () => {
                       </div>
                     </>
                   ) : (
-                    <Link to="/login" className="navbar-link">
+                    <Link to="/auth/login" className="navbar-link">
                       <div className="navbar-content d-flex justify-center item-center">
                         <button className="btn btn-primary header-btn-login">Login</button>
                       </div>
