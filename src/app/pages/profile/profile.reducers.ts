@@ -120,7 +120,7 @@ export const profileReducer = (state = initialState, action: RootAction): Profil
         isSuccess: true,
         message: '',
       };
-    case ACTIONS_TYPE.UPDATE_PROFILE_FAILURE:
+    case ACTIONS_TYPE.UPDATE_AVATAR_FAILURE:
       return {
         ...state,
         isLoading: false,
