@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { RootState } from '../../../stores/store';
-import { registerAction } from '../auth.actions';
+import { registerAction, registerReset } from '../auth.actions';
 import { convertDateToString } from '../../../shared/utils/date';
 import { Gender, StorageKey, regexEmail, regexPhoneNumber } from '../../../shared/constants';
 
@@ -61,6 +61,12 @@ const Register = () => {
   const togglePassword = (): void => {
     setIsShowPassword(!isShowPassword);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(registerReset());
+    };
+  }, []);
 
   useEffect(() => {
     if (isSuccess) {
