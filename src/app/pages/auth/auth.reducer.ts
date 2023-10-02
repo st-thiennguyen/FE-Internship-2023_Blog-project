@@ -52,6 +52,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
         isLoading: true,
         isSuccess: false,
         isError: false,
+        isLogoutSuccess: false,
         message: '',
       };
     }

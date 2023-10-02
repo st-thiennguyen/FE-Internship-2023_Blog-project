@@ -17,7 +17,7 @@ import {
 } from '../../shared/services/user.service';
 import { getEmptyImageUrl, putImageToLink } from '../../shared/services/image.service';
 import { getLocalStorage } from '../../shared/utils';
-import { reAssignmentAuth } from '../auth/auth.actions';
+import { logoutAction, reAssignmentAuth } from '../auth/auth.actions';
 import { deletePostItem } from '../../shared/services';
 import { showToast } from '../../shared/components/toast/toast.actions';
 
@@ -271,7 +271,7 @@ export const updatePasswordAction = (data: FormChangePassword) => async (dispatc
   try {
     await updatePassword(data);
     dispatch(updatePasswordStartSuccess());
-    dispatch(showToast('Change password success', ToastType.SUCCESS));
+    dispatch(logoutAction('Change password success') as any);
   } catch (error) {
     dispatch(updatePasswordStartFailure(`${error}`));
     dispatch(showToast(`${error}`, ToastType.ERROR));
