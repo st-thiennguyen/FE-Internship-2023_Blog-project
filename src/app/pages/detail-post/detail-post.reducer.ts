@@ -17,6 +17,8 @@ const initialState: DetailState = {
 
 export const detailPostReducer = (state = initialState, action: RootAction): DetailState => {
   switch (action.type) {
+    case ACTIONS_TYPE.RESET_STATE_BLOG_DETAIL:
+      return initialState;
     case ACTIONS_TYPE.GET_DETAIL_BLOG:
       return {
         ...state,

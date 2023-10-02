@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import { PostModel } from '../../../models/post';
 import { RootState } from '../../../stores/store';
-import { StorageKey } from '../../../shared/constants';
-import { fetchComments, fetchDetailBlog, fetchLikes } from '../detail-post.actions';
-import { getLocalStorage, isImageUrlValid } from '../../../shared/utils';
+import { fetchComments, fetchDetailBlog, fetchLikes, resetStateDetailBlog } from '../detail-post.actions';
+import { isImageUrlValid } from '../../../shared/utils';
 
 import DetailPostContent from '../components/DetailPostContent';
 import DetailPostCover from '../components/DetailPostCover';
@@ -22,7 +21,6 @@ const DetailPost = () => {
   const post: PostModel = useSelector((state: RootState) => state.detail?.data);
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
   const isError = useSelector((state: RootState) => state.detail.isError);
-  const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN, '');
 
   const { id } = useParams();
   const commentRef = useRef<HTMLDivElement>(null);
@@ -32,21 +30,23 @@ const DetailPost = () => {
   }, []);
 
   const [isErrorCover, setIsErrorCover] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     isImageUrlValid(post.cover).then((value) => setIsErrorCover(!value));
   }, [post, isErrorCover]);
 
   useEffect(() => {
-    if (id) {
+    if (id && Number(id) !== post.id) {
       dispatch(fetchDetailBlog(Number(id)) as any);
-      dispatch(fetchComments(id) as any);
-      dispatch(fetchLikes(Number(id)) as any);
+      if (post.id) {
+        dispatch(fetchComments(id) as any);
+        dispatch(fetchLikes(Number(id)) as any);
+      }
     }
   }, [id]);
 
   if (isError && !post.id) {
+    dispatch(resetStateDetailBlog() as any);
     return <Navigate to="/page-not-found" />;
   }
 
