@@ -38,6 +38,40 @@
   }
 }
 
+@media screen and (max-width: map-get($breakpoints,lg)) {
+  .posts-page {
+    .section-post-result {
+      .post {
+        gap: 10px;
+        margin-bottom: $p-col-lg * 2;
+        flex-direction: column-reverse;
+        padding: 0;
+
+        .tag-list {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+        }
+
+        &-content-wrapper {
+          padding: 0 20px 20px;
+          width: 100%;
+        }
+
+        .post-img-wrapper {
+          width: 100%;
+
+          .post-cover,
+          .post-link {
+            height: 200px;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: map-get($breakpoints, sm)) {
   .posts-page {
     .section-post-result {

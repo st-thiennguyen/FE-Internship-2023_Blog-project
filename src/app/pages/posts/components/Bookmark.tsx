@@ -33,7 +33,7 @@ const Bookmark = () => {
             postListBookmark.map(
               (bookmarkItem, index) =>
                 bookmarkItem.post && (
-                  <li className="post-item col col-3 col-lg-4 col-md-6 col-sm-12" key={index}>
+                  <li className="post-item col col-4 col-md-6 col-sm-12" key={index}>
                     <PostItem
                       post={bookmarkItem.post}
                       onClickBookmark={handleUpdateBookmark}
