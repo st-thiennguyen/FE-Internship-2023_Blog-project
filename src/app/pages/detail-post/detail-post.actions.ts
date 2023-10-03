@@ -11,6 +11,12 @@ import { showToast } from '../../shared/components/toast/toast.actions';
 import { getBookmark, toggleBookmark } from '../../shared/services/user.service';
 import { getDetailPost, getPostComments, getUserLike, postComment, updateLike } from '../../shared/services/index';
 
+export const resetStateDetailBlog = () => {
+  return {
+    type: ACTIONS_TYPE.RESET_STATE_BLOG_DETAIL,
+  };
+};
+
 const getDetailBlogStart = () => {
   return {
     type: ACTIONS_TYPE.GET_DETAIL_BLOG,
