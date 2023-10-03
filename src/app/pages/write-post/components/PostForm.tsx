@@ -190,7 +190,7 @@ const WritePost = ({ post }: WritePostProps) => {
             content: content,
             status: 'draft',
           },
-          file!,
+          file,
         ) as any,
       );
       setIsClick(true);

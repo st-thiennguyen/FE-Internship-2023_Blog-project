@@ -4,7 +4,7 @@ import { getLocalStorage, removeLocalStorage, setLocalStorage } from '../../shar
 import { RootAction } from '../../stores/store';
 
 const initState: AuthState = {
-  userInfo: getLocalStorage(StorageKey.USER, {} as UserInfo) || null,
+  userInfo: getLocalStorage(StorageKey.USER, {} as UserInfo) || {},
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -15,7 +15,10 @@ const initState: AuthState = {
 export const authReducer = (state = initState, action: RootAction): AuthState => {
   switch (action.type) {
     case ACTIONS_TYPE.REGISTER_RESET_STATE: {
-      return initState;
+      return {
+        ...state,
+        isSuccess: false,
+      };
     }
 
     case ACTIONS_TYPE.REGISTER: {
@@ -101,7 +104,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
-        userInfo: initState.userInfo,
+        userInfo: {} as UserInfo,
         isLoading: false,
         isError: false,
         isLogoutSuccess: true,
@@ -115,7 +118,7 @@ export const authReducer = (state = initState, action: RootAction): AuthState =>
       removeLocalStorage(StorageKey.ACCESS_TOKEN);
       return {
         ...state,
-        userInfo: initState.userInfo,
+        userInfo: {} as UserInfo,
         isLoading: false,
         isError: false,
         isLogoutSuccess: true,

@@ -1,13 +1,13 @@
 .post {
   position: relative;
-  gap: 30px;
-  padding: 16px;
+  gap: 10px;
+  padding: 12px;
   border-radius: 24px;
   margin-bottom: 40px;
   border: 1px solid map-get($color, borderColor);
 
   &-content-wrapper {
-    width: 70%;
+    width: 60%;
   }
   &-title {
     min-height: 60px;
@@ -79,6 +79,7 @@
     }
   }
   .post-img-wrapper {
+    width: 40%;
     .post-link {
       display: block;
       height: 220px;
@@ -110,10 +111,10 @@
   }
   .post-action {
     position: absolute;
-    flex-direction: column;
-    right: 10px;
-    top: 10px;
-    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
   }
   .post-delete {
     position: relative;
@@ -158,6 +159,7 @@
     height: 40px;
     padding: 4px;
     border-radius: 12px;
+    margin-right: 6px;
 
     background-color: map-get($color, $key: secondary);
     cursor: pointer;
@@ -203,6 +205,7 @@
     gap: 0;
     padding: 0;
     .post-img-wrapper {
+      width: 100%;
       .post-link {
         width: 100%;
         border-bottom-left-radius: 0;

@@ -34,9 +34,16 @@ const Tags = ({ tags, showAll = false }: TagsProps) => {
   return (
     <>
       <ul className="tag-list d-flex">
-        {sliceTagList()?.map((tag, index) => {
-          return <TagItem key={index} tagName={tag} color={randomColor[index]} />;
-        })}
+        {showAll
+          ? tags?.map((tag, index) => {
+              return <TagItem key={index} tagName={tag} color={randomColor[index]} />;
+            })
+          : sliceTagList()?.map((tag, index) => {
+              return <TagItem key={index} tagName={tag} color={randomColor[index]} />;
+            })}
+        {tags?.length > 3 && !showAll && (
+          <TagItem tagName={`+${tags.length - 3}`} color={'orange'} optionClassname="tag-disabled" />
+        )}
       </ul>
     </>
   );

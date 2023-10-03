@@ -73,14 +73,14 @@ const PostItem = ({ post, onClickBookmark, isInBookmark, isVertical }: PostItemP
     <>
       <div className={`post d-flex item-center ${isVertical && 'post-vertical'}`}>
         <div className="post-action d-flex">
-          <div className="post-delete d-flex item-center justify-center" onClick={handleShowDialog}>
-            <i className="icon icon-small icon-delete icon-trash-20"></i>
-            <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
-          </div>
           <div className="post-edit d-flex item-center justify-center">
             <Link to={`/posts/${post.id}/edit`} className="post-edit-link d-flex item-center justify-center">
               <i className="icon icon-small icon-edit-20"></i>
             </Link>
+          </div>
+          <div className="post-delete d-flex item-center justify-center" onClick={handleShowDialog}>
+            <i className="icon icon-small icon-delete icon-trash-20"></i>
+            <i className="icon icon-small icon-delete icon-trash-fill-20"></i>
           </div>
         </div>
         <div className="post-restore" onClick={handleShowDialogRestore}>

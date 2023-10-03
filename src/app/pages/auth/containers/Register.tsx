@@ -206,8 +206,8 @@ const Register = () => {
                     onClick={togglePassword}
                     className={`icon icon-password ${isShowPassword ? `icon-eye-slash` : `icon-eye`}`}
                   ></i>
-                  {errors.password && <p className="form-error">{errors.password?.message}</p>}
                 </div>
+                {errors.password && <p className="form-error">{errors.password?.message}</p>}
               </div>
               <Button label="Register" optionClassName="btn btn-primary btn-auth" isLoading={isLoading}></Button>
             </fieldset>
