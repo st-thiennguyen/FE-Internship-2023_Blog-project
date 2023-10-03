@@ -57,9 +57,7 @@
       }
     }
     .tag-list {
-      // position: absolute;
-      // top: 10px;
-      // left: 10px;
+     
       z-index: 1;
     }
     .tag-item:not(:last-child) {
@@ -240,6 +238,13 @@
 
       .recommend-item:not(:last-child) {
         margin-bottom: 14px;
+      }
+    }
+    .section-latest-post {
+      .post {
+        .post-img-wrapper .post-link {
+          width: 100%;
+        }
       }
     }
   }

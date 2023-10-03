@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    if (id === userId.toString() || id === 'me') {
+    if (id === userId?.toString() || id === 'me') {
       navigate('/profile');
     }
     const idParams = id ? id : 'me';
