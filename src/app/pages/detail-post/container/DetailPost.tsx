@@ -38,10 +38,10 @@ const DetailPost = () => {
   useEffect(() => {
     if (id && Number(id) !== post.id) {
       dispatch(fetchDetailBlog(Number(id)) as any);
-      if (post.id) {
-        dispatch(fetchComments(id) as any);
-        dispatch(fetchLikes(Number(id)) as any);
-      }
+    }
+    if (id) {
+      dispatch(fetchComments(id) as any);
+      dispatch(fetchLikes(Number(id)) as any);
     }
   }, [id]);
 
