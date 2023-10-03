@@ -4,14 +4,7 @@ import { closeToast } from './toast.actions';
 import { RootState } from '../../../stores/store';
 import { ToastModel } from '../../../models/toast';
 
-type ToastMessageProps = {
-  isShow?: Boolean;
-  isSuccess?: Boolean;
-  title?: string;
-  subtitle?: string;
-};
-
-const ToastMessage = ({}: ToastMessageProps) => {
+const ToastMessage = () => {
   const isShow = useSelector((state: RootState) => state.toast.isShow);
   const info: ToastModel = useSelector((state: RootState) => state.toast.infoToast);
   const closeClick = useRef(() => {});

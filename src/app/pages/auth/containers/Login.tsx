@@ -116,8 +116,8 @@ const Login = () => {
                     onClick={togglePassword}
                     className={`icon icon-password ${isShowPassword ? `icon-eye-slash` : `icon-eye`}`}
                   ></i>
-                  <p className="form-error">{errors.password?.message}</p>
                 </div>
+                <p className="form-error">{errors.password?.message}</p>
               </div>
               <Button label="login" isLoading={isLoading} optionClassName="btn-primary btn-auth" />
             </fieldset>
