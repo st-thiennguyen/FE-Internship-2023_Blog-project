@@ -44,7 +44,6 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
     dispatch(getDetailBlogSuccess(response as PostModel));
   } catch (error) {
     dispatch(getDetailBlogFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
@@ -107,7 +106,6 @@ export const fetchComments = (id: string) => async (dispatch: Dispatch<RootActio
     dispatch(getCommentsSuccess(response as InteractionItemModel[]));
   } catch (error) {
     dispatch(getCommentsFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
