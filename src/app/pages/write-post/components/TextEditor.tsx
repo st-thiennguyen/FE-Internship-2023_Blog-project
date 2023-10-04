@@ -38,12 +38,15 @@ const TextEditor: React.FC<Props> = ({ value, setContent, placeholder, setError 
   const onChange = (content: string) => {
     const contentLength = content.replace(/<(.|\n)*?>/g, '').trim().length;
 
-    const isValidContent = contentLength >= 50;
+    const isValidMinContent = contentLength >= 50;
+    const isValidMaxContent = contentLength <= 3000;
 
     if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
       setError('Content must not be null !');
-    } else if (!isValidContent) {
+    } else if (!isValidMinContent) {
       setError('Content must not be less than 50 characters !');
+    } else if (isValidMinContent && !isValidMaxContent) {
+      setError('Content must not be more than 5000 characters');
     } else {
       setError('');
     }
