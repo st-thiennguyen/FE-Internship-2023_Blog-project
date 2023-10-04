@@ -39,7 +39,7 @@ const TextEditor: React.FC<Props> = ({ value, setContent, placeholder, setError 
     const contentLength = content.replace(/<(.|\n)*?>/g, '').trim().length;
 
     const isValidMinContent = contentLength >= 50;
-    const isValidMaxContent = contentLength <= 3000;
+    const isValidMaxContent = contentLength <= 5000;
 
     if (content.replace(/<(.|\n)*?>/g, '').trim().length === 0) {
       setError('Content must not be null !');
