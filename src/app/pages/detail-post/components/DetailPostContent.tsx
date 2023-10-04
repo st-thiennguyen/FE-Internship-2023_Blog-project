@@ -37,15 +37,6 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
     post.user?.picture && isImageUrlValid(post.user?.picture).then((value) => setIsErrorAvatar(!value));
   }, [isSuccess, post.user]);
 
-  const removeEmptyTags = (htmlString: string) => {
-    const doc = new DOMParser().parseFromString(htmlString, 'text/html');
-    const tagsToRemove = doc.querySelectorAll('*:empty');
-    tagsToRemove.forEach((tag) => {
-      tag.remove();
-    });
-    return doc.body.innerHTML;
-  };
-
   useEffect(() => {
     if (post.user?.id && isLogin) {
       dispatch(getUserPostAction(`${post.user?.id}`) as any);
@@ -59,10 +50,7 @@ const DetailPostContent = ({ post, commentRef }: DetailPostProps) => {
           <div className="row">
             <div className="detail-body col col-8 col-xl-12">
               <article>
-                <div
-                  className="post-content"
-                  dangerouslySetInnerHTML={{ __html: post.content ? removeEmptyTags(post.content) : '' }}
-                ></div>
+                <div className="post-content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
               </article>
               <div className="divided"></div>
               <DetailPostComment ref={commentRef} />
