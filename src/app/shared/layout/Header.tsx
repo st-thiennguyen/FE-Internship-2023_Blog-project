@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../App';
@@ -14,20 +14,21 @@ import IconFolder from '../components/icon/IconFolder';
 
 import logo from '../../../assets/images/logo.svg';
 import avatarDefault from '../../../assets/images/user-default.png';
+import { RootState } from '../../stores/store';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const authContext = useContext(AuthContext);
   const isLogin = getLocalStorage(StorageKey.ACCESS_TOKEN) ? true : false;
   const [isErrorAvatar, setIsErrorAvatar] = useState(false);
+  const userInfo = useSelector((state: RootState) => state.auth.userInfo)
 
   const handleLogout = () => {
     dispatch(logoutAction() as any);
   };
 
   useEffect(() => {
-    isImageUrlValid(authContext?.userInfo.picture).then((value) => setIsErrorAvatar(!value));
-  }, [authContext?.userInfo.picture]);
+    isImageUrlValid(userInfo?.picture).then((value) => setIsErrorAvatar(!value));
+  }, [userInfo?.picture]);
 
   return (
     <header className="header">
@@ -41,7 +42,7 @@ const Header = () => {
           <div className="header-right d-flex item-center">
             <span className="header-welcome">
               {isLogin
-                ? `Welcome ${authContext.userInfo.displayName || authContext.userInfo.firstName}`
+                ? `Welcome ${userInfo.displayName || userInfo.firstName}`
                 : 'Welcome to Supremethod!'}
             </span>
             <nav className="navbar">
@@ -61,7 +62,7 @@ const Header = () => {
                     <>
                       <div className="navbar-content d-flex justify-center item-center">
                         <img
-                          src={!isErrorAvatar ? authContext.userInfo.picture : avatarDefault}
+                          src={!isErrorAvatar ? userInfo.picture : avatarDefault}
                           alt="avatar"
                           className="avatar-user-header"
                         />
@@ -72,13 +73,13 @@ const Header = () => {
                             <Link to="/profile" className="auth-link auth-link-info">
                               <div className="auth-info d-flex item-center">
                                 <img
-                                  src={!isErrorAvatar ? authContext.userInfo.picture : avatarDefault}
+                                  src={!isErrorAvatar ? userInfo.picture : avatarDefault}
                                   alt="avatar"
                                   className="avatar-user"
                                 />
                                 <div className="auth-info-text">
-                                  <p className="auth-info-name text-truncate-1">{authContext.userInfo?.displayName}</p>
-                                  <p className="auth-info-email text-truncate-1">{authContext.userInfo?.email}</p>
+                                  <p className="auth-info-name text-truncate-1">{userInfo?.displayName}</p>
+                                  <p className="auth-info-email text-truncate-1">{userInfo?.email}</p>
                                 </div>
                               </div>
                             </Link>

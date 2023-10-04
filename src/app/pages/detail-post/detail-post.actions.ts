@@ -44,7 +44,6 @@ export const fetchDetailBlog = (id: number) => async (dispatch: Dispatch<RootAct
     dispatch(getDetailBlogSuccess(response as PostModel));
   } catch (error) {
     dispatch(getDetailBlogFailure(`${error}`));
-    dispatch(showToast(`${error}`, ToastType.ERROR));
   }
 };
 
