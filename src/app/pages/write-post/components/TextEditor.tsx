@@ -45,7 +45,7 @@ const TextEditor: React.FC<Props> = ({ value, setContent, placeholder, setError 
       setError('Content must not be null !');
     } else if (!isValidMinContent) {
       setError('Content must not be less than 50 characters !');
-    } else if (isValidMinContent && !isValidMaxContent) {
+    } else if (!isValidMaxContent) {
       setError('Content must not be more than 5000 characters');
     } else {
       setError('');
