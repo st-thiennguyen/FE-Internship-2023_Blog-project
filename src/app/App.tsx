@@ -1,4 +1,3 @@
-import { createContext } from 'react';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import { RouteItem } from './models/route';
@@ -9,8 +8,6 @@ import Layout from './pages/Layout';
 import PrivateRoute from './shared/common/ProtectedRouter';
 import PageNotFound from './pages/not-found/PageNotFound';
 import ToastMessage from './shared/components/toast/ToastMessage';
-
-export const AuthContext = createContext<any>(undefined);
 
 function App() {
   const router = createBrowserRouter(

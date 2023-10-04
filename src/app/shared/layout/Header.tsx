@@ -1,8 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '../../App';
 import { logoutAction } from '../../pages/auth/auth.actions';
 import { StorageKey } from '../constants';
 import { getLocalStorage, isImageUrlValid } from '../utils';
